@@ -1,7 +1,21 @@
-// app/m/page.tsx
-import Link from "next/link";
+"use client";
 
-export default function MobileLandingAppleSoft() {
+import { useRouter } from "next/navigation";
+
+const PAID_KEY = "bigfive_paid_v1";
+
+export default function PayPage() {
+  const router = useRouter();
+
+  function handleUnlock() {
+    localStorage.setItem(PAID_KEY, "true");
+    router.push("/result");
+  }
+
+  function handleBack() {
+    router.push("/test");
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] text-white px-5 py-10">
       {/* Soft gradient background */}
@@ -19,93 +33,90 @@ export default function MobileLandingAppleSoft() {
             <span className="h-2.5 w-2.5 rounded-full bg-indigo-300" />
           </div>
           <div className="leading-tight">
-            <div className="text-sm font-semibold tracking-tight">Personality test</div>
-            <div className="text-xs text-white/55">soft • premium • mobile</div>
+            <div className="text-sm font-semibold tracking-tight">
+              Personality test
+            </div>
+            <div className="text-xs text-white/55">
+              soft • premium • mobile
+            </div>
           </div>
         </div>
 
         {/* Hero */}
-        <h1 className="mt-10 text-[2.6rem] font-semibold leading-[1.05] tracking-tight">
-          Poznaj swój{" "}
+        <h1 className="mt-10 text-[2.4rem] font-semibold leading-[1.1] tracking-tight">
+          Twój{" "}
           <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
-            profil osobowości
-          </span>
+            pełny wynik
+          </span>{" "}
+          jest gotowy
         </h1>
 
         <p className="mt-4 text-base leading-relaxed text-white/70">
-          Spokojny, krótki test oparty na wzorcach odpowiedzi.
-          Bez oceniania. Bez presji. Wynik, który naprawdę ma sens.
+          Otrzymasz kompletny profil osobowości oparty o Big Five: procentowy
+          wynik każdej cechy i krótką interpretację.
         </p>
 
-        {/* Trust pills */}
+        {/* Value pills */}
         <div className="mt-6 flex flex-wrap gap-2 text-sm text-white/70">
           <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            ⏱ 5–7 minut
+            ✔️ 5 cech (OCEAN)
           </span>
           <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            🔒 anonimowo
+            📊 wyniki procentowe
           </span>
           <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            ✨ przyjemny UX
+            ✍️ krótka interpretacja
           </span>
+        </div>
+
+        {/* Soft info cards */}
+        <div className="mt-8 space-y-3">
+          <InfoCard
+            title="Co dokładnie odblokowuję?"
+            text="Pełny raport pięciu cech wraz z krótkimi wskazówkami, jak wykorzystać mocne strony."
+          />
+          <InfoCard
+            title="Czy to jednorazowe?"
+            text="Tak. Płacisz raz i od razu masz dostęp do wyniku."
+          />
+          <InfoCard
+            title="To tylko symulacja"
+            text="Przycisk uruchamia wersję testową — bez prawdziwej płatności."
+          />
         </div>
 
         {/* Main CTA */}
         <div className="mt-8">
-          <Link
-            href="/test"
+          <button
+            onClick={handleUnlock}
             className="relative inline-flex w-full items-center justify-center rounded-2xl px-6 py-4 text-base font-semibold text-white
               bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
               shadow-[0_20px_60px_rgba(99,102,241,0.35)]
               transition active:scale-[0.98]
               focus:outline-none focus:ring-4 focus:ring-indigo-400/30"
+            type="button"
           >
-            Rozpocznij test →
-          </Link>
+            Odblokuj wynik – 1$ (wersja testowa)
+          </button>
+
+          <button
+            onClick={handleBack}
+            className="mt-3 inline-flex w-full items-center justify-center rounded-2xl border border-white/20 bg-white/5 px-6 py-4 text-base font-semibold text-white/85
+              backdrop-blur-md transition hover:border-white/40"
+            type="button"
+          >
+            Wróć do testu
+          </button>
 
           <p className="mt-3 text-center text-xs text-white/55">
-            Możesz przerwać w dowolnym momencie
+            Jednorazowa płatność. Bez subskrypcji.
           </p>
         </div>
 
-        {/* Soft info cards */}
-        <div className="mt-10 space-y-3">
-          <InfoCard
-            title="Co dostanę w wyniku?"
-            text="Opis Twojego stylu myślenia, mocne strony oraz delikatne wskazówki rozwojowe."
-          />
-          <InfoCard
-            title="Czy to jest anonimowe?"
-            text="Tak. Nie wymagamy konta ani danych osobowych."
-          />
-          <InfoCard
-            title="Ile pytań?"
-            text="Kilkanaście krótkich pytań — odpowiadaj intuicyjnie."
-          />
-        </div>
-
-        {/* Floating bottom CTA (Apple-like) */}
-        <div className="fixed inset-x-0 bottom-0 z-50 px-5 pb-5">
-          <div className="mx-auto max-w-md rounded-3xl border border-white/15 bg-white/10 backdrop-blur-2xl shadow-[0_-20px_50px_rgba(0,0,0,0.4)] p-3">
-            <Link
-              href="/start"
-              className="inline-flex w-full items-center justify-center rounded-2xl px-6 py-3.5 text-sm font-semibold text-white
-                bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
-                shadow-[0_14px_40px_rgba(99,102,241,0.35)]
-                transition active:scale-[0.98]"
-            >
-              Start testu osobowości →
-            </Link>
-            <div className="mt-2 text-center text-[11px] text-white/50">
-              Spokojnie • elegancko • bez presji
-            </div>
-          </div>
-        </div>
-
         {/* Spacer */}
-        <div className="h-28" />
+        <div className="h-6" />
 
-        <p className="mt-10 text-center text-xs text-white/40">
+        <p className="mt-8 text-center text-xs text-white/40">
           © {new Date().getFullYear()} Test osobowości
         </p>
       </div>
