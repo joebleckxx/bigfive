@@ -9,15 +9,16 @@ const ANSWERS_KEY = "bigfive_answers_v1";
 const PAID_KEY = "bigfive_paid_v1";
 
 function levelLabel(percent: number) {
-  if (percent < 34) return "Niski";
-  if (percent < 67) return "Średni";
-  return "Wysoki";
+  if (percent < 34) return "Low";
+  if (percent < 67) return "Medium";
+  return "High";
 }
 
 function levelDescription(percent: number) {
-  if (percent < 34) return "Ta cecha jest raczej słabiej zaznaczona w Twoim profilu.";
-  if (percent < 67) return "Ta cecha jest na zbalansowanym poziomie – elastyczność w zachowaniach.";
-  return "Ta cecha jest mocno zaznaczona – wyraźnie wpływa na Twój styl działania.";
+  if (percent < 34) return "This trait is less pronounced in your profile.";
+  if (percent < 67)
+    return "This trait is balanced — flexibility in behavior.";
+  return "This trait is strongly pronounced — it clearly influences your style.";
 }
 
 export default function ResultPage() {
@@ -56,16 +57,17 @@ export default function ResultPage() {
     return (
       <main className="min-h-screen flex items-center justify-center bg-gray-50 px-6">
         <div className="bg-white rounded-2xl shadow p-8 max-w-lg text-center">
-          <h1 className="text-2xl font-bold mb-2">Brak danych</h1>
+          <h1 className="text-2xl font-bold mb-2">No data</h1>
           <p className="text-gray-600 mb-6">
-            Nie widzę zapisanych odpowiedzi. Wróć do testu i odpowiedz na pytania.
+            I can't see saved answers. Return to the test and answer the
+            questions.
           </p>
           <button
             onClick={() => router.push("/test")}
             className="bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition"
             type="button"
           >
-            Wróć do testu
+            Back to the test
           </button>
         </div>
       </main>
@@ -79,8 +81,8 @@ export default function ResultPage() {
       <div className="mx-auto max-w-2xl">
         <div className="flex items-start justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-3xl font-bold mb-2">Twój profil osobowości</h1>
-            <p className="text-gray-600">Wynik oparty na modelu Big Five</p>
+            <h1 className="text-3xl font-bold mb-2">Your personality profile</h1>
+            <p className="text-gray-600">Result based on the Big Five model</p>
           </div>
 
           <button
@@ -88,7 +90,7 @@ export default function ResultPage() {
             className="text-sm text-gray-600 hover:text-black underline"
             type="button"
           >
-            Zrób test od nowa
+            Retake the test
           </button>
         </div>
 
@@ -119,7 +121,8 @@ export default function ResultPage() {
         </div>
 
         <p className="text-xs text-gray-500 mt-8">
-          Uwaga: To narzędzie ma charakter informacyjny/rozwojowy, nie stanowi diagnozy klinicznej.
+          Note: This tool is for informational/growth purposes and is not a
+          clinical diagnosis.
         </p>
       </div>
     </main>

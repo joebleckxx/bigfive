@@ -44,44 +44,44 @@ export default function PayPage() {
 
         {/* Hero */}
         <h1 className="mt-10 text-[2.4rem] font-semibold leading-[1.1] tracking-tight">
-          Twój{" "}
+          Your{" "}
           <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
-            pełny wynik
+            full result
           </span>{" "}
-          jest gotowy
+          is ready
         </h1>
 
         <p className="mt-4 text-base leading-relaxed text-white/70">
-          Otrzymasz kompletny profil osobowości oparty o Big Five: procentowy
-          wynik każdej cechy i krótką interpretację.
+          You will get a complete Big Five personality profile: the percentage
+          score for each trait and a short interpretation.
         </p>
 
         {/* Value pills */}
         <div className="mt-6 flex flex-wrap gap-2 text-sm text-white/70">
           <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            ✔️ 5 cech (OCEAN)
+            ✔️ 5 traits (OCEAN)
           </span>
           <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            📊 wyniki procentowe
+            📊 percentage scores
           </span>
           <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            ✍️ krótka interpretacja
+            ✍️ short interpretation
           </span>
         </div>
 
         {/* Soft info cards */}
         <div className="mt-8 space-y-3">
           <InfoCard
-            title="Co dokładnie odblokowuję?"
-            text="Pełny raport pięciu cech wraz z krótkimi wskazówkami, jak wykorzystać mocne strony."
+            title="What exactly do I unlock?"
+            text="A full report of the five traits with short tips on how to use your strengths."
           />
           <InfoCard
-            title="Czy to jednorazowe?"
-            text="Tak. Płacisz raz i od razu masz dostęp do wyniku."
+            title="Is it one-time?"
+            text="Yes. Pay once and get instant access to the result."
           />
           <InfoCard
-            title="To tylko symulacja"
-            text="Przycisk uruchamia wersję testową — bez prawdziwej płatności."
+            title="This is a simulation"
+            text="This button launches a demo — no real payment."
           />
         </div>
 
@@ -96,7 +96,7 @@ export default function PayPage() {
               focus:outline-none focus:ring-4 focus:ring-indigo-400/30"
             type="button"
           >
-            Odblokuj wynik – 1$ (wersja testowa)
+            Unlock results – $1 (demo)
           </button>
 
           <button
@@ -105,11 +105,11 @@ export default function PayPage() {
               backdrop-blur-md transition hover:border-white/40"
             type="button"
           >
-            Wróć do testu
+            Back to the test
           </button>
 
           <p className="mt-3 text-center text-xs text-white/55">
-            Jednorazowa płatność. Bez subskrypcji.
+            One-time payment. No subscription.
           </p>
         </div>
 
@@ -117,7 +117,7 @@ export default function PayPage() {
         <div className="h-6" />
 
         <p className="mt-8 text-center text-xs text-white/40">
-          © {new Date().getFullYear()} Test osobowości
+          © {new Date().getFullYear()} Personality test
         </p>
       </div>
     </main>

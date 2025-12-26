@@ -7,48 +7,48 @@ export type Question = {
 };
 
 export const QUESTIONS: Question[] = [
-  // O - Otwartość
-  { id: 1, trait: "O", text: "Lubię poznawać nowe idee i sposoby myślenia." },
-  { id: 2, trait: "O", text: "Często interesuję się sztuką, kulturą lub filozofią." },
-  { id: 3, trait: "O", text: "Łatwo nudzą mnie rutynowe, powtarzalne zadania." },
-  { id: 4, trait: "O", text: "Cenię kreatywność bardziej niż sprawdzone schematy." },
-  { id: 5, trait: "O", text: "Chętnie eksperymentuję z nowymi rozwiązaniami." },
+  // O - Openness
+  { id: 1, trait: "O", text: "I enjoy exploring new ideas and ways of thinking." },
+  { id: 2, trait: "O", text: "I am often interested in art, culture, or philosophy." },
+  { id: 3, trait: "O", text: "Routine, repetitive tasks bore me easily." },
+  { id: 4, trait: "O", text: "I value creativity more than tried-and-true patterns." },
+  { id: 5, trait: "O", text: "I like experimenting with new solutions." },
 
-  // C - Sumienność
-  { id: 6, trait: "C", text: "Zwykle planuję swoje działania z wyprzedzeniem." },
-  { id: 7, trait: "C", text: "Staram się doprowadzać sprawy do końca." },
-  { id: 8, trait: "C", text: "Punktualność jest dla mnie bardzo ważna." },
-  { id: 9, trait: "C", text: "Dobrze czuję się, gdy mam jasno określone cele." },
-  { id: 10, trait: "C", text: "Rzadko działam chaotycznie lub impulsywnie." },
+  // C - Conscientiousness
+  { id: 6, trait: "C", text: "I usually plan my actions in advance." },
+  { id: 7, trait: "C", text: "I try to see tasks through to the end." },
+  { id: 8, trait: "C", text: "Punctuality is very important to me." },
+  { id: 9, trait: "C", text: "I feel good when I have clearly defined goals." },
+  { id: 10, trait: "C", text: "I rarely act chaotically or impulsively." },
 
-  // E - Ekstrawersja
-  { id: 11, trait: "E", text: "Łatwo nawiązuję rozmowy z nowymi ludźmi." },
-  { id: 12, trait: "E", text: "Dobrze czuję się w centrum uwagi." },
-  { id: 13, trait: "E", text: "Spotkania towarzyskie dodają mi energii." },
-  { id: 14, trait: "E", text: "Lubię działać w grupie bardziej niż samodzielnie." },
-  { id: 15, trait: "E", text: "Często przejmuję inicjatywę w rozmowach." },
+  // E - Extraversion
+  { id: 11, trait: "E", text: "I easily start conversations with new people." },
+  { id: 12, trait: "E", text: "I feel comfortable in the center of attention." },
+  { id: 13, trait: "E", text: "Social gatherings give me energy." },
+  { id: 14, trait: "E", text: "I prefer working in a group rather than alone." },
+  { id: 15, trait: "E", text: "I often take the initiative in conversations." },
 
-  // A - Ugodowość
-  { id: 16, trait: "A", text: "Staram się unikać konfliktów." },
-  { id: 17, trait: "A", text: "Łatwo okazuję empatię innym." },
-  { id: 18, trait: "A", text: "Często stawiam potrzeby innych ponad swoje." },
-  { id: 19, trait: "A", text: "Ludzie postrzegają mnie jako osobę życzliwą." },
-  { id: 20, trait: "A", text: "Współpraca jest dla mnie ważniejsza niż rywalizacja." },
+  // A - Agreeableness
+  { id: 16, trait: "A", text: "I try to avoid conflicts." },
+  { id: 17, trait: "A", text: "I easily show empathy to others." },
+  { id: 18, trait: "A", text: "I often put others' needs before my own." },
+  { id: 19, trait: "A", text: "People see me as a kind person." },
+  { id: 20, trait: "A", text: "Cooperation matters more to me than competition." },
 
-  // S - Stabilność emocjonalna
-  { id: 21, trait: "S", text: "Rzadko odczuwam silny stres bez wyraźnego powodu." },
-  { id: 22, trait: "S", text: "Dobrze radzę sobie z presją." },
-  { id: 23, trait: "S", text: "Trudne sytuacje nie wytrącają mnie łatwo z równowagi." },
-  { id: 24, trait: "S", text: "Rzadko martwię się rzeczami, na które nie mam wpływu." },
-  { id: 25, trait: "S", text: "Zazwyczaj czuję się emocjonalnie stabilnie." },
+  // S - Emotional stability
+  { id: 21, trait: "S", text: "I rarely feel strong stress without a clear reason." },
+  { id: 22, trait: "S", text: "I handle pressure well." },
+  { id: 23, trait: "S", text: "Difficult situations do not easily throw me off balance." },
+  { id: 24, trait: "S", text: "I rarely worry about things I cannot control." },
+  { id: 25, trait: "S", text: "I usually feel emotionally stable." },
 ];
 
 export const TRAIT_LABELS: Record<Trait, string> = {
-  O: "Otwartość",
-  C: "Sumienność",
-  E: "Ekstrawersja",
-  A: "Ugodowość",
-  S: "Stabilność emocjonalna",
+  O: "Openness",
+  C: "Conscientiousness",
+  E: "Extraversion",
+  A: "Agreeableness",
+  S: "Emotional stability",
 };
 
 export const TRAIT_BY_QID: Record<number, Trait> = Object.fromEntries(

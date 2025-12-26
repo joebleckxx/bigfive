@@ -1,4 +1,5 @@
 // app/m/page.tsx
+import { Logo } from "@/app/components/ui/logo";
 import Link from "next/link";
 
 export default function MobileLandingAppleSoft() {
@@ -16,7 +17,7 @@ export default function MobileLandingAppleSoft() {
         {/* Brand */}
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
-            <span className="h-2.5 w-2.5 rounded-full bg-indigo-300" />
+            <Logo className="text-indigo-200" />
           </div>
           <div className="leading-tight">
             <div className="text-sm font-semibold tracking-tight">Personality test</div>
@@ -26,27 +27,27 @@ export default function MobileLandingAppleSoft() {
 
         {/* Hero */}
         <h1 className="mt-10 text-[2.6rem] font-semibold leading-[1.05] tracking-tight">
-          Poznaj swój{" "}
+          Discover your{" "}
           <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
-            profil osobowości
+            personality profile
           </span>
         </h1>
 
         <p className="mt-4 text-base leading-relaxed text-white/70">
-          Spokojny, krótki test oparty na wzorcach odpowiedzi.
-          Bez oceniania. Bez presji. Wynik, który naprawdę ma sens.
+          A calm, short test based on response patterns. No judgment. No
+          pressure. A result that actually makes sense.
         </p>
 
         {/* Trust pills */}
         <div className="mt-6 flex flex-wrap gap-2 text-sm text-white/70">
           <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            ⏱ 5–7 minut
+            ⏱ 5–7 minutes
           </span>
           <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            🔒 anonimowo
+            🔒 anonymous
           </span>
           <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            ✨ przyjemny UX
+            ✨ pleasant UX
           </span>
         </div>
 
@@ -60,27 +61,27 @@ export default function MobileLandingAppleSoft() {
               transition active:scale-[0.98]
               focus:outline-none focus:ring-4 focus:ring-indigo-400/30"
           >
-            Rozpocznij test →
+            Start the test →
           </Link>
 
           <p className="mt-3 text-center text-xs text-white/55">
-            Możesz przerwać w dowolnym momencie
+            You can pause anytime
           </p>
         </div>
 
         {/* Soft info cards */}
         <div className="mt-10 space-y-3">
           <InfoCard
-            title="Co dostanę w wyniku?"
-            text="Opis Twojego stylu myślenia, mocne strony oraz delikatne wskazówki rozwojowe."
+            title="What will I get?"
+            text="A description of your thinking style, strengths, and gentle growth tips."
           />
           <InfoCard
-            title="Czy to jest anonimowe?"
-            text="Tak. Nie wymagamy konta ani danych osobowych."
+            title="Is it anonymous?"
+            text="Yes. No account or personal data required."
           />
           <InfoCard
-            title="Ile pytań?"
-            text="Kilkanaście krótkich pytań — odpowiadaj intuicyjnie."
+            title="How many questions?"
+            text="A handful of short questions — answer intuitively."
           />
         </div>
 
@@ -94,10 +95,10 @@ export default function MobileLandingAppleSoft() {
                 shadow-[0_14px_40px_rgba(99,102,241,0.35)]
                 transition active:scale-[0.98]"
             >
-              Start testu osobowości →
+              Start personality test →
             </Link>
             <div className="mt-2 text-center text-[11px] text-white/50">
-              Spokojnie • elegancko • bez presji
+              Calm • elegant • no pressure
             </div>
           </div>
         </div>
@@ -106,7 +107,7 @@ export default function MobileLandingAppleSoft() {
         <div className="h-28" />
 
         <p className="mt-10 text-center text-xs text-white/40">
-          © {new Date().getFullYear()} Test osobowości
+          © {new Date().getFullYear()} Personality test
         </p>
       </div>
     </main>

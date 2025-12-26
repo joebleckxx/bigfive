@@ -3,17 +3,18 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { QUESTIONS } from "@/lib/questions";
+import { Logo } from "@/app/components/ui/logo";
 
 type AnswersMap = Record<number, number>;
 
 const STORAGE_KEY = "bigfive_answers_v1";
 
 const OPTIONS: { value: number; label: string }[] = [
-  { value: 1, label: "Zdecydowanie nie" },
-  { value: 2, label: "Raczej nie" },
-  { value: 3, label: "Trudno powiedzieć" },
-  { value: 4, label: "Raczej tak" },
-  { value: 5, label: "Zdecydowanie tak" },
+  { value: 1, label: "Strongly disagree" },
+  { value: 2, label: "Disagree" },
+  { value: 3, label: "Not sure" },
+  { value: 4, label: "Agree" },
+  { value: 5, label: "Strongly agree" },
 ];
 
 function loadAnswers(): AnswersMap {
@@ -41,7 +42,7 @@ export default function TestPage() {
   const currentIndex = Math.min(answeredCount, QUESTIONS.length - 1);
   const currentQuestion = QUESTIONS[currentIndex];
 
-  const progressText = `Pytanie ${currentIndex + 1} z ${QUESTIONS.length}`;
+  const progressText = `Question ${currentIndex + 1} of ${QUESTIONS.length}`;
 
   function handleAnswer(value: number) {
     const next = { ...answers, [currentQuestion.id]: value };
@@ -68,6 +69,17 @@ export default function TestPage() {
       </div>
 
       <div className="relative mx-auto max-w-xl">
+        {/* Brand */}
+        <div className="mb-6 flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
+            <Logo className="text-indigo-200" />
+          </div>
+          <div className="leading-tight">
+            <div className="text-sm font-semibold tracking-tight">Personality test</div>
+            <div className="text-xs text-white/55">soft • premium • mobile</div>
+          </div>
+        </div>
+
         {/* Header */}
         <div className="mb-6 flex items-center justify-between">
           <div className="text-sm text-white/60">{progressText}</div>
@@ -108,7 +120,7 @@ export default function TestPage() {
           </div>
 
           <p className="mt-6 text-xs text-white/55">
-            Wskazówka: odpowiadaj intuicyjnie — nie ma złych odpowiedzi.
+            Tip: answer intuitively — there are no wrong answers.
           </p>
         </div>
       </div>

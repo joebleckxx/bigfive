@@ -19,7 +19,7 @@ export function scoreBigFive(answers: AnswersMap, traitByQuestionId: Record<numb
 
   const out = {} as TraitScores;
   for (const t of TRAITS) {
-    const r = raw[t]; // min=5 max=25 (zakładamy 5 pytań na cechę)
+    const r = raw[t]; // min=5 max=25 (assuming 5 questions per trait)
     const percent = Math.round(((r - 5) / 20) * 100);
     out[t] = { raw: r, percent: Math.max(0, Math.min(100, percent)) };
   }
