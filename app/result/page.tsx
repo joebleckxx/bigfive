@@ -2,127 +2,306 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { TRAIT_BY_QID, TRAIT_LABELS, type Trait } from "@/lib/questions";
-import { scoreBigFive, type AnswersMap } from "@/lib/scoring";
+import { Logo } from "@/app/components/ui/logo";
 
-const ANSWERS_KEY = "bigfive_answers_v1";
+type Trait = "E" | "O" | "C" | "A" | "N";
+
+type StoredResultV1 = {
+  version: "v1";
+  createdAt: string;
+  answers: number[];
+  scores: Record<Trait, number>;
+  stability: number;
+  typeCode: string;
+  typeName: string;
+  typeDescription: string;
+  addOns: {
+    stressProfile: { label: string; note: string };
+    subtype: { label: string; note: string };
+    mode: { label: string; note: string };
+  };
+};
+
+const STORAGE_KEY = "personality_result_v1";
 const PAID_KEY = "bigfive_paid_v1";
 
-function levelLabel(percent: number) {
-  if (percent < 34) return "Low";
-  if (percent < 67) return "Medium";
-  return "High";
-}
-
-function levelDescription(percent: number) {
-  if (percent < 34) return "This trait is less pronounced in your profile.";
-  if (percent < 67)
-    return "This trait is balanced — flexibility in behavior.";
-  return "This trait is strongly pronounced — it clearly influences your style.";
+function pct(n: number) {
+  return Math.max(0, Math.min(100, Math.round(n)));
 }
 
 export default function ResultPage() {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-  const [allowed, setAllowed] = useState(false);
+  const [data, setData] = useState<StoredResultV1 | null>(null);
+  const [loaded, setLoaded] = useState(false);
+  const [showBigFive, setShowBigFive] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const paid = localStorage.getItem(PAID_KEY) === "true";
-    setAllowed(paid);
-    setMounted(true);
-    if (!paid) router.replace("/pay");
+    try {
+      const paid = localStorage.getItem(PAID_KEY) === "true";
+      if (!paid) {
+        router.replace("/pay");
+        return;
+      }
+
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        router.replace("/test");
+        return;
+      }
+
+      const parsed = JSON.parse(raw) as StoredResultV1;
+      if (!parsed?.typeCode || !parsed?.scores) {
+        router.replace("/test");
+        return;
+      }
+
+      setData(parsed);
+    } catch {
+      router.replace("/test");
+    } finally {
+      setLoaded(true);
+    }
   }, [router]);
 
-  const scores = useMemo(() => {
-    if (!mounted || !allowed) return null;
-    try {
-      const raw = localStorage.getItem(ANSWERS_KEY);
-      if (!raw) return null;
-      const answers = JSON.parse(raw) as AnswersMap;
-      return scoreBigFive(answers, TRAIT_BY_QID);
-    } catch {
-      return null;
-    }
-  }, [mounted, allowed]);
+  const stabilityLabel = useMemo(() => {
+    if (!data) return "";
+    const s = data.stability;
+    if (s >= 67) return "High";
+    if (s >= 34) return "Medium";
+    return "Low";
+  }, [data]);
 
-  function resetAll() {
-    localStorage.removeItem(ANSWERS_KEY);
-    localStorage.removeItem(PAID_KEY);
-    router.push("/test");
+  async function copySummary() {
+    if (!data) return;
+    const summary =
+      `My type: ${data.typeCode}\n` +
+      `${data.typeName}\n\n` +
+      `Add-ons:\n` +
+      `• Stress profile: ${data.addOns.stressProfile.label}\n` +
+      `• Subtype: ${data.addOns.subtype.label}\n` +
+      `• Mode: ${data.addOns.mode.label}\n`;
+
+    try {
+      await navigator.clipboard.writeText(summary);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1200);
+    } catch {
+      // ignore
+    }
   }
 
-  if (!mounted) return null;
-  if (!allowed) return null;
-  if (!scores) {
+  if (!loaded) return null;
+
+  if (!data) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-gray-50 px-6">
-        <div className="bg-white rounded-2xl shadow p-8 max-w-lg text-center">
-          <h1 className="text-2xl font-bold mb-2">No data</h1>
-          <p className="text-gray-600 mb-6">
-            I can't see saved answers. Return to the test and answer the
-            questions.
+      <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-5 py-10 text-white">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
+          <div className="absolute top-1/3 -left-40 h-[360px] w-[360px] rounded-full bg-fuchsia-500/20 blur-[120px]" />
+          <div className="absolute bottom-0 -right-40 h-[360px] w-[360px] rounded-full bg-pink-500/20 blur-[120px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] via-transparent to-transparent" />
+        </div>
+
+        <div className="relative mx-auto w-full max-w-md">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
+              <Logo className="text-indigo-200" />
+            </div>
+            <div className="leading-tight">
+              <div className="text-sm font-semibold tracking-tight">Personality test</div>
+              <div className="text-xs text-white/55">soft • premium • mobile</div>
+            </div>
+          </div>
+
+          <div className="mt-10 rounded-3xl border border-white/15 bg-white/10 p-6 text-center backdrop-blur-2xl shadow-xl">
+            <h1 className="mb-2 text-2xl font-semibold">No data</h1>
+            <p className="mb-6 text-white/70">
+              I can't see saved results. Return to the test and answer the questions.
+            </p>
+            <button
+              onClick={() => router.push("/test")}
+              className="inline-flex w-full items-center justify-center rounded-2xl px-6 py-4 text-base font-semibold text-white
+                bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
+                shadow-[0_20px_60px_rgba(99,102,241,0.35)]
+                transition active:scale-[0.98]"
+              type="button"
+            >
+              Back to the test
+            </button>
+          </div>
+
+          <p className="mt-10 text-center text-xs text-white/40">
+            © {new Date().getFullYear()} Personality test
           </p>
-          <button
-            onClick={() => router.push("/test")}
-            className="bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition"
-            type="button"
-          >
-            Back to the test
-          </button>
         </div>
       </main>
     );
   }
 
-  const orderedTraits: Trait[] = ["O", "C", "E", "A", "S"];
+  const bigFiveRows: Array<{
+    key: Trait | "S";
+    label: string;
+    value: number;
+    note?: string;
+  }> = [
+    { key: "E", label: "Extraversion", value: data.scores.E },
+    { key: "O", label: "Openness", value: data.scores.O },
+    { key: "C", label: "Conscientiousness", value: data.scores.C },
+    { key: "A", label: "Agreeableness", value: data.scores.A },
+    {
+      key: "N",
+      label: "Neuroticism",
+      value: data.scores.N,
+      note: "Higher = more emotional reactivity",
+    },
+    {
+      key: "S",
+      label: "Emotional stability",
+      value: data.stability,
+      note: "Higher = calmer under pressure",
+    },
+  ];
+
+  const prettyName =
+    data.typeName.startsWith(data.typeCode)
+      ? data.typeName.replace(data.typeCode, "").trim()
+      : data.typeName;
 
   return (
-    <main className="min-h-screen bg-gray-50 px-6 py-10">
-      <div className="mx-auto max-w-2xl">
-        <div className="flex items-start justify-between gap-4 mb-8">
+    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-5 py-10 text-white">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
+        <div className="absolute top-1/3 -left-40 h-[360px] w-[360px] rounded-full bg-fuchsia-500/20 blur-[120px]" />
+        <div className="absolute bottom-0 -right-40 h-[360px] w-[360px] rounded-full bg-pink-500/20 blur-[120px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] via-transparent to-transparent" />
+      </div>
+
+      <div className="relative mx-auto w-full max-w-2xl">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
+            <Logo className="text-indigo-200" />
+          </div>
+          <div className="leading-tight">
+            <div className="text-sm font-semibold tracking-tight">Personality test</div>
+            <div className="text-xs text-white/55">soft • premium • mobile</div>
+          </div>
+        </div>
+
+        <div className="mt-10 flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold mb-2">Your personality profile</h1>
-            <p className="text-gray-600">Result based on the Big Five model</p>
+            <h1 className="mb-2 text-3xl font-semibold">
+              Your{" "}
+              <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
+                personality result
+              </span>
+            </h1>
+            <p className="text-white/65">Result based on the Big Five model</p>
           </div>
 
           <button
-            onClick={resetAll}
-            className="text-sm text-gray-600 hover:text-black underline"
+            onClick={() => router.push("/test")}
+            className="rounded-2xl border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/80 hover:bg-white/15"
             type="button"
           >
-            Retake the test
+            Retake
           </button>
         </div>
 
-        <div className="space-y-6">
-          {orderedTraits.map((t) => {
-            const data = scores[t];
-            return (
-              <div key={t} className="bg-white rounded-2xl shadow p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <h2 className="text-xl font-semibold">{TRAIT_LABELS[t]}</h2>
-                  <div className="text-right">
-                    <div className="text-sm font-medium">{data.percent}%</div>
-                    <div className="text-xs text-gray-600">{levelLabel(data.percent)}</div>
-                  </div>
-                </div>
+        <div className="mt-8 rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur-2xl shadow-xl">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <div className="text-xs uppercase tracking-wider text-white/50">Your type</div>
+              <h2 className="mt-2 text-3xl font-semibold leading-tight">
+                {data.typeCode}
+                <span className="ml-3 text-xl font-medium text-white/70">{prettyName}</span>
+              </h2>
+            </div>
 
-                <div className="w-full bg-gray-200 rounded-full h-3 mb-3">
-                  <div
-                    className="bg-black h-3 rounded-full"
-                    style={{ width: `${data.percent}%` }}
-                  />
-                </div>
+            <button
+              onClick={copySummary}
+              className="rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-black hover:opacity-90"
+              type="button"
+            >
+              {copied ? "Copied!" : "Copy summary"}
+            </button>
+          </div>
 
-                <p className="text-gray-700 text-sm">{levelDescription(data.percent)}</p>
-              </div>
-            );
-          })}
+          <p className="mt-4 text-white/80">{data.typeDescription}</p>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
+              <div className="text-xs uppercase tracking-wider text-white/50">Stress profile</div>
+              <div className="mt-2 font-semibold">{data.addOns.stressProfile.label}</div>
+              <div className="mt-1 text-sm text-white/70">{data.addOns.stressProfile.note}</div>
+              <div className="mt-2 text-xs text-white/45">Stability: {stabilityLabel}</div>
+            </div>
+
+            <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
+              <div className="text-xs uppercase tracking-wider text-white/50">Subtype</div>
+              <div className="mt-2 font-semibold">{data.addOns.subtype.label}</div>
+              <div className="mt-1 text-sm text-white/70">{data.addOns.subtype.note}</div>
+            </div>
+
+            <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
+              <div className="text-xs uppercase tracking-wider text-white/50">Operating mode</div>
+              <div className="mt-2 font-semibold">{data.addOns.mode.label}</div>
+              <div className="mt-1 text-sm text-white/70">{data.addOns.mode.note}</div>
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+            <button
+              onClick={() => setShowBigFive((v) => !v)}
+              className="rounded-2xl border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/80 hover:bg-white/15"
+              type="button"
+            >
+              {showBigFive ? "Hide Big Five details" : "Show Big Five details"}
+            </button>
+
+            <div className="text-xs text-white/45">
+              Computed from Big Five → mapped into a 16-type result
+            </div>
+          </div>
         </div>
 
-        <p className="text-xs text-gray-500 mt-8">
-          Note: This tool is for informational/growth purposes and is not a
-          clinical diagnosis.
+        {showBigFive ? (
+          <div className="mt-6 rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur-2xl shadow-xl">
+            <div className="text-sm font-semibold">Big Five breakdown</div>
+            <div className="mt-1 text-xs text-white/50">
+              Scores are normalized to 0–100. Bars show relative intensity.
+            </div>
+
+            <div className="mt-6 space-y-4">
+              {bigFiveRows.map((row) => (
+                <div key={row.key}>
+                  <div className="flex items-center justify-between">
+                    <div className="text-sm text-white/80">{row.label}</div>
+                    <div className="text-sm text-white/70">{pct(row.value)}</div>
+                  </div>
+                  <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-white/10">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-indigo-400 via-violet-400 to-pink-400"
+                      style={{ width: `${pct(row.value)}%` }}
+                    />
+                  </div>
+                  {row.note ? <div className="mt-1 text-xs text-white/45">{row.note}</div> : null}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 text-xs text-white/45">
+              Note: “Emotional stability” is the inverse of Neuroticism (100 − N).
+            </div>
+          </div>
+        ) : null}
+
+        <div className="mt-8 text-center text-xs text-white/45">
+          Tip: If you'll add a paywall later, you can store the result only after payment (same payload).
+        </div>
+
+        <p className="mt-10 text-center text-xs text-white/40">
+          © {new Date().getFullYear()} Personality test
         </p>
       </div>
     </main>

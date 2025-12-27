@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { Logo } from "@/app/components/ui/logo";
 
 const PAID_KEY = "bigfive_paid_v1";
 
@@ -18,7 +19,6 @@ export default function PayPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] text-white px-5 py-10">
-      {/* Soft gradient background */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
         <div className="absolute top-1/3 -left-40 h-[360px] w-[360px] rounded-full bg-fuchsia-500/20 blur-[120px]" />
@@ -27,22 +27,18 @@ export default function PayPage() {
       </div>
 
       <div className="relative mx-auto w-full max-w-md">
-        {/* Brand */}
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
-            <span className="h-2.5 w-2.5 rounded-full bg-indigo-300" />
+            <Logo className="text-indigo-200" />
           </div>
           <div className="leading-tight">
             <div className="text-sm font-semibold tracking-tight">
               Personality test
             </div>
-            <div className="text-xs text-white/55">
-              soft • premium • mobile
-            </div>
+            <div className="text-xs text-white/55">soft • premium • mobile</div>
           </div>
         </div>
 
-        {/* Hero */}
         <h1 className="mt-10 text-[2.4rem] font-semibold leading-[1.1] tracking-tight">
           Your{" "}
           <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
@@ -52,24 +48,9 @@ export default function PayPage() {
         </h1>
 
         <p className="mt-4 text-base leading-relaxed text-white/70">
-          You will get a complete Big Five personality profile: the percentage
-          score for each trait and a short interpretation.
+          You will get a complete Big Five personality profile: the percentage score for each trait and a short interpretation.
         </p>
 
-        {/* Value pills */}
-        <div className="mt-6 flex flex-wrap gap-2 text-sm text-white/70">
-          <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            ✔️ 5 traits (OCEAN)
-          </span>
-          <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            📊 percentage scores
-          </span>
-          <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            ✍️ short interpretation
-          </span>
-        </div>
-
-        {/* Soft info cards */}
         <div className="mt-8 space-y-3">
           <InfoCard
             title="What exactly do I unlock?"
@@ -85,7 +66,6 @@ export default function PayPage() {
           />
         </div>
 
-        {/* Main CTA */}
         <div className="mt-8">
           <button
             onClick={handleUnlock}
@@ -113,7 +93,6 @@ export default function PayPage() {
           </p>
         </div>
 
-        {/* Spacer */}
         <div className="h-6" />
 
         <p className="mt-8 text-center text-xs text-white/40">
