@@ -24,9 +24,28 @@ type StoredResultV1 = {
 
 const STORAGE_KEY = "personality_result_v1";
 const PAID_KEY = "bigfive_paid_v1";
+const ANSWERS_KEY = "personality_answers_v1";
 
 function pct(n: number) {
   return Math.max(0, Math.min(100, Math.round(n)));
+}
+
+function isResultShape(x: any): x is StoredResultV1 {
+  return (
+    x &&
+    typeof x.typeCode === "string" &&
+    x.typeCode.length > 0 &&
+    x.scores &&
+    typeof x.scores.E === "number" &&
+    typeof x.scores.O === "number" &&
+    typeof x.scores.C === "number" &&
+    typeof x.scores.A === "number" &&
+    typeof x.scores.N === "number" &&
+    typeof x.stability === "number" &&
+    x.addOns?.stressProfile?.label &&
+    x.addOns?.subtype?.label &&
+    x.addOns?.mode?.label
+  );
 }
 
 export default function ResultPage() {
@@ -50,8 +69,8 @@ export default function ResultPage() {
         return;
       }
 
-      const parsed = JSON.parse(raw) as StoredResultV1;
-      if (!parsed?.typeCode || !parsed?.scores) {
+      const parsed = JSON.parse(raw);
+      if (!isResultShape(parsed)) {
         router.replace("/test");
         return;
       }
@@ -91,6 +110,17 @@ export default function ResultPage() {
     }
   }
 
+  function retake() {
+    try {
+      localStorage.removeItem(PAID_KEY);
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(ANSWERS_KEY);
+    } catch {
+      // ignore
+    }
+    router.push("/test");
+  }
+
   if (!loaded) return null;
 
   if (!data) {
@@ -109,7 +139,9 @@ export default function ResultPage() {
               <Logo className="text-indigo-200" />
             </div>
             <div className="leading-tight">
-              <div className="text-sm font-semibold tracking-tight">Personality test</div>
+              <div className="text-sm font-semibold tracking-tight">
+                Personality test
+              </div>
               <div className="text-xs text-white/55">soft • premium • mobile</div>
             </div>
           </div>
@@ -117,7 +149,8 @@ export default function ResultPage() {
           <div className="mt-10 rounded-3xl border border-white/15 bg-white/10 p-6 text-center backdrop-blur-2xl shadow-xl">
             <h1 className="mb-2 text-2xl font-semibold">No data</h1>
             <p className="mb-6 text-white/70">
-              I can't see saved results. Return to the test and answer the questions.
+              I can't see saved results. Return to the test and answer the
+              questions.
             </p>
             <button
               onClick={() => router.push("/test")}
@@ -183,7 +216,9 @@ export default function ResultPage() {
             <Logo className="text-indigo-200" />
           </div>
           <div className="leading-tight">
-            <div className="text-sm font-semibold tracking-tight">Personality test</div>
+            <div className="text-sm font-semibold tracking-tight">
+              Personality test
+            </div>
             <div className="text-xs text-white/55">soft • premium • mobile</div>
           </div>
         </div>
@@ -200,7 +235,7 @@ export default function ResultPage() {
           </div>
 
           <button
-            onClick={() => router.push("/test")}
+            onClick={retake}
             className="rounded-2xl border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/80 hover:bg-white/15"
             type="button"
           >
@@ -211,10 +246,14 @@ export default function ResultPage() {
         <div className="mt-8 rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur-2xl shadow-xl">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
-              <div className="text-xs uppercase tracking-wider text-white/50">Your type</div>
+              <div className="text-xs uppercase tracking-wider text-white/50">
+                Your type
+              </div>
               <h2 className="mt-2 text-3xl font-semibold leading-tight">
                 {data.typeCode}
-                <span className="ml-3 text-xl font-medium text-white/70">{prettyName}</span>
+                <span className="ml-3 text-xl font-medium text-white/70">
+                  {prettyName}
+                </span>
               </h2>
             </div>
 
@@ -231,20 +270,32 @@ export default function ResultPage() {
 
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
             <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
-              <div className="text-xs uppercase tracking-wider text-white/50">Stress profile</div>
-              <div className="mt-2 font-semibold">{data.addOns.stressProfile.label}</div>
-              <div className="mt-1 text-sm text-white/70">{data.addOns.stressProfile.note}</div>
-              <div className="mt-2 text-xs text-white/45">Stability: {stabilityLabel}</div>
+              <div className="text-xs uppercase tracking-wider text-white/50">
+                Stress profile
+              </div>
+              <div className="mt-2 font-semibold">
+                {data.addOns.stressProfile.label}
+              </div>
+              <div className="mt-1 text-sm text-white/70">
+                {data.addOns.stressProfile.note}
+              </div>
+              <div className="mt-2 text-xs text-white/45">
+                Stability: {stabilityLabel}
+              </div>
             </div>
 
             <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
-              <div className="text-xs uppercase tracking-wider text-white/50">Subtype</div>
+              <div className="text-xs uppercase tracking-wider text-white/50">
+                Subtype
+              </div>
               <div className="mt-2 font-semibold">{data.addOns.subtype.label}</div>
               <div className="mt-1 text-sm text-white/70">{data.addOns.subtype.note}</div>
             </div>
 
             <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
-              <div className="text-xs uppercase tracking-wider text-white/50">Operating mode</div>
+              <div className="text-xs uppercase tracking-wider text-white/50">
+                Operating mode
+              </div>
               <div className="mt-2 font-semibold">{data.addOns.mode.label}</div>
               <div className="mt-1 text-sm text-white/70">{data.addOns.mode.note}</div>
             </div>
@@ -285,7 +336,9 @@ export default function ResultPage() {
                       style={{ width: `${pct(row.value)}%` }}
                     />
                   </div>
-                  {row.note ? <div className="mt-1 text-xs text-white/45">{row.note}</div> : null}
+                  {row.note ? (
+                    <div className="mt-1 text-xs text-white/45">{row.note}</div>
+                  ) : null}
                 </div>
               ))}
             </div>
@@ -295,10 +348,6 @@ export default function ResultPage() {
             </div>
           </div>
         ) : null}
-
-        <div className="mt-8 text-center text-xs text-white/45">
-          Tip: If you'll add a paywall later, you can store the result only after payment (same payload).
-        </div>
 
         <p className="mt-10 text-center text-xs text-white/40">
           © {new Date().getFullYear()} Personality test

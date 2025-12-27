@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/app/components/ui/logo";
 import { computeResult, QUESTIONS } from "@/lib/personality";
@@ -8,8 +9,31 @@ const PAID_KEY = "bigfive_paid_v1";
 const ANSWERS_KEY = "personality_answers_v1";
 const RESULT_KEY = "personality_result_v1";
 
+function isCompleteAnswers(answers: number[]) {
+  return (
+    answers.length === QUESTIONS.length &&
+    answers.every((v) => Number.isInteger(v) && v >= 1 && v <= 5)
+  );
+}
+
 export default function PayPage() {
   const router = useRouter();
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(ANSWERS_KEY);
+      if (!raw) {
+        router.replace("/test");
+        return;
+      }
+      const answers = JSON.parse(raw) as number[];
+      if (!Array.isArray(answers) || !isCompleteAnswers(answers)) {
+        router.replace("/test");
+      }
+    } catch {
+      router.replace("/test");
+    }
+  }, [router]);
 
   function handleUnlock() {
     try {
@@ -20,7 +44,7 @@ export default function PayPage() {
       }
 
       const answers = JSON.parse(raw) as number[];
-      if (!Array.isArray(answers) || answers.length !== QUESTIONS.length) {
+      if (!Array.isArray(answers) || !isCompleteAnswers(answers)) {
         router.push("/test");
         return;
       }
@@ -28,16 +52,10 @@ export default function PayPage() {
       const payload = computeResult(answers);
       localStorage.setItem(RESULT_KEY, JSON.stringify(payload));
       localStorage.setItem(PAID_KEY, "true");
+      router.push("/result");
     } catch {
       router.push("/test");
-      return;
     }
-
-    router.push("/result");
-  }
-
-  function handleBack() {
-    router.push("/test");
   }
 
   return (
@@ -71,7 +89,8 @@ export default function PayPage() {
         </h1>
 
         <p className="mt-4 text-base leading-relaxed text-white/70">
-          You will get a complete Big Five personality profile: the percentage score for each trait and a short interpretation.
+          You will get a complete Big Five personality profile: the percentage
+          score for each trait and a short interpretation.
         </p>
 
         <div className="mt-8 space-y-3">
@@ -103,7 +122,7 @@ export default function PayPage() {
           </button>
 
           <button
-            onClick={handleBack}
+            onClick={() => router.push("/test")}
             className="mt-3 inline-flex w-full items-center justify-center rounded-2xl border border-white/20 bg-white/5 px-6 py-4 text-base font-semibold text-white/85
               backdrop-blur-md transition hover:border-white/40"
             type="button"

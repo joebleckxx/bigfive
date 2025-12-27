@@ -16,54 +16,78 @@ const SCALE = [
   { v: 5, label: "Strongly agree" },
 ] as const;
 
+function normalizeAnswers(input: unknown, total: number): number[] | null {
+  if (!Array.isArray(input) || input.length !== total) return null;
+  const arr = input.map((v) =>
+    Number.isInteger(v) && v >= 1 && v <= 5 ? v : 0
+  );
+  return arr;
+}
+
 export default function TestPage() {
   const router = useRouter();
 
   const total = QUESTIONS.length;
   const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<number[]>(Array(total).fill(0));
+  const [answers, setAnswers] = useState<number[]>(() => Array(total).fill(0));
+  const [backUsed, setBackUsed] = useState(false);
 
+  // Wczytaj postęp po wejściu / refreshu
   useEffect(() => {
     try {
-      localStorage.removeItem(PAID_KEY);
-      localStorage.removeItem(RESULT_KEY);
-      localStorage.removeItem(ANSWERS_KEY);
+      const raw = localStorage.getItem(ANSWERS_KEY);
+      if (!raw) return;
+
+      const parsed = JSON.parse(raw);
+      const normalized = normalizeAnswers(parsed, total);
+      if (!normalized) return;
+
+      setAnswers(normalized);
+
+      const firstUnanswered = normalized.findIndex((v) => v === 0);
+      setIndex(firstUnanswered === -1 ? total - 1 : firstUnanswered);
+      setBackUsed(false);
     } catch {
-      // ignore write errors
+      // ignore
     }
-  }, []);
+  }, [total]);
+
+  const progressText = `Question ${Math.min(index + 1, total)} of ${total}`;
+  const progress = useMemo(() => {
+    if (total === 0) return 0;
+    return Math.round(((index + 1) / total) * 100);
+  }, [index, total]);
 
   const currentQuestion = QUESTIONS[index];
-  const progressText = `Question ${index + 1} of ${total}`;
 
-  const progress = useMemo(
-    () => Math.round(((index + 1) / total) * 100),
-    [index, total]
-  );
-
-  function finish(finalAnswers: number[]) {
+  function persistAnswers(nextAnswers: number[]) {
     try {
-      localStorage.setItem(ANSWERS_KEY, JSON.stringify(finalAnswers));
+      // każda zmiana odpowiedzi unieważnia wcześniejszy pay/result
       localStorage.removeItem(PAID_KEY);
       localStorage.removeItem(RESULT_KEY);
+      localStorage.setItem(ANSWERS_KEY, JSON.stringify(nextAnswers));
     } catch {
-      // ignore write errors
+      // ignore
     }
-
-    router.push("/pay");
   }
 
   function handleAnswer(v: number) {
-    const nextAnswers = [...answers];
-    nextAnswers[index] = v;
-    setAnswers(nextAnswers);
+    const next = [...answers];
+    next[index] = v;
+    setAnswers(next);
+    persistAnswers(next);
+    setBackUsed(false);
 
-    if (index >= total - 1) {
-      finish(nextAnswers);
+    // jeśli wszystko odpowiedziane -> pay
+    const done = next.every((x) => x >= 1 && x <= 5);
+    if (done) {
+      router.push("/pay");
       return;
     }
 
-    setIndex(index + 1);
+    // auto-next: skocz do pierwszego nieodpowiedzianego
+    const firstUnanswered = next.findIndex((x) => x === 0);
+    setIndex(firstUnanswered === -1 ? total - 1 : firstUnanswered);
   }
 
   function resetTest() {
@@ -72,20 +96,20 @@ export default function TestPage() {
       localStorage.removeItem(PAID_KEY);
       localStorage.removeItem(RESULT_KEY);
     } catch {
-      // ignore write errors
+      // ignore
     }
     setAnswers(Array(total).fill(0));
     setIndex(0);
+    setBackUsed(false);
   }
 
   function goBack() {
-    if (index === 0) return;
-    const prevIndex = index - 1;
-    const nextAnswers = [...answers];
-    nextAnswers[prevIndex] = 0;
-    setAnswers(nextAnswers);
-    setIndex(prevIndex);
+    if (index === 0 || backUsed) return;
+    setIndex((i) => Math.max(0, i - 1));
+    setBackUsed(true);
   }
+
+  if (!currentQuestion) return null;
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 py-10 text-white">
@@ -103,7 +127,7 @@ export default function TestPage() {
               onClick={goBack}
               className="text-sm text-white/60 hover:text-white underline underline-offset-4 disabled:cursor-not-allowed disabled:opacity-40"
               type="button"
-              disabled={index === 0}
+              disabled={index === 0 || backUsed}
             >
               Back
             </button>
@@ -130,24 +154,29 @@ export default function TestPage() {
           </h2>
 
           <div className="space-y-3">
-            {SCALE.map((s) => (
-              <button
-                key={s.v}
-                onClick={() => handleAnswer(s.v)}
-                className={[
-                  "w-full text-left px-5 py-4 rounded-2xl transition",
-                  "border backdrop-blur-xl",
-                  "border-white/15 bg-white/10",
-                  "hover:bg-white/15 hover:border-indigo-400/40",
-                  "active:scale-[0.99]",
-                ].join(" ")}
-                type="button"
-              >
-                <span className="text-sm font-medium text-white/90">
-                  {s.label}
-                </span>
-              </button>
-            ))}
+            {SCALE.map((s) => {
+              const selected = answers[index] === s.v;
+              return (
+                <button
+                  key={s.v}
+                  onClick={() => handleAnswer(s.v)}
+                  className={[
+                    "w-full text-left px-5 py-4 rounded-2xl transition",
+                    "border backdrop-blur-xl",
+                    selected
+                      ? "border-indigo-300/50 bg-white/15"
+                      : "border-white/15 bg-white/10",
+                    "hover:bg-white/15 hover:border-indigo-400/40",
+                    "active:scale-[0.99]",
+                  ].join(" ")}
+                  type="button"
+                >
+                  <span className="text-sm font-medium text-white/90">
+                    {s.label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           <p className="mt-6 text-xs text-white/55">
