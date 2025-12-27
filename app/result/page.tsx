@@ -253,7 +253,7 @@ export default function ResultPage() {
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
             <button
               onClick={() => setShowBigFive((v) => !v)}
-              className="rounded-2xl border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/80 hover:bg-white/15"
+              className="rounded-2xl bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_35px_rgba(99,102,241,0.35)] hover:opacity-95"
               type="button"
             >
               {showBigFive ? "Hide Big Five details" : "Show Big Five details"}
