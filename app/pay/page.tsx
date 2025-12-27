@@ -2,14 +2,37 @@
 
 import { useRouter } from "next/navigation";
 import { Logo } from "@/app/components/ui/logo";
+import { computeResult, QUESTIONS } from "@/lib/personality";
 
 const PAID_KEY = "bigfive_paid_v1";
+const ANSWERS_KEY = "personality_answers_v1";
+const RESULT_KEY = "personality_result_v1";
 
 export default function PayPage() {
   const router = useRouter();
 
   function handleUnlock() {
-    localStorage.setItem(PAID_KEY, "true");
+    try {
+      const raw = localStorage.getItem(ANSWERS_KEY);
+      if (!raw) {
+        router.push("/test");
+        return;
+      }
+
+      const answers = JSON.parse(raw) as number[];
+      if (!Array.isArray(answers) || answers.length !== QUESTIONS.length) {
+        router.push("/test");
+        return;
+      }
+
+      const payload = computeResult(answers);
+      localStorage.setItem(RESULT_KEY, JSON.stringify(payload));
+      localStorage.setItem(PAID_KEY, "true");
+    } catch {
+      router.push("/test");
+      return;
+    }
+
     router.push("/result");
   }
 
