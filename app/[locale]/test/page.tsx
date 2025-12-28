@@ -1,20 +1,15 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
+import { useTranslations } from "next-intl";
 import { QUESTIONS } from "@/lib/personality";
 
 const RESULT_KEY = "personality_result_v1";
 const ANSWERS_KEY = "personality_answers_v1";
 const PAID_KEY = "bigfive_paid_v1";
 
-const SCALE = [
-  { v: 1, label: "Strongly disagree" },
-  { v: 2, label: "Disagree" },
-  { v: 3, label: "Neutral" },
-  { v: 4, label: "Agree" },
-  { v: 5, label: "Strongly agree" },
-] as const;
+const SCALE_VALUES = [1, 2, 3, 4, 5] as const;
 
 function normalizeAnswers(input: unknown, total: number): number[] | null {
   if (!Array.isArray(input) || input.length !== total) return null;
@@ -26,6 +21,8 @@ function normalizeAnswers(input: unknown, total: number): number[] | null {
 
 export default function TestPage() {
   const router = useRouter();
+  const t = useTranslations("Test");
+  const s = useTranslations("Scale");
 
   const total = QUESTIONS.length;
   const [index, setIndex] = useState(0);
@@ -52,7 +49,11 @@ export default function TestPage() {
     }
   }, [total]);
 
-  const progressText = `Question ${Math.min(index + 1, total)} of ${total}`;
+  const progressText = t("progress", {
+    current: Math.min(index + 1, total),
+    total
+  });
+
   const progress = useMemo(() => {
     if (total === 0) return 0;
     return Math.round(((index + 1) / total) * 100);
@@ -122,6 +123,7 @@ export default function TestPage() {
       <div className="relative mx-auto max-w-xl">
         <div className="mb-6 flex items-center justify-between">
           <div className="text-sm text-white/60">{progressText}</div>
+
           <div className="flex items-center gap-4">
             <button
               onClick={goBack}
@@ -129,14 +131,15 @@ export default function TestPage() {
               type="button"
               disabled={index === 0 || backUsed}
             >
-              Back
+              {t("back")}
             </button>
+
             <button
               onClick={resetTest}
               className="text-sm text-white/60 hover:text-white underline underline-offset-4"
               type="button"
             >
-              Reset
+              {t("reset")}
             </button>
           </div>
         </div>
@@ -154,12 +157,12 @@ export default function TestPage() {
           </h2>
 
           <div className="space-y-3">
-            {SCALE.map((s) => {
-              const selected = answers[index] === s.v;
+            {SCALE_VALUES.map((v) => {
+              const selected = answers[index] === v;
               return (
                 <button
-                  key={s.v}
-                  onClick={() => handleAnswer(s.v)}
+                  key={v}
+                  onClick={() => handleAnswer(v)}
                   className={[
                     "w-full text-left px-5 py-4 rounded-2xl transition",
                     "border backdrop-blur-xl",
@@ -167,25 +170,23 @@ export default function TestPage() {
                       ? "border-indigo-300/50 bg-white/15"
                       : "border-white/15 bg-white/10",
                     "hover:bg-white/15 hover:border-indigo-400/40",
-                    "active:scale-[0.99]",
+                    "active:scale-[0.99]"
                   ].join(" ")}
                   type="button"
                 >
                   <span className="text-sm font-medium text-white/90">
-                    {s.label}
+                    {s(String(v))}
                   </span>
                 </button>
               );
             })}
           </div>
 
-          <p className="mt-6 text-xs text-white/55">
-            Tip: answer intuitively — there are no wrong answers.
-          </p>
+          <p className="mt-6 text-xs text-white/55">{t("tip")}</p>
         </div>
 
         <p className="mt-10 text-center text-xs text-white/40">
-          © {new Date().getFullYear()} Personality test
+          © {new Date().getFullYear()} {t("footer")}
         </p>
       </div>
     </main>

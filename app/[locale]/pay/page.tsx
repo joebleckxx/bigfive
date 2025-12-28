@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
+import { useTranslations } from "next-intl";
 import { Logo } from "@/app/components/ui/logo";
 import { computeResult, QUESTIONS } from "@/lib/personality";
 
@@ -18,6 +19,7 @@ function isCompleteAnswers(answers: number[]) {
 
 export default function PayPage() {
   const router = useRouter();
+  const t = useTranslations("Pay");
 
   useEffect(() => {
     try {
@@ -74,38 +76,28 @@ export default function PayPage() {
           </div>
           <div className="leading-tight">
             <div className="text-sm font-semibold tracking-tight">
-              Personality test
+              {t("brandTitle")}
             </div>
-            <div className="text-xs text-white/55">soft • premium • mobile</div>
+            <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
           </div>
         </div>
 
         <h1 className="mt-10 text-[2.4rem] font-semibold leading-[1.1] tracking-tight">
-          Your{" "}
+          {t("headline.before")}{" "}
           <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
-            full result
+            {t("headline.accent")}
           </span>{" "}
-          is ready
+          {t("headline.after")}
         </h1>
 
         <p className="mt-4 text-base leading-relaxed text-white/70">
-          You will get a complete Big Five personality profile: the percentage
-          score for each trait and a short interpretation.
+          {t("description")}
         </p>
 
         <div className="mt-8 space-y-3">
-          <InfoCard
-            title="What exactly do I unlock?"
-            text="A full report of the five traits with short tips on how to use your strengths."
-          />
-          <InfoCard
-            title="Is it one-time?"
-            text="Yes. Pay once and get instant access to the result."
-          />
-          <InfoCard
-            title="This is a simulation"
-            text="This button launches a demo — no real payment."
-          />
+          <InfoCard title={t("cards.unlock.title")} text={t("cards.unlock.text")} />
+          <InfoCard title={t("cards.once.title")} text={t("cards.once.text")} />
+          <InfoCard title={t("cards.demo.title")} text={t("cards.demo.text")} />
         </div>
 
         <div className="mt-8">
@@ -118,7 +110,7 @@ export default function PayPage() {
               focus:outline-none focus:ring-4 focus:ring-indigo-400/30"
             type="button"
           >
-            Unlock results – $1 (demo)
+            {t("cta")}
           </button>
 
           <button
@@ -127,18 +119,16 @@ export default function PayPage() {
               backdrop-blur-md transition hover:border-white/40"
             type="button"
           >
-            Back to the test
+            {t("backToTest")}
           </button>
 
-          <p className="mt-3 text-center text-xs text-white/55">
-            One-time payment. No subscription.
-          </p>
+          <p className="mt-3 text-center text-xs text-white/55">{t("note")}</p>
         </div>
 
         <div className="h-6" />
 
         <p className="mt-8 text-center text-xs text-white/40">
-          © {new Date().getFullYear()} Personality test
+          © {new Date().getFullYear()} {t("footer")}
         </p>
       </div>
     </main>

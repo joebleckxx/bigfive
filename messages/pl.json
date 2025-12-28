@@ -1,0 +1,116 @@
+{
+  "Home": {
+    "brand": { "title": "Test osobowości", "subtitle": "soft • premium • mobile" },
+    "headline": { "before": "Odkryj swój", "accent": "profil osobowości" },
+    "description": "Spokojny, krótki test oparty na wzorcach odpowiedzi. Bez oceniania. Bez presji. Wynik, który ma sens.",
+    "pills": { "time": "5–7 minut", "anonymous": "Anonimowo", "ux": "przyjemny UX" },
+    "note": "Zajmuje ~5–7 minut. Bez konta.",
+    "cta": "Rozpocznij test",
+    "ctaNote": "Możesz przerwać w każdej chwili",
+    "cards": {
+      "what": { "title": "Co dostanę?", "text": "Czytelny profil, mocne strony, ślepe punkty i praktyczne wskazówki." },
+      "anonymous": { "title": "Czy to anonimowe?", "text": "Tak. Bez konta i bez danych osobowych." },
+      "questions": { "title": "Ile pytań?", "text": "Krótki zestaw pytań — odpowiadaj intuicyjnie." }
+    },
+    "footer": "Test osobowości"
+  },
+  "Test": {
+    "progress": "Pytanie {current} z {total}",
+    "back": "Wstecz",
+    "reset": "Reset",
+    "tip": "Wskazówka: odpowiadaj intuicyjnie — nie ma złych odpowiedzi.",
+    "footer": "Test osobowości"
+  },
+  "Scale": {
+    "1": "Zdecydowanie się nie zgadzam",
+    "2": "Nie zgadzam się",
+    "3": "Neutralnie",
+    "4": "Zgadzam się",
+    "5": "Zdecydowanie się zgadzam"
+  },
+  "Pay": {
+    "brandTitle": "Test osobowości",
+    "brandSubtitle": "soft • premium • mobile",
+
+    "headline": { "before": "Twój", "accent": "pełny wynik", "after": "jest gotowy" },
+    "description": "Otrzymasz pełny profil Big Five: procentowy wynik dla każdej cechy oraz krótką interpretację.",
+
+    "cards": {
+      "unlock": {
+        "title": "Co dokładnie odblokowuję?",
+        "text": "Pełny raport pięciu cech oraz krótkie wskazówki, jak wykorzystać swoje mocne strony."
+      },
+      "once": {
+        "title": "Czy to jednorazowe?",
+        "text": "Tak. Płacisz raz i masz natychmiastowy dostęp do wyniku."
+      },
+      "demo": {
+        "title": "To jest symulacja",
+        "text": "Ten przycisk uruchamia demo — bez prawdziwej płatności."
+      }
+    },
+
+    "cta": "Odblokuj wynik – $1 (demo)",
+    "backToTest": "Wróć do testu",
+    "note": "Płatność jednorazowa. Bez subskrypcji.",
+    "footer": "Test osobowości"
+  },
+  "Result": {
+    "brandTitle": "Test osobowości",
+    "brandSubtitle": "soft • premium • mobile",
+
+    "noData": {
+      "title": "Brak danych",
+      "text": "Nie widzę zapisanego wyniku. Wróć do testu i odpowiedz na pytania.",
+      "backToTest": "Wróć do testu"
+    },
+
+    "hero": {
+      "before": "Twój",
+      "accent": "wynik osobowości",
+      "sub": "Wynik oparty o model Big Five"
+    },
+
+    "retake": "Zrób ponownie",
+    "yourTypeLabel": "Twój typ",
+
+    "stability": { "high": "Wysoka", "medium": "Średnia", "low": "Niska" },
+
+    "cards": {
+      "stress": { "title": "Profil stresu", "stability": "Stabilność" },
+      "subtype": { "title": "Podtyp" },
+      "mode": { "title": "Tryb działania" }
+    },
+
+    "copy": {
+      "cta": "Kopiuj podsumowanie",
+      "copied": "Skopiowano!",
+      "myType": "Mój typ",
+      "addOns": "Dodatki"
+    },
+
+    "bigFive": {
+      "show": "Pokaż szczegóły Big Five",
+      "hide": "Ukryj szczegóły Big Five",
+      "note": "Wyliczone z Big Five → zmapowane do wyniku 16-typowego",
+      "title": "Rozkład Big Five",
+      "subtitle": "Wyniki są znormalizowane do 0–100. Paski pokazują intensywność względną.",
+      "inverseNote": "Uwaga: „Stabilność emocjonalna” to odwrotność neurotyczności (100 − N)."
+    },
+
+    "traits": {
+      "E": "Ekstrawersja",
+      "O": "Otwartość",
+      "C": "Sumienność",
+      "A": "Ugodowość",
+      "N": "Neurotyczność",
+      "S": "Stabilność emocjonalna"
+    },
+    "traitsNotes": {
+      "N": "Wyżej = większa reaktywność emocjonalna",
+      "S": "Wyżej = większy spokój pod presją"
+    },
+
+    "footer": "Test osobowości"
+  }
+}

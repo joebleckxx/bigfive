@@ -1,0 +1,116 @@
+{
+  "Home": {
+    "brand": { "title": "Personlighetstest", "subtitle": "soft • premium • mobile" },
+    "headline": { "before": "Upptäck din", "accent": "personlighetsprofil" },
+    "description": "Ett lugnt, kort test baserat på svarsmönster. Ingen bedömning. Ingen press. Ett resultat som faktiskt känns rimligt.",
+    "pills": { "time": "5–7 minuter", "anonymous": "Anonymt", "ux": "trevlig UX" },
+    "note": "Tar ~5–7 minuter. Inget konto.",
+    "cta": "Starta testet",
+    "ctaNote": "Du kan pausa när som helst",
+    "cards": {
+      "what": { "title": "Vad får jag?", "text": "En tydlig profil, styrkor, blinda fläckar och praktiska tips." },
+      "anonymous": { "title": "Är det anonymt?", "text": "Ja. Inget konto eller personuppgifter krävs." },
+      "questions": { "title": "Hur många frågor?", "text": "Ett kort frågepaket — svara intuitivt." }
+    },
+    "footer": "Personlighetstest"
+  },
+  "Test": {
+    "progress": "Fråga {current} av {total}",
+    "back": "Tillbaka",
+    "reset": "Återställ",
+    "tip": "Tips: svara intuitivt — det finns inga fel svar.",
+    "footer": "Personlighetstest"
+  },
+  "Scale": {
+    "1": "Instämmer inte alls",
+    "2": "Instämmer inte",
+    "3": "Neutral",
+    "4": "Instämmer",
+    "5": "Instämmer helt"
+  },
+  "Pay": {
+    "brandTitle": "Personlighetstest",
+    "brandSubtitle": "soft • premium • mobile",
+
+    "headline": { "before": "Ditt", "accent": "fulla resultat", "after": "är redo" },
+    "description": "Du får en komplett Big Five-profil: procentpoäng för varje drag och en kort tolkning.",
+
+    "cards": {
+      "unlock": {
+        "title": "Vad låser jag upp?",
+        "text": "En full rapport över de fem dragen med korta tips för hur du kan använda dina styrkor."
+      },
+      "once": {
+        "title": "Är det engångsbetalning?",
+        "text": "Ja. Betala en gång och få direkt tillgång till resultatet."
+      },
+      "demo": {
+        "title": "Detta är en simulering",
+        "text": "Knappen startar en demo — ingen riktig betalning."
+      }
+    },
+
+    "cta": "Lås upp resultat – $1 (demo)",
+    "backToTest": "Tillbaka till testet",
+    "note": "Engångsbetalning. Ingen prenumeration.",
+    "footer": "Personlighetstest"
+  },
+  "Result": {
+    "brandTitle": "Personlighetstest",
+    "brandSubtitle": "soft • premium • mobile",
+
+    "noData": {
+      "title": "Inga data",
+      "text": "Jag kan inte se sparade resultat. Gå tillbaka till testet och svara på frågorna.",
+      "backToTest": "Tillbaka till testet"
+    },
+
+    "hero": {
+      "before": "Ditt",
+      "accent": "personlighetsresultat",
+      "sub": "Resultat baserat på Big Five-modellen"
+    },
+
+    "retake": "Gör om",
+    "yourTypeLabel": "Din typ",
+
+    "stability": { "high": "Hög", "medium": "Medel", "low": "Låg" },
+
+    "cards": {
+      "stress": { "title": "Stressprofil", "stability": "Stabilitet" },
+      "subtype": { "title": "Subtyp" },
+      "mode": { "title": "Arbetsläge" }
+    },
+
+    "copy": {
+      "cta": "Kopiera sammanfattning",
+      "copied": "Kopierat!",
+      "myType": "Min typ",
+      "addOns": "Tillägg"
+    },
+
+    "bigFive": {
+      "show": "Visa Big Five-detaljer",
+      "hide": "Dölj Big Five-detaljer",
+      "note": "Beräknat från Big Five → mappat till ett 16-typsresultat",
+      "title": "Big Five-översikt",
+      "subtitle": "Poäng är normaliserade till 0–100. Staplar visar relativ intensitet.",
+      "inverseNote": "Obs: “Emotionell stabilitet” är inversen av neuroticism (100 − N)."
+    },
+
+    "traits": {
+      "E": "Extraversion",
+      "O": "Öppenhet",
+      "C": "Samvetsgrannhet",
+      "A": "Vänlighet",
+      "N": "Neuroticism",
+      "S": "Emotionell stabilitet"
+    },
+    "traitsNotes": {
+      "N": "Högre = mer emotionell reaktivitet",
+      "S": "Högre = lugnare under press"
+    },
+
+    "footer": "Personlighetstest"
+  }
+}

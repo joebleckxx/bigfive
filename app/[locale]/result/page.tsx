@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
+import { useTranslations } from "next-intl";
 import { Logo } from "@/app/components/ui/logo";
 
 type Trait = "E" | "O" | "C" | "A" | "N";
@@ -50,6 +51,8 @@ function isResultShape(x: any): x is StoredResultV1 {
 
 export default function ResultPage() {
   const router = useRouter();
+  const t = useTranslations("Result");
+
   const [data, setData] = useState<StoredResultV1 | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [showBigFive, setShowBigFive] = useState(false);
@@ -86,20 +89,21 @@ export default function ResultPage() {
   const stabilityLabel = useMemo(() => {
     if (!data) return "";
     const s = data.stability;
-    if (s >= 67) return "High";
-    if (s >= 34) return "Medium";
-    return "Low";
-  }, [data]);
+    if (s >= 67) return t("stability.high");
+    if (s >= 34) return t("stability.medium");
+    return t("stability.low");
+  }, [data, t]);
 
   async function copySummary() {
     if (!data) return;
+
     const summary =
-      `My type: ${data.typeCode}\n` +
+      `${t("copy.myType")}: ${data.typeCode}\n` +
       `${data.typeName}\n\n` +
-      `Add-ons:\n` +
-      `• Stress profile: ${data.addOns.stressProfile.label}\n` +
-      `• Subtype: ${data.addOns.subtype.label}\n` +
-      `• Mode: ${data.addOns.mode.label}\n`;
+      `${t("copy.addOns")}:\n` +
+      `• ${t("cards.stress.title")}: ${data.addOns.stressProfile.label}\n` +
+      `• ${t("cards.subtype.title")}: ${data.addOns.subtype.label}\n` +
+      `• ${t("cards.mode.title")}: ${data.addOns.mode.label}\n`;
 
     try {
       await navigator.clipboard.writeText(summary);
@@ -140,18 +144,15 @@ export default function ResultPage() {
             </div>
             <div className="leading-tight">
               <div className="text-sm font-semibold tracking-tight">
-                Personality test
+                {t("brandTitle")}
               </div>
-              <div className="text-xs text-white/55">soft • premium • mobile</div>
+              <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
             </div>
           </div>
 
           <div className="mt-10 rounded-3xl border border-white/15 bg-white/10 p-6 text-center backdrop-blur-2xl shadow-xl">
-            <h1 className="mb-2 text-2xl font-semibold">No data</h1>
-            <p className="mb-6 text-white/70">
-              I can't see saved results. Return to the test and answer the
-              questions.
-            </p>
+            <h1 className="mb-2 text-2xl font-semibold">{t("noData.title")}</h1>
+            <p className="mb-6 text-white/70">{t("noData.text")}</p>
             <button
               onClick={() => router.push("/test")}
               className="inline-flex w-full items-center justify-center rounded-2xl px-6 py-4 text-base font-semibold text-white
@@ -160,12 +161,12 @@ export default function ResultPage() {
                 transition active:scale-[0.98]"
               type="button"
             >
-              Back to the test
+              {t("noData.backToTest")}
             </button>
           </div>
 
           <p className="mt-10 text-center text-xs text-white/40">
-            © {new Date().getFullYear()} Personality test
+            © {new Date().getFullYear()} {t("footer")}
           </p>
         </div>
       </main>
@@ -178,22 +179,12 @@ export default function ResultPage() {
     value: number;
     note?: string;
   }> = [
-    { key: "E", label: "Extraversion", value: data.scores.E },
-    { key: "O", label: "Openness", value: data.scores.O },
-    { key: "C", label: "Conscientiousness", value: data.scores.C },
-    { key: "A", label: "Agreeableness", value: data.scores.A },
-    {
-      key: "N",
-      label: "Neuroticism",
-      value: data.scores.N,
-      note: "Higher = more emotional reactivity",
-    },
-    {
-      key: "S",
-      label: "Emotional stability",
-      value: data.stability,
-      note: "Higher = calmer under pressure",
-    },
+    { key: "E", label: t("traits.E"), value: data.scores.E },
+    { key: "O", label: t("traits.O"), value: data.scores.O },
+    { key: "C", label: t("traits.C"), value: data.scores.C },
+    { key: "A", label: t("traits.A"), value: data.scores.A },
+    { key: "N", label: t("traits.N"), value: data.scores.N, note: t("traitsNotes.N") },
+    { key: "S", label: t("traits.S"), value: data.stability, note: t("traitsNotes.S") }
   ];
 
   const prettyName =
@@ -216,22 +207,20 @@ export default function ResultPage() {
             <Logo className="text-indigo-200" />
           </div>
           <div className="leading-tight">
-            <div className="text-sm font-semibold tracking-tight">
-              Personality test
-            </div>
-            <div className="text-xs text-white/55">soft • premium • mobile</div>
+            <div className="text-sm font-semibold tracking-tight">{t("brandTitle")}</div>
+            <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
           </div>
         </div>
 
         <div className="mt-10 flex items-start justify-between gap-4">
           <div>
             <h1 className="mb-2 text-3xl font-semibold">
-              Your{" "}
+              {t("hero.before")}{" "}
               <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
-                personality result
+                {t("hero.accent")}
               </span>
             </h1>
-            <p className="text-white/65">Result based on the Big Five model</p>
+            <p className="text-white/65">{t("hero.sub")}</p>
           </div>
 
           <button
@@ -239,7 +228,7 @@ export default function ResultPage() {
             className="rounded-2xl border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/80 hover:bg-white/15"
             type="button"
           >
-            Retake
+            {t("retake")}
           </button>
         </div>
 
@@ -247,7 +236,7 @@ export default function ResultPage() {
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <div className="text-xs uppercase tracking-wider text-white/50">
-                Your type
+                {t("yourTypeLabel")}
               </div>
               <h2 className="mt-2 text-3xl font-semibold leading-tight">
                 {data.typeCode}
@@ -262,7 +251,7 @@ export default function ResultPage() {
               className="rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-black hover:opacity-90"
               type="button"
             >
-              {copied ? "Copied!" : "Copy summary"}
+              {copied ? t("copy.copied") : t("copy.cta")}
             </button>
           </div>
 
@@ -271,22 +260,18 @@ export default function ResultPage() {
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
             <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
               <div className="text-xs uppercase tracking-wider text-white/50">
-                Stress profile
+                {t("cards.stress.title")}
               </div>
-              <div className="mt-2 font-semibold">
-                {data.addOns.stressProfile.label}
-              </div>
-              <div className="mt-1 text-sm text-white/70">
-                {data.addOns.stressProfile.note}
-              </div>
+              <div className="mt-2 font-semibold">{data.addOns.stressProfile.label}</div>
+              <div className="mt-1 text-sm text-white/70">{data.addOns.stressProfile.note}</div>
               <div className="mt-2 text-xs text-white/45">
-                Stability: {stabilityLabel}
+                {t("cards.stress.stability")}: {stabilityLabel}
               </div>
             </div>
 
             <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
               <div className="text-xs uppercase tracking-wider text-white/50">
-                Subtype
+                {t("cards.subtype.title")}
               </div>
               <div className="mt-2 font-semibold">{data.addOns.subtype.label}</div>
               <div className="mt-1 text-sm text-white/70">{data.addOns.subtype.note}</div>
@@ -294,7 +279,7 @@ export default function ResultPage() {
 
             <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
               <div className="text-xs uppercase tracking-wider text-white/50">
-                Operating mode
+                {t("cards.mode.title")}
               </div>
               <div className="mt-2 font-semibold">{data.addOns.mode.label}</div>
               <div className="mt-1 text-sm text-white/70">{data.addOns.mode.note}</div>
@@ -307,21 +292,17 @@ export default function ResultPage() {
               className="rounded-2xl bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_35px_rgba(99,102,241,0.35)] hover:opacity-95"
               type="button"
             >
-              {showBigFive ? "Hide Big Five details" : "Show Big Five details"}
+              {showBigFive ? t("bigFive.hide") : t("bigFive.show")}
             </button>
 
-            <div className="text-xs text-white/45">
-              Computed from Big Five → mapped into a 16-type result
-            </div>
+            <div className="text-xs text-white/45">{t("bigFive.note")}</div>
           </div>
         </div>
 
         {showBigFive ? (
           <div className="mt-6 rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur-2xl shadow-xl">
-            <div className="text-sm font-semibold">Big Five breakdown</div>
-            <div className="mt-1 text-xs text-white/50">
-              Scores are normalized to 0–100. Bars show relative intensity.
-            </div>
+            <div className="text-sm font-semibold">{t("bigFive.title")}</div>
+            <div className="mt-1 text-xs text-white/50">{t("bigFive.subtitle")}</div>
 
             <div className="mt-6 space-y-4">
               {bigFiveRows.map((row) => (
@@ -336,21 +317,17 @@ export default function ResultPage() {
                       style={{ width: `${pct(row.value)}%` }}
                     />
                   </div>
-                  {row.note ? (
-                    <div className="mt-1 text-xs text-white/45">{row.note}</div>
-                  ) : null}
+                  {row.note ? <div className="mt-1 text-xs text-white/45">{row.note}</div> : null}
                 </div>
               ))}
             </div>
 
-            <div className="mt-6 text-xs text-white/45">
-              Note: “Emotional stability” is the inverse of Neuroticism (100 − N).
-            </div>
+            <div className="mt-6 text-xs text-white/45">{t("bigFive.inverseNote")}</div>
           </div>
         ) : null}
 
         <p className="mt-10 text-center text-xs text-white/40">
-          © {new Date().getFullYear()} Personality test
+          © {new Date().getFullYear()} {t("footer")}
         </p>
       </div>
     </main>
