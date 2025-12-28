@@ -14,6 +14,7 @@
     },
     "footer": "Personality test"
   },
+
   "Test": {
     "progress": "Question {current} of {total}",
     "back": "Back",
@@ -21,6 +22,7 @@
     "tip": "Tip: answer intuitively — there are no wrong answers.",
     "footer": "Personality test"
   },
+
   "Scale": {
     "1": "Strongly disagree",
     "2": "Disagree",
@@ -28,6 +30,7 @@
     "4": "Agree",
     "5": "Strongly agree"
   },
+
   "Pay": {
     "brandTitle": "Personality test",
     "brandSubtitle": "soft • premium • mobile",
@@ -55,6 +58,7 @@
     "note": "One-time payment. No subscription.",
     "footer": "Personality test"
   },
+
   "Result": {
     "brandTitle": "Personality test",
     "brandSubtitle": "soft • premium • mobile",
@@ -112,5 +116,108 @@
     },
 
     "footer": "Personality test"
+  },
+
+  "Questions": {
+    "E1": "I find it easy to start conversations with new people.",
+    "E2": "After a long day, I prefer socializing over being alone.",
+    "E3": "I often take the initiative in a group.",
+    "E4": "I feel comfortable being the center of attention.",
+    "E5": "I usually prefer listening rather than talking.",
+
+    "O1": "I enjoy trying new ideas, even if they are unconventional.",
+    "O2": "I'm drawn to abstract topics (ideas, philosophy, the future).",
+    "O3": "I get bored with routine and look for variety.",
+    "O4": "I value creativity more than tradition.",
+    "O5": "I prefer proven methods over experimentation.",
+
+    "C1": "I usually plan tasks and stick to the plan.",
+    "C2": "Deadlines matter to me, and I actively protect them.",
+    "C3": "I like having things organized and structured.",
+    "C4": "I finish what I start, even when motivation drops.",
+    "C5": "I often do things at the last minute.",
+
+    "A1": "It's easy for me to understand other people's perspective.",
+    "A2": "Warmth and respect in relationships are important to me.",
+    "A3": "In conflict, I prefer compromise over winning.",
+    "A4": "I often support others, even when it's not convenient.",
+    "A5": "I can be blunt, even if it hurts someone's feelings.",
+
+    "N1": "I get stressed easily, even by small things.",
+    "N2": "It's hard for me to calm down after an unpleasant situation.",
+    "N3": "I often worry ahead of time.",
+    "N4": "My mood can change quickly.",
+    "N5": "I usually stay calm under pressure."
+  },
+  
+  "AddOns": {
+    "stress": {
+      "sensitive": {
+        "label": "Sensitive Reactor",
+        "note": "You pick up signals quickly. Under pressure you may feel intensity — recovery time matters."
+      },
+      "steady": {
+        "label": "Steady Stabilizer",
+        "note": "You stay relatively calm in stress. You recover quickly and keep a clear head."
+      }
+    },
+    "subtype": {
+      "empathicVisionary": {
+        "label": "Empathic Visionary",
+        "note": "Creativity plus people-awareness. You want solutions that are smart and human."
+      },
+      "independentInnovator": {
+        "label": "Independent Innovator",
+        "note": "Big ideas plus tough standards. You challenge assumptions and cut through noise."
+      },
+      "supportivePragmatist": {
+        "label": "Supportive Pragmatist",
+        "note": "Practical approach plus warmth. You stabilize situations and protect relationships."
+      },
+      "directRealist": {
+        "label": "Direct Realist",
+        "note": "Concrete thinking plus blunt honesty. You value results, clarity, and efficient action."
+      }
+    },
+    "mode": {
+      "driveDeliver": {
+        "label": "Drive & deliver",
+        "note": "You move quickly from talk to execution. You like pace and closing loops."
+      },
+      "planPerfect": {
+        "label": "Plan & perfect",
+        "note": "You work best with structure and deep focus. Quality and correctness are your strengths."
+      },
+      "exploreAdapt": {
+        "label": "Explore & adapt",
+        "note": "You generate momentum by trying things. You iterate fast and learn through action."
+      },
+      "flowImprovise": {
+        "label": "Flow & improvise",
+        "note": "You prefer flexibility and spontaneity. You do best when you can respond in the moment."
+      }
+    }
+  },
+  "Types": {
+    "ISTP": { "name": "ISTP — Craftsman", "desc": "You prefer logic, calm, and practical solutions. You're good at fixing problems under pressure." },
+    "ISFP": { "name": "ISFP — Adventurer", "desc": "You value authenticity and direct experience. You follow what feels right and prefer freedom over rigid plans." },
+    "ESTP": { "name": "ESTP — Dynamo", "desc": "You thrive in action. You read situations fast, adapt quickly, and enjoy taking bold steps." },
+    "ESFP": { "name": "ESFP — Entertainer", "desc": "You bring energy and warmth to people around you. You enjoy shared experiences and living in the moment." },
+
+    "ISTJ": { "name": "ISTJ — Inspector", "desc": "You value reliability, structure, and responsibility. You keep things running smoothly and follow through." },
+    "ISFJ": { "name": "ISFJ — Protector", "desc": "You’re caring, loyal, and attentive to details. You keep people safe and supported, often quietly." },
+    "ESTJ": { "name": "ESTJ — Executive", "desc": "You like clear goals and efficient systems. You organize, lead, and push projects to completion." },
+    "ESFJ": { "name": "ESFJ — Supporter", "desc": "You prioritize harmony and cooperation. You enjoy helping others and maintaining strong connections." },
+
+    "INTP": { "name": "INTP — Analyst", "desc": "Curiosity drives you. You enjoy exploring ideas, building mental models, and finding clean explanations." },
+    "ENTJ": { "name": "ENTJ — Commander", "desc": "You naturally organize people and resources. You prioritize speed, set direction, and execute to outcomes." },
+    "ENTP": { "name": "ENTP — Innovator", "desc": "You love mental challenges and possibilities. You generate options quickly and test hypotheses in the real world." },
+
+    "INFJ": { "name": "INFJ — Counselor", "desc": "You have strong intuition and deep awareness of people. You connect vision with values and meaning." },
+    "INFP": { "name": "INFP — Idealist", "desc": "You're guided by authenticity and purpose. You notice emotional nuance and care about what feels true." },
+    "ENFJ": { "name": "ENFJ — Mentor", "desc": "You read people well and help them grow. You build momentum through encouragement and clear direction." },
+    "ENFP": { "name": "ENFP — Visionary", "desc": "You spark change with energy and imagination. You inspire others and enjoy exploring new paths." },
+
+    "INTJ": { "name": "INTJ — Strategist", "desc": "You think long-term and enjoy designing systems. You prefer autonomy, clarity, and making things better." }
   }
 }

@@ -14,12 +14,12 @@ type StoredResultV1 = {
   scores: Record<Trait, number>;
   stability: number;
   typeCode: string;
-  typeName: string;
-  typeDescription: string;
-  addOns: {
-    stressProfile: { label: string; note: string };
-    subtype: { label: string; note: string };
-    mode: { label: string; note: string };
+  typeName?: string;
+  typeDescription?: string;
+  addOns?: {
+    stressProfile?: { label: string; note: string };
+    subtype?: { label: string; note: string };
+    mode?: { label: string; note: string };
   };
 };
 
@@ -42,16 +42,63 @@ function isResultShape(x: any): x is StoredResultV1 {
     typeof x.scores.C === "number" &&
     typeof x.scores.A === "number" &&
     typeof x.scores.N === "number" &&
-    typeof x.stability === "number" &&
-    x.addOns?.stressProfile?.label &&
-    x.addOns?.subtype?.label &&
-    x.addOns?.mode?.label
+    typeof x.stability === "number"
   );
+}
+
+type StressKey = "sensitive" | "steady";
+type SubtypeKey =
+  | "empathicVisionary"
+  | "independentInnovator"
+  | "supportivePragmatist"
+  | "directRealist";
+type ModeKey = "driveDeliver" | "planPerfect" | "exploreAdapt" | "flowImprovise";
+
+function deriveAddOnKeys(scores: Record<Trait, number>) {
+  const highE = scores.E >= 50;
+  const highO = scores.O >= 50;
+  const highC = scores.C >= 50;
+  const highA = scores.A >= 50;
+  const highN = scores.N >= 50;
+
+  const stressKey: StressKey = highN ? "sensitive" : "steady";
+
+  const subtypeKey: SubtypeKey = highO
+    ? highA
+      ? "empathicVisionary"
+      : "independentInnovator"
+    : highA
+      ? "supportivePragmatist"
+      : "directRealist";
+
+  const modeKey: ModeKey = highC
+    ? highE
+      ? "driveDeliver"
+      : "planPerfect"
+    : highE
+      ? "exploreAdapt"
+      : "flowImprovise";
+
+  return { stressKey, subtypeKey, modeKey };
+}
+
+function safeGet<T>(fn: () => T, fallback: T): T {
+  try {
+    return fn();
+  } catch {
+    return fallback;
+  }
 }
 
 export default function ResultPage() {
   const router = useRouter();
+
+  // UI strings (istniejące w Twoim Result)
   const t = useTranslations("Result");
+
+  // Nowe sekcje z messages/*:
+  const tt = useTranslations("Types");
+  const ta = useTranslations("AddOns");
 
   const [data, setData] = useState<StoredResultV1 | null>(null);
   const [loaded, setLoaded] = useState(false);
@@ -94,16 +141,107 @@ export default function ResultPage() {
     return t("stability.low");
   }, [data, t]);
 
+  const derived = useMemo(() => {
+    if (!data) return null;
+
+    // jeśli payload ma klucze (nowa wersja) -> użyj ich
+    const a: any = data.addOns;
+    if (a?.stressKey && a?.subtypeKey && a?.modeKey) {
+      return {
+        stressKey: a.stressKey,
+        subtypeKey: a.subtypeKey,
+        modeKey: a.modeKey
+      };
+    }
+
+  // fallback dla starych zapisów
+  return deriveAddOnKeys(data.scores);
+}, [data]);
+
+  const typeName = useMemo(() => {
+    if (!data) return "";
+    return safeGet(
+      () => tt(`${data.typeCode}.name`),
+      data.typeName ?? data.typeCode
+    );
+  }, [data, tt]);
+
+  const typeDescription = useMemo(() => {
+    if (!data) return "";
+    return safeGet(
+      () => tt(`${data.typeCode}.desc`),
+      data.typeDescription ?? ""
+    );
+  }, [data, tt]);
+
+  const prettyName = useMemo(() => {
+    if (!data) return "";
+    const full = typeName;
+    return full.startsWith(data.typeCode)
+      ? full.replace(data.typeCode, "").trim().replace(/^[-—]\s*/, "")
+      : full;
+  }, [data, typeName]);
+
+  const addOnTexts = useMemo(() => {
+    if (!data || !derived) {
+      return {
+        stress: { label: "", note: "" },
+        subtype: { label: "", note: "" },
+        mode: { label: "", note: "" }
+      };
+    }
+
+    // fallbacki na stare dane zapisane w localStorage (jeśli istnieją)
+    const fbStress = data.addOns?.stressProfile ?? { label: "", note: "" };
+    const fbSubtype = data.addOns?.subtype ?? { label: "", note: "" };
+    const fbMode = data.addOns?.mode ?? { label: "", note: "" };
+
+    const stress = {
+      label: safeGet(
+        () => ta(`stress.${derived.stressKey}.label`),
+        fbStress.label
+      ),
+      note: safeGet(
+        () => ta(`stress.${derived.stressKey}.note`),
+        fbStress.note
+      )
+    };
+
+    const subtype = {
+      label: safeGet(
+        () => ta(`subtype.${derived.subtypeKey}.label`),
+        fbSubtype.label
+      ),
+      note: safeGet(
+        () => ta(`subtype.${derived.subtypeKey}.note`),
+        fbSubtype.note
+      )
+    };
+
+    const mode = {
+      label: safeGet(
+        () => ta(`mode.${derived.modeKey}.label`),
+        fbMode.label
+      ),
+      note: safeGet(
+        () => ta(`mode.${derived.modeKey}.note`),
+        fbMode.note
+      )
+    };
+
+    return { stress, subtype, mode };
+  }, [data, derived, ta]);
+
   async function copySummary() {
     if (!data) return;
 
     const summary =
       `${t("copy.myType")}: ${data.typeCode}\n` +
-      `${data.typeName}\n\n` +
+      `${typeName}\n\n` +
       `${t("copy.addOns")}:\n` +
-      `• ${t("cards.stress.title")}: ${data.addOns.stressProfile.label}\n` +
-      `• ${t("cards.subtype.title")}: ${data.addOns.subtype.label}\n` +
-      `• ${t("cards.mode.title")}: ${data.addOns.mode.label}\n`;
+      `• ${t("cards.stress.title")}: ${addOnTexts.stress.label}\n` +
+      `• ${t("cards.subtype.title")}: ${addOnTexts.subtype.label}\n` +
+      `• ${t("cards.mode.title")}: ${addOnTexts.mode.label}\n`;
 
     try {
       await navigator.clipboard.writeText(summary);
@@ -187,11 +325,6 @@ export default function ResultPage() {
     { key: "S", label: t("traits.S"), value: data.stability, note: t("traitsNotes.S") }
   ];
 
-  const prettyName =
-    data.typeName.startsWith(data.typeCode)
-      ? data.typeName.replace(data.typeCode, "").trim()
-      : data.typeName;
-
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-5 py-10 text-white">
       <div className="pointer-events-none absolute inset-0">
@@ -255,15 +388,15 @@ export default function ResultPage() {
             </button>
           </div>
 
-          <p className="mt-4 text-white/80">{data.typeDescription}</p>
+          <p className="mt-4 text-white/80">{typeDescription}</p>
 
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
             <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
               <div className="text-xs uppercase tracking-wider text-white/50">
                 {t("cards.stress.title")}
               </div>
-              <div className="mt-2 font-semibold">{data.addOns.stressProfile.label}</div>
-              <div className="mt-1 text-sm text-white/70">{data.addOns.stressProfile.note}</div>
+              <div className="mt-2 font-semibold">{addOnTexts.stress.label}</div>
+              <div className="mt-1 text-sm text-white/70">{addOnTexts.stress.note}</div>
               <div className="mt-2 text-xs text-white/45">
                 {t("cards.stress.stability")}: {stabilityLabel}
               </div>
@@ -273,16 +406,16 @@ export default function ResultPage() {
               <div className="text-xs uppercase tracking-wider text-white/50">
                 {t("cards.subtype.title")}
               </div>
-              <div className="mt-2 font-semibold">{data.addOns.subtype.label}</div>
-              <div className="mt-1 text-sm text-white/70">{data.addOns.subtype.note}</div>
+              <div className="mt-2 font-semibold">{addOnTexts.subtype.label}</div>
+              <div className="mt-1 text-sm text-white/70">{addOnTexts.subtype.note}</div>
             </div>
 
             <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
               <div className="text-xs uppercase tracking-wider text-white/50">
                 {t("cards.mode.title")}
               </div>
-              <div className="mt-2 font-semibold">{data.addOns.mode.label}</div>
-              <div className="mt-1 text-sm text-white/70">{data.addOns.mode.note}</div>
+              <div className="mt-2 font-semibold">{addOnTexts.mode.label}</div>
+              <div className="mt-1 text-sm text-white/70">{addOnTexts.mode.note}</div>
             </div>
           </div>
 

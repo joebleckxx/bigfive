@@ -31,9 +31,11 @@ export default function PayPage() {
       const answers = JSON.parse(raw) as number[];
       if (!Array.isArray(answers) || !isCompleteAnswers(answers)) {
         router.replace("/test");
+        return;
       }
     } catch {
       router.replace("/test");
+      return;
     }
   }, [router]);
 

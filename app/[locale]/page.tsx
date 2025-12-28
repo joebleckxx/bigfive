@@ -131,8 +131,14 @@ export default function Page() {
 
         <div className="mt-10 space-y-3">
           <InfoCard title={t("cards.what.title")} text={t("cards.what.text")} />
-          <InfoCard title={t("cards.anonymous.title")} text={t("cards.anonymous.text")} />
-          <InfoCard title={t("cards.questions.title")} text={t("cards.questions.text")} />
+          <InfoCard
+            title={t("cards.anonymous.title")}
+            text={t("cards.anonymous.text")}
+          />
+          <InfoCard
+            title={t("cards.questions.title")}
+            text={t("cards.questions.text")}
+          />
         </div>
 
         <p className="mt-10 text-center text-xs text-white/40">

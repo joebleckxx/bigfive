@@ -112,5 +112,155 @@
     },
 
     "footer": "Personlighetstest"
+  },
+  "Questions": {
+    "E1": "Jag har lätt för att starta samtal med nya människor.",
+    "E2": "Efter en lång dag föredrar jag att umgås framför att vara ensam.",
+    "E3": "Jag tar ofta initiativ i en grupp.",
+    "E4": "Jag känner mig bekväm med att vara i centrum för uppmärksamheten.",
+    "E5": "Jag föredrar oftast att lyssna snarare än att prata.",
+
+    "O1": "Jag tycker om att prova nya idéer, även om de är okonventionella.",
+    "O2": "Jag dras till abstrakta ämnen (idéer, filosofi, framtiden).",
+    "O3": "Jag blir lätt uttråkad av rutiner och söker variation.",
+    "O4": "Jag värdesätter kreativitet mer än tradition.",
+    "O5": "Jag föredrar beprövade metoder framför att experimentera.",
+
+    "C1": "Jag planerar oftast uppgifter och håller mig till planen.",
+    "C2": "Deadlines är viktiga för mig, och jag skyddar dem aktivt.",
+    "C3": "Jag gillar när saker är organiserade och strukturerade.",
+    "C4": "Jag avslutar det jag börjar, även när motivationen sjunker.",
+    "C5": "Jag gör ofta saker i sista minuten.",
+
+    "A1": "Det är lätt för mig att förstå andras perspektiv.",
+    "A2": "Värme och respekt i relationer är viktigt för mig.",
+    "A3": "I konflikter föredrar jag kompromiss framför att vinna.",
+    "A4": "Jag stöttar ofta andra, även när det inte passar mig.",
+    "A5": "Jag kan vara rättfram, även om det sårar någons känslor.",
+
+    "N1": "Jag blir lätt stressad, även av små saker.",
+    "N2": "Det är svårt för mig att lugna ner mig efter en obehaglig situation.",
+    "N3": "Jag oroar mig ofta i förväg.",
+    "N4": "Mitt humör kan ändras snabbt.",
+    "N5": "Jag brukar behålla lugnet under press."
+  },
+  
+  "AddOns": {
+    "stress": {
+      "sensitive": {
+        "label": "Känslig reagerare",
+        "note": "Du snappar snabbt upp signaler. Under press kan du känna mer intensitet — återhämtning spelar roll."
+      },
+      "steady": {
+        "label": "Lugn stabilisator",
+        "note": "Du håller dig oftast lugn i stress. Du återhämtar dig snabbt och behåller ett klart huvud."
+      }
+    },
+    "subtype": {
+      "empathicVisionary": {
+        "label": "Empatisk visionär",
+        "note": "Kreativitet plus människokänsla. Du vill ha lösningar som är både smarta och mänskliga."
+      },
+      "independentInnovator": {
+        "label": "Självständig innovatör",
+        "note": "Stora idéer plus höga krav. Du utmanar antaganden och skär igenom bruset."
+      },
+      "supportivePragmatist": {
+        "label": "Stöttande pragmatiker",
+        "note": "Praktiskt tänkande plus värme. Du stabiliserar situationer och värnar relationer."
+      },
+      "directRealist": {
+        "label": "Rak realist",
+        "note": "Konkret tänkande plus ärlighet. Du värdesätter resultat, tydlighet och effektiv handling."
+      }
+    },
+    "mode": {
+      "driveDeliver": {
+        "label": "Driv & leverera",
+        "note": "Du går snabbt från prat till genomförande. Du gillar tempo och att stänga loopar."
+      },
+      "planPerfect": {
+        "label": "Planera & finslipa",
+        "note": "Du fungerar bäst med struktur och djupt fokus. Kvalitet och korrekthet är dina styrkor."
+      },
+      "exploreAdapt": {
+        "label": "Utforska & anpassa",
+        "note": "Du skapar fart genom att prova. Du itererar snabbt och lär dig genom handling."
+      },
+      "flowImprovise": {
+        "label": "Flyt & improvisera",
+        "note": "Du föredrar flexibilitet och spontanitet. Du fungerar bäst när du kan reagera i stunden."
+      }
+    }
+  },
+  "Types": {
+    "ISTP": {
+      "name": "ISTP — Hantverkare",
+      "desc": "Du föredrar logik, lugn och praktiska lösningar. Du är bra på att fixa problem under press."
+    },
+    "ISFP": {
+      "name": "ISFP — Äventyrare",
+      "desc": "Du värdesätter äkthet och direkta upplevelser. Du följer det som känns rätt och föredrar frihet framför rigida planer."
+    },
+    "ESTP": {
+      "name": "ESTP — Dynamo",
+      "desc": "Du trivs i action. Du läser situationer snabbt, anpassar dig lätt och gillar att ta modiga steg."
+    },
+    "ESFP": {
+      "name": "ESFP — Underhållare",
+      "desc": "Du tillför energi och värme. Du gillar gemensamma upplevelser och att leva i nuet."
+    },
+
+    "ISTJ": {
+      "name": "ISTJ — Inspektör",
+      "desc": "Du värdesätter pålitlighet, struktur och ansvar. Du får saker att fungera och följer upp."
+    },
+    "ISFJ": {
+      "name": "ISFJ — Beskyddare",
+      "desc": "Du är omtänksam, lojal och detaljorienterad. Du får andra att känna sig trygga och stöttade, ofta i det tysta."
+    },
+    "ESTJ": {
+      "name": "ESTJ — Utförare",
+      "desc": "Du gillar tydliga mål och effektiva system. Du organiserar, leder och driver projekt i mål."
+    },
+    "ESFJ": {
+      "name": "ESFJ — Stödjare",
+      "desc": "Du prioriterar harmoni och samarbete. Du hjälper gärna andra och bygger starka band."
+    },
+
+    "INTP": {
+      "name": "INTP — Analytiker",
+      "desc": "Nyfikenhet driver dig. Du gillar idéer, mentala modeller och rena förklaringar."
+    },
+    "ENTJ": {
+      "name": "ENTJ — Befälhavare",
+      "desc": "Du organiserar naturligt människor och resurser. Du sätter riktning och genomför med fokus på resultat."
+    },
+    "ENTP": {
+      "name": "ENTP — Innovatör",
+      "desc": "Du gillar mentala utmaningar och möjligheter. Du skapar snabbt alternativ och testar hypoteser i verkligheten."
+    },
+
+    "INFJ": {
+      "name": "INFJ — Rådgivare",
+      "desc": "Du har stark intuition och god människokännedom. Du kopplar vision till värderingar och mening."
+    },
+    "INFP": {
+      "name": "INFP — Idealist",
+      "desc": "Du leds av äkthet och syfte. Du märker emotionella nyanser och bryr dig om det som känns sant."
+    },
+    "ENFJ": {
+      "name": "ENFJ — Mentor",
+      "desc": "Du läser människor väl och hjälper dem att växa. Du bygger fart genom uppmuntran och tydlig riktning."
+    },
+    "ENFP": {
+      "name": "ENFP — Visionär",
+      "desc": "Du sätter igång förändring med energi och fantasi. Du inspirerar andra och gillar nya vägar."
+    },
+
+    "INTJ": {
+      "name": "INTJ — Strateg",
+      "desc": "Du tänker långsiktigt och gillar att designa system. Du föredrar autonomi, tydlighet och förbättringar."
+    }
   }
 }

@@ -23,6 +23,7 @@ export default function TestPage() {
   const router = useRouter();
   const t = useTranslations("Test");
   const s = useTranslations("Scale");
+  const q = useTranslations("Questions"); // 👈 pytania po ID
 
   const total = QUESTIONS.length;
   const [index, setIndex] = useState(0);
@@ -153,7 +154,7 @@ export default function TestPage() {
 
         <div className="rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl backdrop-blur-2xl">
           <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
-            {currentQuestion.text}
+            {q(currentQuestion.id)}
           </h2>
 
           <div className="space-y-3">
