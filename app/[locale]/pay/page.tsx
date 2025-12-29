@@ -96,12 +96,6 @@ export default function PayPage() {
           {t("description")}
         </p>
 
-        <div className="mt-8 space-y-3">
-          <InfoCard title={t("cards.unlock.title")} text={t("cards.unlock.text")} />
-          <InfoCard title={t("cards.once.title")} text={t("cards.once.text")} />
-          <InfoCard title={t("cards.demo.title")} text={t("cards.demo.text")} />
-        </div>
-
         <div className="mt-8">
           <button
             onClick={handleUnlock}
@@ -125,6 +119,12 @@ export default function PayPage() {
           </button>
 
           <p className="mt-3 text-center text-xs text-white/55">{t("note")}</p>
+        </div>
+
+        <div className="mt-8 space-y-3">
+          <InfoCard title={t("cards.unlock.title")} text={t("cards.unlock.text")} />
+          <InfoCard title={t("cards.once.title")} text={t("cards.once.text")} />
+          <InfoCard title={t("cards.demo.title")} text={t("cards.demo.text")} />
         </div>
 
         <div className="h-6" />
