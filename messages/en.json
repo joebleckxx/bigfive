@@ -199,25 +199,24 @@
     }
   },
   "Types": {
-    "ISTP": { "name": "ISTP — Craftsman", "desc": "You prefer logic, calm, and practical solutions. You're good at fixing problems under pressure." },
-    "ISFP": { "name": "ISFP — Adventurer", "desc": "You value authenticity and direct experience. You follow what feels right and prefer freedom over rigid plans." },
-    "ESTP": { "name": "ESTP — Dynamo", "desc": "You thrive in action. You read situations fast, adapt quickly, and enjoy taking bold steps." },
-    "ESFP": { "name": "ESFP — Entertainer", "desc": "You bring energy and warmth to people around you. You enjoy shared experiences and living in the moment." },
+    "INTJ": { "name": "Strategist", "desc": "You think long-term and enjoy designing systems. You prefer autonomy, clarity, and making things better." },
+    "INTP": { "name": "Analyst", "desc": "Curiosity drives you. You enjoy exploring ideas, building mental models, and finding clean explanations." },
+    "ENTJ": { "name": "Commander", "desc": "You naturally organize people and resources. You set direction, keep momentum, and execute toward outcomes." },
+    "ENTP": { "name": "Innovator", "desc": "You love possibilities and mental challenges. You generate options fast and test ideas in the real world." },
 
-    "ISTJ": { "name": "ISTJ — Inspector", "desc": "You value reliability, structure, and responsibility. You keep things running smoothly and follow through." },
-    "ISFJ": { "name": "ISFJ — Protector", "desc": "You’re caring, loyal, and attentive to details. You keep people safe and supported, often quietly." },
-    "ESTJ": { "name": "ESTJ — Executive", "desc": "You like clear goals and efficient systems. You organize, lead, and push projects to completion." },
-    "ESFJ": { "name": "ESFJ — Supporter", "desc": "You prioritize harmony and cooperation. You enjoy helping others and maintaining strong connections." },
+    "INFJ": { "name": "Counselor", "desc": "You have strong intuition and deep awareness of people. You connect vision with values and meaning." },
+    "INFP": { "name": "Idealist", "desc": "You’re guided by authenticity and purpose. You notice emotional nuance and care about what feels true." },
+    "ENFJ": { "name": "Mentor", "desc": "You read people well and help them grow. You build momentum through encouragement and clear direction." },
+    "ENFP": { "name": "Visionary", "desc": "You spark change with energy and imagination. You inspire others and enjoy exploring new paths." },
 
-    "INTP": { "name": "INTP — Analyst", "desc": "Curiosity drives you. You enjoy exploring ideas, building mental models, and finding clean explanations." },
-    "ENTJ": { "name": "ENTJ — Commander", "desc": "You naturally organize people and resources. You prioritize speed, set direction, and execute to outcomes." },
-    "ENTP": { "name": "ENTP — Innovator", "desc": "You love mental challenges and possibilities. You generate options quickly and test hypotheses in the real world." },
+    "ISTJ": { "name": "Executor", "desc": "You value reliability, structure, and responsibility. You keep things running smoothly and follow through." },
+    "ISFJ": { "name": "Caregiver", "desc": "You’re caring, loyal, and detail-oriented. You support others steadily, often quietly." },
+    "ESTJ": { "name": "Organizer", "desc": "You like clear goals and efficient systems. You organize, lead, and push projects to completion." },
+    "ESFJ": { "name": "Connector", "desc": "You prioritize harmony and cooperation. You enjoy helping others and maintaining strong connections." },
 
-    "INFJ": { "name": "INFJ — Counselor", "desc": "You have strong intuition and deep awareness of people. You connect vision with values and meaning." },
-    "INFP": { "name": "INFP — Idealist", "desc": "You're guided by authenticity and purpose. You notice emotional nuance and care about what feels true." },
-    "ENFJ": { "name": "ENFJ — Mentor", "desc": "You read people well and help them grow. You build momentum through encouragement and clear direction." },
-    "ENFP": { "name": "ENFP — Visionary", "desc": "You spark change with energy and imagination. You inspire others and enjoy exploring new paths." },
-
-    "INTJ": { "name": "INTJ — Strategist", "desc": "You think long-term and enjoy designing systems. You prefer autonomy, clarity, and making things better." }
+    "ISTP": { "name": "Tactician", "desc": "You prefer logic, calm, and practical solutions. You’re good at fixing problems under pressure." },
+    "ISFP": { "name": "Artist", "desc": "You value authenticity and direct experience. You follow what feels right and prefer freedom over rigid plans." },
+    "ESTP": { "name": "Risk-taker", "desc": "You thrive in action. You read situations fast, adapt quickly, and enjoy taking bold steps." },
+    "ESFP": { "name": "Entertainer", "desc": "You bring energy and warmth to people around you. You enjoy shared experiences and living in the moment." }
   }
 }

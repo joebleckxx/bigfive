@@ -110,7 +110,7 @@ export default function ResultPage() {
       const paid = localStorage.getItem(PAID_KEY) === "true";
       if (!paid) {
         router.replace("/pay");
-        return;
+        return; // <-- nie ustawiamy loaded, żeby nie migał "No data"
       }
 
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -126,10 +126,9 @@ export default function ResultPage() {
       }
 
       setData(parsed);
+      setLoaded(true); // <-- ustawiamy loaded tylko gdy zostajemy na stronie
     } catch {
       router.replace("/test");
-    } finally {
-      setLoaded(true);
     }
   }, [router]);
 
@@ -154,9 +153,9 @@ export default function ResultPage() {
       };
     }
 
-  // fallback dla starych zapisów
-  return deriveAddOnKeys(data.scores);
-}, [data]);
+    // fallback dla starych zapisów
+    return deriveAddOnKeys(data.scores);
+  }, [data]);
 
   const typeName = useMemo(() => {
     if (!data) return "";
@@ -236,8 +235,7 @@ export default function ResultPage() {
     if (!data) return;
 
     const summary =
-      `${t("copy.myType")}: ${data.typeCode}\n` +
-      `${typeName}\n\n` +
+      `${t("copy.myType")}: ${prettyName}\n\n` +
       `${t("copy.addOns")}:\n` +
       `• ${t("cards.stress.title")}: ${addOnTexts.stress.label}\n` +
       `• ${t("cards.subtype.title")}: ${addOnTexts.subtype.label}\n` +
@@ -371,11 +369,10 @@ export default function ResultPage() {
               <div className="text-xs uppercase tracking-wider text-white/50">
                 {t("yourTypeLabel")}
               </div>
+
+              {/* ZMIANA: bez 4-literowego kodu */}
               <h2 className="mt-2 text-3xl font-semibold leading-tight">
-                {data.typeCode}
-                <span className="ml-3 text-xl font-medium text-white/70">
-                  {prettyName}
-                </span>
+                {prettyName}
               </h2>
             </div>
 

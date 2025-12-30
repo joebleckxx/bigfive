@@ -9,6 +9,10 @@ const RESULT_KEY = "personality_result_v1";
 const ANSWERS_KEY = "personality_answers_v1";
 const PAID_KEY = "bigfive_paid_v1";
 
+// Auto-reset po 1h bez aktywności
+const LAST_ACTIVE_KEY = "personality_last_active_v1";
+const PROGRESS_TTL_MS = 60 * 60 * 1000; // 1 godzina
+
 const SCALE_VALUES = [1, 2, 3, 4, 5] as const;
 
 function normalizeAnswers(input: unknown, total: number): number[] | null {
@@ -17,6 +21,36 @@ function normalizeAnswers(input: unknown, total: number): number[] | null {
     Number.isInteger(v) && v >= 1 && v <= 5 ? v : 0
   );
   return arr;
+}
+
+function readLastActive(): number | null {
+  try {
+    const raw = localStorage.getItem(LAST_ACTIVE_KEY);
+    if (!raw) return null;
+    const n = Number(raw);
+    return Number.isFinite(n) ? n : null;
+  } catch {
+    return null;
+  }
+}
+
+function touchLastActive() {
+  try {
+    localStorage.setItem(LAST_ACTIVE_KEY, String(Date.now()));
+  } catch {
+    // ignore
+  }
+}
+
+function clearProgressStorage() {
+  try {
+    localStorage.removeItem(ANSWERS_KEY);
+    localStorage.removeItem(PAID_KEY);
+    localStorage.removeItem(RESULT_KEY);
+    localStorage.removeItem(LAST_ACTIVE_KEY);
+  } catch {
+    // ignore
+  }
 }
 
 export default function TestPage() {
@@ -30,10 +64,28 @@ export default function TestPage() {
   const [answers, setAnswers] = useState<number[]>(() => Array(total).fill(0));
   const [backUsed, setBackUsed] = useState(false);
 
-  // Wczytaj postęp po wejściu / refreshu
+  // Wczytaj postęp po wejściu / refreshu + TTL 1h
   useEffect(() => {
     try {
       const raw = localStorage.getItem(ANSWERS_KEY);
+      const hasAnswers = !!raw;
+
+      // Jeśli jest zapisany progress, ale sesja jest "stara" (albo brak timestampu) -> reset
+      // (brak LAST_ACTIVE_KEY traktujemy jako wygasłe, żeby nie zostawać na 25 pytaniu "następnego dnia")
+      if (hasAnswers) {
+        const lastActiveAt = readLastActive();
+        const expired =
+          !lastActiveAt || Date.now() - lastActiveAt > PROGRESS_TTL_MS;
+
+        if (expired) {
+          clearProgressStorage();
+          setAnswers(Array(total).fill(0));
+          setIndex(0);
+          setBackUsed(false);
+          return;
+        }
+      }
+
       if (!raw) return;
 
       const parsed = JSON.parse(raw);
@@ -67,6 +119,10 @@ export default function TestPage() {
       // każda zmiana odpowiedzi unieważnia wcześniejszy pay/result
       localStorage.removeItem(PAID_KEY);
       localStorage.removeItem(RESULT_KEY);
+
+      // aktywność użytkownika
+      touchLastActive();
+
       localStorage.setItem(ANSWERS_KEY, JSON.stringify(nextAnswers));
     } catch {
       // ignore
@@ -93,13 +149,7 @@ export default function TestPage() {
   }
 
   function resetTest() {
-    try {
-      localStorage.removeItem(ANSWERS_KEY);
-      localStorage.removeItem(PAID_KEY);
-      localStorage.removeItem(RESULT_KEY);
-    } catch {
-      // ignore
-    }
+    clearProgressStorage();
     setAnswers(Array(total).fill(0));
     setIndex(0);
     setBackUsed(false);
@@ -107,6 +157,10 @@ export default function TestPage() {
 
   function goBack() {
     if (index === 0 || backUsed) return;
+
+    // aktywność użytkownika też przy Back
+    touchLastActive();
+
     setIndex((i) => Math.max(0, i - 1));
     setBackUsed(true);
   }

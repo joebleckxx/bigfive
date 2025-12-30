@@ -14,6 +14,7 @@
     },
     "footer": "Test osobowości"
   },
+
   "Test": {
     "progress": "Pytanie {current} z {total}",
     "back": "Wstecz",
@@ -21,6 +22,7 @@
     "tip": "Wskazówka: odpowiadaj intuicyjnie — nie ma złych odpowiedzi.",
     "footer": "Test osobowości"
   },
+
   "Scale": {
     "1": "Zdecydowanie się nie zgadzam",
     "2": "Nie zgadzam się",
@@ -28,6 +30,7 @@
     "4": "Zgadzam się",
     "5": "Zdecydowanie się zgadzam"
   },
+
   "Pay": {
     "brandTitle": "Test osobowości",
     "brandSubtitle": "soft • premium • mobile",
@@ -55,6 +58,7 @@
     "note": "Płatność jednorazowa. Bez subskrypcji.",
     "footer": "Test osobowości"
   },
+
   "Result": {
     "brandTitle": "Test osobowości",
     "brandSubtitle": "soft • premium • mobile",
@@ -113,6 +117,7 @@
 
     "footer": "Test osobowości"
   },
+
   "Questions": {
     "E1": "Łatwo mi zaczynać rozmowy z nowymi ludźmi.",
     "E2": "Po długim dniu wolę spotykać się z ludźmi niż być samemu.",
@@ -193,74 +198,26 @@
       }
     }
   },
+  
   "Types": {
-    "ISTP": {
-      "name": "ISTP — Rzemieślnik",
-      "desc": "Wolisz logikę, spokój i praktyczne rozwiązania. Dobrze radzisz sobie z naprawianiem problemów pod presją."
-    },
-    "ISFP": {
-      "name": "ISFP — Poszukiwacz przygód",
-      "desc": "Cenisz autentyczność i bezpośrednie doświadczenie. Idziesz za tym, co czujesz, i wolisz swobodę od sztywnych planów."
-    },
-    "ESTP": {
-      "name": "ESTP — Dynamo",
-      "desc": "Dobrze czujesz się w działaniu. Szybko czytasz sytuacje, łatwo się dostosowujesz i lubisz odważne decyzje."
-    },
-    "ESFP": {
-      "name": "ESFP — Artysta",
-      "desc": "Wnosisz energię i ciepło do otoczenia. Lubisz wspólne doświadczenia i życie tu i teraz."
-    },
+    "INTJ": { "name": "Strateg", "desc": "Myślisz długoterminowo i lubisz projektować systemy. Cenysz autonomię, klarowność i ulepszanie rzeczy." },
+    "INTP": { "name": "Analityk", "desc": "Napędza Cię ciekawość. Lubisz eksplorować idee, budować modele i znajdować proste wyjaśnienia." },
+    "ENTJ": { "name": "Dowódca", "desc": "Naturalnie organizujesz ludzi i zasoby. Wyznaczasz kierunek, trzymasz tempo i dowozisz wyniki." },
+    "ENTP": { "name": "Innowator", "desc": "Lubisz możliwości i wyzwania umysłowe. Szybko generujesz opcje i testujesz pomysły w praktyce." },
 
-    "ISTJ": {
-      "name": "ISTJ — Inspektor",
-      "desc": "Cenisz rzetelność, strukturę i odpowiedzialność. Pilnujesz, żeby wszystko działało, i dowozisz do końca."
-    },
-    "ISFJ": {
-      "name": "ISFJ — Opiekun",
-      "desc": "Jesteś troskliwy, lojalny i uważny na detale. Dbasz o bezpieczeństwo i wsparcie innych — często po cichu."
-    },
-    "ESTJ": {
-      "name": "ESTJ — Wykonawca",
-      "desc": "Lubisz jasne cele i sprawne systemy. Organizujesz, prowadzisz i doprowadzasz projekty do końca."
-    },
-    "ESFJ": {
-      "name": "ESFJ — Wspierający",
-      "desc": "Stawiasz na harmonię i współpracę. Lubisz pomagać i budować mocne relacje."
-    },
+    "INFJ": { "name": "Doradca", "desc": "Masz silną intuicję i wyczucie ludzi. Łączysz wizję z wartościami i poczuciem sensu." },
+    "INFP": { "name": "Idealista", "desc": "Prowadzi Cię autentyczność i sens. Dostrzegasz niuanse emocji i dbasz o to, co jest prawdziwe." },
+    "ENFJ": { "name": "Mentor", "desc": "Dobrze czytasz ludzi i wspierasz ich rozwój. Budujesz momentum przez zachętę i jasny kierunek." },
+    "ENFP": { "name": "Wizjoner", "desc": "Uruchamiasz zmiany energią i wyobraźnią. Inspirujesz innych i lubisz odkrywać nowe ścieżki." },
 
-    "INTP": {
-      "name": "INTP — Analityk",
-      "desc": "Napędza Cię ciekawość. Lubisz eksplorować idee, budować modele i znajdować proste wyjaśnienia."
-    },
-    "ENTJ": {
-      "name": "ENTJ — Dowódca",
-      "desc": "Naturalnie organizujesz ludzi i zasoby. Lubisz tempo, wyznaczasz kierunek i dowozisz wyniki."
-    },
-    "ENTP": {
-      "name": "ENTP — Innowator",
-      "desc": "Lubisz wyzwania i możliwości. Szybko generujesz opcje i testujesz hipotezy w praktyce."
-    },
+    "ISTJ": { "name": "Realizator", "desc": "Cenisz rzetelność, strukturę i odpowiedzialność. Pilnujesz, żeby wszystko działało, i dowozisz do końca." },
+    "ISFJ": { "name": "Opiekun", "desc": "Jesteś troskliwy, lojalny i uważny na detale. Wspierasz innych stabilnie, często po cichu." },
+    "ESTJ": { "name": "Organizator", "desc": "Lubisz jasne cele i sprawne systemy. Organizujesz, prowadzisz i doprowadzasz projekty do końca." },
+    "ESFJ": { "name": "Integrator", "desc": "Stawiasz na harmonię i współpracę. Lubisz pomagać i utrzymywać mocne relacje." },
 
-    "INFJ": {
-      "name": "INFJ — Doradca",
-      "desc": "Masz silną intuicję i wyczucie ludzi. Łączysz wizję z wartościami i sensem."
-    },
-    "INFP": {
-      "name": "INFP — Idealista",
-      "desc": "Prowadzi Cię autentyczność i sens. Dostrzegasz niuanse emocji i dbasz o to, co jest prawdziwe."
-    },
-    "ENFJ": {
-      "name": "ENFJ — Mentor",
-      "desc": "Dobrze czytasz ludzi i wspierasz ich rozwój. Budujesz momentum przez zachętę i jasny kierunek."
-    },
-    "ENFP": {
-      "name": "ENFP — Wizjoner",
-      "desc": "Uruchamiasz zmiany energią i wyobraźnią. Inspirujesz innych i lubisz odkrywać nowe ścieżki."
-    },
-
-    "INTJ": {
-      "name": "INTJ — Strateg",
-      "desc": "Myślisz długoterminowo i lubisz projektować systemy. Cenisz autonomię, klarowność i ulepszanie rzeczy."
-    }
+    "ISTP": { "name": "Taktyk", "desc": "Wolisz logikę, spokój i praktyczne rozwiązania. Dobrze naprawiasz problemy pod presją." },
+    "ISFP": { "name": "Artysta", "desc": "Cenisz autentyczność i bezpośrednie doświadczenie. Idziesz za tym, co czujesz, i wolisz swobodę od sztywnych planów." },
+    "ESTP": { "name": "Ryzykant", "desc": "Dobrze czujesz się w działaniu. Szybko czytasz sytuacje, łatwo się dostosowujesz i lubisz odważne kroki." },
+    "ESFP": { "name": "Animator", "desc": "Wnosisz energię i ciepło do otoczenia. Lubisz wspólne doświadczenia i życie tu i teraz." }
   }
 }
