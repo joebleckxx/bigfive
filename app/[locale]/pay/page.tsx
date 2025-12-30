@@ -5,6 +5,7 @@ import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { Logo } from "@/app/components/ui/logo";
 import { computeResult, QUESTIONS } from "@/lib/personality";
+import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 
 const PAID_KEY = "bigfive_paid_v1";
 const ANSWERS_KEY = "personality_answers_v1";
@@ -72,16 +73,20 @@ export default function PayPage() {
       </div>
 
       <div className="relative mx-auto w-full max-w-md">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
-            <Logo className="text-indigo-200" />
-          </div>
-          <div className="leading-tight">
-            <div className="text-sm font-semibold tracking-tight">
-              {t("brandTitle")}
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
+              <Logo className="text-indigo-200" />
             </div>
-            <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
+            <div className="leading-tight">
+              <div className="text-sm font-semibold tracking-tight">
+                {t("brandTitle")}
+              </div>
+              <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
+            </div>
           </div>
+
+          <LanguageSwitcher />
         </div>
 
         <h1 className="mt-10 text-[2.4rem] font-semibold leading-[1.1] tracking-tight">

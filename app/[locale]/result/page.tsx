@@ -5,6 +5,7 @@ import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { Logo } from "@/app/components/ui/logo";
 import Image from "next/image";
+import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 
 type Trait = "E" | "O" | "C" | "A" | "N";
 
@@ -297,16 +298,20 @@ export default function ResultPage() {
         </div>
 
         <div className="relative mx-auto w-full max-w-md">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
-              <Logo className="text-indigo-200" />
-            </div>
-            <div className="leading-tight">
-              <div className="text-sm font-semibold tracking-tight">
-                {t("brandTitle")}
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
+                <Logo className="text-indigo-200" />
               </div>
-              <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
+              <div className="leading-tight">
+                <div className="text-sm font-semibold tracking-tight">
+                  {t("brandTitle")}
+                </div>
+                <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
+              </div>
             </div>
+
+            <LanguageSwitcher />
           </div>
 
           <div className="mt-10 rounded-3xl border border-white/15 bg-white/10 p-6 text-center backdrop-blur-2xl shadow-xl">
@@ -356,14 +361,18 @@ export default function ResultPage() {
       </div>
 
       <div className="relative mx-auto w-full max-w-2xl">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
-            <Logo className="text-indigo-200" />
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
+              <Logo className="text-indigo-200" />
+            </div>
+            <div className="leading-tight">
+              <div className="text-sm font-semibold tracking-tight">{t("brandTitle")}</div>
+              <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
+            </div>
           </div>
-          <div className="leading-tight">
-            <div className="text-sm font-semibold tracking-tight">{t("brandTitle")}</div>
-            <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
-          </div>
+
+          <LanguageSwitcher />
         </div>
 
         <div className="mt-10 flex items-start justify-between gap-4">
