@@ -136,12 +136,16 @@ export default function TestPage() {
     persistAnswers(next);
     setBackUsed(false);
 
-    // jeśli wszystko odpowiedziane -> pay
-    const done = next.every((x) => x >= 1 && x <= 5);
-    if (done) {
+    // jeśli wszystko odpowiedziane -> pay, ale dopiero gdy jesteśmy na ostatnim pytaniu
+  const done = next.every((x) => x >= 1 && x <= 5);
+  if (done) {
+    if (index < total - 1) {
+      setIndex(index + 1); // przejdź do następnego (np. z 24 -> 25)
+    } else {
       router.push("/pay");
-      return;
     }
+    return;
+  }
 
     // auto-next: skocz do pierwszego nieodpowiedzianego
     const firstUnanswered = next.findIndex((x) => x === 0);
