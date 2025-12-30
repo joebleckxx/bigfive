@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Logo } from "@/app/components/ui/logo";
 import { Link } from "@/navigation";
 import { useTranslations } from "next-intl";
@@ -127,6 +128,18 @@ export default function Page() {
           <p className="mt-3 text-center text-xs text-white/55">
             {t("ctaNote")}
           </p>
+        </div>
+
+        {/* ✅ Collage pod CTA */}
+        <div className="mt-8 flex justify-center">
+          <Image
+            src="/graphics/avatars-collage-compact-beta.png"
+            alt=""
+            width={900}
+            height={420}
+            className="w-full max-w-md select-none"
+            priority
+          />
         </div>
 
         <div className="mt-10 space-y-3">

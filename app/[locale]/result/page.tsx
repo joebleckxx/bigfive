@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { Logo } from "@/app/components/ui/logo";
+import Image from "next/image";
 
 type Trait = "E" | "O" | "C" | "A" | "N";
 
@@ -26,6 +27,21 @@ type StoredResultV1 = {
 const STORAGE_KEY = "personality_result_v1";
 const PAID_KEY = "bigfive_paid_v1";
 const ANSWERS_KEY = "personality_answers_v1";
+
+// ✅ Placeholder avatar paths (wrzuć pliki do /public/avatars/placeholder/)
+const AVATARS = Array.from({ length: 16 }, (_, i) => {
+  const id = String(i + 1).padStart(2, "0");
+  return `/avatars/placeholder/avatar-${id}.png`;
+});
+
+// ✅ Stabilny wybór avatara bez indexu (na podstawie typeCode)
+function avatarIndexFromTypeCode(code: string) {
+  let h = 0;
+  for (let i = 0; i < code.length; i++) {
+    h = (h * 31 + code.charCodeAt(i)) >>> 0;
+  }
+  return h % 16;
+}
 
 function pct(n: number) {
   return Math.max(0, Math.min(100, Math.round(n)));
@@ -180,6 +196,13 @@ export default function ResultPage() {
       ? full.replace(data.typeCode, "").trim().replace(/^[-—]\s*/, "")
       : full;
   }, [data, typeName]);
+
+  // ✅ avatar src bez indexu
+  const avatarSrc = useMemo(() => {
+    if (!data) return AVATARS[0];
+    const idx = avatarIndexFromTypeCode(data.typeCode);
+    return AVATARS[idx] ?? AVATARS[0];
+  }, [data]);
 
   const addOnTexts = useMemo(() => {
     if (!data || !derived) {
@@ -370,10 +393,23 @@ export default function ResultPage() {
                 {t("yourTypeLabel")}
               </div>
 
-              {/* ZMIANA: bez 4-literowego kodu */}
-              <h2 className="mt-2 text-3xl font-semibold leading-tight">
-                {prettyName}
-              </h2>
+              {/* ✅ AVATAR + NAZWA (bez indexu) */}
+              <div className="mt-2 flex items-center gap-4">
+                <div className="h-16 w-16 overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10">
+                  <Image
+                    src={avatarSrc}
+                    alt=""
+                    width={128}
+                    height={128}
+                    className="h-full w-full object-cover"
+                    priority
+                  />
+                </div>
+
+                <h2 className="text-3xl font-semibold leading-tight">
+                  {prettyName}
+                </h2>
+              </div>
             </div>
 
             <button
