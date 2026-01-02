@@ -425,7 +425,8 @@ export default function ResultPage() {
                   width={256}
                   height={256}
                   className="h-24 w-24 rounded-full object-cover"
-                  loading="eager"
+                  unoptimized
+                  priority
                 />
                 <h2 className="text-3xl font-semibold leading-tight">
                   {prettyName}
