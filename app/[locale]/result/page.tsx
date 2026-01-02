@@ -32,16 +32,16 @@ const ANSWERS_KEY = "personality_answers_v1";
 // ✅ Placeholder avatar paths (wrzuć pliki do /public/avatars/placeholder/)
 const AVATARS = Array.from({ length: 16 }, (_, i) => {
   const id = String(i + 1).padStart(2, "0");
-  return `/avatars/placeholder/avatar-${id}.png`;
+  return `/avatars/placeholder/avatar-${id}n.png`;
 });
 
 // ✅ Stabilny wybór avatara bez indexu (na podstawie typeCode)
-function avatarIndexFromTypeCode(code: string) {
+function avatarIndexFromTypeCode(code: string, mod: number) {
   let h = 0;
   for (let i = 0; i < code.length; i++) {
     h = (h * 31 + code.charCodeAt(i)) >>> 0;
   }
-  return h % 16;
+  return h % mod;
 }
 
 function pct(n: number) {
@@ -121,6 +121,27 @@ export default function ResultPage() {
   const [loaded, setLoaded] = useState(false);
   const [showBigFive, setShowBigFive] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [avatarFiles, setAvatarFiles] = useState<string[] | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/avatars/placeholder/manifest.json", { cache: "no-store" })
+      .then((res) => (res.ok ? res.json() : Promise.reject(res)))
+      .then((list: Array<{ id: number; file: string }>) => {
+        if (cancelled) return;
+        const files = list
+          .map((item) => item.file)
+          .filter((file) => typeof file === "string" && file.length > 0)
+          .map((file) => `/avatars/placeholder/${file}`);
+        setAvatarFiles(files.length > 0 ? files : null);
+      })
+      .catch(() => {
+        if (!cancelled) setAvatarFiles(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     try {
@@ -200,10 +221,11 @@ export default function ResultPage() {
 
   // ✅ avatar src bez indexu
   const avatarSrc = useMemo(() => {
-    if (!data) return AVATARS[0];
-    const idx = avatarIndexFromTypeCode(data.typeCode);
-    return AVATARS[idx] ?? AVATARS[0];
-  }, [data]);
+    const files = avatarFiles && avatarFiles.length > 0 ? avatarFiles : AVATARS;
+    if (!data) return files[0];
+    const idx = avatarIndexFromTypeCode(data.typeCode, files.length);
+    return files[idx] ?? files[0];
+  }, [data, avatarFiles]);
 
   const addOnTexts = useMemo(() => {
     if (!data || !derived) {
@@ -404,16 +426,14 @@ export default function ResultPage() {
 
               {/* ✅ AVATAR + NAZWA (bez indexu) */}
               <div className="mt-2 flex items-center gap-4">
-                <div className="h-16 w-16 overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10">
-                  <Image
-                    src={avatarSrc}
-                    alt=""
-                    width={128}
-                    height={128}
-                    className="h-full w-full object-cover"
-                    priority
-                  />
-                </div>
+                <Image
+                  src={avatarSrc}
+                  alt=""
+                  width={192}
+                  height={192}
+                  className="h-24 w-24 object-cover"
+                  priority
+                />
 
                 <h2 className="text-3xl font-semibold leading-tight">
                   {prettyName}
