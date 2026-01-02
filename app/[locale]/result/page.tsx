@@ -422,12 +422,11 @@ export default function ResultPage() {
                 <Image
                   src={avatarSrc}
                   alt=""
-                  width={192}
-                  height={192}
-                  className="h-24 w-24 object-cover"
-                  priority
+                  width={256}
+                  height={256}
+                  className="h-24 w-24 rounded-full object-cover"
+                  loading="eager"
                 />
-
                 <h2 className="text-3xl font-semibold leading-tight">
                   {prettyName}
                 </h2>
