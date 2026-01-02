@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { Logo } from "@/app/components/ui/logo";
@@ -145,13 +144,13 @@ export default function Page() {
 
         {/* COLLAGE */}
         <div className="mt-8 flex justify-center">
-          <Image
+          <img
             src="/graphics/avatars-collage-compact-beta.png"
             alt=""
             width={900}
             height={420}
             className="w-full max-w-md select-none"
-            priority
+            loading="eager"
           />
         </div>
 
