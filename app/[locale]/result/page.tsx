@@ -32,16 +32,31 @@ const ANSWERS_KEY = "personality_answers_v1";
 // ✅ Placeholder avatar paths (wrzuć pliki do /public/avatars/placeholder/)
 const AVATARS = Array.from({ length: 16 }, (_, i) => {
   const id = String(i + 1).padStart(2, "0");
-  return `/avatars/placeholder/avatar-${id}n.png`;
+  return `/avatars/placeholder/avatar-${id}.png`;
 });
 
+const TYPE_TO_AVATAR_INDEX: Record<string, number> = {
+  INTJ: 0,
+  INTP: 1,
+  ENTJ: 2,
+  ENTP: 3,
+  INFJ: 4,
+  INFP: 5,
+  ENFJ: 6,
+  ENFP: 7,
+  ISTJ: 8,
+  ISFJ: 9,
+  ESTJ: 10,
+  ESFJ: 11,
+  ISTP: 12,
+  ISFP: 13,
+  ESTP: 14,
+  ESFP: 15
+};
+
 // ✅ Stabilny wybór avatara bez indexu (na podstawie typeCode)
-function avatarIndexFromTypeCode(code: string, mod: number) {
-  let h = 0;
-  for (let i = 0; i < code.length; i++) {
-    h = (h * 31 + code.charCodeAt(i)) >>> 0;
-  }
-  return h % mod;
+function avatarIndexFromTypeCode(code: string) {
+  return TYPE_TO_AVATAR_INDEX[code] ?? 0;
 }
 
 function pct(n: number) {
@@ -121,27 +136,6 @@ export default function ResultPage() {
   const [loaded, setLoaded] = useState(false);
   const [showBigFive, setShowBigFive] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [avatarFiles, setAvatarFiles] = useState<string[] | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetch("/avatars/placeholder/manifest.json", { cache: "no-store" })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res)))
-      .then((list: Array<{ id: number; file: string }>) => {
-        if (cancelled) return;
-        const files = list
-          .map((item) => item.file)
-          .filter((file) => typeof file === "string" && file.length > 0)
-          .map((file) => `/avatars/placeholder/${file}`);
-        setAvatarFiles(files.length > 0 ? files : null);
-      })
-      .catch(() => {
-        if (!cancelled) setAvatarFiles(null);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   useEffect(() => {
     try {
@@ -221,11 +215,10 @@ export default function ResultPage() {
 
   // ✅ avatar src bez indexu
   const avatarSrc = useMemo(() => {
-    const files = avatarFiles && avatarFiles.length > 0 ? avatarFiles : AVATARS;
-    if (!data) return files[0];
-    const idx = avatarIndexFromTypeCode(data.typeCode, files.length);
-    return files[idx] ?? files[0];
-  }, [data, avatarFiles]);
+    if (!data) return AVATARS[0];
+    const idx = avatarIndexFromTypeCode(data.typeCode);
+    return AVATARS[idx] ?? AVATARS[0];
+  }, [data]);
 
   const addOnTexts = useMemo(() => {
     if (!data || !derived) {
