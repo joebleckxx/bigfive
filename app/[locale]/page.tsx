@@ -110,9 +110,6 @@ export default function Page() {
             {t("cta")} →
           </Link>
 
-          <p className="mt-3 text-center text-xs text-white/55">
-            {t("ctaNote")}
-          </p>
         </div>
 
         {/* COLLAGE */}
