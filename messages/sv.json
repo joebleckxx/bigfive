@@ -7,12 +7,6 @@
     "note": "Tar ~5–7 minuter. Inget konto.",
     "cta": "Starta testet",
     "ctaNote": "Du kan pausa när som helst",
-    "cards": {
-      "what": { "title": "Vad får jag?", "text": "En tydlig profil, styrkor, blinda fläckar och praktiska tips." },
-      "anonymous": { "title": "Är det anonymt?", "text": "Ja. Inget konto eller personuppgifter krävs." },
-      "questions": { "title": "Hur många frågor?", "text": "Ett kort frågepaket — svara intuitivt." }
-    },
-    
     "editorial": {
       "line1": "25 enkla frågor. Bara några minuter.",
       "line2": "Baserat på etablerad psykologi. En av 16 personlighetsprofiler.",

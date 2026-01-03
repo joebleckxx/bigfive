@@ -5,17 +5,11 @@
     "note": "Takes ~5–7 minutes. No account.",
     "cta": "Start the test",
     "ctaNote": "You can pause anytime",
-    "cards": {
-      "what": { "title": "What will I get?", "text": "A clear profile, strengths, blind spots, and practical tips." },
-      "anonymous": { "title": "Is it anonymous?", "text": "Yes. No account or personal data required." },
-      "questions": { "title": "How many questions?", "text": "A short set of questions — answer intuitively." }
-    },
-
     "editorial": {
       "line1": "25 simple questions. Just a few minutes.",
       "line2": "Based on established psychology. One of 16 personality profiles.",
       "line3": "Practical insight into your strengths and blind spots."
-    },  
+    },
     "footer": "Personality test"
   },
 

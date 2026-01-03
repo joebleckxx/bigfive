@@ -127,32 +127,10 @@ export default function Page() {
           />
         </div>
 
-        {/* INFO CARDS */}
-        <div className="mt-12 space-y-3">
-          <InfoCard title={t("cards.what.title")} text={t("cards.what.text")} />
-          <InfoCard
-            title={t("cards.anonymous.title")}
-            text={t("cards.anonymous.text")}
-          />
-          <InfoCard
-            title={t("cards.questions.title")}
-            text={t("cards.questions.text")}
-          />
-        </div>
-
         <p className="mt-10 text-center text-xs text-white/40">
           © {new Date().getFullYear()} {t("footer")}
         </p>
       </div>
     </main>
-  );
-}
-
-function InfoCard({ title, text }: { title: string; text: string }) {
-  return (
-    <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl shadow-lg">
-      <div className="text-sm font-semibold text-white/85">{title}</div>
-      <p className="mt-2 text-sm leading-relaxed text-white/65">{text}</p>
-    </div>
   );
 }

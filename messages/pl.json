@@ -7,17 +7,11 @@
     "note": "Zajmuje ~5–7 minut. Bez konta.",
     "cta": "Rozpocznij test",
     "ctaNote": "Możesz przerwać w każdej chwili",
-    "cards": {
-      "what": { "title": "Co dostanę?", "text": "Czytelny profil, mocne strony, ślepe punkty i praktyczne wskazówki." },
-      "anonymous": { "title": "Czy to anonimowe?", "text": "Tak. Bez konta i bez danych osobowych." },
-      "questions": { "title": "Ile pytań?", "text": "Krótki zestaw pytań — odpowiadaj intuicyjnie." }
-    },
-
     "editorial": {
       "line1": "25 prostych pytań. Tylko kilka minut.",
       "line2": "Oparte na ugruntowanej psychologii. Jeden z 16 profili osobowości.",
       "line3": "Praktyczny wgląd w Twoje mocne i słabe strony."
-    },  
+    },
     "footer": "Test osobowości"
   },
 
