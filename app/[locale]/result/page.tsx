@@ -280,11 +280,12 @@ export default function ResultPage() {
 
           <button
             onClick={retake}
-            className="rounded-2xl border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/80 hover:bg-white/15"
             type="button"
+            className="max-w-full whitespace-normal text-center rounded-2xl border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/80 hover:bg-white/15"
           >
             {t("retake")}
           </button>
+
         </div>
 
         <div className="mt-8 rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl">
