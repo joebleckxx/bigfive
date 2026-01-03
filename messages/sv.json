@@ -12,6 +12,12 @@
       "anonymous": { "title": "Är det anonymt?", "text": "Ja. Inget konto eller personuppgifter krävs." },
       "questions": { "title": "Hur många frågor?", "text": "Ett kort frågepaket — svara intuitivt." }
     },
+    
+    "editorial": {
+      "line1": "25 enkla frågor. Bara några minuter.",
+      "line2": "Baserat på etablerad psykologi. En av 16 personlighetsprofiler.",
+      "line3": "Praktisk insikt i dina styrkor och blinda fläckar."
+    },
     "footer": "Personlighetstest"
   },
 

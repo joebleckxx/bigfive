@@ -5,53 +5,6 @@ import { Link } from "@/navigation";
 import { Logo } from "@/app/components/ui/logo";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 
-const IconClock = ({ className = "w-4 h-4" }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.8"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-    aria-hidden="true"
-  >
-    <circle cx="12" cy="12" r="9" />
-    <path d="M12 7v5l3 2" />
-  </svg>
-);
-
-const IconLock = ({ className = "w-4 h-4" }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.8"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-    aria-hidden="true"
-  >
-    <rect x="5" y="11" width="14" height="8" rx="2" />
-    <path d="M8 11V8a4 4 0 0 1 8 0v3" />
-  </svg>
-);
-
-const IconSpark = ({ className = "w-4 h-4" }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.8"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-    aria-hidden="true"
-  >
-    <path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3z" />
-  </svg>
-);
-
 export default function Page() {
   const t = useTranslations("Home");
 
@@ -82,7 +35,6 @@ export default function Page() {
             </div>
           </div>
 
-          {/* 🌍 Language switcher */}
           <LanguageSwitcher />
         </div>
 
@@ -94,35 +46,56 @@ export default function Page() {
           </span>
         </h1>
 
-        <p className="mt-4 text-base leading-relaxed text-white/70">
-          {t("description")}
-        </p>
+        {/* EDITORIAL – VARIANT A */}
+        <div className="mt-6 space-y-4 text-sm leading-relaxed text-white/70">
+          <div className="flex gap-3">
+            <svg
+              className="mt-0.5 h-6 w-6 text-indigo-300"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12l5 5L19 7" />
+            </svg>
+            <p className="m-0">{t("editorial.line1")}</p>
+          </div>
 
-        {/* TRUST PILLS */}
-        <div className="mt-6 flex flex-wrap gap-2 text-sm text-white/70">
-          <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            <span className="inline-flex items-center gap-2">
-              <IconClock />
-              {t("pills.time")}
-            </span>
-          </span>
+          <div className="flex gap-3">
+            <svg
+              className="mt-0.5 h-6 w-6 text-indigo-300"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12l5 5L19 7" />
+            </svg>
+            <p className="m-0">{t("editorial.line2")}</p>
+          </div>
 
-          <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            <span className="inline-flex items-center gap-2">
-              <IconLock />
-              {t("pills.anonymous")}
-            </span>
-          </span>
-
-          <span className="rounded-full border border-white/15 bg-white/10 px-3 py-2 backdrop-blur-md">
-            <span className="inline-flex items-center gap-2">
-              <IconSpark />
-              {t("pills.ux")}
-            </span>
-          </span>
+          <div className="flex gap-3">
+            <svg
+              className="mt-0.5 h-6 w-6 text-indigo-300"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12l5 5L19 7" />
+            </svg>
+            <p className="m-0">{t("editorial.line3")}</p>
+          </div>
         </div>
-
-        <p className="mt-3 text-sm text-white/55">{t("note")}</p>
 
         {/* CTA */}
         <div className="mt-8">
@@ -155,7 +128,7 @@ export default function Page() {
         </div>
 
         {/* INFO CARDS */}
-        <div className="mt-10 space-y-3">
+        <div className="mt-12 space-y-3">
           <InfoCard title={t("cards.what.title")} text={t("cards.what.text")} />
           <InfoCard
             title={t("cards.anonymous.title")}
