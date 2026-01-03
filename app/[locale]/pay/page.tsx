@@ -67,7 +67,7 @@ export default function PayPage() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] text-white px-5 py-10">
+    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] text-white px-6 sm:px-5 py-10">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
         <div className="absolute top-1/3 -left-40 h-[360px] w-[360px] rounded-full bg-fuchsia-500/20 blur-[120px]" />
@@ -94,7 +94,7 @@ export default function PayPage() {
           <LanguageSwitcher />
         </div>
 
-        <h1 className="mt-10 text-[2.4rem] font-semibold leading-[1.1] tracking-tight">
+        <h1 className="mt-10 text-[2.4rem] font-semibold leading-[1.1] tracking-tight break-words">
           {t("headline.before")}{" "}
           <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
             {t("headline.accent")}

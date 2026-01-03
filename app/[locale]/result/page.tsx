@@ -252,7 +252,7 @@ export default function ResultPage() {
   ];
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-5 py-10 text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 sm:px-5 py-10 text-white">
       <div className="relative mx-auto w-full max-w-2xl">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
@@ -304,7 +304,7 @@ export default function ResultPage() {
                   unoptimized
                   priority
                 />
-                <h2 className="text-3xl font-semibold">{typeName}</h2>
+                <h2 className="text-3xl font-semibold break-words">{typeName}</h2>
               </div>
             </div>
 
