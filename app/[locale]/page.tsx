@@ -50,7 +50,7 @@ export default function Page() {
         <div className="mt-6 space-y-4 text-sm leading-relaxed text-white/70">
           <div className="flex gap-3">
             <svg
-              className="mt-0.5 h-6 w-6 text-indigo-300"
+              className="mt-0.5 h-6 w-6 shrink-0 text-indigo-300"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -66,7 +66,7 @@ export default function Page() {
 
           <div className="flex gap-3">
             <svg
-              className="mt-0.5 h-6 w-6 text-indigo-300"
+              className="mt-0.5 h-6 w-6 shrink-0 text-indigo-300"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -82,7 +82,7 @@ export default function Page() {
 
           <div className="flex gap-3">
             <svg
-              className="mt-0.5 h-6 w-6 text-indigo-300"
+              className="mt-0.5 h-6 w-6 shrink-0 text-indigo-300"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
