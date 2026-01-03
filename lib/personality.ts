@@ -14,13 +14,19 @@ export type SubtypeKey =
   | "directRealist";
 export type ModeKey = "driveDeliver" | "planPerfect" | "exploreAdapt" | "flowImprovise";
 
+export type ProfileId =
+  | "P01" | "P02" | "P03" | "P04"
+  | "P05" | "P06" | "P07" | "P08"
+  | "P09" | "P10" | "P11" | "P12"
+  | "P13" | "P14" | "P15" | "P16";
+
 export type StoredResultV1 = {
   version: "v1";
   createdAt: string;
   answers: number[];
   scores: Record<Trait, number>;
   stability: number;
-  typeCode: string;
+  typeCode: ProfileId;
 
   // zostawiamy opcjonalnie dla kompatybilności ze starymi zapisami
   typeName?: string;
@@ -98,17 +104,48 @@ function scoreToPct(sum: number, count: number) {
   return Math.round(clamp01(norm) * 100);
 }
 
-// Map Big Five scores to a 16-type code (heurystyka):
-// E: high -> E else I
-// O: high -> N else S
-// C: high -> J else P
-// A: high -> F else T
-function toTypeCode(scores: Record<Trait, number>) {
-  const E = scores.E >= 50 ? "E" : "I";
-  const N = scores.O >= 50 ? "N" : "S";
-  const J = scores.C >= 50 ? "J" : "P";
-  const F = scores.A >= 50 ? "F" : "T";
-  return `${E}${N}${F}${J}`;
+// Map Big Five scores to a 16-profile id (P01-P16), no MBTI codes.
+function toProfileId(scores: Record<Trait, number>): ProfileId {
+  const highE = scores.E >= 50;
+  const highO = scores.O >= 50;
+  const highC = scores.C >= 50;
+  const highA = scores.A >= 50;
+  const highN = scores.N >= 50;
+
+  const SE = highE; // social energy
+  const ST = highC; // structure
+  const OR = (scores.A + (100 - scores.O)) / 2 >= 50; // people vs ideas
+  const SB = (100 - scores.N) >= 50; // emotional stability
+
+  const key =
+    `${SE ? "H" : "L"}_` +
+    `${ST ? "H" : "L"}_` +
+    `${OR ? "H" : "L"}_` +
+    `${SB ? "H" : "L"}`;
+
+  const MAP: Record<string, ProfileId> = {
+    "L_H_L_H": "P01",
+    "L_L_L_H": "P02",
+    "H_H_L_H": "P03",
+    "H_L_L_H": "P04",
+
+    "L_H_H_L": "P05",
+    "L_L_H_L": "P06",
+    "H_H_H_L": "P07",
+    "H_L_H_L": "P08",
+
+    "L_H_H_H": "P09",
+    "L_L_H_H": "P10",
+    "H_H_H_H": "P11",
+    "H_L_H_H": "P12",
+
+    "L_L_L_L": "P13",
+    "L_H_L_L": "P14",
+    "H_L_L_L": "P15",
+    "H_H_L_L": "P16"
+  };
+
+  return MAP[key] ?? "P01";
 }
 
 // KLUCZE add-ons (językowo neutralne)
@@ -166,7 +203,7 @@ export function computeResult(answers: number[]): StoredResultV1 {
   // stability = inverse of neuroticism
   const stability = Math.round(100 - scores.N);
 
-  const typeCode = toTypeCode(scores);
+  const typeCode = toProfileId(scores);
   const { stressKey, subtypeKey, modeKey } = deriveAddOnKeys(scores);
 
   return {

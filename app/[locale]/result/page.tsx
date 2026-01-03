@@ -15,13 +15,16 @@ type StoredResultV1 = {
   answers: number[];
   scores: Record<Trait, number>;
   stability: number;
-  typeCode: string;
+  typeCode: string; // P01–P16
   typeName?: string;
   typeDescription?: string;
   addOns?: {
     stressProfile?: { label: string; note: string };
     subtype?: { label: string; note: string };
     mode?: { label: string; note: string };
+    stressKey?: string;
+    subtypeKey?: string;
+    modeKey?: string;
   };
 };
 
@@ -29,34 +32,17 @@ const STORAGE_KEY = "personality_result_v1";
 const PAID_KEY = "bigfive_paid_v1";
 const ANSWERS_KEY = "personality_answers_v1";
 
-// ✅ Placeholder avatar paths (wrzuć pliki do /public/avatars/placeholder/)
+/**
+ * Avatary: P01 → 0, P02 → 1, ..., P16 → 15
+ */
 const AVATARS = Array.from({ length: 16 }, (_, i) => {
   const id = String(i + 1).padStart(2, "0");
   return `/avatars/placeholder/avatar-${id}.png`;
 });
 
-const TYPE_TO_AVATAR_INDEX: Record<string, number> = {
-  INTJ: 0,
-  INTP: 1,
-  ENTJ: 2,
-  ENTP: 3,
-  INFJ: 4,
-  INFP: 5,
-  ENFJ: 6,
-  ENFP: 7,
-  ISTJ: 8,
-  ISFJ: 9,
-  ESTJ: 10,
-  ESFJ: 11,
-  ISTP: 12,
-  ISFP: 13,
-  ESTP: 14,
-  ESFP: 15
-};
-
-// ✅ Stabilny wybór avatara bez indexu (na podstawie typeCode)
 function avatarIndexFromTypeCode(code: string) {
-  return TYPE_TO_AVATAR_INDEX[code] ?? 0;
+  const n = Number(code.replace("P", ""));
+  return Number.isFinite(n) ? Math.max(0, Math.min(15, n - 1)) : 0;
 }
 
 function pct(n: number) {
@@ -67,7 +53,7 @@ function isResultShape(x: any): x is StoredResultV1 {
   return (
     x &&
     typeof x.typeCode === "string" &&
-    x.typeCode.length > 0 &&
+    x.typeCode.startsWith("P") &&
     x.scores &&
     typeof x.scores.E === "number" &&
     typeof x.scores.O === "number" &&
@@ -76,42 +62,6 @@ function isResultShape(x: any): x is StoredResultV1 {
     typeof x.scores.N === "number" &&
     typeof x.stability === "number"
   );
-}
-
-type StressKey = "sensitive" | "steady";
-type SubtypeKey =
-  | "empathicVisionary"
-  | "independentInnovator"
-  | "supportivePragmatist"
-  | "directRealist";
-type ModeKey = "driveDeliver" | "planPerfect" | "exploreAdapt" | "flowImprovise";
-
-function deriveAddOnKeys(scores: Record<Trait, number>) {
-  const highE = scores.E >= 50;
-  const highO = scores.O >= 50;
-  const highC = scores.C >= 50;
-  const highA = scores.A >= 50;
-  const highN = scores.N >= 50;
-
-  const stressKey: StressKey = highN ? "sensitive" : "steady";
-
-  const subtypeKey: SubtypeKey = highO
-    ? highA
-      ? "empathicVisionary"
-      : "independentInnovator"
-    : highA
-      ? "supportivePragmatist"
-      : "directRealist";
-
-  const modeKey: ModeKey = highC
-    ? highE
-      ? "driveDeliver"
-      : "planPerfect"
-    : highE
-      ? "exploreAdapt"
-      : "flowImprovise";
-
-  return { stressKey, subtypeKey, modeKey };
 }
 
 function safeGet<T>(fn: () => T, fallback: T): T {
@@ -125,10 +75,7 @@ function safeGet<T>(fn: () => T, fallback: T): T {
 export default function ResultPage() {
   const router = useRouter();
 
-  // UI strings (istniejące w Twoim Result)
   const t = useTranslations("Result");
-
-  // Nowe sekcje z messages/*:
   const tt = useTranslations("Types");
   const ta = useTranslations("AddOns");
 
@@ -142,7 +89,7 @@ export default function ResultPage() {
       const paid = localStorage.getItem(PAID_KEY) === "true";
       if (!paid) {
         router.replace("/pay");
-        return; // <-- nie ustawiamy loaded, żeby nie migał "No data"
+        return;
       }
 
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -158,7 +105,7 @@ export default function ResultPage() {
       }
 
       setData(parsed);
-      setLoaded(true); // <-- ustawiamy loaded tylko gdy zostajemy na stronie
+      setLoaded(true);
     } catch {
       router.replace("/test");
     }
@@ -166,28 +113,10 @@ export default function ResultPage() {
 
   const stabilityLabel = useMemo(() => {
     if (!data) return "";
-    const s = data.stability;
-    if (s >= 67) return t("stability.high");
-    if (s >= 34) return t("stability.medium");
+    if (data.stability >= 67) return t("stability.high");
+    if (data.stability >= 34) return t("stability.medium");
     return t("stability.low");
   }, [data, t]);
-
-  const derived = useMemo(() => {
-    if (!data) return null;
-
-    // jeśli payload ma klucze (nowa wersja) -> użyj ich
-    const a: any = data.addOns;
-    if (a?.stressKey && a?.subtypeKey && a?.modeKey) {
-      return {
-        stressKey: a.stressKey,
-        subtypeKey: a.subtypeKey,
-        modeKey: a.modeKey
-      };
-    }
-
-    // fallback dla starych zapisów
-    return deriveAddOnKeys(data.scores);
-  }, [data]);
 
   const typeName = useMemo(() => {
     if (!data) return "";
@@ -205,80 +134,90 @@ export default function ResultPage() {
     );
   }, [data, tt]);
 
-  const prettyName = useMemo(() => {
-    if (!data) return "";
-    const full = typeName;
-    return full.startsWith(data.typeCode)
-      ? full.replace(data.typeCode, "").trim().replace(/^[-—]\s*/, "")
-      : full;
-  }, [data, typeName]);
-
-  // ✅ avatar src bez indexu
   const avatarSrc = useMemo(() => {
     if (!data) return AVATARS[0];
-    const idx = avatarIndexFromTypeCode(data.typeCode);
-    return AVATARS[idx] ?? AVATARS[0];
+    return AVATARS[avatarIndexFromTypeCode(data.typeCode)];
   }, [data]);
 
-  const addOnTexts = useMemo(() => {
-    if (!data || !derived) {
+  // ✅ PRZYWRÓCONE: add-ons (payload -> fallback na tłumaczenia)
+  const stress = useMemo(() => {
+    if (!data?.addOns) return null;
+
+    if (data.addOns.stressProfile?.label || data.addOns.stressProfile?.note) {
       return {
-        stress: { label: "", note: "" },
-        subtype: { label: "", note: "" },
-        mode: { label: "", note: "" }
+        label: data.addOns.stressProfile?.label ?? "",
+        note: data.addOns.stressProfile?.note ?? ""
       };
     }
 
-    // fallbacki na stare dane zapisane w localStorage (jeśli istnieją)
-    const fbStress = data.addOns?.stressProfile ?? { label: "", note: "" };
-    const fbSubtype = data.addOns?.subtype ?? { label: "", note: "" };
-    const fbMode = data.addOns?.mode ?? { label: "", note: "" };
+    const key = data.addOns.stressKey as "sensitive" | "steady" | undefined;
+    if (!key) return null;
 
-    const stress = {
-      label: safeGet(
-        () => ta(`stress.${derived.stressKey}.label`),
-        fbStress.label
-      ),
-      note: safeGet(
-        () => ta(`stress.${derived.stressKey}.note`),
-        fbStress.note
-      )
+    return {
+      label: safeGet(() => ta(`stress.${key}.label`), ""),
+      note: safeGet(() => ta(`stress.${key}.note`), "")
     };
+  }, [data, ta]);
 
-    const subtype = {
-      label: safeGet(
-        () => ta(`subtype.${derived.subtypeKey}.label`),
-        fbSubtype.label
-      ),
-      note: safeGet(
-        () => ta(`subtype.${derived.subtypeKey}.note`),
-        fbSubtype.note
-      )
+  const subtype = useMemo(() => {
+    if (!data?.addOns) return null;
+
+    if (data.addOns.subtype?.label || data.addOns.subtype?.note) {
+      return {
+        label: data.addOns.subtype?.label ?? "",
+        note: data.addOns.subtype?.note ?? ""
+      };
+    }
+
+    const key = data.addOns.subtypeKey as
+      | "empathicVisionary"
+      | "independentInnovator"
+      | "supportivePragmatist"
+      | "directRealist"
+      | undefined;
+
+    if (!key) return null;
+
+    return {
+      label: safeGet(() => ta(`subtype.${key}.label`), ""),
+      note: safeGet(() => ta(`subtype.${key}.note`), "")
     };
+  }, [data, ta]);
 
-    const mode = {
-      label: safeGet(
-        () => ta(`mode.${derived.modeKey}.label`),
-        fbMode.label
-      ),
-      note: safeGet(
-        () => ta(`mode.${derived.modeKey}.note`),
-        fbMode.note
-      )
+  const mode = useMemo(() => {
+    if (!data?.addOns) return null;
+
+    if (data.addOns.mode?.label || data.addOns.mode?.note) {
+      return {
+        label: data.addOns.mode?.label ?? "",
+        note: data.addOns.mode?.note ?? ""
+      };
+    }
+
+    const key = data.addOns.modeKey as
+      | "driveDeliver"
+      | "planPerfect"
+      | "exploreAdapt"
+      | "flowImprovise"
+      | undefined;
+
+    if (!key) return null;
+
+    return {
+      label: safeGet(() => ta(`mode.${key}.label`), ""),
+      note: safeGet(() => ta(`mode.${key}.note`), "")
     };
-
-    return { stress, subtype, mode };
-  }, [data, derived, ta]);
+  }, [data, ta]);
 
   async function copySummary() {
     if (!data) return;
 
     const summary =
-      `${t("copy.myType")}: ${prettyName}\n\n` +
+      `${t("copy.myType")}: ${typeName}\n\n` +
       `${t("copy.addOns")}:\n` +
-      `• ${t("cards.stress.title")}: ${addOnTexts.stress.label}\n` +
-      `• ${t("cards.subtype.title")}: ${addOnTexts.subtype.label}\n` +
-      `• ${t("cards.mode.title")}: ${addOnTexts.mode.label}\n`;
+      `• ${t("cards.stress.title")}\n` +
+      `• ${t("cards.subtype.title")}\n` +
+      `• ${t("cards.mode.title")}\n`;
 
     try {
       await navigator.clipboard.writeText(summary);
@@ -294,99 +233,37 @@ export default function ResultPage() {
       localStorage.removeItem(PAID_KEY);
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem(ANSWERS_KEY);
-    } catch {
-      // ignore
-    }
+    } catch {}
     router.push("/test");
   }
 
-  if (!loaded) return null;
+  if (!loaded || !data) return null;
 
-  if (!data) {
-    return (
-      <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-5 py-10 text-white">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
-          <div className="absolute top-1/3 -left-40 h-[360px] w-[360px] rounded-full bg-fuchsia-500/20 blur-[120px]" />
-          <div className="absolute bottom-0 -right-40 h-[360px] w-[360px] rounded-full bg-pink-500/20 blur-[120px]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] via-transparent to-transparent" />
-        </div>
+  const emotionalStability = 100 - data.scores.N;
 
-        <div className="relative mx-auto w-full max-w-md">
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
-                <Logo className="text-indigo-200" />
-              </div>
-              <div className="leading-tight">
-                <div className="text-sm font-semibold tracking-tight">
-                  {t("brandTitle")}
-                </div>
-                <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
-              </div>
-            </div>
-
-            <LanguageSwitcher />
-          </div>
-
-          <div className="mt-10 rounded-3xl border border-white/15 bg-white/10 p-6 text-center backdrop-blur-2xl shadow-xl">
-            <h1 className="mb-2 text-2xl font-semibold">{t("noData.title")}</h1>
-            <p className="mb-6 text-white/70">{t("noData.text")}</p>
-            <button
-              onClick={() => router.push("/test")}
-              className="inline-flex w-full items-center justify-center rounded-2xl px-6 py-4 text-base font-semibold text-white
-                bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
-                shadow-[0_20px_60px_rgba(99,102,241,0.35)]
-                transition active:scale-[0.98]"
-              type="button"
-            >
-              {t("noData.backToTest")}
-            </button>
-          </div>
-
-          <p className="mt-10 text-center text-xs text-white/40">
-            © {new Date().getFullYear()} {t("footer")}
-          </p>
-        </div>
-      </main>
-    );
-  }
-
-  const bigFiveRows: Array<{
-    key: Trait | "S";
-    label: string;
-    value: number;
-    note?: string;
-  }> = [
+  const bigFiveRows = [
     { key: "E", label: t("traits.E"), value: data.scores.E },
     { key: "O", label: t("traits.O"), value: data.scores.O },
     { key: "C", label: t("traits.C"), value: data.scores.C },
     { key: "A", label: t("traits.A"), value: data.scores.A },
     { key: "N", label: t("traits.N"), value: data.scores.N, note: t("traitsNotes.N") },
-    { key: "S", label: t("traits.S"), value: data.stability, note: t("traitsNotes.S") }
+    // ✅ POPRAWIONE: S = 100 - N (nie "stability" wyniku)
+    { key: "S", label: t("traits.S"), value: emotionalStability, note: t("traitsNotes.S") }
   ];
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-5 py-10 text-white">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
-        <div className="absolute top-1/3 -left-40 h-[360px] w-[360px] rounded-full bg-fuchsia-500/20 blur-[120px]" />
-        <div className="absolute bottom-0 -right-40 h-[360px] w-[360px] rounded-full bg-pink-500/20 blur-[120px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] via-transparent to-transparent" />
-      </div>
-
       <div className="relative mx-auto w-full max-w-2xl">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15">
               <Logo className="text-indigo-200" />
             </div>
             <div className="leading-tight">
-              <div className="text-sm font-semibold tracking-tight">{t("brandTitle")}</div>
+              <div className="text-sm font-semibold">{t("brandTitle")}</div>
               <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
             </div>
           </div>
-
           <LanguageSwitcher />
         </div>
 
@@ -410,14 +287,13 @@ export default function ResultPage() {
           </button>
         </div>
 
-        <div className="mt-8 rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur-2xl shadow-xl">
+        <div className="mt-8 rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <div className="text-xs uppercase tracking-wider text-white/50">
                 {t("yourTypeLabel")}
               </div>
 
-              {/* ✅ AVATAR + NAZWA (bez indexu) */}
               <div className="mt-2 flex items-center gap-4">
                 <Image
                   src={avatarSrc}
@@ -428,15 +304,13 @@ export default function ResultPage() {
                   unoptimized
                   priority
                 />
-                <h2 className="text-3xl font-semibold leading-tight">
-                  {prettyName}
-                </h2>
+                <h2 className="text-3xl font-semibold">{typeName}</h2>
               </div>
             </div>
 
             <button
               onClick={copySummary}
-              className="rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-black hover:opacity-90"
+              className="rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-black"
               type="button"
             >
               {copied ? t("copy.copied") : t("copy.cta")}
@@ -445,53 +319,69 @@ export default function ResultPage() {
 
           <p className="mt-4 text-white/80">{typeDescription}</p>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
-              <div className="text-xs uppercase tracking-wider text-white/50">
-                {t("cards.stress.title")}
-              </div>
-              <div className="mt-2 font-semibold">{addOnTexts.stress.label}</div>
-              <div className="mt-1 text-sm text-white/70">{addOnTexts.stress.note}</div>
-              <div className="mt-2 text-xs text-white/45">
-                {t("cards.stress.stability")}: {stabilityLabel}
-              </div>
-            </div>
+          {/* ✅ PRZYWRÓCONE: opisy add-ons */}
+          {(stress || subtype || mode) && (
+            <div className="mt-6 grid gap-3 sm:grid-cols-3">
+              {stress && (
+                <div className="rounded-2xl border border-white/15 bg-white/10 p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="text-sm font-semibold text-white/85">
+                      {t("cards.stress.title")}
+                    </div>
+                    <div className="text-xs text-white/55">
+                      {t("cards.stress.stability")}: {stabilityLabel}
+                    </div>
+                  </div>
+                  <div className="mt-2 text-sm text-white/80">{stress.label}</div>
+                  <div className="mt-2 text-xs leading-relaxed text-white/60">
+                    {stress.note}
+                  </div>
+                </div>
+              )}
 
-            <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
-              <div className="text-xs uppercase tracking-wider text-white/50">
-                {t("cards.subtype.title")}
-              </div>
-              <div className="mt-2 font-semibold">{addOnTexts.subtype.label}</div>
-              <div className="mt-1 text-sm text-white/70">{addOnTexts.subtype.note}</div>
-            </div>
+              {subtype && (
+                <div className="rounded-2xl border border-white/15 bg-white/10 p-4">
+                  <div className="text-sm font-semibold text-white/85">
+                    {t("cards.subtype.title")}
+                  </div>
+                  <div className="mt-2 text-sm text-white/80">{subtype.label}</div>
+                  <div className="mt-2 text-xs leading-relaxed text-white/60">
+                    {subtype.note}
+                  </div>
+                </div>
+              )}
 
-            <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
-              <div className="text-xs uppercase tracking-wider text-white/50">
-                {t("cards.mode.title")}
-              </div>
-              <div className="mt-2 font-semibold">{addOnTexts.mode.label}</div>
-              <div className="mt-1 text-sm text-white/70">{addOnTexts.mode.note}</div>
+              {mode && (
+                <div className="rounded-2xl border border-white/15 bg-white/10 p-4">
+                  <div className="text-sm font-semibold text-white/85">
+                    {t("cards.mode.title")}
+                  </div>
+                  <div className="mt-2 text-sm text-white/80">{mode.label}</div>
+                  <div className="mt-2 text-xs leading-relaxed text-white/60">
+                    {mode.note}
+                  </div>
+                </div>
+              )}
             </div>
-          </div>
+          )}
 
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
             <button
               onClick={() => setShowBigFive((v) => !v)}
-              className="rounded-2xl bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_35px_rgba(99,102,241,0.35)] hover:opacity-95"
+              className="rounded-2xl bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 px-4 py-2 text-sm font-semibold"
               type="button"
             >
               {showBigFive ? t("bigFive.hide") : t("bigFive.show")}
             </button>
 
-            <div className="text-xs text-white/45">{t("bigFive.note")}</div>
+            <div className="text-xs text-white/45">
+              {t("bigFive.note")}
+            </div>
           </div>
         </div>
 
-        {showBigFive ? (
-          <div className="mt-6 rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur-2xl shadow-xl">
-            <div className="text-sm font-semibold">{t("bigFive.title")}</div>
-            <div className="mt-1 text-xs text-white/50">{t("bigFive.subtitle")}</div>
-
+        {showBigFive && (
+          <div className="mt-6 rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl">
             <div className="mt-6 space-y-4">
               {bigFiveRows.map((row) => (
                 <div key={row.key}>
@@ -499,20 +389,27 @@ export default function ResultPage() {
                     <div className="text-sm text-white/80">{row.label}</div>
                     <div className="text-sm text-white/70">{pct(row.value)}</div>
                   </div>
-                  <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-white/10">
+                  <div className="mt-2 h-2 w-full rounded-full bg-white/10">
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-indigo-400 via-violet-400 to-pink-400"
                       style={{ width: `${pct(row.value)}%` }}
                     />
                   </div>
-                  {row.note ? <div className="mt-1 text-xs text-white/45">{row.note}</div> : null}
+                  {row.note && (
+                    <div className="mt-1 text-xs text-white/45">{row.note}</div>
+                  )}
                 </div>
               ))}
             </div>
 
-            <div className="mt-6 text-xs text-white/45">{t("bigFive.inverseNote")}</div>
+            <div className="mt-6 text-xs text-white/45">
+              {t("bigFive.inverseNote")}
+            </div>
+            <p className="mt-4 text-center text-xs text-white/40">
+              {t("disclaimer")}
+            </p>
           </div>
-        ) : null}
+        )}
 
         <p className="mt-10 text-center text-xs text-white/40">
           © {new Date().getFullYear()} {t("footer")}

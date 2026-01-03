@@ -34,10 +34,8 @@
   "Pay": {
     "brandTitle": "Test osobowości",
     "brandSubtitle": "soft • premium • mobile",
-
     "headline": { "before": "Twój", "accent": "pełny wynik", "after": "jest gotowy" },
     "description": "Otrzymasz pełny profil Big Five: procentowy wynik dla każdej cechy oraz krótką interpretację.",
-
     "cards": {
       "unlock": {
         "title": "Co dokładnie odblokowuję?",
@@ -52,7 +50,6 @@
         "text": "Ten przycisk uruchamia demo — bez prawdziwej płatności."
       }
     },
-
     "cta": "Odblokuj wynik – $1 (demo)",
     "backToTest": "Wróć do testu",
     "note": "Płatność jednorazowa. Bez subskrypcji.",
@@ -62,45 +59,40 @@
   "Result": {
     "brandTitle": "Test osobowości",
     "brandSubtitle": "soft • premium • mobile",
-
     "noData": {
       "title": "Brak danych",
       "text": "Nie widzę zapisanego wyniku. Wróć do testu i odpowiedz na pytania.",
       "backToTest": "Wróć do testu"
     },
-
     "hero": {
       "before": "Twój",
       "accent": "wynik osobowości",
-      "sub": "Wynik oparty o model Big Five"
+      "sub": "Wynik oparty na badaniach nad osobowością"
     },
-
     "retake": "Zrób ponownie",
-    "yourTypeLabel": "Twój typ",
-
+    "yourTypeLabel": "Twój profil",
     "stability": { "high": "Wysoka", "medium": "Średnia", "low": "Niska" },
-
     "cards": {
       "stress": { "title": "Profil stresu", "stability": "Stabilność" },
       "subtype": { "title": "Podtyp" },
       "mode": { "title": "Tryb działania" }
     },
-
     "copy": {
       "cta": "Kopiuj podsumowanie",
       "copied": "Skopiowano!",
-      "myType": "Mój typ",
+      "myType": "Mój profil",
       "addOns": "Dodatki"
     },
-
     "bigFive": {
       "show": "Pokaż szczegóły Big Five",
       "hide": "Ukryj szczegóły Big Five",
-      "note": "Wyliczone z Big Five → zmapowane do wyniku 16-typowego",
+      "note": "Wyliczone z cech Big Five → zmapowane do jednego z 16 profili osobowości",
       "title": "Rozkład Big Five",
       "subtitle": "Wyniki są znormalizowane do 0–100. Paski pokazują intensywność względną.",
       "inverseNote": "Uwaga: „Stabilność emocjonalna” to odwrotność neurotyczności (100 − N)."
     },
+
+    "disclaimer": "Ten test opiera się na badaniach nad osobowością i ma charakter informacyjny — nie jest narzędziem klinicznym ani diagnostycznym.",
 
     "traits": {
       "E": "Ekstrawersja",
@@ -114,7 +106,6 @@
       "N": "Wyżej = większa reaktywność emocjonalna",
       "S": "Wyżej = większy spokój pod presją"
     },
-
     "footer": "Test osobowości"
   },
 
@@ -124,25 +115,21 @@
     "E3": "Często przejmuję inicjatywę w grupie.",
     "E4": "Czuję się komfortowo, będąc w centrum uwagi.",
     "E5": "Zwykle wolę słuchać niż mówić.",
-
     "O1": "Lubię próbować nowych pomysłów, nawet jeśli są niekonwencjonalne.",
     "O2": "Ciągną mnie tematy abstrakcyjne (idee, filozofia, przyszłość).",
     "O3": "Nudzi mnie rutyna i szukam różnorodności.",
     "O4": "Cenię kreatywność bardziej niż tradycję.",
     "O5": "Wolę sprawdzone metody niż eksperymentowanie.",
-
     "C1": "Zwykle planuję zadania i trzymam się planu.",
     "C2": "Terminy są dla mnie ważne i aktywnie ich pilnuję.",
     "C3": "Lubię, gdy wszystko jest uporządkowane i ustrukturyzowane.",
     "C4": "Kończę to, co zaczynam, nawet gdy spada motywacja.",
     "C5": "Często robię rzeczy na ostatnią chwilę.",
-
     "A1": "Łatwo mi zrozumieć perspektywę innych ludzi.",
     "A2": "Ciepło i szacunek w relacjach są dla mnie ważne.",
     "A3": "W konflikcie wolę kompromis niż wygraną.",
     "A4": "Często wspieram innych, nawet gdy nie jest to wygodne.",
     "A5": "Potrafię być bezpośredni, nawet jeśli to rani czyjeś uczucia.",
-
     "N1": "Łatwo się stresuję, nawet drobiazgami.",
     "N2": "Trudno mi się uspokoić po nieprzyjemnej sytuacji.",
     "N3": "Często martwię się na zapas.",
@@ -198,26 +185,26 @@
       }
     }
   },
-  
+
   "Types": {
-    "INTJ": { "name": "Strateg", "desc": "Myślisz długoterminowo i lubisz projektować systemy. Cenysz autonomię, klarowność i ulepszanie rzeczy." },
-    "INTP": { "name": "Analityk", "desc": "Napędza Cię ciekawość. Lubisz eksplorować idee, budować modele i znajdować proste wyjaśnienia." },
-    "ENTJ": { "name": "Dowódca", "desc": "Naturalnie organizujesz ludzi i zasoby. Wyznaczasz kierunek, trzymasz tempo i dowozisz wyniki." },
-    "ENTP": { "name": "Innowator", "desc": "Lubisz możliwości i wyzwania umysłowe. Szybko generujesz opcje i testujesz pomysły w praktyce." },
+    "P01": { "name": "Strategiczny myśliciel", "desc": "Długoterminowa perspektywa, myślenie systemowe, klarowność zamiast chaosu." },
+    "P02": { "name": "Analityczny odkrywca", "desc": "Ciekawość, refleksyjność, podejście oparte na ideach." },
+    "P03": { "name": "Zdecydowany lider", "desc": "Kierunek, decyzyjność i koncentracja na rezultatach." },
+    "P04": { "name": "Kreatywny katalizator", "desc": "Pomysłowość, szybkie myślenie, energia do nowych możliwości." },
 
-    "INFJ": { "name": "Doradca", "desc": "Masz silną intuicję i wyczucie ludzi. Łączysz wizję z wartościami i poczuciem sensu." },
-    "INFP": { "name": "Idealista", "desc": "Prowadzi Cię autentyczność i sens. Dostrzegasz niuanse emocji i dbasz o to, co jest prawdziwe." },
-    "ENFJ": { "name": "Mentor", "desc": "Dobrze czytasz ludzi i wspierasz ich rozwój. Budujesz momentum przez zachętę i jasny kierunek." },
-    "ENFP": { "name": "Wizjoner", "desc": "Uruchamiasz zmiany energią i wyobraźnią. Inspirujesz innych i lubisz odkrywać nowe ścieżki." },
+    "P05": { "name": "Wnikliwy przewodnik", "desc": "Intuicja i dobre wyczucie ludzi." },
+    "P06": { "name": "Refleksyjny idealista", "desc": "Autentyczność, wartości i wewnętrzny kompas." },
+    "P07": { "name": "Wspierający motywator", "desc": "Ciepło, zachęta i nastawienie na rozwój." },
+    "P08": { "name": "Inspirujący łącznik", "desc": "Ekspresja, entuzjazm i łatwość w kontaktach." },
 
-    "ISTJ": { "name": "Realizator", "desc": "Cenisz rzetelność, strukturę i odpowiedzialność. Pilnujesz, żeby wszystko działało, i dowozisz do końca." },
-    "ISFJ": { "name": "Opiekun", "desc": "Jesteś troskliwy, lojalny i uważny na detale. Wspierasz innych stabilnie, często po cichu." },
-    "ESTJ": { "name": "Organizator", "desc": "Lubisz jasne cele i sprawne systemy. Organizujesz, prowadzisz i doprowadzasz projekty do końca." },
-    "ESFJ": { "name": "Integrator", "desc": "Stawiasz na harmonię i współpracę. Lubisz pomagać i utrzymywać mocne relacje." },
+    "P09": { "name": "Niezawodny realizator", "desc": "Struktura, rzetelność i spokojna konsekwencja." },
+    "P10": { "name": "Troskliwy stabilizator", "desc": "Wsparcie, lojalność i uważność na detale." },
+    "P11": { "name": "Praktyczny organizator", "desc": "Porządek, efektywność i sprawne działanie." },
+    "P12": { "name": "Harmonizator relacji", "desc": "Współpraca, relacje i budowanie zgody." },
 
-    "ISTP": { "name": "Taktyk", "desc": "Wolisz logikę, spokój i praktyczne rozwiązania. Dobrze naprawiasz problemy pod presją." },
-    "ISFP": { "name": "Artysta", "desc": "Cenisz autentyczność i bezpośrednie doświadczenie. Idziesz za tym, co czujesz, i wolisz swobodę od sztywnych planów." },
-    "ESTP": { "name": "Ryzykant", "desc": "Dobrze czujesz się w działaniu. Szybko czytasz sytuacje, łatwo się dostosowujesz i lubisz odważne kroki." },
-    "ESFP": { "name": "Animator", "desc": "Wnosisz energię i ciepło do otoczenia. Lubisz wspólne doświadczenia i życie tu i teraz." }
+    "P13": { "name": "Spokojny rozwiązywacz problemów", "desc": "Opanowanie, logika i podejście zadaniowe." },
+    "P14": { "name": "Autentyczny twórca", "desc": "Doświadczenie, ekspresja i wierność sobie." },
+    "P15": { "name": "Adaptacyjny ryzykant", "desc": "Działanie, elastyczność i szybka reakcja." },
+    "P16": { "name": "Energiczny performer", "desc": "Żywiołowość, kontaktowość i bycie tu i teraz." }
   }
 }

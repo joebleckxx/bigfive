@@ -14,6 +14,7 @@
     },
     "footer": "Personlighetstest"
   },
+
   "Test": {
     "progress": "Fråga {current} av {total}",
     "back": "Tillbaka",
@@ -21,6 +22,7 @@
     "tip": "Tips: svara intuitivt — det finns inga fel svar.",
     "footer": "Personlighetstest"
   },
+
   "Scale": {
     "1": "Instämmer inte alls",
     "2": "Instämmer inte",
@@ -28,13 +30,12 @@
     "4": "Instämmer",
     "5": "Instämmer helt"
   },
+
   "Pay": {
     "brandTitle": "Personlighetstest",
     "brandSubtitle": "soft • premium • mobile",
-
     "headline": { "before": "Ditt", "accent": "fulla resultat", "after": "är redo" },
     "description": "Du får en komplett Big Five-profil: procentpoäng för varje drag och en kort tolkning.",
-
     "cards": {
       "unlock": {
         "title": "Vad låser jag upp?",
@@ -49,54 +50,49 @@
         "text": "Knappen startar en demo — ingen riktig betalning."
       }
     },
-
     "cta": "Lås upp resultat – $1 (demo)",
     "backToTest": "Tillbaka till testet",
     "note": "Engångsbetalning. Ingen prenumeration.",
     "footer": "Personlighetstest"
   },
+
   "Result": {
     "brandTitle": "Personlighetstest",
     "brandSubtitle": "soft • premium • mobile",
-
     "noData": {
       "title": "Inga data",
       "text": "Jag kan inte se sparade resultat. Gå tillbaka till testet och svara på frågorna.",
       "backToTest": "Tillbaka till testet"
     },
-
     "hero": {
       "before": "Ditt",
       "accent": "personlighetsresultat",
-      "sub": "Resultat baserat på Big Five-modellen"
+      "sub": "Resultat baserat på etablerad personlighetforskning"
     },
-
     "retake": "Gör om",
-    "yourTypeLabel": "Din typ",
-
+    "yourTypeLabel": "Din profil",
     "stability": { "high": "Hög", "medium": "Medel", "low": "Låg" },
-
     "cards": {
       "stress": { "title": "Stressprofil", "stability": "Stabilitet" },
       "subtype": { "title": "Subtyp" },
       "mode": { "title": "Arbetsläge" }
     },
-
     "copy": {
       "cta": "Kopiera sammanfattning",
       "copied": "Kopierat!",
-      "myType": "Min typ",
+      "myType": "Min profil",
       "addOns": "Tillägg"
     },
-
     "bigFive": {
       "show": "Visa Big Five-detaljer",
       "hide": "Dölj Big Five-detaljer",
-      "note": "Beräknat från Big Five → mappat till ett 16-typsresultat",
+      "note": "Beräknat från Big Five-drag → mappat till en av 16 personlighetsprofiler",
       "title": "Big Five-översikt",
       "subtitle": "Poäng är normaliserade till 0–100. Staplar visar relativ intensitet.",
       "inverseNote": "Obs: “Emotionell stabilitet” är inversen av neuroticism (100 − N)."
     },
+
+    "disclaimer": "Detta test bygger på etablerad personlighetforskning och är av informativ karaktär — det är inte ett kliniskt eller diagnostiskt verktyg.",
 
     "traits": {
       "E": "Extraversion",
@@ -110,41 +106,37 @@
       "N": "Högre = mer emotionell reaktivitet",
       "S": "Högre = lugnare under press"
     },
-
     "footer": "Personlighetstest"
   },
+
   "Questions": {
     "E1": "Jag har lätt för att starta samtal med nya människor.",
     "E2": "Efter en lång dag föredrar jag att umgås framför att vara ensam.",
     "E3": "Jag tar ofta initiativ i en grupp.",
     "E4": "Jag känner mig bekväm med att vara i centrum för uppmärksamheten.",
     "E5": "Jag föredrar oftast att lyssna snarare än att prata.",
-
     "O1": "Jag tycker om att prova nya idéer, även om de är okonventionella.",
     "O2": "Jag dras till abstrakta ämnen (idéer, filosofi, framtiden).",
     "O3": "Jag blir lätt uttråkad av rutiner och söker variation.",
     "O4": "Jag värdesätter kreativitet mer än tradition.",
     "O5": "Jag föredrar beprövade metoder framför att experimentera.",
-
     "C1": "Jag planerar oftast uppgifter och håller mig till planen.",
     "C2": "Deadlines är viktiga för mig, och jag skyddar dem aktivt.",
     "C3": "Jag gillar när saker är organiserade och strukturerade.",
     "C4": "Jag avslutar det jag börjar, även när motivationen sjunker.",
     "C5": "Jag gör ofta saker i sista minuten.",
-
     "A1": "Det är lätt för mig att förstå andras perspektiv.",
     "A2": "Värme och respekt i relationer är viktigt för mig.",
     "A3": "I konflikter föredrar jag kompromiss framför att vinna.",
     "A4": "Jag stöttar ofta andra, även när det inte passar mig.",
     "A5": "Jag kan vara rättfram, även om det sårar någons känslor.",
-
     "N1": "Jag blir lätt stressad, även av små saker.",
     "N2": "Det är svårt för mig att lugna ner mig efter en obehaglig situation.",
     "N3": "Jag oroar mig ofta i förväg.",
     "N4": "Mitt humör kan ändras snabbt.",
     "N5": "Jag brukar behålla lugnet under press."
   },
-  
+
   "AddOns": {
     "stress": {
       "sensitive": {
@@ -193,25 +185,26 @@
       }
     }
   },
+
   "Types": {
-    "INTJ": { "name": "Strateg", "desc": "Du tänker långsiktigt och gillar att designa system. Du föredrar autonomi, tydlighet och förbättringar." },
-    "INTP": { "name": "Analytiker", "desc": "Nyfikenhet driver dig. Du gillar idéer, mentala modeller och rena förklaringar." },
-    "ENTJ": { "name": "Befälhavare", "desc": "Du organiserar naturligt människor och resurser. Du sätter riktning, håller tempo och levererar resultat." },
-    "ENTP": { "name": "Innovatör", "desc": "Du gillar möjligheter och mentala utmaningar. Du skapar snabbt alternativ och testar idéer i verkligheten." },
+    "P01": { "name": "Strategisk tänkare", "desc": "Långsiktigt fokus, systemtänkande och tydlighet istället för kaos." },
+    "P02": { "name": "Analytisk utforskare", "desc": "Nyfiken, reflekterande och idédriven." },
+    "P03": { "name": "Beslutsam ledare", "desc": "Riktning, beslutsamhet och fokus på resultat." },
+    "P04": { "name": "Kreativ katalysator", "desc": "Uppfinningsrik, snabbtänkande och energisk kring möjligheter." },
 
-    "INFJ": { "name": "Rådgivare", "desc": "Du har stark intuition och god människokännedom. Du kopplar vision till värderingar och mening." },
-    "INFP": { "name": "Idealist", "desc": "Du leds av äkthet och syfte. Du märker emotionella nyanser och bryr dig om det som känns sant." },
-    "ENFJ": { "name": "Mentor", "desc": "Du läser människor väl och hjälper dem att växa. Du bygger fart genom uppmuntran och tydlig riktning." },
-    "ENFP": { "name": "Visionär", "desc": "Du sätter igång förändring med energi och fantasi. Du inspirerar andra och gillar nya vägar." },
+    "P05": { "name": "Insiktsfull guide", "desc": "Intuitiv och människoorienterad." },
+    "P06": { "name": "Reflekterande idealist", "desc": "Styrs av äkthet och inre värderingar." },
+    "P07": { "name": "Stöttande motivator", "desc": "Uppmuntrande, varm och utvecklingsinriktad." },
+    "P08": { "name": "Inspirerande sammansvetsare", "desc": "Uttrycksfull, entusiastisk och socialt smidig." },
 
-    "ISTJ": { "name": "Genomförare", "desc": "Du värdesätter pålitlighet, struktur och ansvar. Du får saker att fungera och följer upp." },
-    "ISFJ": { "name": "Vårdare", "desc": "Du är omtänksam, lojal och detaljorienterad. Du stöttar andra stabilt, ofta i det tysta." },
-    "ESTJ": { "name": "Organisatör", "desc": "Du gillar tydliga mål och effektiva system. Du organiserar, leder och driver projekt i mål." },
-    "ESFJ": { "name": "Integrator", "desc": "Du prioriterar harmoni och samarbete. Du hjälper gärna andra och bygger starka band." },
+    "P09": { "name": "Pålitlig genomförare", "desc": "Strukturerad, stabil och konsekvent." },
+    "P10": { "name": "Omtänksam stabilisator", "desc": "Stöttande, lojal och detaljmedveten." },
+    "P11": { "name": "Praktisk organisatör", "desc": "Ordning, effektivitet och driv att få saker gjorda." },
+    "P12": { "name": "Social harmonisör", "desc": "Relationsfokuserad och samarbetsinriktad." },
 
-    "ISTP": { "name": "Taktiker", "desc": "Du föredrar logik, lugn och praktiska lösningar. Du är bra på att fixa problem under press." },
-    "ISFP": { "name": "Konstnär", "desc": "Du värdesätter äkthet och direkta upplevelser. Du följer det som känns rätt och föredrar frihet framför rigida planer." },
-    "ESTP": { "name": "Risktagare", "desc": "Du trivs i action. Du läser situationer snabbt, anpassar dig lätt och gillar att ta modiga steg." },
-    "ESFP": { "name": "Underhållare", "desc": "Du tillför energi och värme. Du gillar gemensamma upplevelser och att leva i nuet." }
+    "P13": { "name": "Lugn problemlösare", "desc": "Samlad, logisk och lösningsfokuserad." },
+    "P14": { "name": "Autentisk skapare", "desc": "Upplevelsedriven och självuttryckande." },
+    "P15": { "name": "Anpassningsbar risktagare", "desc": "Handlingsinriktad, flexibel och snabb att ställa om." },
+    "P16": { "name": "Energisk performer", "desc": "Livlig, engagerande och närvarande i stunden." }
   }
 }

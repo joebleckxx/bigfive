@@ -34,10 +34,8 @@
   "Pay": {
     "brandTitle": "Personality test",
     "brandSubtitle": "soft • premium • mobile",
-
     "headline": { "before": "Your", "accent": "full result", "after": "is ready" },
     "description": "You will get a complete Big Five personality profile: the percentage score for each trait and a short interpretation.",
-
     "cards": {
       "unlock": {
         "title": "What exactly do I unlock?",
@@ -52,7 +50,6 @@
         "text": "This button launches a demo — no real payment."
       }
     },
-
     "cta": "Unlock results – $1 (demo)",
     "backToTest": "Back to the test",
     "note": "One-time payment. No subscription.",
@@ -62,45 +59,40 @@
   "Result": {
     "brandTitle": "Personality test",
     "brandSubtitle": "soft • premium • mobile",
-
     "noData": {
       "title": "No data",
       "text": "I can't see saved results. Return to the test and answer the questions.",
       "backToTest": "Back to the test"
     },
-
     "hero": {
       "before": "Your",
       "accent": "personality result",
-      "sub": "Result based on the Big Five model"
+      "sub": "Result based on established personality research"
     },
-
     "retake": "Retake",
-    "yourTypeLabel": "Your type",
-
+    "yourTypeLabel": "Your profile",
     "stability": { "high": "High", "medium": "Medium", "low": "Low" },
-
     "cards": {
       "stress": { "title": "Stress profile", "stability": "Stability" },
       "subtype": { "title": "Subtype" },
       "mode": { "title": "Operating mode" }
     },
-
     "copy": {
       "cta": "Copy summary",
       "copied": "Copied!",
-      "myType": "My type",
+      "myType": "My profile",
       "addOns": "Add-ons"
     },
-
     "bigFive": {
       "show": "Show Big Five details",
       "hide": "Hide Big Five details",
-      "note": "Computed from Big Five → mapped into a 16-type result",
+      "note": "Computed from Big Five traits → mapped into one of 16 personality profiles",
       "title": "Big Five breakdown",
       "subtitle": "Scores are normalized to 0–100. Bars show relative intensity.",
       "inverseNote": "Note: “Emotional stability” is the inverse of Neuroticism (100 − N)."
     },
+
+    "disclaimer": "This assessment is based on established personality research and provides informational insight — it is not a clinical or diagnostic tool.",
 
     "traits": {
       "E": "Extraversion",
@@ -114,7 +106,6 @@
       "N": "Higher = more emotional reactivity",
       "S": "Higher = calmer under pressure"
     },
-
     "footer": "Personality test"
   },
 
@@ -149,7 +140,7 @@
     "N4": "My mood can change quickly.",
     "N5": "I usually stay calm under pressure."
   },
-  
+
   "AddOns": {
     "stress": {
       "sensitive": {
@@ -198,25 +189,26 @@
       }
     }
   },
+
   "Types": {
-    "INTJ": { "name": "Strategist", "desc": "You think long-term and enjoy designing systems. You prefer autonomy, clarity, and making things better." },
-    "INTP": { "name": "Analyst", "desc": "Curiosity drives you. You enjoy exploring ideas, building mental models, and finding clean explanations." },
-    "ENTJ": { "name": "Commander", "desc": "You naturally organize people and resources. You set direction, keep momentum, and execute toward outcomes." },
-    "ENTP": { "name": "Innovator", "desc": "You love possibilities and mental challenges. You generate options fast and test ideas in the real world." },
+    "P01": { "name": "Strategic Thinker", "desc": "Long-term focus, systems thinking, clarity over chaos." },
+    "P02": { "name": "Analytical Explorer", "desc": "Curious, reflective, idea-driven." },
+    "P03": { "name": "Decisive Leader", "desc": "Direction-oriented and outcome-focused." },
+    "P04": { "name": "Creative Catalyst", "desc": "Inventive, fast-thinking, energized by possibilities." },
 
-    "INFJ": { "name": "Counselor", "desc": "You have strong intuition and deep awareness of people. You connect vision with values and meaning." },
-    "INFP": { "name": "Idealist", "desc": "You’re guided by authenticity and purpose. You notice emotional nuance and care about what feels true." },
-    "ENFJ": { "name": "Mentor", "desc": "You read people well and help them grow. You build momentum through encouragement and clear direction." },
-    "ENFP": { "name": "Visionary", "desc": "You spark change with energy and imagination. You inspire others and enjoy exploring new paths." },
+    "P05": { "name": "Insightful Guide", "desc": "Intuitive and people-aware." },
+    "P06": { "name": "Reflective Idealist", "desc": "Driven by authenticity and inner values." },
+    "P07": { "name": "Supportive Motivator", "desc": "Encouraging, warm, growth-oriented." },
+    "P08": { "name": "Inspirational Connector", "desc": "Expressive, enthusiastic, socially agile." },
 
-    "ISTJ": { "name": "Executor", "desc": "You value reliability, structure, and responsibility. You keep things running smoothly and follow through." },
-    "ISFJ": { "name": "Caregiver", "desc": "You’re caring, loyal, and detail-oriented. You support others steadily, often quietly." },
-    "ESTJ": { "name": "Organizer", "desc": "You like clear goals and efficient systems. You organize, lead, and push projects to completion." },
-    "ESFJ": { "name": "Connector", "desc": "You prioritize harmony and cooperation. You enjoy helping others and maintaining strong connections." },
+    "P09": { "name": "Reliable Executor", "desc": "Structured, dependable, steady." },
+    "P10": { "name": "Caring Stabilizer", "desc": "Supportive, loyal, detail-aware." },
+    "P11": { "name": "Practical Organizer", "desc": "Order-oriented and efficiency-driven." },
+    "P12": { "name": "Social Harmonizer", "desc": "Relationship-focused and cooperative." },
 
-    "ISTP": { "name": "Tactician", "desc": "You prefer logic, calm, and practical solutions. You’re good at fixing problems under pressure." },
-    "ISFP": { "name": "Artist", "desc": "You value authenticity and direct experience. You follow what feels right and prefer freedom over rigid plans." },
-    "ESTP": { "name": "Risk-taker", "desc": "You thrive in action. You read situations fast, adapt quickly, and enjoy taking bold steps." },
-    "ESFP": { "name": "Entertainer", "desc": "You bring energy and warmth to people around you. You enjoy shared experiences and living in the moment." }
+    "P13": { "name": "Calm Problem Solver", "desc": "Composed, logical, solution-focused." },
+    "P14": { "name": "Authentic Creator", "desc": "Experience-driven and self-expressive." },
+    "P15": { "name": "Adaptive Risk-Taker", "desc": "Action-oriented and responsive." },
+    "P16": { "name": "Energetic Performer", "desc": "Lively, engaging, present-focused." }
   }
 }

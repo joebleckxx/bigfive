@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { Logo } from "@/app/components/ui/logo";
-import { computeResult, QUESTIONS } from "@/lib/personality";
+import { QUESTIONS } from "@/lib/personality";
+import { calculateResult } from "@/lib/scoring";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 
 const PAID_KEY = "bigfive_paid_v1";
@@ -36,7 +37,6 @@ export default function PayPage() {
       }
     } catch {
       router.replace("/test");
-      return;
     }
   }, [router]);
 
@@ -54,9 +54,12 @@ export default function PayPage() {
         return;
       }
 
-      const payload = computeResult(answers);
+      // ✅ NOWA, JEDYNA POPRAWNA ŚCIEŻKA
+      const payload = calculateResult(answers);
+
       localStorage.setItem(RESULT_KEY, JSON.stringify(payload));
       localStorage.setItem(PAID_KEY, "true");
+
       router.push("/result");
     } catch {
       router.push("/test");
@@ -82,7 +85,9 @@ export default function PayPage() {
               <div className="text-sm font-semibold tracking-tight">
                 {t("brandTitle")}
               </div>
-              <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
+              <div className="text-xs text-white/55">
+                {t("brandSubtitle")}
+              </div>
             </div>
           </div>
 
@@ -123,7 +128,9 @@ export default function PayPage() {
             {t("backToTest")}
           </button>
 
-          <p className="mt-3 text-center text-xs text-white/55">{t("note")}</p>
+          <p className="mt-3 text-center text-xs text-white/55">
+            {t("note")}
+          </p>
         </div>
 
         <div className="mt-8 space-y-3">
@@ -131,8 +138,6 @@ export default function PayPage() {
           <InfoCard title={t("cards.once.title")} text={t("cards.once.text")} />
           <InfoCard title={t("cards.demo.title")} text={t("cards.demo.text")} />
         </div>
-
-        <div className="h-6" />
 
         <p className="mt-8 text-center text-xs text-white/40">
           © {new Date().getFullYear()} {t("footer")}
