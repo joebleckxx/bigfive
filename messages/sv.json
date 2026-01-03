@@ -1,18 +1,21 @@
 {
   "Home": {
     "brand": { "title": "Personlighetstest", "subtitle": "soft • premium • mobile" },
-    "headline": { "before": "Upptäck din", "accent": "personlighetsprofil" },
-    "description": "Ett lugnt, kort test baserat på svarsmönster. Ingen bedömning. Ingen press. Ett resultat som faktiskt känns rimligt.",
-    "pills": { "time": "5–7 minuter", "anonymous": "Anonymt", "ux": "trevlig UX" },
-    "note": "Tar ~5–7 minuter. Inget konto.",
-    "cta": "Starta testet",
-    "editorial": {
-      "line1": "25 enkla frågor. Bara några minuter.",
-      "line2": "Baserat på etablerad psykologi. En av 16 personlighetsprofiler.",
-      "line3": "Praktisk insikt i dina styrkor och blinda fläckar."
-    },
-    "footer": "Personlighetstest"
+    "headline": {
+      "before": "Upptäck din",
+      "accent": "personlighetspro\u00ADfil"
   },
+  "description": "Ett lugnt, kort test baserat på svarsmönster. Ingen bedömning. Ingen press. Ett resultat som faktiskt känns rimligt.",
+  "pills": { "time": "5–7 minuter", "anonymous": "Anonymt", "ux": "trevlig UX" },
+  "note": "Tar ~5–7 minuter. Inget konto.",
+  "cta": "Starta testet",
+  "editorial": {
+    "line1": "25 enkla frågor. Bara några minuter.",
+    "line2": "Baserat på etablerad psykologi. En av 16 personlighetsprofiler.",
+    "line3": "Praktisk insikt i dina styrkor och blinda fläckar."
+  },
+  "footer": "Personlighetstest"
+},
 
   "Test": {
     "progress": "Fråga {current} av {total}",
