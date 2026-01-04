@@ -57,21 +57,21 @@ export default function TestPage() {
   const router = useRouter();
   const t = useTranslations("Test");
   const s = useTranslations("Scale");
-  const q = useTranslations("Questions"); // pytania po ID
+  const q = useTranslations("Questions");
 
   const total = QUESTIONS.length;
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<number[]>(() => Array(total).fill(0));
 
-  // tap feedback (bez migania): na ułamek sekundy podświetl klikniętą odpowiedź
+  // Tap feedback: na ułamek sekundy podświetl klikniętą odpowiedź
   const [tapSelected, setTapSelected] = useState<number | null>(null);
   const [isAdvancing, setIsAdvancing] = useState(false);
 
-  // Fade-in przy zmianie pytania
-  const [fadeIn, setFadeIn] = useState(true);
+  // ✅ micro-slide przy zmianie pytania (bez fade)
+  const [slideIn, setSlideIn] = useState(false);
   useEffect(() => {
-    setFadeIn(false);
-    const id = requestAnimationFrame(() => setFadeIn(true));
+    setSlideIn(false);
+    const id = requestAnimationFrame(() => setSlideIn(true));
     return () => cancelAnimationFrame(id);
   }, [index]);
 
@@ -192,7 +192,7 @@ export default function TestPage() {
         <div className="mb-6 flex items-center justify-between">
           <div className="text-sm text-white/60">{progressText}</div>
 
-          {/* ✅ Back: bez underline, bez migania, bez limitu */}
+          {/* Back: bez underline, bez limitu */}
           <button
             onClick={goBack}
             type="button"
@@ -204,10 +204,10 @@ export default function TestPage() {
           </button>
         </div>
 
-        {/* ✅ progress: mniej saturacji + szybciej, bez kropki */}
+        {/* progress: mniej saturacji, bez kropki */}
         <div className="mb-6 h-2 w-full rounded-full bg-white/10">
           <div
-            className="h-2 rounded-full bg-gradient-to-r from-indigo-400/70 via-violet-400/70 to-pink-400/70 transition-[width] duration-150"
+            className="h-2 rounded-full bg-gradient-to-r from-indigo-400/65 via-violet-400/65 to-pink-400/65 transition-[width] duration-150"
             style={{
               width: `${progress}%`,
               minWidth: index === 0 ? "24px" : undefined
@@ -215,11 +215,11 @@ export default function TestPage() {
           />
         </div>
 
-        {/* ✅ Fade-in content */}
+        {/* ✅ micro-slide wrapper */}
         <div
           className={[
-            "transition-opacity duration-150",
-            fadeIn ? "opacity-100" : "opacity-0"
+            "transition-transform duration-150 ease-out will-change-transform",
+            slideIn ? "translate-y-0" : "translate-y-1"
           ].join(" ")}
         >
           <div className="rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl backdrop-blur-2xl">
@@ -232,17 +232,18 @@ export default function TestPage() {
                 const selected = answers[index] === v;
                 const tapping = tapSelected === v;
 
-                // ✅ skrajne ciemniejsze, środek jaśniejszy
+                // ✅ widoczniejsza skala jasności (neutral jaśniej, skrajne ciemniej)
                 const baseTone =
                   v === 3
-                    ? "border-white/20 bg-white/12"
+                    ? "border-white/24 bg-white/16"
                     : v === 1 || v === 5
-                      ? "border-white/12 bg-white/8"
-                      : "border-white/15 bg-white/10";
+                      ? "border-white/10 bg-white/6"
+                      : "border-white/14 bg-white/10";
 
-                const idle = selected
-                  ? "border-indigo-300/45 bg-white/15"
-                  : baseTone;
+                // ✅ mocny selected state (żeby po Back było od razu widać)
+                const selectedClass =
+                  "border-indigo-300/70 bg-white/18 ring-2 ring-indigo-300/45 " +
+                  "shadow-[0_0_0_1px_rgba(167,139,250,0.25),0_12px_36px_rgba(0,0,0,0.28)]";
 
                 return (
                   <button
@@ -253,9 +254,13 @@ export default function TestPage() {
                     className={[
                       "w-full rounded-2xl border px-5 py-4 text-left backdrop-blur-xl",
                       "transition-colors duration-150",
-                      idle,
-                      !isAdvancing ? "hover:border-white/25 hover:bg-white/15" : "",
-                      tapping ? "bg-white/20 ring-1 ring-white/25" : "",
+                      selected ? selectedClass : baseTone,
+                      // hover tylko jako delikatne wzmocnienie
+                      !isAdvancing
+                        ? "hover:border-white/25 hover:bg-white/15"
+                        : "",
+                      // highlight po tap (krótki “flash”)
+                      tapping ? "bg-white/22 ring-1 ring-white/25" : "",
                       isAdvancing ? "cursor-not-allowed" : ""
                     ].join(" ")}
                   >
