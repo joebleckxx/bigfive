@@ -320,17 +320,15 @@ export default function TestPage() {
                       ? "border-white/10 bg-white/7"
                       : "border-white/14 bg-white/10";
 
-                // ✅ FIX: gradient = tylko ramka (żadnego “zalewania środka”)
-                // Klucz: inner w stanie selected/tap jest przezroczysty (brak ciemnego wypełnienia).
                 const gradientBorder =
                   "rounded-2xl p-[2px] bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500";
 
-                const innerTransparent =
-                  "rounded-[14px] bg-transparent px-4 py-3 sm:px-5 sm:py-4";
+                // ✅ JEDYNA ZMIANA: zamiast bg-transparent, środek ma tone bg
+                const innerSelected =
+                  `rounded-[14px] bg-[#50505F] px-4 py-3 sm:px-5 sm:py-4`;
 
                 const tapScale = tapping ? "scale-[0.995]" : "";
 
-                // Show gradient border on tap OR selected (so Back keeps highlight)
                 if (tapping || selected) {
                   return (
                     <button
@@ -343,13 +341,12 @@ export default function TestPage() {
                         gradientBorder,
                         tapScale,
                         isAdvancing ? "cursor-not-allowed" : "",
-                        // iOS / focus flash killers
                         "focus:outline-none focus-visible:outline-none",
                         "[-webkit-tap-highlight-color:transparent]",
                         "active:bg-transparent"
                       ].join(" ")}
                     >
-                      <div className={innerTransparent}>
+                      <div className={innerSelected}>
                         <span className="text-sm font-medium text-white/90">
                           {s(String(v))}
                         </span>
