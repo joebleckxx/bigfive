@@ -66,14 +66,6 @@ export default function TestPage() {
   const [tapSelected, setTapSelected] = useState<number | null>(null);
   const [isAdvancing, setIsAdvancing] = useState(false);
 
-  // micro-slide
-  const [slideIn, setSlideIn] = useState(false);
-  useEffect(() => {
-    setSlideIn(false);
-    const id = requestAnimationFrame(() => setSlideIn(true));
-    return () => cancelAnimationFrame(id);
-  }, [index]);
-
   // menu ⋯
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -233,7 +225,7 @@ export default function TestPage() {
               {t("back")}
             </button>
 
-            {/* Menu ⋯ — 1:1 jak LanguageSwitcher (transparent, mały) */}
+            {/* Menu ⋯ */}
             <div className="relative" ref={menuRef}>
               <button
                 type="button"
@@ -263,7 +255,7 @@ export default function TestPage() {
                     type="button"
                     onClick={doReset}
                     className="block w-full whitespace-nowrap rounded-lg
-                      px-4 py-2 text-[11px] font-semibold tracking-wider
+                      px-3 py-1.5 text-[11px] font-semibold tracking-wider
                       text-white/75 hover:text-white hover:bg-white/8"
                     role="menuitem"
                   >
@@ -296,13 +288,8 @@ export default function TestPage() {
           />
         </div>
 
-        {/* micro-slide */}
-        <div
-          className={[
-            "relative z-10 transition-transform duration-150 ease-out will-change-transform",
-            slideIn ? "translate-y-0" : "translate-y-1"
-          ].join(" ")}
-        >
+        {/* micro-slide USUNIĘTY: brak transition/translate */}
+        <div className="relative z-10">
           <div className="rounded-3xl border border-white/15 bg-white/10 p-5 shadow-xl backdrop-blur-2xl sm:p-6">
             <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
               {q(currentQuestion.id)}
@@ -320,12 +307,7 @@ export default function TestPage() {
                       ? "border-white/10 bg-white/7"
                       : "border-white/14 bg-white/10";
 
-                const tapScale = tapping ? "scale-[0.995]" : "";
-
-                // ✅ FIX (tylko przycisk): gradient jako BORDER na jednym elemencie
-                // - środek zawsze szary jak reszta (tu: #50505F)
-                // - brak przebijania gradientu przez tapInner
-                // - mniej artefaktów iOS (brak "seamu" między warstwami)
+                // ✅ gradient border only (one element)
                 const gradientBorderOneElement =
                   "w-full rounded-2xl border border-transparent px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4 " +
                   "[background:linear-gradient(#50505F,#50505F)_padding-box,linear-gradient(to_right,#6366F1,#8B5CF6,#EC4899)_border-box]";
@@ -338,9 +320,7 @@ export default function TestPage() {
                       disabled={isAdvancing}
                       type="button"
                       className={[
-                        "transition-transform duration-150",
                         gradientBorderOneElement,
-                        tapScale,
                         isAdvancing ? "cursor-not-allowed" : "",
                         "focus:outline-none focus-visible:outline-none",
                         "[-webkit-tap-highlight-color:transparent]"
@@ -364,12 +344,12 @@ export default function TestPage() {
                       "focus:outline-none focus-visible:outline-none",
                       "[-webkit-tap-highlight-color:transparent]",
                       "active:bg-transparent",
-                      "transition-[background-color,border-color,transform] duration-150",
+                      // ✅ usunięty transform z transition
+                      "transition-[background-color,border-color] duration-150",
                       baseTone,
                       !isAdvancing
                         ? "md:hover:border-white/25 md:hover:bg-white/15"
                         : "",
-                      tapScale,
                       isAdvancing ? "cursor-not-allowed" : ""
                     ].join(" ")}
                   >
