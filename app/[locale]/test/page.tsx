@@ -320,22 +320,15 @@ export default function TestPage() {
                       ? "border-white/10 bg-white/7"
                       : "border-white/14 bg-white/10";
 
-                const tapInner =
-                  `rounded-2xl ${
-                    v === 3 ? "bg-white/12" : v === 1 || v === 5 ? "bg-white/7" : "bg-white/10"
-                  } px-4 py-3 sm:px-5 sm:py-4`;
-
-                const selectedInner =
-                  "rounded-2xl bg-[#50505F] px-4 py-3 sm:px-5 sm:py-4";
-
-                const gradientBorder =
-                  "rounded-2xl overflow-hidden p-[1px] bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500";
-
-                // ✅ JEDYNA ZMIANA: zamiast bg-transparent, środek ma tone bg
-                const innerSelected =
-                  `rounded-2xl bg-[#50505F] px-4 py-3 sm:px-5 sm:py-4`;
-
                 const tapScale = tapping ? "scale-[0.995]" : "";
+
+                // ✅ FIX (tylko przycisk): gradient jako BORDER na jednym elemencie
+                // - środek zawsze szary jak reszta (tu: #50505F)
+                // - brak przebijania gradientu przez tapInner
+                // - mniej artefaktów iOS (brak "seamu" między warstwami)
+                const gradientBorderOneElement =
+                  "w-full rounded-2xl border border-transparent px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4 " +
+                  "[background:linear-gradient(#50505F,#50505F)_padding-box,linear-gradient(to_right,#6366F1,#8B5CF6,#EC4899)_border-box]";
 
                 if (tapping || selected) {
                   return (
@@ -345,18 +338,17 @@ export default function TestPage() {
                       disabled={isAdvancing}
                       type="button"
                       className={[
-                        "w-full text-left transition-transform duration-150",
-                        gradientBorder,
+                        "transition-transform duration-150",
+                        gradientBorderOneElement,
                         tapScale,
                         isAdvancing ? "cursor-not-allowed" : "",
                         "focus:outline-none focus-visible:outline-none",
-                        "[-webkit-tap-highlight-color:transparent]",
-                        "active:bg-transparent"
+                        "[-webkit-tap-highlight-color:transparent]"
                       ].join(" ")}
                     >
-                      <div className={selected ? selectedInner : tapInner}>
-                        <span className="text-sm font-medium text-white/90">{s(String(v))}</span>
-                      </div>
+                      <span className="text-sm font-medium text-white/90">
+                        {s(String(v))}
+                      </span>
                     </button>
                   );
                 }
