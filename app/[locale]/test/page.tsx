@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { QUESTIONS } from "@/lib/personality";
@@ -9,9 +9,8 @@ const RESULT_KEY = "personality_result_v1";
 const ANSWERS_KEY = "personality_answers_v1";
 const PAID_KEY = "bigfive_paid_v1";
 
-// Auto-reset po 1h bez aktywności
 const LAST_ACTIVE_KEY = "personality_last_active_v1";
-const PROGRESS_TTL_MS = 60 * 60 * 1000; // 1 godzina
+const PROGRESS_TTL_MS = 60 * 60 * 1000;
 
 const SCALE_VALUES = [1, 2, 3, 4, 5] as const;
 
@@ -63,11 +62,11 @@ export default function TestPage() {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<number[]>(() => Array(total).fill(0));
 
-  // Tap feedback: na ułamek sekundy podświetl klikniętą odpowiedź
+  // tap feedback
   const [tapSelected, setTapSelected] = useState<number | null>(null);
   const [isAdvancing, setIsAdvancing] = useState(false);
 
-  // ✅ micro-slide przy zmianie pytania (bez fade)
+  // micro-slide
   const [slideIn, setSlideIn] = useState(false);
   useEffect(() => {
     setSlideIn(false);
@@ -75,7 +74,30 @@ export default function TestPage() {
     return () => cancelAnimationFrame(id);
   }, [index]);
 
-  // Wczytaj postęp po wejściu / refreshu + TTL 1h
+  // menu ⋯
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setMenuOpen(false);
+    }
+    function onPointerDown(e: MouseEvent | TouchEvent) {
+      if (!menuRef.current) return;
+      const target = e.target as Node;
+      if (!menuRef.current.contains(target)) setMenuOpen(false);
+    }
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("touchstart", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("touchstart", onPointerDown);
+    };
+  }, []);
+
+  // load progress + TTL
   useEffect(() => {
     try {
       const raw = localStorage.getItem(ANSWERS_KEY);
@@ -97,13 +119,11 @@ export default function TestPage() {
       }
 
       if (!raw) return;
-
       const parsed = JSON.parse(raw);
       const normalized = normalizeAnswers(parsed, total);
       if (!normalized) return;
 
       setAnswers(normalized);
-
       const firstUnanswered = normalized.findIndex((v) => v === 0);
       setIndex(firstUnanswered === -1 ? total - 1 : firstUnanswered);
       setTapSelected(null);
@@ -127,15 +147,27 @@ export default function TestPage() {
 
   function persistAnswers(nextAnswers: number[]) {
     try {
-      // każda zmiana odpowiedzi unieważnia wcześniejszy pay/result
       localStorage.removeItem(PAID_KEY);
       localStorage.removeItem(RESULT_KEY);
-
       touchLastActive();
       localStorage.setItem(ANSWERS_KEY, JSON.stringify(nextAnswers));
     } catch {
       // ignore
     }
+  }
+
+  function doReset() {
+    clearProgressStorage();
+    setAnswers(Array(total).fill(0));
+    setIndex(0);
+    setTapSelected(null);
+    setIsAdvancing(false);
+    setMenuOpen(false);
+  }
+
+  function goToStart() {
+    setMenuOpen(false);
+    router.push("/");
   }
 
   function commitAnswer(v: number) {
@@ -146,11 +178,8 @@ export default function TestPage() {
 
     const done = next.every((x) => x >= 1 && x <= 5);
     if (done) {
-      if (index < total - 1) {
-        setIndex(index + 1);
-      } else {
-        router.push("/pay");
-      }
+      if (index < total - 1) setIndex(index + 1);
+      else router.push("/pay");
       return;
     }
 
@@ -173,7 +202,6 @@ export default function TestPage() {
 
   function goBack() {
     if (index === 0 || isAdvancing) return;
-
     touchLastActive();
     setIndex((i) => Math.max(0, i - 1));
   }
@@ -182,6 +210,7 @@ export default function TestPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 py-10 text-white">
+      {/* tło jak wcześniej */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
         <div className="absolute bottom-0 -right-40 h-[360px] w-[360px] rounded-full bg-pink-500/20 blur-[120px]" />
@@ -189,25 +218,77 @@ export default function TestPage() {
       </div>
 
       <div className="relative mx-auto max-w-xl">
-        <div className="mb-6 flex items-center justify-between">
+        {/* Topbar */}
+        <div className="relative z-30 mb-6 flex items-center justify-between">
           <div className="text-sm text-white/60">{progressText}</div>
 
-          {/* Back: bez underline, bez limitu */}
-          <button
-            onClick={goBack}
-            type="button"
-            disabled={index === 0}
-            className="text-sm text-white/50 hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
-            aria-disabled={index === 0 || isAdvancing}
-          >
-            {t("back")}
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={goBack}
+              type="button"
+              disabled={index === 0}
+              className="text-sm text-white/60 underline underline-offset-4 decoration-white/20 hover:text-white hover:decoration-white/45 disabled:cursor-not-allowed disabled:opacity-40"
+              aria-disabled={index === 0 || isAdvancing}
+            >
+              {t("back")}
+            </button>
+
+            {/* Menu ⋯ — 1:1 jak LanguageSwitcher (transparent, mały) */}
+            <div className="relative" ref={menuRef}>
+              <button
+                type="button"
+                onClick={() => setMenuOpen((v) => !v)}
+                className="inline-flex items-center justify-center rounded-xl
+                  px-2.5 py-1.5 text-[11px] font-semibold tracking-wider
+                  text-white/70 hover:text-white/90
+                  border border-white/10 hover:border-white/20
+                  bg-transparent hover:bg-white/5
+                  transition focus:outline-none"
+                aria-haspopup="menu"
+                aria-expanded={menuOpen}
+                aria-label="Menu"
+              >
+                ⋯
+              </button>
+
+              {menuOpen && (
+                <div
+                  className="absolute right-0 z-50 mt-2 w-max
+                    rounded-xl border border-white/10
+                    bg-[#0B0C14]/90 backdrop-blur-xl
+                    shadow-xl overflow-hidden p-1"
+                  role="menu"
+                >
+                  <button
+                    type="button"
+                    onClick={doReset}
+                    className="block w-full whitespace-nowrap rounded-lg
+                      px-3 py-1.5 text-[11px] font-semibold tracking-wider
+                      text-white/75 hover:text-white hover:bg-white/8"
+                    role="menuitem"
+                  >
+                    Reset
+                  </button>
+                  <button
+                    type="button"
+                    onClick={goToStart}
+                    className="block w-full whitespace-nowrap rounded-lg
+                      px-3 py-1.5 text-[11px] font-semibold tracking-wider
+                      text-white/75 hover:text-white hover:bg-white/8"
+                    role="menuitem"
+                  >
+                    Start
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
-        {/* progress: mniej saturacji, bez kropki */}
-        <div className="mb-6 h-2 w-full rounded-full bg-white/10">
+        {/* Progress */}
+        <div className="mb-6 h-[6px] w-full rounded-full bg-white/10">
           <div
-            className="h-2 rounded-full bg-gradient-to-r from-indigo-400/65 via-violet-400/65 to-pink-400/65 transition-[width] duration-150"
+            className="h-[6px] rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 transition-[width] duration-150"
             style={{
               width: `${progress}%`,
               minWidth: index === 0 ? "24px" : undefined
@@ -215,10 +296,10 @@ export default function TestPage() {
           />
         </div>
 
-        {/* ✅ micro-slide wrapper */}
+        {/* micro-slide */}
         <div
           className={[
-            "transition-transform duration-150 ease-out will-change-transform",
+            "relative z-10 transition-transform duration-150 ease-out will-change-transform",
             slideIn ? "translate-y-0" : "translate-y-1"
           ].join(" ")}
         >
@@ -232,18 +313,48 @@ export default function TestPage() {
                 const selected = answers[index] === v;
                 const tapping = tapSelected === v;
 
-                // ✅ widoczniejsza skala jasności (neutral jaśniej, skrajne ciemniej)
                 const baseTone =
                   v === 3
-                    ? "border-white/24 bg-white/16"
+                    ? "border-white/18 bg-white/12"
                     : v === 1 || v === 5
-                      ? "border-white/10 bg-white/6"
+                      ? "border-white/10 bg-white/7"
                       : "border-white/14 bg-white/10";
 
-                // ✅ mocny selected state (żeby po Back było od razu widać)
-                const selectedClass =
-                  "border-indigo-300/70 bg-white/18 ring-2 ring-indigo-300/45 " +
-                  "shadow-[0_0_0_1px_rgba(167,139,250,0.25),0_12px_36px_rgba(0,0,0,0.28)]";
+                // ✅ FIX: gradient = tylko ramka (żadnego “zalewania środka”)
+                // Klucz: inner w stanie selected/tap NIE jest przezroczysty i NIE ma blur.
+                const gradientBorder =
+                  "rounded-2xl p-[2px] bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500";
+
+                const innerSolid =
+                  "rounded-[14px] bg-[#2A2D3A] px-5 py-4"; // solid, brak blur
+                const innerSolidSelected =
+                  "rounded-[14px] bg-[#30344A] px-5 py-4"; // lekko jaśniej
+
+                const tapScale = tapping ? "scale-[0.995]" : "";
+
+                // Show gradient border on tap OR selected (so Back keeps highlight)
+                if (tapping || selected) {
+                  return (
+                    <button
+                      key={v}
+                      onClick={() => handleAnswer(v)}
+                      disabled={isAdvancing}
+                      type="button"
+                      className={[
+                        "w-full text-left transition-transform duration-150",
+                        gradientBorder,
+                        tapScale,
+                        isAdvancing ? "cursor-not-allowed" : ""
+                      ].join(" ")}
+                    >
+                      <div className={selected ? innerSolidSelected : innerSolid}>
+                        <span className="text-sm font-medium text-white/90">
+                          {s(String(v))}
+                        </span>
+                      </div>
+                    </button>
+                  );
+                }
 
                 return (
                   <button
@@ -253,14 +364,12 @@ export default function TestPage() {
                     type="button"
                     className={[
                       "w-full rounded-2xl border px-5 py-4 text-left backdrop-blur-xl",
-                      "transition-colors duration-150",
-                      selected ? selectedClass : baseTone,
-                      // hover tylko jako delikatne wzmocnienie
+                      "transition-[background-color,border-color,transform] duration-150",
+                      baseTone,
                       !isAdvancing
-                        ? "hover:border-white/25 hover:bg-white/15"
+                        ? "md:hover:border-white/25 md:hover:bg-white/15"
                         : "",
-                      // highlight po tap (krótki “flash”)
-                      tapping ? "bg-white/22 ring-1 ring-white/25" : "",
+                      tapScale,
                       isAdvancing ? "cursor-not-allowed" : ""
                     ].join(" ")}
                   >
