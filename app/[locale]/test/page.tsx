@@ -236,7 +236,6 @@ export default function TestPage() {
                   border border-white/10 hover:border-white/20
                   bg-transparent hover:bg-white/5
                   transition focus:outline-none"
-
                 aria-haspopup="menu"
                 aria-expanded={menuOpen}
                 aria-label="Menu"
@@ -268,7 +267,6 @@ export default function TestPage() {
                     className="block w-full whitespace-nowrap rounded-lg
                       px-3 py-2 text-sm font-medium tracking-tight
                       text-white/75 hover:text-white hover:bg-white/8"
-
                     role="menuitem"
                   >
                     Start
@@ -302,6 +300,7 @@ export default function TestPage() {
                 const selected = answers[index] === v;
                 const tapping = tapSelected === v;
 
+                // ✅ różnicowanie tła
                 const baseTone =
                   v === 3
                     ? "border-white/22 bg-white/18"
@@ -314,10 +313,21 @@ export default function TestPage() {
                   "w-full rounded-2xl border border-transparent px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4 " +
                   "[background:linear-gradient(#50505F,#50505F)_padding-box,linear-gradient(to_right,#6366F1,#8B5CF6,#EC4899)_border-box]";
 
+                // ✅ NEW: pokazuj ramkę NATYCHMIAST na dotyku (przed onClick)
+                const onPressStart = () => {
+                  if (isAdvancing) return;
+                  setTapSelected(v);
+                };
+                const onPressCancel = () => {
+                  if (tapSelected === v) setTapSelected(null);
+                };
+
                 if (tapping || selected) {
                   return (
                     <button
                       key={v}
+                      onPointerDown={onPressStart}
+                      onPointerCancel={onPressCancel}
                       onClick={() => handleAnswer(v)}
                       disabled={isAdvancing}
                       type="button"
@@ -338,6 +348,8 @@ export default function TestPage() {
                 return (
                   <button
                     key={v}
+                    onPointerDown={onPressStart}
+                    onPointerCancel={onPressCancel}
                     onClick={() => handleAnswer(v)}
                     disabled={isAdvancing}
                     type="button"
@@ -346,7 +358,6 @@ export default function TestPage() {
                       "focus:outline-none focus-visible:outline-none",
                       "[-webkit-tap-highlight-color:transparent]",
                       "active:bg-transparent",
-                      // ✅ usunięty transform z transition
                       "transition-[background-color,border-color] duration-150",
                       baseTone,
                       !isAdvancing
