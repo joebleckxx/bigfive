@@ -201,7 +201,7 @@ export default function TestPage() {
   if (!currentQuestion) return null;
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-4 py-6 text-white sm:px-6 sm:py-10 flex items-center">
+    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-4 py-6 text-white sm:px-6 sm:py-10">
       {/* tło jak wcześniej */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
@@ -209,7 +209,7 @@ export default function TestPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] via-transparent to-transparent" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-xl">
+      <div className="relative mx-auto max-w-xl">
         {/* Topbar */}
         <div className="relative z-30 mb-6 flex items-center justify-between">
           <div className="text-sm text-white/60">{progressText}</div>
