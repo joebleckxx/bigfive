@@ -189,7 +189,7 @@ export default function TestPage() {
       commitAnswer(v);
       setTapSelected(null);
       setIsAdvancing(false);
-    }, 120);
+    }, 80);
   }
 
   function goBack() {
