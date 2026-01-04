@@ -212,7 +212,8 @@ export default function TestPage() {
               onClick={goBack}
               className="text-sm text-white/60 hover:text-white underline underline-offset-4 disabled:cursor-not-allowed disabled:opacity-40"
               type="button"
-              disabled={index === 0 || backUsed || isAdvancing}
+              disabled={index === 0 || backUsed}
+              aria-disabled={index === 0 || backUsed || isAdvancing}
             >
               {t("back")}
             </button>
