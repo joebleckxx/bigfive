@@ -263,7 +263,7 @@ export default function TestPage() {
                     type="button"
                     onClick={doReset}
                     className="block w-full whitespace-nowrap rounded-lg
-                      px-3 py-1.5 text-[11px] font-semibold tracking-wider
+                      px-4 py-2 text-[11px] font-semibold tracking-wider
                       text-white/75 hover:text-white hover:bg-white/8"
                     role="menuitem"
                   >
@@ -320,12 +320,20 @@ export default function TestPage() {
                       ? "border-white/10 bg-white/7"
                       : "border-white/14 bg-white/10";
 
+                const tapInner =
+                  `rounded-2xl ${
+                    v === 3 ? "bg-white/12" : v === 1 || v === 5 ? "bg-white/7" : "bg-white/10"
+                  } px-4 py-3 sm:px-5 sm:py-4`;
+
+                const selectedInner =
+                  "rounded-2xl bg-[#50505F] px-4 py-3 sm:px-5 sm:py-4";
+
                 const gradientBorder =
-                  "rounded-2xl p-[2px] bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500";
+                  "rounded-2xl overflow-hidden p-[1px] bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500";
 
                 // ✅ JEDYNA ZMIANA: zamiast bg-transparent, środek ma tone bg
                 const innerSelected =
-                  `rounded-[14px] bg-[#50505F] px-4 py-3 sm:px-5 sm:py-4`;
+                  `rounded-2xl bg-[#50505F] px-4 py-3 sm:px-5 sm:py-4`;
 
                 const tapScale = tapping ? "scale-[0.995]" : "";
 
@@ -346,10 +354,8 @@ export default function TestPage() {
                         "active:bg-transparent"
                       ].join(" ")}
                     >
-                      <div className={innerSelected}>
-                        <span className="text-sm font-medium text-white/90">
-                          {s(String(v))}
-                        </span>
+                      <div className={selected ? selectedInner : tapInner}>
+                        <span className="text-sm font-medium text-white/90">{s(String(v))}</span>
                       </div>
                     </button>
                   );

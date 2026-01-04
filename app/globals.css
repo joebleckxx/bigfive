@@ -29,6 +29,8 @@ body {
 button,
 [role="button"] {
   -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 button:focus,
@@ -39,4 +41,22 @@ button:focus-visible {
 
 button:active {
   background-color: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* iOS Safari sometimes draws its own focus ring */
+button::-moz-focus-inner {
+  border: 0;
+}
+
+button:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* last resort: disable WebKit focus ring */
+button {
+  outline: none !important;
+  box-shadow: none !important;
 }
