@@ -64,6 +64,10 @@ export default function TestPage() {
   const [answers, setAnswers] = useState<number[]>(() => Array(total).fill(0));
   const [backUsed, setBackUsed] = useState(false);
 
+  // 👇 tap feedback (na ułamek sekundy przed przejściem dalej)
+  const [tapSelected, setTapSelected] = useState<number | null>(null);
+  const [isAdvancing, setIsAdvancing] = useState(false);
+
   // Wczytaj postęp po wejściu / refreshu + TTL 1h
   useEffect(() => {
     try {
@@ -82,6 +86,8 @@ export default function TestPage() {
           setAnswers(Array(total).fill(0));
           setIndex(0);
           setBackUsed(false);
+          setTapSelected(null);
+          setIsAdvancing(false);
           return;
         }
       }
@@ -97,6 +103,8 @@ export default function TestPage() {
       const firstUnanswered = normalized.findIndex((v) => v === 0);
       setIndex(firstUnanswered === -1 ? total - 1 : firstUnanswered);
       setBackUsed(false);
+      setTapSelected(null);
+      setIsAdvancing(false);
     } catch {
       // ignore
     }
@@ -109,7 +117,7 @@ export default function TestPage() {
 
   const progress = useMemo(() => {
     if (total === 0) return 0;
-    return Math.round(((index + 1) / total) * 100);
+    return ((index + 1) / total) * 100;
   }, [index, total]);
 
   const currentQuestion = QUESTIONS[index];
@@ -129,7 +137,7 @@ export default function TestPage() {
     }
   }
 
-  function handleAnswer(v: number) {
+  function commitAnswer(v: number) {
     const next = [...answers];
     next[index] = v;
     setAnswers(next);
@@ -137,19 +145,33 @@ export default function TestPage() {
     setBackUsed(false);
 
     // jeśli wszystko odpowiedziane -> pay, ale dopiero gdy jesteśmy na ostatnim pytaniu
-  const done = next.every((x) => x >= 1 && x <= 5);
-  if (done) {
-    if (index < total - 1) {
-      setIndex(index + 1); // przejdź do następnego (np. z 24 -> 25)
-    } else {
-      router.push("/pay");
+    const done = next.every((x) => x >= 1 && x <= 5);
+    if (done) {
+      if (index < total - 1) {
+        setIndex(index + 1); // przejdź do następnego (np. z 24 -> 25)
+      } else {
+        router.push("/pay");
+      }
+      return;
     }
-    return;
-  }
 
     // auto-next: skocz do pierwszego nieodpowiedzianego
     const firstUnanswered = next.findIndex((x) => x === 0);
     setIndex(firstUnanswered === -1 ? total - 1 : firstUnanswered);
+  }
+
+  function handleAnswer(v: number) {
+    if (isAdvancing) return;
+
+    setIsAdvancing(true);
+    setTapSelected(v);
+
+    // krótki moment na feedback wizualny (na mobile daje pewność co zostało kliknięte)
+    window.setTimeout(() => {
+      commitAnswer(v);
+      setTapSelected(null);
+      setIsAdvancing(false);
+    }, 140);
   }
 
   function resetTest() {
@@ -157,19 +179,24 @@ export default function TestPage() {
     setAnswers(Array(total).fill(0));
     setIndex(0);
     setBackUsed(false);
+    setTapSelected(null);
+    setIsAdvancing(false);
   }
 
   function goBack() {
-    if (index === 0 || backUsed) return;
+    if (index === 0 || backUsed || isAdvancing) return;
 
     // aktywność użytkownika też przy Back
     touchLastActive();
 
     setIndex((i) => Math.max(0, i - 1));
     setBackUsed(true);
+    setTapSelected(null);
   }
 
   if (!currentQuestion) return null;
+
+  const answeredNow = answers[index];
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 py-10 text-white">
@@ -188,7 +215,7 @@ export default function TestPage() {
               onClick={goBack}
               className="text-sm text-white/60 hover:text-white underline underline-offset-4 disabled:cursor-not-allowed disabled:opacity-40"
               type="button"
-              disabled={index === 0 || backUsed}
+              disabled={index === 0 || backUsed || isAdvancing}
             >
               {t("back")}
             </button>
@@ -203,11 +230,18 @@ export default function TestPage() {
           </div>
         </div>
 
-        <div className="mb-6 h-1.5 w-full rounded-full bg-white/10">
+        {/* ✅ lekko poprawiony progress: trochę grubszy + min width na Q1 + thumb */}
+        <div className="mb-6 h-2 w-full rounded-full bg-white/10">
           <div
-            className="h-1.5 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 transition-[width] duration-300"
-            style={{ width: `${progress}%` }}
-          />
+            className="relative h-2 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 transition-[width] duration-300"
+            style={{
+              width: `${progress}%`,
+              // na pierwszym pytaniu pasek nie znika prawie całkiem
+              minWidth: index === 0 ? "24px" : undefined
+            }}
+          >
+            <span className="absolute right-0 top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-white/85 shadow-[0_0_18px_rgba(255,255,255,0.35)]" />
+          </div>
         </div>
 
         <div className="rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl backdrop-blur-2xl">
@@ -217,19 +251,28 @@ export default function TestPage() {
 
           <div className="space-y-3">
             {SCALE_VALUES.map((v) => {
-              const selected = answers[index] === v;
+              const selected = answeredNow === v;
+              const tapping = tapSelected === v;
+
               return (
                 <button
                   key={v}
                   onClick={() => handleAnswer(v)}
+                  disabled={isAdvancing}
                   className={[
-                    "w-full text-left px-5 py-4 rounded-2xl transition",
+                    "w-full text-left px-5 py-4 rounded-2xl",
                     "border backdrop-blur-xl",
+                    "transition-transform transition-colors duration-150",
                     selected
                       ? "border-indigo-300/50 bg-white/15"
                       : "border-white/15 bg-white/10",
-                    "hover:bg-white/15 hover:border-indigo-400/40",
-                    "active:scale-[0.99]"
+                    // ✅ hover bardziej delikatny (desktop)
+                    "hover:border-white/25 hover:bg-white/12",
+                    // ✅ tap/active (mobile)
+                    "active:scale-[0.99] active:bg-white/20",
+                    // ✅ szybki highlight po tap (nawet jeśli zaraz skaczesz dalej)
+                    tapping ? "bg-white/20 ring-1 ring-white/25" : "",
+                    isAdvancing ? "cursor-not-allowed" : ""
                   ].join(" ")}
                   type="button"
                 >
