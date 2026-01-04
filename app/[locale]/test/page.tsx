@@ -64,7 +64,7 @@ export default function TestPage() {
   const [answers, setAnswers] = useState<number[]>(() => Array(total).fill(0));
   const [backUsed, setBackUsed] = useState(false);
 
-  // 👇 tap feedback (na ułamek sekundy przed przejściem dalej)
+  // ✅ tap feedback (bez migania): na ułamek sekundy podświetl klikniętą odpowiedź
   const [tapSelected, setTapSelected] = useState<number | null>(null);
   const [isAdvancing, setIsAdvancing] = useState(false);
 
@@ -117,7 +117,7 @@ export default function TestPage() {
 
   const progress = useMemo(() => {
     if (total === 0) return 0;
-    return ((index + 1) / total) * 100;
+    return Math.round(((index + 1) / total) * 100);
   }, [index, total]);
 
   const currentQuestion = QUESTIONS[index];
@@ -166,12 +166,12 @@ export default function TestPage() {
     setIsAdvancing(true);
     setTapSelected(v);
 
-    // krótki moment na feedback wizualny (na mobile daje pewność co zostało kliknięte)
+    // ✅ krótki “flash” wyboru (bez :active, które potrafi migać na mobile)
     window.setTimeout(() => {
       commitAnswer(v);
       setTapSelected(null);
       setIsAdvancing(false);
-    }, 140);
+    }, 120);
   }
 
   function resetTest() {
@@ -191,12 +191,9 @@ export default function TestPage() {
 
     setIndex((i) => Math.max(0, i - 1));
     setBackUsed(true);
-    setTapSelected(null);
   }
 
   if (!currentQuestion) return null;
-
-  const answeredNow = answers[index];
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 py-10 text-white">
@@ -230,18 +227,15 @@ export default function TestPage() {
           </div>
         </div>
 
-        {/* ✅ lekko poprawiony progress: trochę grubszy + min width na Q1 + thumb */}
+        {/* ✅ progress: grubszy + min-width na Q1, bez kropki */}
         <div className="mb-6 h-2 w-full rounded-full bg-white/10">
           <div
-            className="relative h-2 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 transition-[width] duration-300"
+            className="h-2 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 transition-[width] duration-300"
             style={{
               width: `${progress}%`,
-              // na pierwszym pytaniu pasek nie znika prawie całkiem
               minWidth: index === 0 ? "24px" : undefined
             }}
-          >
-            <span className="absolute right-0 top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-white/85 shadow-[0_0_18px_rgba(255,255,255,0.35)]" />
-          </div>
+          />
         </div>
 
         <div className="rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl backdrop-blur-2xl">
@@ -251,7 +245,7 @@ export default function TestPage() {
 
           <div className="space-y-3">
             {SCALE_VALUES.map((v) => {
-              const selected = answeredNow === v;
+              const selected = answers[index] === v;
               const tapping = tapSelected === v;
 
               return (
@@ -262,15 +256,14 @@ export default function TestPage() {
                   className={[
                     "w-full text-left px-5 py-4 rounded-2xl",
                     "border backdrop-blur-xl",
-                    "transition-transform transition-colors duration-150",
+                    // ✅ tylko kolory (mniej “flashy”)
+                    "transition-colors duration-150",
                     selected
                       ? "border-indigo-300/50 bg-white/15"
                       : "border-white/15 bg-white/10",
-                    // ✅ hover bardziej delikatny (desktop)
-                    "hover:border-white/25 hover:bg-white/12",
-                    // ✅ tap/active (mobile)
-                    "active:scale-[0.99] active:bg-white/20",
-                    // ✅ szybki highlight po tap (nawet jeśli zaraz skaczesz dalej)
+                    // ✅ delikatny hover (desktop)
+                    !isAdvancing ? "hover:bg-white/15 hover:border-white/25" : "",
+                    // ✅ highlight po tap (mobile/desktop) — bez :active (to usuwa miganie)
                     tapping ? "bg-white/20 ring-1 ring-white/25" : "",
                     isAdvancing ? "cursor-not-allowed" : ""
                   ].join(" ")}
@@ -283,8 +276,6 @@ export default function TestPage() {
               );
             })}
           </div>
-
-          <p className="mt-6 text-xs text-white/55">{t("tip")}</p>
         </div>
 
         <p className="mt-10 text-center text-xs text-white/40">
