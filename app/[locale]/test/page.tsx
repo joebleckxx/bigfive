@@ -209,7 +209,7 @@ export default function TestPage() {
   if (!currentQuestion) return null;
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 py-10 text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-4 py-6 text-white sm:px-6 sm:py-10">
       {/* tło jak wcześniej */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
@@ -303,7 +303,7 @@ export default function TestPage() {
             slideIn ? "translate-y-0" : "translate-y-1"
           ].join(" ")}
         >
-          <div className="rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl backdrop-blur-2xl">
+          <div className="rounded-3xl border border-white/15 bg-white/10 p-5 shadow-xl backdrop-blur-2xl sm:p-6">
             <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
               {q(currentQuestion.id)}
             </h2>
@@ -321,14 +321,12 @@ export default function TestPage() {
                       : "border-white/14 bg-white/10";
 
                 // ✅ FIX: gradient = tylko ramka (żadnego “zalewania środka”)
-                // Klucz: inner w stanie selected/tap NIE jest przezroczysty i NIE ma blur.
+                // Klucz: inner w stanie selected/tap jest przezroczysty (brak ciemnego wypełnienia).
                 const gradientBorder =
                   "rounded-2xl p-[2px] bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500";
 
-                const innerSolid =
-                  "rounded-[14px] bg-[#2A2D3A] px-5 py-4"; // solid, brak blur
-                const innerSolidSelected =
-                  "rounded-[14px] bg-[#30344A] px-5 py-4"; // lekko jaśniej
+                const innerTransparent =
+                  "rounded-[14px] bg-transparent px-4 py-3 sm:px-5 sm:py-4";
 
                 const tapScale = tapping ? "scale-[0.995]" : "";
 
@@ -344,10 +342,14 @@ export default function TestPage() {
                         "w-full text-left transition-transform duration-150",
                         gradientBorder,
                         tapScale,
-                        isAdvancing ? "cursor-not-allowed" : ""
+                        isAdvancing ? "cursor-not-allowed" : "",
+                        // iOS / focus flash killers
+                        "focus:outline-none focus-visible:outline-none",
+                        "[-webkit-tap-highlight-color:transparent]",
+                        "active:bg-transparent"
                       ].join(" ")}
                     >
-                      <div className={selected ? innerSolidSelected : innerSolid}>
+                      <div className={innerTransparent}>
                         <span className="text-sm font-medium text-white/90">
                           {s(String(v))}
                         </span>
@@ -363,7 +365,10 @@ export default function TestPage() {
                     disabled={isAdvancing}
                     type="button"
                     className={[
-                      "w-full rounded-2xl border px-5 py-4 text-left backdrop-blur-xl",
+                      "w-full rounded-2xl border px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4",
+                      "focus:outline-none focus-visible:outline-none",
+                      "[-webkit-tap-highlight-color:transparent]",
+                      "active:bg-transparent",
                       "transition-[background-color,border-color,transform] duration-150",
                       baseTone,
                       !isAdvancing
