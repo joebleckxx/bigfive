@@ -57,16 +57,23 @@ export default function TestPage() {
   const router = useRouter();
   const t = useTranslations("Test");
   const s = useTranslations("Scale");
-  const q = useTranslations("Questions"); // 👈 pytania po ID
+  const q = useTranslations("Questions"); // pytania po ID
 
   const total = QUESTIONS.length;
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<number[]>(() => Array(total).fill(0));
-  const [backUsed, setBackUsed] = useState(false);
 
-  // ✅ tap feedback (bez migania): na ułamek sekundy podświetl klikniętą odpowiedź
+  // tap feedback (bez migania): na ułamek sekundy podświetl klikniętą odpowiedź
   const [tapSelected, setTapSelected] = useState<number | null>(null);
   const [isAdvancing, setIsAdvancing] = useState(false);
+
+  // Fade-in przy zmianie pytania
+  const [fadeIn, setFadeIn] = useState(true);
+  useEffect(() => {
+    setFadeIn(false);
+    const id = requestAnimationFrame(() => setFadeIn(true));
+    return () => cancelAnimationFrame(id);
+  }, [index]);
 
   // Wczytaj postęp po wejściu / refreshu + TTL 1h
   useEffect(() => {
@@ -74,8 +81,6 @@ export default function TestPage() {
       const raw = localStorage.getItem(ANSWERS_KEY);
       const hasAnswers = !!raw;
 
-      // Jeśli jest zapisany progress, ale sesja jest "stara" (albo brak timestampu) -> reset
-      // (brak LAST_ACTIVE_KEY traktujemy jako wygasłe, żeby nie zostawać na 25 pytaniu "następnego dnia")
       if (hasAnswers) {
         const lastActiveAt = readLastActive();
         const expired =
@@ -85,7 +90,6 @@ export default function TestPage() {
           clearProgressStorage();
           setAnswers(Array(total).fill(0));
           setIndex(0);
-          setBackUsed(false);
           setTapSelected(null);
           setIsAdvancing(false);
           return;
@@ -102,7 +106,6 @@ export default function TestPage() {
 
       const firstUnanswered = normalized.findIndex((v) => v === 0);
       setIndex(firstUnanswered === -1 ? total - 1 : firstUnanswered);
-      setBackUsed(false);
       setTapSelected(null);
       setIsAdvancing(false);
     } catch {
@@ -128,9 +131,7 @@ export default function TestPage() {
       localStorage.removeItem(PAID_KEY);
       localStorage.removeItem(RESULT_KEY);
 
-      // aktywność użytkownika
       touchLastActive();
-
       localStorage.setItem(ANSWERS_KEY, JSON.stringify(nextAnswers));
     } catch {
       // ignore
@@ -142,20 +143,17 @@ export default function TestPage() {
     next[index] = v;
     setAnswers(next);
     persistAnswers(next);
-    setBackUsed(false);
 
-    // jeśli wszystko odpowiedziane -> pay, ale dopiero gdy jesteśmy na ostatnim pytaniu
     const done = next.every((x) => x >= 1 && x <= 5);
     if (done) {
       if (index < total - 1) {
-        setIndex(index + 1); // przejdź do następnego (np. z 24 -> 25)
+        setIndex(index + 1);
       } else {
         router.push("/pay");
       }
       return;
     }
 
-    // auto-next: skocz do pierwszego nieodpowiedzianego
     const firstUnanswered = next.findIndex((x) => x === 0);
     setIndex(firstUnanswered === -1 ? total - 1 : firstUnanswered);
   }
@@ -166,7 +164,6 @@ export default function TestPage() {
     setIsAdvancing(true);
     setTapSelected(v);
 
-    // ✅ krótki “flash” wyboru (bez :active, które potrafi migać na mobile)
     window.setTimeout(() => {
       commitAnswer(v);
       setTapSelected(null);
@@ -174,23 +171,11 @@ export default function TestPage() {
     }, 120);
   }
 
-  function resetTest() {
-    clearProgressStorage();
-    setAnswers(Array(total).fill(0));
-    setIndex(0);
-    setBackUsed(false);
-    setTapSelected(null);
-    setIsAdvancing(false);
-  }
-
   function goBack() {
-    if (index === 0 || backUsed || isAdvancing) return;
+    if (index === 0 || isAdvancing) return;
 
-    // aktywność użytkownika też przy Back
     touchLastActive();
-
     setIndex((i) => Math.max(0, i - 1));
-    setBackUsed(true);
   }
 
   if (!currentQuestion) return null;
@@ -207,31 +192,22 @@ export default function TestPage() {
         <div className="mb-6 flex items-center justify-between">
           <div className="text-sm text-white/60">{progressText}</div>
 
-          <div className="flex items-center gap-4">
-            <button
-              onClick={goBack}
-              className="text-sm text-white/60 hover:text-white underline underline-offset-4 disabled:cursor-not-allowed disabled:opacity-40"
-              type="button"
-              disabled={index === 0 || backUsed}
-              aria-disabled={index === 0 || backUsed || isAdvancing}
-            >
-              {t("back")}
-            </button>
-
-            <button
-              onClick={resetTest}
-              className="text-sm text-white/60 hover:text-white underline underline-offset-4"
-              type="button"
-            >
-              {t("reset")}
-            </button>
-          </div>
+          {/* ✅ Back: bez underline, bez migania, bez limitu */}
+          <button
+            onClick={goBack}
+            type="button"
+            disabled={index === 0}
+            className="text-sm text-white/50 hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
+            aria-disabled={index === 0 || isAdvancing}
+          >
+            {t("back")}
+          </button>
         </div>
 
-        {/* ✅ progress: grubszy + min-width na Q1, bez kropki */}
+        {/* ✅ progress: mniej saturacji + szybciej, bez kropki */}
         <div className="mb-6 h-2 w-full rounded-full bg-white/10">
           <div
-            className="h-2 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 transition-[width] duration-300"
+            className="h-2 rounded-full bg-gradient-to-r from-indigo-400/70 via-violet-400/70 to-pink-400/70 transition-[width] duration-150"
             style={{
               width: `${progress}%`,
               minWidth: index === 0 ? "24px" : undefined
@@ -239,43 +215,57 @@ export default function TestPage() {
           />
         </div>
 
-        <div className="rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl backdrop-blur-2xl">
-          <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
-            {q(currentQuestion.id)}
-          </h2>
+        {/* ✅ Fade-in content */}
+        <div
+          className={[
+            "transition-opacity duration-150",
+            fadeIn ? "opacity-100" : "opacity-0"
+          ].join(" ")}
+        >
+          <div className="rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl backdrop-blur-2xl">
+            <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
+              {q(currentQuestion.id)}
+            </h2>
 
-          <div className="space-y-3">
-            {SCALE_VALUES.map((v) => {
-              const selected = answers[index] === v;
-              const tapping = tapSelected === v;
+            <div className="space-y-3">
+              {SCALE_VALUES.map((v) => {
+                const selected = answers[index] === v;
+                const tapping = tapSelected === v;
 
-              return (
-                <button
-                  key={v}
-                  onClick={() => handleAnswer(v)}
-                  disabled={isAdvancing}
-                  className={[
-                    "w-full text-left px-5 py-4 rounded-2xl",
-                    "border backdrop-blur-xl",
-                    // ✅ tylko kolory (mniej “flashy”)
-                    "transition-colors duration-150",
-                    selected
-                      ? "border-indigo-300/50 bg-white/15"
-                      : "border-white/15 bg-white/10",
-                    // ✅ delikatny hover (desktop)
-                    !isAdvancing ? "hover:bg-white/15 hover:border-white/25" : "",
-                    // ✅ highlight po tap (mobile/desktop) — bez :active (to usuwa miganie)
-                    tapping ? "bg-white/20 ring-1 ring-white/25" : "",
-                    isAdvancing ? "cursor-not-allowed" : ""
-                  ].join(" ")}
-                  type="button"
-                >
-                  <span className="text-sm font-medium text-white/90">
-                    {s(String(v))}
-                  </span>
-                </button>
-              );
-            })}
+                // ✅ skrajne ciemniejsze, środek jaśniejszy
+                const baseTone =
+                  v === 3
+                    ? "border-white/20 bg-white/12"
+                    : v === 1 || v === 5
+                      ? "border-white/12 bg-white/8"
+                      : "border-white/15 bg-white/10";
+
+                const idle = selected
+                  ? "border-indigo-300/45 bg-white/15"
+                  : baseTone;
+
+                return (
+                  <button
+                    key={v}
+                    onClick={() => handleAnswer(v)}
+                    disabled={isAdvancing}
+                    type="button"
+                    className={[
+                      "w-full rounded-2xl border px-5 py-4 text-left backdrop-blur-xl",
+                      "transition-colors duration-150",
+                      idle,
+                      !isAdvancing ? "hover:border-white/25 hover:bg-white/15" : "",
+                      tapping ? "bg-white/20 ring-1 ring-white/25" : "",
+                      isAdvancing ? "cursor-not-allowed" : ""
+                    ].join(" ")}
+                  >
+                    <span className="text-sm font-medium text-white/90">
+                      {s(String(v))}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
