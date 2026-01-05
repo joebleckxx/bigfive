@@ -335,6 +335,7 @@ export default function TestPage() {
                         gradientBorderOneElement,
                         isAdvancing ? "cursor-not-allowed" : "",
                         "focus:outline-none focus-visible:outline-none",
+                        "transition-transform duration-100 active:scale-[0.98]",
                         "[-webkit-tap-highlight-color:transparent]"
                       ].join(" ")}
                     >
@@ -358,7 +359,7 @@ export default function TestPage() {
                       "focus:outline-none focus-visible:outline-none",
                       "[-webkit-tap-highlight-color:transparent]",
                       "active:bg-transparent",
-                      "transition-[background-color,border-color] duration-150",
+                      "transition-[background-color,border-color,transform] duration-150 active:scale-[0.98]",
                       baseTone,
                       !isAdvancing
                         ? "md:hover:border-white/25 md:hover:bg-white/15"
