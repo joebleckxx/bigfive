@@ -16,8 +16,10 @@
 
   "Test": {
     "progress": "Pytanie {current} z {total}",
+    "menu": "Menu",
     "back": "Wstecz",
     "reset": "Reset",
+    "start": "Start",
     "tip": "Wskazówka: odpowiadaj intuicyjnie — nie ma złych odpowiedzi.",
     "footer": "Test osobowości"
   },

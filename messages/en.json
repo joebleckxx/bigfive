@@ -14,8 +14,10 @@
 
   "Test": {
     "progress": "Question {current} of {total}",
+    "menu": "Menu",
     "back": "Back",
     "reset": "Reset",
+    "start": "Start",
     "tip": "Tip: answer intuitively — there are no wrong answers.",
     "footer": "Personality test"
   },

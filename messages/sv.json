@@ -19,8 +19,10 @@
 
   "Test": {
     "progress": "Fråga {current} av {total}",
+    "menu": "Meny",
     "back": "Tillbaka",
     "reset": "Återställ",
+    "start": "Start",
     "tip": "Tips: svara intuitivt — det finns inga fel svar.",
     "footer": "Personlighetstest"
   },
