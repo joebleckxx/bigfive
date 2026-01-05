@@ -1,24 +1,32 @@
 {
   "Home": {
-    "brand": { "title": "Nilo", "subtitle": "soft • premium • mobile" },
-    "headline": { "before": "Discover your", "accent": "personality profile" },
-    "note": "Takes ~5–7 minutes. No account.",
+    "brand": {
+      "title": "Nilo",
+      "tagline": "Fast, fun personality test"
+    },
+    "headline": {
+      "before": "Find your",
+      "accent": "personality",
+      "after": "in minutes"
+    },
+    "subheadline": "Answer a few quick questions and get a clear, shareable result.",
     "cta": "Start the test",
     "editorial": {
-      "line1": "25 simple questions. Just a few minutes.",
-      "line2": "Based on established psychology. One of 16 personality profiles.",
-      "line3": "Practical insight into your strengths and blind spots."
-    },
-    "footer": "Personality test"
+      "title": "What you'll get",
+      "items": [
+        "A clear personality profile",
+        "A short, practical interpretation",
+        "Optional deep dive into trait scores"
+      ]
+    }
   },
 
   "Test": {
-    "progress": "Question {current} of {total}",
-    "menu": "Menu",
+    "progress": "{current}/{total}",
     "back": "Back",
+    "menu": "Menu",
     "reset": "Reset",
-    "start": "Start",
-    "tip": "Tip: answer intuitively — there are no wrong answers.",
+    "start": "Home",
     "footer": "Personality test"
   },
 
@@ -33,65 +41,73 @@
   "Pay": {
     "brandTitle": "Personality test",
     "brandSubtitle": "soft • premium • mobile",
-    "headline": { "before": "Your", "accent": "full result", "after": "is ready" },
-    "description": "You will get a complete Big Five personality profile: the percentage score for each trait and a short interpretation.",
-    "cards": {
-      "unlock": {
-        "title": "What exactly do I unlock?",
-        "text": "A full report of the five traits with short tips on how to use your strengths."
-      },
-      "once": {
-        "title": "Is it one-time?",
-        "text": "Yes. Pay once and get instant access to the result."
-      },
-      "demo": {
-        "title": "This is a simulation",
-        "text": "This button launches a demo — no real payment."
-      }
+
+    "headline": {
+      "before": "Unlock your",
+      "accent": "full profile",
+      "after": ""
     },
-    "cta": "Unlock results – $1 (demo)",
-    "backToTest": "Back to the test",
-    "note": "One-time payment. No subscription.",
+
+    "description": "Get your 16-profile result, five core trait scores, and extra insights with a short, practical interpretation.",
+
+    "editorial": {
+      "line1": "Your full 16-profile match and summary.",
+      "line2": "Five core trait scores (0–100).",
+      "line3": "Extra insights: stress profile, subtype, and operating mode."
+    },
+
+    "cta": "Unlock full report",
+    "note": "$1 • one-time payment • instant access",
+
     "footer": "Personality test"
   },
 
   "Result": {
     "brandTitle": "Personality test",
     "brandSubtitle": "soft • premium • mobile",
-    "noData": {
-      "title": "No data",
-      "text": "I can't see saved results. Return to the test and answer the questions.",
-      "backToTest": "Back to the test"
-    },
+
     "hero": {
       "before": "Your",
-      "accent": "personality result",
-      "sub": "Result based on established personality research"
+      "accent": "result",
+      "sub": "Here’s your profile"
     },
+
     "retake": "Retake",
+
     "yourTypeLabel": "Your profile",
-    "stability": { "high": "High", "medium": "Medium", "low": "Low" },
-    "cards": {
-      "stress": { "title": "Stress profile", "stability": "Stability" },
-      "subtype": { "title": "Subtype" },
-      "mode": { "title": "Operating mode" }
-    },
+
     "copy": {
       "cta": "Copy summary",
       "copied": "Copied!",
-      "myType": "My profile",
-      "addOns": "Add-ons"
-    },
-    "bigFive": {
-      "show": "Show Big Five details",
-      "hide": "Hide Big Five details",
-      "note": "Computed from Big Five traits → mapped into one of 16 personality profiles",
-      "title": "Big Five breakdown",
-      "subtitle": "Scores are normalized to 0–100. Bars show relative intensity.",
-      "inverseNote": "Note: “Emotional stability” is the inverse of Neuroticism (100 − N)."
+      "myType": "My type",
+      "addOns": "Extra insights"
     },
 
-    "disclaimer": "This assessment is based on established personality research and provides informational insight — it is not a clinical or diagnostic tool.",
+    "cards": {
+      "stress": {
+        "title": "Stress profile",
+        "stability": "Stability"
+      },
+      "subtype": {
+        "title": "Subtype"
+      },
+      "mode": {
+        "title": "Mode"
+      }
+    },
+
+    "stability": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+
+    "bigFive": {
+      "show": "Show trait details",
+      "hide": "Hide trait details",
+      "note": "Trait details are optional",
+      "inverseNote": "Note: some traits may be shown in inverse form for readability."
+    },
 
     "traits": {
       "E": "Extraversion",
@@ -101,113 +117,17 @@
       "N": "Neuroticism",
       "S": "Emotional stability"
     },
+
     "traitsNotes": {
       "N": "Higher = more emotional reactivity",
-      "S": "Higher = calmer under pressure"
+      "S": "Higher = more emotional stability"
     },
+
+    "disclaimer": "This is not a medical or psychological diagnosis.",
     "footer": "Personality test"
   },
 
-  "Questions": {
-    "E1": "I find it easy to start conversations with new people.",
-    "E2": "After a long day, I prefer socializing over being alone.",
-    "E3": "I often take the initiative in a group.",
-    "E4": "I feel comfortable being the center of attention.",
-    "E5": "I usually prefer listening rather than talking.",
-
-    "O1": "I enjoy trying new ideas, even if they are unconventional.",
-    "O2": "I'm drawn to abstract topics (ideas, philosophy, the future).",
-    "O3": "I get bored with routine and look for variety.",
-    "O4": "I value creativity more than tradition.",
-    "O5": "I prefer proven methods over experimentation.",
-
-    "C1": "I usually plan tasks and stick to the plan.",
-    "C2": "Deadlines matter to me, and I actively protect them.",
-    "C3": "I like having things organized and structured.",
-    "C4": "I finish what I start, even when motivation drops.",
-    "C5": "I often do things at the last minute.",
-
-    "A1": "It's easy for me to understand other people's perspective.",
-    "A2": "Warmth and respect in relationships are important to me.",
-    "A3": "In conflict, I prefer compromise over winning.",
-    "A4": "I often support others, even when it's not convenient.",
-    "A5": "I can be blunt, even if it hurts someone's feelings.",
-
-    "N1": "I get stressed easily, even by small things.",
-    "N2": "It's hard for me to calm down after an unpleasant situation.",
-    "N3": "I often worry ahead of time.",
-    "N4": "My mood can change quickly.",
-    "N5": "I usually stay calm under pressure."
-  },
-
-  "AddOns": {
-    "stress": {
-      "sensitive": {
-        "label": "Sensitive Reactor",
-        "note": "You pick up signals quickly. Under pressure you may feel intensity — recovery time matters."
-      },
-      "steady": {
-        "label": "Steady Stabilizer",
-        "note": "You stay relatively calm in stress. You recover quickly and keep a clear head."
-      }
-    },
-    "subtype": {
-      "empathicVisionary": {
-        "label": "Empathic Visionary",
-        "note": "Creativity plus people-awareness. You want solutions that are smart and human."
-      },
-      "independentInnovator": {
-        "label": "Independent Innovator",
-        "note": "Big ideas plus tough standards. You challenge assumptions and cut through noise."
-      },
-      "supportivePragmatist": {
-        "label": "Supportive Pragmatist",
-        "note": "Practical approach plus warmth. You stabilize situations and protect relationships."
-      },
-      "directRealist": {
-        "label": "Direct Realist",
-        "note": "Concrete thinking plus blunt honesty. You value results, clarity, and efficient action."
-      }
-    },
-    "mode": {
-      "driveDeliver": {
-        "label": "Drive & deliver",
-        "note": "You move quickly from talk to execution. You like pace and closing loops."
-      },
-      "planPerfect": {
-        "label": "Plan & perfect",
-        "note": "You work best with structure and deep focus. Quality and correctness are your strengths."
-      },
-      "exploreAdapt": {
-        "label": "Explore & adapt",
-        "note": "You generate momentum by trying things. You iterate fast and learn through action."
-      },
-      "flowImprovise": {
-        "label": "Flow & improvise",
-        "note": "You prefer flexibility and spontaneity. You do best when you can respond in the moment."
-      }
-    }
-  },
-
-  "Types": {
-    "P01": { "name": "Strategic Thinker", "desc": "Long-term focus, systems thinking, clarity over chaos." },
-    "P02": { "name": "Analytical Explorer", "desc": "Curious, reflective, idea-driven." },
-    "P03": { "name": "Decisive Leader", "desc": "Direction-oriented and outcome-focused." },
-    "P04": { "name": "Creative Catalyst", "desc": "Inventive, fast-thinking, energized by possibilities." },
-
-    "P05": { "name": "Insightful Guide", "desc": "Intuitive and people-aware." },
-    "P06": { "name": "Reflective Idealist", "desc": "Driven by authenticity and inner values." },
-    "P07": { "name": "Supportive Motivator", "desc": "Encouraging, warm, growth-oriented." },
-    "P08": { "name": "Inspirational Connector", "desc": "Expressive, enthusiastic, socially agile." },
-
-    "P09": { "name": "Reliable Executor", "desc": "Structured, dependable, steady." },
-    "P10": { "name": "Caring Stabilizer", "desc": "Supportive, loyal, detail-aware." },
-    "P11": { "name": "Practical Organizer", "desc": "Order-oriented and efficiency-driven." },
-    "P12": { "name": "Social Harmonizer", "desc": "Relationship-focused and cooperative." },
-
-    "P13": { "name": "Calm Problem Solver", "desc": "Composed, logical, solution-focused." },
-    "P14": { "name": "Authentic Creator", "desc": "Experience-driven and self-expressive." },
-    "P15": { "name": "Adaptive Risk-Taker", "desc": "Action-oriented and responsive." },
-    "P16": { "name": "Energetic Performer", "desc": "Lively, engaging, present-focused." }
-  }
+  "Questions": {},
+  "AddOns": {},
+  "Types": {}
 }

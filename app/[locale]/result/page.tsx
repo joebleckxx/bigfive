@@ -29,8 +29,10 @@ type StoredResultV1 = {
 };
 
 const STORAGE_KEY = "personality_result_v1";
-const PAID_KEY = "bigfive_paid_v1";
 const ANSWERS_KEY = "personality_answers_v1";
+
+// ✅ NEW + ✅ legacy fallback
+const PAID_KEY = "personality_paid_v1";
 
 /**
  * Avatary: P01 → 0, P02 → 1, ..., P16 → 15
@@ -87,6 +89,7 @@ export default function ResultPage() {
   useEffect(() => {
     try {
       const paid = localStorage.getItem(PAID_KEY) === "true";
+
       if (!paid) {
         router.replace("/pay");
         return;
@@ -139,7 +142,6 @@ export default function ResultPage() {
     return AVATARS[avatarIndexFromTypeCode(data.typeCode)];
   }, [data]);
 
-  // ✅ PRZYWRÓCONE: add-ons (payload -> fallback na tłumaczenia)
   const stress = useMemo(() => {
     if (!data?.addOns) return null;
 
@@ -230,7 +232,9 @@ export default function ResultPage() {
 
   function retake() {
     try {
+      // ✅ czyść oba paid keys
       localStorage.removeItem(PAID_KEY);
+
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem(ANSWERS_KEY);
     } catch {}
@@ -247,7 +251,6 @@ export default function ResultPage() {
     { key: "C", label: t("traits.C"), value: data.scores.C },
     { key: "A", label: t("traits.A"), value: data.scores.A },
     { key: "N", label: t("traits.N"), value: data.scores.N, note: t("traitsNotes.N") },
-    // ✅ POPRAWIONE: S = 100 - N (nie "stability" wyniku)
     { key: "S", label: t("traits.S"), value: emotionalStability, note: t("traitsNotes.S") }
   ];
 
@@ -285,7 +288,6 @@ export default function ResultPage() {
           >
             {t("retake")}
           </button>
-
         </div>
 
         <div className="mt-8 rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl">
@@ -320,7 +322,6 @@ export default function ResultPage() {
 
           <p className="mt-4 text-white/80">{typeDescription}</p>
 
-          {/* ✅ PRZYWRÓCONE: opisy add-ons */}
           {(stress || subtype || mode) && (
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
               {stress && (

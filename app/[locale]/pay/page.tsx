@@ -8,7 +8,7 @@ import { QUESTIONS } from "@/lib/personality";
 import { calculateResult } from "@/lib/scoring";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 
-const PAID_KEY = "bigfive_paid_v1";
+const PAID_KEY = "personality_paid_v1";
 const ANSWERS_KEY = "personality_answers_v1";
 const RESULT_KEY = "personality_result_v1";
 
@@ -16,6 +16,23 @@ function isCompleteAnswers(answers: number[]) {
   return (
     answers.length === QUESTIONS.length &&
     answers.every((v) => Number.isInteger(v) && v >= 1 && v <= 5)
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      className="mt-0.5 h-6 w-6 shrink-0 text-indigo-300"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M5 12l5 5L19 7" />
+    </svg>
   );
 }
 
@@ -54,7 +71,6 @@ export default function PayPage() {
         return;
       }
 
-      // ✅ NOWA, JEDYNA POPRAWNA ŚCIEŻKA
       const payload = calculateResult(answers);
 
       localStorage.setItem(RESULT_KEY, JSON.stringify(payload));
@@ -85,9 +101,7 @@ export default function PayPage() {
               <div className="text-sm font-semibold tracking-tight">
                 {t("brandTitle")}
               </div>
-              <div className="text-xs text-white/55">
-                {t("brandSubtitle")}
-              </div>
+              <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
             </div>
           </div>
 
@@ -106,6 +120,24 @@ export default function PayPage() {
           {t("description")}
         </p>
 
+        {/* 3 lines – same pattern as Home */}
+        <div className="mt-6 space-y-4 text-sm leading-relaxed text-white/70">
+          <div className="flex gap-3">
+            <CheckIcon />
+            <p className="m-0">{t("editorial.line1")}</p>
+          </div>
+
+          <div className="flex gap-3">
+            <CheckIcon />
+            <p className="m-0">{t("editorial.line2")}</p>
+          </div>
+
+          <div className="flex gap-3">
+            <CheckIcon />
+            <p className="m-0">{t("editorial.line3")}</p>
+          </div>
+        </div>
+
         <div className="mt-8">
           <button
             onClick={handleUnlock}
@@ -119,24 +151,7 @@ export default function PayPage() {
             {t("cta")}
           </button>
 
-          <button
-            onClick={() => router.push("/test")}
-            className="mt-3 inline-flex w-full items-center justify-center rounded-2xl border border-white/20 bg-white/5 px-6 py-4 text-base font-semibold text-white/85
-              backdrop-blur-md transition hover:border-white/40"
-            type="button"
-          >
-            {t("backToTest")}
-          </button>
-
-          <p className="mt-3 text-center text-xs text-white/55">
-            {t("note")}
-          </p>
-        </div>
-
-        <div className="mt-8 space-y-3">
-          <InfoCard title={t("cards.unlock.title")} text={t("cards.unlock.text")} />
-          <InfoCard title={t("cards.once.title")} text={t("cards.once.text")} />
-          <InfoCard title={t("cards.demo.title")} text={t("cards.demo.text")} />
+          <p className="mt-3 text-center text-xs text-white/55">{t("note")}</p>
         </div>
 
         <p className="mt-8 text-center text-xs text-white/40">
@@ -144,14 +159,5 @@ export default function PayPage() {
         </p>
       </div>
     </main>
-  );
-}
-
-function InfoCard({ title, text }: { title: string; text: string }) {
-  return (
-    <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl shadow-lg">
-      <div className="text-sm font-semibold text-white/85">{title}</div>
-      <p className="mt-2 text-sm leading-relaxed text-white/65">{text}</p>
-    </div>
   );
 }

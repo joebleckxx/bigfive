@@ -7,7 +7,9 @@ import { QUESTIONS } from "@/lib/personality";
 
 const RESULT_KEY = "personality_result_v1";
 const ANSWERS_KEY = "personality_answers_v1";
-const PAID_KEY = "bigfive_paid_v1";
+
+// ✅ NEW + ✅ legacy fallback
+const PAID_KEY = "personality_paid_v1";
 
 const LAST_ACTIVE_KEY = "personality_last_active_v1";
 const PROGRESS_TTL_MS = 60 * 60 * 1000;
@@ -44,7 +46,10 @@ function touchLastActive() {
 function clearProgressStorage() {
   try {
     localStorage.removeItem(ANSWERS_KEY);
+
+    // ✅ czyścimy oba (nowy + legacy)
     localStorage.removeItem(PAID_KEY);
+
     localStorage.removeItem(RESULT_KEY);
     localStorage.removeItem(LAST_ACTIVE_KEY);
   } catch {
@@ -139,8 +144,10 @@ export default function TestPage() {
 
   function persistAnswers(nextAnswers: number[]) {
     try {
+      // ✅ reset paid + result po każdej zmianie odpowiedzi (czyści oba klucze)
       localStorage.removeItem(PAID_KEY);
       localStorage.removeItem(RESULT_KEY);
+
       touchLastActive();
       localStorage.setItem(ANSWERS_KEY, JSON.stringify(nextAnswers));
     } catch {
@@ -288,7 +295,6 @@ export default function TestPage() {
           />
         </div>
 
-        {/* micro-slide USUNIĘTY: brak transition/translate */}
         <div className="relative z-10">
           <div className="rounded-3xl border border-white/15 bg-white/10 p-5 shadow-xl backdrop-blur-2xl sm:p-6">
             <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
@@ -300,7 +306,6 @@ export default function TestPage() {
                 const selected = answers[index] === v;
                 const tapping = tapSelected === v;
 
-                // ✅ różnicowanie tła
                 const baseTone =
                   v === 3
                     ? "border-white/22 bg-white/18"
@@ -337,7 +342,6 @@ export default function TestPage() {
                   maskComposite: "exclude"
                 } as const;
 
-                // ✅ NEW: pokazuj ramkę NATYCHMIAST na dotyku (przed onClick)
                 const onPressStart = () => {
                   if (isAdvancing) return;
                   setTapSelected(v);
