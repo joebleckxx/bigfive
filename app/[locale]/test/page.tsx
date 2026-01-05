@@ -308,10 +308,34 @@ export default function TestPage() {
                       ? "border-white/16 bg-white/13"
                       : "border-white/12 bg-white/9";
 
-                // ✅ gradient border only (one element)
-                const gradientBorderOneElement =
-                  "w-full rounded-2xl border border-transparent px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4 " +
-                  "[background:linear-gradient(#50505F,#50505F)_padding-box,linear-gradient(to_right,#6366F1,#8B5CF6,#EC4899)_border-box]";
+                const toneColor =
+                  v === 3
+                    ? "rgba(255, 255, 255, 0.18)"
+                    : v === 2 || v === 4
+                      ? "rgba(255, 255, 255, 0.13)"
+                      : "rgba(255, 255, 255, 0.09)";
+
+                const pressedToneColor =
+                  v === 3
+                    ? "rgba(255, 255, 255, 0.12)"
+                    : v === 2 || v === 4
+                      ? "rgba(255, 255, 255, 0.09)"
+                      : "rgba(255, 255, 255, 0.06)";
+
+                const gradientBorderBase =
+                  "relative w-full rounded-2xl border border-transparent px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4";
+
+                const gradientBorderStyle = {
+                  padding: "1px",
+                  boxSizing: "border-box",
+                  background:
+                    "linear-gradient(to right, #6366F1, #8B5CF6, #EC4899)",
+                  WebkitMask:
+                    "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  WebkitMaskComposite: "xor",
+                  mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  maskComposite: "exclude"
+                } as const;
 
                 // ✅ NEW: pokazuj ramkę NATYCHMIAST na dotyku (przed onClick)
                 const onPressStart = () => {
@@ -323,25 +347,32 @@ export default function TestPage() {
                 };
 
                 if (tapping || selected) {
+                  const gradientTone = tapping ? pressedToneColor : toneColor;
                   return (
                     <button
                       key={v}
                       onPointerDown={onPressStart}
                       onPointerCancel={onPressCancel}
                       onClick={() => handleAnswer(v)}
-                      disabled={isAdvancing}
+                      aria-disabled={isAdvancing}
                       type="button"
                       className={[
-                        gradientBorderOneElement,
-                        isAdvancing ? "cursor-not-allowed" : "",
+                        gradientBorderBase,
+                        isAdvancing ? "pointer-events-none cursor-not-allowed" : "",
                         "focus:outline-none focus-visible:outline-none",
                         "transition-transform duration-100 active:scale-[0.98]",
                         "[-webkit-tap-highlight-color:transparent]"
                       ].join(" ")}
+                      style={{ backgroundColor: gradientTone }}
                     >
-                      <span className="text-sm font-medium text-white/90">
+                      <span className="relative z-10 text-sm font-medium text-white/90">
                         {s(String(v))}
                       </span>
+                      <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute -inset-px rounded-[calc(1rem+1px)]"
+                        style={gradientBorderStyle}
+                      />
                     </button>
                   );
                 }
@@ -352,7 +383,7 @@ export default function TestPage() {
                     onPointerDown={onPressStart}
                     onPointerCancel={onPressCancel}
                     onClick={() => handleAnswer(v)}
-                    disabled={isAdvancing}
+                    aria-disabled={isAdvancing}
                     type="button"
                     className={[
                       "w-full rounded-2xl border px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4",
@@ -364,7 +395,7 @@ export default function TestPage() {
                       !isAdvancing
                         ? "md:hover:border-white/25 md:hover:bg-white/15"
                         : "",
-                      isAdvancing ? "cursor-not-allowed" : ""
+                      isAdvancing ? "pointer-events-none cursor-not-allowed" : ""
                     ].join(" ")}
                   >
                     <span className="text-sm font-medium text-white/90">
