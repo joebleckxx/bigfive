@@ -320,15 +320,8 @@ export default function TestPage() {
                       ? "rgba(255, 255, 255, 0.13)"
                       : "rgba(255, 255, 255, 0.09)";
 
-                const pressedToneColor =
-                  v === 3
-                    ? "rgba(255, 255, 255, 0.12)"
-                    : v === 2 || v === 4
-                      ? "rgba(255, 255, 255, 0.09)"
-                      : "rgba(255, 255, 255, 0.06)";
-
                 const gradientBorderBase =
-                  "relative w-full rounded-2xl border border-transparent px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4";
+                  "relative w-full appearance-none rounded-2xl border border-transparent px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4";
 
                 const gradientBorderStyle = {
                   padding: "1px",
@@ -351,7 +344,6 @@ export default function TestPage() {
                 };
 
                 if (tapping || selected) {
-                  const gradientTone = tapping ? pressedToneColor : toneColor;
                   return (
                     <button
                       key={v}
@@ -367,7 +359,7 @@ export default function TestPage() {
                         "transition-transform duration-100 active:scale-[0.98]",
                         "[-webkit-tap-highlight-color:transparent]"
                       ].join(" ")}
-                      style={{ backgroundColor: gradientTone }}
+                      style={{ backgroundColor: toneColor }}
                     >
                       <span className="relative z-10 text-sm font-medium text-white/90">
                         {s(String(v))}
@@ -391,9 +383,9 @@ export default function TestPage() {
                     type="button"
                     className={[
                       "w-full rounded-2xl border px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4",
+                      "appearance-none",
                       "focus:outline-none focus-visible:outline-none",
                       "[-webkit-tap-highlight-color:transparent]",
-                      "active:bg-transparent",
                       "transition-[background-color,border-color,transform] duration-150 active:scale-[0.98]",
                       baseTone,
                       !isAdvancing
