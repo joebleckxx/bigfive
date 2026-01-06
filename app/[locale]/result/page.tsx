@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { Logo } from "@/app/components/ui/logo";
@@ -58,7 +58,7 @@ function pct(n: number) {
   return Math.max(0, Math.min(100, Math.round(n)));
 }
 
-// ✅ Big Five UX label key (i18n via en.json)
+// ✅ Big Five UX label key (i18n via json)
 function levelKey(v: number): "low" | "medium" | "high" {
   const x = pct(v);
   if (x <= 33) return "low";
@@ -100,6 +100,29 @@ export default function ResultPage() {
   const [loaded, setLoaded] = useState(false);
   const [showBigFive, setShowBigFive] = useState(false);
   const [downloading, setDownloading] = useState(false);
+
+  // ✅ menu ⋯ (jak na /test)
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setMenuOpen(false);
+    }
+    function onPointerDown(e: MouseEvent | TouchEvent) {
+      if (!menuRef.current) return;
+      const target = e.target as Node;
+      if (!menuRef.current.contains(target)) setMenuOpen(false);
+    }
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("touchstart", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("touchstart", onPointerDown);
+    };
+  }, []);
 
   useEffect(() => {
     try {
@@ -367,45 +390,87 @@ export default function ResultPage() {
       <div className="relative mx-auto w-full max-w-2xl">
         {/* Top bar */}
         <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15">
               <Logo className="text-indigo-200" />
             </div>
-            <div className="leading-tight">
-              <div className="text-sm font-semibold">{t("brandTitle")}</div>
-              <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
+            <div className="leading-tight min-w-0">
+              <div className="text-sm font-semibold break-words [overflow-wrap:anywhere]">
+                {t("brandTitle")}
+              </div>
+              <div className="text-xs text-white/55 break-words [overflow-wrap:anywhere]">
+                {t("brandSubtitle")}
+              </div>
             </div>
           </div>
-          <LanguageSwitcher />
+
+          <div className="flex items-center gap-3">
+            <LanguageSwitcher />
+
+            {/* Menu ⋯ (jak na /test) */}
+            <div className="relative" ref={menuRef}>
+              <button
+                type="button"
+                onClick={() => setMenuOpen((v) => !v)}
+                className="inline-flex items-center justify-center rounded-xl
+                  px-2.5 py-1.5 text-sm font-semibold tracking-tight
+                  text-white/70 hover:text-white/90
+                  border border-white/10 hover:border-white/20
+                  bg-transparent hover:bg-white/5
+                  transition focus:outline-none"
+                aria-haspopup="menu"
+                aria-expanded={menuOpen}
+                aria-label={t("menu")}
+              >
+                ⋯
+              </button>
+
+              {menuOpen && (
+                <div
+                  className="absolute right-0 z-50 mt-2 w-max
+                    rounded-xl border border-white/10
+                    bg-[#0B0C14]/90 backdrop-blur-xl
+                    shadow-xl overflow-hidden p-1"
+                  role="menu"
+                >
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      retake();
+                    }}
+                    className="block w-full whitespace-nowrap rounded-lg
+                      px-3 py-2 text-sm font-medium tracking-tight
+                      text-white/75 hover:text-white hover:bg-white/8"
+                    role="menuitem"
+                  >
+                    {t("menuRetake")}
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Hero */}
-        <div className="mt-10 flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <h1 className="mb-2 text-4xl font-semibold tracking-tight sm:text-5xl">
-              {t("hero.before")}{" "}
-              <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
-                {t("hero.accent")}
-              </span>
-            </h1>
-            <p className="text-base text-white/65 sm:text-lg">{t("hero.sub")}</p>
-          </div>
-
-          <button
-            onClick={retake}
-            type="button"
-            className="max-w-full whitespace-normal text-center rounded-2xl border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/80 hover:bg-white/15"
-          >
-            {t("retake")}
-          </button>
+        <div className="mt-10">
+          <h1 className="mb-2 text-4xl font-semibold tracking-tight sm:text-5xl break-words [overflow-wrap:anywhere]">
+            {t("hero.before")}{" "}
+            <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent break-words [overflow-wrap:anywhere]">
+              {t("hero.accent")}
+            </span>
+          </h1>
+          <p className="text-base text-white/65 sm:text-lg break-words [overflow-wrap:anywhere]">
+            {t("hero.sub")}
+          </p>
         </div>
 
         {/* Main card */}
         <div className="mt-8 rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl">
-          {/* Profile header + CTA (fixed layout) */}
+          {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
-              <div className="text-xs uppercase tracking-wider text-white/50">
+              <div className="text-xs uppercase tracking-wider text-white/50 break-words [overflow-wrap:anywhere]">
                 {t("yourTypeLabel")}
               </div>
 
@@ -419,7 +484,9 @@ export default function ResultPage() {
                   unoptimized
                   priority
                 />
-                <h2 className="text-3xl font-semibold break-words">{typeName}</h2>
+                <h2 className="text-3xl font-semibold break-words [overflow-wrap:anywhere]">
+                  {typeName}
+                </h2>
               </div>
             </div>
 
@@ -435,15 +502,17 @@ export default function ResultPage() {
             </div>
           </div>
 
-          <p className="mt-4 text-white/80">{typeDescription}</p>
+          <p className="mt-4 text-white/80 break-words [overflow-wrap:anywhere]">
+            {typeDescription}
+          </p>
 
-          {/* Add-ons cards (all same premium style) */}
+          {/* Add-ons cards */}
           {(stress || subtype || mode) && (
             <div className="mt-6 space-y-4">
               {stress && (
                 <div className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4">
                   <div className="flex items-center justify-between gap-3">
-                    <div className="text-xs uppercase tracking-wider text-white/45">
+                    <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:anywhere]">
                       {t("cards.stress.title")}
                     </div>
 
@@ -453,17 +522,17 @@ export default function ResultPage() {
                           data.stability
                         )}`}
                       />
-                      <span>
+                      <span className="break-words [overflow-wrap:anywhere]">
                         {t("cards.stress.stability")}: {stabilityLabel}
                       </span>
                     </div>
                   </div>
 
-                  <div className="mt-2 text-sm font-semibold text-white/90">
+                  <div className="mt-2 text-sm font-semibold text-white/90 break-words [overflow-wrap:anywhere]">
                     {stress.label}
                   </div>
 
-                  <p className="mt-2 text-xs leading-relaxed text-white/60">
+                  <p className="mt-2 text-xs leading-relaxed text-white/60 break-words [overflow-wrap:anywhere]">
                     {stress.note}
                   </p>
                 </div>
@@ -471,15 +540,15 @@ export default function ResultPage() {
 
               {subtype && (
                 <div className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4">
-                  <div className="text-xs uppercase tracking-wider text-white/45">
+                  <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:anywhere]">
                     {t("cards.subtype.title")}
                   </div>
 
-                  <div className="mt-2 text-sm font-semibold text-white/90">
+                  <div className="mt-2 text-sm font-semibold text-white/90 break-words [overflow-wrap:anywhere]">
                     {subtype.label}
                   </div>
 
-                  <p className="mt-2 text-xs leading-relaxed text-white/60">
+                  <p className="mt-2 text-xs leading-relaxed text-white/60 break-words [overflow-wrap:anywhere]">
                     {subtype.note}
                   </p>
                 </div>
@@ -487,15 +556,15 @@ export default function ResultPage() {
 
               {mode && (
                 <div className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4">
-                  <div className="text-xs uppercase tracking-wider text-white/45">
+                  <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:anywhere]">
                     {t("cards.mode.title")}
                   </div>
 
-                  <div className="mt-2 text-sm font-semibold text-white/90">
+                  <div className="mt-2 text-sm font-semibold text-white/90 break-words [overflow-wrap:anywhere]">
                     {mode.label}
                   </div>
 
-                  <p className="mt-2 text-xs leading-relaxed text-white/60">
+                  <p className="mt-2 text-xs leading-relaxed text-white/60 break-words [overflow-wrap:anywhere]">
                     {mode.note}
                   </p>
                 </div>
@@ -503,7 +572,7 @@ export default function ResultPage() {
             </div>
           )}
 
-          {/* Big Five toggle (less CTA, more section) */}
+          {/* Big Five toggle */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <button
               onClick={() => setShowBigFive((v) => !v)}
@@ -516,7 +585,9 @@ export default function ResultPage() {
               </span>
             </button>
 
-            <div className="text-xs text-white/45">{t("bigFive.note")}</div>
+            <div className="text-xs text-white/45 break-words [overflow-wrap:anywhere]">
+              {t("bigFive.note")}
+            </div>
           </div>
         </div>
 
@@ -529,7 +600,9 @@ export default function ResultPage() {
                 return (
                   <div key={row.key}>
                     <div className="flex items-center justify-between">
-                      <div className="text-sm text-white/80">{row.label}</div>
+                      <div className="text-sm text-white/80 break-words [overflow-wrap:anywhere]">
+                        {row.label}
+                      </div>
                       <div className="text-sm text-white/70">{pct(row.value)}</div>
                     </div>
 
@@ -545,19 +618,25 @@ export default function ResultPage() {
                     </div>
 
                     {row.note && (
-                      <div className="mt-1 text-xs text-white/45">{row.note}</div>
+                      <div className="mt-1 text-xs text-white/45 break-words [overflow-wrap:anywhere]">
+                        {row.note}
+                      </div>
                     )}
                   </div>
                 );
               })}
             </div>
 
-            <div className="mt-6 text-xs text-white/45">
+            <div className="mt-6 text-xs text-white/45 break-words [overflow-wrap:anywhere]">
               {t("bigFive.stabilityMeaning")}
             </div>
-            <div className="mt-2 text-xs text-white/45">{t("bigFive.inverseNote")}</div>
+            <div className="mt-2 text-xs text-white/45 break-words [overflow-wrap:anywhere]">
+              {t("bigFive.inverseNote")}
+            </div>
 
-            <p className="mt-4 text-center text-xs text-white/40">{t("disclaimer")}</p>
+            <p className="mt-4 text-center text-xs text-white/40 break-words [overflow-wrap:anywhere]">
+              {t("disclaimer")}
+            </p>
           </div>
         )}
 

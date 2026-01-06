@@ -48,28 +48,40 @@
   "Result": {
     "brandTitle": "Personality test",
     "brandSubtitle": "soft • premium • mobile",
+
     "noData": {
       "title": "No data",
       "text": "I can't see saved results. Return to the test and answer the questions.",
       "backToTest": "Back to the test"
     },
+
     "hero": {
       "before": "Your",
       "accent": "personality result",
       "sub": "Result based on established personality research"
     },
 
+    "menu": "Menu",
+    "menuRetake": "Retake",
+    
     "pdf": {
       "download": "Download full report",
       "downloading": "Generating…",
       "generated": "Generated",
-      "disclaimer": "This report is for personal insight only. It is not a medical, clinical, or diagnostic assessment. Results are computed from Big Five trait scores and mapped into one of 16 profile styles."
+      "disclaimer": "This report is for personal insight only. It is not a medical, clinical, or diagnostic assessment."
     },
 
     "retake": "Retake",
     "retakeConfirm": "Retake will reset this result. Next result requires payment. Continue?",
+
     "yourTypeLabel": "Your profile",
-    "stability": { "high": "High", "medium": "Medium", "low": "Low" },
+
+    "stability": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+
     "cards": {
       "stress": { "title": "Stress profile", "stability": "Stability" },
       "subtype": { "title": "Subtype" },
@@ -80,8 +92,12 @@
       "show": "Show Big Five details",
       "hide": "Hide Big Five details",
       "note": "Based on Big Five personality traits and translated into one of 16 descriptive profiles.",
-      "title": "Big Five breakdown",
-      "subtitle": "Scores are normalized to 0–100. Bars show relative intensity.",
+      "levels": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      },
+      "stabilityMeaning": "Emotional stability reflects how calm and resilient you tend to be under pressure.",
       "inverseNote": "Note: “Emotional stability” is the inverse of Neuroticism (100 − N)."
     },
 
@@ -95,10 +111,12 @@
       "N": "Neuroticism",
       "S": "Emotional stability"
     },
+
     "traitsNotes": {
       "N": "Higher = more emotional reactivity",
       "S": "Higher = calmer under pressure"
     },
+
     "footer": "Personality test"
   },
 
