@@ -573,7 +573,7 @@ export default function ResultPage() {
           )}
 
           {/* Big Five toggle */}
-          <div className="mt-8 flex flex-col items-start gap-3">
+          <div className="mt-4 flex flex-col items-start gap-4">
             <button
               onClick={() => setShowBigFive((v) => !v)}
               className="inline-flex items-center gap-2 self-start rounded-xl border border-white/10
