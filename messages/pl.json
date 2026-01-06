@@ -5,10 +5,10 @@
     "note": "Zajmuje ~5–7 minut. Bez konta.",
     "cta": "Rozpocznij test",
     "editorial": {
-      "line1": "25 prostych pytań. Kilka minut.",
-      "line2": "Oparte na uznanej psychologii. Jeden z 16 profili osobowości.",
-      "line3": "Praktyczny wgląd w Twoje mocne strony i ograniczenia."
-    },
+    "line1": "25 prostych pytań. Tylko kilka minut.",
+    "line2": "Oparte na ugruntowanej psychologii. Jeden z 16 profili osobowości.",
+    "line3": "Praktyczny wgląd w Twoje mocne i słabe strony."
+  },
     "footer": "Test osobowości"
   },
 
@@ -33,15 +33,24 @@
   "Pay": {
     "brandTitle": "Test osobowości",
     "brandSubtitle": "soft • premium • mobile",
-    "headline": { "before": "Odblokuj swój", "accent": "pełny profil", "after": "" },
-    "description": "Uzyskaj swój wynik 16-profilowy, pięć głównych wyników cech oraz dodatkowe wglądy z krótką, praktyczną interpretacją.",
-    "editorial": {
-      "line1": "Twój pełny profil i podsumowanie.",
-      "line2": "Pięć głównych wyników cech (0–100).",
-      "line3": "Dodatkowe wglądy: profil stresu, podtyp i tryb działania."
+
+    "headline": {
+      "before": "Odblokuj swój",
+      "accent": "pełny profil",
+      "after": ""
     },
+
+    "description": "Otrzymasz wynik jednego z 16 profili, wyniki pięciu kluczowych cech oraz dodatkowe wnioski w krótkiej, praktycznej interpretacji.",
+
+    "editorial": {
+      "line1": "Pełne dopasowanie do jednego z 16 profili.",
+      "line2": "Wyniki pięciu kluczowych cech (0–100).",
+      "line3": "Dodatkowe wnioski: profil stresu, podtyp i tryb działania."
+    },
+
     "cta": "Odblokuj pełny raport",
-    "note": "1 USD • jednorazowa płatność • natychmiastowy dostęp",
+    "note": "$1 • płatność jednorazowa • natychmiastowy dostęp",
+
     "footer": "Test osobowości"
   },
 
@@ -58,14 +67,14 @@
     "hero": {
       "before": "Twój",
       "accent": "wynik osobowości",
-      "sub": "Wynik oparty na uznanych badaniach osobowości"
+      "sub": "Wynik oparty na uznanym modelu cech osobowości"
     },
 
     "menu": "Menu",
     "menuRetake": "Powtórz",
 
     "pdf": {
-      "download": "Pobierz pełny raport",
+      "download": "Pobierz raport",
       "downloading": "Generowanie…",
       "generated": "Wygenerowano",
       "disclaimer": "Ten raport służy wyłącznie do celów informacyjnych. Nie jest narzędziem medycznym ani diagnostycznym."
@@ -85,15 +94,15 @@
     },
 
     "bigFive": {
-      "show": "Pokaż szczegóły Wielkiej Piątki",
-      "hide": "Ukryj szczegóły Wielkiej Piątki",
-      "note": "Na podstawie cech Wielkiej Piątki, przekształcone w jeden z 16 opisowych profili.",
-      "levels": { "low": "Niski", "medium": "Średni", "high": "Wysoki" },
-      "stabilityMeaning": "Stabilność emocjonalna opisuje, jak spokojnie i odporne reagujesz pod presją.",
-      "inverseNote": "Uwaga: „stabilność emocjonalna” jest odwrotnością neurotyczności (100 − N)."
+      "show": "Pokaż szczegóły cech osobowości",
+      "hide": "Ukryj szczegóły cech osobowości",
+      "note": "Oparte na modelu Big Five – pięciu podstawowych cechach osobowości.",
+      "topTrait": "Twoja najsilniejsza cecha",
+      "summary": "Najmocniej wyróżnia się u Ciebie {trait}.",
+      "levels": { "low": "Niski", "medium": "Średni", "high": "Wysoki" }
     },
 
-    "disclaimer": "To narzędzie opiera się na uznanych badaniach osobowości i ma charakter informacyjny — nie jest testem klinicznym.",
+    "disclaimer": "Ten test opiera się na uznanych badaniach osobowości i ma charakter informacyjny — nie jest testem klinicznym.",
 
     "traits": {
       "E": "Ekstrawersja",
@@ -105,8 +114,8 @@
     },
 
     "traitsNotes": {
-      "N": "Wyżej = większa reaktywność emocjonalna",
-      "S": "Wyżej = większy spokój pod presją"
+      "N": "wyżej = większa reaktywność emocjonalna",
+      "S": "wyżej = większy spokój pod presją"
     },
 
     "footer": "Test osobowości"

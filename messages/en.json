@@ -7,7 +7,7 @@
     "editorial": {
       "line1": "25 simple questions. Just a few minutes.",
       "line2": "Based on established psychology. One of 16 personality profiles.",
-      "line3": "Practical insight into your strengths and blind spots."
+      "line3": "Practical insight into your strengths and weaknesses."
     },
     "footer": "Personality test"
   },
@@ -34,10 +34,10 @@
     "brandTitle": "Personality test",
     "brandSubtitle": "soft • premium • mobile",
     "headline": { "before": "Unlock your", "accent": "full profile", "after": "" },
-    "description": "Get your 16-profile result, five core trait scores, and extra insights with a short, practical interpretation.",
+    "description": "You’ll get one of 16 personality profiles, five key personality traits (0–100), and extra insights with a short, practical interpretation.",
     "editorial": {
-      "line1": "Your full 16-profile match and summary.",
-      "line2": "Five core trait scores (0–100).",
+      "line1": "A clear match to one of 16 personality profiles.",
+      "line2": "Five key personality traits (0–100).",
       "line3": "Extra insights: stress profile, subtype, and operating mode."
     },
     "cta": "Unlock full report",
@@ -58,14 +58,14 @@
     "hero": {
       "before": "Your",
       "accent": "personality result",
-      "sub": "Result based on established personality research"
+      "sub": "Based on an established personality trait model"
     },
 
     "menu": "Menu",
     "menuRetake": "Retake",
     
     "pdf": {
-      "download": "Download full report",
+      "download": "Download report",
       "downloading": "Generating…",
       "generated": "Generated",
       "disclaimer": "This report is for personal insight only. It is not a medical, clinical, or diagnostic assessment."
@@ -89,19 +89,19 @@
     },
 
     "bigFive": {
-      "show": "Show Big Five details",
-      "hide": "Hide Big Five details",
-      "note": "Based on Big Five personality traits and translated into one of 16 descriptive profiles.",
+      "show": "Show personality traits details",
+      "hide": "Hide personality traits details",
+      "note": "Based on the Big Five personality model.",
+      "topTrait": "Your strongest trait",
+      "summary": "Your strongest trait is {trait}.",
       "levels": {
         "low": "Low",
         "medium": "Medium",
         "high": "High"
-      },
-      "stabilityMeaning": "Emotional stability reflects how calm and resilient you tend to be under pressure.",
-      "inverseNote": "Note: “Emotional stability” is the inverse of Neuroticism (100 − N)."
+      }
     },
 
-    "disclaimer": "This assessment is based on established personality research and provides informational insight — it is not a clinical or diagnostic tool.",
+    "disclaimer": "This test is based on established personality research and is for informational purposes only — it is not a clinical assessment.",
 
     "traits": {
       "E": "Extraversion",
@@ -113,8 +113,8 @@
     },
 
     "traitsNotes": {
-      "N": "Higher = more emotional reactivity",
-      "S": "Higher = calmer under pressure"
+      "N": "higher = more emotional reactivity",
+      "S": "higher = calmer under pressure"
     },
 
     "footer": "Personality test"

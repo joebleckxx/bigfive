@@ -367,6 +367,12 @@ export default function ResultPage() {
   const emotionalStability = 100 - data.scores.N;
 
   const bigFiveRows = [
+    {
+      key: "S",
+      label: t("traits.S"),
+      value: emotionalStability,
+      note: t("traitsNotes.S")
+    },
     { key: "E", label: t("traits.E"), value: data.scores.E },
     { key: "O", label: t("traits.O"), value: data.scores.O },
     { key: "C", label: t("traits.C"), value: data.scores.C },
@@ -376,17 +382,21 @@ export default function ResultPage() {
       label: t("traits.N"),
       value: data.scores.N,
       note: t("traitsNotes.N")
-    },
-    {
-      key: "S",
-      label: t("traits.S"),
-      value: emotionalStability,
-      note: t("traitsNotes.S")
     }
   ];
 
+  const highestTrait = bigFiveRows.reduce((max, row) =>
+    row.value > max.value ? row : max
+  , bigFiveRows[0]);
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-4 py-6 text-white sm:px-6 sm:py-10">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
+        <div className="absolute top-1/3 -left-40 h-[360px] w-[360px] rounded-full bg-fuchsia-500/20 blur-[120px]" />
+        <div className="absolute bottom-0 -right-40 h-[360px] w-[360px] rounded-full bg-pink-500/20 blur-[120px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] via-transparent to-transparent" />
+      </div>
       <div className="relative mx-auto w-full max-w-xl">
         {/* Top bar */}
         <div className="flex items-center justify-between gap-3">
@@ -413,7 +423,7 @@ export default function ResultPage() {
                 type="button"
                 onClick={() => setMenuOpen((v) => !v)}
                 className="inline-flex items-center justify-center rounded-xl
-                  px-2.5 py-1.5 text-sm font-semibold tracking-tight
+                  px-2 py-1.5 text-xs font-semibold tracking-tight
                   text-white/70 hover:text-white/90
                   border border-white/10 hover:border-white/20
                   bg-transparent hover:bg-white/5
@@ -602,14 +612,31 @@ export default function ResultPage() {
                 return (
                   <div key={row.key}>
                     <div className="flex items-center justify-between">
-                      <div className="text-sm text-white/80 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+                      <div className="flex items-center gap-2 text-sm text-white/80 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                         {row.label}
+                        {row.key === highestTrait.key && (
+                          <span
+                            className="text-yellow-300/90 text-sm"
+                            title={t("bigFive.topTrait")}
+                            aria-label={t("bigFive.topTrait")}
+                          >
+                            ★
+                          </span>
+                        )}
                       </div>
+
                       <div className="text-sm text-white/70">{pct(row.value)}</div>
                     </div>
 
                     <div className="mt-1 text-xs text-white/50">
                       {t(`bigFive.levels.${k}`)}
+                      {(row.key === "S" || row.key === "N") && (
+                        <span className="ml-1 text-[11px] leading-none">
+                          ({row.key === "S"
+                            ? t("traitsNotes.S")
+                            : t("traitsNotes.N")})
+                        </span>
+                      )}
                     </div>
 
                     <div className="mt-2 h-2 w-full rounded-full bg-white/10">
@@ -619,21 +646,9 @@ export default function ResultPage() {
                       />
                     </div>
 
-                    {row.note && (
-                      <div className="mt-1 text-xs text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                        {row.note}
-                      </div>
-                    )}
                   </div>
                 );
               })}
-            </div>
-
-            <div className="mt-6 text-xs text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-              {t("bigFive.stabilityMeaning")}
-            </div>
-            <div className="mt-2 text-xs text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-              {t("bigFive.inverseNote")}
             </div>
 
             <p className="mt-4 text-center text-xs text-white/40 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">

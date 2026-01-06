@@ -7,7 +7,7 @@
     "editorial": {
       "line1": "25 enkla frågor. Bara några minuter.",
       "line2": "Baserat på etablerad psykologi. En av 16 personlighetsprofiler.",
-      "line3": "Praktisk insikt i dina styrkor och begränsningar."
+      "line3": "Praktisk insikt i dina styrkor och svagheter."
     },
     "footer": "Personlighetstest"
   },
@@ -33,15 +33,24 @@
   "Pay": {
     "brandTitle": "Personlighetstest",
     "brandSubtitle": "soft • premium • mobile",
-    "headline": { "before": "Lås upp din", "accent": "fullständiga profil", "after": "" },
-    "description": "Få din 16-profilmatchning, fem kärnpoäng och extra insikter med en kort, praktisk tolkning.",
+
+    "headline": {
+      "before": "Lås upp din",
+      "accent": "fullständiga profil",
+      "after": ""
+    },
+
+    "description": "Du får en av 16 personlighetsprofiler, fem centrala personlighetsdrag (0–100) samt extra insikter med en kort, praktisk tolkning.",
+
     "editorial": {
-      "line1": "Din fullständiga profil och sammanfattning.",
-      "line2": "Fem kärnpoäng (0–100).",
+      "line1": "Fydlig matchning till en av 16 personlighetsprofiler.",
+      "line2": "Fem centrala personlighetsdrag (0–100).",
       "line3": "Extra insikter: stressprofil, undertyp och arbetssätt."
     },
-    "cta": "Lås upp fullständig rapport",
-    "note": "1 USD • engångsbetalning • direkt åtkomst",
+
+    "cta": "Lås upp hela rapporten",
+    "note": "$1 • engångsbetalning • direkt åtkomst",
+
     "footer": "Personlighetstest"
   },
 
@@ -58,14 +67,14 @@
     "hero": {
       "before": "Ditt",
       "accent": "personlighetsresultat",
-      "sub": "Resultatet baseras på etablerad personlighetsforskning"
+      "sub": "Baserat på en etablerad modell för personlighetsdrag"
     },
 
     "menu": "Meny",
     "menuRetake": "Gör om",
 
     "pdf": {
-      "download": "Ladda ner fullständig rapport",
+      "download": "Ladda ner rapport",
       "downloading": "Skapar…",
       "generated": "Skapad",
       "disclaimer": "Denna rapport är endast avsedd för personlig insikt och är inte ett medicinskt eller diagnostiskt verktyg."
@@ -85,15 +94,16 @@
     },
 
     "bigFive": {
-      "show": "Visa Big Five-detaljer",
-      "hide": "Dölj Big Five-detaljer",
-      "note": "Baserat på Big Five-personlighetsdrag och översatt till en av 16 beskrivande profiler.",
+      "show": "Visa detaljer om personlighetsdrag",
+      "hide": "Dölj detaljer om personlighetsdrag",
+      "note": "Baserat på Big Five-modellen.",
+      "topTrait": "Din starkaste egenskap",
+      "summary": "Din starkaste egenskap är {trait}.",
       "levels": { "low": "Låg", "medium": "Medel", "high": "Hög" },
-      "stabilityMeaning": "Emotionell stabilitet beskriver hur lugn och motståndskraftig du tenderar att vara under press.",
-      "inverseNote": "Obs: ”emotionell stabilitet” är motsatsen till neuroticism (100 − N)."
+      "stabilityMeaning": "Emotionell stabilitet beskriver hur lugn och motståndskraftig du tenderar att vara under press."
     },
 
-    "disclaimer": "Detta test bygger på etablerad personlighetsforskning och är endast informativt — det är inte ett kliniskt eller diagnostiskt verktyg.",
+    "disclaimer": "Detta test bygger på etablerad personlighetsforskning och är endast av informativ karaktär — det är inte ett kliniskt test.",
 
     "traits": {
       "E": "Extraversion",
@@ -105,8 +115,8 @@
     },
 
     "traitsNotes": {
-      "N": "Högre = mer emotionell reaktivitet",
-      "S": "Högre = lugnare under press"
+      "N": "högre = mer emotionell reaktivitet",
+      "S": "högre = lugnare under press"
     },
 
     "footer": "Personlighetstest"
