@@ -35,25 +35,24 @@
   "Pay": {
     "brandTitle": "Test osobowości",
     "brandSubtitle": "soft • premium • mobile",
-    "headline": { "before": "Twój", "accent": "pełny wynik", "after": "jest gotowy" },
-    "description": "Otrzymasz pełny profil Big Five: procentowy wynik dla każdej cechy oraz krótką interpretację.",
-    "cards": {
-      "unlock": {
-        "title": "Co dokładnie odblokowuję?",
-        "text": "Pełny raport pięciu cech oraz krótkie wskazówki, jak wykorzystać swoje mocne strony."
-      },
-      "once": {
-        "title": "Czy to jednorazowe?",
-        "text": "Tak. Płacisz raz i masz natychmiastowy dostęp do wyniku."
-      },
-      "demo": {
-        "title": "To jest symulacja",
-        "text": "Ten przycisk uruchamia demo — bez prawdziwej płatności."
-      }
+
+    "headline": {
+      "before": "Odblokuj swój",
+      "accent": "pełny profil",
+      "after": ""
     },
-    "cta": "Odblokuj wynik – $1 (demo)",
-    "backToTest": "Wróć do testu",
-    "note": "Płatność jednorazowa. Bez subskrypcji.",
+
+    "description": "Otrzymasz wynik jednego z 16 profili, wyniki pięciu kluczowych cech oraz dodatkowe wnioski w krótkiej, praktycznej interpretacji.",
+
+    "editorial": {
+      "line1": "Pełne dopasowanie do jednego z 16 profili.",
+      "line2": "Wyniki pięciu kluczowych cech (0–100).",
+      "line3": "Dodatkowe wnioski: profil stresu, podtyp i tryb działania."
+    },
+
+    "cta": "Odblokuj pełny raport",
+    "note": "$1 • płatność jednorazowa • natychmiastowy dostęp",
+
     "footer": "Test osobowości"
   },
 

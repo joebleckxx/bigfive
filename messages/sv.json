@@ -38,25 +38,24 @@
   "Pay": {
     "brandTitle": "Personlighetstest",
     "brandSubtitle": "soft • premium • mobile",
-    "headline": { "before": "Ditt", "accent": "fulla resultat", "after": "är redo" },
-    "description": "Du får en komplett Big Five-profil: procentpoäng för varje drag och en kort tolkning.",
-    "cards": {
-      "unlock": {
-        "title": "Vad låser jag upp?",
-        "text": "En full rapport över de fem dragen med korta tips för hur du kan använda dina styrkor."
-      },
-      "once": {
-        "title": "Är det engångsbetalning?",
-        "text": "Ja. Betala en gång och få direkt tillgång till resultatet."
-      },
-      "demo": {
-        "title": "Detta är en simulering",
-        "text": "Knappen startar en demo — ingen riktig betalning."
-      }
+
+    "headline": {
+      "before": "Lås upp din",
+      "accent": "fullständiga profil",
+      "after": ""
     },
-    "cta": "Lås upp resultat – $1 (demo)",
-    "backToTest": "Tillbaka till testet",
-    "note": "Engångsbetalning. Ingen prenumeration.",
+
+    "description": "Få ditt resultat bland 16 profiler, poäng för fem grundläggande personlighetsdrag och extra insikter i en kort, praktisk tolkning.",
+
+    "editorial": {
+      "line1": "Full matchning mot en av 16 profiler.",
+      "line2": "Poäng för fem grundläggande personlighetsdrag (0–100).",
+      "line3": "Extra insikter: stressprofil, subtyp och arbetssätt."
+    },
+
+    "cta": "Lås upp hela rapporten",
+    "note": "$1 • engångsbetalning • direkt åtkomst",
+
     "footer": "Personlighetstest"
   },
 
