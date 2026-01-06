@@ -34,7 +34,7 @@
     "brandTitle": "Personlighetstest",
     "brandSubtitle": "soft • premium • mobile",
     "headline": { "before": "Lås upp din", "accent": "fullständiga profil", "after": "" },
-    "description": "Få din 16-profilmatchning, fem kärnpoäng och extra insikter med en kort tolkning.",
+    "description": "Få din 16-profilmatchning, fem kärnpoäng och extra insikter med en kort, praktisk tolkning.",
     "editorial": {
       "line1": "Din fullständiga profil och sammanfattning.",
       "line2": "Fem kärnpoäng (0–100).",
@@ -76,11 +76,7 @@
 
     "yourTypeLabel": "Din profil",
 
-    "stability": {
-      "high": "Hög",
-      "medium": "Medel",
-      "low": "Låg"
-    },
+    "stability": { "high": "Hög", "medium": "Medel", "low": "Låg" },
 
     "cards": {
       "stress": { "title": "Stressprofil", "stability": "Stabilitet" },
@@ -92,11 +88,7 @@
       "show": "Visa Big Five-detaljer",
       "hide": "Dölj Big Five-detaljer",
       "note": "Baserat på Big Five-personlighetsdrag och översatt till en av 16 beskrivande profiler.",
-      "levels": {
-        "low": "Låg",
-        "medium": "Medel",
-        "high": "Hög"
-      },
+      "levels": { "low": "Låg", "medium": "Medel", "high": "Hög" },
       "stabilityMeaning": "Emotionell stabilitet beskriver hur lugn och motståndskraftig du tenderar att vara under press.",
       "inverseNote": "Obs: ”emotionell stabilitet” är motsatsen till neuroticism (100 − N)."
     },
@@ -120,7 +112,106 @@
     "footer": "Personlighetstest"
   },
 
-  "Questions": {},
-  "AddOns": {},
-  "Types": {}
+  "Questions": {
+    "E1": "Jag har lätt för att inleda samtal med nya människor.",
+    "E2": "Efter en lång dag föredrar jag att umgås framför att vara ensam.",
+    "E3": "Jag tar ofta initiativ i en grupp.",
+    "E4": "Jag känner mig bekväm med att vara i centrum.",
+    "E5": "Jag brukar hellre lyssna än prata.",
+
+    "O1": "Jag gillar att testa nya idéer, även om de är okonventionella.",
+    "O2": "Jag dras till abstrakta ämnen (idéer, filosofi, framtiden).",
+    "O3": "Jag blir lätt uttråkad av rutiner och söker variation.",
+    "O4": "Jag värdesätter kreativitet mer än tradition.",
+    "O5": "Jag föredrar beprövade metoder framför att experimentera.",
+
+    "C1": "Jag planerar vanligtvis uppgifter och håller mig till planen.",
+    "C2": "Deadlines är viktiga för mig och jag skyddar dem aktivt.",
+    "C3": "Jag gillar att ha ordning och struktur.",
+    "C4": "Jag slutför det jag påbörjar, även när motivationen sjunker.",
+    "C5": "Jag gör ofta saker i sista minuten.",
+
+    "A1": "Det är lätt för mig att förstå andras perspektiv.",
+    "A2": "Värme och respekt i relationer är viktigt för mig.",
+    "A3": "I konflikter föredrar jag kompromiss framför att vinna.",
+    "A4": "Jag stöttar ofta andra, även när det inte passar.",
+    "A5": "Jag kan vara rak, även om det sårar någon.",
+
+    "N1": "Jag blir lätt stressad, även av små saker.",
+    "N2": "Det är svårt för mig att varva ner efter en obehaglig situation.",
+    "N3": "Jag oroar mig ofta i förväg.",
+    "N4": "Mitt humör kan ändras snabbt.",
+    "N5": "Jag brukar förbli lugn under press."
+  },
+
+  "AddOns": {
+    "stress": {
+      "sensitive": {
+        "label": "Känslig reaktör",
+        "note": "Du fångar upp signaler snabbt. Under press kan känslor bli intensiva — återhämtningstid är viktig."
+      },
+      "steady": {
+        "label": "Lugn stabilisator",
+        "note": "Du håller dig oftast lugn i stress. Du återhämtar dig snabbt och behåller ett klart huvud."
+      }
+    },
+    "subtype": {
+      "empathicVisionary": {
+        "label": "Empatisk visionär",
+        "note": "Kreativitet och människokännedom. Du vill ha lösningar som är smarta och mänskliga."
+      },
+      "independentInnovator": {
+        "label": "Självständig innovatör",
+        "note": "Stora idéer och höga krav. Du utmanar antaganden och skär igenom brus."
+      },
+      "supportivePragmatist": {
+        "label": "Stöttande pragmatiker",
+        "note": "Praktiskt angreppssätt och värme. Du stabiliserar situationer och värnar relationer."
+      },
+      "directRealist": {
+        "label": "Rak realist",
+        "note": "Konkret tänkande och ärlig tydlighet. Du värdesätter resultat, klarhet och effektiv handling."
+      }
+    },
+    "mode": {
+      "driveDeliver": {
+        "label": "Driv & leverera",
+        "note": "Du går snabbt från prat till genomförande. Du gillar tempo och att knyta ihop lösa trådar."
+      },
+      "planPerfect": {
+        "label": "Planera & finslipa",
+        "note": "Du fungerar bäst med struktur och djupt fokus. Kvalitet och korrekthet är dina styrkor."
+      },
+      "exploreAdapt": {
+        "label": "Utforska & anpassa",
+        "note": "Du skapar fart genom att testa. Du itererar snabbt och lär dig genom att göra."
+      },
+      "flowImprovise": {
+        "label": "Flow & improvisera",
+        "note": "Du föredrar flexibilitet och spontanitet. Du fungerar bäst när du kan reagera i stunden."
+      }
+    }
+  },
+
+  "Types": {
+    "P01": { "name": "Strategisk tänkare", "desc": "Långsiktigt fokus, systemtänk, klarhet framför kaos." },
+    "P02": { "name": "Analytisk utforskare", "desc": "Nyfiken, reflekterande och idédriven." },
+    "P03": { "name": "Beslutsam ledare", "desc": "Riktnings- och resultatfokuserad." },
+    "P04": { "name": "Kreativ katalysator", "desc": "Uppfinningsrik, snabb i tanken och energisk kring möjligheter." },
+
+    "P05": { "name": "Insiktsfull vägledare", "desc": "Intuitiv och människomedveten." },
+    "P06": { "name": "Reflekterande idealist", "desc": "Drivs av autenticitet och inre värderingar." },
+    "P07": { "name": "Stöttande motivator", "desc": "Uppmuntrande, varm och utvecklingsorienterad." },
+    "P08": { "name": "Inspirerande sammanlänkare", "desc": "Uttrycksfull, entusiastisk och socialt smidig." },
+
+    "P09": { "name": "Pålitlig genomförare", "desc": "Strukturerad, pålitlig och stabil." },
+    "P10": { "name": "Omtänksam stabilisator", "desc": "Stöttande, lojal och detaljmedveten." },
+    "P11": { "name": "Praktisk organisatör", "desc": "Ordning och effektivitet i fokus." },
+    "P12": { "name": "Social harmonisator", "desc": "Relationsfokuserad och samarbetsinriktad." },
+
+    "P13": { "name": "Lugn problemlösare", "desc": "Samlad, logisk och lösningsorienterad." },
+    "P14": { "name": "Autentisk skapare", "desc": "Upplevelsedriven och självuttryckande." },
+    "P15": { "name": "Anpassningsbar risktagare", "desc": "Handlingsorienterad och snabb att ställa om." },
+    "P16": { "name": "Energisk performer", "desc": "Livlig, engagerande och nu-fokuserad." }
+  }
 }

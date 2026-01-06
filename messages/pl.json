@@ -34,11 +34,11 @@
     "brandTitle": "Test osobowości",
     "brandSubtitle": "soft • premium • mobile",
     "headline": { "before": "Odblokuj swój", "accent": "pełny profil", "after": "" },
-    "description": "Uzyskaj swój profil z 16 typów, pięć głównych wyników cech oraz dodatkowe interpretacje.",
+    "description": "Uzyskaj swój wynik 16-profilowy, pięć głównych wyników cech oraz dodatkowe wglądy z krótką, praktyczną interpretacją.",
     "editorial": {
       "line1": "Twój pełny profil i podsumowanie.",
       "line2": "Pięć głównych wyników cech (0–100).",
-      "line3": "Dodatkowe wglądy: stres, podtyp i tryb działania."
+      "line3": "Dodatkowe wglądy: profil stresu, podtyp i tryb działania."
     },
     "cta": "Odblokuj pełny raport",
     "note": "1 USD • jednorazowa płatność • natychmiastowy dostęp",
@@ -63,7 +63,7 @@
 
     "menu": "Menu",
     "menuRetake": "Powtórz",
-    
+
     "pdf": {
       "download": "Pobierz pełny raport",
       "downloading": "Generowanie…",
@@ -76,11 +76,7 @@
 
     "yourTypeLabel": "Twój profil",
 
-    "stability": {
-      "high": "Wysoka",
-      "medium": "Średnia",
-      "low": "Niska"
-    },
+    "stability": { "high": "Wysoka", "medium": "Średnia", "low": "Niska" },
 
     "cards": {
       "stress": { "title": "Profil stresu", "stability": "Stabilność" },
@@ -92,11 +88,7 @@
       "show": "Pokaż szczegóły Wielkiej Piątki",
       "hide": "Ukryj szczegóły Wielkiej Piątki",
       "note": "Na podstawie cech Wielkiej Piątki, przekształcone w jeden z 16 opisowych profili.",
-      "levels": {
-        "low": "Niski",
-        "medium": "Średni",
-        "high": "Wysoki"
-      },
+      "levels": { "low": "Niski", "medium": "Średni", "high": "Wysoki" },
       "stabilityMeaning": "Stabilność emocjonalna opisuje, jak spokojnie i odporne reagujesz pod presją.",
       "inverseNote": "Uwaga: „stabilność emocjonalna” jest odwrotnością neurotyczności (100 − N)."
     },
@@ -120,7 +112,106 @@
     "footer": "Test osobowości"
   },
 
-  "Questions": {},
-  "AddOns": {},
-  "Types": {}
+  "Questions": {
+    "E1": "Łatwo mi zaczynać rozmowy z nowymi osobami.",
+    "E2": "Po długim dniu wolę spotkania towarzyskie niż bycie samemu.",
+    "E3": "Często przejmuję inicjatywę w grupie.",
+    "E4": "Czuję się swobodnie, gdy jestem w centrum uwagi.",
+    "E5": "Zwykle wolę słuchać niż mówić.",
+
+    "O1": "Lubię próbować nowych pomysłów, nawet jeśli są niekonwencjonalne.",
+    "O2": "Pociągają mnie tematy abstrakcyjne (idee, filozofia, przyszłość).",
+    "O3": "Nudzi mnie rutyna i szukam urozmaicenia.",
+    "O4": "Cenię kreatywność bardziej niż tradycję.",
+    "O5": "Wolę sprawdzone metody niż eksperymentowanie.",
+
+    "C1": "Zwykle planuję zadania i trzymam się planu.",
+    "C2": "Terminy są dla mnie ważne i aktywnie ich pilnuję.",
+    "C3": "Lubię, gdy rzeczy są uporządkowane i ustrukturyzowane.",
+    "C4": "Kończę to, co zaczynam, nawet gdy spada motywacja.",
+    "C5": "Często robię rzeczy na ostatnią chwilę.",
+
+    "A1": "Łatwo mi zrozumieć perspektywę innych osób.",
+    "A2": "W relacjach ważne są dla mnie ciepło i szacunek.",
+    "A3": "W konflikcie wolę kompromis niż wygraną.",
+    "A4": "Często wspieram innych, nawet gdy nie jest to wygodne.",
+    "A5": "Potrafię być bezpośredni(a), nawet jeśli kogoś to zaboli.",
+
+    "N1": "Łatwo się stresuję, nawet drobiazgami.",
+    "N2": "Trudno mi się uspokoić po nieprzyjemnej sytuacji.",
+    "N3": "Często martwię się z wyprzedzeniem.",
+    "N4": "Mój nastrój potrafi szybko się zmieniać.",
+    "N5": "Zwykle zachowuję spokój pod presją."
+  },
+
+  "AddOns": {
+    "stress": {
+      "sensitive": {
+        "label": "Wrażliwy Reaktor",
+        "note": "Szybko wyłapujesz sygnały. Pod presją możesz odczuwać większą intensywność — kluczowy jest czas regeneracji."
+      },
+      "steady": {
+        "label": "Spokojny Stabilizator",
+        "note": "W stresie pozostajesz względnie spokojny(a). Szybko wracasz do równowagi i zachowujesz jasny umysł."
+      }
+    },
+    "subtype": {
+      "empathicVisionary": {
+        "label": "Empatyczny Wizjoner",
+        "note": "Kreatywność i uważność na ludzi. Chcesz rozwiązań, które są mądre i ludzkie."
+      },
+      "independentInnovator": {
+        "label": "Niezależny Innowator",
+        "note": "Duże idee i wysokie standardy. Kwestionujesz założenia i przebijasz się przez szum."
+      },
+      "supportivePragmatist": {
+        "label": "Wspierający Pragmatyk",
+        "note": "Praktyczne podejście i ciepło. Stabilizujesz sytuacje i dbasz o relacje."
+      },
+      "directRealist": {
+        "label": "Bezpośredni Realista",
+        "note": "Konkretne myślenie i szczerość. Cenimy wyniki, jasność i sprawne działanie."
+      }
+    },
+    "mode": {
+      "driveDeliver": {
+        "label": "Napęd & realizacja",
+        "note": "Szybko przechodzisz od rozmów do działania. Lubisz tempo i domykanie spraw."
+      },
+      "planPerfect": {
+        "label": "Plan & dopracowanie",
+        "note": "Najlepiej działasz w strukturze i głębokim skupieniu. Twoją mocą są jakość i poprawność."
+      },
+      "exploreAdapt": {
+        "label": "Eksploruj & dostosuj",
+        "note": "Budujesz postęp, próbując różnych podejść. Szybko iterujesz i uczysz się w działaniu."
+      },
+      "flowImprovise": {
+        "label": "Flow & improwizacja",
+        "note": "Wolisz elastyczność i spontaniczność. Najlepiej działasz, gdy możesz reagować na bieżąco."
+      }
+    }
+  },
+
+  "Types": {
+    "P01": { "name": "Strategiczny Myśliciel", "desc": "Długofalowe myślenie, podejście systemowe, klarowność zamiast chaosu." },
+    "P02": { "name": "Analityczny Odkrywca", "desc": "Ciekawy świata, refleksyjny, napędzany ideami." },
+    "P03": { "name": "Zdecydowany Lider", "desc": "Nastawiony na kierunek i rezultat." },
+    "P04": { "name": "Kreatywny Katalizator", "desc": "Pomysłowy, szybki w myśleniu, żyje możliwościami." },
+
+    "P05": { "name": "Wnikliwy Przewodnik", "desc": "Intuicyjny i uważny na ludzi." },
+    "P06": { "name": "Refleksyjny Idealista", "desc": "Napędzany autentycznością i wewnętrznymi wartościami." },
+    "P07": { "name": "Wspierający Motywator", "desc": "Dodaje otuchy, ciepły, nastawiony na rozwój." },
+    "P08": { "name": "Inspirujący Łącznik", "desc": "Ekspresyjny, entuzjastyczny, społecznie sprawny." },
+
+    "P09": { "name": "Niezawodny Wykonawca", "desc": "Uporządkowany, rzetelny, stabilny." },
+    "P10": { "name": "Troskliwy Stabilizator", "desc": "Wspierający, lojalny, uważny na detale." },
+    "P11": { "name": "Praktyczny Organizator", "desc": "Nastawiony na porządek i efektywność." },
+    "P12": { "name": "Harmonizator Relacji", "desc": "Skupiony na relacjach i współpracy." },
+
+    "P13": { "name": "Spokojny Rozwiązywacz Problemów", "desc": "Opanowany, logiczny, nastawiony na rozwiązania." },
+    "P14": { "name": "Autentyczny Twórca", "desc": "Kieruje się doświadczeniem i ekspresją siebie." },
+    "P15": { "name": "Adaptacyjny Ryzykant", "desc": "Nastawiony na działanie i szybkie reakcje." },
+    "P16": { "name": "Energiczny Performer", "desc": "Żywy, angażujący, skoncentrowany na tu i teraz." }
+  }
 }

@@ -386,8 +386,8 @@ export default function ResultPage() {
   ];
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 py-10 text-white sm:px-5">
-      <div className="relative mx-auto w-full max-w-2xl">
+    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-4 py-6 text-white sm:px-6 sm:py-10">
+      <div className="relative mx-auto w-full max-w-xl">
         {/* Top bar */}
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
@@ -395,10 +395,10 @@ export default function ResultPage() {
               <Logo className="text-indigo-200" />
             </div>
             <div className="leading-tight min-w-0">
-              <div className="text-sm font-semibold break-words [overflow-wrap:anywhere]">
+              <div className="text-sm font-semibold break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                 {t("brandTitle")}
               </div>
-              <div className="text-xs text-white/55 break-words [overflow-wrap:anywhere]">
+              <div className="text-xs text-white/55 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                 {t("brandSubtitle")}
               </div>
             </div>
@@ -454,23 +454,23 @@ export default function ResultPage() {
 
         {/* Hero */}
         <div className="mt-10">
-          <h1 className="mb-2 text-4xl font-semibold tracking-tight sm:text-5xl break-words [overflow-wrap:anywhere]">
+          <h1 className="mb-2 text-4xl font-semibold tracking-tight sm:text-5xl break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
             {t("hero.before")}{" "}
-            <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent break-words [overflow-wrap:anywhere]">
+            <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
               {t("hero.accent")}
             </span>
           </h1>
-          <p className="text-base text-white/65 sm:text-lg break-words [overflow-wrap:anywhere]">
+          <p className="text-base text-white/65 sm:text-lg break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
             {t("hero.sub")}
           </p>
         </div>
 
         {/* Main card */}
-        <div className="mt-8 rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl">
+        <div className="mt-8 rounded-3xl border border-white/15 bg-white/10 p-5 shadow-xl sm:p-6">
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
-              <div className="text-xs uppercase tracking-wider text-white/50 break-words [overflow-wrap:anywhere]">
+              <div className="text-xs uppercase tracking-wider text-white/50 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                 {t("yourTypeLabel")}
               </div>
 
@@ -484,7 +484,7 @@ export default function ResultPage() {
                   unoptimized
                   priority
                 />
-                <h2 className="text-3xl font-semibold break-words [overflow-wrap:anywhere]">
+                <h2 className="text-3xl font-semibold break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
                   {typeName}
                 </h2>
               </div>
@@ -502,7 +502,7 @@ export default function ResultPage() {
             </div>
           </div>
 
-          <p className="mt-4 text-white/80 break-words [overflow-wrap:anywhere]">
+          <p className="mt-4 text-white/80 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
             {typeDescription}
           </p>
 
@@ -512,7 +512,7 @@ export default function ResultPage() {
               {stress && (
                 <div className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4">
                   <div className="flex items-center justify-between gap-3">
-                    <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:anywhere]">
+                    <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                       {t("cards.stress.title")}
                     </div>
 
@@ -522,17 +522,17 @@ export default function ResultPage() {
                           data.stability
                         )}`}
                       />
-                      <span className="break-words [overflow-wrap:anywhere]">
+                      <span className="break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                         {t("cards.stress.stability")}: {stabilityLabel}
                       </span>
                     </div>
                   </div>
 
-                  <div className="mt-2 text-sm font-semibold text-white/90 break-words [overflow-wrap:anywhere]">
+                  <div className="mt-2 text-sm font-semibold text-white/90 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                     {stress.label}
                   </div>
 
-                  <p className="mt-2 text-xs leading-relaxed text-white/60 break-words [overflow-wrap:anywhere]">
+                  <p className="mt-2 text-xs leading-relaxed text-white/60 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                     {stress.note}
                   </p>
                 </div>
@@ -540,15 +540,15 @@ export default function ResultPage() {
 
               {subtype && (
                 <div className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4">
-                  <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:anywhere]">
+                  <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                     {t("cards.subtype.title")}
                   </div>
 
-                  <div className="mt-2 text-sm font-semibold text-white/90 break-words [overflow-wrap:anywhere]">
+                  <div className="mt-2 text-sm font-semibold text-white/90 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                     {subtype.label}
                   </div>
 
-                  <p className="mt-2 text-xs leading-relaxed text-white/60 break-words [overflow-wrap:anywhere]">
+                  <p className="mt-2 text-xs leading-relaxed text-white/60 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                     {subtype.note}
                   </p>
                 </div>
@@ -556,15 +556,15 @@ export default function ResultPage() {
 
               {mode && (
                 <div className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4">
-                  <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:anywhere]">
+                  <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                     {t("cards.mode.title")}
                   </div>
 
-                  <div className="mt-2 text-sm font-semibold text-white/90 break-words [overflow-wrap:anywhere]">
+                  <div className="mt-2 text-sm font-semibold text-white/90 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                     {mode.label}
                   </div>
 
-                  <p className="mt-2 text-xs leading-relaxed text-white/60 break-words [overflow-wrap:anywhere]">
+                  <p className="mt-2 text-xs leading-relaxed text-white/60 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                     {mode.note}
                   </p>
                 </div>
@@ -573,19 +573,20 @@ export default function ResultPage() {
           )}
 
           {/* Big Five toggle */}
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-8 flex flex-col items-start gap-3">
             <button
               onClick={() => setShowBigFive((v) => !v)}
-              className="w-full sm:w-auto rounded-2xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white/85 hover:bg-white/10"
+              className="inline-flex items-center gap-2 self-start rounded-xl border border-white/10
+                bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300
+                px-3 py-1.5 text-xs font-semibold text-white/85
+                hover:brightness-105"
               type="button"
             >
-              <span className="inline-flex items-center justify-between gap-2 w-full sm:w-auto">
-                <span>{showBigFive ? t("bigFive.hide") : t("bigFive.show")}</span>
-                <span className="text-white/60">{showBigFive ? "▴" : "▾"}</span>
-              </span>
+              <span>{showBigFive ? t("bigFive.hide") : t("bigFive.show")}</span>
+              <span className="text-white/60">{showBigFive ? "▴" : "▾"}</span>
             </button>
 
-            <div className="text-xs text-white/45 break-words [overflow-wrap:anywhere]">
+            <div className="text-xs text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
               {t("bigFive.note")}
             </div>
           </div>
@@ -600,7 +601,7 @@ export default function ResultPage() {
                 return (
                   <div key={row.key}>
                     <div className="flex items-center justify-between">
-                      <div className="text-sm text-white/80 break-words [overflow-wrap:anywhere]">
+                      <div className="text-sm text-white/80 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                         {row.label}
                       </div>
                       <div className="text-sm text-white/70">{pct(row.value)}</div>
@@ -618,7 +619,7 @@ export default function ResultPage() {
                     </div>
 
                     {row.note && (
-                      <div className="mt-1 text-xs text-white/45 break-words [overflow-wrap:anywhere]">
+                      <div className="mt-1 text-xs text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                         {row.note}
                       </div>
                     )}
@@ -627,14 +628,14 @@ export default function ResultPage() {
               })}
             </div>
 
-            <div className="mt-6 text-xs text-white/45 break-words [overflow-wrap:anywhere]">
+            <div className="mt-6 text-xs text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
               {t("bigFive.stabilityMeaning")}
             </div>
-            <div className="mt-2 text-xs text-white/45 break-words [overflow-wrap:anywhere]">
+            <div className="mt-2 text-xs text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
               {t("bigFive.inverseNote")}
             </div>
 
-            <p className="mt-4 text-center text-xs text-white/40 break-words [overflow-wrap:anywhere]">
+            <p className="mt-4 text-center text-xs text-white/40 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
               {t("disclaimer")}
             </p>
           </div>
