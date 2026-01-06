@@ -573,12 +573,13 @@ export default function ResultPage() {
           )}
 
           {/* Big Five toggle */}
-          <div className="mt-4 flex flex-col items-start gap-4">
+          <div className="mt-6 flex flex-col items-start gap-4">
             <button
               onClick={() => setShowBigFive((v) => !v)}
-              className="inline-flex items-center gap-2 self-start rounded-xl border border-white/10
-                bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300
-                px-3 py-1.5 text-xs font-semibold text-white/85
+              className="inline-flex items-center gap-2 self-start rounded-xl
+                bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
+                px-3 py-1.5 text-xs font-semibold text-white/90
+                shadow-[0_10px_30px_rgba(99,102,241,0.25)]
                 hover:brightness-105"
               type="button"
             >
