@@ -60,7 +60,7 @@
     },
 
     "pdf": {
-      "download": "Download PDF",
+      "download": "Download full report",
       "downloading": "Generating…",
       "generated": "Generated",
       "disclaimer": "This report is for personal insight only. It is not a medical, clinical, or diagnostic assessment. Results are computed from Big Five trait scores and mapped into one of 16 profile styles."
@@ -75,16 +75,11 @@
       "subtype": { "title": "Subtype" },
       "mode": { "title": "Operating mode" }
     },
-    "copy": {
-      "cta": "Copy summary",
-      "copied": "Copied!",
-      "myType": "My profile",
-      "addOns": "Add-ons"
-    },
+
     "bigFive": {
       "show": "Show Big Five details",
       "hide": "Hide Big Five details",
-      "note": "Computed from Big Five traits → mapped into one of 16 personality profiles",
+      "note": "Based on Big Five personality traits and translated into one of 16 descriptive profiles.",
       "title": "Big Five breakdown",
       "subtitle": "Scores are normalized to 0–100. Bars show relative intensity.",
       "inverseNote": "Note: “Emotional stability” is the inverse of Neuroticism (100 − N)."

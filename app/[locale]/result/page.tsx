@@ -38,8 +38,8 @@ const STORAGE_KEY = "personality_result_v1";
 const ANSWERS_KEY = "personality_answers_v1";
 
 const PAID_KEY = "personality_paid_v1";
-const PAID_AT_KEY = "personality_paid_at_v1"; // ✅ NEW
-const GRACE_MS = 30 * 60 * 1000; // ✅ 30 minutes
+const PAID_AT_KEY = "personality_paid_at_v1";
+const GRACE_MS = 30 * 60 * 1000; // 30 minutes
 
 /**
  * Avatary: P01 → 0, P02 → 1, ..., P16 → 15
@@ -56,6 +56,14 @@ function avatarIndexFromTypeCode(code: string) {
 
 function pct(n: number) {
   return Math.max(0, Math.min(100, Math.round(n)));
+}
+
+// ✅ Big Five UX label key (i18n via en.json)
+function levelKey(v: number): "low" | "medium" | "high" {
+  const x = pct(v);
+  if (x <= 33) return "low";
+  if (x <= 66) return "medium";
+  return "high";
 }
 
 function isResultShape(x: any): x is StoredResultV1 {
@@ -91,14 +99,12 @@ export default function ResultPage() {
   const [data, setData] = useState<StoredResultV1 | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [showBigFive, setShowBigFive] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
 
-      // If no result exists, there's nothing to show.
       if (!raw) {
         router.replace("/test");
         return;
@@ -108,9 +114,6 @@ export default function ResultPage() {
       const paidAt = Number(localStorage.getItem(PAID_AT_KEY) ?? "0");
       const withinGrace = paidAt > 0 && Date.now() - paidAt < GRACE_MS;
 
-      // Access rule:
-      // - allow if paid === true
-      // - OR allow if within 30-min grace (recovery) AND result exists (we already checked raw)
       if (!paid && !withinGrace) {
         router.replace("/pay");
         return;
@@ -232,25 +235,6 @@ export default function ResultPage() {
     };
   }, [data, ta]);
 
-  async function copySummary() {
-    if (!data) return;
-
-    const summary =
-      `${t("copy.myType")}: ${typeName}\n\n` +
-      `${t("copy.addOns")}:\n` +
-      `${t("cards.stress.title")}: ${stress?.label ?? "—"}\n` +
-      `${t("cards.subtype.title")}: ${subtype?.label ?? "—"}\n` +
-      `${t("cards.mode.title")}: ${mode?.label ?? "—"}\n`;
-
-    try {
-      await navigator.clipboard.writeText(summary);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1200);
-    } catch {
-      // ignore
-    }
-  }
-
   async function downloadPdf() {
     if (!data || downloading) return;
 
@@ -347,7 +331,7 @@ export default function ResultPage() {
 
     try {
       localStorage.removeItem(PAID_KEY);
-      localStorage.removeItem(PAID_AT_KEY); // ✅ also clear grace timestamp
+      localStorage.removeItem(PAID_AT_KEY);
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem(ANSWERS_KEY);
     } catch {}
@@ -364,13 +348,24 @@ export default function ResultPage() {
     { key: "O", label: t("traits.O"), value: data.scores.O },
     { key: "C", label: t("traits.C"), value: data.scores.C },
     { key: "A", label: t("traits.A"), value: data.scores.A },
-    { key: "N", label: t("traits.N"), value: data.scores.N, note: t("traitsNotes.N") },
-    { key: "S", label: t("traits.S"), value: emotionalStability, note: t("traitsNotes.S") }
+    {
+      key: "N",
+      label: t("traits.N"),
+      value: data.scores.N,
+      note: t("traitsNotes.N")
+    },
+    {
+      key: "S",
+      label: t("traits.S"),
+      value: emotionalStability,
+      note: t("traitsNotes.S")
+    }
   ];
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 sm:px-5 py-10 text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 py-10 text-white sm:px-5">
       <div className="relative mx-auto w-full max-w-2xl">
+        {/* Top bar */}
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15">
@@ -384,15 +379,16 @@ export default function ResultPage() {
           <LanguageSwitcher />
         </div>
 
+        {/* Hero */}
         <div className="mt-10 flex items-start justify-between gap-4">
-          <div>
-            <h1 className="mb-2 text-3xl font-semibold">
+          <div className="min-w-0">
+            <h1 className="mb-2 text-4xl font-semibold tracking-tight sm:text-5xl">
               {t("hero.before")}{" "}
               <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
                 {t("hero.accent")}
               </span>
             </h1>
-            <p className="text-white/65">{t("hero.sub")}</p>
+            <p className="text-base text-white/65 sm:text-lg">{t("hero.sub")}</p>
           </div>
 
           <button
@@ -404,9 +400,11 @@ export default function ResultPage() {
           </button>
         </div>
 
+        {/* Main card */}
         <div className="mt-8 rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl">
-          <div className="flex flex-wrap items-end justify-between gap-3">
-            <div>
+          {/* Profile header + CTA (fixed layout) */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="min-w-0">
               <div className="text-xs uppercase tracking-wider text-white/50">
                 {t("yourTypeLabel")}
               </div>
@@ -414,7 +412,7 @@ export default function ResultPage() {
               <div className="mt-2 flex items-center gap-4">
                 <Image
                   src={avatarSrc}
-                  alt={typeName} // ✅ FIX: correct prop name
+                  alt={typeName}
                   width={256}
                   height={256}
                   className="h-24 w-24 rounded-full object-cover"
@@ -425,18 +423,10 @@ export default function ResultPage() {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={copySummary}
-                className="rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-black"
-                type="button"
-              >
-                {copied ? t("copy.copied") : t("copy.cta")}
-              </button>
-
+            <div className="flex items-center sm:justify-end">
               <button
                 onClick={downloadPdf}
-                className="rounded-2xl border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white/85 hover:bg-white/15 disabled:opacity-60"
+                className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white/85 hover:bg-white/15 disabled:opacity-60"
                 type="button"
                 disabled={downloading}
               >
@@ -447,96 +437,126 @@ export default function ResultPage() {
 
           <p className="mt-4 text-white/80">{typeDescription}</p>
 
+          {/* Add-ons cards (all same premium style) */}
           {(stress || subtype || mode) && (
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            <div className="mt-6 space-y-4">
               {stress && (
-                <div className="rounded-2xl border border-white/15 bg-white/10 p-4">
+                <div className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4">
                   <div className="flex items-center justify-between gap-3">
-                    <div className="text-sm font-semibold text-white/85">
+                    <div className="text-xs uppercase tracking-wider text-white/45">
                       {t("cards.stress.title")}
                     </div>
 
-                    <div className="flex items-start gap-2 text-xs text-white/55">
+                    <div className="flex items-center gap-2 text-xs text-white/60">
                       <span
-                        className={`mt-[0.35em] shrink-0 h-2 w-2 rounded-full ${stabilityDotClass(
+                        className={`h-2 w-2 rounded-full ${stabilityDotClass(
                           data.stability
                         )}`}
                       />
-                      <span className="leading-snug">
+                      <span>
                         {t("cards.stress.stability")}: {stabilityLabel}
                       </span>
                     </div>
                   </div>
 
-                  <div className="mt-2 text-sm text-white/80">{stress.label}</div>
-                  <div className="mt-2 text-xs leading-relaxed text-white/60">
-                    {stress.note}
+                  <div className="mt-2 text-sm font-semibold text-white/90">
+                    {stress.label}
                   </div>
+
+                  <p className="mt-2 text-xs leading-relaxed text-white/60">
+                    {stress.note}
+                  </p>
                 </div>
               )}
 
               {subtype && (
-                <div className="rounded-2xl border border-white/15 bg-white/10 p-4">
-                  <div className="text-sm font-semibold text-white/85">
+                <div className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4">
+                  <div className="text-xs uppercase tracking-wider text-white/45">
                     {t("cards.subtype.title")}
                   </div>
-                  <div className="mt-2 text-sm text-white/80">{subtype.label}</div>
-                  <div className="mt-2 text-xs leading-relaxed text-white/60">
-                    {subtype.note}
+
+                  <div className="mt-2 text-sm font-semibold text-white/90">
+                    {subtype.label}
                   </div>
+
+                  <p className="mt-2 text-xs leading-relaxed text-white/60">
+                    {subtype.note}
+                  </p>
                 </div>
               )}
 
               {mode && (
-                <div className="rounded-2xl border border-white/15 bg-white/10 p-4">
-                  <div className="text-sm font-semibold text-white/85">
+                <div className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4">
+                  <div className="text-xs uppercase tracking-wider text-white/45">
                     {t("cards.mode.title")}
                   </div>
-                  <div className="mt-2 text-sm text-white/80">{mode.label}</div>
-                  <div className="mt-2 text-xs leading-relaxed text-white/60">
-                    {mode.note}
+
+                  <div className="mt-2 text-sm font-semibold text-white/90">
+                    {mode.label}
                   </div>
+
+                  <p className="mt-2 text-xs leading-relaxed text-white/60">
+                    {mode.note}
+                  </p>
                 </div>
               )}
             </div>
           )}
 
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+          {/* Big Five toggle (less CTA, more section) */}
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <button
               onClick={() => setShowBigFive((v) => !v)}
-              className="rounded-2xl bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 px-4 py-2 text-sm font-semibold"
+              className="w-full sm:w-auto rounded-2xl border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white/85 hover:bg-white/10"
               type="button"
             >
-              {showBigFive ? t("bigFive.hide") : t("bigFive.show")}
+              <span className="inline-flex items-center justify-between gap-2 w-full sm:w-auto">
+                <span>{showBigFive ? t("bigFive.hide") : t("bigFive.show")}</span>
+                <span className="text-white/60">{showBigFive ? "▴" : "▾"}</span>
+              </span>
             </button>
 
             <div className="text-xs text-white/45">{t("bigFive.note")}</div>
           </div>
         </div>
 
+        {/* Big Five panel */}
         {showBigFive && (
           <div className="mt-6 rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl">
-            <div className="mt-6 space-y-4">
-              {bigFiveRows.map((row) => (
-                <div key={row.key}>
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-white/80">{row.label}</div>
-                    <div className="text-sm text-white/70">{pct(row.value)}</div>
+            <div className="mt-2 space-y-4">
+              {bigFiveRows.map((row) => {
+                const k = levelKey(row.value);
+                return (
+                  <div key={row.key}>
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm text-white/80">{row.label}</div>
+                      <div className="text-sm text-white/70">{pct(row.value)}</div>
+                    </div>
+
+                    <div className="mt-1 text-xs text-white/50">
+                      {t(`bigFive.levels.${k}`)}
+                    </div>
+
+                    <div className="mt-2 h-2 w-full rounded-full bg-white/10">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-indigo-400 via-violet-400 to-pink-400"
+                        style={{ width: `${pct(row.value)}%` }}
+                      />
+                    </div>
+
+                    {row.note && (
+                      <div className="mt-1 text-xs text-white/45">{row.note}</div>
+                    )}
                   </div>
-                  <div className="mt-2 h-2 w-full rounded-full bg-white/10">
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-indigo-400 via-violet-400 to-pink-400"
-                      style={{ width: `${pct(row.value)}%` }}
-                    />
-                  </div>
-                  {row.note && (
-                    <div className="mt-1 text-xs text-white/45">{row.note}</div>
-                  )}
-                </div>
-              ))}
+                );
+              })}
             </div>
 
-            <div className="mt-6 text-xs text-white/45">{t("bigFive.inverseNote")}</div>
+            <div className="mt-6 text-xs text-white/45">
+              {t("bigFive.stabilityMeaning")}
+            </div>
+            <div className="mt-2 text-xs text-white/45">{t("bigFive.inverseNote")}</div>
+
             <p className="mt-4 text-center text-xs text-white/40">{t("disclaimer")}</p>
           </div>
         )}
