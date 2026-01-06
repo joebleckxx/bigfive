@@ -588,7 +588,7 @@ export default function ResultPage() {
               onClick={() => setShowBigFive((v) => !v)}
               className="inline-flex items-center gap-2 self-start rounded-xl
                 bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
-                px-3 py-1.5 text-xs font-semibold text-white/90
+                px-3 py-2 text-xs font-semibold text-white/90
                 shadow-[0_10px_30px_rgba(99,102,241,0.25)]
                 hover:brightness-105"
               type="button"
