@@ -72,7 +72,16 @@
       "accent": "personlighetsresultat",
       "sub": "Resultat baserat på etablerad personlighetforskning"
     },
+
+    "pdf": {
+      "download": "Ladda ner PDF",
+      "downloading": "Skapar…",
+      "generated": "Skapad",
+      "disclaimer": "Den här rapporten är endast avsedd för personlig insikt och är inte en medicinsk, klinisk eller diagnostisk bedömning. Resultaten beräknas utifrån Big Five-egenskaper och mappas till en av 16 profil-stilar."
+    },
+
     "retake": "Gör om",
+    "retakeConfirm": "Gör om-testet återställer detta resultat. Nästa resultat kräver betalning. Fortsätta?",
     "yourTypeLabel": "Din profil",
     "stability": { "high": "Hög", "medium": "Medel", "low": "Låg" },
     "cards": {

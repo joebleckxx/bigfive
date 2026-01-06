@@ -69,7 +69,16 @@
       "accent": "wynik osobowości",
       "sub": "Wynik oparty na badaniach nad osobowością"
     },
+
+    "pdf": {
+      "download": "Pobierz PDF",
+      "downloading": "Generowanie…",
+      "generated": "Wygenerowano",
+      "disclaimer": "Ten raport służy wyłącznie do osobistego wglądu i nie jest oceną medyczną, kliniczną ani diagnostyczną. Wyniki są obliczane na podstawie cech Big Five i mapowane do jednego z 16 profili."
+    },
+
     "retake": "Zrób ponownie",
+    "retakeConfirm": "To zresetuje ten wynik. Kolejny wynik będzie wymagał płatności. Kontynuować?",
     "yourTypeLabel": "Twój profil",
     "stability": { "high": "Wysoka", "medium": "Średnia", "low": "Niska" },
     "cards": {

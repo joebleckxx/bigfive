@@ -58,7 +58,16 @@
       "accent": "personality result",
       "sub": "Result based on established personality research"
     },
+
+    "pdf": {
+      "download": "Download PDF",
+      "downloading": "Generating…",
+      "generated": "Generated",
+      "disclaimer": "This report is for personal insight only. It is not a medical, clinical, or diagnostic assessment. Results are computed from Big Five trait scores and mapped into one of 16 profile styles."
+    },
+
     "retake": "Retake",
+    "retakeConfirm": "Retake will reset this result. Next result requires payment. Continue?",
     "yourTypeLabel": "Your profile",
     "stability": { "high": "High", "medium": "Medium", "low": "Low" },
     "cards": {

@@ -9,6 +9,7 @@ import { calculateResult } from "@/lib/scoring";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 
 const PAID_KEY = "personality_paid_v1";
+const PAID_AT_KEY = "personality_paid_at_v1"; // ✅ NEW
 const ANSWERS_KEY = "personality_answers_v1";
 const RESULT_KEY = "personality_result_v1";
 
@@ -75,6 +76,7 @@ export default function PayPage() {
 
       localStorage.setItem(RESULT_KEY, JSON.stringify(payload));
       localStorage.setItem(PAID_KEY, "true");
+      localStorage.setItem(PAID_AT_KEY, String(Date.now())); // ✅ NEW: timestamp for 30-min recovery
 
       router.push("/result");
     } catch {
@@ -148,7 +150,7 @@ export default function PayPage() {
               focus:outline-none focus:ring-4 focus:ring-indigo-400/30"
             type="button"
           >
-            {t("cta")}
+            {t("cta")} →
           </button>
 
           <p className="mt-3 text-center text-xs text-white/55">{t("note")}</p>

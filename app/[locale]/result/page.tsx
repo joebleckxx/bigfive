@@ -7,6 +7,12 @@ import { Logo } from "@/app/components/ui/logo";
 import Image from "next/image";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 
+// ✅ PDF
+import {
+  PersonalityReportPDF,
+  type PdfReportData
+} from "@/app/components/pdf/personality-report";
+
 type Trait = "E" | "O" | "C" | "A" | "N";
 
 type StoredResultV1 = {
@@ -31,8 +37,9 @@ type StoredResultV1 = {
 const STORAGE_KEY = "personality_result_v1";
 const ANSWERS_KEY = "personality_answers_v1";
 
-// ✅ NEW + ✅ legacy fallback
 const PAID_KEY = "personality_paid_v1";
+const PAID_AT_KEY = "personality_paid_at_v1"; // ✅ NEW
+const GRACE_MS = 30 * 60 * 1000; // ✅ 30 minutes
 
 /**
  * Avatary: P01 → 0, P02 → 1, ..., P16 → 15
@@ -85,19 +92,27 @@ export default function ResultPage() {
   const [loaded, setLoaded] = useState(false);
   const [showBigFive, setShowBigFive] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     try {
-      const paid = localStorage.getItem(PAID_KEY) === "true";
+      const raw = localStorage.getItem(STORAGE_KEY);
 
-      if (!paid) {
-        router.replace("/pay");
+      // If no result exists, there's nothing to show.
+      if (!raw) {
+        router.replace("/test");
         return;
       }
 
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) {
-        router.replace("/test");
+      const paid = localStorage.getItem(PAID_KEY) === "true";
+      const paidAt = Number(localStorage.getItem(PAID_AT_KEY) ?? "0");
+      const withinGrace = paidAt > 0 && Date.now() - paidAt < GRACE_MS;
+
+      // Access rule:
+      // - allow if paid === true
+      // - OR allow if within 30-min grace (recovery) AND result exists (we already checked raw)
+      if (!paid && !withinGrace) {
+        router.replace("/pay");
         return;
       }
 
@@ -120,6 +135,12 @@ export default function ResultPage() {
     if (data.stability >= 34) return t("stability.medium");
     return t("stability.low");
   }, [data, t]);
+
+  function stabilityDotClass(stability: number) {
+    if (stability >= 67) return "bg-emerald-400";
+    if (stability >= 34) return "bg-amber-400";
+    return "bg-rose-400";
+  }
 
   const typeName = useMemo(() => {
     if (!data) return "";
@@ -217,9 +238,9 @@ export default function ResultPage() {
     const summary =
       `${t("copy.myType")}: ${typeName}\n\n` +
       `${t("copy.addOns")}:\n` +
-      `• ${t("cards.stress.title")}\n` +
-      `• ${t("cards.subtype.title")}\n` +
-      `• ${t("cards.mode.title")}\n`;
+      `${t("cards.stress.title")}: ${stress?.label ?? "—"}\n` +
+      `${t("cards.subtype.title")}: ${subtype?.label ?? "—"}\n` +
+      `${t("cards.mode.title")}: ${mode?.label ?? "—"}\n`;
 
     try {
       await navigator.clipboard.writeText(summary);
@@ -230,14 +251,107 @@ export default function ResultPage() {
     }
   }
 
-  function retake() {
-    try {
-      // ✅ czyść oba paid keys
-      localStorage.removeItem(PAID_KEY);
+  async function downloadPdf() {
+    if (!data || downloading) return;
 
+    setDownloading(true);
+    try {
+      const { pdf } = await import("@react-pdf/renderer");
+
+      const avatarUrl = (() => {
+        try {
+          return new URL(avatarSrc, window.location.origin).toString();
+        } catch {
+          return undefined;
+        }
+      })();
+
+      const emotionalStability = 100 - data.scores.N;
+
+      const bigFiveRows = [
+        { key: "E", label: t("traits.E"), value: data.scores.E },
+        { key: "O", label: t("traits.O"), value: data.scores.O },
+        { key: "C", label: t("traits.C"), value: data.scores.C },
+        { key: "A", label: t("traits.A"), value: data.scores.A },
+        {
+          key: "N",
+          label: t("traits.N"),
+          value: data.scores.N,
+          note: t("traitsNotes.N")
+        },
+        {
+          key: "S",
+          label: t("traits.S"),
+          value: emotionalStability,
+          note: t("traitsNotes.S")
+        }
+      ];
+
+      const report: PdfReportData = {
+        brandTitle: t("brandTitle"),
+        brandSubtitle: t("brandSubtitle"),
+        generatedLabel: t("pdf.generated"),
+        dateISO: new Date().toISOString().slice(0, 10),
+
+        typeName,
+        typeDescription,
+        avatarUrl,
+
+        addOns: {
+          stressTitle: t("cards.stress.title"),
+          stressValue: stress?.label,
+          stressNote: stress?.note,
+          stabilityLabel: `${t("cards.stress.stability")}: ${stabilityLabel}`,
+
+          subtypeTitle: t("cards.subtype.title"),
+          subtypeValue: subtype?.label,
+          subtypeNote: subtype?.note,
+
+          modeTitle: t("cards.mode.title"),
+          modeValue: mode?.label,
+          modeNote: mode?.note
+        },
+
+        bigFive: bigFiveRows.map((r) => ({
+          key: r.key,
+          label: r.label,
+          value: r.value,
+          note: (r as any).note
+        })),
+
+        footer: t("footer"),
+        disclaimer: t("pdf.disclaimer")
+      };
+
+      const blob = await pdf(<PersonalityReportPDF data={report} />).toBlob();
+
+      const filename = `personality-report-${report.dateISO}.pdf`;
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.click();
+
+      URL.revokeObjectURL(url);
+    } catch {
+      // ignore
+    } finally {
+      setDownloading(false);
+    }
+  }
+
+  function retake() {
+    const ok = window.confirm(t("retakeConfirm"));
+    if (!ok) return;
+
+    try {
+      localStorage.removeItem(PAID_KEY);
+      localStorage.removeItem(PAID_AT_KEY); // ✅ also clear grace timestamp
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem(ANSWERS_KEY);
     } catch {}
+
     router.push("/test");
   }
 
@@ -300,7 +414,7 @@ export default function ResultPage() {
               <div className="mt-2 flex items-center gap-4">
                 <Image
                   src={avatarSrc}
-                  alt=""
+                  alt={typeName} // ✅ FIX: correct prop name
                   width={256}
                   height={256}
                   className="h-24 w-24 rounded-full object-cover"
@@ -311,13 +425,24 @@ export default function ResultPage() {
               </div>
             </div>
 
-            <button
-              onClick={copySummary}
-              className="rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-black"
-              type="button"
-            >
-              {copied ? t("copy.copied") : t("copy.cta")}
-            </button>
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={copySummary}
+                className="rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-black"
+                type="button"
+              >
+                {copied ? t("copy.copied") : t("copy.cta")}
+              </button>
+
+              <button
+                onClick={downloadPdf}
+                className="rounded-2xl border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white/85 hover:bg-white/15 disabled:opacity-60"
+                type="button"
+                disabled={downloading}
+              >
+                {downloading ? t("pdf.downloading") : t("pdf.download")}
+              </button>
+            </div>
           </div>
 
           <p className="mt-4 text-white/80">{typeDescription}</p>
@@ -330,10 +455,19 @@ export default function ResultPage() {
                     <div className="text-sm font-semibold text-white/85">
                       {t("cards.stress.title")}
                     </div>
-                    <div className="text-xs text-white/55">
-                      {t("cards.stress.stability")}: {stabilityLabel}
+
+                    <div className="flex items-start gap-2 text-xs text-white/55">
+                      <span
+                        className={`mt-[0.35em] shrink-0 h-2 w-2 rounded-full ${stabilityDotClass(
+                          data.stability
+                        )}`}
+                      />
+                      <span className="leading-snug">
+                        {t("cards.stress.stability")}: {stabilityLabel}
+                      </span>
                     </div>
                   </div>
+
                   <div className="mt-2 text-sm text-white/80">{stress.label}</div>
                   <div className="mt-2 text-xs leading-relaxed text-white/60">
                     {stress.note}
@@ -376,9 +510,7 @@ export default function ResultPage() {
               {showBigFive ? t("bigFive.hide") : t("bigFive.show")}
             </button>
 
-            <div className="text-xs text-white/45">
-              {t("bigFive.note")}
-            </div>
+            <div className="text-xs text-white/45">{t("bigFive.note")}</div>
           </div>
         </div>
 
@@ -404,12 +536,8 @@ export default function ResultPage() {
               ))}
             </div>
 
-            <div className="mt-6 text-xs text-white/45">
-              {t("bigFive.inverseNote")}
-            </div>
-            <p className="mt-4 text-center text-xs text-white/40">
-              {t("disclaimer")}
-            </p>
+            <div className="mt-6 text-xs text-white/45">{t("bigFive.inverseNote")}</div>
+            <p className="mt-4 text-center text-xs text-white/40">{t("disclaimer")}</p>
           </div>
         )}
 

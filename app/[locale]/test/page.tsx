@@ -12,7 +12,7 @@ const ANSWERS_KEY = "personality_answers_v1";
 const PAID_KEY = "personality_paid_v1";
 
 const LAST_ACTIVE_KEY = "personality_last_active_v1";
-const PROGRESS_TTL_MS = 60 * 60 * 1000;
+const PROGRESS_TTL_MS = 30 * 60 * 1000;
 
 const SCALE_VALUES = [1, 2, 3, 4, 5] as const;
 
@@ -324,7 +324,7 @@ export default function TestPage() {
                   "relative w-full appearance-none rounded-2xl border border-transparent px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4";
 
                 const gradientBorderStyle = {
-                  padding: "1px",
+                  padding: "1.5px",
                   boxSizing: "border-box",
                   background:
                     "linear-gradient(to right, #6366F1, #8B5CF6, #EC4899)",
@@ -366,7 +366,7 @@ export default function TestPage() {
                       </span>
                       <span
                         aria-hidden="true"
-                        className="pointer-events-none absolute -inset-px rounded-[calc(1rem+1px)]"
+                        className="pointer-events-none absolute -inset-[1.5px] rounded-[calc(1rem+1.5px)]"
                         style={gradientBorderStyle}
                       />
                     </button>
