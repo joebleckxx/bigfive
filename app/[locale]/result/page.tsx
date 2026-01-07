@@ -49,6 +49,23 @@ const AVATARS = Array.from({ length: 16 }, (_, i) => {
   return `/avatars/placeholder/avatar-${id}.png`;
 });
 
+const TYPE_CODES = Array.from({ length: 16 }, (_, i) =>
+  `P${String(i + 1).padStart(2, "0")}`
+);
+const STRESS_KEYS = ["sensitive", "steady"] as const;
+const SUBTYPE_KEYS = [
+  "empathicVisionary",
+  "independentInnovator",
+  "supportivePragmatist",
+  "directRealist"
+] as const;
+const MODE_KEYS = [
+  "driveDeliver",
+  "planPerfect",
+  "exploreAdapt",
+  "flowImprovise"
+] as const;
+
 function avatarIndexFromTypeCode(code: string) {
   const n = Number(code.replace("P", ""));
   return Number.isFinite(n) ? Math.max(0, Math.min(15, n - 1)) : 0;
@@ -87,6 +104,17 @@ function safeGet<T>(fn: () => T, fallback: T): T {
   } catch {
     return fallback;
   }
+}
+
+function pickLongest(values: string[]) {
+  return values.reduce(
+    (best, value) => (value.length > best.length ? value : best),
+    ""
+  );
+}
+
+function longestByKeys<T extends string>(keys: readonly T[], get: (key: T) => string) {
+  return pickLongest(keys.map((key) => safeGet(() => get(key), "")));
 }
 
 export default function ResultPage() {
@@ -264,6 +292,44 @@ export default function ResultPage() {
     setDownloading(true);
     try {
       const { pdf } = await import("@react-pdf/renderer");
+      const useMax =
+        typeof window !== "undefined" &&
+        new URLSearchParams(window.location.search).get("pdf") === "max";
+
+      const maxTypeName = longestByKeys(TYPE_CODES, (code) =>
+        tt(`${code}.name`)
+      );
+      const maxTypeDesc = longestByKeys(TYPE_CODES, (code) =>
+        tt(`${code}.desc`)
+      );
+
+      const maxStressLabel = longestByKeys(STRESS_KEYS, (key) =>
+        ta(`stress.${key}.label`)
+      );
+      const maxStressNote = longestByKeys(STRESS_KEYS, (key) =>
+        ta(`stress.${key}.note`)
+      );
+      const maxSubtypeLabel = longestByKeys(SUBTYPE_KEYS, (key) =>
+        ta(`subtype.${key}.label`)
+      );
+      const maxSubtypeNote = longestByKeys(SUBTYPE_KEYS, (key) =>
+        ta(`subtype.${key}.note`)
+      );
+      const maxModeLabel = longestByKeys(MODE_KEYS, (key) =>
+        ta(`mode.${key}.label`)
+      );
+      const maxModeNote = longestByKeys(MODE_KEYS, (key) =>
+        ta(`mode.${key}.note`)
+      );
+
+      const stabilityOptions = [
+        { label: t("stability.high"), color: "#34D399" },
+        { label: t("stability.medium"), color: "#FBBF24" },
+        { label: t("stability.low"), color: "#FB7185" }
+      ];
+      const maxStability = stabilityOptions.reduce((best, option) =>
+        option.label.length > best.label.length ? option : best
+      );
 
       const avatarUrl = (() => {
         try {
@@ -294,29 +360,60 @@ export default function ResultPage() {
         }
       ];
 
+      const reportTypeName = useMax ? maxTypeName : typeName;
+      const reportTypeDesc = useMax ? maxTypeDesc : typeDescription;
+      const reportStressLabel = useMax ? maxStressLabel : stress?.label;
+      const reportStressNote = useMax ? maxStressNote : stress?.note;
+      const reportSubtypeLabel = useMax ? maxSubtypeLabel : subtype?.label;
+      const reportSubtypeNote = useMax ? maxSubtypeNote : subtype?.note;
+      const reportModeLabel = useMax ? maxModeLabel : mode?.label;
+      const reportModeNote = useMax ? maxModeNote : mode?.note;
+
+      const reportStability =
+        useMax
+          ? {
+              label: maxStability.label,
+              color: maxStability.color
+            }
+          : {
+              label: stabilityLabel,
+              color:
+                data.stability >= 67
+                  ? "#34D399"
+                  : data.stability >= 34
+                    ? "#FBBF24"
+                    : "#FB7185"
+            };
+
       const report: PdfReportData = {
         brandTitle: t("brandTitle"),
         brandSubtitle: t("brandSubtitle"),
         generatedLabel: t("pdf.generated"),
         dateISO: new Date().toISOString().slice(0, 10),
+        titleBefore: t("hero.before"),
+        titleAccent: t("hero.accent"),
+        subtitle: t("hero.sub"),
+        profileLabel: t("yourTypeLabel"),
+        traitsTitle: t("bigFive.title"),
 
-        typeName,
-        typeDescription,
+        typeName: reportTypeName,
+        typeDescription: reportTypeDesc,
         avatarUrl,
 
         addOns: {
           stressTitle: t("cards.stress.title"),
-          stressValue: stress?.label,
-          stressNote: stress?.note,
-          stabilityLabel: `${t("cards.stress.stability")}: ${stabilityLabel}`,
+          stressValue: reportStressLabel,
+          stressNote: reportStressNote,
+          stabilityLabel: `${t("cards.stress.stability")}: ${reportStability.label}`,
+          stabilityColor: reportStability.color,
 
           subtypeTitle: t("cards.subtype.title"),
-          subtypeValue: subtype?.label,
-          subtypeNote: subtype?.note,
+          subtypeValue: reportSubtypeLabel,
+          subtypeNote: reportSubtypeNote,
 
           modeTitle: t("cards.mode.title"),
-          modeValue: mode?.label,
-          modeNote: mode?.note
+          modeValue: reportModeLabel,
+          modeNote: reportModeNote
         },
 
         bigFive: bigFiveRows.map((r) => ({
@@ -325,9 +422,13 @@ export default function ResultPage() {
           value: r.value,
           note: (r as any).note
         })),
+        bigFiveLevels: {
+          low: t("bigFive.levels.low"),
+          medium: t("bigFive.levels.medium"),
+          high: t("bigFive.levels.high")
+        },
 
-        footer: t("footer"),
-        disclaimer: t("pdf.disclaimer")
+        disclaimer: t("disclaimer")
       };
 
       const blob = await pdf(<PersonalityReportPDF data={report} />).toBlob();
@@ -341,8 +442,9 @@ export default function ResultPage() {
       a.click();
 
       URL.revokeObjectURL(url);
-    } catch {
-      // ignore
+    } catch (error) {
+      console.error("PDF generation failed", error);
+      alert(t("pdf.error"));
     } finally {
       setDownloading(false);
     }

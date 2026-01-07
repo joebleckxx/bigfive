@@ -40,7 +40,7 @@
       "after": ""
     },
 
-    "description": "Otrzymasz wynik jednego z 16 profili, wyniki pięciu kluczowych cech oraz dodatkowe wnioski w krótkiej, praktycznej interpretacji.",
+    "description": "Praktyczne podsumowanie tego, jak działa Twoja osobowość.",
 
     "editorial": {
       "line1": "Pełne dopasowanie do jednego z 16 profili.",
@@ -77,6 +77,7 @@
       "download": "Pobierz raport",
       "downloading": "Generowanie…",
       "generated": "Wygenerowano",
+      "error": "Nie udało się wygenerować PDF. Sprawdź konsolę.",
       "disclaimer": "Ten raport służy wyłącznie do celów informacyjnych. Nie jest narzędziem medycznym ani diagnostycznym."
     },
 
@@ -94,6 +95,7 @@
     },
 
     "bigFive": {
+      "title": "Cechy osobowości",
       "show": "Pokaż szczegóły cech osobowości",
       "hide": "Ukryj szczegóły cech osobowości",
       "note": "Oparte na modelu Big Five – pięciu podstawowych cechach osobowości.",

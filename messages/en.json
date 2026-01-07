@@ -34,7 +34,7 @@
     "brandTitle": "Personality test",
     "brandSubtitle": "soft • premium • mobile",
     "headline": { "before": "Unlock your", "accent": "full profile", "after": "" },
-    "description": "You’ll get one of 16 personality profiles, five key personality traits (0–100), and extra insights with a short, practical interpretation.",
+    "description": "A practical summary of how your personality works.",
     "editorial": {
       "line1": "A clear match to one of 16 personality profiles.",
       "line2": "Five key personality traits (0–100).",
@@ -68,6 +68,7 @@
       "download": "Download report",
       "downloading": "Generating…",
       "generated": "Generated",
+      "error": "Could not generate PDF. Check the console for details.",
       "disclaimer": "This report is for personal insight only. It is not a medical, clinical, or diagnostic assessment."
     },
 
@@ -89,6 +90,7 @@
     },
 
     "bigFive": {
+      "title": "Personality traits",
       "show": "Show personality traits details",
       "hide": "Hide personality traits details",
       "note": "Based on the Big Five personality model.",
