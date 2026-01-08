@@ -9,7 +9,7 @@
       "line2": "Baserat på etablerad psykologi. En av 16 personlighetsprofiler.",
       "line3": "Ta reda på vilka dina styrkor och svagheter är."
     },
-    "footer": "tellmejoe."
+    "footer": "TMJ • tellmejoe."
   },
 
   "Test": {
@@ -19,7 +19,7 @@
     "reset": "Återställ",
     "start": "Start",
     "tip": "Tips: svara intuitivt — det finns inga fel svar.",
-    "footer": "tellmejoe."
+    "footer": "TMJ • tellmejoe."
   },
 
   "Scale": {
@@ -51,7 +51,7 @@
     "cta": "Lås upp hela rapporten",
     "note": "$1 • engångsbetalning • direkt åtkomst",
 
-    "footer": "tellmejoe."
+    "footer": "TMJ • tellmejoe."
   },
 
   "Result": {
@@ -121,7 +121,7 @@
       "S": "högre = lugnare under press"
     },
 
-    "footer": "tellmejoe."
+    "footer": "TMJ • tellmejoe."
   },
 
   "Questions": {

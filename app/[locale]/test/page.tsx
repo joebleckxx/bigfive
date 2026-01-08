@@ -410,8 +410,9 @@ export default function TestPage() {
         </div>
 
         <p className="mt-10 text-center text-xs text-white/40">
-          © {new Date().getFullYear()} {t("footer")}
+          tellmejoe. TMJ © {new Date().getFullYear()}
         </p>
+        
       </div>
     </main>
   );

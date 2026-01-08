@@ -9,7 +9,7 @@
       "line2": "Based on established psychology. One of 16 personality profiles.",
       "line3": "Learn what your strengths and weaknesses are."
     },
-    "footer": "tellmejoe."
+    "footer": "tellmejoe. · TMJ"
   },
 
   "Test": {
@@ -19,7 +19,7 @@
     "reset": "Reset",
     "start": "Start",
     "tip": "Tip: answer intuitively — there are no wrong answers.",
-    "footer": "tellmejoe."
+    "footer": "TMJ • tellmejoe."
   },
 
   "Scale": {
@@ -42,7 +42,7 @@
     },
     "cta": "Unlock full report",
     "note": "$1 • one-time payment • instant access",
-    "footer": "tellmejoe."
+    "footer": "TMJ • tellmejoe."
   },
 
   "Result": {
@@ -119,7 +119,7 @@
       "S": "higher = calmer under pressure"
     },
 
-    "footer": "tellmejoe."
+    "footer": "TMJ • tellmejoe."
   },
 
   "Questions": {
