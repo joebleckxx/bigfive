@@ -7,7 +7,7 @@
     "editorial": {
       "line1": "25 simple questions. Just a few minutes.",
       "line2": "Based on established psychology. One of 16 personality profiles.",
-      "line3": "Practical insight into your strengths and weaknesses."
+      "line3": "Learn what your strengths and weaknesses are."
     },
     "footer": "Personality test"
   },
@@ -124,32 +124,32 @@
 
   "Questions": {
     "E1": "I find it easy to start conversations with new people.",
-    "E2": "After a long day, I prefer socializing over being alone.",
-    "E3": "I often take the initiative in a group.",
+    "E2": "After a long day, I prefer being with others rather than alone.",
+    "E3": "I often take initiative in group situations.",
     "E4": "I feel comfortable being the center of attention.",
     "E5": "I usually prefer listening rather than talking.",
 
-    "O1": "I enjoy trying new ideas, even if they are unconventional.",
-    "O2": "I'm drawn to abstract topics (ideas, philosophy, the future).",
-    "O3": "I get bored with routine and look for variety.",
-    "O4": "I value creativity more than tradition.",
-    "O5": "I prefer proven methods over experimentation.",
+    "O1": "I enjoy exploring new ideas, even if they are unconventional.",
+    "O2": "I'm drawn to abstract topics like ideas, philosophy, or the future.",
+    "O3": "Routine bores me, and I look for something new.",
+    "O4": "I like questioning established ways.",
+    "O5": "I feel more comfortable with proven methods than with experimentation.",
 
-    "C1": "I usually plan tasks and stick to the plan.",
-    "C2": "Deadlines matter to me, and I actively protect them.",
-    "C3": "I like having things organized and structured.",
-    "C4": "I finish what I start, even when motivation drops.",
-    "C5": "I often do things at the last minute.",
+    "C1": "I usually plan tasks ahead and follow through.",
+    "C2": "Deadlines are important to me, and I actively protect them.",
+    "C3": "I like things to be organized and structured.",
+    "C4": "I finish what I start, even when motivation fades.",
+    "C5": "I often leave things until the last minute.",
 
-    "A1": "It's easy for me to understand other people's perspective.",
-    "A2": "Warmth and respect in relationships are important to me.",
-    "A3": "In conflict, I prefer compromise over winning.",
-    "A4": "I often support others, even when it's not convenient.",
-    "A5": "I can be blunt, even if it hurts someone's feelings.",
+    "A1": "I find it easy to understand other people's perspectives.",
+    "A2": "I try to avoid hurting others, even if it means holding back my own opinion.",
+    "A3": "In conflict, I prefer finding compromise over winning.",
+    "A4": "I often support others, even when it's inconvenient.",
+    "A5": "I can be direct, even if it hurts someone's feelings.",
 
     "N1": "I get stressed easily, even by small things.",
-    "N2": "It's hard for me to calm down after an unpleasant situation.",
-    "N3": "I often worry ahead of time.",
+    "N2": "I find it hard to calm down after an unpleasant situation.",
+    "N3": "I tend to worry ahead of time.",
     "N4": "My mood can change quickly.",
     "N5": "I usually stay calm under pressure."
   },

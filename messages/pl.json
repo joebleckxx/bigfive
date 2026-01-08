@@ -7,7 +7,7 @@
     "editorial": {
     "line1": "25 prostych pytań. Tylko kilka minut.",
     "line2": "Oparte na ugruntowanej psychologii. Jeden z 16 profili osobowości.",
-    "line3": "Praktyczny wgląd w Twoje mocne i słabe strony."
+    "line3": "Dowiedz się, jakie są Twoje mocne i słabe strony."
   },
     "footer": "Test osobowości"
   },
@@ -125,32 +125,32 @@
 
   "Questions": {
     "E1": "Łatwo mi zaczynać rozmowy z nowymi osobami.",
-    "E2": "Po długim dniu wolę spotkania towarzyskie niż bycie samemu.",
-    "E3": "Często przejmuję inicjatywę w grupie.",
+    "E2": "Po długim dniu wolę być z innymi niż samemu.",
+    "E3": "Często przejmuję inicjatywę w sytuacjach grupowych.",
     "E4": "Czuję się swobodnie, gdy jestem w centrum uwagi.",
     "E5": "Zwykle wolę słuchać niż mówić.",
 
-    "O1": "Lubię próbować nowych pomysłów, nawet jeśli są niekonwencjonalne.",
-    "O2": "Pociągają mnie tematy abstrakcyjne (idee, filozofia, przyszłość).",
-    "O3": "Nudzi mnie rutyna i szukam urozmaicenia.",
-    "O4": "Cenię kreatywność bardziej niż tradycję.",
-    "O5": "Wolę sprawdzone metody niż eksperymentowanie.",
+    "O1": "Lubię odkrywać nowe pomysły, nawet jeśli są niekonwencjonalne.",
+    "O2": "Pociągają mnie tematy abstrakcyjne, takie jak idee, filozofia czy przyszłość.",
+    "O3": "Rutyna mnie nudzi i szukam czegoś nowego.",
+    "O4": "Lubię kwestionować utarte sposoby.",
+    "O5": "Czuję się pewniej przy sprawdzonych metodach niż przy eksperymentowaniu.",
 
-    "C1": "Zwykle planuję zadania i trzymam się planu.",
+    "C1": "Zwykle planuję zadania z wyprzedzeniem i doprowadzam je do końca.",
     "C2": "Terminy są dla mnie ważne i aktywnie ich pilnuję.",
-    "C3": "Lubię, gdy rzeczy są uporządkowane i ustrukturyzowane.",
+    "C3": "Lubię, gdy rzeczy są uporządkowane i mają strukturę.",
     "C4": "Kończę to, co zaczynam, nawet gdy spada motywacja.",
-    "C5": "Często robię rzeczy na ostatnią chwilę.",
+    "C5": "Często odkładam sprawy na ostatnią chwilę.",
 
-    "A1": "Łatwo mi zrozumieć perspektywę innych osób.",
-    "A2": "W relacjach ważne są dla mnie ciepło i szacunek.",
-    "A3": "W konflikcie wolę kompromis niż wygraną.",
-    "A4": "Często wspieram innych, nawet gdy nie jest to wygodne.",
-    "A5": "Potrafię być bezpośredni(a), nawet jeśli kogoś to zaboli.",
+    "A1": "Łatwo mi zrozumieć punkt widzenia innych osób.",
+    "A2": "Staram się nie ranić innych, nawet jeśli oznacza to powstrzymanie własnej opinii.",
+    "A3": "W sytuacjach konfliktowych wolę kompromis niż wygraną.",
+    "A4": "Często wspieram innych, nawet gdy nie jest to dla mnie wygodne.",
+    "A5": "Potrafię być bezpośredni(a), nawet jeśli może to kogoś zranić.",
 
-    "N1": "Łatwo się stresuję, nawet drobiazgami.",
+    "N1": "Łatwo się stresuję, nawet drobnymi sprawami.",
     "N2": "Trudno mi się uspokoić po nieprzyjemnej sytuacji.",
-    "N3": "Często martwię się z wyprzedzeniem.",
+    "N3": "Mam tendencję do martwienia się na zapas.",
     "N4": "Mój nastrój potrafi szybko się zmieniać.",
     "N5": "Zwykle zachowuję spokój pod presją."
   },
