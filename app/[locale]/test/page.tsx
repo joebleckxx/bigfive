@@ -295,6 +295,11 @@ export default function TestPage() {
           />
         </div>
 
+        {/* Joe microcopy */}
+        <div className="mb-6 mt-1 text-xs text-white/45 italic">
+          Take your time — Joe.
+        </div>
+
         <div className="relative z-10">
           <div className="rounded-3xl border border-white/15 bg-white/10 p-5 shadow-xl backdrop-blur-2xl sm:p-6">
             <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">

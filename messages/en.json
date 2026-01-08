@@ -1,6 +1,6 @@
 {
   "Home": {
-    "brand": { "title": "Nilo", "subtitle": "soft • premium • mobile" },
+    "brand": { "title": "tellmejoe.", "subtitle": "no judgment • just patterns" },
     "headline": { "before": "Discover your", "accent": "personality profile" },
     "note": "Takes ~5–7 minutes. No account.",
     "cta": "Start the test",
@@ -9,7 +9,7 @@
       "line2": "Based on established psychology. One of 16 personality profiles.",
       "line3": "Learn what your strengths and weaknesses are."
     },
-    "footer": "Personality test"
+    "footer": "tellmejoe."
   },
 
   "Test": {
@@ -19,7 +19,7 @@
     "reset": "Reset",
     "start": "Start",
     "tip": "Tip: answer intuitively — there are no wrong answers.",
-    "footer": "Personality test"
+    "footer": "tellmejoe."
   },
 
   "Scale": {
@@ -31,8 +31,8 @@
   },
 
   "Pay": {
-    "brandTitle": "Personality test",
-    "brandSubtitle": "soft • premium • mobile",
+    "brandTitle": "tellmejoe.",
+    "brandSubtitle": "no judgment • just patterns",
     "headline": { "before": "Unlock your", "accent": "full profile", "after": "" },
     "description": "A practical summary of how your personality works.",
     "editorial": {
@@ -42,12 +42,12 @@
     },
     "cta": "Unlock full report",
     "note": "$1 • one-time payment • instant access",
-    "footer": "Personality test"
+    "footer": "tellmejoe."
   },
 
   "Result": {
-    "brandTitle": "Personality test",
-    "brandSubtitle": "soft • premium • mobile",
+    "brandTitle": "tellmejoe.",
+    "brandSubtitle": "no judgment • just patterns",
 
     "noData": {
       "title": "No data",
@@ -119,7 +119,7 @@
       "S": "higher = calmer under pressure"
     },
 
-    "footer": "Personality test"
+    "footer": "tellmejoe."
   },
 
   "Questions": {

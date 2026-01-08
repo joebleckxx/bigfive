@@ -1,6 +1,6 @@
 {
   "Home": {
-    "brand": { "title": "Nilo", "subtitle": "soft • premium • mobile" },
+    "brand": { "title": "tellmejoe.", "subtitle": "no judgment • just patterns" },
     "headline": { "before": "Upptäck din", "accent": "personlighetsprofil" },
     "note": "Tar ~5–7 minuter. Inget konto krävs.",
     "cta": "Starta testet",
@@ -9,7 +9,7 @@
       "line2": "Baserat på etablerad psykologi. En av 16 personlighetsprofiler.",
       "line3": "Ta reda på vilka dina styrkor och svagheter är."
     },
-    "footer": "Personlighetstest"
+    "footer": "tellmejoe."
   },
 
   "Test": {
@@ -19,7 +19,7 @@
     "reset": "Återställ",
     "start": "Start",
     "tip": "Tips: svara intuitivt — det finns inga fel svar.",
-    "footer": "Personlighetstest"
+    "footer": "tellmejoe."
   },
 
   "Scale": {
@@ -31,8 +31,8 @@
   },
 
   "Pay": {
-    "brandTitle": "Personlighetstest",
-    "brandSubtitle": "soft • premium • mobile",
+    "brandTitle": "tellmejoe.",
+    "brandSubtitle": "no judgment • just patterns",
 
     "headline": {
       "before": "Lås upp din",
@@ -51,12 +51,12 @@
     "cta": "Lås upp hela rapporten",
     "note": "$1 • engångsbetalning • direkt åtkomst",
 
-    "footer": "Personlighetstest"
+    "footer": "tellmejoe."
   },
 
   "Result": {
-    "brandTitle": "Personlighetstest",
-    "brandSubtitle": "soft • premium • mobile",
+    "brandTitle": "tellmejoe.",
+    "brandSubtitle": "no judgment • just patterns",
 
     "noData": {
       "title": "Inga data",
@@ -121,7 +121,7 @@
       "S": "högre = lugnare under press"
     },
 
-    "footer": "Personlighetstest"
+    "footer": "tellmejoe."
   },
 
   "Questions": {

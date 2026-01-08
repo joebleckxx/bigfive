@@ -1,6 +1,6 @@
 {
   "Home": {
-    "brand": { "title": "Nilo", "subtitle": "soft • premium • mobile" },
+    "brand": { "title": "tellmejoe.", "subtitle": "no judgment • just patterns" },
     "headline": { "before": "Odkryj swój", "accent": "profil osobowości" },
     "note": "Zajmuje ~5–7 minut. Bez konta.",
     "cta": "Rozpocznij test",
@@ -9,7 +9,7 @@
     "line2": "Oparte na ugruntowanej psychologii. Jeden z 16 profili osobowości.",
     "line3": "Dowiedz się, jakie są Twoje mocne i słabe strony."
   },
-    "footer": "Test osobowości"
+    "footer": "tellmejoe."
   },
 
   "Test": {
@@ -19,7 +19,7 @@
     "reset": "Resetuj",
     "start": "Start",
     "tip": "Wskazówka: odpowiadaj intuicyjnie — nie ma złych odpowiedzi.",
-    "footer": "Test osobowości"
+    "footer": "tellmejoe."
   },
 
   "Scale": {
@@ -31,8 +31,8 @@
   },
 
   "Pay": {
-    "brandTitle": "Test osobowości",
-    "brandSubtitle": "soft • premium • mobile",
+    "brandTitle": "tellmejoe.",
+    "brandSubtitle": "no judgment • just patterns",
 
     "headline": {
       "before": "Odblokuj swój",
@@ -51,12 +51,12 @@
     "cta": "Odblokuj pełny raport",
     "note": "$1 • płatność jednorazowa • natychmiastowy dostęp",
 
-    "footer": "Test osobowości"
+    "footer": "tellmejoe."
   },
 
   "Result": {
-    "brandTitle": "Test osobowości",
-    "brandSubtitle": "soft • premium • mobile",
+    "brandTitle": "tellmejoe.",
+    "brandSubtitle": "no judgment • just patterns",
 
     "noData": {
       "title": "Brak danych",
@@ -120,7 +120,7 @@
       "S": "wyżej = większy spokój pod presją"
     },
 
-    "footer": "Test osobowości"
+    "footer": "tellmejoe."
   },
 
   "Questions": {
