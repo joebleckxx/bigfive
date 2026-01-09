@@ -602,16 +602,6 @@ export default function ResultPage() {
               </div>
             </div>
 
-            <div className="flex items-center sm:justify-end">
-              <button
-                onClick={downloadPdf}
-                className="inline-flex items-center justify-center rounded-2xl border border-white/15 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white/85 hover:bg-white/15 disabled:opacity-60"
-                type="button"
-                disabled={downloading}
-              >
-                {downloading ? t("pdf.downloading") : t("pdf.download")}
-              </button>
-            </div>
           </div>
 
           <p className="mt-4 text-white/80 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
@@ -684,22 +674,86 @@ export default function ResultPage() {
             </div>
           )}
 
-          {/* Big Five toggle */}
-          <div className="mt-6 flex flex-col items-start gap-4">
-            <button
-              onClick={() => setShowBigFive((v) => !v)}
-              className="inline-flex items-center gap-2 self-start rounded-xl
-                bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
-                px-3 py-2 text-xs font-semibold text-white/90
-                shadow-[0_10px_30px_rgba(99,102,241,0.25)]
-                hover:brightness-105"
-              type="button"
-            >
-              <span>{showBigFive ? t("bigFive.hide") : t("bigFive.show")}</span>
-              <span className="text-white/60">{showBigFive ? "▴" : "▾"}</span>
-            </button>
+          {/* Actions: Big Five (left, gradient) + Download PDF (right, prominent) */}
+          <div className="mt-6">
+            <div className="flex flex-wrap items-center gap-3">
+              {/* Show personality traits – gradient preserved */}
+              <button
+                onClick={() => setShowBigFive((v) => !v)}
+                className="inline-flex items-center gap-2 rounded-full
+                  px-4 py-2 text-xs font-semibold
+                  text-white/90
+                  bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
+                  ring-1 ring-white/20
+                  shadow-[0_10px_30px_rgba(99,102,241,0.25)]
+                  hover:brightness-105
+                  active:scale-[0.99]
+                  transition
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                type="button"
+              >
+                <span>{showBigFive ? t("bigFive.hide") : t("bigFive.show")}</span>
+                <span className="text-white/70">{showBigFive ? "▴" : "▾"}</span>
+              </button>
 
-            <div className="text-xs text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+              {/* Download PDF – right */}
+              <button
+                onClick={downloadPdf}
+                disabled={downloading}
+                className="ml-auto inline-flex items-center gap-2 justify-center rounded-full
+                  px-4 py-2 text-xs font-semibold
+                  text-white
+                  bg-white/14 backdrop-blur
+                  border border-white/25
+                  ring-1 ring-white/25
+                  shadow-[0_10px_30px_rgba(255,255,255,0.06)]
+                  hover:bg-white/18 hover:ring-white/40
+                  disabled:opacity-60
+                  active:scale-[0.99]
+                  transition
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/45"
+                type="button"
+              >
+                {/* PDF icon */}
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  className="opacity-90"
+                >
+                  <path
+                    d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M14 2v6h6"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M8 15h8"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8 18h6"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                </svg>
+
+                <span>{downloading ? t("pdf.downloading") : t("pdf.download")}</span>
+              </button>
+            </div>
+
+            <div className="mt-2 text-xs text-white/45">
               {t("bigFive.note")}
             </div>
           </div>
