@@ -592,7 +592,7 @@ export default function ResultPage() {
                   alt={typeName}
                   width={256}
                   height={256}
-                  className="h-24 w-24 rounded-full object-cover"
+                  className="h-28 w-28 rounded-full object-cover"
                   unoptimized
                   priority
                 />
@@ -759,7 +759,6 @@ export default function ResultPage() {
               {t("bigFive.note")}
             </div>
           </div>
-
         </div>
 
         {/* Big Five panel */}
