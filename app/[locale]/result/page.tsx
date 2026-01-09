@@ -616,17 +616,19 @@ export default function ResultPage() {
                     {typeName}
                   </h2>
 
-                  {/* ✅ Joe line (random from 5) */}
-                  <p className="mt-2 text-xs text-white/45 italic break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                    {joeLine} — Joe
+                  {/* ✅ Summary line (was Joe) */}
+                  <p className="mt-2 text-sm text-white/80 italic break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+                    {typeDescription}
                   </p>
+
                 </div>
               </div>
             </div>
           </div>
 
-          <p className="mt-4 text-white/80 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-            {typeDescription}
+          {/* ✅ Joe line (moved under the 3 cards, above actions) */}
+          <p className="mt-5 text-xs text-white/45 italic break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+            {joeLine} <span className="text-white/40">— Joe</span>
           </p>
 
           {/* Add-ons cards */}
@@ -776,7 +778,7 @@ export default function ResultPage() {
               </button>
             </div>
 
-            <div className="mt-2 text-xs text-white/45">
+            <div className="mt-2 text-xs text-white/40">
               {t("bigFive.note")}
             </div>
           </div>
