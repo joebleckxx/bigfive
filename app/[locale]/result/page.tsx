@@ -674,13 +674,13 @@ export default function ResultPage() {
             </div>
           )}
 
-          {/* Actions: Big Five (left, gradient) + Download PDF (right, prominent) */}
+          {/* Actions: keep in one row on mobile */}
           <div className="mt-6">
-            <div className="flex flex-wrap items-center gap-3">
-              {/* Show personality traits – gradient preserved */}
+            <div className="flex items-center gap-3">
+              {/* Show personality traits – left (fills remaining space) */}
               <button
                 onClick={() => setShowBigFive((v) => !v)}
-                className="inline-flex items-center gap-2 rounded-full
+                className="inline-flex flex-1 min-w-0 items-center justify-center gap-2 rounded-full
                   px-4 py-2 text-xs font-semibold
                   text-white/90
                   bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
@@ -692,16 +692,18 @@ export default function ResultPage() {
                   focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
                 type="button"
               >
-                <span>{showBigFive ? t("bigFive.hide") : t("bigFive.show")}</span>
-                <span className="text-white/70">{showBigFive ? "▴" : "▾"}</span>
+                <span className="truncate">
+                  {showBigFive ? t("bigFive.hide") : t("bigFive.show")}
+                </span>
+                <span className="shrink-0 text-white/70">{showBigFive ? "▴" : "▾"}</span>
               </button>
 
-              {/* Download PDF – right */}
+              {/* Download PDF – right (does not shrink / does not wrap) */}
               <button
                 onClick={downloadPdf}
                 disabled={downloading}
-                className="ml-auto inline-flex items-center gap-2 justify-center rounded-full
-                  px-4 py-2 text-xs font-semibold
+                className="inline-flex shrink-0 items-center gap-2 justify-center rounded-full
+                  px-4 py-2 text-xs font-semibold whitespace-nowrap
                   text-white
                   bg-white/14 backdrop-blur
                   border border-white/25
@@ -757,6 +759,7 @@ export default function ResultPage() {
               {t("bigFive.note")}
             </div>
           </div>
+
         </div>
 
         {/* Big Five panel */}
