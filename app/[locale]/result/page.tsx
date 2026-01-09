@@ -15,6 +15,15 @@ import {
 
 type Trait = "E" | "O" | "C" | "A" | "N";
 
+/* ✅ Joe — result microcopy (5 variants, random) */
+const JOE_RESULTS = [
+  "This is just a snapshot. Use it gently.",
+  "Take what’s useful. Leave the rest.",
+  "A result, not a rule.",
+  "Just a perspective — not the whole story.",
+  "This is one way of seeing it."
+];
+
 type StoredResultV1 = {
   version: "v1";
   createdAt: string;
@@ -132,6 +141,11 @@ export default function ResultPage() {
   // ✅ menu ⋯ (jak na /test)
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+
+  // ✅ Joe line (pick once per mount)
+  const joeLine = useMemo(() => {
+    return JOE_RESULTS[Math.floor(Math.random() * JOE_RESULTS.length)];
+  }, []);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -487,9 +501,10 @@ export default function ResultPage() {
     }
   ];
 
-  const highestTrait = bigFiveRows.reduce((max, row) =>
-    row.value > max.value ? row : max
-  , bigFiveRows[0]);
+  const highestTrait = bigFiveRows.reduce(
+    (max, row) => (row.value > max.value ? row : max),
+    bigFiveRows[0]
+  );
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-4 py-6 text-white sm:px-6 sm:py-10">
@@ -596,12 +611,18 @@ export default function ResultPage() {
                   unoptimized
                   priority
                 />
-                <h2 className="text-3xl font-semibold break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
-                  {typeName}
-                </h2>
+                <div className="min-w-0">
+                  <h2 className="text-3xl font-semibold break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
+                    {typeName}
+                  </h2>
+
+                  {/* ✅ Joe line (random from 5) */}
+                  <p className="mt-2 text-xs text-white/45 italic break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+                    {joeLine} — Joe
+                  </p>
+                </div>
               </div>
             </div>
-
           </div>
 
           <p className="mt-4 text-white/80 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
@@ -803,7 +824,6 @@ export default function ResultPage() {
                         style={{ width: `${pct(row.value)}%` }}
                       />
                     </div>
-
                   </div>
                 );
               })}
@@ -818,7 +838,6 @@ export default function ResultPage() {
         <p className="mt-10 text-center text-xs text-white/40">
           tellmejoe. TMJ © {new Date().getFullYear()}
         </p>
-        
       </div>
     </main>
   );
