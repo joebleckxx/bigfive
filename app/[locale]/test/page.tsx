@@ -3,10 +3,15 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
-import { QUESTIONS } from "@/lib/personality";
+import {
+  QUESTIONS,
+  makeQuestionOrder,
+  questionsFromOrder
+} from "@/lib/personality";
 
 const RESULT_KEY = "personality_result_v1";
 const ANSWERS_KEY = "personality_answers_v1";
+const QUESTION_ORDER_KEY = "personality_question_order_v1";
 
 // ✅ NEW + ✅ legacy fallback
 const PAID_KEY = "personality_paid_v1";
@@ -46,6 +51,7 @@ function touchLastActive() {
 function clearProgressStorage() {
   try {
     localStorage.removeItem(ANSWERS_KEY);
+    localStorage.removeItem(QUESTION_ORDER_KEY);
 
     // ✅ czyścimy oba (nowy + legacy)
     localStorage.removeItem(PAID_KEY);
@@ -64,6 +70,30 @@ export default function TestPage() {
   const q = useTranslations("Questions");
 
   const total = QUESTIONS.length;
+
+  // ✅ LOSOWA, ZAMROŻONA KOLEJNOŚĆ PYTAŃ (1x na start; trzymana w localStorage)
+  const [questionOrder, setQuestionOrder] = useState<string[]>(() => {
+    try {
+      const raw = localStorage.getItem(QUESTION_ORDER_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length === total) return parsed;
+      }
+
+      const seed = crypto.randomUUID();
+      const order = makeQuestionOrder(seed, 2);
+      localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
+      return order;
+    } catch {
+      return QUESTIONS.map((qq) => qq.id);
+    }
+  });
+
+  const orderedQuestions = useMemo(
+    () => questionsFromOrder(questionOrder),
+    [questionOrder]
+  );
+
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<number[]>(() => Array(total).fill(0));
 
@@ -111,8 +141,42 @@ export default function TestPage() {
           setIndex(0);
           setTapSelected(null);
           setIsAdvancing(false);
+
+          // ✅ po TTL resetujemy też kolejność
+          try {
+            const seed = crypto.randomUUID();
+            const order = makeQuestionOrder(seed, 2);
+            localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
+            setQuestionOrder(order);
+          } catch {
+            // ignore
+          }
+
           return;
         }
+      }
+
+      // ✅ upewnij się, że mamy kolejność (jeśli ktoś ma stare storage bez order)
+      try {
+        const rawOrder = localStorage.getItem(QUESTION_ORDER_KEY);
+        if (rawOrder) {
+          const parsed = JSON.parse(rawOrder);
+          if (Array.isArray(parsed) && parsed.length === total) {
+            setQuestionOrder(parsed);
+          } else {
+            const seed = crypto.randomUUID();
+            const order = makeQuestionOrder(seed, 2);
+            localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
+            setQuestionOrder(order);
+          }
+        } else {
+          const seed = crypto.randomUUID();
+          const order = makeQuestionOrder(seed, 2);
+          localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
+          setQuestionOrder(order);
+        }
+      } catch {
+        // ignore
       }
 
       if (!raw) return;
@@ -140,7 +204,8 @@ export default function TestPage() {
     return Math.round(((index + 1) / total) * 100);
   }, [index, total]);
 
-  const currentQuestion = QUESTIONS[index];
+  // ✅ ZAMIANA: pytanie wg wylosowanej kolejności
+  const currentQuestion = orderedQuestions[index];
 
   function persistAnswers(nextAnswers: number[]) {
     try {
@@ -150,6 +215,11 @@ export default function TestPage() {
 
       touchLastActive();
       localStorage.setItem(ANSWERS_KEY, JSON.stringify(nextAnswers));
+
+      // ✅ kolejność już jest zapisana; tu tylko dbamy, żeby nie znikła przypadkiem
+      if (!localStorage.getItem(QUESTION_ORDER_KEY)) {
+        localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(questionOrder));
+      }
     } catch {
       // ignore
     }
@@ -162,6 +232,16 @@ export default function TestPage() {
     setTapSelected(null);
     setIsAdvancing(false);
     setMenuOpen(false);
+
+    // ✅ reset generuje nową kolejność
+    try {
+      const seed = crypto.randomUUID();
+      const order = makeQuestionOrder(seed, 2);
+      localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
+      setQuestionOrder(order);
+    } catch {
+      // ignore
+    }
   }
 
   function goToStart() {
@@ -412,7 +492,6 @@ export default function TestPage() {
         <p className="mt-10 text-center text-xs text-white/40">
           tellmejoe. TMJ © {new Date().getFullYear()}
         </p>
-        
       </div>
     </main>
   );

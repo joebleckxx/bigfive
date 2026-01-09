@@ -1,4 +1,4 @@
-import { QUESTIONS, Trait } from "./personality";
+import { QUESTIONS, Trait, questionsFromOrder } from "./personality";
 
 /**
  * Wynik zapisywany do localStorage / payload
@@ -7,6 +7,13 @@ export type StoredResultV1 = {
   version: "v1";
   createdAt: string;
   answers: number[];
+
+  /**
+   * Kolejność pytań użyta w tej sesji (losowana raz na start testu).
+   * Opcjonalne dla kompatybilności ze starymi zapisami.
+   */
+  questionOrder?: string[];
+
   scores: Record<Trait, number>;
   stability: number;
   typeCode: ProfileId;
@@ -17,9 +24,6 @@ export type StoredResultV1 = {
   };
 };
 
-/**
- * Autorski, legal-safe identyfikator profilu
- */
 export type ProfileId =
   | "P01" | "P02" | "P03" | "P04"
   | "P05" | "P06" | "P07" | "P08"
@@ -54,25 +58,16 @@ const hi = (v: number) => v >= 50;
  * z uwzględnieniem pytań odwróconych
  */
 function answerToScore(v: number, reverse?: boolean): number {
-  const base = ((v - 1) / 4) * 100; // 1..5 -> 0..100
-  return reverse ? 100 - base : base;
+  const raw = ((v - 1) / 4) * 100; // 1..5 => 0..100
+  return clamp(reverse ? 100 - raw : raw);
 }
 
-/* --------------------------------------------------
- * Big Five scoring
- * -------------------------------------------------- */
-
-export function computeBigFiveScores(
-  answers: number[]
-): Record<Trait, number> {
-  const sums: Record<Trait, number> = {
-    E: 0,
-    O: 0,
-    C: 0,
-    A: 0,
-    N: 0
-  };
-
+/**
+ * Liczy Big Five na podstawie odpowiedzi i KOLEJNOŚCI pytań.
+ * Jeśli questionOrder nie ma (stare zapisy), używa defaultowej kolejności.
+ */
+function computeBigFiveScores(answers: number[], questionOrder?: string[]) {
+  const sums: Record<Trait, number> = { E: 0, O: 0, C: 0, A: 0, N: 0 };
   const counts: Record<Trait, number> = {
     E: 0,
     O: 0,
@@ -81,7 +76,9 @@ export function computeBigFiveScores(
     N: 0
   };
 
-  QUESTIONS.forEach((q, i) => {
+  const orderedQuestions = questionsFromOrder(questionOrder);
+
+  orderedQuestions.forEach((q, i) => {
     const v = answers[i];
     if (v < 1 || v > 5) return;
 
@@ -100,14 +97,10 @@ export function computeBigFiveScores(
 }
 
 /* --------------------------------------------------
- * Stability (pewność profilu)
- * im bliżej 50 i im więcej osi blisko środka,
- * tym niższa stabilność
+ * Stability (0–100)
  * -------------------------------------------------- */
 
-export function computeStability(
-  scores: Record<Trait, number>
-): number {
+export function computeStability(scores: Record<Trait, number>): number {
   const distances = [
     Math.abs(scores.E - 50),
     Math.abs(scores.O - 50),
@@ -118,97 +111,93 @@ export function computeStability(
 
   const avg = distances.reduce((a, b) => a + b, 0) / distances.length;
 
-  // 0..50 -> 0..100
-  return clamp(Math.round((avg / 50) * 100));
+  return clamp(avg);
 }
 
 /* --------------------------------------------------
- * Big Five → 16 profili (P01–P16)
- *
- * Osi używamy 4:
- * SE = E
- * ST = C
- * OR = (A + (100 - O)) / 2
- * SB = (100 - N)
+ * 16-profile mapping (autorskie)
  * -------------------------------------------------- */
 
-export function profileIdFromBigFive(
-  scores: Record<Trait, number>
-): ProfileId {
-  const SE = hi(scores.E); // social energy
-  const ST = hi(scores.C); // structure
-  const OR = hi((scores.A + (100 - scores.O)) / 2); // people vs ideas
-  const SB = hi(100 - scores.N); // emotional stability
-
+function profileIdFromBigFive(scores: Record<Trait, number>): ProfileId {
   const key =
-    `${SE ? "H" : "L"}_` +
-    `${ST ? "H" : "L"}_` +
-    `${OR ? "H" : "L"}_` +
-    `${SB ? "H" : "L"}`;
+    (hi(scores.E) ? "H" : "L") +
+    "_" +
+    (hi(scores.O) ? "H" : "L") +
+    "_" +
+    (hi(scores.C) ? "H" : "L") +
+    "_" +
+    (hi(scores.A) ? "H" : "L") +
+    "_" +
+    (hi(scores.N) ? "H" : "L");
 
   const MAP: Record<string, ProfileId> = {
-    "L_H_L_H": "P01",
-    "L_L_L_H": "P02",
-    "H_H_L_H": "P03",
-    "H_L_L_H": "P04",
+    "L_L_L_H_H": "P01",
+    "L_H_L_H_H": "P02",
+    "H_L_L_H_H": "P03",
+    "H_H_L_H_H": "P04",
 
-    "L_H_H_L": "P05",
-    "L_L_H_L": "P06",
-    "H_H_H_L": "P07",
-    "H_L_H_L": "P08",
+    "L_L_H_H_H": "P05",
+    "L_H_H_H_H": "P06",
+    "H_L_H_H_H": "P07",
+    "H_H_H_H_H": "P08",
 
-    "L_H_H_H": "P09",
-    "L_L_H_H": "P10",
-    "H_H_H_H": "P11",
-    "H_L_H_H": "P12",
+    "L_L_L_L_L": "P09",
+    "L_H_L_L_L": "P10",
+    "H_L_L_L_L": "P11",
+    "H_H_L_L_L": "P12",
 
-    "L_L_L_L": "P13",
-    "L_H_L_L": "P14",
-    "H_L_L_L": "P15",
-    "H_H_L_L": "P16"
+    "L_L_H_L_L": "P13",
+    "L_H_H_L_L": "P14",
+    "H_L_H_L_L": "P15",
+    "H_H_H_L_L": "P16"
   };
 
   return MAP[key] ?? "P01";
 }
 
 /* --------------------------------------------------
- * Add-ons (klucze do tłumaczeń AddOns.*)
+ * Add-ons (klucze językowo neutralne)
  * -------------------------------------------------- */
 
-export function computeAddOns(scores: Record<Trait, number>) {
-  const stressKey: StressKey = scores.N >= 55 ? "sensitive" : "steady";
-
-  // subtype: O (ideas/novelty) x A (people/warmth)
-  const Ohi = hi(scores.O);
-  const Ahi = hi(scores.A);
+function computeAddOns(scores: Record<Trait, number>) {
+  const stressKey: StressKey = hi(scores.N) ? "sensitive" : "steady";
 
   const subtypeKey: SubtypeKey =
-    Ohi && Ahi ? "empathicVisionary" :
-    Ohi && !Ahi ? "independentInnovator" :
-    !Ohi && Ahi ? "supportivePragmatist" :
-    "directRealist";
-
-  // mode: E (pace/drive) x C (structure/discipline)
-  const Ehi = hi(scores.E);
-  const Chi = hi(scores.C);
+    hi(scores.O) && hi(scores.A)
+      ? "empathicVisionary"
+      : hi(scores.O) && !hi(scores.A)
+        ? "independentInnovator"
+        : !hi(scores.O) && hi(scores.A)
+          ? "supportivePragmatist"
+          : "directRealist";
 
   const modeKey: ModeKey =
-    Ehi && Chi ? "driveDeliver" :
-    !Ehi && Chi ? "planPerfect" :
-    Ehi && !Chi ? "exploreAdapt" :
-    "flowImprovise";
+    hi(scores.C) && hi(scores.E)
+      ? "driveDeliver"
+      : hi(scores.C) && !hi(scores.E)
+        ? "planPerfect"
+        : !hi(scores.C) && hi(scores.E)
+          ? "exploreAdapt"
+          : "flowImprovise";
 
   return { stressKey, subtypeKey, modeKey };
 }
 
 /* --------------------------------------------------
- * Główna funkcja: answers[] → StoredResultV1
+ * Public: build result
  * -------------------------------------------------- */
 
-export function calculateResult(
-  answers: number[]
-): StoredResultV1 {
-  const scores = computeBigFiveScores(answers);
+/**
+ * Jeśli UI tasuje pytania, przekaż `questionOrder`,
+ * a zapis i scoring będą poprawne.
+ */
+export function buildStoredResultV1(answers: number[], questionOrder?: string[]): StoredResultV1 {
+  const scores = computeBigFiveScores(answers, questionOrder);
+  const usedOrder =
+    questionOrder && questionOrder.length === QUESTIONS.length
+      ? questionOrder
+      : QUESTIONS.map((q) => q.id);
+
   const stability = computeStability(scores);
   const typeCode = profileIdFromBigFive(scores);
   const addOns = computeAddOns(scores);
@@ -217,9 +206,11 @@ export function calculateResult(
     version: "v1",
     createdAt: new Date().toISOString(),
     answers,
+    questionOrder: usedOrder,
     scores,
     stability,
     typeCode,
     addOns
   };
 }
+export { buildStoredResultV1 as calculateResult }
