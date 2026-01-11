@@ -465,7 +465,7 @@ export default function ResultPage() {
         </div>
 
         {/* Main card */}
-        <div className="mt-8 rounded-3xl border border-white/15 bg-white/10 p-5 shadow-xl sm:p-6">
+        <div className="mt-8 rounded-3xl bg-white/2 p-4 shadow-xl sm:p-6">
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
@@ -506,7 +506,7 @@ export default function ResultPage() {
             {sections.map((s) => (
               <div
                 key={s.key}
-                className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4"
+                className="rounded-2xl bg-white/2 p-5 shadow-xl p-4"
               >
                 <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                   {s.icon} {s.title}
