@@ -154,74 +154,153 @@
     "N5": "I usually stay calm under pressure."
   },
 
-  "AddOns": {
-    "stress": {
-      "sensitive": {
-        "label": "Sensitive Reactor",
-        "note": "You pick up signals quickly. Under pressure you may feel intensity — recovery time matters."
-      },
-      "steady": {
-        "label": "Steady Stabilizer",
-        "note": "You stay relatively calm in stress. You recover quickly and keep a clear head."
-      }
-    },
-    "subtype": {
-      "empathicVisionary": {
-        "label": "Empathic Visionary",
-        "note": "Creativity plus people-awareness. You want solutions that are smart and human."
-      },
-      "independentInnovator": {
-        "label": "Independent Innovator",
-        "note": "Big ideas plus tough standards. You challenge assumptions and cut through noise."
-      },
-      "supportivePragmatist": {
-        "label": "Supportive Pragmatist",
-        "note": "Practical approach plus warmth. You stabilize situations and protect relationships."
-      },
-      "directRealist": {
-        "label": "Direct Realist",
-        "note": "Concrete thinking plus blunt honesty. You value results, clarity, and efficient action."
-      }
-    },
-    "mode": {
-      "driveDeliver": {
-        "label": "Drive & deliver",
-        "note": "You move quickly from talk to execution. You like pace and closing loops."
-      },
-      "planPerfect": {
-        "label": "Plan & perfect",
-        "note": "You work best with structure and deep focus. Quality and correctness are your strengths."
-      },
-      "exploreAdapt": {
-        "label": "Explore & adapt",
-        "note": "You generate momentum by trying things. You iterate fast and learn through action."
-      },
-      "flowImprovise": {
-        "label": "Flow & improvise",
-        "note": "You prefer flexibility and spontaneity. You do best when you can respond in the moment."
-      }
-    }
+  "Types": {
+    "P01": { "name": "Thinker", "desc": "Sorts reality in their head before acting." },
+    "P02": { "name": "Explorer", "desc": "Driven by curiosity and the need to understand the world." },
+    "P03": { "name": "Idealist", "desc": "Guided by an inner compass and clear values." },
+    "P04": { "name": "Guide", "desc": "Gives others a sense of direction and stability." },
+    "P05": { "name": "Visionary", "desc": "Sees beyond the present and thinks ahead." },
+    "P06": { "name": "Leader", "desc": "Sets direction and can bring others along." },
+    "P07": { "name": "Mentor", "desc": "Supports others’ growth through insight and understanding." },
+    "P08": { "name": "Caregiver", "desc": "Attuned to people’s needs and builds a sense of safety." },
+    "P09": { "name": "Realist", "desc": "Focused on facts and what works in practice." },
+    "P10": { "name": "Doer", "desc": "Feels most at home in action and concrete tasks." },
+    "P11": { "name": "Analyst", "desc": "Makes sense of the world through logic, data, and precision." },
+    "P12": { "name": "Finisher", "desc": "Brings things to completion and cares about the outcome." },
+    "P13": { "name": "Observer", "desc": "Notices change, signals, and nuance." },
+    "P14": { "name": "Creator", "desc": "Expresses themselves through creation and new forms." },
+    "P15": { "name": "Risk-Taker", "desc": "Acts boldly despite uncertainty." },
+    "P16": { "name": "Animator", "desc": "Brings energy and sets things in motion." }
   },
 
-  "Types": {
-    "P01": { "name": "Strategic Thinker", "desc": "Long-term focus, systems thinking, clarity over chaos." },
-    "P02": { "name": "Analytical Explorer", "desc": "Curious, reflective, idea-driven." },
-    "P03": { "name": "Decisive Leader", "desc": "Direction-oriented and outcome-focused." },
-    "P04": { "name": "Creative Catalyst", "desc": "Inventive, fast-thinking, energized by possibilities." },
-
-    "P05": { "name": "Insightful Guide", "desc": "Intuitive and people-aware." },
-    "P06": { "name": "Reflective Idealist", "desc": "Driven by authenticity and inner values." },
-    "P07": { "name": "Supportive Motivator", "desc": "Encouraging, warm, growth-oriented." },
-    "P08": { "name": "Inspirational Connector", "desc": "Expressive, enthusiastic, socially agile." },
-
-    "P09": { "name": "Reliable Executor", "desc": "Structured, dependable, steady." },
-    "P10": { "name": "Caring Stabilizer", "desc": "Supportive, loyal, detail-aware." },
-    "P11": { "name": "Practical Organizer", "desc": "Order-oriented and efficiency-driven." },
-    "P12": { "name": "Social Harmonizer", "desc": "Relationship-focused and cooperative." },
-
-    "P13": { "name": "Calm Problem Solver", "desc": "Composed, logical, solution-focused." },
-    "P14": { "name": "Authentic Creator", "desc": "Experience-driven and self-expressive." },
-    "P15": { "name": "Adaptive Risk-Taker", "desc": "Action-oriented and responsive." },
-    "P16": { "name": "Energetic Performer", "desc": "Lively, engaging, present-focused." }
+  "Profiles": {
+    "P01": {
+      "core": ["Your thinking is intense and autonomous, often detached from other people’s expectations. You follow your own impulses and inner logic, even when it’s hard to explain to others."],
+      "daily": ["You move in waves — you can be deeply engaged and then suddenly withdraw. You don’t stick to fixed patterns; you respond to whatever captures your attention right now. You make decisions based on the moment, your mood, or an inner impulse."],
+      "strengths": ["You have the courage to think and respond differently than most. You notice what others miss precisely because you don’t filter the world through norms and expectations. Your authenticity can be raw, but it’s real."],
+      "watchOut": ["A lack of structure can make it hard to close loops or stay on one course for long. Strong emotions can take the wheel before you’ve had time to name them."],
+      "underPressure": ["Under pressure you react intensely and quickly, often before things settle. It’s hard to create emotional distance because tension hits your body and thoughts immediately."],
+      "relationships": ["In relationships you can be unpredictable but honest. You communicate more through reactions than declarations. Others may find you hard to pin down, yet clearly authentic."]
+    },
+    "P02": {
+      "core": ["You’re driven by curiosity and a need to understand things in your own way. You feel best when you can watch, listen, and test without the pressure of immediate answers."],
+      "daily": ["You move calmly, giving yourself time to observe and experiment. You rarely commit to a single direction, because the process of discovery matters more to you than the destination. You treat change as a natural state."],
+      "strengths": ["You keep a fresh perspective where others have already gotten used to things. You connect facts without rushing, often seeing relationships that were previously missed. Your curiosity has a calming effect on people around you."],
+      "watchOut": ["You may postpone decisions because you always see one more option to check. Sometimes it’s hard to draw a clear line between exploring and stopping."],
+      "underPressure": ["Under pressure you retreat into observation instead of immediate action. You need a moment to sort things out in your head and regain clarity."],
+      "relationships": ["In relationships you’re attentive and non-imposing. You listen more than you lead the conversation. For others, you can feel like a calm, safe presence."]
+    },
+    "P03": {
+      "core": ["You’re guided by a strong inner sense of meaning and coherence. If something doesn’t resonate with your values, you feel it quickly."],
+      "daily": ["You engage deeply, but only where you see significance — not just a goal. When a situation drifts away from what matters to you, you withdraw without big declarations. You’d rather lose pace than lose authenticity."],
+      "strengths": ["You can bring depth even to simple actions and conversations. You offer a perspective grounded in meaning, not only effectiveness. For others, you can be a reference point even if you never say it out loud."],
+      "watchOut": ["Disappointment can hit harder than you show on the outside. When reality diverges too far from ideals, tension rises quickly."],
+      "underPressure": ["Under pressure you react emotionally and intensely on the inside. You need time to separate what you feel from what is actually happening."],
+      "relationships": ["In relationships you seek real contact, not polite exchanges. You avoid surface-level conversations even if it complicates things. For some you’re demanding; for others you’re deeply real."]
+    },
+    "P04": {
+      "core": ["You naturally want to understand what’s happening beneath the surface. The calm you carry helps you see meaning where others see only chaos."],
+      "daily": ["Before you respond, you pause and observe people and the tensions between them. You don’t lead through pressure, but through presence and questions. Often that’s enough for things to start sorting themselves out."],
+      "strengths": ["You can hold opposing perspectives without needing to decide who’s right. You give others a sense of direction even when you don’t point to a path directly. It’s easier to calm down around you."],
+      "watchOut": ["At times you take on more responsibility than is truly yours. You can forget that not every situation needs to be carried."],
+      "underPressure": ["Under pressure you turn inward and start organizing everything in your head. Tension builds slowly, but it can run deep."],
+      "relationships": ["In relationships you’re someone people look to for calm. They often come to you with questions they don’t ask others. You become a guide even without planning that role."]
+    },
+    "P05": {
+      "core": ["Your thinking naturally goes beyond what’s happening here and now. You’re more drawn to what could be created than to what already exists."],
+      "daily": ["When something absorbs you, you can dive into one direction for a long time. You detach from everyday stimuli, focusing on an image that slowly becomes clearer. Vision carries you further than circumstances."],
+      "strengths": ["You can see potential where others see limits or risk. You think broadly and ahead, even without complete data. Your ideas have weight and direction."],
+      "watchOut": ["At times you lose contact with day-to-day details and the pace of reality. When tension rises, the vision can blur."],
+      "underPressure": ["Under pressure you escape into future scenarios and planning. It helps you regain a sense of influence."],
+      "relationships": ["In relationships you speak the language of ideas and possibilities. Not everyone can follow your way of thinking. For some you’re inspiring; for others, distant."]
+    },
+    "P06": {
+      "core": ["You feel a strong responsibility for the direction you choose. Inner calm gives you support in decisions even when the situation is unclear."],
+      "daily": ["You act consistently, relying on structure and clearly defined rules. You rarely react impulsively; you prefer to control how things unfold. You make decisions consciously, even when they’re uncomfortable."],
+      "strengths": ["You can keep order where others start to wobble. You provide stability through predictability and clear boundaries. Your firmness builds trust."],
+      "watchOut": ["You may come across as emotionally cool or unavailable. Letting go of control can be difficult for you."],
+      "underPressure": ["Under pressure you focus on action rather than tension. You postpone emotions, concentrating on solutions."],
+      "relationships": ["In relationships you’re direct and clear, leaving little room for guessing. People quickly know where they stand with you and what to expect. You bring stability and order instead of emotional chaos."]
+    },
+    "P07": {
+      "core": ["Your attention naturally goes to people and where they are in their process. You care more about slow maturation than quick results."],
+      "daily": ["Before you respond, you carefully observe pace, tension, and needs around you. You don’t push things forward by force; you let them settle in the right moment. Often you act more quietly than others expect."],
+      "strengths": ["You can see potential where others see only chaos or lack of readiness. You give people space for attempts, mistakes, and their own conclusions. Around you, growth feels easier."],
+      "watchOut": ["Sometimes you take on more of other people’s matters than you should. Your own needs can slip into the background unnoticed."],
+      "underPressure": ["Under pressure you focus on stabilizing the situation around you. Only later do you realize how tense you were yourself."],
+      "relationships": ["In relationships you’re present and attentive, even when you say little. People feel they can slow down and think around you. You often become important before anyone names it."]
+    },
+    "P08": {
+      "core": ["Your attention naturally goes to what needs protection and stabilization. You feel best when there is calm around you and tensions are under control."],
+      "daily": ["You often respond before a situation visibly escalates, because you quickly pick up subtle signals. You prefer preventing problems over cleaning up consequences, so you do many things quietly. For you, safety matters more than speed or impact."],
+      "strengths": ["You can create an atmosphere where others start breathing more calmly. You notice small details that shape comfort and trust. With you, it’s easier to return to balance."],
+      "watchOut": ["Other people’s needs can push your own into the background. Over time this can lead to fatigue that you don’t name for a long time."],
+      "underPressure": ["Under pressure you focus on keeping order and calm around you. Only later do you realize how tense you were yourself."],
+      "relationships": ["In relationships you’re warm and predictable without big declarations. People feel they can rely on you even in difficult moments. You often become someone’s safe point of reference."]
+    },
+    "P09": {
+      "core": ["You look at the world without embellishment or unnecessary assumptions. You care about what actually works, not what sounds good in theory."],
+      "daily": ["When something happens, you react without overthinking possible scenarios. You’d rather test the situation in practice than analyze it from a distance. Action helps you quickly orient to what’s real."],
+      "strengths": ["You can keep a clear head even when chaos is happening around you. You bring clarity and concreteness where others start to get lost. Your directness often shortens the road to a decision."],
+      "watchOut": ["Your honesty can be perceived as harshness even when you don’t mean it. Emotions sometimes arrive faster than reflection."],
+      "underPressure": ["Under pressure you respond impulsively, focused on an immediate fix. Only later comes the moment to pause and evaluate."],
+      "relationships": ["In relationships you speak plainly and don’t wrap things in soft words. People know what to expect from you — which can be a relief or a challenge. You rarely leave things unsaid."]
+    },
+    "P10": {
+      "core": ["You feel best when you have direct contact with what’s real and tangible. For you, thinking doesn’t exist separately from doing — one naturally follows the other."],
+      "daily": ["You enter situations without excessive preparation, learning as you move. You test things in practice rather than debating them for long, because experience gives you the most information. Action organizes your thoughts."],
+      "strengths": ["You can quickly turn ideas into concrete steps without unnecessary delay. You do well when conditions change and not everything is clear. Around you, things start happening."],
+      "watchOut": ["Sometimes you move forward before checking where it leads. Pausing and reflecting doesn’t always arrive at the right time."],
+      "underPressure": ["Under pressure you speed up even more, looking for a solution through movement. Action helps you handle tension."],
+      "relationships": ["In relationships you’re concrete but not cold. You value conversations that lead to a decision or a change. People feel that around you, things take real shape."]
+    },
+    "P11": {
+      "core": ["Your thinking naturally goes deeper than the surface of events. Before you accept something as true, you need to break it down, test it, and understand it on your own terms."],
+      "daily": ["Before you decide, you observe for a long time and gather information, even if others are already acting. Analysis gives you a sense of safety because it lets you move through the world without oversimplifying. Often you know more than you show."],
+      "strengths": ["You can see relationships that remain invisible to others. You connect facts into a coherent whole without losing precision. Your attentiveness brings order to chaos."],
+      "watchOut": ["Sometimes you stay in analysis longer than the situation requires. A decision can be delayed even when the answer is close."],
+      "underPressure": ["Under pressure your thinking becomes even more intense and detailed. It’s harder to let go and trust simpler solutions."],
+      "relationships": ["In relationships you communicate factually and with distance, not revealing everything at once. People may feel you’re hard to read. Over time they appreciate your clarity and consistency."]
+    },
+    "P12": {
+      "core": ["You have a strong need to bring things to the point where they truly start working. What satisfies you isn’t the idea itself, but the moment it stops being theory."],
+      "daily": ["You connect people and actions into one coherent movement even when conditions aren’t ideal. When you see direction, you can pull others along without waiting for full agreement. Progress matters more to you than perfect preparation."],
+      "strengths": ["You can bring things to the moment they stop being a promise and start working. You see where a process gets stuck and push it forward without drama until it moves. Around you, ideas don’t hang in the air — they land on the ground."],
+      "watchOut": ["Sometimes you push forward faster than others can keep up. Only afterward do you notice the pace cost more than you assumed."],
+      "underPressure": ["Under pressure you focus even harder on execution, narrowing your field of view. Effectiveness helps you survive tension, but it can disconnect you from warning signals."],
+      "relationships": ["In relationships you’re someone people can count on when something must be delivered to the end. People feel things move forward around you, even if it can be intense. You often take responsibility before others even name it."]
+    },
+    "P13": {
+      "core": ["You naturally need to look from a distance before stepping into the middle of events. Understanding the situation matters more to you than a quick reaction."],
+      "daily": ["You slow down where others speed up because you know hurry distorts the picture. You track people, tensions, and small shifts before you decide to move. You often see more when others are already in motion."],
+      "strengths": ["You have a rare ability to catch signals that get lost in noise and speed. You connect small observations into a whole before the situation becomes obvious. Your attentiveness gives you an edge before others even notice it."],
+      "watchOut": ["Sometimes distance turns into a safe shelter rather than a conscious choice. You may realize too late that observing replaced acting."],
+      "underPressure": ["Under pressure you close down even more into analysis, searching for meaning instead of movement. The tension doesn’t explode, but it can circulate under the surface for a long time."],
+      "relationships": ["In relationships you can be present more internally than externally. People may feel it’s hard to get close, even when you’re nearby. Trust builds slowly, but it can run deep."]
+    },
+    "P14": {
+      "core": ["You have a strong need to give things your own meaning instead of adopting ready-made forms. What you do must feel aligned with you, otherwise it quickly loses significance."],
+      "daily": ["You go deep into whatever currently absorbs you, cutting off the rest of the world. When something resonates, you can work intensely for a long time without tracking the hours. When meaning disappears, your energy can drop almost instantly."],
+      "strengths": ["You can pull meaning out of chaos and give it form. You bring a fresh perspective where everything starts repeating and stiffening. Your sensitivity lets you see what others haven’t named yet."],
+      "watchOut": ["Lack of meaning can break your continuity and direction. When inspiration fades, it’s easy to slip into tension instead of finding simple structure that would help you return to motion."],
+      "underPressure": ["Under pressure you retreat into your inner world, trying to regain coherence and meaning. The stronger the outside expectations, the harder it is for you to move at a forced pace."],
+      "relationships": ["In relationships you’re intense and authentic but not always predictable. People can feel your depth and sensitivity even when you don’t explain much. Closeness emerges when you have space to be yourself, without the pressure to fit in."]
+    },
+    "P15": {
+      "core": ["You have a strong need to test boundaries — your own and those imposed by others. Life starts to feel real when uncertainty and stakes appear."],
+      "daily": ["You step into situations without full guarantees of safety, because the lack of control gives you energy. You move faster than you can analyze everything, trusting your instincts. Movement and decision are your way of mastering fear."],
+      "strengths": ["You can stay courageous where others retreat or stop. You do well in breakthrough moments, when a step into the unknown is required. Your willingness to take risks often opens new paths."],
+      "watchOut": ["Sometimes intensity blocks your view of consequences that show up later. At times you confuse tension with direction."],
+      "underPressure": ["Under pressure you push forward even harder instead of slowing down. Adrenaline helps you act, but it can drown out warning signals."],
+      "relationships": ["In relationships you’re intense and engaging, but not always stable. People feel excitement around you, though they may struggle to keep up. Closeness emerges where there’s room for speed and change."]
+    },
+    "P16": {
+      "core": ["You have a strong need to move people and situations rather than observe passively. Life feels meaningful when things start reacting, shifting, and responding to your presence."],
+      "daily": ["You naturally bring energy where there used to be stagnation or pause. You respond to people, emotions, and moment-to-moment dynamics faster than you can name it. You often initiate movement before others even realize what was missing."],
+      "strengths": ["You can brighten the atmosphere and activate potential that was asleep. You connect people around an impulse, an emotion, or a shared moment — even if it’s brief. Your presence makes things start happening."],
+      "watchOut": ["Sometimes constant movement covers the need to pause and close loops. When your energy drops, you may feel emptiness or impatience."],
+      "underPressure": ["Under pressure you look for even more stimulation and contact instead of slowing down. Movement helps you discharge tension, but it can also postpone reflection."],
+      "relationships": ["In relationships you’re intense, vivid, and easy to read. People respond quickly to your energy, even if they can’t always keep up. Closeness emerges where there’s room for spontaneity, change, and emotion."]
+    }
   }
 }

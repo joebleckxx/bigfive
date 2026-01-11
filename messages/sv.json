@@ -155,75 +155,154 @@
     "N4": "Mitt humör kan förändras snabbt.",
     "N5": "Jag brukar förbli lugn under press."
   },
-
-  "AddOns": {
-    "stress": {
-      "sensitive": {
-        "label": "Känslig reaktör",
-        "note": "Du fångar upp signaler snabbt. Under press kan känslor bli intensiva — återhämtningstid är viktig."
-      },
-      "steady": {
-        "label": "Lugn stabilisator",
-        "note": "Du håller dig oftast lugn i stress. Du återhämtar dig snabbt och behåller ett klart huvud."
-      }
-    },
-    "subtype": {
-      "empathicVisionary": {
-        "label": "Empatisk visionär",
-        "note": "Kreativitet och människokännedom. Du vill ha lösningar som är smarta och mänskliga."
-      },
-      "independentInnovator": {
-        "label": "Självständig innovatör",
-        "note": "Stora idéer och höga krav. Du utmanar antaganden och skär igenom brus."
-      },
-      "supportivePragmatist": {
-        "label": "Stöttande pragmatiker",
-        "note": "Praktiskt angreppssätt och värme. Du stabiliserar situationer och värnar relationer."
-      },
-      "directRealist": {
-        "label": "Rak realist",
-        "note": "Konkret tänkande och ärlig tydlighet. Du värdesätter resultat, klarhet och effektiv handling."
-      }
-    },
-    "mode": {
-      "driveDeliver": {
-        "label": "Driv & leverera",
-        "note": "Du går snabbt från prat till genomförande. Du gillar tempo och att knyta ihop lösa trådar."
-      },
-      "planPerfect": {
-        "label": "Planera & finslipa",
-        "note": "Du fungerar bäst med struktur och djupt fokus. Kvalitet och korrekthet är dina styrkor."
-      },
-      "exploreAdapt": {
-        "label": "Utforska & anpassa",
-        "note": "Du skapar fart genom att testa. Du itererar snabbt och lär dig genom att göra."
-      },
-      "flowImprovise": {
-        "label": "Flow & improvisera",
-        "note": "Du föredrar flexibilitet och spontanitet. Du fungerar bäst när du kan reagera i stunden."
-      }
-    }
+  
+  "Types": {
+    "P01": { "name": "Tänkaren", "desc": "Sorterar verkligheten i huvudet innan det blir handling." },
+    "P02": { "name": "Utforskaren", "desc": "Drivs av nyfikenhet och behovet av att förstå världen." },
+    "P03": { "name": "Idealisten", "desc": "Styrs av en inre kompass och tydliga värderingar." },
+    "P04": { "name": "Vägvisaren", "desc": "Ger andra en känsla av riktning och stabilitet." },
+    "P05": { "name": "Visionären", "desc": "Ser bortom nuet och tänker framåt." },
+    "P06": { "name": "Ledaren", "desc": "Sätter riktning och kan få andra att följa med." },
+    "P07": { "name": "Mentorn", "desc": "Stöttar andras utveckling genom insikt och förståelse." },
+    "P08": { "name": "Omsorgsgivaren", "desc": "Uppmärksam på människors behov och skapar trygghet." },
+    "P09": { "name": "Realisten", "desc": "Fokuserar på fakta och det som fungerar i praktiken." },
+    "P10": { "name": "Praktikern", "desc": "Trivs bäst i handling och konkreta uppgifter." },
+    "P11": { "name": "Analytikern", "desc": "Förstår världen genom logik, data och precision." },
+    "P12": { "name": "Genomföraren", "desc": "Driver saker i mål och bryr sig om resultatet." },
+    "P13": { "name": "Observatören", "desc": "Fångar upp förändringar, signaler och nyanser." },
+    "P14": { "name": "Skaparen", "desc": "Uttrycker sig genom skapande och nya former." },
+    "P15": { "name": "Risktopparen", "desc": "Agerar modigt trots osäkerhet." },
+    "P16": { "name": "Energigivaren", "desc": "Tillför energi och sätter saker i rörelse." }
   },
 
-  "Types": {
-    "P01": { "name": "Strategisk tänkare", "desc": "Långsiktigt fokus, systemtänk, klarhet framför kaos." },
-    "P02": { "name": "Analytisk utforskare", "desc": "Nyfiken, reflekterande och idédriven." },
-    "P03": { "name": "Beslutsam ledare", "desc": "Riktnings- och resultatfokuserad." },
-    "P04": { "name": "Kreativ katalysator", "desc": "Uppfinningsrik, snabb i tanken och energisk kring möjligheter." },
-
-    "P05": { "name": "Insiktsfull vägledare", "desc": "Intuitiv och människomedveten." },
-    "P06": { "name": "Reflekterande idealist", "desc": "Drivs av autenticitet och inre värderingar." },
-    "P07": { "name": "Stöttande motivator", "desc": "Uppmuntrande, varm och utvecklingsorienterad." },
-    "P08": { "name": "Inspirerande sammanlänkare", "desc": "Uttrycksfull, entusiastisk och socialt smidig." },
-
-    "P09": { "name": "Pålitlig genomförare", "desc": "Strukturerad, pålitlig och stabil." },
-    "P10": { "name": "Omtänksam stabilisator", "desc": "Stöttande, lojal och detaljmedveten." },
-    "P11": { "name": "Praktisk organisatör", "desc": "Ordning och effektivitet i fokus." },
-    "P12": { "name": "Social harmonisator", "desc": "Relationsfokuserad och samarbetsinriktad." },
-
-    "P13": { "name": "Lugn problemlösare", "desc": "Samlad, logisk och lösningsorienterad." },
-    "P14": { "name": "Autentisk skapare", "desc": "Upplevelsedriven och självuttryckande." },
-    "P15": { "name": "Anpassningsbar risktagare", "desc": "Handlingsorienterad och snabb att ställa om." },
-    "P16": { "name": "Energisk performer", "desc": "Livlig, engagerande och nu-fokuserad." }
+  "Profiles": {
+    "P01": {
+      "core": ["Ditt tänkande är intensivt och självständigt, ofta frikopplat från omgivningens förväntningar. Du följer dina egna impulser och en inre logik, även när den är svår att förklara för andra."],
+      "daily": ["Du rör dig i vågor — du kan vara starkt engagerad och sedan plötsligt dra dig tillbaka. Du håller dig sällan till fasta mönster; du reagerar på det som fångar din uppmärksamhet just nu. Du fattar beslut utifrån stunden, sinnesläget eller en inre impuls."],
+      "strengths": ["Du har modet att tänka och reagera annorlunda än de flesta. Du ser sådant som andra missar just för att du inte filtrerar världen genom normer och förväntningar. Din autenticitet kan vara rå, men den är äkta."],
+      "watchOut": ["Brist på struktur kan göra det svårt att avsluta saker eller hålla en riktning över tid. Starka känslor kan ta över innan du hinner sätta ord på dem."],
+      "underPressure": ["Under press reagerar du intensivt och snabbt, ofta innan situationen hinner lugna sig. Det kan vara svårt att skapa emotionell distans eftersom spänningen slår direkt i kropp och tankar."],
+      "relationships": ["I relationer kan du vara oförutsägbar men ärlig. Du kommunicerar mer genom reaktioner än genom deklarationer. Andra kan ha svårt att få grepp om dig, men känner tydligt att du är autentisk."]
+    },
+    "P02": {
+      "core": ["Du drivs av nyfikenhet och behovet av att förstå saker på ditt sätt. Du mår bäst när du kan se, lyssna och pröva utan pressen att hitta snabba svar."],
+      "daily": ["Du rör dig lugnt och ger dig tid att observera och experimentera. Du binder dig sällan till en enda riktning, eftersom själva upptäckandet är viktigare än målet. Du ser förändring som ett naturligt tillstånd."],
+      "strengths": ["Du behåller ett fräscht perspektiv där andra redan har vant sig. Du kopplar ihop fakta utan att stressa och ser ofta samband som tidigare missats. Din nyfikenhet har en lugnande effekt på omgivningen."],
+      "watchOut": ["Du kan skjuta upp beslut eftersom du alltid ser ytterligare en möjlighet att undersöka. Ibland är det svårt att dra en tydlig gräns mellan utforskande och att stanna."],
+      "underPressure": ["Under press drar du dig tillbaka i observation snarare än att agera direkt. Du behöver en stund för att sortera allt i huvudet och få tillbaka klarhet."],
+      "relationships": ["I relationer är du uppmärksam och inte påträngande. Du lyssnar mer än du driver samtalet. För andra kan du vara en lugn och trygg närvaro."]
+    },
+    "P03": {
+      "core": ["Du styrs av en stark inre känsla av mening och samstämmighet. Om något inte harmonierar med dina värderingar känner du det snabbt."],
+      "daily": ["Du engagerar dig djupt, men bara där du ser betydelse — inte bara ett mål. När en situation glider bort från det som är viktigt för dig drar du dig tillbaka utan stora ord. Du tappar hellre tempo än autenticitet."],
+      "strengths": ["Du kan ge djup även åt enkla handlingar och samtal. Du bidrar med ett perspektiv som bygger på mening, inte bara effektivitet. För andra kan du vara en referenspunkt även om du inte säger det rakt ut."],
+      "watchOut": ["Besvikelse kan slå hårdare än du visar utåt. När verkligheten går för långt ifrån idealen stiger spänningen snabbt."],
+      "underPressure": ["Under press reagerar du känslomässigt och intensivt på insidan. Du behöver tid för att skilja det du känner från det som faktiskt händer."],
+      "relationships": ["I relationer söker du äkta kontakt, inte artiga utbyten. Du undviker ytliga samtal även om det kan komplicera relationer. För vissa är du krävande; för andra är du djupt genuin."]
+    },
+    "P04": {
+      "core": ["Du har en naturlig vilja att förstå vad som händer under ytan. Lugnet du bär hjälper dig att se mening där andra bara ser kaos."],
+      "daily": ["Innan du reagerar stannar du upp och observerar människor och spänningar mellan dem. Du leder inte med press, utan med närvaro och frågor. Ofta räcker det för att saker ska börja ordna upp sig."],
+      "strengths": ["Du kan hålla två motstridiga perspektiv utan att behöva avgöra vem som har rätt. Du ger andra en känsla av riktning även när du inte pekar ut en väg direkt. Det är lättare att lugna sig i din närhet."],
+      "watchOut": ["Ibland tar du på dig mer ansvar än som egentligen är ditt. Du kan glömma att inte varje situation behöver bäras."],
+      "underPressure": ["Under press drar du dig inåt och börjar strukturera allt i huvudet. Spänningen byggs långsamt men kan bli djup."],
+      "relationships": ["I relationer är du ofta den som människor söker sig till för lugn. De kommer till dig med frågor de inte ställer till andra. Du blir en vägvisare utan att planera det."]
+    },
+    "P05": {
+      "core": ["Ditt tänkande går naturligt bortom det som händer här och nu. Du dras mer till det som kan bli till än till det som redan finns."],
+      "daily": ["När något fångar dig kan du dyka ner i en riktning länge. Du kopplar bort vardagens intryck och fokuserar på en bild som långsamt klarnar. Din vision bär dig längre än omständigheterna."],
+      "strengths": ["Du kan se potential där andra ser begränsningar eller risk. Du tänker brett och med framförhållning, även utan full data. Dina idéer har tyngd och riktning."],
+      "watchOut": ["Ibland tappar du kontakten med detaljerna och verklighetens tempo. När spänningen ökar kan visionen börja suddas ut."],
+      "underPressure": ["Under press flyr du in i framtidsscenarier och planering. Det hjälper dig att återfå en känsla av kontroll och påverkan."],
+      "relationships": ["I relationer talar du idéernas och möjligheternas språk. Alla hänger inte med i ditt sätt att tänka. För vissa är du inspirerande; för andra, avlägsen."]
+    },
+    "P06": {
+      "core": ["Du har en stark ansvarskänsla för den riktning du väljer. Inre lugn ger dig stöd i beslut även när läget är otydligt."],
+      "daily": ["Du agerar konsekvent och lutar dig mot struktur och tydliga regler. Du reagerar sällan impulsivt och föredrar att ha kontroll över hur saker utvecklas. Du fattar beslut medvetet även när de är obekväma."],
+      "strengths": ["Du kan hålla ordning där andra börjar vackla. Du skapar stabilitet genom förutsägbarhet och tydliga ramar. Din fasthet bygger förtroende."],
+      "watchOut": ["Du kan uppfattas som känslomässigt sval eller otillgänglig. Att släppa kontrollen kan vara svårt för dig."],
+      "underPressure": ["Under press fokuserar du på att agera snarare än på spänningen. Du skjuter känslor åt sidan och koncentrerar dig på lösningar."],
+      "relationships": ["I relationer är du tydlig och konkret, vilket lämnar lite utrymme för gissningar. Människor vet snabbt var de har dig och vad de kan förvänta sig. Du ger stabilitet och ordning istället för emotionellt kaos."]
+    },
+    "P07": {
+      "core": ["Din uppmärksamhet dras naturligt till människor och var de befinner sig i sin process. Du bryr dig mer om något som mognar än om snabba resultat."],
+      "daily": ["Innan du reagerar observerar du noga tempo, spänning och behov runt dig. Du pressar inte fram saker med kraft, utan låter dem landa i rätt ögonblick. Ofta agerar du tystare än andra förväntar sig."],
+      "strengths": ["Du kan se potential där andra bara ser kaos eller brist på beredskap. Du ger människor utrymme för försök, misstag och egna insikter. I din närhet blir utveckling lättare."],
+      "watchOut": ["Ibland tar du på dig fler av andras saker än du borde. Dina egna behov kan glida i bakgrunden utan att du märker det."],
+      "underPressure": ["Under press fokuserar du på att stabilisera situationen runt dig. Först senare inser du hur spänd du själv var."],
+      "relationships": ["I relationer är du närvarande och uppmärksam även när du säger lite. Människor känner att de kan sakta ner och tänka i din närhet. Du blir ofta viktig innan någon sätter ord på det."]
+    },
+    "P08": {
+      "core": ["Din uppmärksamhet dras naturligt till det som behöver skydd och stabilisering. Du mår bäst när det är lugnt omkring dig och spänningar är under kontroll."],
+      "daily": ["Du reagerar ofta innan en situation hinner eskalera tydligt, eftersom du snabbt fångar subtila signaler. Du föredrar att förebygga problem framför att hantera följderna, så du gör mycket i det tysta. För dig är trygghet viktigare än tempo eller effekt."],
+      "strengths": ["Du kan skapa en atmosfär där andra börjar andas lugnare. Du ser små detaljer som bygger komfort och tillit. Med dig är det lättare att återfå balans."],
+      "watchOut": ["Andras behov kan skjuta dina egna åt sidan. Med tiden kan det leda till trötthet som du länge inte sätter ord på."],
+      "underPressure": ["Under press fokuserar du på att hålla ordning och lugn omkring dig. Först senare märker du hur spänd du själv var."],
+      "relationships": ["I relationer är du varm och förutsägbar utan stora deklarationer. Människor känner att de kan lita på dig även i svåra stunder. Du blir ofta någon annans trygga punkt."]
+    },
+    "P09": {
+      "core": ["Du ser världen utan försköningar och onödiga antaganden. Du bryr dig om vad som faktiskt fungerar, inte vad som låter bra i teorin."],
+      "daily": ["När något händer reagerar du utan att fastna i möjliga scenarier. Du testar hellre situationen i praktiken än analyserar den på avstånd. Handling hjälper dig snabbt att orientera dig i det som är verkligt."],
+      "strengths": ["Du kan behålla ett klart huvud även när det är kaos runt omkring. Du tillför tydlighet och konkretion där andra börjar tappa bort sig. Din direkthet kan ofta förkorta vägen till beslut."],
+      "watchOut": ["Din ärlighet kan uppfattas som hårdhet även när du inte menar det så. Känslor kan ibland komma snabbare än eftertanke."],
+      "underPressure": ["Under press reagerar du impulsivt och fokuserar på en omedelbar lösning. Först senare kommer pausen och utvärderingen."],
+      "relationships": ["I relationer talar du rakt och utan omskrivningar. Människor vet vad de kan förvänta sig av dig — vilket kan vara en lättnad eller en utmaning. Du lämnar sällan saker osagda."]
+    },
+    "P10": {
+      "core": ["Du trivs bäst när du har direkt kontakt med det som är verkligt och påtagligt. För dig finns tänkandet inte separat från görandet — det ena följer naturligt av det andra."],
+      "daily": ["Du kliver in i situationer utan överdriven förberedelse och lär dig i rörelse. Du prövar saker i praktiken istället för att väga dem länge, eftersom erfarenhet ger dig mest information. Handling hjälper dig att sortera tankar."],
+      "strengths": ["Du kan snabbt omvandla idéer till konkreta steg utan onödiga dröjsmål. Du fungerar bra när förutsättningar förändras och inte allt är tydligt. I din närhet börjar saker hända."],
+      "watchOut": ["Ibland går du vidare innan du kontrollerar vart det leder. Att stanna upp och reflektera kommer inte alltid i rätt tid."],
+      "underPressure": ["Under press ökar du ofta tempot ännu mer och söker lösningen i rörelse. Handling hjälper dig att hantera spänning."],
+      "relationships": ["I relationer är du konkret men inte kall. Du uppskattar samtal som leder till beslut eller förändring. Människor känner att saker får verklig form i din närhet."]
+    },
+    "P11": {
+      "core": ["Ditt tänkande går naturligt djupare än händelsernas yta. Innan du accepterar något som sant behöver du bryta ner det, testa det och förstå det på dina villkor."],
+      "daily": ["Innan du bestämmer dig observerar du länge och samlar information, även om andra redan agerar. Analys ger dig trygghet eftersom du kan röra dig i världen utan förenklingar. Ofta vet du mer än du visar."],
+      "strengths": ["Du kan se samband som förblir osynliga för andra. Du kopplar ihop fakta till en helhet utan att tappa precision. Din uppmärksamhet skapar ordning i kaos."],
+      "watchOut": ["Ibland stannar du i analys längre än situationen kräver. Beslut kan skjutas upp även när svaret är nära."],
+      "underPressure": ["Under press blir ditt tänkande ännu mer intensivt och detaljrikt. Det blir svårare att släppa taget och lita på enklare lösningar."],
+      "relationships": ["I relationer kommunicerar du sakligt och med viss distans och visar inte allt på en gång. Människor kan tycka att du är svår att läsa. Med tiden uppskattar de din tydlighet och konsekvens."]
+    },
+    "P12": {
+      "core": ["Du har ett starkt behov av att driva saker till den punkt där de verkligen börjar fungera. Det som ger dig tillfredsställelse är inte idén, utan ögonblicket när den slutar vara teori."],
+      "daily": ["Du kopplar ihop människor och handlingar till en sammanhängande rörelse även när villkoren inte är perfekta. När du ser riktningen kan du dra andra med dig utan att vänta på full enighet. Framsteg är viktigare för dig än perfekt förberedelse."],
+      "strengths": ["Du kan få saker till den punkt där de slutar vara löften och börjar fungera. Du ser var en process fastnar och trycker den framåt utan drama tills den rör sig. I din närhet hänger idéer inte i luften — de landar på marken."],
+      "watchOut": ["Ibland driver du framåt snabbare än andra hinner med. Först i efterhand märker du att tempot kostade mer än du trodde."],
+      "underPressure": ["Under press fokuserar du ännu mer på genomförande och smalnar av ditt synfält. Effektivitet hjälper dig att hantera spänning, men kan koppla bort dig från varningssignaler."],
+      "relationships": ["I relationer är du någon man kan räkna med när något måste levereras hela vägen. Människor känner att saker går framåt med dig, även om det kan vara intensivt. Du tar ofta ansvar innan andra ens sätter ord på det."]
+    },
+    "P13": {
+      "core": ["Du har en naturlig vilja att se på saker på avstånd innan du går in i händelsernas centrum. Förståelse är viktigare för dig än en snabb reaktion."],
+      "daily": ["Du saktar ner där andra ökar tempot, eftersom du vet att brådska förvränger bilden. Du följer människor, spänningar och små skiften innan du bestämmer dig för att agera. Ofta ser du mer när andra redan är i rörelse."],
+      "strengths": ["Du har en ovanlig förmåga att fånga signaler som försvinner i brus och tempo. Du kopplar ihop små observationer till en helhet innan situationen blir uppenbar. Din uppmärksamhet ger dig ett försprång innan andra ens märker det."],
+      "watchOut": ["Ibland blir distans en trygg plats snarare än ett medvetet val. Du kan inse för sent att observation har ersatt handling."],
+      "underPressure": ["Under press stänger du ner ännu mer i analys och söker mening istället för rörelse. Spänningen exploderar inte, men kan cirkulera under ytan länge."],
+      "relationships": ["I relationer kan du vara närvarande mer inåt än utåt. Människor kan känna att det är svårt att komma nära, även när du är där. Tillit byggs långsamt, men kan bli djup."]
+    },
+    "P14": {
+      "core": ["Du har ett starkt behov av att ge saker din egen mening istället för att ta över färdiga former. Det du gör måste kännas i linje med dig, annars tappar det snabbt betydelse."],
+      "daily": ["Du går djupt in i det som just nu absorberar dig och stänger ute resten av världen. När något resonerar kan du arbeta intensivt länge utan att räkna timmar. När meningen försvinner kan energin falla nästan direkt."],
+      "strengths": ["Du kan plocka fram mening ur kaos och ge den form. Du tillför ett nytt perspektiv där allt börjar upprepa sig och stelna. Din känslighet gör att du ser det andra ännu inte satt ord på."],
+      "watchOut": ["Brist på mening kan bryta din kontinuitet och riktning. När inspirationen sviktar är det lätt att hamna i spänning istället för att hitta enkel struktur som hjälper dig tillbaka i rörelse."],
+      "underPressure": ["Under press drar du dig tillbaka inåt för att återfå sammanhang och mening. Ju starkare yttre krav, desto svårare är det att röra sig i ett påtvingat tempo."],
+      "relationships": ["I relationer är du intensiv och autentisk men inte alltid förutsägbar. Människor kan känna ditt djup och din känslighet även när du inte förklarar mycket. Närhet uppstår när du har utrymme att vara dig själv, utan press att passa in."]
+    },
+    "P15": {
+      "core": ["Du har ett starkt behov av att testa gränser — dina egna och de som andra sätter. Livet känns verkligt när osäkerhet och insats finns."],
+      "daily": ["Du går in i situationer utan fulla garantier för trygghet, eftersom brist på kontroll ger dig energi. Du agerar snabbare än du hinner analysera allt och litar på din instinkt. Rörelse och beslut är ditt sätt att hantera rädsla."],
+      "strengths": ["Du kan vara modig där andra backar eller stannar. Du fungerar bra i brytpunkter när ett steg in i det okända krävs. Din vilja att ta risker öppnar ofta nya vägar."],
+      "watchOut": ["Ibland skymmer intensiteten konsekvenser som kommer senare. Du kan förväxla spänning med riktning."],
+      "underPressure": ["Under press trycker du framåt ännu mer istället för att sakta ner. Adrenalin hjälper dig att agera, men kan dränka varningssignaler."],
+      "relationships": ["I relationer är du intensiv och engagerande men inte alltid stabil. Människor känner spänning kring dig, även om de kan ha svårt att hänga med. Närhet uppstår där det finns utrymme för tempo och förändring."]
+    },
+    "P16": {
+      "core": ["Du har ett starkt behov av att sätta människor och situationer i rörelse istället för att observera passivt. Livet känns meningsfullt när saker börjar reagera och förändras i din närvaro."],
+      "daily": ["Du tillför naturligt energi där det tidigare fanns stagnation eller paus. Du reagerar på människor, känslor och stundens dynamik snabbare än du hinner sätta ord på det. Ofta initierar du rörelse innan andra ens förstår att något saknades."],
+      "strengths": ["Du kan liva upp stämningen och aktivera potential som varit sovande. Du samlar människor kring en impuls, en känsla eller ett gemensamt ögonblick — även om det är kort. Din närvaro gör att saker börjar hända."],
+      "watchOut": ["Ibland kan ständig rörelse dölja behovet av att stanna upp och avsluta saker. När energin sjunker kan du känna tomhet eller otålighet."],
+      "underPressure": ["Under press söker du ännu mer stimulans och kontakt istället för att sakta ner. Rörelse hjälper dig att släppa spänning, men kan också skjuta upp reflektion."],
+      "relationships": ["I relationer är du intensiv, levande och lätt att läsa. Människor reagerar snabbt på din energi, även om de inte alltid hinner med. Närhet uppstår där det finns utrymme för spontanitet, förändring och känslor."]
+    }
   }
 }

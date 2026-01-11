@@ -33,14 +33,6 @@ type StoredResultV1 = {
   typeCode: string; // P01–P16
   typeName?: string;
   typeDescription?: string;
-  addOns?: {
-    stressProfile?: { label: string; note: string };
-    subtype?: { label: string; note: string };
-    mode?: { label: string; note: string };
-    stressKey?: string;
-    subtypeKey?: string;
-    modeKey?: string;
-  };
 };
 
 const STORAGE_KEY = "personality_result_v1";
@@ -61,19 +53,14 @@ const AVATARS = Array.from({ length: 16 }, (_, i) => {
 const TYPE_CODES = Array.from({ length: 16 }, (_, i) =>
   `P${String(i + 1).padStart(2, "0")}`
 );
-const STRESS_KEYS = ["sensitive", "steady"] as const;
-const SUBTYPE_KEYS = [
-  "empathicVisionary",
-  "independentInnovator",
-  "supportivePragmatist",
-  "directRealist"
-] as const;
-const MODE_KEYS = [
-  "driveDeliver",
-  "planPerfect",
-  "exploreAdapt",
-  "flowImprovise"
-] as const;
+
+function isValidTypeCode(code: unknown): code is string {
+  if (typeof code !== "string") return false;
+  const m = /^P(\d{2})$/.exec(code);
+  if (!m) return false;
+  const n = Number(m[1]);
+  return Number.isFinite(n) && n >= 1 && n <= 16;
+}
 
 function avatarIndexFromTypeCode(code: string) {
   const n = Number(code.replace("P", ""));
@@ -95,8 +82,7 @@ function levelKey(v: number): "low" | "medium" | "high" {
 function isResultShape(x: any): x is StoredResultV1 {
   return (
     x &&
-    typeof x.typeCode === "string" &&
-    x.typeCode.startsWith("P") &&
+    isValidTypeCode(x.typeCode) &&
     x.scores &&
     typeof x.scores.E === "number" &&
     typeof x.scores.O === "number" &&
@@ -122,7 +108,10 @@ function pickLongest(values: string[]) {
   );
 }
 
-function longestByKeys<T extends string>(keys: readonly T[], get: (key: T) => string) {
+function longestByKeys<T extends string>(
+  keys: readonly T[],
+  get: (key: T) => string
+) {
   return pickLongest(keys.map((key) => safeGet(() => get(key), "")));
 }
 
@@ -131,7 +120,7 @@ export default function ResultPage() {
 
   const t = useTranslations("Result");
   const tt = useTranslations("Types");
-  const ta = useTranslations("AddOns");
+  const tp = useTranslations("Profiles");
 
   const [data, setData] = useState<StoredResultV1 | null>(null);
   const [loaded, setLoaded] = useState(false);
@@ -197,19 +186,6 @@ export default function ResultPage() {
     }
   }, [router]);
 
-  const stabilityLabel = useMemo(() => {
-    if (!data) return "";
-    if (data.stability >= 67) return t("stability.high");
-    if (data.stability >= 34) return t("stability.medium");
-    return t("stability.low");
-  }, [data, t]);
-
-  function stabilityDotClass(stability: number) {
-    if (stability >= 67) return "bg-emerald-400";
-    if (stability >= 34) return "bg-amber-400";
-    return "bg-rose-400";
-  }
-
   const typeName = useMemo(() => {
     if (!data) return "";
     return safeGet(
@@ -231,74 +207,26 @@ export default function ResultPage() {
     return AVATARS[avatarIndexFromTypeCode(data.typeCode)];
   }, [data]);
 
-  const stress = useMemo(() => {
-    if (!data?.addOns) return null;
+  // ✅ Profiles (6 sekcji)
+  const profile = useMemo(() => {
+    if (!data) return null;
+    const code = data.typeCode;
 
-    if (data.addOns.stressProfile?.label || data.addOns.stressProfile?.note) {
-      return {
-        label: data.addOns.stressProfile?.label ?? "",
-        note: data.addOns.stressProfile?.note ?? ""
-      };
-    }
+    // next-intl: arrays pobieramy przez .raw
+    const raw = (tp as any).raw as (key: string) => any;
 
-    const key = data.addOns.stressKey as "sensitive" | "steady" | undefined;
-    if (!key) return null;
+    const getLines = (k: string): string[] =>
+      safeGet(() => raw(`${code}.${k}`) as string[], []);
 
     return {
-      label: safeGet(() => ta(`stress.${key}.label`), ""),
-      note: safeGet(() => ta(`stress.${key}.note`), "")
+      core: getLines("core"),
+      daily: getLines("daily"),
+      strengths: getLines("strengths"),
+      watchOut: getLines("watchOut"),
+      underPressure: getLines("underPressure"),
+      relationships: getLines("relationships")
     };
-  }, [data, ta]);
-
-  const subtype = useMemo(() => {
-    if (!data?.addOns) return null;
-
-    if (data.addOns.subtype?.label || data.addOns.subtype?.note) {
-      return {
-        label: data.addOns.subtype?.label ?? "",
-        note: data.addOns.subtype?.note ?? ""
-      };
-    }
-
-    const key = data.addOns.subtypeKey as
-      | "empathicVisionary"
-      | "independentInnovator"
-      | "supportivePragmatist"
-      | "directRealist"
-      | undefined;
-
-    if (!key) return null;
-
-    return {
-      label: safeGet(() => ta(`subtype.${key}.label`), ""),
-      note: safeGet(() => ta(`subtype.${key}.note`), "")
-    };
-  }, [data, ta]);
-
-  const mode = useMemo(() => {
-    if (!data?.addOns) return null;
-
-    if (data.addOns.mode?.label || data.addOns.mode?.note) {
-      return {
-        label: data.addOns.mode?.label ?? "",
-        note: data.addOns.mode?.note ?? ""
-      };
-    }
-
-    const key = data.addOns.modeKey as
-      | "driveDeliver"
-      | "planPerfect"
-      | "exploreAdapt"
-      | "flowImprovise"
-      | undefined;
-
-    if (!key) return null;
-
-    return {
-      label: safeGet(() => ta(`mode.${key}.label`), ""),
-      note: safeGet(() => ta(`mode.${key}.note`), "")
-    };
-  }, [data, ta]);
+  }, [data, tp]);
 
   async function downloadPdf() {
     if (!data || downloading) return;
@@ -315,34 +243,6 @@ export default function ResultPage() {
       );
       const maxTypeDesc = longestByKeys(TYPE_CODES, (code) =>
         tt(`${code}.desc`)
-      );
-
-      const maxStressLabel = longestByKeys(STRESS_KEYS, (key) =>
-        ta(`stress.${key}.label`)
-      );
-      const maxStressNote = longestByKeys(STRESS_KEYS, (key) =>
-        ta(`stress.${key}.note`)
-      );
-      const maxSubtypeLabel = longestByKeys(SUBTYPE_KEYS, (key) =>
-        ta(`subtype.${key}.label`)
-      );
-      const maxSubtypeNote = longestByKeys(SUBTYPE_KEYS, (key) =>
-        ta(`subtype.${key}.note`)
-      );
-      const maxModeLabel = longestByKeys(MODE_KEYS, (key) =>
-        ta(`mode.${key}.label`)
-      );
-      const maxModeNote = longestByKeys(MODE_KEYS, (key) =>
-        ta(`mode.${key}.note`)
-      );
-
-      const stabilityOptions = [
-        { label: t("stability.high"), color: "#34D399" },
-        { label: t("stability.medium"), color: "#FBBF24" },
-        { label: t("stability.low"), color: "#FB7185" }
-      ];
-      const maxStability = stabilityOptions.reduce((best, option) =>
-        option.label.length > best.label.length ? option : best
       );
 
       const avatarUrl = (() => {
@@ -376,28 +276,6 @@ export default function ResultPage() {
 
       const reportTypeName = useMax ? maxTypeName : typeName;
       const reportTypeDesc = useMax ? maxTypeDesc : typeDescription;
-      const reportStressLabel = useMax ? maxStressLabel : stress?.label;
-      const reportStressNote = useMax ? maxStressNote : stress?.note;
-      const reportSubtypeLabel = useMax ? maxSubtypeLabel : subtype?.label;
-      const reportSubtypeNote = useMax ? maxSubtypeNote : subtype?.note;
-      const reportModeLabel = useMax ? maxModeLabel : mode?.label;
-      const reportModeNote = useMax ? maxModeNote : mode?.note;
-
-      const reportStability =
-        useMax
-          ? {
-              label: maxStability.label,
-              color: maxStability.color
-            }
-          : {
-              label: stabilityLabel,
-              color:
-                data.stability >= 67
-                  ? "#34D399"
-                  : data.stability >= 34
-                    ? "#FBBF24"
-                    : "#FB7185"
-            };
 
       const report: PdfReportData = {
         brandTitle: t("brandTitle"),
@@ -413,22 +291,6 @@ export default function ResultPage() {
         typeName: reportTypeName,
         typeDescription: reportTypeDesc,
         avatarUrl,
-
-        addOns: {
-          stressTitle: t("cards.stress.title"),
-          stressValue: reportStressLabel,
-          stressNote: reportStressNote,
-          stabilityLabel: `${t("cards.stress.stability")}: ${reportStability.label}`,
-          stabilityColor: reportStability.color,
-
-          subtypeTitle: t("cards.subtype.title"),
-          subtypeValue: reportSubtypeLabel,
-          subtypeNote: reportSubtypeNote,
-
-          modeTitle: t("cards.mode.title"),
-          modeValue: reportModeLabel,
-          modeNote: reportModeNote
-        },
 
         bigFive: bigFiveRows.map((r) => ({
           key: r.key,
@@ -506,6 +368,15 @@ export default function ResultPage() {
     bigFiveRows[0]
   );
 
+  const sections = [
+    { key: "core", icon: "🧠", title: t("profileSections.core"), lines: profile?.core ?? [] },
+    { key: "daily", icon: "⚡", title: t("profileSections.daily"), lines: profile?.daily ?? [] },
+    { key: "strengths", icon: "🌟", title: t("profileSections.strengths"), lines: profile?.strengths ?? [] },
+    { key: "watchOut", icon: "⚠️", title: t("profileSections.watchOut"), lines: profile?.watchOut ?? [] },
+    { key: "underPressure", icon: "🛡️", title: t("profileSections.underPressure"), lines: profile?.underPressure ?? [] },
+    { key: "relationships", icon: "🧩", title: t("profileSections.relationships"), lines: profile?.relationships ?? [] }
+  ] as const;
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-4 py-6 text-white sm:px-6 sm:py-10">
       <div className="pointer-events-none absolute inset-0">
@@ -514,6 +385,7 @@ export default function ResultPage() {
         <div className="absolute bottom-0 -right-40 h-[360px] w-[360px] rounded-full bg-pink-500/20 blur-[120px]" />
         <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] via-transparent to-transparent" />
       </div>
+
       <div className="relative mx-auto w-full max-w-xl">
         {/* Top bar */}
         <div className="flex items-center justify-between gap-3">
@@ -616,91 +488,47 @@ export default function ResultPage() {
                     {typeName}
                   </h2>
 
-                  {/* ✅ Summary line (was Joe) */}
                   <p className="mt-2 text-sm text-white/80 italic break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                     {typeDescription}
                   </p>
-
                 </div>
               </div>
             </div>
           </div>
 
-          {/* ✅ Joe line (moved under the 3 cards, above actions) */}
+          {/* ✅ Joe line */}
           <p className="mt-5 text-xs text-white/45 italic break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
             {joeLine} <span className="text-white/40">— Joe</span>
           </p>
 
-          {/* Add-ons cards */}
-          {(stress || subtype || mode) && (
-            <div className="mt-6 space-y-4">
-              {stress && (
-                <div className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                      {t("cards.stress.title")}
-                    </div>
-
-                    <div className="flex items-center gap-2 text-xs text-white/60">
-                      <span
-                        className={`h-2 w-2 rounded-full ${stabilityDotClass(
-                          data.stability
-                        )}`}
-                      />
-                      <span className="break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                        {t("cards.stress.stability")}: {stabilityLabel}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="mt-2 text-sm font-semibold text-white/90 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                    {stress.label}
-                  </div>
-
-                  <p className="mt-2 text-xs leading-relaxed text-white/60 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                    {stress.note}
-                  </p>
+          {/* ✅ Profile sections (6) */}
+          <div className="mt-6 space-y-4">
+            {sections.map((s) => (
+              <div
+                key={s.key}
+                className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4"
+              >
+                <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+                  {s.icon} {s.title}
                 </div>
-              )}
 
-              {subtype && (
-                <div className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4">
-                  <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                    {t("cards.subtype.title")}
-                  </div>
-
-                  <div className="mt-2 text-sm font-semibold text-white/90 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                    {subtype.label}
-                  </div>
-
-                  <p className="mt-2 text-xs leading-relaxed text-white/60 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                    {subtype.note}
-                  </p>
+                <div className="mt-2 space-y-2 text-sm text-white/85">
+                  {s.lines.map((line, i) => (
+                    <p
+                      key={i}
+                      className="break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]"
+                    >
+                      {line}
+                    </p>
+                  ))}
                 </div>
-              )}
+              </div>
+            ))}
+          </div>
 
-              {mode && (
-                <div className="rounded-2xl border border-white/15 bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-pink-500/10 p-4">
-                  <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                    {t("cards.mode.title")}
-                  </div>
-
-                  <div className="mt-2 text-sm font-semibold text-white/90 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                    {mode.label}
-                  </div>
-
-                  <p className="mt-2 text-xs leading-relaxed text-white/60 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                    {mode.note}
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Actions: keep in one row on mobile */}
+          {/* Actions */}
           <div className="mt-6">
             <div className="flex items-center gap-3">
-              {/* Show personality traits – left (fills remaining space) */}
               <button
                 onClick={() => setShowBigFive((v) => !v)}
                 className="inline-flex flex-1 min-w-0 items-center justify-center gap-2 rounded-full
@@ -721,7 +549,6 @@ export default function ResultPage() {
                 <span className="shrink-0 text-white/70">{showBigFive ? "▴" : "▾"}</span>
               </button>
 
-              {/* Download PDF – right (does not shrink / does not wrap) */}
               <button
                 onClick={downloadPdf}
                 disabled={downloading}
@@ -739,7 +566,6 @@ export default function ResultPage() {
                   focus:outline-none focus-visible:ring-2 focus-visible:ring-white/45"
                 type="button"
               >
-                {/* PDF icon */}
                 <svg
                   width="16"
                   height="16"
@@ -778,9 +604,7 @@ export default function ResultPage() {
               </button>
             </div>
 
-            <div className="mt-2 text-xs text-white/40">
-              {t("bigFive.note")}
-            </div>
+            <div className="mt-2 text-xs text-white/40">{t("bigFive.note")}</div>
           </div>
         </div>
 
@@ -813,9 +637,7 @@ export default function ResultPage() {
                       {t(`bigFive.levels.${k}`)}
                       {(row.key === "S" || row.key === "N") && (
                         <span className="ml-1 text-[11px] leading-none">
-                          ({row.key === "S"
-                            ? t("traitsNotes.S")
-                            : t("traitsNotes.N")})
+                          ({row.key === "S" ? t("traitsNotes.S") : t("traitsNotes.N")})
                         </span>
                       )}
                     </div>

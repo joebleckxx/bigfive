@@ -7,21 +7,10 @@ export type StoredResultV1 = {
   version: "v1";
   createdAt: string;
   answers: number[];
-
-  /**
-   * Kolejność pytań użyta w tej sesji (losowana raz na start testu).
-   * Opcjonalne dla kompatybilności ze starymi zapisami.
-   */
   questionOrder?: string[];
-
   scores: Record<Trait, number>;
   stability: number;
   typeCode: ProfileId;
-  addOns: {
-    stressKey: StressKey;
-    subtypeKey: SubtypeKey;
-    modeKey: ModeKey;
-  };
 };
 
 export type ProfileId =
@@ -30,20 +19,6 @@ export type ProfileId =
   | "P09" | "P10" | "P11" | "P12"
   | "P13" | "P14" | "P15" | "P16";
 
-export type StressKey = "sensitive" | "steady";
-
-export type SubtypeKey =
-  | "empathicVisionary"
-  | "independentInnovator"
-  | "supportivePragmatist"
-  | "directRealist";
-
-export type ModeKey =
-  | "driveDeliver"
-  | "planPerfect"
-  | "exploreAdapt"
-  | "flowImprovise";
-
 /* --------------------------------------------------
  * Helpers
  * -------------------------------------------------- */
@@ -51,30 +26,30 @@ export type ModeKey =
 const clamp = (n: number, min = 0, max = 100) =>
   Math.max(min, Math.min(max, n));
 
-const hi = (v: number) => v >= 50;
+/**
+ * Deadzone thresholds
+ */
+const DEAD_LOW = 45;
+const DEAD_HIGH = 55;
+
+const axisBit = (v: number): 0 | 1 =>
+  v <= DEAD_LOW ? 0 : v >= DEAD_HIGH ? 1 : v >= 50 ? 1 : 0;
 
 /**
  * Normalizacja odpowiedzi 1–5 → 0–100
  * z uwzględnieniem pytań odwróconych
  */
 function answerToScore(v: number, reverse?: boolean): number {
-  const raw = ((v - 1) / 4) * 100; // 1..5 => 0..100
+  const raw = ((v - 1) / 4) * 100;
   return clamp(reverse ? 100 - raw : raw);
 }
 
 /**
  * Liczy Big Five na podstawie odpowiedzi i KOLEJNOŚCI pytań.
- * Jeśli questionOrder nie ma (stare zapisy), używa defaultowej kolejności.
  */
 function computeBigFiveScores(answers: number[], questionOrder?: string[]) {
   const sums: Record<Trait, number> = { E: 0, O: 0, C: 0, A: 0, N: 0 };
-  const counts: Record<Trait, number> = {
-    E: 0,
-    O: 0,
-    C: 0,
-    A: 0,
-    N: 0
-  };
+  const counts: Record<Trait, number> = { E: 0, O: 0, C: 0, A: 0, N: 0 };
 
   const orderedQuestions = questionsFromOrder(questionOrder);
 
@@ -96,111 +71,60 @@ function computeBigFiveScores(answers: number[], questionOrder?: string[]) {
   };
 }
 
-/* --------------------------------------------------
- * Stability (0–100)
- * -------------------------------------------------- */
-
+/**
+ * Stability (0–100) — liczona na 4 osiach
+ */
 export function computeStability(scores: Record<Trait, number>): number {
-  const distances = [
-    Math.abs(scores.E - 50),
-    Math.abs(scores.O - 50),
-    Math.abs(scores.C - 50),
-    Math.abs(scores.A - 50),
-    Math.abs(scores.N - 50)
+  const axes = [
+    scores.E,
+    scores.C,
+    (scores.A + (100 - scores.O)) / 2,
+    100 - scores.N
   ];
 
-  const avg = distances.reduce((a, b) => a + b, 0) / distances.length;
+  const avg =
+    axes.reduce((a, v) => a + Math.abs(v - 50), 0) / axes.length;
 
   return clamp(avg);
 }
 
-/* --------------------------------------------------
- * 16-profile mapping (autorskie)
- * -------------------------------------------------- */
+/**
+ * Big Five → 4 osie → ProfileId (P01–P16)
+ *
+ * Osie:
+ * SE = E
+ * ST = C
+ * OR = (A + (100 − O)) / 2
+ * SB = 100 − N
+ */
+function profileIdFromScores(scores: Record<Trait, number>): ProfileId {
+  const SE = scores.E;
+  const ST = scores.C;
+  const OR = (scores.A + (100 - scores.O)) / 2;
+  const SB = 100 - scores.N;
 
-function profileIdFromBigFive(scores: Record<Trait, number>): ProfileId {
-  const key =
-    (hi(scores.E) ? "H" : "L") +
-    "_" +
-    (hi(scores.O) ? "H" : "L") +
-    "_" +
-    (hi(scores.C) ? "H" : "L") +
-    "_" +
-    (hi(scores.A) ? "H" : "L") +
-    "_" +
-    (hi(scores.N) ? "H" : "L");
+  const index =
+    (axisBit(SE) << 3) |
+    (axisBit(ST) << 2) |
+    (axisBit(OR) << 1) |
+    axisBit(SB);
 
-  const MAP: Record<string, ProfileId> = {
-    "L_L_L_H_H": "P01",
-    "L_H_L_H_H": "P02",
-    "H_L_L_H_H": "P03",
-    "H_H_L_H_H": "P04",
-
-    "L_L_H_H_H": "P05",
-    "L_H_H_H_H": "P06",
-    "H_L_H_H_H": "P07",
-    "H_H_H_H_H": "P08",
-
-    "L_L_L_L_L": "P09",
-    "L_H_L_L_L": "P10",
-    "H_L_L_L_L": "P11",
-    "H_H_L_L_L": "P12",
-
-    "L_L_H_L_L": "P13",
-    "L_H_H_L_L": "P14",
-    "H_L_H_L_L": "P15",
-    "H_H_H_L_L": "P16"
-  };
-
-  return MAP[key] ?? "P01";
-}
-
-/* --------------------------------------------------
- * Add-ons (klucze językowo neutralne)
- * -------------------------------------------------- */
-
-function computeAddOns(scores: Record<Trait, number>) {
-  const stressKey: StressKey = hi(scores.N) ? "sensitive" : "steady";
-
-  const subtypeKey: SubtypeKey =
-    hi(scores.O) && hi(scores.A)
-      ? "empathicVisionary"
-      : hi(scores.O) && !hi(scores.A)
-        ? "independentInnovator"
-        : !hi(scores.O) && hi(scores.A)
-          ? "supportivePragmatist"
-          : "directRealist";
-
-  const modeKey: ModeKey =
-    hi(scores.C) && hi(scores.E)
-      ? "driveDeliver"
-      : hi(scores.C) && !hi(scores.E)
-        ? "planPerfect"
-        : !hi(scores.C) && hi(scores.E)
-          ? "exploreAdapt"
-          : "flowImprovise";
-
-  return { stressKey, subtypeKey, modeKey };
+  return `P${String(index + 1).padStart(2, "0")}` as ProfileId;
 }
 
 /* --------------------------------------------------
  * Public: build result
  * -------------------------------------------------- */
 
-/**
- * Jeśli UI tasuje pytania, przekaż `questionOrder`,
- * a zapis i scoring będą poprawne.
- */
-export function buildStoredResultV1(answers: number[], questionOrder?: string[]): StoredResultV1 {
+export function buildStoredResultV1(
+  answers: number[],
+  questionOrder?: string[]
+): StoredResultV1 {
   const scores = computeBigFiveScores(answers, questionOrder);
   const usedOrder =
     questionOrder && questionOrder.length === QUESTIONS.length
       ? questionOrder
       : QUESTIONS.map((q) => q.id);
-
-  const stability = computeStability(scores);
-  const typeCode = profileIdFromBigFive(scores);
-  const addOns = computeAddOns(scores);
 
   return {
     version: "v1",
@@ -208,9 +132,9 @@ export function buildStoredResultV1(answers: number[], questionOrder?: string[])
     answers,
     questionOrder: usedOrder,
     scores,
-    stability,
-    typeCode,
-    addOns
+    stability: computeStability(scores),
+    typeCode: profileIdFromScores(scores)
   };
 }
-export { buildStoredResultV1 as calculateResult }
+
+export { buildStoredResultV1 as calculateResult };

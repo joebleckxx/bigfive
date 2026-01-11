@@ -32,22 +32,6 @@ export type PdfReportData = {
   typeDescription: string;
   avatarUrl?: string;
 
-  addOns: {
-    stressTitle: string;
-    stressValue?: string;
-    stressNote?: string;
-    stabilityLabel?: string;
-    stabilityColor?: string;
-
-    subtypeTitle: string;
-    subtypeValue?: string;
-    subtypeNote?: string;
-
-    modeTitle: string;
-    modeValue?: string;
-    modeNote?: string;
-  };
-
   bigFive: Array<{
     key: string;
     label: string;
@@ -64,27 +48,23 @@ export type PdfReportData = {
 };
 
 const C = {
-  bg: "#0B0C14",                 // result.tsx bg
-  cardBg: "#23242C",                // okolo bg-white/10 na ciemnym tle
-  border: "#303037",                // okolo border-white/15 na ciemnym tle
-  title: "rgba(255,255,255,0.90)",  // text-white/90
-  titleAccentStart: "#A5B4FC",      // indigo-300
-  text85: "rgba(255,255,255,0.85)", // text-white/85
-  text80: "rgba(255,255,255,0.80)", // text-white/80
-  text70: "rgba(255,255,255,0.70)", // text-white/70
-  text65: "rgba(255,255,255,0.65)", // text-white/65
-  text60: "rgba(255,255,255,0.60)", // text-white/60
-  text55: "rgba(255,255,255,0.55)", // text-white/55
-  text50: "rgba(255,255,255,0.50)", // text-white/50
-  text45: "rgba(255,255,255,0.45)", // text-white/45
-  text40: "rgba(255,255,255,0.40)", // text-white/40
-  barBg: "#1F212A",                 // okolo bg-white/10 for bars
-  fadeTop: "rgba(255,255,255,0.06)",
+  bg: "#0B0C14",
+  cardBg: "#23242C",
+  border: "#303037",
+  title: "rgba(255,255,255,0.90)",
+  titleAccentStart: "#A5B4FC",
+  text85: "rgba(255,255,255,0.85)",
+  text80: "rgba(255,255,255,0.80)",
+  text70: "rgba(255,255,255,0.70)",
+  text65: "rgba(255,255,255,0.65)",
+  text55: "rgba(255,255,255,0.55)",
+  text50: "rgba(255,255,255,0.50)",
+  text45: "rgba(255,255,255,0.45)",
+  text40: "rgba(255,255,255,0.40)",
+  barBg: "#1F212A",
   gradStart: "#6366F1",
   gradMid: "#8B5CF6",
-  gradEnd: "#EC4899",
-  // w UI masz gradient, w PDF robimy spójny indigo “z gradientu”
-  accent: "rgba(129,140,248,1)"      // indigo-400
+  gradEnd: "#EC4899"
 };
 
 let fontRegistered = false;
@@ -145,41 +125,21 @@ const styles = StyleSheet.create({
 
   profileRow: { flexDirection: "row", alignItems: "center" },
   avatar: { width: 64, height: 64, borderRadius: 999, marginRight: 14 },
-  typeLabel: { fontSize: 8.5, color: C.text55, marginBottom: 4, letterSpacing: 0.6 },
+  typeLabel: {
+    fontSize: 8.5,
+    color: C.text55,
+    marginBottom: 4,
+    letterSpacing: 0.6
+  },
   typeName: { fontSize: 20, fontWeight: 700, color: C.text85 },
   typeDesc: { fontSize: 10, color: C.text80, marginTop: 8, lineHeight: 1.35 },
 
-  // 3 kafelki obok siebie (bez gap)
-  pillsRow: { flexDirection: "row", marginTop: 14 },
-  pill: {
-    width: "33.33%",
-    borderWidth: 1,
-    borderColor: C.border,
-    borderRadius: 12,
-    padding: 10,
-    backgroundColor: C.cardBg,
-    overflow: "hidden",
-    position: "relative"
+  sectionTitle: {
+    fontSize: 11,
+    fontWeight: 700,
+    marginBottom: 10,
+    color: C.text85
   },
-  pillGradient: { position: "absolute", top: 0, left: 0, right: 0, bottom: 0 },
-  pillMid: { marginLeft: 10, marginRight: 10 },
-
-  pillTitleRow: { flexDirection: "column", alignItems: "flex-start", marginBottom: 6 },
-  pillTitle: { fontSize: 8.5, fontWeight: 400, color: C.text45, letterSpacing: 0.8 },
-  pillMetaRow: { flexDirection: "row", alignItems: "center", marginTop: 4 },
-  pillMeta: { fontSize: 9, color: C.text60 },
-  stabilityDot: { width: 6, height: 6, borderRadius: 999, marginRight: 4 },
-  pillValue: { fontSize: 11, fontWeight: 700, color: C.text85 },
-
-  // tekst ma się mieścić
-  pillNote: {
-    fontSize: 8.8,
-    color: C.text60,
-    marginTop: 4,
-    lineHeight: 1.5
-  },
-
-  sectionTitle: { fontSize: 11, fontWeight: 700, marginBottom: 10, color: C.text85 },
 
   barRow: { marginBottom: 10 },
   barTop: { flexDirection: "row", justifyContent: "space-between" },
@@ -200,7 +160,7 @@ const styles = StyleSheet.create({
   barMetaNote: { fontSize: 8.5, color: C.text55, marginLeft: 4, lineHeight: 1.2 },
   topTrait: { marginLeft: 6 },
 
-  disclaimer: { fontSize: 8.5, color: C.text40, lineHeight: 1.3, marginTop: 8 },
+  disclaimer: { fontSize: 8.5, color: C.text40, lineHeight: 1.3, marginTop: 8 }
 });
 
 function clampPct(n: number) {
@@ -219,7 +179,6 @@ function toUpper(value: string) {
 }
 
 export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
-  const a = data.addOns;
   const levels = data.bigFiveLevels;
 
   const bigFiveOrder: Trait[] = ["S", "E", "O", "C", "A", "N"];
@@ -279,80 +238,18 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
             {data.avatarUrl ? (
               <Image style={styles.avatar} src={data.avatarUrl} />
             ) : (
-              <View style={[styles.avatar, { backgroundColor: C.cardBg, borderWidth: 1, borderColor: C.border }]} />
+              <View
+                style={[
+                  styles.avatar,
+                  { backgroundColor: C.cardBg, borderWidth: 1, borderColor: C.border }
+                ]}
+              />
             )}
 
             <View style={{ flexGrow: 1 }}>
               <Text style={styles.typeLabel}>{toUpper(data.profileLabel)}</Text>
               <Text style={styles.typeName}>{data.typeName}</Text>
               <Text style={styles.typeDesc}>{data.typeDescription}</Text>
-            </View>
-          </View>
-
-          {/* 3 kafelki */}
-          <View style={styles.pillsRow}>
-            <View style={styles.pill}>
-              <Svg style={styles.pillGradient} viewBox="0 0 100 100" preserveAspectRatio="none">
-                <Defs>
-                  <LinearGradient id="pillGrad" x1="0" y1="0" x2="1" y2="0">
-                    <Stop offset="0%" stopColor={C.gradStart} stopOpacity={0.18} />
-                    <Stop offset="50%" stopColor={C.gradMid} stopOpacity={0.16} />
-                    <Stop offset="100%" stopColor={C.gradEnd} stopOpacity={0.14} />
-                  </LinearGradient>
-                </Defs>
-                <Rect x="0" y="0" width="100" height="100" fill="url(#pillGrad)" />
-              </Svg>
-              <View style={styles.pillTitleRow}>
-                <Text style={styles.pillTitle}>{toUpper(a.stressTitle)}</Text>
-                {a.stabilityLabel ? (
-                  <View style={styles.pillMetaRow}>
-                    {a.stabilityColor ? (
-                      <View
-                        style={[styles.stabilityDot, { backgroundColor: a.stabilityColor }]}
-                      />
-                    ) : null}
-                    <Text style={styles.pillMeta}>{a.stabilityLabel}</Text>
-                  </View>
-                ) : null}
-              </View>
-              <Text style={styles.pillValue}>{a.stressValue ?? "—"}</Text>
-              {a.stressNote ? <Text style={styles.pillNote}>{a.stressNote}</Text> : null}
-            </View>
-
-            <View style={[styles.pill, styles.pillMid]}>
-              <Svg style={styles.pillGradient} viewBox="0 0 100 100" preserveAspectRatio="none">
-                <Defs>
-                  <LinearGradient id="pillGrad" x1="0" y1="0" x2="1" y2="0">
-                    <Stop offset="0%" stopColor={C.gradStart} stopOpacity={0.18} />
-                    <Stop offset="50%" stopColor={C.gradMid} stopOpacity={0.16} />
-                    <Stop offset="100%" stopColor={C.gradEnd} stopOpacity={0.14} />
-                  </LinearGradient>
-                </Defs>
-                <Rect x="0" y="0" width="100" height="100" fill="url(#pillGrad)" />
-              </Svg>
-              <View style={styles.pillTitleRow}>
-                <Text style={styles.pillTitle}>{toUpper(a.subtypeTitle)}</Text>
-              </View>
-              <Text style={styles.pillValue}>{a.subtypeValue ?? "—"}</Text>
-              {a.subtypeNote ? <Text style={styles.pillNote}>{a.subtypeNote}</Text> : null}
-            </View>
-
-            <View style={styles.pill}>
-              <Svg style={styles.pillGradient} viewBox="0 0 100 100" preserveAspectRatio="none">
-                <Defs>
-                  <LinearGradient id="pillGrad" x1="0" y1="0" x2="1" y2="0">
-                    <Stop offset="0%" stopColor={C.gradStart} stopOpacity={0.18} />
-                    <Stop offset="50%" stopColor={C.gradMid} stopOpacity={0.16} />
-                    <Stop offset="100%" stopColor={C.gradEnd} stopOpacity={0.14} />
-                  </LinearGradient>
-                </Defs>
-                <Rect x="0" y="0" width="100" height="100" fill="url(#pillGrad)" />
-              </Svg>
-              <View style={styles.pillTitleRow}>
-                <Text style={styles.pillTitle}>{toUpper(a.modeTitle)}</Text>
-              </View>
-              <Text style={styles.pillValue}>{a.modeValue ?? "—"}</Text>
-              {a.modeNote ? <Text style={styles.pillNote}>{a.modeNote}</Text> : null}
             </View>
           </View>
         </View>
@@ -377,6 +274,7 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
                 </View>
                 <Text style={styles.barVal}>{clampPct(row.value)}</Text>
               </View>
+
               <View style={styles.barBg}>
                 <View style={[styles.barFillWrap, { width: `${clampPct(row.value)}%` }]}>
                   <Svg style={styles.barGradient} viewBox="0 0 100 8" preserveAspectRatio="none">
@@ -391,6 +289,7 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
                   </Svg>
                 </View>
               </View>
+
               <View style={styles.barMetaRow}>
                 <Text style={styles.barMetaText}>{levels[levelKey(row.value)]}</Text>
                 {row.note ? <Text style={styles.barMetaNote}>({row.note})</Text> : null}
@@ -400,7 +299,6 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
 
           <Text style={styles.disclaimer}>{data.disclaimer}</Text>
         </View>
-
       </Page>
     </Document>
   );
