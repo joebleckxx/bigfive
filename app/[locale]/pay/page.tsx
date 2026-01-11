@@ -143,7 +143,7 @@ export default function PayPage() {
         <div className="mt-8">
           <button
             onClick={handleUnlock}
-            className="relative inline-flex w-full items-center justify-center rounded-2xl px-6 py-4 text-base font-semibold text-white
+            className="relative inline-flex w-full items-center justify-center rounded-3xl px-6 py-4 text-base font-semibold text-white
               bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
               shadow-[0_20px_60px_rgba(99,102,241,0.35)]
               transition active:scale-[0.98]

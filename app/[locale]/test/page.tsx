@@ -415,7 +415,7 @@ export default function TestPage() {
                       : "rgba(255, 255, 255, 0.09)";
 
                 const gradientBorderBase =
-                  "relative w-full appearance-none rounded-2xl border border-transparent px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4";
+                  "relative w-full appearance-none rounded-3xl border border-transparent px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4";
 
                 const gradientBorderStyle = {
                   padding: "1.5px",
@@ -460,7 +460,7 @@ export default function TestPage() {
                       </span>
                       <span
                         aria-hidden="true"
-                        className="pointer-events-none absolute -inset-[1.5px] rounded-[calc(1rem+1.5px)]"
+                        className="pointer-events-none absolute -inset-[1.5px] rounded-[calc(1.5rem+1.5px)]"
                         style={gradientBorderStyle}
                       />
                     </button>
@@ -476,7 +476,7 @@ export default function TestPage() {
                     aria-disabled={isAdvancing}
                     type="button"
                     className={[
-                      "w-full rounded-2xl border px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4",
+                      "w-full rounded-3xl border px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4",
                       "appearance-none",
                       "focus:outline-none focus-visible:outline-none",
                       "[-webkit-tap-highlight-color:transparent]",
