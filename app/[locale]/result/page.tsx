@@ -453,7 +453,7 @@ export default function ResultPage() {
 
         {/* Hero */}
         <div className="mt-10">
-          <h1 className="mb-2 text-[2.4rem] font-semibold tracking-tight sm:text-[2.6rem] break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
+          <h1 className="mb-2 text-[2.4rem] font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem] break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
             {t("hero.before")}{" "}
             <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
               {t("hero.accent")}
