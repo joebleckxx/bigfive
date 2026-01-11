@@ -1,15 +1,19 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { Logo } from "@/app/components/ui/logo";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 
 export default function Page() {
   const t = useTranslations("Home");
+  const locale = useLocale();
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 sm:px-5 py-10 text-white">
+    <main
+      lang={locale}
+      className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 sm:px-5 py-10 text-white"
+    >
       {/* Background */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
@@ -39,7 +43,7 @@ export default function Page() {
         </div>
 
         {/* HERO */}
-        <h1 className="mt-10 break-words text-[2.4rem] sm:text-[2.6rem] font-semibold leading-[1.05] tracking-tight">
+        <h1 className="mt-10 break-normal text-[2.4rem] sm:text-[2.6rem] font-semibold leading-[1.05] tracking-tight [hyphens:auto] [text-wrap:balance]">
           {t("headline.before")}{" "}
           <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
             {t("headline.accent")}
