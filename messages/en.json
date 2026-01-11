@@ -34,11 +34,11 @@
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "headline": { "before": "Unlock your", "accent": "full profile", "after": "" },
-    "description": "A practical summary of how your personality works.",
+    "description": "See your strengths, potential blind spots, and how they shape your relationships with others.",
     "editorial": {
-      "line1": "A clear match to one of 16 personality profiles.",
-      "line2": "Five key personality traits (0–100).",
-      "line3": "Extra insights: stress profile, subtype, and operating mode."
+      "line1": "A clear match to one of 16 profiles, along with scores for five key traits (0–100).",
+      "line2": "An understanding of how your strengths and weaker areas translate into the way you act.",
+      "line3": "Insight into how you respond under pressure and what helps you stay balanced in relationships."
     },
     "cta": "Unlock full report",
     "note": "$1 • one-time payment • instant access",
@@ -119,7 +119,16 @@
       "S": "higher = calmer under pressure"
     },
 
-    "footer": "TMJ • tellmejoe."
+    "footer": "TMJ • tellmejoe.",
+
+    "profileSections": {
+      "core": "Your core",
+      "daily": "How you operate day to day",
+      "strengths": "Strengths",
+      "watchOut": "What to watch out for",
+      "underPressure": "How you respond under pressure",
+      "relationships": "Your relationship style"
+    }
   },
 
   "Questions": {

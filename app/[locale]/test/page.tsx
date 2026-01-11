@@ -71,23 +71,33 @@ export default function TestPage() {
 
   const total = QUESTIONS.length;
 
-  // ✅ LOSOWA, ZAMROŻONA KOLEJNOŚĆ PYTAŃ (1x na start; trzymana w localStorage)
-  const [questionOrder, setQuestionOrder] = useState<string[]>(() => {
+  // ✅ LOSOWA, ZAMROŻONA KOLEJNOŚĆ PYTAŃ (bez hydration mismatch)
+  const [questionOrder, setQuestionOrder] = useState<string[]>(
+    () => QUESTIONS.map((qq) => qq.id) // deterministycznie na SSR i na 1. render klienta
+  );
+  const [orderReady, setOrderReady] = useState(false);
+
+  useEffect(() => {
     try {
       const raw = localStorage.getItem(QUESTION_ORDER_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length === total) return parsed;
+        if (Array.isArray(parsed) && parsed.length === total) {
+          setQuestionOrder(parsed);
+          setOrderReady(true);
+          return;
+        }
       }
 
       const seed = crypto.randomUUID();
       const order = makeQuestionOrder(seed, 2);
       localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
-      return order;
+      setQuestionOrder(order);
+      setOrderReady(true);
     } catch {
-      return QUESTIONS.map((qq) => qq.id);
+      setOrderReady(true);
     }
-  });
+  }, [total]);
 
   const orderedQuestions = useMemo(
     () => questionsFromOrder(questionOrder),
@@ -383,9 +393,8 @@ export default function TestPage() {
         <div className="relative z-10">
           <div className="rounded-3xl border border-white/15 bg-white/10 p-5 shadow-xl backdrop-blur-2xl sm:p-6">
             <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
-              {q(currentQuestion.id)}
+              {orderReady ? q(currentQuestion.id) : "\u00A0"}
             </h2>
-
             <div className="space-y-3">
               {SCALE_VALUES.map((v) => {
                 const selected = answers[index] === v;

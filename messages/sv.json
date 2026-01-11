@@ -33,24 +33,19 @@
   "Pay": {
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
-
     "headline": {
       "before": "Lås upp din",
       "accent": "fullständiga profil",
       "after": ""
     },
-
-    "description": "En praktisk sammanfattning av hur din personlighet fungerar.",
-
+    "description": "Se dina styrkor, möjliga svagheter och hur de påverkar dina relationer med andra.",
     "editorial": {
-      "line1": "Fydlig matchning till en av 16 personlighetsprofiler.",
-      "line2": "Fem centrala personlighetsdrag (0–100).",
-      "line3": "Extra insikter: stressprofil, undertyp och arbetssätt."
-    },
-
+      "line1": "En tydlig matchning mot en av 16 profiler samt resultat för fem centrala drag (0–100).",
+      "line2": "En förståelse för hur dina styrkor och svagare sidor tar form i ditt sätt att agera.",
+      "line3": "Insikt i hur du reagerar under press och vad som hjälper dig att behålla balans i relationer."
+    },  
     "cta": "Lås upp hela rapporten",
     "note": "$1 • engångsbetalning • direkt åtkomst",
-
     "footer": "TMJ • tellmejoe."
   },
 
@@ -121,7 +116,16 @@
       "S": "högre = lugnare under press"
     },
 
-    "footer": "TMJ • tellmejoe."
+    "footer": "TMJ • tellmejoe.",
+
+    "profileSections": {
+      "core": "Din kärna",
+      "daily": "Hur du fungerar i vardagen",
+      "strengths": "Styrkor",
+      "watchOut": "Vad du bör vara uppmärksam på",
+      "underPressure": "Hur du reagerar under press",
+      "relationships": "Din relationsstil"
+    }
   },
 
   "Questions": {

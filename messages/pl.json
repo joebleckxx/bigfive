@@ -41,11 +41,11 @@
       "accent": "pełny profil",
       "after": ""
     },
-    "description": "Praktyczne podsumowanie tego, jak działa Twoja osobowość.",
+    "description": "Zobacz swoje mocne strony, potencjalne słabości i to, jak przekładają się na relacje z innymi.",
     "editorial": {
-      "line1": "Pełne dopasowanie do jednego z 16 profili.",
-      "line2": "Wyniki pięciu kluczowych cech (0–100).",
-      "line3": "Dodatkowe wnioski: profil stresu, podtyp i tryb działania."
+      "line1": "Pełne dopasowanie do jednego z 16 profili oraz wyniki pięciu kluczowych cech (0–100).",
+      "line2": "Zrozumienie, jak Twoje mocne i słabsze strony przekładają się na sposób działania.",
+      "line3": "Wgląd w to, jak reagujesz pod presją i co pomaga Ci zachować równowagę w relacjach."
     },
     "cta": "Odblokuj pełny raport",
     "note": "$1 • płatność jednorazowa • natychmiastowy dostęp",
@@ -103,6 +103,7 @@
       "S": "wyżej = większy spokój pod presją"
     },
     "footer": "TMJ • tellmejoe.",
+
     "profileSections": {
       "core": "Twój rdzeń",
       "daily": "Jak działasz na co dzień",
