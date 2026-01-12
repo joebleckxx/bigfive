@@ -391,7 +391,7 @@ export default function TestPage() {
         </div>
 
         <div className="relative z-10">
-          <div className="rounded-3xl border border-white/15 bg-white/10 p-5 shadow-xl backdrop-blur-2xl sm:p-6">
+          <div className="rounded-3xl border border-white/10 bg-white/8 p-5 shadow-xl backdrop-blur-2xl sm:p-6">
             <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
               {orderReady ? q(currentQuestion.id) : "\u00A0"}
             </h2>
@@ -402,10 +402,10 @@ export default function TestPage() {
 
                 const baseTone =
                   v === 3
-                    ? "border-white/22 bg-white/18"
+                    ? "border-white/10 bg-white/5"
                     : v === 2 || v === 4
-                      ? "border-white/16 bg-white/13"
-                      : "border-white/12 bg-white/9";
+                      ? "border-white/10 bg-white/5"
+                      : "border-white/10 bg-white/5";
 
                 const toneColor =
                   v === 3
@@ -476,21 +476,27 @@ export default function TestPage() {
                     aria-disabled={isAdvancing}
                     type="button"
                     className={[
-                      "w-full rounded-3xl border px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4",
+                      "group relative w-full rounded-3xl border px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4",
                       "appearance-none",
                       "focus:outline-none focus-visible:outline-none",
                       "[-webkit-tap-highlight-color:transparent]",
                       "transition-[background-color,border-color,transform] duration-150 active:scale-[0.98]",
                       baseTone,
                       !isAdvancing
-                        ? "md:hover:border-white/25 md:hover:bg-white/15"
+                        ? "md:group-hover:border-transparent md:group-hover:bg-[var(--tone-color)]"
                         : "",
                       isAdvancing ? "pointer-events-none cursor-not-allowed" : ""
                     ].join(" ")}
+                    style={{ ["--tone-color" as any]: toneColor }}
                   >
-                    <span className="text-sm font-medium text-white/90">
+                    <span className="relative z-10 text-sm font-medium text-white/90">
                       {s(String(v))}
                     </span>
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute -inset-[1.5px] rounded-[calc(1.5rem+1.5px)] opacity-0 transition-opacity duration-150 md:group-hover:opacity-100"
+                      style={gradientBorderStyle}
+                    />
                   </button>
                 );
               })}

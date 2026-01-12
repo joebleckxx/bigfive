@@ -465,24 +465,23 @@ export default function ResultPage() {
         </div>
 
         {/* Main card */}
-        <div className="mt-8 rounded-3xl bg-white/10 p-5 shadow-xl sm:p-7">
+        <div className="mt-8 rounded-3xl bg-white/2 px-5 py-6 shadow-xl sm:px-7 sm:py-7">
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
-              <div className="text-xs uppercase tracking-wider text-white/50 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                {t("yourTypeLabel")}
-              </div>
-
-              <div className="mt-2 flex items-center gap-4">
-                <Image
-                  src={avatarSrc}
-                  alt={typeName}
-                  width={256}
-                  height={256}
-                  className="h-28 w-28 rounded-full object-cover"
-                  unoptimized
-                  priority
-                />
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <div className="pointer-events-none absolute -inset-4 rounded-full bg-[radial-gradient(circle,_rgba(14,18,32,0.95)_30%,_rgba(58,76,125,0.85)_55%,_rgba(122,141,190,0.25)_78%)] blur-3xl" />
+                  <Image
+                    src={avatarSrc}
+                    alt={typeName}
+                    width={256}
+                    height={256}
+                    className="relative z-10 h-28 w-28 rounded-full object-cover"
+                    unoptimized
+                    priority
+                  />
+                </div>
                 <div className="min-w-0">
                   <h2 className="text-3xl font-semibold break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
                     {typeName}
@@ -495,19 +494,19 @@ export default function ResultPage() {
               </div>
             </div>
           </div>
+        </div>
 
-          {/* ✅ Joe line */}
+        {/* ✅ Joe line */}
           <p className="mt-5 text-xs text-white/45 italic break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
             {joeLine} <span className="text-white/40">— Joe</span>
           </p>
-        </div>
 
         {/* ✅ Profile sections (6) */}
         <div className="mt-6 space-y-4">
           {sections.map((s) => (
             <div
               key={s.key}
-              className="rounded-3xl bg-white/10 p-5 shadow-xl sm:p-6"
+              className="rounded-3xl bg-white/5 p-5 shadow-xl sm:p-6"
             >
               <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                 {s.icon} {s.title}
