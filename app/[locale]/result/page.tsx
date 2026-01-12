@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { Logo } from "@/app/components/ui/logo";
 import Image from "next/image";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
+import { calculateResult } from "@/lib/scoring";
 
 // ✅ PDF
 import {
@@ -156,34 +157,71 @@ export default function ResultPage() {
   }, []);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+    (async () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const sessionId = params.get("session_id");
 
-      if (!raw) {
-        router.replace("/test");
-        return;
-      }
+        const raw = localStorage.getItem(STORAGE_KEY);
 
-      const paid = localStorage.getItem(PAID_KEY) === "true";
-      const paidAt = Number(localStorage.getItem(PAID_AT_KEY) ?? "0");
-      const withinGrace = paidAt > 0 && Date.now() - paidAt < GRACE_MS;
+        const paid = localStorage.getItem(PAID_KEY) === "true";
+        const paidAt = Number(localStorage.getItem(PAID_AT_KEY) ?? "0");
+        const withinGrace = paidAt > 0 && Date.now() - paidAt < GRACE_MS;
 
-      if (!paid && !withinGrace) {
+        // Jeśli mamy zapisany wynik + dostęp → pokaż od razu
+        if (raw && (paid || withinGrace)) {
+          const parsed = JSON.parse(raw);
+          if (!isResultShape(parsed)) {
+            router.replace("/test");
+            return;
+          }
+          setData(parsed);
+          setLoaded(true);
+          return;
+        }
+
+        // Wracamy ze Stripe → weryfikuj payment
+        if (sessionId) {
+          const res = await fetch(`/api/stripe/verify?session_id=${encodeURIComponent(sessionId)}`);
+          const json = await res.json().catch(() => null);
+
+          if (!res.ok || !json?.paid) {
+            router.replace("/pay");
+            return;
+          }
+
+          localStorage.setItem(PAID_KEY, "true");
+          localStorage.setItem(PAID_AT_KEY, String(json.paidAt ?? Date.now()));
+
+          // Policz wynik z answers
+          const rawAnswers = localStorage.getItem(ANSWERS_KEY);
+          if (!rawAnswers) {
+            router.replace("/test");
+            return;
+          }
+          const answers = JSON.parse(rawAnswers);
+          const payload = calculateResult(answers);
+
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+          setData(payload);
+          setLoaded(true);
+
+          // Usuń session_id z URL (czyściutko)
+          params.delete("session_id");
+          const newQs = params.toString();
+          const newUrl = window.location.pathname + (newQs ? `?${newQs}` : "");
+          window.history.replaceState({}, "", newUrl);
+
+          return;
+        }
+
+        // Brak dostępu
         router.replace("/pay");
-        return;
-      }
-
-      const parsed = JSON.parse(raw);
-      if (!isResultShape(parsed)) {
+      } catch (e) {
+        console.error("Result gate error:", e);
         router.replace("/test");
-        return;
       }
-
-      setData(parsed);
-      setLoaded(true);
-    } catch {
-      router.replace("/test");
-    }
+    })();
   }, [router]);
 
   const typeName = useMemo(() => {

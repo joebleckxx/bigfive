@@ -7,6 +7,7 @@ import { Logo } from "@/app/components/ui/logo";
 import { QUESTIONS } from "@/lib/personality";
 import { calculateResult } from "@/lib/scoring";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
+import { useLocale } from "next-intl";
 
 const PAID_KEY = "personality_paid_v1";
 const PAID_AT_KEY = "personality_paid_at_v1"; // ✅ NEW
@@ -40,6 +41,7 @@ function CheckIcon() {
 export default function PayPage() {
   const router = useRouter();
   const t = useTranslations("Pay");
+  const locale = useLocale();
 
   useEffect(() => {
     try {
@@ -58,30 +60,27 @@ export default function PayPage() {
     }
   }, [router]);
 
-  function handleUnlock() {
+  async function handleUnlock() {
     try {
-      const raw = localStorage.getItem(ANSWERS_KEY);
-      if (!raw) {
-        router.push("/test");
+      const res = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ locale }),
+      });
+
+      const json = await res.json();
+
+      if (json?.url) {
+        window.location.href = json.url; // 👉 Stripe Checkout
         return;
       }
 
-      const answers = JSON.parse(raw) as number[];
-      if (!Array.isArray(answers) || !isCompleteAnswers(answers)) {
-        router.push("/test");
-        return;
-      }
-
-      const payload = calculateResult(answers);
-
-      localStorage.setItem(RESULT_KEY, JSON.stringify(payload));
-      localStorage.setItem(PAID_KEY, "true");
-      localStorage.setItem(PAID_AT_KEY, String(Date.now())); // ✅ NEW: timestamp for 30-min recovery
-
-      router.push("/result");
-    } catch {
-      router.push("/test");
+      console.error("Stripe checkout: missing url", json);
+    } catch (e) {
+      console.error("Stripe checkout failed", e);
     }
+
+    alert("Payment setup error. Please try again.");
   }
 
   return (
