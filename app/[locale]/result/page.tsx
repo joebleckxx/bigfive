@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
-import { Logo } from "@/app/components/ui/logo";
 import Image from "next/image";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { calculateResult } from "@/lib/scoring";
@@ -427,17 +426,18 @@ export default function ResultPage() {
       <div className="relative mx-auto w-full max-w-xl">
         {/* Top bar */}
         <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15">
-              <Logo className="text-indigo-200" />
+          <div className="leading-tight min-w-0">
+            <div
+              className="text-sm font-bold text-white/80 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]"
+              style={{
+                fontFamily:
+                  '"Satoshi", var(--font-geist-sans), system-ui, sans-serif',
+              }}
+            >
+              {t("brandTitle")}
             </div>
-            <div className="leading-tight min-w-0">
-              <div className="text-sm font-semibold break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                {t("brandTitle")}
-              </div>
-              <div className="text-xs text-white/55 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                {t("brandSubtitle")}
-              </div>
+            <div className="text-xs text-white/55 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+              {t("brandSubtitle")}
             </div>
           </div>
 

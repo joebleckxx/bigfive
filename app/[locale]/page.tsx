@@ -2,7 +2,6 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/navigation";
-import { Logo } from "@/app/components/ui/logo";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 
 export default function Page() {
@@ -25,18 +24,17 @@ export default function Page() {
       <div className="relative mx-auto w-full max-w-md">
         {/* HEADER */}
         <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-xl ring-1 ring-white/15 shadow-lg">
-              <Logo className="text-indigo-200" />
+          <div className="leading-tight">
+            <div
+              className="text-sm font-bold tracking-tight text-white/80"
+              style={{
+                fontFamily:
+                  '"Satoshi", var(--font-geist-sans), system-ui, sans-serif',
+              }}
+            >
+              {t("brand.title")}
             </div>
-            <div className="leading-tight">
-              <div className="text-sm font-semibold tracking-tight">
-                {t("brand.title")}
-              </div>
-              <div className="text-xs text-white/55">
-                {t("brand.subtitle")}
-              </div>
-            </div>
+            <div className="text-xs text-white/55">{t("brand.subtitle")}</div>
           </div>
 
           <LanguageSwitcher />
