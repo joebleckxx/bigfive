@@ -244,16 +244,23 @@ export default function ResultPage() {
     return AVATARS[avatarIndexFromTypeCode(data.typeCode)];
   }, [data]);
 
-  // ✅ Profiles (6 sekcji)
+  // ✅ Profiles (6 sekcji) — potrzebne do PDF
   const profile = useMemo(() => {
     if (!data) return null;
+
     const code = data.typeCode;
 
     // next-intl: arrays pobieramy przez .raw
     const raw = (tp as any).raw as (key: string) => any;
 
-    const getLines = (k: string): string[] =>
-      safeGet(() => raw(`${code}.${k}`) as string[], []);
+    const getLines = (k: string): string[] => {
+      try {
+        const v = raw(`${code}.${k}`);
+        return Array.isArray(v) ? v : [];
+      } catch {
+        return [];
+      }
+    };
 
     return {
       core: getLines("core"),
@@ -329,6 +336,15 @@ export default function ResultPage() {
         typeDescription: reportTypeDesc,
         avatarUrl,
 
+        profileSections: [
+          { key: "core", icon: "🧠", title: t("profileSections.core"), lines: profile?.core ?? [] },
+          { key: "daily", icon: "🎯", title: t("profileSections.daily"), lines: profile?.daily ?? [] },
+          { key: "strengths", icon: "🌟", title: t("profileSections.strengths"), lines: profile?.strengths ?? [] },
+          { key: "watchOut", icon: "⚠️", title: t("profileSections.watchOut"), lines: profile?.watchOut ?? [] },
+          { key: "underPressure", icon: "⚡", title: t("profileSections.underPressure"), lines: profile?.underPressure ?? [] },
+          { key: "relationships", icon: "👥", title: t("profileSections.relationships"), lines: profile?.relationships ?? [] }
+        ].filter((s) => Array.isArray(s.lines) && s.lines.length > 0),
+
         bigFive: bigFiveRows.map((r) => ({
           key: r.key,
           label: r.label,
@@ -341,7 +357,7 @@ export default function ResultPage() {
           high: t("bigFive.levels.high")
         },
 
-        disclaimer: t("disclaimer")
+        disclaimer: t("pdf.disclaimer")
       };
 
       const blob = await pdf(<PersonalityReportPDF data={report} />).toBlob();
@@ -510,15 +526,17 @@ export default function ResultPage() {
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <div className="pointer-events-none absolute -inset-4 rounded-full bg-[radial-gradient(circle,_rgba(14,18,32,0.95)_30%,_rgba(58,76,125,0.85)_55%,_rgba(122,141,190,0.25)_78%)] blur-3xl" />
-                  <Image
-                    src={avatarSrc}
-                    alt={typeName}
-                    width={256}
-                    height={256}
-                    className="relative z-10 h-28 w-28 rounded-full object-cover"
-                    unoptimized
-                    priority
-                  />
+                  <div className="relative z-10 h-28 w-28 overflow-hidden rounded-full">
+                    <Image
+                      src={avatarSrc}
+                      alt={typeName}
+                      fill
+                      sizes="112px"
+                      className="object-cover"
+                      unoptimized
+                      priority
+                    />
+                  </div>
                 </div>
                 <div className="min-w-0">
                   <h2 className="text-3xl font-semibold break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">

@@ -83,12 +83,6 @@
       "low": "Low"
     },
 
-    "cards": {
-      "stress": { "title": "Stress profile", "stability": "Stability" },
-      "subtype": { "title": "Subtype" },
-      "mode": { "title": "Operating mode" }
-    },
-
     "bigFive": {
       "title": "Personality traits",
       "show": "Show personality traits details",

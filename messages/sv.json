@@ -83,12 +83,6 @@
 
     "stability": { "high": "Hög", "medium": "Medel", "low": "Låg" },
 
-    "cards": {
-      "stress": { "title": "Stressprofil", "stability": "Stabilitet" },
-      "subtype": { "title": "Undertyp" },
-      "mode": { "title": "Arbetssätt" }
-    },
-
     "bigFive": {
       "title": "Personlighetsdrag",
       "show": "Visa detaljer om personlighetsdrag",
