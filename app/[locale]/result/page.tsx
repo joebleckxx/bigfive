@@ -519,12 +519,12 @@ export default function ResultPage() {
         </div>
 
         {/* Main card */}
-        <div className="mt-8 rounded-3xl bg-white/2 px-5 py-6 shadow-xl sm:px-9 sm:py-5">
+        <div className="mt-8 rounded-3xl bg-white/2 px-5 py-6 shadow-xl sm:px-7 sm:py-7">
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
               <div className="flex items-center gap-4">
-                <div className="relative">
+                <div className="relative shrink-0">
                   <div className="pointer-events-none absolute -inset-4 rounded-full bg-[radial-gradient(circle,_rgba(14,18,32,0.95)_30%,_rgba(58,76,125,0.85)_55%,_rgba(122,141,190,0.25)_78%)] blur-3xl" />
                   <div className="relative z-10 h-28 w-28 shrink-0 overflow-hidden rounded-full">
                     <Image
