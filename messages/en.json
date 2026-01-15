@@ -87,7 +87,7 @@
       "title": "Personality traits",
       "show": "Show personality traits details",
       "hide": "Hide personality traits details",
-      "note": "Based on the Big Five personality model.",
+      "note": "Based on the Big Five model — five core personality traits.",
       "topTrait": "Your strongest trait",
       "summary": "Your strongest trait is {trait}.",
       "levels": {

@@ -478,6 +478,7 @@ export default function TestPage() {
                     className={[
                       "group relative w-full rounded-3xl border px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4",
                       "appearance-none",
+                      "cursor-pointer",
                       "focus:outline-none focus-visible:outline-none",
                       "[-webkit-tap-highlight-color:transparent]",
                       "transition-[background-color,border-color,transform] duration-150 active:scale-[0.98]",

@@ -87,7 +87,7 @@
       "title": "Personlighetsdrag",
       "show": "Visa detaljer om personlighetsdrag",
       "hide": "Dölj detaljer om personlighetsdrag",
-      "note": "Baserat på Big Five-modellen.",
+      "note": "Baserat på Big Five-modellen – fem grundläggande personlighetsdrag.",
       "topTrait": "Din starkaste egenskap",
       "summary": "Din starkaste egenskap är {trait}.",
       "levels": { "low": "Låg", "medium": "Medel", "high": "Hög" },

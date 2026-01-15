@@ -173,7 +173,8 @@ export default function PayPage() {
               bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
               shadow-[0_20px_60px_rgba(99,102,241,0.35)]
               transition active:scale-[0.98]
-              focus:outline-none focus:ring-4 focus:ring-indigo-400/30"
+              focus:outline-none focus:ring-4 focus:ring-indigo-400/30
+              cursor-pointer"
             type="button"
           >
             {t("cta")} →

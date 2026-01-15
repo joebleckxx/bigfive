@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { calculateResult } from "@/lib/scoring";
 
@@ -592,67 +591,14 @@ export default function ResultPage() {
                 hover:brightness-105
                 active:scale-[0.99]
                 transition
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40
+                cursor-pointer"
               type="button"
             >
               <span className="truncate">
                 {showBigFive ? t("bigFive.hide") : t("bigFive.show")}
               </span>
               <span className="shrink-0 text-white/70">{showBigFive ? "▴" : "▾"}</span>
-            </button>
-
-            <button
-              onClick={downloadPdf}
-              disabled={downloading}
-              className="inline-flex shrink-0 items-center gap-2 justify-center rounded-full
-                px-5 py-2.5 text-sm font-semibold whitespace-nowrap sm:text-base
-                text-white
-                bg-white/14 backdrop-blur
-                border border-white/25
-                ring-1 ring-white/25
-                shadow-[0_10px_30px_rgba(255,255,255,0.06)]
-                hover:bg-white/18 hover:ring-white/40
-                disabled:opacity-60
-                active:scale-[0.99]
-                transition
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/45"
-              type="button"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden="true"
-                className="opacity-90"
-              >
-                <path
-                  d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M14 2v6h6"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M8 15h8"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M8 18h6"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                />
-              </svg>
-
-              <span>{downloading ? t("pdf.downloading") : t("pdf.download")}</span>
             </button>
           </div>
 
@@ -661,7 +607,7 @@ export default function ResultPage() {
 
         {/* Big Five panel */}
         {showBigFive && (
-          <div className="mt-6 rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl">
+          <div className="mt-6 rounded-3xl bg-white/5 p-5 shadow-xl sm:p-6">
             <div className="mt-2 space-y-4">
               {bigFiveRows.map((row) => {
                 const k = levelKey(row.value);
@@ -702,6 +648,62 @@ export default function ResultPage() {
                   </div>
                 );
               })}
+            </div>
+
+            <div className="mt-8 mb-2">
+              <button
+                onClick={downloadPdf}
+                disabled={downloading}
+                className="relative inline-flex w-full items-center justify-center gap-2 rounded-3xl px-6 py-2.5
+                  text-base font-semibold text-white
+                  bg-white/14 backdrop-blur
+                  border border-white/20
+                  ring-1 ring-white/20
+                  shadow-[0_10px_30px_rgba(255,255,255,0.06)]
+                  hover:bg-white/18 hover:ring-white/35
+                  disabled:opacity-60
+                  active:scale-[0.99]
+                  transition
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/45
+                  cursor-pointer"
+                type="button"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  className="opacity-90"
+                >
+                  <path
+                    d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M14 2v6h6"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M8 15h8"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8 18h6"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                </svg>
+
+                <span>{downloading ? t("pdf.downloading") : t("pdf.download")}</span>
+              </button>
             </div>
 
             <p className="mt-4 text-center text-xs text-white/40">
