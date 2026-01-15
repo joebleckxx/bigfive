@@ -523,7 +523,7 @@ export default function ResultPage() {
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
                 <div className="relative shrink-0">
                   <div className="pointer-events-none absolute -inset-4 rounded-full bg-[radial-gradient(circle,_rgba(14,18,32,0.95)_30%,_rgba(58,76,125,0.85)_55%,_rgba(122,141,190,0.25)_78%)] blur-3xl" />
                   <div
@@ -533,8 +533,9 @@ export default function ResultPage() {
                     style={{ backgroundImage: `url(${avatarSrc})` }}
                   />
                 </div>
-                <div className="min-w-0">
-                  <h2 className="text-3xl font-semibold [text-wrap:balance] [word-break:normal] [overflow-wrap:normal] hyphens-auto">
+
+                <div className="min-w-0 text-center sm:text-left">
+                  <h2 className="text-3xl font-semibold">
                     {typeName}
                   </h2>
 
