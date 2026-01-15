@@ -519,7 +519,7 @@ export default function ResultPage() {
         </div>
 
         {/* Main card */}
-        <div className="mt-8 rounded-3xl bg-white/2 px-5 py-6 shadow-xl sm:px-7 sm:py-7">
+        <div className="mt-8 rounded-3xl bg-white/2 px-6 py-7 shadow-xl sm:px-8 sm:py-8">
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
@@ -558,7 +558,7 @@ export default function ResultPage() {
           {sections.map((s) => (
             <div
               key={s.key}
-              className="rounded-3xl bg-white/5 p-5 shadow-xl sm:p-6"
+              className="rounded-3xl bg-white/5 px-4 py-5 shadow-xl sm:px-5 sm:py-6"
             >
               <div className="text-xs uppercase tracking-wider text-white/45 whitespace-normal">
                 {s.icon} {s.title}
