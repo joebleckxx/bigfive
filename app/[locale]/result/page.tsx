@@ -535,7 +535,7 @@ export default function ResultPage() {
                       alt={typeName}
                       fill
                       sizes="112px"
-                      className="object-center"
+                      className="object-center rounded-full"
                       style={{ objectFit: "cover" }}
                       unoptimized
                       priority
