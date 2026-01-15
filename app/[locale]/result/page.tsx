@@ -549,8 +549,8 @@ export default function ResultPage() {
         </div>
 
         {/* ✅ Joe line */}
-          <p className="mt-5 text-xs text-white/45 italic">
-            {joeLine} <span className="text-white/40">— Joe</span>
+          <p className="mt-5 text-xs text-white/50 italic">
+            {joeLine} <span className="text-white/45">— Joe</span>
           </p>
 
         {/* ✅ Profile sections (6) */}
@@ -560,7 +560,7 @@ export default function ResultPage() {
               key={s.key}
               className="rounded-3xl bg-white/5 px-4 py-5 shadow-xl sm:px-5 sm:py-6"
             >
-              <div className="text-xs uppercase tracking-wider text-white/45 whitespace-normal">
+              <div className="text-xs uppercase tracking-wide text-white/50 whitespace-normal">
                 {s.icon} {s.title}
               </div>
 
