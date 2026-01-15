@@ -559,15 +559,15 @@ export default function ResultPage() {
               key={s.key}
               className="rounded-3xl bg-white/5 p-5 shadow-xl sm:p-6"
             >
-              <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+              <div className="text-xs uppercase tracking-wider text-white/45 whitespace-normal">
                 {s.icon} {s.title}
               </div>
 
-              <div className="mt-2 space-y-2 text-sm text-white/70">
+              <div className="mt-2 space-y-2 text-[0.95rem] leading-relaxed text-white/70">
                 {s.lines.map((line, i) => (
                   <p
                     key={i}
-                    className="break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]"
+                    className="whitespace-normal"
                   >
                     {line}
                   </p>
