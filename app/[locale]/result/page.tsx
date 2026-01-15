@@ -534,7 +534,7 @@ export default function ResultPage() {
                   />
                 </div>
                 <div className="min-w-0">
-                  <h2 className="text-3xl font-semibold [text-wrap:balance]">
+                  <h2 className="text-3xl font-semibold [text-wrap:balance] [word-break:normal] [overflow-wrap:normal] hyphens-auto">
                     {typeName}
                   </h2>
 
