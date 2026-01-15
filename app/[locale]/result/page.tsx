@@ -526,7 +526,7 @@ export default function ResultPage() {
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <div className="pointer-events-none absolute -inset-4 rounded-full bg-[radial-gradient(circle,_rgba(14,18,32,0.95)_30%,_rgba(58,76,125,0.85)_55%,_rgba(122,141,190,0.25)_78%)] blur-3xl" />
-                  <div className="relative z-10 h-28 w-28 overflow-hidden rounded-full">
+                  <div className="relative z-10 h-28 w-28 shrink-0 overflow-hidden rounded-full">
                     <Image
                       src={avatarSrc}
                       alt={typeName}
