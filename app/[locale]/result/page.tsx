@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { calculateResult } from "@/lib/scoring";
 
@@ -180,9 +181,7 @@ export default function ResultPage() {
 
         // Wracamy ze Stripe → weryfikuj payment
         if (sessionId) {
-          const res = await fetch(
-            `/api/stripe/verify?session_id=${encodeURIComponent(sessionId)}`
-          );
+          const res = await fetch(`/api/stripe/verify?session_id=${encodeURIComponent(sessionId)}`);
           const json = await res.json().catch(() => null);
 
           if (!res.ok || !json?.paid) {
@@ -338,42 +337,12 @@ export default function ResultPage() {
         avatarUrl,
 
         profileSections: [
-          {
-            key: "core",
-            icon: "🧠",
-            title: t("profileSections.core"),
-            lines: profile?.core ?? []
-          },
-          {
-            key: "daily",
-            icon: "🎯",
-            title: t("profileSections.daily"),
-            lines: profile?.daily ?? []
-          },
-          {
-            key: "strengths",
-            icon: "🌟",
-            title: t("profileSections.strengths"),
-            lines: profile?.strengths ?? []
-          },
-          {
-            key: "watchOut",
-            icon: "⚠️",
-            title: t("profileSections.watchOut"),
-            lines: profile?.watchOut ?? []
-          },
-          {
-            key: "underPressure",
-            icon: "⚡",
-            title: t("profileSections.underPressure"),
-            lines: profile?.underPressure ?? []
-          },
-          {
-            key: "relationships",
-            icon: "👥",
-            title: t("profileSections.relationships"),
-            lines: profile?.relationships ?? []
-          }
+          { key: "core", icon: "🧠", title: t("profileSections.core"), lines: profile?.core ?? [] },
+          { key: "daily", icon: "🎯", title: t("profileSections.daily"), lines: profile?.daily ?? [] },
+          { key: "strengths", icon: "🌟", title: t("profileSections.strengths"), lines: profile?.strengths ?? [] },
+          { key: "watchOut", icon: "⚠️", title: t("profileSections.watchOut"), lines: profile?.watchOut ?? [] },
+          { key: "underPressure", icon: "⚡", title: t("profileSections.underPressure"), lines: profile?.underPressure ?? [] },
+          { key: "relationships", icon: "👥", title: t("profileSections.relationships"), lines: profile?.relationships ?? [] }
         ].filter((s) => Array.isArray(s.lines) && s.lines.length > 0),
 
         bigFive: bigFiveRows.map((r) => ({
@@ -453,46 +422,16 @@ export default function ResultPage() {
   );
 
   const sections = [
-    {
-      key: "core",
-      icon: "🧠",
-      title: t("profileSections.core"),
-      lines: profile?.core ?? []
-    },
-    {
-      key: "daily",
-      icon: "🎯",
-      title: t("profileSections.daily"),
-      lines: profile?.daily ?? []
-    },
-    {
-      key: "strengths",
-      icon: "🌟",
-      title: t("profileSections.strengths"),
-      lines: profile?.strengths ?? []
-    },
-    {
-      key: "watchOut",
-      icon: "⚠️",
-      title: t("profileSections.watchOut"),
-      lines: profile?.watchOut ?? []
-    },
-    {
-      key: "underPressure",
-      icon: "⚡",
-      title: t("profileSections.underPressure"),
-      lines: profile?.underPressure ?? []
-    },
-    {
-      key: "relationships",
-      icon: "👥",
-      title: t("profileSections.relationships"),
-      lines: profile?.relationships ?? []
-    }
+    { key: "core", icon: "🧠", title: t("profileSections.core"), lines: profile?.core ?? [] },
+    { key: "daily", icon: "🎯", title: t("profileSections.daily"), lines: profile?.daily ?? [] },
+    { key: "strengths", icon: "🌟", title: t("profileSections.strengths"), lines: profile?.strengths ?? [] },
+    { key: "watchOut", icon: "⚠️", title: t("profileSections.watchOut"), lines: profile?.watchOut ?? [] },
+    { key: "underPressure", icon: "⚡", title: t("profileSections.underPressure"), lines: profile?.underPressure ?? [] },
+    { key: "relationships", icon: "👥", title: t("profileSections.relationships"), lines: profile?.relationships ?? [] }
   ] as const;
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 py-6 text-white sm:px-6 sm:py-10">
+    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 py-6 text-white sm:px-5 sm:py-10">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
         <div className="absolute top-1/3 -left-40 h-[360px] w-[360px] rounded-full bg-fuchsia-500/20 blur-[120px]" />
@@ -505,15 +444,17 @@ export default function ResultPage() {
         <div className="flex items-center justify-between gap-3">
           <div className="leading-tight min-w-0">
             <div
-              className="text-sm font-bold text-white/80"
+              className="text-sm font-bold text-white/80 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]"
               style={{
                 fontFamily:
-                  '"Satoshi", var(--font-geist-sans), system-ui, sans-serif'
+                  '"Satoshi", var(--font-geist-sans), system-ui, sans-serif',
               }}
             >
               {t("brandTitle")}
             </div>
-            <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
+            <div className="text-xs text-white/55 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+              {t("brandSubtitle")}
+            </div>
           </div>
 
           <div className="flex items-center gap-3">
@@ -566,13 +507,15 @@ export default function ResultPage() {
 
         {/* Hero */}
         <div className="mt-10">
-          <h1 className="mb-2 text-[2.4rem] font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem] [text-wrap:balance]">
+          <h1 className="mb-2 text-[2.4rem] font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem] break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
             {t("hero.before")}{" "}
-            <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent [text-wrap:balance]">
+            <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
               {t("hero.accent")}
             </span>
           </h1>
-          <p className="text-base text-white/65 sm:text-lg">{t("hero.sub")}</p>
+          <p className="text-base text-white/65 sm:text-lg break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+            {t("hero.sub")}
+          </p>
         </div>
 
         {/* Main card */}
@@ -591,11 +534,11 @@ export default function ResultPage() {
                   />
                 </div>
                 <div className="min-w-0">
-                  <h2 className="text-3xl font-semibold [text-wrap:balance]">
+                  <h2 className="text-3xl font-semibold break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
                     {typeName}
                   </h2>
 
-                  <p className="mt-2 text-sm text-white/70 italic">
+                  <p className="mt-2 text-sm text-white/70 italic break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                     {typeDescription}
                   </p>
                 </div>
@@ -605,24 +548,27 @@ export default function ResultPage() {
         </div>
 
         {/* ✅ Joe line */}
-        <p className="mt-5 text-xs text-white/50 italic">
-          {joeLine} <span className="text-white/45">— Joe</span>
-        </p>
+          <p className="mt-5 text-xs text-white/45 italic break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+            {joeLine} <span className="text-white/40">— Joe</span>
+          </p>
 
         {/* ✅ Profile sections (6) */}
         <div className="mt-6 space-y-4">
           {sections.map((s) => (
             <div
               key={s.key}
-              className="rounded-3xl bg-white/5 p-6 shadow-xl sm:p-7"
+              className="rounded-3xl bg-white/5 p-5 shadow-xl sm:p-6"
             >
-              <div className="text-xs uppercase tracking-wide text-white/45 whitespace-normal">
+              <div className="text-xs uppercase tracking-wider text-white/45 whitespace-normal">
                 {s.icon} {s.title}
               </div>
 
               <div className="mt-2 space-y-2 text-[0.95rem] leading-relaxed text-white/70">
                 {s.lines.map((line, i) => (
-                  <p key={i} className="whitespace-normal">
+                  <p
+                    key={i}
+                    className="whitespace-normal"
+                  >
                     {line}
                   </p>
                 ))}
@@ -651,9 +597,7 @@ export default function ResultPage() {
               <span className="truncate">
                 {showBigFive ? t("bigFive.hide") : t("bigFive.show")}
               </span>
-              <span className="shrink-0 text-white/70">
-                {showBigFive ? "▴" : "▾"}
-              </span>
+              <span className="shrink-0 text-white/70">{showBigFive ? "▴" : "▾"}</span>
             </button>
 
             <button
@@ -716,14 +660,14 @@ export default function ResultPage() {
 
         {/* Big Five panel */}
         {showBigFive && (
-          <div className="mt-6 rounded-3xl border border-white/15 bg-white/8 p-5 shadow-xl sm:p-6">
+          <div className="mt-6 rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl">
             <div className="mt-2 space-y-4">
               {bigFiveRows.map((row) => {
                 const k = levelKey(row.value);
                 return (
                   <div key={row.key}>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-sm text-white/80">
+                      <div className="flex items-center gap-2 text-sm text-white/80 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
                         {row.label}
                         {row.key === highestTrait.key && (
                           <span
@@ -743,10 +687,7 @@ export default function ResultPage() {
                       {t(`bigFive.levels.${k}`)}
                       {(row.key === "S" || row.key === "N") && (
                         <span className="ml-1 text-[11px] leading-none">
-                          ({row.key === "S"
-                            ? t("traitsNotes.S")
-                            : t("traitsNotes.N")}
-                          )
+                          ({row.key === "S" ? t("traitsNotes.S") : t("traitsNotes.N")})
                         </span>
                       )}
                     </div>
@@ -762,7 +703,7 @@ export default function ResultPage() {
               })}
             </div>
 
-            <p className="mt-4 text-center text-xs text-white/40">
+            <p className="mt-4 text-center text-xs text-white/40 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
               {t("disclaimer")}
             </p>
           </div>
