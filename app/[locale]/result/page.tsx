@@ -526,17 +526,11 @@ export default function ResultPage() {
               <div className="flex items-center gap-4">
                 <div className="relative shrink-0">
                   <div className="pointer-events-none absolute -inset-4 rounded-full bg-[radial-gradient(circle,_rgba(14,18,32,0.95)_30%,_rgba(58,76,125,0.85)_55%,_rgba(122,141,190,0.25)_78%)] blur-3xl" />
-                  <div className="relative z-10 h-28 w-28 shrink-0 overflow-hidden rounded-full">
-                    <img
-                      src={avatarSrc}
-                      alt={typeName}
-                      width={112}
-                      height={112}
-                      className="h-full w-full rounded-full"
-                      style={{ objectFit: "cover", objectPosition: "center" }}
-                      draggable={false}
-                    />
-                  </div>
+                  <div
+                    className="relative z-10 h-28 w-28 shrink-0 overflow-hidden rounded-full bg-center bg-cover bg-no-repeat"
+                    style={{ backgroundImage: `url(${avatarSrc})` }}
+                    aria-label={typeName}
+                  />
                 </div>
                 <div className="min-w-0">
                   <h2 className="text-3xl font-semibold break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
