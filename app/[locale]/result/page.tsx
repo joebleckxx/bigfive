@@ -427,18 +427,13 @@ export default function ResultPage() {
         <svg
           viewBox="0 0 24 24"
           fill="none"
-          stroke="url(#iconGrad)"
+          stroke="currentColor"
           strokeWidth="1.4"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="h-5 w-5"
+          aria-hidden="true"
+          className="h-5 w-5 text-indigo-300/75"
         >
-          <defs>
-            <linearGradient id="iconGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#818CF8" />  {/* indigo-400 */}
-              <stop offset="100%" stopColor="#A5B4FC" /> {/* indigo-300 */}
-            </linearGradient>
-          </defs>
           <path d="M12 18V5" />
           <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" />
           <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" />
@@ -458,18 +453,13 @@ export default function ResultPage() {
         <svg
           viewBox="0 0 24 24"
           fill="none"
-          stroke="url(#iconGrad)"
+          stroke="currentColor"
           strokeWidth="1.4"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="h-5 w-5"
+          aria-hidden="true"
+          className="h-5 w-5 text-indigo-400/75"
         >
-          <defs>
-            <linearGradient id="iconGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#818CF8" />  {/* indigo-400 */}
-              <stop offset="100%" stopColor="#A5B4FC" /> {/* indigo-300 */}
-            </linearGradient>
-          </defs>
           <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
         </svg>
       ),
@@ -482,19 +472,13 @@ export default function ResultPage() {
         <svg
           viewBox="0 0 24 24"
           fill="none"
-          stroke="url(#iconGrad)"
+          stroke="currentColor"
           strokeWidth="1.4"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="h-5 w-5"
+          aria-hidden="true"
+          className="h-5 w-5 text-violet-400/75"
         >
-          <defs>
-            <linearGradient id="iconGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#818CF8" />
-              <stop offset="100%" stopColor="#A5B4FC" />
-            </linearGradient>
-          </defs>
-
           {/* główna gwiazda — gradient */}
           <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
 
@@ -515,25 +499,16 @@ export default function ResultPage() {
         <svg
           viewBox="0 0 24 24"
           fill="none"
-          stroke="url(#iconGrad)"
+          stroke="currentColor"
           strokeWidth="1.4"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="h-5 w-5"
+          aria-hidden="true"
+          className="h-5 w-5 text-violet-500/75"
         >
-          <defs>
-            <linearGradient id="iconGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#818CF8" />
-              <stop offset="100%" stopColor="#A5B4FC" />
-            </linearGradient>
-          </defs>
-
-          {/* dymek — gradient */}
           <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-
-          {/* wykrzyknik — bez gradientu, ciut grubszy */}
-          <path d="M12 8v4" stroke="currentColor" strokeWidth="1.8" />
-          <path d="M12 16h.01" stroke="currentColor" strokeWidth="2.2" />
+          <path d="M12 8v4" />
+          <path d="M12 16h.01" />
         </svg>
       ),
       title: t("profileSections.watchOut"),
@@ -545,18 +520,13 @@ export default function ResultPage() {
         <svg
           viewBox="0 0 24 24"
           fill="none"
-          stroke="url(#iconGrad)"
+          stroke="currentColor"
           strokeWidth="1.4"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="h-5 w-5"
+          aria-hidden="true"
+          className="h-5 w-5 text-fuchsia-400/75"
         >
-          <defs>
-            <linearGradient id="iconGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#818CF8" />  {/* indigo-400 */}
-              <stop offset="100%" stopColor="#A5B4FC" /> {/* indigo-300 */}
-            </linearGradient>
-          </defs>
           <path d="m12 14 4-4" />
           <path d="M3.34 19a10 10 0 1 1 17.32 0" />
         </svg>
@@ -570,18 +540,13 @@ export default function ResultPage() {
         <svg
           viewBox="0 0 24 24"
           fill="none"
-          stroke="url(#iconGrad)"
+          stroke="currentColor"
           strokeWidth="1.4"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="h-5 w-5"
+          aria-hidden="true"
+          className="h-5 w-5 text-pink-400/75"
         >
-          <defs>
-            <linearGradient id="iconGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#818CF8" />  {/* indigo-400 */}
-              <stop offset="100%" stopColor="#A5B4FC" /> {/* indigo-300 */}
-            </linearGradient>
-          </defs>
           <path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762" />
         </svg>
       ),
