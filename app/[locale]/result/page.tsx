@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { calculateResult } from "@/lib/scoring";
 
@@ -244,16 +243,23 @@ export default function ResultPage() {
     return AVATARS[avatarIndexFromTypeCode(data.typeCode)];
   }, [data]);
 
-  // ✅ Profiles (6 sekcji)
+  // ✅ Profiles (6 sekcji) — potrzebne do PDF
   const profile = useMemo(() => {
     if (!data) return null;
+
     const code = data.typeCode;
 
     // next-intl: arrays pobieramy przez .raw
     const raw = (tp as any).raw as (key: string) => any;
 
-    const getLines = (k: string): string[] =>
-      safeGet(() => raw(`${code}.${k}`) as string[], []);
+    const getLines = (k: string): string[] => {
+      try {
+        const v = raw(`${code}.${k}`);
+        return Array.isArray(v) ? v : [];
+      } catch {
+        return [];
+      }
+    };
 
     return {
       core: getLines("core"),
@@ -329,6 +335,15 @@ export default function ResultPage() {
         typeDescription: reportTypeDesc,
         avatarUrl,
 
+        profileSections: [
+          { key: "core", icon: "🧠", title: t("profileSections.core"), lines: profile?.core ?? [] },
+          { key: "daily", icon: "🎯", title: t("profileSections.daily"), lines: profile?.daily ?? [] },
+          { key: "strengths", icon: "🌟", title: t("profileSections.strengths"), lines: profile?.strengths ?? [] },
+          { key: "watchOut", icon: "⚠️", title: t("profileSections.watchOut"), lines: profile?.watchOut ?? [] },
+          { key: "underPressure", icon: "⚡", title: t("profileSections.underPressure"), lines: profile?.underPressure ?? [] },
+          { key: "relationships", icon: "👥", title: t("profileSections.relationships"), lines: profile?.relationships ?? [] }
+        ].filter((s) => Array.isArray(s.lines) && s.lines.length > 0),
+
         bigFive: bigFiveRows.map((r) => ({
           key: r.key,
           label: r.label,
@@ -341,7 +356,7 @@ export default function ResultPage() {
           high: t("bigFive.levels.high")
         },
 
-        disclaimer: t("disclaimer")
+        disclaimer: t("pdf.disclaimer")
       };
 
       const blob = await pdf(<PersonalityReportPDF data={report} />).toBlob();
@@ -406,16 +421,142 @@ export default function ResultPage() {
   );
 
   const sections = [
-    { key: "core", icon: "🧠", title: t("profileSections.core"), lines: profile?.core ?? [] },
-    { key: "daily", icon: "🎯", title: t("profileSections.daily"), lines: profile?.daily ?? [] },
-    { key: "strengths", icon: "🌟", title: t("profileSections.strengths"), lines: profile?.strengths ?? [] },
-    { key: "watchOut", icon: "⚠️", title: t("profileSections.watchOut"), lines: profile?.watchOut ?? [] },
-    { key: "underPressure", icon: "⚡", title: t("profileSections.underPressure"), lines: profile?.underPressure ?? [] },
-    { key: "relationships", icon: "👥", title: t("profileSections.relationships"), lines: profile?.relationships ?? [] }
+    {
+      key: "core",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className="h-5 w-5 text-indigo-300/75"
+        >
+          <path d="M12 18V5" />
+          <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" />
+          <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" />
+          <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" />
+          <path d="M18 18a4 4 0 0 0 2-7.464" />
+          <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" />
+          <path d="M6 18a4 4 0 0 1-2-7.464" />
+          <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" />
+        </svg>
+      ),
+      title: t("profileSections.core"),
+      lines: profile?.core ?? []
+    },
+    {
+      key: "daily",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className="h-5 w-5 text-indigo-400/75"
+        >
+          <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
+        </svg>
+      ),
+      title: t("profileSections.daily"),
+      lines: profile?.daily ?? [],
+    },
+    {
+      key: "strengths",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className="h-5 w-5 text-violet-400/75"
+        >
+          {/* główna gwiazda — gradient */}
+          <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+
+          {/* mały plus — bez gradientu, czytelny */}
+          <path d="M20 2v4" stroke="currentColor" strokeWidth="1.8" />
+          <path d="M22 4h-4" stroke="currentColor" strokeWidth="1.8" />
+
+          {/* kółko — bez gradientu, czytelne */}
+          <circle cx="4" cy="20" r="2" stroke="currentColor" strokeWidth="1.8" />
+        </svg>
+      ),
+      title: t("profileSections.strengths"),
+      lines: profile?.strengths ?? [],
+    },
+    {
+      key: "watchOut",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className="h-5 w-5 text-violet-500/75"
+        >
+          <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
+          <path d="M12 8v4" />
+          <path d="M12 16h.01" />
+        </svg>
+      ),
+      title: t("profileSections.watchOut"),
+      lines: profile?.watchOut ?? [],
+    },
+    {
+      key: "underPressure",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className="h-5 w-5 text-fuchsia-400/75"
+        >
+          <path d="m12 14 4-4" />
+          <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+        </svg>
+      ),
+      title: t("profileSections.underPressure"),
+      lines: profile?.underPressure ?? [],
+    },
+    {
+      key: "relationships",
+      icon: (
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className="h-5 w-5 text-pink-400/75"
+        >
+          <path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762" />
+        </svg>
+      ),
+      title: t("profileSections.relationships"),
+      lines: profile?.relationships ?? [],
+    },
   ] as const;
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-4 py-6 text-white sm:px-6 sm:py-10">
+    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 py-6 text-white sm:px-6 sm:py-10">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
         <div className="absolute top-1/3 -left-40 h-[360px] w-[360px] rounded-full bg-fuchsia-500/20 blur-[120px]" />
@@ -427,16 +568,17 @@ export default function ResultPage() {
         {/* Top bar */}
         <div className="flex items-center justify-between gap-3">
           <div className="leading-tight min-w-0">
-            <div
-              className="text-sm font-bold text-white/80 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]"
+            <a
+              href="/"
+              className="text-sm font-bold text-white/80 hover:text-white/95 transition"
               style={{
                 fontFamily:
                   '"Satoshi", var(--font-geist-sans), system-ui, sans-serif',
               }}
             >
               {t("brandTitle")}
-            </div>
-            <div className="text-xs text-white/55 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+            </a>
+            <div className="text-xs text-white/55">
               {t("brandSubtitle")}
             </div>
           </div>
@@ -454,7 +596,8 @@ export default function ResultPage() {
                   text-white/70 hover:text-white/90
                   border border-white/10 hover:border-white/20
                   bg-transparent hover:bg-white/5
-                  transition focus:outline-none"
+                  transition focus:outline-none
+                  cursor-pointer"
                 aria-haspopup="menu"
                 aria-expanded={menuOpen}
                 aria-label={t("menu")}
@@ -478,7 +621,7 @@ export default function ResultPage() {
                     }}
                     className="block w-full whitespace-nowrap rounded-lg
                       px-3 py-2 text-sm font-medium tracking-tight
-                      text-white/75 hover:text-white hover:bg-white/8"
+                      text-white/70 hover:text-white/90 hover:bg-white/8"
                     role="menuitem"
                   >
                     {t("menuRetake")}
@@ -491,41 +634,39 @@ export default function ResultPage() {
 
         {/* Hero */}
         <div className="mt-10">
-          <h1 className="mb-2 text-[2.4rem] font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem] break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
+          <h1 className="mb-2 text-[2.4rem] font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem] break-normal [overflow-wrap:normal] hyphens-auto [text-wrap:balance]">
             {t("hero.before")}{" "}
-            <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
+            <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent hyphens-auto">
               {t("hero.accent")}
             </span>
           </h1>
-          <p className="text-base text-white/65 sm:text-lg break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+          <p className="text-base text-white/65 sm:text-lg">
             {t("hero.sub")}
           </p>
         </div>
 
         {/* Main card */}
-        <div className="mt-8 rounded-3xl bg-white/2 px-5 py-6 shadow-xl sm:px-7 sm:py-7">
+        <div className="mt-8 rounded-3xl bg-white/2 px-6 py-7 shadow-xl sm:px-8 sm:py-8">
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
-              <div className="flex items-center gap-4">
-                <div className="relative">
+              <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
+                <div className="relative shrink-0">
                   <div className="pointer-events-none absolute -inset-4 rounded-full bg-[radial-gradient(circle,_rgba(14,18,32,0.95)_30%,_rgba(58,76,125,0.85)_55%,_rgba(122,141,190,0.25)_78%)] blur-3xl" />
-                  <Image
-                    src={avatarSrc}
-                    alt={typeName}
-                    width={256}
-                    height={256}
-                    className="relative z-10 h-28 w-28 rounded-full object-cover"
-                    unoptimized
-                    priority
+                  <div
+                    role="img"
+                    aria-label={typeName}
+                    className="relative z-10 h-28 w-28 shrink-0 overflow-hidden rounded-full bg-center bg-cover bg-no-repeat"
+                    style={{ backgroundImage: `url(${avatarSrc})` }}
                   />
                 </div>
-                <div className="min-w-0">
-                  <h2 className="text-3xl font-semibold break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:balance]">
+
+                <div className="min-w-0 text-center sm:text-left">
+                  <h2 className="text-3xl font-semibold">
                     {typeName}
                   </h2>
 
-                  <p className="mt-2 text-sm text-white/70 italic break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+                  <p className="mt-2 text-sm text-white/70 italic">
                     {typeDescription}
                   </p>
                 </div>
@@ -535,8 +676,8 @@ export default function ResultPage() {
         </div>
 
         {/* ✅ Joe line */}
-          <p className="mt-5 text-xs text-white/45 italic break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-            {joeLine} <span className="text-white/40">— Joe</span>
+          <p className="mt-5 text-xs text-white/50 italic">
+            {joeLine} <span className="text-white/45">— Joe</span>
           </p>
 
         {/* ✅ Profile sections (6) */}
@@ -544,17 +685,20 @@ export default function ResultPage() {
           {sections.map((s) => (
             <div
               key={s.key}
-              className="rounded-3xl bg-white/5 p-5 shadow-xl sm:p-6"
+              className="rounded-3xl bg-white/5 px-4 py-5 shadow-xl sm:px-5 sm:py-6"
             >
-              <div className="text-xs uppercase tracking-wider text-white/45 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
-                {s.icon} {s.title}
+              <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-white/50 whitespace-normal">
+                <span className="inline-flex items-center justify-center text-indigo-300/70 -translate-y-[0.5px]">
+                  {s.icon}
+                </span>
+                <span>{s.title}</span>
               </div>
 
-              <div className="mt-2 space-y-2 text-sm text-white/70">
+              <div className="mt-2 space-y-2 text-[0.95rem] leading-relaxed text-white/70">
                 {s.lines.map((line, i) => (
                   <p
                     key={i}
-                    className="break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]"
+                    className="whitespace-normal"
                   >
                     {line}
                   </p>
@@ -569,8 +713,8 @@ export default function ResultPage() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowBigFive((v) => !v)}
-              className="inline-flex flex-1 min-w-0 items-center justify-center gap-2 rounded-full
-                px-5 py-2.5 text-sm font-semibold sm:text-base
+              className="inline-flex flex-1 min-w-0 items-center justify-center gap-2 rounded-3xl
+                px-6 py-2.5 text-base font-semibold
                 text-white/90
                 bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
                 ring-1 ring-white/20
@@ -578,7 +722,8 @@ export default function ResultPage() {
                 hover:brightness-105
                 active:scale-[0.99]
                 transition
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40
+                cursor-pointer"
               type="button"
             >
               <span className="truncate">
@@ -586,75 +731,21 @@ export default function ResultPage() {
               </span>
               <span className="shrink-0 text-white/70">{showBigFive ? "▴" : "▾"}</span>
             </button>
-
-            <button
-              onClick={downloadPdf}
-              disabled={downloading}
-              className="inline-flex shrink-0 items-center gap-2 justify-center rounded-full
-                px-5 py-2.5 text-sm font-semibold whitespace-nowrap sm:text-base
-                text-white
-                bg-white/14 backdrop-blur
-                border border-white/25
-                ring-1 ring-white/25
-                shadow-[0_10px_30px_rgba(255,255,255,0.06)]
-                hover:bg-white/18 hover:ring-white/40
-                disabled:opacity-60
-                active:scale-[0.99]
-                transition
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/45"
-              type="button"
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden="true"
-                className="opacity-90"
-              >
-                <path
-                  d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M14 2v6h6"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M8 15h8"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M8 18h6"
-                  stroke="currentColor"
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                />
-              </svg>
-
-              <span>{downloading ? t("pdf.downloading") : t("pdf.download")}</span>
-            </button>
           </div>
 
-          <div className="mt-2 text-xs text-white/40">{t("bigFive.note")}</div>
+          <div className="mt-4 text-xs text-white/40">{t("bigFive.note")}</div>
         </div>
 
         {/* Big Five panel */}
         {showBigFive && (
-          <div className="mt-6 rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl">
+          <div className="mt-6 rounded-3xl bg-white/5 p-5 shadow-xl sm:p-6">
             <div className="mt-2 space-y-4">
               {bigFiveRows.map((row) => {
                 const k = levelKey(row.value);
                 return (
                   <div key={row.key}>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-sm text-white/80 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+                      <div className="flex items-center gap-2 text-sm text-white/80">
                         {row.label}
                         {row.key === highestTrait.key && (
                           <span
@@ -690,14 +781,75 @@ export default function ResultPage() {
               })}
             </div>
 
-            <p className="mt-4 text-center text-xs text-white/40 break-words [overflow-wrap:break-word] [hyphens:auto] [text-wrap:pretty]">
+            <div className="mt-8 mb-2">
+              <button
+                onClick={downloadPdf}
+                disabled={downloading}
+                className="relative inline-flex w-full items-center justify-center gap-2 rounded-3xl px-6 py-2.5
+                  text-base font-semibold text-white
+                  bg-white/14 backdrop-blur
+                  border border-white/20
+                  ring-1 ring-white/20
+                  shadow-[0_10px_30px_rgba(255,255,255,0.06)]
+                  hover:bg-white/18 hover:ring-white/35
+                  disabled:opacity-60
+                  active:scale-[0.99]
+                  transition
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/45
+                  cursor-pointer"
+                type="button"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  className="opacity-90"
+                >
+                  <path
+                    d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M14 2v6h6"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M8 15h8"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8 18h6"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
+                </svg>
+
+                <span>{downloading ? t("pdf.downloading") : t("pdf.download")}</span>
+              </button>
+            </div>
+
+            <p className="mt-4 text-center text-xs text-white/40">
               {t("disclaimer")}
             </p>
           </div>
         )}
-
         <p className="mt-10 text-center text-xs text-white/40">
-          tellmejoe. TMJ © {new Date().getFullYear()}
+          <a
+            href="/"
+            className="hover:text-white/55 transition"
+          >
+            tellmejoe
+          </a>
+          . TMJ © {new Date().getFullYear()}
         </p>
       </div>
     </main>

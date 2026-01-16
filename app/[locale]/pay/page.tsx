@@ -60,6 +60,33 @@ export default function PayPage() {
   }, [router]);
 
   async function handleUnlock() {
+    // ✅ Preview/test mode: payments disabled → unlock locally (no Stripe)
+    if (process.env.NEXT_PUBLIC_PAYMENTS_DISABLED === "true") {
+      try {
+        const raw = localStorage.getItem(ANSWERS_KEY);
+        if (!raw) return router.push("/test");
+
+        const answers = JSON.parse(raw) as number[];
+        if (!Array.isArray(answers) || !isCompleteAnswers(answers)) {
+          return router.push("/test");
+        }
+
+        const payload = calculateResult(answers);
+
+        localStorage.setItem(RESULT_KEY, JSON.stringify(payload));
+        localStorage.setItem(PAID_KEY, "true");
+        localStorage.setItem(PAID_AT_KEY, String(Date.now()));
+
+        router.push("/result");
+        return;
+      } catch (e) {
+        console.error("Local unlock failed", e);
+        alert("Unlock error. Please try again.");
+        return;
+      }
+    }
+
+    // ✅ Normal: Stripe Checkout
     try {
       const res = await fetch("/api/stripe/checkout", {
         method: "POST",
@@ -146,7 +173,8 @@ export default function PayPage() {
               bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
               shadow-[0_20px_60px_rgba(99,102,241,0.35)]
               transition active:scale-[0.98]
-              focus:outline-none focus:ring-4 focus:ring-indigo-400/30"
+              focus:outline-none focus:ring-4 focus:ring-indigo-400/30
+              cursor-pointer"
             type="button"
           >
             {t("cta")} →
@@ -156,9 +184,14 @@ export default function PayPage() {
         </div>
 
         <p className="mt-10 text-center text-xs text-white/40">
-          tellmejoe. TMJ © {new Date().getFullYear()}
-        </p>
-        
+          <a
+            href="/"
+            className="hover:text-white/55 transition"
+          >
+            tellmejoe
+          </a>
+          . TMJ © {new Date().getFullYear()}
+        </p>        
       </div>
     </main>
   );

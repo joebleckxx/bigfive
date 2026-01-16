@@ -316,7 +316,7 @@ export default function TestPage() {
               onClick={goBack}
               type="button"
               disabled={index === 0}
-              className="text-sm text-white/60 underline underline-offset-4 decoration-white/20 hover:text-white hover:decoration-white/45 disabled:cursor-not-allowed disabled:opacity-40"
+              className="text-sm text-white/60 underline underline-offset-4 decoration-white/20 hover:text-white/90 hover:decoration-white/45 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
               aria-disabled={index === 0 || isAdvancing}
             >
               {t("back")}
@@ -332,7 +332,8 @@ export default function TestPage() {
                   text-white/70 hover:text-white/90
                   border border-white/10 hover:border-white/20
                   bg-transparent hover:bg-white/5
-                  transition focus:outline-none"
+                  transition focus:outline-none
+                  cursor-pointer"
                 aria-haspopup="menu"
                 aria-expanded={menuOpen}
                 aria-label={t("menu")}
@@ -353,20 +354,11 @@ export default function TestPage() {
                     onClick={doReset}
                     className="block w-full whitespace-nowrap rounded-lg
                       px-3 py-2 text-sm font-medium tracking-tight
-                      text-white/75 hover:text-white hover:bg-white/8"
+                      text-white/75 hover:text-white/90 hover:bg-white/8
+                      cursor-pointer"
                     role="menuitem"
                   >
                     {t("reset")}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={goToStart}
-                    className="block w-full whitespace-nowrap rounded-lg
-                      px-3 py-2 text-sm font-medium tracking-tight
-                      text-white/75 hover:text-white hover:bg-white/8"
-                    role="menuitem"
-                  >
-                    {t("start")}
                   </button>
                 </div>
               )}
@@ -386,12 +378,15 @@ export default function TestPage() {
         </div>
 
         {/* Joe microcopy */}
-        <div className="mb-6 mt-1 text-xs text-white/45 italic">
+        <div className="mb-6 mt-1 text-xs text-white/50 italic">
           Take your time — Joe.
         </div>
 
         <div className="relative z-10">
-          <div className="rounded-3xl border border-white/10 bg-white/8 p-5 shadow-xl backdrop-blur-2xl sm:p-6">
+          <div className="rounded-3xl border border-white/10 bg-white/8
+                          px-4 pt-4 pb-5
+                          shadow-xl backdrop-blur-2xl
+                          sm:px-6 sm:pt-6 sm:pb-7">
             <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
               {orderReady ? q(currentQuestion.id) : "\u00A0"}
             </h2>
@@ -478,6 +473,7 @@ export default function TestPage() {
                     className={[
                       "group relative w-full rounded-3xl border px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4",
                       "appearance-none",
+                      "cursor-pointer",
                       "focus:outline-none focus-visible:outline-none",
                       "[-webkit-tap-highlight-color:transparent]",
                       "transition-[background-color,border-color,transform] duration-150 active:scale-[0.98]",
@@ -505,7 +501,13 @@ export default function TestPage() {
         </div>
 
         <p className="mt-10 text-center text-xs text-white/40">
-          tellmejoe. TMJ © {new Date().getFullYear()}
+          <a
+            href="/"
+            className="hover:text-white/55 transition"
+          >
+            tellmejoe
+          </a>
+          . TMJ © {new Date().getFullYear()}
         </p>
       </div>
     </main>

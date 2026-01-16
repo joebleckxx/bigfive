@@ -11,9 +11,9 @@
     "note": "Zajmuje ~5–7 minut. Bez konta.",
     "cta": "Rozpocznij test",
     "editorial": {
-      "line1": "25 prostych pytań. Tylko kilka minut.",
-      "line2": "Oparte na ugruntowanej psychologii. Jeden z 16 profili osobowości.",
-      "line3": "Dowiedz się, jakie są Twoje mocne i słabe strony."
+      "line1": "25 prostych pytań – gotowe w kilka minut.",
+      "line2": "Test oparty na uznanym modelu Big Five, dopasowany do jednego z 16 profili.",
+      "line3": "Praktyczny wgląd w to, jak działasz na co dzień, reagujesz pod presją oraz styl budowania relacji."
     },
     "footer": "TMJ • tellmejoe."
   },
@@ -62,7 +62,7 @@
     "hero": {
       "before": "Twój",
       "accent": "wynik osobowości",
-      "sub": "Wynik oparty na uznanym modelu cech osobowości"
+      "sub": "Wynik oparty na uznanym modelu cech osobowości Big Five"
     },
     "menu": "Menu",
     "menuRetake": "Powtórz",
@@ -115,25 +115,25 @@
   },
   "Questions": {
     "E1": "Łatwo mi zaczynać rozmowy z nowymi osobami.",
-    "E2": "Po długim dniu wolę być z innymi niż samemu.",
+    "E2": "Po długim dniu wolę być z innymi niż w samotności.",
     "E3": "Często przejmuję inicjatywę w sytuacjach grupowych.",
     "E4": "Czuję się swobodnie, gdy jestem w centrum uwagi.",
     "E5": "Zwykle wolę słuchać niż mówić.",
     "O1": "Lubię odkrywać nowe pomysły, nawet jeśli są niekonwencjonalne.",
-    "O2": "Pociągają mnie tematy abstrakcyjne, takie jak idee, filozofia czy przyszłość.",
+    "O2": "Pociągają mnie abstrakcyjne tematy, takie jak idee, filozofia czy przyszłość.",
     "O3": "Rutyna mnie nudzi i szukam czegoś nowego.",
     "O4": "Lubię kwestionować utarte sposoby.",
-    "O5": "Czuję się pewniej przy sprawdzonych metodach niż przy eksperymentowaniu.",
+    "O5": "Czuję się pewniej przy sprawdzonych metodach niż przy próbowaniu nowych rozwiązań.",
     "C1": "Zwykle planuję zadania z wyprzedzeniem i doprowadzam je do końca.",
     "C2": "Terminy są dla mnie ważne i aktywnie ich pilnuję.",
     "C3": "Lubię, gdy rzeczy są uporządkowane i mają strukturę.",
     "C4": "Kończę to, co zaczynam, nawet gdy spada motywacja.",
     "C5": "Często odkładam sprawy na ostatnią chwilę.",
     "A1": "Łatwo mi zrozumieć punkt widzenia innych osób.",
-    "A2": "Staram się nie ranić innych, nawet jeśli oznacza to powstrzymanie własnej opinii.",
+    "A2": "Dobieram słowa ostrożnie, nawet jeśli mam inne zdanie",
     "A3": "W sytuacjach konfliktowych wolę kompromis niż wygraną.",
     "A4": "Często wspieram innych, nawet gdy nie jest to dla mnie wygodne.",
-    "A5": "Potrafię być bezpośredni(a), nawet jeśli może to kogoś zranić.",
+    "A5": "Zdarza mi się mówić wprost, nawet jeśli komuś jest to nieprzyjemne.",
     "N1": "Łatwo się stresuję, nawet drobnymi sprawami.",
     "N2": "Trudno mi się uspokoić po nieprzyjemnej sytuacji.",
     "N3": "Mam tendencję do martwienia się na zapas.",

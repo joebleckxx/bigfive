@@ -52,7 +52,8 @@ export function LanguageSwitcher() {
           text-white/70 hover:text-white/90
           border border-white/10 hover:border-white/20
           bg-transparent hover:bg-white/5
-          transition focus:outline-none"
+          transition focus:outline-none
+          cursor-pointer"
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label="Language"

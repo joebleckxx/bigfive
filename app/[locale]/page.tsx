@@ -36,7 +36,7 @@ export default function Page() {
             </div>
             <div className="text-xs text-white/55">{t("brand.subtitle")}</div>
           </div>
-
+          
           <LanguageSwitcher />
         </div>
 
