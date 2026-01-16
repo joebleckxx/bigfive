@@ -469,7 +469,8 @@ export default function ResultPage() {
                   text-white/70 hover:text-white/90
                   border border-white/10 hover:border-white/20
                   bg-transparent hover:bg-white/5
-                  transition focus:outline-none"
+                  transition focus:outline-none
+                  cursor-pointer"
                 aria-haspopup="menu"
                 aria-expanded={menuOpen}
                 aria-label={t("menu")}
@@ -582,8 +583,8 @@ export default function ResultPage() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowBigFive((v) => !v)}
-              className="inline-flex flex-1 min-w-0 items-center justify-center gap-2 rounded-full
-                px-5 py-2.5 text-sm font-semibold sm:text-base
+              className="inline-flex flex-1 min-w-0 items-center justify-center gap-2 rounded-3xl
+                px-6 py-2.5 text-base font-semibold
                 text-white/90
                 bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
                 ring-1 ring-white/20
@@ -602,7 +603,7 @@ export default function ResultPage() {
             </button>
           </div>
 
-          <div className="mt-2 text-xs text-white/40">{t("bigFive.note")}</div>
+          <div className="mt-4 text-xs text-white/40">{t("bigFive.note")}</div>
         </div>
 
         {/* Big Five panel */}

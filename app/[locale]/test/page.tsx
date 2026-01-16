@@ -316,7 +316,7 @@ export default function TestPage() {
               onClick={goBack}
               type="button"
               disabled={index === 0}
-              className="text-sm text-white/60 underline underline-offset-4 decoration-white/20 hover:text-white hover:decoration-white/45 disabled:cursor-not-allowed disabled:opacity-40"
+              className="text-sm text-white/60 underline underline-offset-4 decoration-white/20 hover:text-white hover:decoration-white/45 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
               aria-disabled={index === 0 || isAdvancing}
             >
               {t("back")}
@@ -332,7 +332,8 @@ export default function TestPage() {
                   text-white/70 hover:text-white/90
                   border border-white/10 hover:border-white/20
                   bg-transparent hover:bg-white/5
-                  transition focus:outline-none"
+                  transition focus:outline-none
+                  cursor-pointer"
                 aria-haspopup="menu"
                 aria-expanded={menuOpen}
                 aria-label={t("menu")}
@@ -391,7 +392,7 @@ export default function TestPage() {
         </div>
 
         <div className="relative z-10">
-          <div className="rounded-3xl border border-white/10 bg-white/8 p-5 shadow-xl backdrop-blur-2xl sm:p-6">
+          <div className="rounded-3xl border border-white/10 bg-white/8 p-4 shadow-xl backdrop-blur-2xl sm:p-6">
             <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
               {orderReady ? q(currentQuestion.id) : "\u00A0"}
             </h2>
