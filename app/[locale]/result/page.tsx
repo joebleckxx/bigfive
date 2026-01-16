@@ -442,15 +442,16 @@ export default function ResultPage() {
         {/* Top bar */}
         <div className="flex items-center justify-between gap-3">
           <div className="leading-tight min-w-0">
-            <div
-              className="text-sm font-bold text-white/80"
+            <a
+              href="/"
+              className="text-sm font-bold text-white/80 hover:text-white/95 transition"
               style={{
                 fontFamily:
                   '"Satoshi", var(--font-geist-sans), system-ui, sans-serif',
               }}
             >
               {t("brandTitle")}
-            </div>
+            </a>
             <div className="text-xs text-white/55">
               {t("brandSubtitle")}
             </div>
@@ -494,7 +495,7 @@ export default function ResultPage() {
                     }}
                     className="block w-full whitespace-nowrap rounded-lg
                       px-3 py-2 text-sm font-medium tracking-tight
-                      text-white/75 hover:text-white hover:bg-white/8"
+                      text-white/70 hover:text-white/90 hover:bg-white/8"
                     role="menuitem"
                   >
                     {t("menuRetake")}
@@ -712,9 +713,14 @@ export default function ResultPage() {
             </p>
           </div>
         )}
-
         <p className="mt-10 text-center text-xs text-white/40">
-          tellmejoe. TMJ © {new Date().getFullYear()}
+          <a
+            href="/"
+            className="hover:text-white/55 transition"
+          >
+            tellmejoe
+          </a>
+          . TMJ © {new Date().getFullYear()}
         </p>
       </div>
     </main>

@@ -184,9 +184,14 @@ export default function PayPage() {
         </div>
 
         <p className="mt-10 text-center text-xs text-white/40">
-          tellmejoe. TMJ © {new Date().getFullYear()}
-        </p>
-        
+          <a
+            href="/"
+            className="hover:text-white/55 transition"
+          >
+            tellmejoe
+          </a>
+          . TMJ © {new Date().getFullYear()}
+        </p>        
       </div>
     </main>
   );
