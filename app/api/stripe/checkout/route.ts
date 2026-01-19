@@ -15,13 +15,18 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: [{ price: process.env.STRIPE_PRICE_ID!, quantity: 1 }],
+
+      // ✅ Jedyna kluczowa zmiana dla metod płatności:
+      // Apple Pay / Google Pay pojawią się jako "card wallets", a znikają dziwne metody.
+      payment_method_types: ["card"],
+
       success_url: `${appUrl}/${locale}/result?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${appUrl}/${locale}/pay`
+      cancel_url: `${appUrl}/${locale}/pay?canceled=1`
     });
 
     return NextResponse.json({ url: session.url });
   } catch (e) {
-  console.error("STRIPE CHECKOUT ERROR:", e);
-  return NextResponse.json({ error: "checkout_failed" }, { status: 500 });
+    console.error("STRIPE CHECKOUT ERROR:", e);
+    return NextResponse.json({ error: "checkout_failed" }, { status: 500 });
   }
 }
