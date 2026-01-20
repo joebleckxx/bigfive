@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 
       // ✅ Jedyna kluczowa zmiana dla metod płatności:
       // Apple Pay / Google Pay pojawią się jako "card wallets", a znikają dziwne metody.
-      payment_method_types: ["card", "klarna"],
+      payment_method_types: ["card"],
 
       success_url: `${appUrl}/${locale}/result?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${appUrl}/${locale}/pay?canceled=1`
