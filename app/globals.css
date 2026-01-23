@@ -43,6 +43,9 @@ body {
 
 /* Premium spinner used on pay page */
 .tmj-spinner {
+  --tmj-ring-inner: 56%;
+  --tmj-ring-mid: 78%;
+  --tmj-ring-outer: 82%;
   background: conic-gradient(
     from 0deg,
     rgba(255, 255, 255, 0) 0deg,
@@ -55,22 +58,25 @@ body {
   );
   -webkit-mask-image: radial-gradient(
     transparent 52%,
-    #000 56%,
-    #000 78%,
-    transparent 82%
+    #000 var(--tmj-ring-inner),
+    #000 var(--tmj-ring-mid),
+    transparent var(--tmj-ring-outer)
   );
   mask-image: radial-gradient(
     transparent 52%,
-    #000 56%,
-    #000 78%,
-    transparent 82%
+    #000 var(--tmj-ring-inner),
+    #000 var(--tmj-ring-mid),
+    transparent var(--tmj-ring-outer)
   );
-  filter: blur(0.6px) brightness(1.08);
+  filter: blur(0.6px) brightness(1.08) drop-shadow(0 0 10px rgba(199, 210, 254, 0.35));
   animation: tmj-spin 1.05s linear infinite;
   transform: translateZ(0);
 }
 
 .tmj-spinner-glow {
+  --tmj-glow-inner: 50%;
+  --tmj-glow-mid: 82%;
+  --tmj-glow-outer: 86%;
   background: conic-gradient(
     from 0deg,
     rgba(255, 255, 255, 0) 0deg,
@@ -82,20 +88,37 @@ body {
   );
   -webkit-mask-image: radial-gradient(
     transparent 46%,
-    #000 50%,
-    #000 82%,
-    transparent 86%
+    #000 var(--tmj-glow-inner),
+    #000 var(--tmj-glow-mid),
+    transparent var(--tmj-glow-outer)
   );
   mask-image: radial-gradient(
     transparent 46%,
-    #000 50%,
-    #000 82%,
-    transparent 86%
+    #000 var(--tmj-glow-inner),
+    #000 var(--tmj-glow-mid),
+    transparent var(--tmj-glow-outer)
   );
   filter: blur(10px) saturate(1.2);
   opacity: 0.9;
   animation: tmj-spin 1.05s linear infinite;
   transform: translateZ(0);
+}
+
+@media (max-width: 640px) {
+  .tmj-spinner {
+    --tmj-ring-inner: 58%;
+    --tmj-ring-mid: 74%;
+    --tmj-ring-outer: 78%;
+    filter: blur(0.7px) brightness(1.1) drop-shadow(0 0 14px rgba(199, 210, 254, 0.45));
+  }
+
+  .tmj-spinner-glow {
+    --tmj-glow-inner: 52%;
+    --tmj-glow-mid: 80%;
+    --tmj-glow-outer: 84%;
+    filter: blur(12px) saturate(1.25);
+    opacity: 0.95;
+  }
 }
 
 @keyframes tmj-spin {
