@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { QUESTIONS } from "@/lib/personality";
@@ -41,6 +41,7 @@ export default function PayPage() {
   const router = useRouter();
   const t = useTranslations("Pay");
   const locale = useLocale();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     try {
@@ -60,14 +61,22 @@ export default function PayPage() {
   }, [router]);
 
   async function handleUnlock() {
+
+    if (isLoading) return;
+    setIsLoading(true);
+
     // ✅ Preview/test mode: payments disabled → unlock locally (no Stripe)
     if (process.env.NEXT_PUBLIC_PAYMENTS_DISABLED === "true") {
       try {
         const raw = localStorage.getItem(ANSWERS_KEY);
-        if (!raw) return router.push("/test");
+        if (!raw) {
+          setIsLoading(false);
+          return router.push("/test");
+        }
 
         const answers = JSON.parse(raw) as number[];
         if (!Array.isArray(answers) || !isCompleteAnswers(answers)) {
+          setIsLoading(false);
           return router.push("/test");
         }
 
@@ -81,6 +90,7 @@ export default function PayPage() {
         return;
       } catch (e) {
         console.error("Local unlock failed", e);
+        setIsLoading(false);
         alert("Unlock error. Please try again.");
         return;
       }
@@ -106,6 +116,7 @@ export default function PayPage() {
       console.error("Stripe checkout failed", e);
     }
 
+    setIsLoading(false);
     alert("Payment setup error. Please try again.");
   }
 
@@ -169,12 +180,14 @@ export default function PayPage() {
         <div className="mt-8">
           <button
             onClick={handleUnlock}
+            aria-busy={isLoading}
+            disabled={isLoading}
             className="relative inline-flex w-full items-center justify-center rounded-3xl px-6 py-4 text-base font-semibold text-white
               bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
               shadow-[0_20px_60px_rgba(99,102,241,0.35)]
               transition active:scale-[0.98]
               focus:outline-none focus:ring-4 focus:ring-indigo-400/30
-              cursor-pointer"
+              cursor-pointer disabled:opacity-80 disabled:cursor-not-allowed"
             type="button"
           >
             {t("cta")} →
@@ -193,6 +206,32 @@ export default function PayPage() {
           . TMJ © {new Date().getFullYear()}
         </p>        
       </div>
+
+      {isLoading && (
+        <div
+          className="absolute inset-0 z-50 flex items-center justify-center bg-[#0B0C14]/70 backdrop-blur-md"
+          role="status"
+          aria-live="polite"
+        >
+          <div className="flex flex-col items-center gap-4">
+            <div className="relative h-16 w-16">
+              <div className="tmj-spinner absolute inset-0 rounded-full" />
+              <div className="tmj-spinner-glow absolute inset-0 rounded-full" />
+            </div>
+
+            <div className="text-sm text-white/75">
+              {(() => {
+                try {
+                  return t("loading");
+                } catch {
+                  return "Loading…";
+                }
+              })()}
+            </div>
+          </div>
+        </div>
+      )}
+
     </main>
   );
 }

@@ -49,6 +49,7 @@
     },
     "cta": "Débloquer le rapport complet",
     "note": "$1 • paiement unique • accès immédiat",
+    "loading": "Redirection vers le paiement sécurisé...",
     "footer": "TMJ • tellmejoe."
   },
   "Result": {

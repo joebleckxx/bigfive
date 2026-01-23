@@ -49,6 +49,7 @@
     },
     "cta": "Desbloquear informe completo",
     "note": "$1 • pago único • acceso inmediato",
+    "loading": "Redirigiendo al pago seguro...",
     "footer": "TMJ • tellmejoe."
   },
   "Result": {

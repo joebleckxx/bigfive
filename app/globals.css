@@ -41,6 +41,69 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Premium spinner used on pay page */
+.tmj-spinner {
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0) 0deg,
+    rgba(255, 255, 255, 0) 24deg,
+    rgba(165, 180, 252, 0.95) 70deg,
+    rgba(216, 180, 254, 0.95) 102deg,
+    rgba(244, 114, 182, 0.95) 132deg,
+    rgba(255, 255, 255, 0) 165deg,
+    rgba(255, 255, 255, 0) 360deg
+  );
+  -webkit-mask-image: radial-gradient(
+    transparent 52%,
+    #000 56%,
+    #000 78%,
+    transparent 82%
+  );
+  mask-image: radial-gradient(
+    transparent 52%,
+    #000 56%,
+    #000 78%,
+    transparent 82%
+  );
+  filter: blur(0.6px) brightness(1.08);
+  animation: tmj-spin 1.05s linear infinite;
+  transform: translateZ(0);
+}
+
+.tmj-spinner-glow {
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0) 0deg,
+    rgba(255, 255, 255, 0) 45deg,
+    rgba(199, 210, 254, 0.7) 90deg,
+    rgba(244, 114, 182, 0.65) 130deg,
+    rgba(255, 255, 255, 0) 165deg,
+    rgba(255, 255, 255, 0) 360deg
+  );
+  -webkit-mask-image: radial-gradient(
+    transparent 46%,
+    #000 50%,
+    #000 82%,
+    transparent 86%
+  );
+  mask-image: radial-gradient(
+    transparent 46%,
+    #000 50%,
+    #000 82%,
+    transparent 86%
+  );
+  filter: blur(10px) saturate(1.2);
+  opacity: 0.9;
+  animation: tmj-spin 1.05s linear infinite;
+  transform: translateZ(0);
+}
+
+@keyframes tmj-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* iOS / Safari tap & focus flash killer */
 button,
 [role="button"] {
