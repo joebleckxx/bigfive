@@ -1,0 +1,530 @@
+{
+  "Home": {
+    "brand": {
+      "title": "tellmejoe.",
+      "subtitle": "no judgment • just patterns"
+    },
+    "headline": {
+      "before": "Descubre tu",
+      "accent": "perfil de personalidad"
+    },
+    "note": "Toma ~5–7 minutos. Sin cuenta.",
+    "cta": "Empezar el test",
+    "editorial": {
+      "line1": "25 preguntas simples — listo en unos minutos.",
+      "line2": "Test basado en el reconocido modelo Big Five, asignado a uno de 16 perfiles.",
+      "line3": "Una visión práctica de cómo actúas a diario, reaccionas bajo presión y construyes relaciones."
+    },
+    "footer": "TMJ • tellmejoe."
+  },
+  "Test": {
+    "progress": "Pregunta {current} de {total}",
+    "menu": "Menú",
+    "back": "Atrás",
+    "reset": "Reiniciar",
+    "start": "Empezar",
+    "tip": "Consejo: responde de forma intuitiva — no hay respuestas incorrectas.",
+    "footer": "TMJ • tellmejoe."
+  },
+  "Scale": {
+    "1": "Totalmente en desacuerdo",
+    "2": "En desacuerdo",
+    "3": "Neutral",
+    "4": "De acuerdo",
+    "5": "Totalmente de acuerdo"
+  },
+  "Pay": {
+    "brandTitle": "tellmejoe.",
+    "brandSubtitle": "no judgment • just patterns",
+    "headline": {
+      "before": "Desbloquea tu",
+      "accent": "perfil completo",
+      "after": ""
+    },
+    "description": "Un resumen práctico de cómo funciona tu personalidad.",
+    "editorial": {
+      "line1": "Asignación completa a uno de 16 perfiles y puntuaciones de cinco rasgos clave (0–100).",
+      "line2": "Entender cómo tus puntos fuertes y más débiles se traducen en tu forma de actuar.",
+      "line3": "Cómo reaccionas bajo presión y qué te ayuda a mantener el equilibrio en las relaciones."
+    },
+    "cta": "Desbloquear informe completo",
+    "note": "$1 • pago único • acceso inmediato",
+    "footer": "TMJ • tellmejoe."
+  },
+  "Result": {
+    "brandTitle": "tellmejoe.",
+    "brandSubtitle": "no judgment • just patterns",
+    "noData": {
+      "title": "Sin datos",
+      "text": "No veo resultados guardados. Vuelve al test y responde a las preguntas.",
+      "backToTest": "Volver al test"
+    },
+    "hero": {
+      "before": "Tu",
+      "accent": "resultado de personalidad",
+      "sub": "Resultado basado en el reconocido modelo de rasgos de personalidad Big Five"
+    },
+    "menu": "Menú",
+    "menuRetake": "Repetir",
+    "pdf": {
+      "download": "Descargar informe",
+      "downloading": "Generando…",
+      "generated": "Generado",
+      "error": "No se pudo generar el PDF. Revisa la consola.",
+      "disclaimer": "Este informe es solo informativo. No es una herramienta médica ni diagnóstica."
+    },
+    "retake": "Repetir",
+    "retakeConfirm": "Repetir reiniciará este resultado. Un nuevo resultado requiere pago. ¿Continuar?",
+    "yourTypeLabel": "Tu perfil",
+    "bigFive": {
+      "title": "Rasgos de personalidad",
+      "show": "Mostrar detalles de rasgos",
+      "hide": "Ocultar detalles de rasgos",
+      "note": "Basado en el modelo Big Five: cinco rasgos básicos de personalidad.",
+      "topTrait": "Tu rasgo más fuerte",
+      "summary": "El rasgo que más destaca en ti es {trait}.",
+      "levels": {
+        "low": "Bajo",
+        "medium": "Medio",
+        "high": "Alto"
+      }
+    },
+    "disclaimer": "Este test se basa en investigación reconocida sobre personalidad y es informativo — no es un test clínico.",
+    "traits": {
+      "E": "Extraversión",
+      "O": "Apertura",
+      "C": "Responsabilidad",
+      "A": "Amabilidad",
+      "N": "Neuroticismo",
+      "S": "Estabilidad emocional"
+    },
+    "traitsNotes": {
+      "N": "más alto = mayor reactividad emocional",
+      "S": "más alto = más calma bajo presión"
+    },
+    "footer": "TMJ • tellmejoe.",
+    "profileSections": {
+      "core": "Tu núcleo",
+      "daily": "Cómo actúas a diario",
+      "strengths": "Puntos fuertes",
+      "watchOut": "A tener en cuenta",
+      "underPressure": "Cómo reaccionas bajo presión",
+      "relationships": "Tu estilo en las relaciones"
+    }
+  },
+  "Questions": {
+    "E1": "Me resulta fácil iniciar conversaciones con personas nuevas.",
+    "E2": "Después de un día largo prefiero estar con otros que a solas.",
+    "E3": "A menudo tomo la iniciativa en situaciones de grupo.",
+    "E4": "Me siento cómodo/a cuando soy el centro de atención.",
+    "E5": "Por lo general prefiero escuchar antes que hablar.",
+    "O1": "Me gusta explorar ideas nuevas, incluso si son poco convencionales.",
+    "O2": "Me atraen temas abstractos como ideas, filosofía o el futuro.",
+    "O3": "La rutina me aburre y busco algo nuevo.",
+    "O4": "Me gusta cuestionar las formas establecidas.",
+    "O5": "Me siento más seguro/a con métodos probados que probando soluciones nuevas.",
+    "C1": "Normalmente planifico las tareas con antelación y las termino.",
+    "C2": "Los plazos son importantes para mí y los sigo activamente.",
+    "C3": "Me gusta que las cosas estén ordenadas y tengan estructura.",
+    "C4": "Termino lo que empiezo, incluso cuando baja la motivación.",
+    "C5": "A menudo dejo las cosas para el último momento.",
+    "A1": "Me resulta fácil entender el punto de vista de otras personas.",
+    "A2": "Elijo mis palabras con cuidado, incluso si no estoy de acuerdo.",
+    "A3": "En conflictos prefiero un compromiso antes que ganar.",
+    "A4": "A menudo apoyo a otros, incluso cuando no me resulta cómodo.",
+    "A5": "A veces hablo con franqueza, aunque a alguien le resulte desagradable.",
+    "N1": "Me estreso con facilidad, incluso por cosas pequeñas.",
+    "N2": "Me cuesta calmarme después de una situación desagradable.",
+    "N3": "Tiendo a preocuparme por adelantado.",
+    "N4": "Mi estado de ánimo puede cambiar rápidamente.",
+    "N5": "Por lo general mantengo la calma bajo presión."
+  },
+  "Types": {
+    "P01": {
+      "name": "Pensador",
+      "desc": "Piensa de forma intensa y a su manera — actúa en oleadas, guiado por un impulso interno."
+    },
+    "P02": {
+      "name": "Explorador",
+      "desc": "Impulsado por la curiosidad y la necesidad de entender el mundo."
+    },
+    "P03": {
+      "name": "Idealista",
+      "desc": "Se guía por una brújula interna y valores claramente definidos."
+    },
+    "P04": {
+      "name": "Guía",
+      "desc": "Da a los demás sentido de dirección y estabilidad."
+    },
+    "P05": {
+      "name": "Visionario",
+      "desc": "Ve más allá del aquí y ahora; piensa en el futuro."
+    },
+    "P06": {
+      "name": "Líder",
+      "desc": "Marca el rumbo y sabe arrastrar a otros."
+    },
+    "P07": {
+      "name": "Mentor",
+      "desc": "Apoya el desarrollo de otros mediante conocimiento y comprensión."
+    },
+    "P08": {
+      "name": "Cuidador",
+      "desc": "Atento a las personas y sus necesidades; crea sensación de seguridad."
+    },
+    "P09": {
+      "name": "Realista",
+      "desc": "Centrado en los hechos y en lo que funciona en la práctica."
+    },
+    "P10": {
+      "name": "Práctico",
+      "desc": "Piensa a través de la acción — se siente mejor en lo concreto."
+    },
+    "P11": {
+      "name": "Analista",
+      "desc": "Ordena el mundo mediante lógica, datos y precisión."
+    },
+    "P12": {
+      "name": "Realizador",
+      "desc": "Lleva las cosas hasta el final y cuida el resultado."
+    },
+    "P13": {
+      "name": "Observador",
+      "desc": "Capta con atención cambios, señales y matices."
+    },
+    "P14": {
+      "name": "Creador",
+      "desc": "Se expresa a través de la creación y formas nuevas."
+    },
+    "P15": {
+      "name": "Audaz",
+      "desc": "Toma decisiones con valentía y actúa a pesar de la incertidumbre."
+    },
+    "P16": {
+      "name": "Animador",
+      "desc": "Aporta energía y pone en marcha movimiento a su alrededor."
+    }
+  },
+  "Profiles": {
+    "P01": {
+      "core": [
+        "Tu forma de pensar es intensa y autónoma, a menudo desconectada de las expectativas del entorno. Te guías por impulsos propios y una lógica interna, aunque a veces cueste explicarla."
+      ],
+      "daily": [
+        "Actúas por oleadas: puedes estar muy involucrado/a y de pronto retirarte. No te aferras a esquemas fijos; respondes a lo que atrae tu atención en ese momento. Decides según el instante, el ánimo o un impulso interno."
+      ],
+      "strengths": [
+        "Tienes el valor de pensar y reaccionar distinto a la mayoría. Ves cosas que a otros se les escapan precisamente porque no filtras el mundo por normas y expectativas. Tu autenticidad puede ser cruda, pero es real."
+      ],
+      "watchOut": [
+        "La falta de estructura puede dificultarte cerrar asuntos o mantener el rumbo a largo plazo. Las emociones fuertes pueden tomar el control antes de que logres nombrarlas."
+      ],
+      "underPressure": [
+        "Bajo presión reaccionas de forma intensa y rápida, a menudo antes de que la situación se calme. Te cuesta tomar distancia emocional, porque la tensión entra de inmediato en el cuerpo y los pensamientos."
+      ],
+      "relationships": [
+        "En las relaciones puedes ser impredecible, pero sincero/a. Te comunicas más por reacciones que por declaraciones. Los demás pueden verte difícil de descifrar, pero claramente auténtico/a."
+      ]
+    },
+    "P02": {
+      "core": [
+        "Te mueve la curiosidad por el mundo y la necesidad de entender las cosas a tu manera. Te sientes mejor cuando puedes mirar, escuchar y comprobar sin la presión de respuestas inmediatas."
+      ],
+      "daily": [
+        "Te mueves con calma, dándote tiempo para observar y experimentar. Rara vez te atas a una sola dirección, porque el proceso de descubrir es más importante que la meta. Consideras el cambio un estado natural."
+      ],
+      "strengths": [
+        "Mantienes una mirada fresca donde otros ya se han acostumbrado. Conectas hechos sin prisa y sueles ver relaciones que antes pasaban desapercibidas. Tu curiosidad transmite calma a tu entorno."
+      ],
+      "watchOut": [
+        "Puedes posponer decisiones porque siempre ves una posibilidad más por explorar. A veces te cuesta marcar una línea clara entre explorar y detenerte."
+      ],
+      "underPressure": [
+        "Bajo presión te refugias en la observación en lugar de actuar de inmediato. Necesitas un momento para ordenar todo en tu cabeza y recuperar claridad."
+      ],
+      "relationships": [
+        "En las relaciones eres atento/a y no te impones. Escuchas más de lo que llevas la conversación. Para otros, puedes ser una presencia tranquila y segura."
+      ]
+    },
+    "P03": {
+      "core": [
+        "Te guía un fuerte sentido interno de significado y coherencia. Si algo no encaja con tus valores, lo sientes muy rápido."
+      ],
+      "daily": [
+        "Te implicas a fondo, pero solo donde ves sentido, no solo un objetivo. Cuando la situación se aleja de lo que es importante para ti, te retiras sin grandes declaraciones. Prefieres perder ritmo antes que autenticidad."
+      ],
+      "strengths": [
+        "Eres capaz de dar profundidad incluso a acciones y conversaciones simples. Aportas una perspectiva basada en el sentido, no solo en la eficacia. Para otros, puedes ser un punto de referencia, aunque no lo digas explícitamente."
+      ],
+      "watchOut": [
+        "La decepción puede golpearte más de lo que muestras por fuera. Cuando la realidad se aleja demasiado de los ideales, la tensión crece rápido."
+      ],
+      "underPressure": [
+        "Bajo presión reaccionas de manera emocional y con intensidad interna. Necesitas tiempo para separar lo que sientes de lo que realmente está ocurriendo."
+      ],
+      "relationships": [
+        "En las relaciones buscas contacto real, no un intercambio de cortesías. Evitas conversaciones superficiales, aunque eso complique vínculos. Para algunos eres exigente; para otros, muy auténtico/a."
+      ]
+    },
+    "P04": {
+      "core": [
+        "Tienes una necesidad natural de entender lo que ocurre bajo la superficie. La calma que llevas dentro te permite ver sentido donde otros solo ven caos."
+      ],
+      "daily": [
+        "Antes de reaccionar, te detienes y observas a las personas y las tensiones entre ellas. No guías con presión, sino con presencia y preguntas. A menudo eso basta para que las cosas empiecen a ordenarse."
+      ],
+      "strengths": [
+        "Puedes unir perspectivas opuestas sin necesidad de decidir quién tiene razón. Das a otros una sensación de dirección, aunque no marques el camino de forma explícita. Contigo es más fácil calmarse."
+      ],
+      "watchOut": [
+        "A veces asumes más responsabilidad de la que realmente te corresponde. Puedes olvidar que no toda situación hay que cargarla."
+      ],
+      "underPressure": [
+        "Bajo presión te repliegas hacia dentro y empiezas a ordenar todo en tu mente. La tensión crece despacio, pero puede ser profunda."
+      ],
+      "relationships": [
+        "En las relaciones eres alguien junto a quien la gente busca calma. A menudo llegan a ti con preguntas que no le hacen a otros. Puedes ser guía sin haberlo planeado."
+      ]
+    },
+    "P05": {
+      "core": [
+        "Tu forma de pensar va naturalmente más allá de lo que ocurre aquí y ahora. Te atrae más lo que aún puede nacer que lo que ya existe."
+      ],
+      "daily": [
+        "Cuando algo te absorbe, puedes sumergirte en una dirección durante mucho tiempo. Te desconectas de los estímulos cotidianos y te centras en una imagen que se va aclarando poco a poco. La visión te lleva más lejos que las circunstancias."
+      ],
+      "strengths": [
+        "Ves potencial donde otros ven limitaciones o riesgo. Piensas en grande y con anticipación, incluso sin todos los datos. Tus ideas tienen peso y dirección."
+      ],
+      "watchOut": [
+        "A veces pierdes contacto con los detalles del día a día y con el ritmo de la realidad. Cuando la tensión aumenta, la visión puede volverse difusa."
+      ],
+      "underPressure": [
+        "Bajo presión te refugias en escenarios futuros y en planificar. Eso te ayuda a recuperar sensación de control."
+      ],
+      "relationships": [
+        "En las relaciones hablas el lenguaje de las ideas y las posibilidades. No todos siguen tu manera de pensar. Para algunos eres inspirador/a; para otros, distante."
+      ]
+    },
+    "P06": {
+      "core": [
+        "Tienes un fuerte sentido de responsabilidad sobre el rumbo que eliges. Tu calma interna te sostiene en las decisiones, incluso cuando la situación es ambigua."
+      ],
+      "daily": [
+        "Actúas de forma consecuente, apoyándote en estructura y reglas claras. Rara vez reaccionas por impulso; prefieres controlar el curso de la situación. Tomas decisiones de manera consciente, incluso si son incómodas."
+      ],
+      "strengths": [
+        "Mantienes el orden cuando otros empiezan a tambalearse. Das estabilidad a través de previsibilidad y marcos claros. Tu firmeza genera confianza."
+      ],
+      "watchOut": [
+        "Puedes parecer frío/a o emocionalmente inaccesible. Ceder el control puede resultarte difícil."
+      ],
+      "underPressure": [
+        "Bajo presión te centras en actuar, no en la tensión. Dejas las emociones para después y te concentras en soluciones."
+      ],
+      "relationships": [
+        "En las relaciones eres concreto/a y claro/a; dejas poco espacio a suposiciones. La gente sabe rápido dónde está y qué puede esperar. Aportas estabilidad y orden en lugar de caos emocional."
+      ]
+    },
+    "P07": {
+      "core": [
+        "Tu atención se dirige naturalmente a las personas y a dónde están en su proceso. Más que resultados rápidos, te interesa cómo algo madura poco a poco."
+      ],
+      "daily": [
+        "Antes de reaccionar, observas con atención el ritmo, las tensiones y las necesidades a tu alrededor. No empujas las cosas a la fuerza; dejas que encajen en el momento adecuado. A menudo actúas con más discreción de lo que otros esperan."
+      ],
+      "strengths": [
+        "Ves potencial donde otros solo ven caos o falta de preparación. Das a la gente espacio para intentos, errores y conclusiones propias. Contigo es más fácil crecer."
+      ],
+      "watchOut": [
+        "A veces asumes más asuntos ajenos de lo que deberías. Tus propias necesidades pueden pasar a segundo plano sin que lo notes."
+      ],
+      "underPressure": [
+        "Bajo presión te enfocas en estabilizar la situación alrededor. Solo después te das cuenta de cuánta tensión llevabas tú."
+      ],
+      "relationships": [
+        "En las relaciones estás presente y atento/a, incluso cuando hablas poco. La gente siente que contigo puede bajar el ritmo y pensar. A menudo te vuelves alguien importante antes de que nadie lo nombre."
+      ]
+    },
+    "P08": {
+      "core": [
+        "Tu atención se dirige de forma natural a lo que necesita protección y estabilidad. Te sientes mejor cuando hay calma alrededor y las tensiones están bajo control."
+      ],
+      "daily": [
+        "Sueles reaccionar antes de que la situación se agrave, porque detectas rápido señales sutiles. Prefieres prevenir problemas que apagar consecuencias, por eso haces muchas cosas en silencio. Para ti es más importante la seguridad que el ritmo o el resultado."
+      ],
+      "strengths": [
+        "Creas una atmósfera en la que los demás empiezan a respirar más tranquilo. Notas las pequeñas cosas que deciden el confort y la confianza. Contigo es más fácil volver al equilibrio."
+      ],
+      "watchOut": [
+        "A veces las necesidades de otros empujan las tuyas a segundo plano. Con el tiempo esto puede llevar a un cansancio que tardas en nombrar."
+      ],
+      "underPressure": [
+        "Bajo presión te enfocas en mantener el orden y la calma a tu alrededor. Solo después notas cuánta tensión llevabas tú."
+      ],
+      "relationships": [
+        "En las relaciones eres previsible y cálido/a, sin necesidad de grandes declaraciones. La gente siente que puede contar contigo incluso en momentos difíciles. A menudo te conviertes en un punto de referencia seguro para alguien."
+      ]
+    },
+    "P09": {
+      "core": [
+        "Miras el mundo sin adornos ni suposiciones innecesarias. Te interesa lo que realmente funciona, no lo que suena bien en teoría."
+      ],
+      "daily": [
+        "Cuando algo ocurre, reaccionas sin darle vueltas a todos los escenarios posibles. Prefieres comprobar la situación en la práctica antes que analizarla a distancia. Actuar te ayuda a orientarte rápido sobre dónde estás de verdad."
+      ],
+      "strengths": [
+        "Mantienes la claridad mental incluso cuando alrededor hay caos. Aportas claridad y concreción cuando otros empiezan a perderse. Tu franqueza suele acortar el camino hacia la decisión."
+      ],
+      "watchOut": [
+        "Tu sinceridad puede percibirse como aspereza, aunque no sea tu intención. A veces las emociones llegan más rápido que la reflexión."
+      ],
+      "underPressure": [
+        "Bajo presión reaccionas por impulso, enfocándote en una solución inmediata. Solo más tarde llega el momento de parar y evaluar."
+      ],
+      "relationships": [
+        "En las relaciones hablas directo/a, sin rodeos. La gente sabe qué esperar de ti, lo cual puede ser un alivio o un reto. Rara vez dejas cosas sin decir."
+      ]
+    },
+    "P10": {
+      "core": [
+        "Te sientes mejor cuando tienes contacto directo con lo real y tangible. En ti, pensar no existe separado de actuar: una cosa surge naturalmente de la otra."
+      ],
+      "daily": [
+        "Entras en situaciones sin prepararte en exceso, aprendiendo mientras te mueves. Compruebas las cosas en la práctica en lugar de darles vueltas, porque la experiencia te da más información. Actuar ordena tus pensamientos."
+      ],
+      "strengths": [
+        "Transformas ideas en pasos concretos rápidamente, sin retrasos innecesarios. Te mueves bien cuando las condiciones cambian y no todo está claro. Contigo, las cosas empiezan a suceder."
+      ],
+      "watchOut": [
+        "A veces sigues adelante antes de comprobar a dónde conduce. Parar y reflexionar no siempre aparece en el momento adecuado."
+      ],
+      "underPressure": [
+        "Bajo presión aceleras aún más, buscando la solución en el movimiento. Actuar te ayuda a manejar la tensión."
+      ],
+      "relationships": [
+        "En las relaciones eres concreto/a, pero no frío/a. Valoras conversaciones que llevan a una decisión o a un cambio. La gente siente que contigo las cosas toman forma real."
+      ]
+    },
+    "P11": {
+      "core": [
+        "Tu pensamiento va naturalmente más allá de la superficie de los hechos. Antes de dar algo por verdadero, necesitas descomponerlo, comprobarlo y entenderlo a tu manera."
+      ],
+      "daily": [
+        "Antes de decidir, observas mucho tiempo y reúnes información, incluso si otros ya actúan. Analizar te da seguridad porque te permite moverte en el mundo sin simplificaciones. A menudo sabes más de lo que muestras."
+      ],
+      "strengths": [
+        "Detectas relaciones que para otros permanecen invisibles. Conectas hechos en un todo coherente sin perder precisión. Tu atención ordena el caos."
+      ],
+      "watchOut": [
+        "A veces te quedas en el análisis más de lo que la situación requiere. La decisión puede retrasarse incluso cuando la respuesta ya está cerca."
+      ],
+      "underPressure": [
+        "Bajo presión tu pensamiento se vuelve aún más intenso y detallado. Te cuesta más soltar y confiar en soluciones más simples."
+      ],
+      "relationships": [
+        "En las relaciones te comunicas de forma objetiva y con distancia, sin mostrarlo todo de inmediato. La gente puede sentir que eres difícil de leer. Con el tiempo, sin embargo, valoran tu claridad y coherencia."
+      ]
+    },
+    "P12": {
+      "core": [
+        "Tienes una fuerte necesidad de llevar las cosas hasta el punto en que realmente empiezan a funcionar. La satisfacción no te la da la idea, sino el momento en que algo deja de ser teoría."
+      ],
+      "daily": [
+        "Unes personas y acciones en un movimiento coherente, incluso si las condiciones no son ideales. Cuando ves dirección, puedes tirar de otros sin esperar consenso total. Para ti cuenta el progreso, no la preparación perfecta."
+      ],
+      "strengths": [
+        "Llevas las cosas hasta el punto en que dejan de ser una promesa y empiezan a funcionar. Ves dónde se atasca el proceso y, sin dramas, lo empujas hasta que arranca. Contigo las ideas no quedan en el aire: aterrizan."
+      ],
+      "watchOut": [
+        "A veces empujas el avance más rápido de lo que otros pueden seguir. En ocasiones solo después notas que el ritmo costó más de lo que pensabas."
+      ],
+      "underPressure": [
+        "Bajo presión te enfocas aún más en actuar y estrechas el campo de visión. La eficacia te ayuda a soportar la tensión, pero puede desconectarte de señales de alerta."
+      ],
+      "relationships": [
+        "En las relaciones eres alguien en quien se puede confiar cuando hay que llevar algo hasta el final. La gente siente que contigo las cosas avanzan, aunque a veces sea intenso. Sueles asumir responsabilidad antes de que otros la nombren."
+      ]
+    },
+    "P13": {
+      "core": [
+        "Tienes una necesidad natural de mirar con distancia antes de entrar en el centro de los hechos. Entender la situación es más importante para ti que reaccionar rápido."
+      ],
+      "daily": [
+        "Te detienes donde otros aceleran, porque sabes que la prisa distorsiona la imagen. Sigues con atención a las personas, las tensiones y pequeños cambios antes de moverte. A menudo ves más cuando otros ya están en marcha."
+      ],
+      "strengths": [
+        "Tienes una capacidad poco común para captar señales que se pierden en el ruido y el ritmo. Conectas pequeñas observaciones en un todo antes de que la situación sea obvia. Tu atención te da ventaja antes de que otros la noten."
+      ],
+      "watchOut": [
+        "A veces la distancia se vuelve un refugio seguro más que una elección consciente. Puedes darte cuenta tarde de que la observación reemplazó a la acción."
+      ],
+      "underPressure": [
+        "Bajo presión te encierras aún más en el análisis, buscando sentido en lugar de movimiento. La tensión no estalla, pero puede circular mucho tiempo bajo la superficie."
+      ],
+      "relationships": [
+        "En las relaciones sueles estar presente más por dentro que por fuera. La gente puede sentir que es difícil acercarse a ti, incluso si estás al lado. La confianza se construye despacio, pero puede ser profunda."
+      ]
+    },
+    "P14": {
+      "core": [
+        "Tienes una fuerte necesidad de dar a las cosas tu propio sentido, en lugar de aceptar formas prefabricadas. Lo que haces debe ser coherente contigo; si no, pierde significado rápido."
+      ],
+      "daily": [
+        "Te metes a fondo en lo que te absorbe en ese momento, desconectándote del resto del mundo. Cuando algo resuena, puedes trabajar intenso y durante mucho tiempo sin mirar el reloj. Cuando el sentido desaparece, la energía se va casi de inmediato."
+      ],
+      "strengths": [
+        "Eres capaz de extraer sentido del caos y darle forma. Aportas una mirada fresca donde todo empieza a repetirse y rigidizarse. Tu sensibilidad te permite ver lo que otros aún no han nombrado."
+      ],
+      "watchOut": [
+        "A veces la falta de sentido te quita continuidad y dirección. Cuando la inspiración baja, es fácil caer en tensión en vez de buscar marcos simples que te devuelvan al movimiento."
+      ],
+      "underPressure": [
+        "Bajo presión te retiras al mundo interior para recuperar coherencia y significado. Cuanto más fuertes son las expectativas externas, más difícil te resulta actuar a un ritmo impuesto."
+      ],
+      "relationships": [
+        "En las relaciones eres intenso/a y auténtico/a, pero no siempre previsible. La gente siente tu profundidad y sensibilidad incluso si explicas poco. La cercanía aparece cuando tienes espacio para ser tú, sin presión de encajar."
+      ]
+    },
+    "P15": {
+      "core": [
+        "Tienes una fuerte necesidad de poner a prueba límites, tanto propios como los impuestos por el entorno. La vida se vuelve real para ti cuando aparece la incertidumbre y hay algo en juego."
+      ],
+      "daily": [
+        "Entras en situaciones sin una garantía total de seguridad, porque precisamente la falta de control te da energía. Actúas más rápido de lo que logras analizarlo todo, confiando en tu instinto. El movimiento y la decisión son tu forma de domesticar el miedo."
+      ],
+      "strengths": [
+        "Mantienes el coraje donde otros se retiran o se detienen. Te mueves bien en momentos de giro, cuando hay que dar un paso hacia lo desconocido. Tu disposición al riesgo abre caminos nuevos."
+      ],
+      "watchOut": [
+        "A veces la intensidad te tapa consecuencias que aparecen después. En ocasiones confundes tensión con dirección."
+      ],
+      "underPressure": [
+        "Bajo presión empujas aún más hacia adelante en lugar de frenar. La adrenalina te ayuda a actuar, pero puede silenciar señales de alerta."
+      ],
+      "relationships": [
+        "En las relaciones eres intenso/a y atrapante, pero no siempre estable. La gente siente emoción contigo, aunque a veces les cuesta seguir tu ritmo. La cercanía aparece donde hay espacio para cambio y velocidad."
+      ]
+    },
+    "P16": {
+      "core": [
+        "Tienes una fuerte necesidad de mover a las personas y las situaciones en lugar de observar pasivamente. La vida cobra sentido para ti cuando algo empieza a reaccionar, cambiar y responder a tu presencia."
+      ],
+      "daily": [
+        "Aportas energía de forma natural donde antes había estancamiento o pausa. Reaccionas a personas, emociones y a la dinámica del momento más rápido de lo que alcanzas a nombrarlo. A menudo inicias movimiento antes de que otros se den cuenta de que algo les faltaba."
+      ],
+      "strengths": [
+        "Puedes animar el ambiente y activar un potencial que estaba dormido. Unes a la gente alrededor de un impulso, una emoción o un momento compartido, aunque sea breve. Tu presencia hace que las cosas empiecen a suceder."
+      ],
+      "watchOut": [
+        "A veces el movimiento constante tapa la necesidad de parar y cerrar asuntos. Cuando la energía baja, puedes sentir vacío o impaciencia."
+      ],
+      "underPressure": [
+        "Bajo presión buscas aún más estímulos y contacto en lugar de frenar. El movimiento te ayuda a descargar tensión, pero también puede alejar el momento de reflexión."
+      ],
+      "relationships": [
+        "En las relaciones eres intenso/a, vivo/a y fácil de percibir. La gente reacciona rápido a tu energía, aunque no siempre pueda seguirla. La cercanía aparece donde hay espacio para espontaneidad, cambio y emoción."
+      ]
+    }
+  }
+}
