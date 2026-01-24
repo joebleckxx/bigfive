@@ -227,13 +227,7 @@ function PageBackground() {
   return (
     <View style={styles.pageBg} fixed>
       <Svg width="100%" height="100%" viewBox="0 0 595 842">
-        <Defs>
-          <LinearGradient id="pageFade" x1="0" y1="0" x2="0" y2="1">
-            <Stop offset="0%" stopColor="#FFFFFF" stopOpacity={0.06} />
-            <Stop offset="60%" stopColor="#FFFFFF" stopOpacity={0} />
-          </LinearGradient>
-        </Defs>
-        <Rect x="0" y="0" width="595" height="300" fill="url(#pageFade)" />
+        <Rect x="0" y="0" width="595" height="842" fill={C.bg} />
       </Svg>
     </View>
   );
