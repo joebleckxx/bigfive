@@ -81,6 +81,17 @@ const C = {
   gradEnd: "#EC4899"
 };
 
+const SECTION_ICON_SIZE = 18;
+const SECTION_ICON_OPACITY = 0.75;
+const SECTION_ICON_COLORS = {
+  core: "#A5B4FC", // indigo-300
+  daily: "#818CF8", // indigo-400
+  strengths: "#A78BFA", // violet-400
+  watchOut: "#8B5CF6", // violet-500
+  underPressure: "#E879F9", // fuchsia-400
+  relationships: "#F472B6" // pink-400
+} as const;
+
 let fontRegistered = false;
 
 // NOTE: this stays compatible with your current setup (Geist font files in /public/fonts).
@@ -179,12 +190,10 @@ const styles = StyleSheet.create({
     letterSpacing: 0.8,
     textTransform: "uppercase"
   },
-  psDot: {
-    width: 7,
-    height: 7,
-    borderRadius: 99,
-    marginRight: 8,
-    backgroundColor: "#A5B4FC"
+  psIconWrap: {
+    width: SECTION_ICON_SIZE,
+    height: SECTION_ICON_SIZE,
+    marginRight: 8
   },
 
   psBody: { fontSize: 10, color: C.text75, lineHeight: 1.45 },
@@ -223,11 +232,143 @@ function getYearFromISO(dateISO: string) {
   return Number.isFinite(y) ? String(y) : String(new Date().getFullYear());
 }
 
+function SectionIcon({ sectionKey }: { sectionKey: string }) {
+  const color =
+    SECTION_ICON_COLORS[sectionKey as keyof typeof SECTION_ICON_COLORS] ??
+    SECTION_ICON_COLORS.core;
+  const pathProps = {
+    stroke: color,
+    strokeOpacity: SECTION_ICON_OPACITY,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    strokeWidth: 1.4,
+    fill: "none"
+  };
+
+  switch (sectionKey) {
+    case "core":
+      return (
+        <View style={styles.psIconWrap}>
+          <Svg
+            width={SECTION_ICON_SIZE}
+            height={SECTION_ICON_SIZE}
+            viewBox="0 0 24 24"
+          >
+            <Path d="M12 18V5" {...pathProps} />
+            <Path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" {...pathProps} />
+            <Path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" {...pathProps} />
+            <Path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" {...pathProps} />
+            <Path d="M18 18a4 4 0 0 0 2-7.464" {...pathProps} />
+            <Path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" {...pathProps} />
+            <Path d="M6 18a4 4 0 0 1-2-7.464" {...pathProps} />
+            <Path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" {...pathProps} />
+          </Svg>
+        </View>
+      );
+    case "daily":
+      return (
+        <View style={styles.psIconWrap}>
+          <Svg
+            width={SECTION_ICON_SIZE}
+            height={SECTION_ICON_SIZE}
+            viewBox="0 0 24 24"
+          >
+            <Path
+              d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+              {...pathProps}
+            />
+          </Svg>
+        </View>
+      );
+    case "strengths":
+      return (
+        <View style={styles.psIconWrap}>
+          <Svg
+            width={SECTION_ICON_SIZE}
+            height={SECTION_ICON_SIZE}
+            viewBox="0 0 24 24"
+          >
+            <Path
+              d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"
+              {...pathProps}
+            />
+            <Path d="M20 2v4" {...pathProps} strokeWidth={1.8} />
+            <Path d="M22 4h-4" {...pathProps} strokeWidth={1.8} />
+            <Path d="M4 20a2 2 0 1 0 4 0a2 2 0 1 0-4 0" {...pathProps} strokeWidth={1.8} />
+          </Svg>
+        </View>
+      );
+    case "watchOut":
+      return (
+        <View style={styles.psIconWrap}>
+          <Svg
+            width={SECTION_ICON_SIZE}
+            height={SECTION_ICON_SIZE}
+            viewBox="0 0 24 24"
+          >
+            <Path
+              d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"
+              {...pathProps}
+            />
+            <Path d="M12 8v4" {...pathProps} />
+            <Path d="M12 16h.01" {...pathProps} />
+          </Svg>
+        </View>
+      );
+    case "underPressure":
+      return (
+        <View style={styles.psIconWrap}>
+          <Svg
+            width={SECTION_ICON_SIZE}
+            height={SECTION_ICON_SIZE}
+            viewBox="0 0 24 24"
+          >
+            <Path d="m12 14 4-4" {...pathProps} />
+            <Path d="M3.34 19a10 10 0 1 1 17.32 0" {...pathProps} />
+          </Svg>
+        </View>
+      );
+    case "relationships":
+      return (
+        <View style={styles.psIconWrap}>
+          <Svg
+            width={SECTION_ICON_SIZE}
+            height={SECTION_ICON_SIZE}
+            viewBox="0 0 24 24"
+          >
+            <Path
+              d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762"
+              {...pathProps}
+            />
+          </Svg>
+        </View>
+      );
+    default:
+      return (
+        <View style={styles.psIconWrap}>
+          <Svg
+            width={SECTION_ICON_SIZE}
+            height={SECTION_ICON_SIZE}
+            viewBox="0 0 24 24"
+          >
+            <Path d="M12 12h.01" {...pathProps} />
+          </Svg>
+        </View>
+      );
+  }
+}
+
 function PageBackground() {
   return (
     <View style={styles.pageBg} fixed>
       <Svg width="100%" height="100%" viewBox="0 0 595 842">
-        <Rect x="0" y="0" width="595" height="842" fill={C.bg} />
+        <Defs>
+          <LinearGradient id="pageFade" x1="0" y1="0" x2="0" y2="1">
+            <Stop offset="0%" stopColor="#FFFFFF" stopOpacity={0.06} />
+            <Stop offset="60%" stopColor="#FFFFFF" stopOpacity={0} />
+          </LinearGradient>
+        </Defs>
+        <Rect x="0" y="0" width="595" height="300" fill="url(#pageFade)" />
       </Svg>
     </View>
   );
@@ -321,7 +462,7 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
             {sections.map((s) => (
               <View key={s.key} style={{ marginBottom: 14 }}>
                 <View style={styles.psTitleRow}>
-                  <View style={styles.psDot} />
+                  <SectionIcon sectionKey={s.key} />
                   <Text style={styles.psKicker}>{s.title}</Text>
                 </View>
 
