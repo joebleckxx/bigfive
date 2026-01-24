@@ -64,7 +64,9 @@ export default function PayPage() {
     if (process.env.NEXT_PUBLIC_PAYMENTS_DISABLED === "true") {
       try {
         const raw = localStorage.getItem(ANSWERS_KEY);
-        if (!raw) return router.push("/test");
+        if (!raw) {
+          return router.push("/test");
+        }
 
         const answers = JSON.parse(raw) as number[];
         if (!Array.isArray(answers) || !isCompleteAnswers(answers)) {
@@ -193,6 +195,7 @@ export default function PayPage() {
           . TMJ © {new Date().getFullYear()}
         </p>        
       </div>
+
     </main>
   );
 }
