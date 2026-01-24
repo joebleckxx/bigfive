@@ -163,11 +163,16 @@ export default function ResultPage() {
         const raw = localStorage.getItem(STORAGE_KEY);
 
         const paid = localStorage.getItem(PAID_KEY) === "true";
-        const paidAt = Number(localStorage.getItem(PAID_AT_KEY) ?? "0");
+        let paidAt = Number(localStorage.getItem(PAID_AT_KEY) ?? "0");
+        // legacy: paid=true without paidAt → start grace window now
+        if (!paidAt && paid) {
+          paidAt = Date.now();
+          localStorage.setItem(PAID_AT_KEY, String(paidAt));
+        }
         const withinGrace = paidAt > 0 && Date.now() - paidAt < GRACE_MS;
 
         // Jeśli mamy zapisany wynik + dostęp → pokaż od razu
-        if (raw && (paid || withinGrace)) {
+        if (raw && withinGrace) {
           const parsed = JSON.parse(raw);
           if (!isResultShape(parsed)) {
             router.replace("/test");
