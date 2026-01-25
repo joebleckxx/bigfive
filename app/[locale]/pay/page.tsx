@@ -48,8 +48,8 @@ function PremiumRingLoader() {
           // thin line only
           "[mask:radial-gradient(farthest-side,transparent_calc(100%-3px),#000_calc(100%-2px))]",
           // short arc, not full ring
-          "bg-[conic-gradient(from_0deg,transparent_0deg,transparent_220deg,#818CF8_260deg,#A78BFA_300deg,#F472B6_330deg,transparent_360deg)]",
-          "opacity-90",
+          "bg-[conic-gradient(from_0deg,transparent_0deg,transparent_220deg,#6366F1_260deg,#8B5CF6_300deg,#EC4899_330deg,transparent_360deg)]",
+          "opacity-95",
         ].join(" ")}
       />
 
@@ -59,7 +59,7 @@ function PremiumRingLoader() {
           "absolute inset-0 rounded-full blur-lg",
           "animate-[spin_1.1s_linear_infinite]",
           "[mask:radial-gradient(farthest-side,transparent_calc(100%-4px),#000_calc(100%-3px))]",
-          "bg-[conic-gradient(from_0deg,transparent_0deg,transparent_220deg,#818CF8_260deg,#A78BFA_300deg,#F472B6_330deg,transparent_360deg)]",
+          "bg-[conic-gradient(from_0deg,transparent_0deg,transparent_220deg,#6366F1_260deg,#8B5CF6_300deg,#EC4899_330deg,transparent_360deg)]",
           "opacity-40",
         ].join(" ")}
       />
@@ -89,6 +89,19 @@ export default function PayPage() {
       router.replace("/test");
     }
   }, [router]);
+
+  // Guard: browser back from external checkout (Stripe)
+  useEffect(() => {
+    const onPageShow = (e: PageTransitionEvent) => {
+      // triggered when restoring from bfcache (Safari / iOS, browser back)
+      if (e.persisted) {
+        window.location.replace(`/${locale}/result`);
+      }
+    };
+
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, [locale]);
 
   async function handleUnlock() {
     // ✅ Preview/test mode: payments disabled → unlock locally (no Stripe)
