@@ -40,23 +40,29 @@ function CheckIcon() {
 function PremiumRingLoader() {
   return (
     <div className="relative h-14 w-14">
-      {/* soft glow */}
-      <div className="absolute inset-0 rounded-full blur-xl opacity-70 bg-[conic-gradient(from_180deg,#818CF8,#A78BFA,#F472B6,#60A5FA,#818CF8)]" />
-  
-      {/* ring */}
+      {/* rotating arc */}
       <div
         className={[
           "absolute inset-0 rounded-full",
-          "animate-spin",
-          // ring thickness via mask
-          "[mask:radial-gradient(farthest-side,transparent_calc(100%-6px),#000_calc(100%-5px))]",
-          "bg-[conic-gradient(from_180deg,#818CF8,#A78BFA,#F472B6,#60A5FA,#818CF8)]",
-          "opacity-95",
+          "animate-[spin_1.1s_linear_infinite]",
+          // thin line only
+          "[mask:radial-gradient(farthest-side,transparent_calc(100%-3px),#000_calc(100%-2px))]",
+          // short arc, not full ring
+          "bg-[conic-gradient(from_0deg,transparent_0deg,transparent_220deg,#818CF8_260deg,#A78BFA_300deg,#F472B6_330deg,transparent_360deg)]",
+          "opacity-90",
         ].join(" ")}
       />
 
-      {/* inner subtle glass */}
-      <div className="absolute inset-[10px] rounded-full bg-white/5 backdrop-blur-sm border border-white/10" />
+      {/* subtle glow */}
+      <div
+        className={[
+          "absolute inset-0 rounded-full blur-lg",
+          "animate-[spin_1.1s_linear_infinite]",
+          "[mask:radial-gradient(farthest-side,transparent_calc(100%-4px),#000_calc(100%-3px))]",
+          "bg-[conic-gradient(from_0deg,transparent_0deg,transparent_220deg,#818CF8_260deg,#A78BFA_300deg,#F472B6_330deg,transparent_360deg)]",
+          "opacity-40",
+        ].join(" ")}
+      />
     </div>
   );
 }
