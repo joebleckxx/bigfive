@@ -50,7 +50,8 @@ function PremiumRingLoader() {
           "animate-spin",
           // ring thickness via mask
           "[mask:radial-gradient(farthest-side,transparent_calc(100%-6px),#000_calc(100%-5px))]",
-          "bg-[conic-gradient(from_180deg,#818CF8,#A78BFA,#F472B6,#60A5FA,#818CF8)]",+          "opacity-95",
+          "bg-[conic-gradient(from_180deg,#818CF8,#A78BFA,#F472B6,#60A5FA,#818CF8)]",
+          "opacity-95",
         ].join(" ")}
       />
 
@@ -115,6 +116,7 @@ export default function PayPage() {
     // ✅ Normal: Stripe Checkout
     try {
       setIsRedirecting(true);
+      await new Promise<void>((r) => requestAnimationFrame(() => r()));
       const res = await fetch("/api/stripe/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
