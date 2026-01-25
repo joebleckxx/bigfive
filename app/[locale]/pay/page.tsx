@@ -235,15 +235,15 @@ export default function PayPage() {
       </div>
 
       {isRedirecting && (
-        //* Payment redirect loader (Stripe / forced preview) *//
         <div className="fixed inset-0 z-[60] grid place-items-center bg-black/40 backdrop-blur-md">
           <div className="flex flex-col items-center gap-4 rounded-3xl border border-white/10 bg-white/5 px-8 py-7 shadow-2xl">
             <PremiumRingLoader />
-            <p className="text-center text-sm font-medium text-white/85">{t("loading")}</p>
+            <p className="text-center text-sm font-medium text-white/85">
+              {t("loading")}
+            </p>
           </div>
         </div>
       )}
-
     </main>
   );
 }
