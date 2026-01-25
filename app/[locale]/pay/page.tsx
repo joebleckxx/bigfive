@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { QUESTIONS } from "@/lib/personality";
@@ -66,7 +65,6 @@ export default function PayPage() {
   const router = useRouter();
   const t = useTranslations("Pay");
   const locale = useLocale();
-  const searchParams = useSearchParams();
   const [isRedirecting, setIsRedirecting] = useState(false);
 
   useEffect(() => {
@@ -88,17 +86,8 @@ export default function PayPage() {
 
   async function handleUnlock() {
     // ✅ Preview/test mode: payments disabled → unlock locally (no Stripe)
-    // DEV / PREVIEW ONLY:
-    // payments disabled → unlock locally (no Stripe)
-    // optional visual inspection of payment loader via ?loader=1   
     if (process.env.NEXT_PUBLIC_PAYMENTS_DISABLED === "true") {
       try {
-        const forceLoader = searchParams?.get("loader") === "1";
-        if (forceLoader) {
-          setIsRedirecting(true);
-          await new Promise((r) => setTimeout(r, 600));
-        }
-
         const raw = localStorage.getItem(ANSWERS_KEY);
         if (!raw) {
           return router.push("/test");
