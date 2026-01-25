@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { QUESTIONS } from "@/lib/personality";
@@ -37,10 +37,34 @@ function CheckIcon() {
   );
 }
 
+function PremiumRingLoader() {
+  return (
+    <div className="relative h-14 w-14">
+      {/* soft glow */}
+      <div className="absolute inset-0 rounded-full blur-xl opacity-70 bg-[conic-gradient(from_180deg,#818CF8,#A78BFA,#F472B6,#60A5FA,#818CF8)]" />
+  
+      {/* ring */}
+      <div
+        className={[
+          "absolute inset-0 rounded-full",
+          "animate-spin",
+          // ring thickness via mask
+          "[mask:radial-gradient(farthest-side,transparent_calc(100%-6px),#000_calc(100%-5px))]",
+          "bg-[conic-gradient(from_180deg,#818CF8,#A78BFA,#F472B6,#60A5FA,#818CF8)]",+          "opacity-95",
+        ].join(" ")}
+      />
+
+      {/* inner subtle glass */}
+      <div className="absolute inset-[10px] rounded-full bg-white/5 backdrop-blur-sm border border-white/10" />
+    </div>
+  );
+}
+
 export default function PayPage() {
   const router = useRouter();
   const t = useTranslations("Pay");
   const locale = useLocale();
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   useEffect(() => {
     try {
@@ -90,6 +114,7 @@ export default function PayPage() {
 
     // ✅ Normal: Stripe Checkout
     try {
+      setIsRedirecting(true);
       const res = await fetch("/api/stripe/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -107,7 +132,7 @@ export default function PayPage() {
     } catch (e) {
       console.error("Stripe checkout failed", e);
     }
-
+    setIsRedirecting(false);
     alert("Payment setup error. Please try again.");
   }
 
@@ -195,6 +220,15 @@ export default function PayPage() {
           . TMJ © {new Date().getFullYear()}
         </p>        
       </div>
+
+      {isRedirecting && (
+        <div className="fixed inset-0 z-[60] grid place-items-center bg-black/40 backdrop-blur-md">
+          <div className="flex flex-col items-center gap-4 rounded-3xl border border-white/10 bg-white/5 px-8 py-7 shadow-2xl">
+            <PremiumRingLoader />
+            <p className="text-center text-sm font-medium text-white/85">{t("loading")}</p>
+          </div>
+        </div>
+      )}
 
     </main>
   );
