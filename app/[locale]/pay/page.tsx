@@ -192,12 +192,12 @@ export default function PayPage() {
           {t("headline.after")}
         </h1>
 
-        <p className="mt-4 text-base leading-relaxed text-white/70">
+        <p className="mt-4 text-base leading-relaxed text-white/80">
           {t("description")}
         </p>
 
         {/* 3 lines – same pattern as Home */}
-        <div className="mt-6 space-y-4 text-sm leading-relaxed text-white/70">
+        <div className="mt-6 space-y-4 text-sm leading-relaxed text-white/80">
           <div className="flex gap-3">
             <CheckIcon />
             <p className="m-0">{t("editorial.line1")}</p>

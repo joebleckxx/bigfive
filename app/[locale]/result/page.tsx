@@ -125,6 +125,7 @@ export default function ResultPage() {
   const [loaded, setLoaded] = useState(false);
   const [showBigFive, setShowBigFive] = useState(false);
   const [downloading, setDownloading] = useState(false);
+  const showAvatar = false;
 
   // ✅ menu ⋯ (jak na /test)
   const [menuOpen, setMenuOpen] = useState(false);
@@ -656,15 +657,17 @@ export default function ResultPage() {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
               <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
-                <div className="relative shrink-0">
-                  <div className="pointer-events-none absolute -inset-4 rounded-full bg-[radial-gradient(circle,_rgba(14,18,32,0.95)_30%,_rgba(58,76,125,0.85)_55%,_rgba(122,141,190,0.25)_78%)] blur-3xl" />
-                  <div
-                    role="img"
-                    aria-label={typeName}
-                    className="relative z-10 h-28 w-28 shrink-0 overflow-hidden rounded-full bg-center bg-cover bg-no-repeat"
-                    style={{ backgroundImage: `url(${avatarSrc})` }}
-                  />
-                </div>
+                {showAvatar && (
+                  <div className="relative shrink-0">
+                    <div className="pointer-events-none absolute -inset-4 rounded-full bg-[radial-gradient(circle,_rgba(14,18,32,0.95)_30%,_rgba(58,76,125,0.85)_55%,_rgba(122,141,190,0.25)_78%)] blur-3xl" />
+                    <div
+                      role="img"
+                      aria-label={typeName}
+                      className="relative z-10 h-28 w-28 shrink-0 overflow-hidden rounded-full bg-center bg-cover bg-no-repeat"
+                      style={{ backgroundImage: `url(${avatarSrc})` }}
+                    />
+                  </div>
+                )}
 
                 <div className="min-w-0 text-center sm:text-left">
                   <h2 className="text-3xl font-semibold">
