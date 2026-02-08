@@ -117,13 +117,12 @@ export default function Page() {
         {/* COLLAGE */}
         <div className="mt-8 flex justify-center">
           <div className="relative w-full max-w-md">
-            <div className="pointer-events-none absolute -inset-2 rounded-3xl bg-black/30 blur-md" />
             <img
               src="/graphics/avatars-collage-compact-beta.png"
               alt=""
               width={900}
               height={420}
-              className="relative z-10 w-full select-none"
+              className="w-full select-none [filter:drop-shadow(0_0_26px_rgba(0,0,0,0.5))]"
               loading="eager"
             />
           </div>
