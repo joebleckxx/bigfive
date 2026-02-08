@@ -49,7 +49,7 @@ export default function Page() {
         </h1>
 
         {/* EDITORIAL – VARIANT A */}
-        <div className="mt-6 space-y-4 text-sm leading-relaxed text-white/70">
+        <div className="mt-6 space-y-4 text-sm leading-relaxed text-white/80">
           <div className="flex gap-3">
             <svg
               className="mt-0.5 h-6 w-6 shrink-0 text-indigo-300"
