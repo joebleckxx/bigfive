@@ -400,6 +400,7 @@ function Footer({ data }: { data: PdfReportData }) {
 
 export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
   const levels = data.bigFiveLevels;
+  const showAvatar = false;
 
   const bigFiveOrder: Trait[] = ["S", "E", "O", "C", "A", "N"];
   const bigFiveMap = new Map(data.bigFive.map((row) => [row.key, row]));
@@ -437,15 +438,17 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
         {/* Profile card */}
         <View style={styles.card}>
           <View style={styles.profileRow}>
-            {data.avatarUrl ? (
-              <Image style={styles.avatar} src={data.avatarUrl} />
-            ) : (
-              <View
-                style={[
-                  styles.avatar,
-                  { backgroundColor: C.cardBg, borderWidth: 1, borderColor: C.border }
-                ]}
-              />
+            {showAvatar && (
+              data.avatarUrl ? (
+                <Image style={styles.avatar} src={data.avatarUrl} />
+              ) : (
+                <View
+                  style={[
+                    styles.avatar,
+                    { backgroundColor: C.cardBg, borderWidth: 1, borderColor: C.border }
+                  ]}
+                />
+              )
             )}
 
             <View style={{ flexGrow: 1 }}>
