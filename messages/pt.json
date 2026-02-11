@@ -76,11 +76,11 @@
     },
 
     "share": "Compartilhar",
-    "shareTitle": "tellmejoe. - meu resultado",
-    "shareText": "Acabei de fazer o teste e obtive meu resultado.",
+    "shareTitle": "tellmejoe.",
+    "shareText": "Acabei de fazer TMJ. Faça o teste e veja seu resultado.",
     "shareCopied": "Link copiado",
     "sharePrompt": "Copiar este link:",
-    "shareError": "Não foi possível compartilhar o resultado",
+    "shareError": "Não foi possível compartilhar agora",
 
     "retake": "Repetir",
     "retakeConfirm": "Repetir irá repor este resultado. Um novo resultado requer pagamento. Continuar?",

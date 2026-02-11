@@ -405,9 +405,9 @@ export default function ResultPage() {
  
    async function shareResult() {
      try {
-       const url = window.location.href;
-       const title = tr("shareTitle", "TellMeJoe — my result");
-       const text = tr("shareText", "I just got my personality result:");
+       const url = window.location.origin; // share homepage (auto language detect)
+       const title = tr("shareTitle", "tellmejoe.");
+       const text = tr("shareText", "Take the test and see your result.");
  
        if (navigator.share) {
          await navigator.share({ title, text, url });

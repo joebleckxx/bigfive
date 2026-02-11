@@ -76,11 +76,11 @@
     },
 
     "share": "Teilen",
-    "shareTitle": "tellmejoe. - mein Ergebnis",
-    "shareText": "Ich habe gerade den Test gemacht und mein Ergebnis erhalten.",
+    "shareTitle": "tellmejoe.",
+    "shareText": "Ich habe gerade TMJ gemacht. Mach den Test und sieh dein Ergebnis.",
     "shareCopied": "Link kopiert",
     "sharePrompt": "Diesen Link kopieren:",
-    "shareError": "Ergebnis konnte nicht geteilt werden",
+    "shareError": "Konnte gerade nicht geteilt werden",
 
     "retake": "Wiederholen",
     "retakeConfirm": "Wiederholen setzt dieses Ergebnis zurück. Ein neues Ergebnis erfordert eine Zahlung. Fortfahren?",
