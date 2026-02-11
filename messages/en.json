@@ -75,7 +75,7 @@
 
     "share": "Share",
     "shareTitle": "tellmejoe. - my result",
-    "shareText": "I just completed the test and got my result:",
+    "shareText": "I just completed the test and got my result.",
     "shareCopied": "Link copied",
     "sharePrompt": "Copy this link:",
     "shareError": "Couldn’t share the result",

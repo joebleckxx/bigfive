@@ -77,9 +77,9 @@
 
     "share": "Partager",
     "shareTitle": "tellmejoe. - mon résultat",
-    "shareText": "Je viens de terminer le test et voici mon résultat :",
+    "shareText": "Je viens de terminer le test et voici mon résultat.",
     "shareCopied": "Lien copié",
-    "sharePrompt": "Copiez ce lien :",
+    "sharePrompt": "Copiez ce lien:",
     "shareError": "Impossible de partager le résultat",
 
     "retake": "Recommencer",

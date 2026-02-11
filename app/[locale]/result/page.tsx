@@ -766,7 +766,6 @@ export default function ResultPage() {
                 px-6 py-2.5 text-base font-semibold
                 text-white/90
                 bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
-                ring-1 ring-white/20
                 shadow-[0_10px_30px_rgba(99,102,241,0.25)]
                 hover:brightness-105
                 active:scale-[0.99]
