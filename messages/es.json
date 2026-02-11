@@ -74,6 +74,14 @@
       "error": "No se pudo generar el PDF. Revisa la consola.",
       "disclaimer": "Este informe es solo informativo. No es una herramienta médica ni diagnóstica."
     },
+
+    "share": "Compartir",
+    "shareTitle": "tellmejoe. - mi resultado",
+    "shareText": "Acabo de completar el test y obtuve mi resultado:",
+    "shareCopied": "Enlace copiado",
+    "sharePrompt": "Copia este enlace:",
+    "shareError": "No se pudo compartir el resultado",
+
     "retake": "Repetir",
     "retakeConfirm": "Repetir reiniciará este resultado. Un nuevo resultado requiere pago. ¿Continuar?",
     "yourTypeLabel": "Tu perfil",

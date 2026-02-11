@@ -73,6 +73,13 @@
       "disclaimer": "This report is for personal insight only. It is not a medical, clinical, or diagnostic assessment."
     },
 
+    "share": "Share",
+    "shareTitle": "tellmejoe. - my result",
+    "shareText": "I just completed the test and got my result:",
+    "shareCopied": "Link copied",
+    "sharePrompt": "Copy this link:",
+    "shareError": "Couldn’t share the result",
+
     "retake": "Retake",
     "retakeConfirm": "Retake will reset this result. Next result requires payment. Continue?",
 

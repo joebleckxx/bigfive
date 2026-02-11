@@ -2,6 +2,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { locales, type Locale } from "../../i18n/routing";
+import { Toaster } from "sonner";
 
 import en from "../../messages/en.json";
 import pl from "../../messages/pl.json";
@@ -34,6 +35,10 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       {children}
+      <Toaster
+        position="bottom-center"
+        closeButton={false}
+      />
     </NextIntlClientProvider>
   );
 }

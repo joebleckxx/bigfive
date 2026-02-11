@@ -74,6 +74,14 @@
       "error": "PDF konnte nicht erstellt werden. Prüfe die Konsole.",
       "disclaimer": "Dieser Bericht dient nur zu Informationszwecken. Er ist kein medizinisches oder diagnostisches Instrument."
     },
+
+    "share": "Teilen",
+    "shareTitle": "tellmejoe. - mein Ergebnis",
+    "shareText": "Ich habe gerade den Test gemacht und mein Ergebnis erhalten:",
+    "shareCopied": "Link kopiert",
+    "sharePrompt": "Diesen Link kopieren:",
+    "shareError": "Ergebnis konnte nicht geteilt werden",
+
     "retake": "Wiederholen",
     "retakeConfirm": "Wiederholen setzt dieses Ergebnis zurück. Ein neues Ergebnis erfordert eine Zahlung. Fortfahren?",
     "yourTypeLabel": "Dein Profil",

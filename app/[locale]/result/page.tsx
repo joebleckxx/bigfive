@@ -5,6 +5,7 @@ import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { calculateResult } from "@/lib/scoring";
+import { toast } from "sonner";
 
 // ✅ PDF
 import {
@@ -398,6 +399,46 @@ export default function ResultPage() {
     router.push("/test");
   }
 
+  // ✅ safe i18n fallback (nie wywali jeśli brakuje klucza w JSON)
+   const tr = (key: string, fallback: string) =>
+     safeGet(() => t(key as any), fallback);
+ 
+   async function shareResult() {
+     try {
+       const url = window.location.href;
+       const title = tr("shareTitle", "TellMeJoe — my result");
+       const text = tr("shareText", "I just got my personality result:");
+ 
+       if (navigator.share) {
+         await navigator.share({ title, text, url });
+         return;
+       }
+ 
+       if (navigator.clipboard?.writeText) {
+         await navigator.clipboard.writeText(url);
+         toast(tr("shareCopied", "Link copied"));
+         return;
+       }
+ 
+       window.prompt(tr("sharePrompt", "Copy this link:"), url);
+     } catch (e: any) {
+      // iOS: user closed share sheet (cancel) -> AbortError (to nie jest błąd)
+      const name = e?.name || "";
+      const msg = String(e?.message || "");
+
+      if (
+        name === "AbortError" ||
+        name === "NotAllowedError" ||
+        /abort/i.test(msg)
+      ) {
+        return; // user cancelled — nic nie pokazuj
+      }
+
+      console.error("Share failed:", e);
+      toast(tr("shareError", "Couldn’t share right now"));
+    }
+   }
+
   if (!loaded || !data) return null;
 
   const emotionalStability = 100 - data.scores.N;
@@ -738,6 +779,44 @@ export default function ResultPage() {
                 {showBigFive ? t("bigFive.hide") : t("bigFive.show")}
               </span>
               <span className="shrink-0 text-white/70">{showBigFive ? "▴" : "▾"}</span>
+            </button>
+
+            <button
+              onClick={shareResult}
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-3xl
+                px-4 py-2.5 text-base font-semibold
+                text-white/85
+                bg-white/10 backdrop-blur
+                border border-white/16
+                ring-1 ring-white/12
+                hover:bg-white/14 hover:border-white/22
+                active:scale-[0.99]
+                transition
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40
+                cursor-pointer"
+              type="button"
+              aria-label={tr("share", "Share")}
+              title={tr("share", "Share")}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="opacity-90"
+                aria-hidden="true"
+              >
+                <path d="M12 2v13" />
+                <path d="m16 6-4-4-4 4" />
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+              </svg>
+
+              <span className="hidden sm:inline">{tr("share", "Share")}</span>
             </button>
           </div>
 

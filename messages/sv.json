@@ -77,6 +77,13 @@
       "disclaimer": "Denna rapport är endast avsedd för personlig insikt och är inte ett medicinskt eller diagnostiskt verktyg."
     },
 
+    "share": "Dela",
+    "shareTitle": "tellmejoe. - mitt resultat",
+    "shareText": "Jag har precis gjort testet och fått mitt resultat:",
+    "shareCopied": "Länken kopierad",
+    "sharePrompt": "Kopiera den här länken:",
+    "shareError": "Det gick inte att dela resultatet",
+
     "retake": "Gör om",
     "retakeConfirm": "Att göra om återställer detta resultat. Nästa resultat kräver betalning. Fortsätta?",
 
