@@ -74,6 +74,14 @@
       "error": "Nie udało się wygenerować PDF. Sprawdź konsolę.",
       "disclaimer": "Ten raport służy wyłącznie do celów informacyjnych. Nie jest narzędziem medycznym ani diagnostycznym."
     },
+
+    "share": "Udostępnij",
+    "shareTitle": "tellmejoe.",
+    "shareText": "Właśnie zrobiłem TMJ. Zrób test i zobacz swój wynik.",
+    "shareCopied": "Link skopiowany",
+    "sharePrompt": "Skopiuj ten link:",
+    "shareError": "Nie udało się udostępnić",
+    
     "retake": "Powtórz",
     "retakeConfirm": "Powtórzenie zresetuje ten wynik. Kolejny wynik wymaga płatności. Kontynuować?",
     "yourTypeLabel": "Twój profil",

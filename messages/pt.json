@@ -74,6 +74,14 @@
       "error": "Não foi possível gerar o PDF. Verifica a consola.",
       "disclaimer": "Este relatório é apenas informativo. Não é uma ferramenta médica nem de diagnóstico."
     },
+
+    "share": "Compartilhar",
+    "shareTitle": "tellmejoe.",
+    "shareText": "Acabei de fazer TMJ. Faça o teste e veja seu resultado.",
+    "shareCopied": "Link copiado",
+    "sharePrompt": "Copiar este link:",
+    "shareError": "Não foi possível compartilhar agora",
+
     "retake": "Repetir",
     "retakeConfirm": "Repetir irá repor este resultado. Um novo resultado requer pagamento. Continuar?",
     "yourTypeLabel": "O teu perfil",

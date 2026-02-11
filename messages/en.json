@@ -73,6 +73,13 @@
       "disclaimer": "This report is for personal insight only. It is not a medical, clinical, or diagnostic assessment."
     },
 
+    "share": "Share", 
+    "shareTitle": "tellmejoe.", 
+    "shareText": "I just took TMJ. Take the test and see your result.", 
+    "shareCopied": "Link copied", 
+    "sharePrompt": "Copy this link:", 
+    "shareError": "Couldn’t share right now",
+
     "retake": "Retake",
     "retakeConfirm": "Retake will reset this result. Next result requires payment. Continue?",
 

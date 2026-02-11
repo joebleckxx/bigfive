@@ -77,6 +77,13 @@
       "disclaimer": "Denna rapport är endast avsedd för personlig insikt och är inte ett medicinskt eller diagnostiskt verktyg."
     },
 
+    "share": "Dela",
+    "shareTitle": "tellmejoe.",
+    "shareText": "Jag gjorde precis TMJ. Gör testet och se ditt resultat.",
+    "shareCopied": "Länken kopierad",
+    "sharePrompt": "Kopiera den här länken:",
+    "shareError": "Det gick inte att dela just nu",
+
     "retake": "Gör om",
     "retakeConfirm": "Att göra om återställer detta resultat. Nästa resultat kräver betalning. Fortsätta?",
 

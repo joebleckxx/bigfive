@@ -74,6 +74,14 @@
       "error": "PDF konnte nicht erstellt werden. Prüfe die Konsole.",
       "disclaimer": "Dieser Bericht dient nur zu Informationszwecken. Er ist kein medizinisches oder diagnostisches Instrument."
     },
+
+    "share": "Teilen",
+    "shareTitle": "tellmejoe.",
+    "shareText": "Ich habe gerade TMJ gemacht. Mach den Test und sieh dein Ergebnis.",
+    "shareCopied": "Link kopiert",
+    "sharePrompt": "Diesen Link kopieren:",
+    "shareError": "Konnte gerade nicht geteilt werden",
+
     "retake": "Wiederholen",
     "retakeConfirm": "Wiederholen setzt dieses Ergebnis zurück. Ein neues Ergebnis erfordert eine Zahlung. Fortfahren?",
     "yourTypeLabel": "Dein Profil",
