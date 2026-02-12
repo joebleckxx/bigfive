@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { calculateResult } from "@/lib/scoring";
 import { toast } from "sonner";
+import LegalFooter from "@/app/components/ui/legal-footer";
 
 // ✅ PDF
 import {
@@ -928,15 +929,7 @@ export default function ResultPage() {
             </p>
           </div>
         )}
-        <p className="mt-10 text-center text-xs text-white/40">
-          <a
-            href="/"
-            className="hover:text-white/55 transition"
-          >
-            tellmejoe
-          </a>
-          . TMJ © {new Date().getFullYear()}
-        </p>
+        <LegalFooter />      
       </div>
     </main>
   );

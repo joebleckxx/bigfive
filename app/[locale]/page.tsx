@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/navigation";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
+import LegalFooter from "@/app/components/ui/legal-footer";
 
 export default function Page() {
   const t = useTranslations("Home");
@@ -127,12 +128,8 @@ export default function Page() {
             />
           </div>
         </div>
-
-        <p className="mt-10 text-center text-xs text-white/40">
-          tellmejoe. TMJ © {new Date().getFullYear()}
-        </p>
-
       </div>
+      <LegalFooter />
     </main>
   );
 }

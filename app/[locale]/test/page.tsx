@@ -8,6 +8,7 @@ import {
   makeQuestionOrder,
   questionsFromOrder
 } from "@/lib/personality";
+import LegalFooter from "@/app/components/ui/legal-footer";
 
 const RESULT_KEY = "personality_result_v1";
 const ANSWERS_KEY = "personality_answers_v1";
@@ -383,7 +384,7 @@ export default function TestPage() {
         </div>
 
         <div className="relative z-10">
-          <div className="rounded-3xl border border-white/10 bg-white/8
+          <div className="rounded-3xl border border-white/10 bg-white/5
                           px-4 pt-4 pb-5
                           shadow-xl backdrop-blur-2xl
                           sm:px-6 sm:pt-6 sm:pb-7">
@@ -397,17 +398,17 @@ export default function TestPage() {
 
                 const baseTone =
                   v === 3
-                    ? "border-white/10 bg-white/5"
+                    ? "border-white/10 bg-white/2"
                     : v === 2 || v === 4
-                      ? "border-white/10 bg-white/5"
-                      : "border-white/10 bg-white/5";
+                      ? "border-white/10 bg-white/2"
+                      : "border-white/10 bg-white/2";
 
                 const toneColor =
                   v === 3
-                    ? "rgba(255, 255, 255, 0.18)"
+                    ? "rgba(255, 255, 255, 0.0675)"
                     : v === 2 || v === 4
-                      ? "rgba(255, 255, 255, 0.13)"
-                      : "rgba(255, 255, 255, 0.09)";
+                      ? "rgba(255, 255, 255, 0.04875)"
+                      : "rgba(255, 255, 255, 0.03375)";
 
                 const gradientBorderBase =
                   "relative w-full appearance-none rounded-3xl border border-transparent px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4";
@@ -499,16 +500,7 @@ export default function TestPage() {
             </div>
           </div>
         </div>
-
-        <p className="mt-10 text-center text-xs text-white/40">
-          <a
-            href="/"
-            className="hover:text-white/55 transition"
-          >
-            tellmejoe
-          </a>
-          . TMJ © {new Date().getFullYear()}
-        </p>
+        <LegalFooter />
       </div>
     </main>
   );
