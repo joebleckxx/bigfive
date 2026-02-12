@@ -8,6 +8,7 @@ import {
   makeQuestionOrder,
   questionsFromOrder
 } from "@/lib/personality";
+import LegalFooter from "@/app/components/ui/legal-footer";
 
 const RESULT_KEY = "personality_result_v1";
 const ANSWERS_KEY = "personality_answers_v1";
@@ -499,16 +500,7 @@ export default function TestPage() {
             </div>
           </div>
         </div>
-
-        <p className="mt-10 text-center text-xs text-white/40">
-          <a
-            href="/"
-            className="hover:text-white/55 transition"
-          >
-            tellmejoe
-          </a>
-          . TMJ © {new Date().getFullYear()}
-        </p>
+        <LegalFooter />
       </div>
     </main>
   );

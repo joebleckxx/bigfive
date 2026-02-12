@@ -7,6 +7,7 @@ import { QUESTIONS } from "@/lib/personality";
 import { calculateResult } from "@/lib/scoring";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { useLocale } from "next-intl";
+import LegalFooter from "@/app/components/ui/legal-footer";
 
 const PAID_KEY = "personality_paid_v1";
 const PAID_AT_KEY = "personality_paid_at_v1"; // ✅ NEW
@@ -211,16 +212,7 @@ export default function PayPage() {
 
           <p className="mt-3 text-center text-xs text-white/55">{t("note")}</p>
         </div>
-
-        <p className="mt-10 text-center text-xs text-white/40">
-          <a
-            href="/"
-            className="hover:text-white/55 transition"
-          >
-            tellmejoe
-          </a>
-          . TMJ © {new Date().getFullYear()}
-        </p>        
+        <LegalFooter />        
       </div>
 
       {isRedirecting && (
