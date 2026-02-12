@@ -216,7 +216,7 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <footer className="pt-6">
+          <footer className="pt-8">
             <p className="mt-10 text-center text-xs text-white/40">
               tellmejoe. TMJ © {new Date().getFullYear()}
             </p>

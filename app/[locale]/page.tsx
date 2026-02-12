@@ -80,7 +80,7 @@ export default function Page() {
             >
               <path d="M5 12l5 5L19 7" />
             </svg>
-            <p className="m-0">{t("editorial.line2")}</p>
+            <p className="m-0">{t("editorial.line3")}</p>
           </div>
 
           <div className="flex gap-3">
@@ -96,7 +96,7 @@ export default function Page() {
             >
               <path d="M5 12l5 5L19 7" />
             </svg>
-            <p className="m-0">{t("editorial.line3")}</p>
+            <p className="m-0">{t("editorial.line2")}</p>
           </div>
         </div>
 
