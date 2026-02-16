@@ -28,14 +28,14 @@ export default function LegalFooter() {
         >
           {t.privacy}
         </Link>
-        <span className="opacity-30">·</span>
+        <span className="opacity-70">·</span>
         <Link
           href={`/${locale}/terms`}
           className="hover:text-white/70 transition"
         >
           {t.terms}
         </Link>
-        <span className="opacity-30">·</span>
+        <span className="opacity-70">·</span>
         <a
           href="mailto:support@hellotmj.com"
           className="hover:text-white/70 transition"
