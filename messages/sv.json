@@ -1,13 +1,14 @@
 {
   "Home": {
     "brand": { "title": "tellmejoe.", "subtitle": "no judgment • just patterns" },
-    "headline": { "before": "Upptäck din", "accent": "personlighetsprofil" },
+    "headline": { "before": "Känn dig själv.", "accent": "Klart." },
+    "subheadline": "En djupare titt på hur du tänker, fattar beslut och relaterar till andra människor.",
     "note": "Tar ~5–7 minuter. Inget konto krävs.",
     "cta": "Starta testet",
     "editorial": {
-      "line1": "25 enkla frågor – klart på bara några minuter.",
-      "line2": "Ett test baserat på den etablerade Big Five-modellen, anpassat till en av 16 profiler.",
-      "line3": "Praktisk insikt i hur du fungerar i vardagen, reagerar under press och din stil i att bygga relationer."
+      "line1": "25 enkla frågor - snabbt, fokuserat, avslöjande.",
+      "line2": "En unik hybridmodell som omvandlar mönster till praktisk insikt du faktiskt kan använda.",
+      "line3": "Se hur du agerar i vardagen, hanterar press och bygger relationer."
   },
     "footer": "TMJ • tellmejoe."
   },
@@ -18,7 +19,7 @@
     "back": "Tillbaka",
     "reset": "Återställ",
     "start": "Start",
-    "tip": "Tips: svara intuitivt — det finns inga fel svar.",
+    "tip": "Tar cirka 5 minuter. Lita på din intuition - det finns inga fel svar.",
     "footer": "TMJ • tellmejoe."
   },
 
@@ -34,17 +35,17 @@
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "headline": {
-      "before": "Lås upp din",
-      "accent": "fullständiga profil",
+      "before": "Lås upp din fulla",
+      "accent": "insikt",
       "after": ""
     },
-    "description": "En praktisk sammanfattning av hur din personlighet fungerar.",
+    "description": "En tydlig, strukturerad genomgång av hur du fungerar.",
     "editorial": {
-      "line1": "En tydlig matchning mot en av 16 profiler samt resultat för fem centrala drag (0–100).",
-      "line2": "En förståelse för hur dina styrkor och svagare sidor tar form i ditt sätt att agera.",
+      "line1": "En tydlig genomgång av dina resultat, med detaljerade dragpoäng (0–100).",
+      "line2": "Förstå hur dina styrkor - och blinda fläckar - visar sig i sättet du agerar.",
       "line3": "Insikt i hur du reagerar under press och vad som hjälper dig att behålla balans i relationer."
     },  
-    "cta": "Lås upp hela rapporten",
+    "cta": "Se fullständiga resultat",
     "note": "$1 • engångsbetalning • återbetalning inom 7 dagar - utan frågor",
     "loading": "Skickar dig till säker betalning...",
     "footer": "TMJ • tellmejoe."

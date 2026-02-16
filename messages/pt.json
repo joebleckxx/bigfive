@@ -5,15 +5,16 @@
       "subtitle": "no judgment • just patterns"
     },
     "headline": {
-      "before": "Descobre o teu",
-      "accent": "perfil de personalidade"
+      "before": "Conhece-te.",
+      "accent": "Com clareza."
     },
+    "subheadline": "Um olhar mais profundo sobre como pensas, decides e te relacionas com as pessoas.",
     "note": "Leva ~5–7 minutos. Sem conta.",
     "cta": "Começar o teste",
     "editorial": {
-      "line1": "25 perguntas simples — pronto em poucos minutos.",
-      "line2": "Teste baseado no reconhecido modelo Big Five, associado a um dos 16 perfis.",
-      "line3": "Uma visão prática de como ages no dia a dia, reages sob pressão e constróis relações."
+      "line1": "25 perguntas simples - rápidas, focadas, reveladoras.",
+      "line2": "Um modelo híbrido único que transforma padrões em perceção prática que podes mesmo usar.",
+      "line3": "Vê como ages no dia a dia, lidas com a pressão e constróis relações."
     },
     "footer": "TMJ • tellmejoe."
   },
@@ -23,7 +24,7 @@
     "back": "Voltar",
     "reset": "Repor",
     "start": "Iniciar",
-    "tip": "Dica: responde por intuição — não há respostas erradas.",
+    "tip": "Leva cerca de 5 minutos. Confia na tua intuição - não há respostas erradas.",
     "footer": "TMJ • tellmejoe."
   },
   "Scale": {
@@ -37,17 +38,17 @@
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "headline": {
-      "before": "Desbloqueia o teu",
-      "accent": "perfil completo",
+      "before": "Desbloqueia toda a tua",
+      "accent": "clareza",
       "after": ""
     },
-    "description": "Um resumo prático de como a tua personalidade funciona.",
+    "description": "Uma análise clara e estruturada de como funcionas.",
     "editorial": {
-      "line1": "Associação completa a um dos 16 perfis e pontuações dos cinco traços-chave (0–100).",
-      "line2": "Compreender como os teus pontos fortes e mais fracos se traduzem na tua forma de agir.",
-      "line3": "Como reages sob pressão e o que te ajuda a manter o equilíbrio nas relações."
+      "line1": "Uma análise clara dos teus resultados, com pontuações detalhadas dos traços (0–100).",
+      "line2": "Percebe como os teus pontos fortes - e pontos cegos - se traduzem na forma como ages.",
+      "line3": "Insight sobre como reages sob pressão e o que te ajuda a manter o equilíbrio nas relações."
     },
-    "cta": "Desbloquear relatório completo",
+    "cta": "Ver resultados completos",
     "note": "$1 • pagamento único • reembolso em 7 dias — sem perguntas",
     "loading": "Redirecionando para pagamento seguro...",
     "footer": "TMJ • tellmejoe."

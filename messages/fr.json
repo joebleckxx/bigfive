@@ -5,15 +5,16 @@
       "subtitle": "no judgment • just patterns"
     },
     "headline": {
-      "before": "Découvre ton",
-      "accent": "profil de personnalité"
+      "before": "Connais-toi.",
+      "accent": "Clairement."
     },
+    "subheadline": "Un regard plus profond sur ta façon de penser, de décider et d’entrer en relation avec les autres.",
     "note": "~5–7 minutes. Sans compte.",
     "cta": "Commencer le test",
     "editorial": {
-      "line1": "25 questions simples — prêt en quelques minutes.",
-      "line2": "Test basé sur le modèle reconnu Big Five, associé à l’un des 16 profils.",
-      "line3": "Un aperçu pratique de ta façon d’agir au quotidien, de réagir sous pression et de construire tes relations."
+      "line1": "25 questions simples - rapides, ciblées, révélatrices.",
+      "line2": "Un modèle hybride unique qui transforme des schémas en enseignements pratiques que tu peux réellement utiliser.",
+      "line3": "Vois comment tu agis au quotidien, gères la pression et construis tes relations."
     },
     "footer": "TMJ • tellmejoe."
   },
@@ -23,7 +24,7 @@
     "back": "Retour",
     "reset": "Réinitialiser",
     "start": "Démarrer",
-    "tip": "Astuce : réponds instinctivement — il n’y a pas de mauvaises réponses.",
+    "tip": "Ça prend environ 5 minutes. Fais confiance à ton intuition - il n’y a pas de mauvaise réponse.",
     "footer": "TMJ • tellmejoe."
   },
   "Scale": {
@@ -37,17 +38,17 @@
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "headline": {
-      "before": "Débloque ton",
-      "accent": "profil complet",
+      "before": "Débloque toute ta",
+      "accent": "lucidité",
       "after": ""
     },
-    "description": "Un résumé pratique de la façon dont ta personnalité fonctionne.",
+    "description": "Une analyse claire et structurée de ta façon de fonctionner.",
     "editorial": {
-      "line1": "Association complète à l’un des 16 profils et scores des cinq traits clés (0–100).",
-      "line2": "Comprendre comment tes points forts et plus faibles se traduisent dans ta manière d’agir.",
-      "line3": "Comment tu réagis sous pression et ce qui t’aide à garder l’équilibre dans tes relations."
+      "line1": "Une analyse claire de tes résultats, avec des scores détaillés par trait (0–100).",
+      "line2": "Comprends comment tes forces - et tes angles morts - se traduisent dans ta manière d’agir.",
+      "line3": "Des éclairages sur ta façon de réagir sous pression et sur ce qui t’aide à garder l’équilibre dans tes relations."
     },
-    "cta": "Débloquer le rapport complet",
+    "cta": "Voir les résultats complets",
     "note": "$1 • paiement unique • remboursement sous 7 jours — sans justification",
     "loading": "Redirection vers le paiement sécurisé...",
     "footer": "TMJ • tellmejoe."

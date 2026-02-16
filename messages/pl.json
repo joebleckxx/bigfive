@@ -5,15 +5,16 @@
       "subtitle": "no judgment • just patterns"
     },
     "headline": {
-      "before": "Odkryj swój",
-      "accent": "profil osobowości"
+      "before": "Poznaj siebie.",
+      "accent": "Wyraźnie."
     },
+    "subheadline": "Głębsze spojrzenie na to, jak myślisz, decydujesz i budujesz relacje z innymi.",
     "note": "Zajmuje ~5–7 minut. Bez konta.",
     "cta": "Rozpocznij test",
     "editorial": {
-      "line1": "25 prostych pytań - gotowe w kilka minut.",
-      "line2": "Test oparty na uznanym modelu Big Five, dopasowany do jednego z 16 profili.",
-      "line3": "Praktyczny wgląd w to, jak działasz na co dzień, reagujesz pod presją oraz styl budowania relacji."
+      "line1": "25 prostych pytań - szybkie, konkretne, odkrywające.",
+      "line2": "Unikalny model hybrydowy, który zamienia wzorce w praktyczny wgląd, z którego naprawdę skorzystasz.",
+      "line3": "Zobacz, jak działasz na co dzień, radzisz sobie pod presją i budujesz relacje."
     },
     "footer": "TMJ • tellmejoe."
   },
@@ -23,7 +24,7 @@
     "back": "Wstecz",
     "reset": "Resetuj",
     "start": "Start",
-    "tip": "Wskazówka: odpowiadaj intuicyjnie — nie ma złych odpowiedzi.",
+    "tip": "Zajmuje około 5 minut. Zaufaj swojej intuicji - nie ma złych odpowiedzi.",
     "footer": "TMJ • tellmejoe."
   },
   "Scale": {
@@ -37,17 +38,17 @@
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "headline": {
-      "before": "Odblokuj swój",
-      "accent": "pełny profil",
+      "before": "Odblokuj pełne",
+      "accent": "wyniki",
       "after": ""
     },
-    "description": "Praktyczne podsumowanie tego, jak działa Twoja osobowość.",
+    "description": "Jasne, uporządkowane omówienie tego, jak działasz.",
     "editorial": {
-      "line1": "Pełne dopasowanie do jednego z 16 profili oraz wyniki pięciu kluczowych cech (0-100).",
-      "line2": "Zrozumienie, jak Twoje mocne i słabsze strony przekładają się na sposób działania.",
+      "line1": "Jasne omówienie Twoich rezultatów wraz ze szczegółową punktacją cech (0–100).",
+      "line2": "Zrozum, jak Twoje mocne i słabe strony wpływają na Twoje codzienne decyzje i zachowania.",
       "line3": "Wgląd w to, jak reagujesz pod presją i co pomaga Ci zachować równowagę w relacjach."
     },
-    "cta": "Odblokuj pełny raport",
+    "cta": "Zobacz pełne wyniki",
     "note": "$1 • płatność jednorazowa • zwrot do 7 dni - bez pytań",
     "loading": "Przekierowuję do bezpiecznej płatności...",
     "footer": "TMJ • tellmejoe."

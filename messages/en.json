@@ -1,13 +1,14 @@
 {
   "Home": {
     "brand": { "title": "tellmejoe.", "subtitle": "no judgment • just patterns" },
-    "headline": { "before": "Discover your", "accent": "personality profile" },
+    "headline": { "before": "Know yourself.", "accent": "Clearly." },
+    "subheadline": "A deeper look at how you think, decide, and relate to people.",
     "note": "Takes ~5–7 minutes. No account.",
     "cta": "Start the test",
     "editorial": {
-      "line1": "25 simple questions – ready in just a few minutes.",
-      "line2": "A test based on the well-established Big Five model, mapped to one of 16 profiles.",
-      "line3": "Practical insight into how you operate day to day, respond under pressure, and your style of building relationships."
+      "line1": "25 simple questions - quick, focused, revealing.",
+      "line2": "A unique hybrid model that turns patterns into practical insight you can actually use.",
+      "line3": "See how you act day to day, handle pressure, and build relationships."
     },
     "footer": "tellmejoe. · TMJ"
   },
@@ -18,7 +19,7 @@
     "back": "Back",
     "reset": "Reset",
     "start": "Start",
-    "tip": "Tip: answer intuitively — there are no wrong answers.",
+    "tip": "Takes about 5 minutes. Trust your intuition - there are no wrong answers.",
     "footer": "TMJ • tellmejoe."
   },
 
@@ -33,14 +34,14 @@
   "Pay": {
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
-    "headline": { "before": "Unlock your", "accent": "full profile", "after": "" },
-    "description": "A practical summary of how your personality works.",
+    "headline": { "before": "Unlock your full", "accent": "insight", "after": "" },
+    "description": "A clear, structured breakdown of how you operate.",
     "editorial": {
-      "line1": "A clear match to one of 16 profiles, along with scores for five key traits (0–100).",
-      "line2": "An understanding of how your strengths and weaker areas translate into the way you act.",
+      "line1": "A clear breakdown of your results, with detailed trait scores (0–100).",
+      "line2": "Understand how your strengths - and blind spots - translate into the way you act.",
       "line3": "Insight into how you respond under pressure and what helps you stay balanced in relationships."
     },
-    "cta": "Unlock full report",
+    "cta": "See full results",
     "note": "$1 • one-time payment • 7-day refund - no questions asked",
     "loading": "Redirecting to secure checkout...",
     "footer": "TMJ • tellmejoe."

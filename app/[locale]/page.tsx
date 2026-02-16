@@ -49,6 +49,10 @@ export default function Page() {
           </span>
         </h1>
 
+        <p className="mt-3 text-sm leading-relaxed text-white/90">
+          {t("subheadline")}
+        </p>
+
         {/* EDITORIAL – VARIANT A */}
         <div className="mt-6 space-y-4 text-sm leading-relaxed text-white/80">
           <div className="flex gap-3">
@@ -128,8 +132,9 @@ export default function Page() {
             />
           </div>
         </div>
+
+        <LegalFooter />
       </div>
-      <LegalFooter />
     </main>
   );
 }

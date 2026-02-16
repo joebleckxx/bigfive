@@ -5,15 +5,16 @@
       "subtitle": "no judgment • just patterns"
     },
     "headline": {
-      "before": "Descubre tu",
-      "accent": "perfil de personalidad"
+      "before": "Conócete.",
+      "accent": "Con claridad."
     },
+    "subheadline": "Una mirada más profunda a cómo piensas, decides y te relacionas con las personas.",
     "note": "Toma ~5–7 minutos. Sin cuenta.",
     "cta": "Empezar el test",
     "editorial": {
-      "line1": "25 preguntas simples — listo en unos minutos.",
-      "line2": "Test basado en el reconocido modelo Big Five, asignado a uno de 16 perfiles.",
-      "line3": "Una visión práctica de cómo actúas a diario, reaccionas bajo presión y construyes relaciones."
+      "line1": "25 preguntas simples - rápidas, enfocadas, reveladoras.",
+      "line2": "Un modelo híbrido único que convierte patrones en una visión práctica que realmente puedes usar.",
+      "line3": "Mira cómo actúas en el día a día, manejas la presión y construyes relaciones."
     },
     "footer": "TMJ • tellmejoe."
   },
@@ -23,7 +24,7 @@
     "back": "Atrás",
     "reset": "Reiniciar",
     "start": "Empezar",
-    "tip": "Consejo: responde de forma intuitiva — no hay respuestas incorrectas.",
+    "tip": "Toma unos 5 minutos. Confía en tu intuición - no hay respuestas incorrectas.",
     "footer": "TMJ • tellmejoe."
   },
   "Scale": {
@@ -37,17 +38,17 @@
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "headline": {
-      "before": "Desbloquea tu",
-      "accent": "perfil completo",
+      "before": "Desbloquea toda tu",
+      "accent": "visión",
       "after": ""
     },
-    "description": "Un resumen práctico de cómo funciona tu personalidad.",
+    "description": "Un desglose claro y estructurado de cómo funcionas.",
     "editorial": {
-      "line1": "Asignación completa a uno de 16 perfiles y puntuaciones de cinco rasgos clave (0–100).",
-      "line2": "Entender cómo tus puntos fuertes y más débiles se traducen en tu forma de actuar.",
-      "line3": "Cómo reaccionas bajo presión y qué te ayuda a mantener el equilibrio en las relaciones."
+      "line1": "Un desglose claro de tus resultados, con puntuaciones detalladas de rasgos (0–100).",
+      "line2": "Entiende cómo tus fortalezas - y puntos ciegos - se traducen en tu forma de actuar.",
+      "line3": "Información sobre cómo respondes bajo presión y qué te ayuda a mantener el equilibrio en tus relaciones."
     },
-    "cta": "Desbloquear informe completo",
+    "cta": "Ver resultados completos",
     "note": "$1 • pago único • reembolso en 7 días — sin preguntas",
     "loading": "Redirigiendo al pago seguro...",
     "footer": "TMJ • tellmejoe."
