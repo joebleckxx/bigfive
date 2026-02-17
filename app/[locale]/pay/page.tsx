@@ -209,12 +209,19 @@ export default function PayPage() {
               "shadow-[0_20px_60px_rgba(99,102,241,0.35)]",
               "transition active:scale-[0.98]",
               "focus:outline-none focus:ring-4 focus:ring-indigo-400/30",
+              "cursor-pointer",
               ].join(" ")}
           >
             {t("cta")} →
           </button>
 
-          <p className="mt-3 text-center text-xs text-white/55">{t("note")}</p>
+          <p className="mt-3 text-center text-sm text-white/75">
+            {t("note")}
+          </p>
+          <p className="mt-2 mb-1 text-center text-xs text-white/50">
+            {t("stripeNote")}
+          </p>
+
         </div>
         <LegalFooter />        
       </div>

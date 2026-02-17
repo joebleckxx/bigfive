@@ -48,8 +48,9 @@
       "line2": "Verstehe, wie sich deine Stärken - und blinden Flecken - in deiner Art zu handeln zeigen.",
       "line3": "Einblick darin, wie du unter Druck reagierst und was dir hilft, in Beziehungen im Gleichgewicht zu bleiben."
     },
-    "cta": "Volle Ergebnisse ansehen",
-    "note": "$1 • einmalige Zahlung • 7 Tage Rückerstattung - ohne Fragen",
+    "cta": "Volle Ergebnisse für 1 $ ansehen",
+    "note": "Einmalige Zahlung · Kein Abonnement",
+    "stripeNote": "Sichere Zahlung über Stripe",
     "loading": "Weiterleitung zur sicheren Zahlung...",
     "footer": "TMJ • tellmejoe."
   },

@@ -48,8 +48,9 @@
       "line2": "Entiende cómo tus fortalezas - y puntos ciegos - se traducen en tu forma de actuar.",
       "line3": "Información sobre cómo respondes bajo presión y qué te ayuda a mantener el equilibrio en tus relaciones."
     },
-    "cta": "Ver resultados completos",
-    "note": "$1 • pago único • reembolso en 7 días — sin preguntas",
+    "cta": "Ver resultados completos por 1 $",
+    "note": "Pago único · Sin suscripción",
+    "stripeNote": "Pago seguro a través de Stripe",
     "loading": "Redirigiendo al pago seguro...",
     "footer": "TMJ • tellmejoe."
   },

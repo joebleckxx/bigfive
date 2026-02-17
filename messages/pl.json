@@ -48,8 +48,9 @@
       "line2": "Zrozum, jak Twoje mocne i słabe strony wpływają na Twoje codzienne decyzje i zachowania.",
       "line3": "Wgląd w to, jak reagujesz pod presją i co pomaga Ci zachować równowagę w relacjach."
     },
-    "cta": "Zobacz pełne wyniki",
-    "note": "$1 • płatność jednorazowa • zwrot do 7 dni - bez pytań",
+    "cta": "Zobacz pełne wyniki za 1 $",
+    "note": "Płatność jednorazowa · Brak subskrypcji",
+    "stripeNote": "Bezpieczna płatność przez Stripe",
     "loading": "Przekierowuję do bezpiecznej płatności...",
     "footer": "TMJ • tellmejoe."
   },

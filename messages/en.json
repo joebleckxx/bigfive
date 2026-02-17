@@ -41,8 +41,9 @@
       "line2": "Understand how your strengths - and blind spots - translate into the way you act.",
       "line3": "Insight into how you respond under pressure and what helps you stay balanced in relationships."
     },
-    "cta": "See full results",
-    "note": "$1 • one-time payment • 7-day refund - no questions asked",
+    "cta": "See full results for $1",
+    "note": "One-time payment · No subscription",
+    "stripeNote": "Secure checkout via Stripe",
     "loading": "Redirecting to secure checkout...",
     "footer": "TMJ • tellmejoe."
   },

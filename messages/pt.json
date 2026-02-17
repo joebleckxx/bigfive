@@ -48,8 +48,9 @@
       "line2": "Percebe como os teus pontos fortes - e pontos cegos - se traduzem na forma como ages.",
       "line3": "Insight sobre como reages sob pressão e o que te ajuda a manter o equilíbrio nas relações."
     },
-    "cta": "Ver resultados completos",
-    "note": "$1 • pagamento único • reembolso em 7 dias — sem perguntas",
+    "cta": "Ver resultados completos por 1 $",
+    "note": "Pagamento único · Sem subscrição",
+    "stripeNote": "Pagamento seguro via Stripe",
     "loading": "Redirecionando para pagamento seguro...",
     "footer": "TMJ • tellmejoe."
   },

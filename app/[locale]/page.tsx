@@ -117,6 +117,7 @@ export default function Page() {
               "shadow-[0_20px_60px_rgba(99,102,241,0.35)]",
               "transition active:scale-[0.98]",
               "focus:outline-none focus:ring-4 focus:ring-indigo-400/30",
+              "cursor-pointer",
             ].join(" ")}
           >
             {t("cta")} →

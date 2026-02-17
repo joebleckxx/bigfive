@@ -48,8 +48,9 @@
       "line2": "Comprends comment tes forces - et tes angles morts - se traduisent dans ta manière d’agir.",
       "line3": "Des éclairages sur ta façon de réagir sous pression et sur ce qui t’aide à garder l’équilibre dans tes relations."
     },
-    "cta": "Voir les résultats complets",
-    "note": "$1 • paiement unique • remboursement sous 7 jours — sans justification",
+    "cta": "Voir les résultats complets pour 1 $",
+    "note": "Paiement unique · Sans abonnement",
+    "stripeNote": "Paiement sécurisé via Stripe",
     "loading": "Redirection vers le paiement sécurisé...",
     "footer": "TMJ • tellmejoe."
   },

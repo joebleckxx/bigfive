@@ -45,8 +45,9 @@
       "line2": "Förstå hur dina styrkor - och blinda fläckar - visar sig i sättet du agerar.",
       "line3": "Insikt i hur du reagerar under press och vad som hjälper dig att behålla balans i relationer."
     },  
-    "cta": "Se fullständiga resultat",
-    "note": "$1 • engångsbetalning • återbetalning inom 7 dagar - utan frågor",
+    "cta": "Se fullständiga resultat för 1 $",
+    "note": "Engångsbetalning · Ingen prenumeration",
+    "stripeNote": "Säker betalning via Stripe",
     "loading": "Skickar dig till säker betalning...",
     "footer": "TMJ • tellmejoe."
   },
