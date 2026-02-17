@@ -310,7 +310,7 @@ export default function TestPage() {
       <div className="relative mx-auto max-w-xl">
         {/* Topbar */}
         <div className="relative z-30 mb-6 flex items-center justify-between">
-          <div className="text-sm text-white/60">{progressText}</div>
+          <div className="text-sm text-white/70">{progressText}</div>
 
           <div className="flex items-center gap-4">
             <button
@@ -380,7 +380,7 @@ export default function TestPage() {
 
         {/* Joe microcopy */}
         <div className="mb-6 mt-1 text-xs text-white/50 italic">
-          Take your time — Joe.
+          {t("tip")}
         </div>
 
         <div className="relative z-10">

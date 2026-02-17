@@ -193,7 +193,7 @@ export default function PayPage() {
           {t("headline.after")}
         </h1>
 
-        <p className="mt-4 text-base leading-relaxed text-white/80">
+        <p className="mt-4 text-base leading-relaxed text-white/90">
           {t("description")}
         </p>
 
@@ -201,7 +201,7 @@ export default function PayPage() {
         <div className="mt-6 space-y-4 text-sm leading-relaxed text-white/80">
           <div className="flex gap-3">
             <CheckIcon />
-            <p className="m-0">{t("editorial.line1")}</p>
+            <p className="m-0">{t("editorial.line3")}</p>
           </div>
 
           <div className="flex gap-3">
@@ -211,7 +211,7 @@ export default function PayPage() {
 
           <div className="flex gap-3">
             <CheckIcon />
-            <p className="m-0">{t("editorial.line3")}</p>
+            <p className="m-0">{t("editorial.line1")}</p>
           </div>
         </div>
 

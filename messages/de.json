@@ -5,15 +5,16 @@
       "subtitle": "no judgment • just patterns"
     },
     "headline": {
-      "before": "Entdecke dein",
-      "accent": "Persönlichkeitsprofil"
+      "before": "Erkenne dich selbst.",
+      "accent": "Klar."
     },
+    "subheadline": "Ein tieferer Blick darauf, wie du denkst, entscheidest und mit Menschen umgehst.",
     "note": "Dauert ~5–7 Minuten. Ohne Konto.",
-    "cta": "Test starten",
+    "cta": "Meine Ergebnisse ansehen",
     "editorial": {
-      "line1": "25 einfache Fragen — in wenigen Minuten fertig.",
-      "line2": "Test basierend auf dem anerkannten Big-Five-Modell, zugeordnet zu einem von 16 Profilen.",
-      "line3": "Praktischer Einblick darin, wie du im Alltag handelst, unter Druck reagierst und Beziehungen gestaltest."
+      "line1": "25 einfache Fragen - schnell, fokussiert, aufschlussreich.",
+      "line2": "Ein einzigartiges Hybridmodell, das Muster in praktische Erkenntnisse verwandelt, die du wirklich nutzen kannst.",
+      "line3": "Sieh, wie du im Alltag handelst, mit Druck umgehst und Beziehungen aufbaust."
     },
     "footer": "TMJ • tellmejoe."
   },
@@ -23,7 +24,7 @@
     "back": "Zurück",
     "reset": "Zurücksetzen",
     "start": "Start",
-    "tip": "Tipp: antworte intuitiv — es gibt keine falschen Antworten.",
+    "tip": "Dauert etwa 5 Minuten. Vertraue deiner Intuition - es gibt keine falschen Antworten.",
     "footer": "TMJ • tellmejoe."
   },
   "Scale": {
@@ -37,17 +38,17 @@
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "headline": {
-      "before": "Schalte dein",
-      "accent": "vollständiges Profil",
+      "before": "Schalte deinen vollen",
+      "accent": "Einblick frei",
       "after": ""
     },
-    "description": "Eine praktische Zusammenfassung, wie deine Persönlichkeit funktioniert.",
+    "description": "Eine klare, strukturierte Aufschlüsselung, wie du funktionierst.",
     "editorial": {
-      "line1": "Vollständige Zuordnung zu einem von 16 Profilen sowie Werte der fünf zentralen Merkmale (0–100).",
-      "line2": "Verstehen, wie deine Stärken und schwächeren Seiten sich in deinem Handeln zeigen.",
-      "line3": "Wie du unter Druck reagierst und was dir hilft, in Beziehungen im Gleichgewicht zu bleiben."
+      "line1": "Eine klare Aufschlüsselung deiner Ergebnisse mit detaillierten Merkmalswerten (0–100).",
+      "line2": "Verstehe, wie sich deine Stärken - und blinden Flecken - in deiner Art zu handeln zeigen.",
+      "line3": "Einblick darin, wie du unter Druck reagierst und was dir hilft, in Beziehungen im Gleichgewicht zu bleiben."
     },
-    "cta": "Vollen Bericht freischalten",
+    "cta": "Volle Ergebnisse ansehen",
     "note": "$1 • einmalige Zahlung • 7 Tage Rückerstattung - ohne Fragen",
     "loading": "Weiterleitung zur sicheren Zahlung...",
     "footer": "TMJ • tellmejoe."
