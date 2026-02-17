@@ -48,8 +48,9 @@
       "line2": "Comprends comment tes forces - et tes angles morts - se traduisent dans ta manière d’agir.",
       "line3": "Des éclairages sur ta façon de réagir sous pression et sur ce qui t’aide à garder l’équilibre dans tes relations."
     },
-    "cta": "Voir les résultats complets",
-    "note": "$1 • paiement unique • remboursement sous 7 jours — sans justification",
+    "cta": "Voir les résultats complets pour 1 $",
+    "note": "Paiement unique · Sans abonnement",
+    "stripeNote": "Paiement sécurisé via Stripe",
     "loading": "Redirection vers le paiement sécurisé...",
     "footer": "TMJ • tellmejoe."
   },
@@ -90,7 +91,7 @@
       "title": "Traits de personnalité",
       "show": "Afficher les détails des traits",
       "hide": "Masquer les détails des traits",
-      "note": "Basé sur le modèle Big Five — cinq traits fondamentaux de personnalité.",
+      "note": "Basé sur le modèle Big Five - cinq traits fondamentaux de personnalité.",
       "topTrait": "Ton trait le plus marqué",
       "summary": "Le trait qui ressort le plus chez toi est {trait}.",
       "levels": {
@@ -99,7 +100,7 @@
         "high": "Élevé"
       }
     },
-    "disclaimer": "Ce test s’appuie sur des recherches reconnues en personnalité et est informatif — ce n’est pas un test clinique.",
+    "disclaimer": "Ce test s’appuie sur des recherches reconnues en personnalité et est informatif - ce n’est pas un test clinique.",
     "traits": {
       "E": "Extraversion",
       "O": "Ouverture",
@@ -129,7 +130,7 @@
     "E4": "Je me sens à l’aise quand je suis au centre de l’attention.",
     "E5": "En général, je préfère écouter plutôt que parler.",
     "O1": "J’aime découvrir de nouvelles idées, même si elles sont non conventionnelles.",
-    "O2": "Les sujets abstraits — idées, philosophie ou futur — m’attirent.",
+    "O2": "Les sujets abstraits - idées, philosophie ou futur - m’attirent.",
     "O3": "La routine m’ennuie et je cherche du nouveau.",
     "O4": "J’aime remettre en question les façons de faire établies.",
     "O5": "Je me sens plus en confiance avec des méthodes éprouvées qu’en essayant de nouvelles solutions.",
@@ -152,7 +153,7 @@
   "Types": {
     "P01": {
       "name": "Penseur",
-      "desc": "Pense intensément et à sa manière — agit par vagues, porté par un élan intérieur."
+      "desc": "Pense intensément et à sa manière - agit par vagues, porté par un élan intérieur."
     },
     "P02": {
       "name": "Explorateur",
@@ -188,7 +189,7 @@
     },
     "P10": {
       "name": "Praticien",
-      "desc": "Pense par l’action — se sent le mieux dans le concret."
+      "desc": "Pense par l’action - se sent le mieux dans le concret."
     },
     "P11": {
       "name": "Analyste",
@@ -498,7 +499,7 @@
     },
     "P15": {
       "core": [
-        "Tu as un fort besoin de tester les limites — les tiennes et celles imposées par l’extérieur. La vie devient réelle pour toi quand l’incertitude et l’enjeu apparaissent."
+        "Tu as un fort besoin de tester les limites - les tiennes et celles imposées par l’extérieur. La vie devient réelle pour toi quand l’incertitude et l’enjeu apparaissent."
       ],
       "daily": [
         "Tu entres dans les situations sans garantie totale de sécurité, car c’est justement l’absence de contrôle qui te donne de l’énergie. Tu agis plus vite que tu ne peux tout analyser, en faisant confiance à ton instinct. Le mouvement et la décision sont ta façon d’apprivoiser la peur."

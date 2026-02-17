@@ -49,8 +49,9 @@
       "line2": "Zrozum, jak Twoje mocne i słabe strony wpływają na Twoje codzienne decyzje i zachowania.",
       "line3": "Wgląd w to, jak reagujesz pod presją i co pomaga Ci zachować równowagę w relacjach."
     },
-    "cta": "Zobacz pełne wyniki",
-    "note": "$1 • płatność jednorazowa • zwrot do 7 dni - bez pytań",
+    "cta": "Zobacz pełne wyniki za 1 $",
+    "note": "Płatność jednorazowa · Brak subskrypcji",
+    "stripeNote": "Bezpieczna płatność przez Stripe",
     "loading": "Przekierowuję do bezpiecznej płatności...",
     "footer": "TMJ • tellmejoe."
   },
@@ -100,7 +101,7 @@
         "high": "Wysoki"
       }
     },
-    "disclaimer": "Ten test opiera się na uznanych badaniach osobowości i ma charakter informacyjny — nie jest testem klinicznym.",
+    "disclaimer": "Ten test opiera się na uznanych badaniach osobowości i ma charakter informacyjny - nie jest testem klinicznym.",
     "traits": {
       "E": "Ekstrawersja",
       "O": "Otwartość",
@@ -155,7 +156,7 @@
   "Types": {
     "P01": {
       "name": "Myśliciel",
-      "desc": "Myśli intensywnie i po swojemu — działa falami, pod wpływem wewnętrznego impulsu."
+      "desc": "Myśli intensywnie i po swojemu - działa falami, pod wpływem wewnętrznego impulsu."
     },
     "P02": {
       "name": "Odkrywca",
@@ -191,7 +192,7 @@
     },
     "P10": {
       "name": "Praktyk",
-      "desc": "Myśli przez działanie — najlepiej czuje się w konkretach."
+      "desc": "Myśli przez działanie - najlepiej czuje się w konkretach."
     },
     "P11": {
       "name": "Analityk",
@@ -225,7 +226,7 @@
         "Twoje myślenie jest intensywne i autonomiczne, często oderwane od oczekiwań otoczenia. Kierujesz się własnymi impulsami i wewnętrzną logiką, nawet jeśli trudno ją komuś wytłumaczyć."
       ],
       "daily": [
-        "Działasz falami — potrafisz być bardzo zaangażowany, a potem nagle się wycofać. Nie trzymasz się stałych schematów, raczej reagujesz na to, co aktualnie przyciąga Twoją uwagę. Decyzje podejmujesz pod wpływem momentu, nastroju lub wewnętrznego impulsu."
+        "Działasz falami - potrafisz być bardzo zaangażowany, a potem nagle się wycofać. Nie trzymasz się stałych schematów, raczej reagujesz na to, co aktualnie przyciąga Twoją uwagę. Decyzje podejmujesz pod wpływem momentu, nastroju lub wewnętrznego impulsu."
       ],
       "strengths": [
         "Masz odwagę myśleć i reagować inaczej niż większość. Potrafisz zauważyć rzeczy, które innym umykają, właśnie dlatego, że nie filtrujesz świata przez normy i oczekiwania. Twoja autentyczność bywa surowa, ale jest prawdziwa."

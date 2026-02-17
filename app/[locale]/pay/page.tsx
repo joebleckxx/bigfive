@@ -9,6 +9,9 @@ import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { useLocale } from "next-intl";
 import LegalFooter from "@/app/components/ui/legal-footer";
 
+export const CTA_GRADIENT =
+  "bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-400";
+
 const PAID_KEY = "personality_paid_v1";
 const PAID_AT_KEY = "personality_paid_at_v1"; // ✅ NEW
 const ANSWERS_KEY = "personality_answers_v1";
@@ -215,21 +218,29 @@ export default function PayPage() {
           </div>
         </div>
 
+        {/* CTA */}
         <div className="mt-8">
           <button
             onClick={handleUnlock}
-            className="relative inline-flex w-full items-center justify-center rounded-3xl px-6 py-4 text-base font-semibold text-white
-              bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
-              shadow-[0_20px_60px_rgba(99,102,241,0.35)]
-              transition active:scale-[0.98]
-              focus:outline-none focus:ring-4 focus:ring-indigo-400/30
-              cursor-pointer"
-            type="button"
+            className={[
+              "relative inline-flex w-full items-center justify-center rounded-3xl px-6 py-4 text-base font-semibold text-white",
+              CTA_GRADIENT,
+              "shadow-[0_20px_60px_rgba(99,102,241,0.35)]",
+              "transition active:scale-[0.98]",
+              "focus:outline-none focus:ring-4 focus:ring-indigo-400/30",
+              "cursor-pointer",
+              ].join(" ")}
           >
             {t("cta")} →
           </button>
 
-          <p className="mt-3 text-center text-xs text-white/55">{t("note")}</p>
+          <p className="mt-3 text-center text-sm text-white/75">
+            {t("note")}
+          </p>
+          <p className="mt-2 mb-1 text-center text-xs text-white/50">
+            {t("stripeNote")}
+          </p>
+
         </div>
         <LegalFooter />        
       </div>

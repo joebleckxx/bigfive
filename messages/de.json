@@ -48,8 +48,9 @@
       "line2": "Verstehe, wie sich deine Stärken - und blinden Flecken - in deiner Art zu handeln zeigen.",
       "line3": "Einblick darin, wie du unter Druck reagierst und was dir hilft, in Beziehungen im Gleichgewicht zu bleiben."
     },
-    "cta": "Volle Ergebnisse ansehen",
-    "note": "$1 • einmalige Zahlung • 7 Tage Rückerstattung - ohne Fragen",
+    "cta": "Volle Ergebnisse für 1 $ ansehen",
+    "note": "Einmalige Zahlung · Kein Abonnement",
+    "stripeNote": "Sichere Zahlung über Stripe",
     "loading": "Weiterleitung zur sicheren Zahlung...",
     "footer": "TMJ • tellmejoe."
   },
@@ -90,7 +91,7 @@
       "title": "Persönlichkeitsmerkmale",
       "show": "Details der Merkmale anzeigen",
       "hide": "Details der Merkmale ausblenden",
-      "note": "Basierend auf dem Big-Five-Modell — fünf grundlegenden Persönlichkeitsmerkmalen.",
+      "note": "Basierend auf dem Big-Five-Modell - fünf grundlegenden Persönlichkeitsmerkmalen.",
       "topTrait": "Dein stärkstes Merkmal",
       "summary": "Am stärksten ausgeprägt ist bei dir {trait}.",
       "levels": {
@@ -99,7 +100,7 @@
         "high": "Hoch"
       }
     },
-    "disclaimer": "Dieser Test basiert auf anerkannter Persönlichkeitsforschung und ist informativ — kein klinischer Test.",
+    "disclaimer": "Dieser Test basiert auf anerkannter Persönlichkeitsforschung und ist informativ - kein klinischer Test.",
     "traits": {
       "E": "Extraversion",
       "O": "Offenheit",
@@ -152,7 +153,7 @@
   "Types": {
     "P01": {
       "name": "Denker",
-      "desc": "Denkt intensiv und auf eigene Weise — handelt in Wellen, getrieben von einem inneren Impuls."
+      "desc": "Denkt intensiv und auf eigene Weise - handelt in Wellen, getrieben von einem inneren Impuls."
     },
     "P02": {
       "name": "Entdecker",
@@ -188,7 +189,7 @@
     },
     "P10": {
       "name": "Praktiker",
-      "desc": "Denkt durch Handeln — fühlt sich am wohlsten im Konkreten."
+      "desc": "Denkt durch Handeln - fühlt sich am wohlsten im Konkreten."
     },
     "P11": {
       "name": "Analytiker",
@@ -221,7 +222,7 @@
         "Dein Denken ist intensiv und autonom, oft losgelöst von den Erwartungen der Umgebung. Du folgst eigenen Impulsen und einer inneren Logik, auch wenn sie schwer zu erklären ist."
       ],
       "daily": [
-        "Du handelst in Wellen — du kannst sehr engagiert sein und dich dann plötzlich zurückziehen. Du hältst dich selten an feste Muster, sondern reagierst auf das, was gerade deine Aufmerksamkeit anzieht. Entscheidungen triffst du nach Moment, Stimmung oder innerem Impuls."
+        "Du handelst in Wellen - du kannst sehr engagiert sein und dich dann plötzlich zurückziehen. Du hältst dich selten an feste Muster, sondern reagierst auf das, was gerade deine Aufmerksamkeit anzieht. Entscheidungen triffst du nach Moment, Stimmung oder innerem Impuls."
       ],
       "strengths": [
         "Du hast den Mut, anders zu denken und zu reagieren als die meisten. Du bemerkst Dinge, die anderen entgehen, weil du die Welt nicht durch Normen und Erwartungen filterst. Deine Authentizität kann rau sein, aber sie ist echt."
@@ -238,7 +239,7 @@
     },
     "P02": {
       "core": [
-        "Dich treibt Neugier auf die Welt und das Bedürfnis, Dinge auf deine Weise zu verstehen. Am wohlsten fühlst du dich, wenn du schauen, zuhören und ausprobieren kannst — ohne Druck auf sofortige Antworten."
+        "Dich treibt Neugier auf die Welt und das Bedürfnis, Dinge auf deine Weise zu verstehen. Am wohlsten fühlst du dich, wenn du schauen, zuhören und ausprobieren kannst - ohne Druck auf sofortige Antworten."
       ],
       "daily": [
         "Du bewegst dich ruhig und gibst dir Zeit zum Beobachten und Experimentieren. Du bindest dich selten an eine Richtung, weil dir der Entdeckungsprozess wichtiger ist als das Ziel. Wandel ist für dich ein natürlicher Zustand."
@@ -393,12 +394,12 @@
         "Unter Druck reagierst du impulsiv und fokussierst eine sofortige Lösung. Erst später kommt der Moment des Innehaltens und Bewertens."
       ],
       "relationships": [
-        "In Beziehungen sprichst du direkt und ohne Umschweife. Menschen wissen, was sie von dir erwarten können — das ist Entlastung oder Herausforderung. Du lässt selten etwas unausgesprochen."
+        "In Beziehungen sprichst du direkt und ohne Umschweife. Menschen wissen, was sie von dir erwarten können - das ist Entlastung oder Herausforderung. Du lässt selten etwas unausgesprochen."
       ]
     },
     "P10": {
       "core": [
-        "Am besten fühlst du dich, wenn du direkten Kontakt zu etwas Realem und Greifbarem hast. Denken existiert bei dir nicht getrennt vom Handeln — das eine ergibt sich natürlich aus dem anderen."
+        "Am besten fühlst du dich, wenn du direkten Kontakt zu etwas Realem und Greifbarem hast. Denken existiert bei dir nicht getrennt vom Handeln - das eine ergibt sich natürlich aus dem anderen."
       ],
       "daily": [
         "Du gehst in Situationen ohne übermäßige Vorbereitung und lernst in der Bewegung. Du prüfst Dinge praktisch, statt sie lange abzuwägen, weil Erfahrung dir die meisten Informationen gibt. Handeln ordnet deine Gedanken."
@@ -444,7 +445,7 @@
         "Du verbindest Menschen und Handlungen zu einer stimmigen Bewegung, selbst wenn die Bedingungen nicht ideal sind. Wenn du eine Richtung siehst, kannst du andere mitziehen, ohne auf vollständige Zustimmung zu warten. Für dich zählt Fortschritt, nicht perfekte Vorbereitung."
       ],
       "strengths": [
-        "Du bringst Dinge an den Punkt, an dem sie keine Versprechen mehr sind, sondern funktionieren. Du siehst, wo ein Prozess klemmt, und schiebst ihn ohne Drama weiter, bis er läuft. Bei dir hängen Ideen nicht in der Luft — sie landen auf dem Boden."
+        "Du bringst Dinge an den Punkt, an dem sie keine Versprechen mehr sind, sondern funktionieren. Du siehst, wo ein Prozess klemmt, und schiebst ihn ohne Drama weiter, bis er läuft. Bei dir hängen Ideen nicht in der Luft - sie landen auf dem Boden."
       ],
       "watchOut": [
         "Manchmal drückst du Dinge schneller voran, als andere mithalten können. Manchmal merkst du erst im Nachhinein, dass das Tempo mehr gekostet hat als gedacht."
@@ -493,12 +494,12 @@
         "Unter Druck ziehst du dich in die innere Welt zurück, um Stimmigkeit und Sinn wiederzufinden. Je stärker äußere Erwartungen, desto schwerer fällt es dir, im vorgegebenen Tempo zu handeln."
       ],
       "relationships": [
-        "In Beziehungen bist du intensiv und authentisch, aber nicht immer vorhersehbar. Menschen spüren deine Tiefe und Sensibilität, auch wenn du wenig erklärst. Nähe entsteht, wenn du Raum hast, du selbst zu sein — ohne Anpassungsdruck."
+        "In Beziehungen bist du intensiv und authentisch, aber nicht immer vorhersehbar. Menschen spüren deine Tiefe und Sensibilität, auch wenn du wenig erklärst. Nähe entsteht, wenn du Raum hast, du selbst zu sein - ohne Anpassungsdruck."
       ]
     },
     "P15": {
       "core": [
-        "Du hast ein starkes Bedürfnis, Grenzen zu testen — deine eigenen und die von außen gesetzten. Leben wird für dich erst real, wenn Unsicherheit und Einsatz spürbar werden."
+        "Du hast ein starkes Bedürfnis, Grenzen zu testen - deine eigenen und die von außen gesetzten. Leben wird für dich erst real, wenn Unsicherheit und Einsatz spürbar werden."
       ],
       "daily": [
         "Du gehst in Situationen ohne volle Sicherheitsgarantie, weil gerade der Kontrollverlust dir Energie gibt. Du handelst schneller, als du alles analysieren kannst, und vertraust deinem Instinkt. Bewegung und Entscheidung sind für dich ein Weg, Angst zu zähmen."
@@ -524,7 +525,7 @@
         "Du bringst ganz natürlich Energie dorthin, wo zuvor Stillstand oder Schwebe herrschte. Du reagierst auf Menschen, Emotionen und die Dynamik des Moments schneller, als du es benennen kannst. Oft setzt du Bewegung in Gang, bevor andere merken, dass ihnen etwas fehlte."
       ],
       "strengths": [
-        "Du kannst die Atmosphäre beleben und Potenzial aktivieren, das geschlummert hat. Du verbindest Menschen um einen Impuls, ein Gefühl oder einen gemeinsamen Moment — auch wenn er kurz ist. Deine Präsenz sorgt dafür, dass Dinge passieren."
+        "Du kannst die Atmosphäre beleben und Potenzial aktivieren, das geschlummert hat. Du verbindest Menschen um einen Impuls, ein Gefühl oder einen gemeinsamen Moment - auch wenn er kurz ist. Deine Präsenz sorgt dafür, dass Dinge passieren."
       ],
       "watchOut": [
         "Manchmal überdeckt ständige Bewegung das Bedürfnis anzuhalten und Dinge abzuschließen. Wenn die Energie sinkt, kannst du Leere oder Ungeduld spüren."

@@ -48,8 +48,9 @@
       "line2": "Percebe como os teus pontos fortes - e pontos cegos - se traduzem na forma como ages.",
       "line3": "Insight sobre como reages sob pressão e o que te ajuda a manter o equilíbrio nas relações."
     },
-    "cta": "Ver resultados completos",
-    "note": "$1 • pagamento único • reembolso em 7 dias — sem perguntas",
+    "cta": "Ver resultados completos por 1 $",
+    "note": "Pagamento único · Sem subscrição",
+    "stripeNote": "Pagamento seguro via Stripe",
     "loading": "Redirecionando para pagamento seguro...",
     "footer": "TMJ • tellmejoe."
   },
@@ -90,7 +91,7 @@
       "title": "Traços de personalidade",
       "show": "Mostrar detalhes dos traços",
       "hide": "Ocultar detalhes dos traços",
-      "note": "Baseado no modelo Big Five — cinco traços fundamentais de personalidade.",
+      "note": "Baseado no modelo Big Five - cinco traços fundamentais de personalidade.",
       "topTrait": "O teu traço mais forte",
       "summary": "O traço que mais se destaca em ti é {trait}.",
       "levels": {
@@ -99,7 +100,7 @@
         "high": "Alto"
       }
     },
-    "disclaimer": "Este teste baseia-se em investigação reconhecida sobre personalidade e tem caráter informativo — não é um teste clínico.",
+    "disclaimer": "Este teste baseia-se em investigação reconhecida sobre personalidade e tem caráter informativo - não é um teste clínico.",
     "traits": {
       "E": "Extroversão",
       "O": "Abertura",
@@ -152,7 +153,7 @@
   "Types": {
     "P01": {
       "name": "Pensador",
-      "desc": "Pensa de forma intensa e à sua maneira — age em ondas, guiado por um impulso interno."
+      "desc": "Pensa de forma intensa e à sua maneira - age em ondas, guiado por um impulso interno."
     },
     "P02": {
       "name": "Explorador",
@@ -188,7 +189,7 @@
     },
     "P10": {
       "name": "Prático",
-      "desc": "Pensa através da ação — sente-se melhor no concreto."
+      "desc": "Pensa através da ação - sente-se melhor no concreto."
     },
     "P11": {
       "name": "Analista",
@@ -221,7 +222,7 @@
         "O teu pensamento é intenso e autónomo, muitas vezes desligado das expectativas à tua volta. Guias-te pelos teus impulsos e por uma lógica interna, mesmo que seja difícil explicá-la."
       ],
       "daily": [
-        "Ages por ondas — consegues estar muito envolvido/a e, de repente, recuar. Não te prendes a esquemas fixos; reages ao que, naquele momento, prende a tua atenção. Decides conforme o instante, o humor ou um impulso interno."
+        "Ages por ondas - consegues estar muito envolvido/a e, de repente, recuar. Não te prendes a esquemas fixos; reages ao que, naquele momento, prende a tua atenção. Decides conforme o instante, o humor ou um impulso interno."
       ],
       "strengths": [
         "Tens coragem para pensar e reagir de forma diferente da maioria. Reparas em coisas que escapam aos outros precisamente porque não filtras o mundo por normas e expectativas. A tua autenticidade pode ser crua, mas é real."
@@ -393,12 +394,12 @@
         "Sob pressão, reages por impulso, focando-te numa solução imediata. Só mais tarde vem o momento de parar e avaliar."
       ],
       "relationships": [
-        "Nas relações, falas de forma direta, sem rodeios. As pessoas sabem o que esperar de ti — o que pode ser um alívio ou um desafio. Raramente deixas coisas por dizer."
+        "Nas relações, falas de forma direta, sem rodeios. As pessoas sabem o que esperar de ti - o que pode ser um alívio ou um desafio. Raramente deixas coisas por dizer."
       ]
     },
     "P10": {
       "core": [
-        "Sentes-te melhor quando tens contacto direto com o que é real e tangível. Em ti, pensar não existe separado de agir — uma coisa resulta naturalmente da outra."
+        "Sentes-te melhor quando tens contacto direto com o que é real e tangível. Em ti, pensar não existe separado de agir - uma coisa resulta naturalmente da outra."
       ],
       "daily": [
         "Entras nas situações sem preparação excessiva, aprendendo em movimento. Testas as coisas na prática em vez de as ponderares demasiado, porque a experiência dá-te mais informação. A ação organiza os teus pensamentos."
@@ -444,7 +445,7 @@
         "Juntas pessoas e ações num movimento coerente, mesmo quando as condições não são ideais. Quando vês direção, consegues puxar os outros sem esperar acordo total. Para ti conta o progresso, não a preparação perfeita."
       ],
       "strengths": [
-        "Consegues levar as coisas até ao ponto em que deixam de ser promessa e começam a funcionar. Vês onde o processo emperra e, sem dramas, empurras até arrancar. Contigo, as ideias não ficam no ar — pousam no chão."
+        "Consegues levar as coisas até ao ponto em que deixam de ser promessa e começam a funcionar. Vês onde o processo emperra e, sem dramas, empurras até arrancar. Contigo, as ideias não ficam no ar - pousam no chão."
       ],
       "watchOut": [
         "Às vezes empurras as coisas mais depressa do que os outros conseguem acompanhar. Por vezes só depois notas que o ritmo custou mais do que esperavas."
@@ -498,7 +499,7 @@
     },
     "P15": {
       "core": [
-        "Tens uma forte necessidade de testar limites — os teus e os impostos pelo ambiente. A vida torna-se real para ti quando surge incerteza e há algo em jogo."
+        "Tens uma forte necessidade de testar limites - os teus e os impostos pelo ambiente. A vida torna-se real para ti quando surge incerteza e há algo em jogo."
       ],
       "daily": [
         "Entras em situações sem garantia total de segurança, porque é precisamente a falta de controlo que te dá energia. Ages mais depressa do que consegues analisar tudo, confiando no teu instinto. Movimento e decisão são a tua forma de domesticar o medo."

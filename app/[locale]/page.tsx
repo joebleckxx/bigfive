@@ -5,6 +5,9 @@ import { Link } from "@/navigation";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import LegalFooter from "@/app/components/ui/legal-footer";
 
+export const CTA_GRADIENT =
+  "bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-400";
+
 export default function Page() {
   const t = useTranslations("Home");
   const locale = useLocale();
@@ -108,11 +111,14 @@ export default function Page() {
         <div className="mt-8">
           <Link
             href="/test"
-            className="relative inline-flex w-full items-center justify-center rounded-3xl px-6 py-4 text-base font-semibold text-white
-              bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
-              shadow-[0_20px_60px_rgba(99,102,241,0.35)]
-              transition active:scale-[0.98]
-              focus:outline-none focus:ring-4 focus:ring-indigo-400/30"
+            className={[
+              "relative inline-flex w-full items-center justify-center rounded-3xl px-6 py-4 text-base font-semibold text-white",
+              CTA_GRADIENT,
+              "shadow-[0_20px_60px_rgba(99,102,241,0.35)]",
+              "transition active:scale-[0.98]",
+              "focus:outline-none focus:ring-4 focus:ring-indigo-400/30",
+              "cursor-pointer",
+            ].join(" ")}
           >
             {t("cta")} →
           </Link>

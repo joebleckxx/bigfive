@@ -21,7 +21,7 @@ const JOE_RESULTS = [
   "This is just a snapshot. Use it gently.",
   "Take what’s useful. Leave the rest.",
   "A result, not a rule.",
-  "Just a perspective — not the whole story.",
+  "Just a perspective - not the whole story.",
   "This is one way of seeing it."
 ];
 
@@ -766,7 +766,7 @@ export default function ResultPage() {
               className="inline-flex flex-1 min-w-0 items-center justify-center gap-2 rounded-3xl
                 px-6 py-2.5 text-base font-semibold
                 text-white/90
-                bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500
+                bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-400
                 shadow-[0_10px_30px_rgba(99,102,241,0.25)]
                 hover:brightness-105
                 active:scale-[0.99]

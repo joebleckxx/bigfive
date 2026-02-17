@@ -384,7 +384,7 @@ export default function TestPage() {
         </div>
 
         <div className="relative z-10">
-          <div className="rounded-3xl border border-white/10 bg-white/5
+          <div className="rounded-3xl border border-white/10 bg-white/10
                           px-4 pt-4 pb-5
                           shadow-xl backdrop-blur-2xl
                           sm:px-6 sm:pt-6 sm:pb-7">
