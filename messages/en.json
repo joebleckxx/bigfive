@@ -97,7 +97,7 @@
       "title": "Personality traits",
       "show": "Show personality traits details",
       "hide": "Hide personality traits details",
-      "note": "Based on the Big Five model — five core personality traits.",
+      "note": "Based on the Big Five model - five core personality traits.",
       "topTrait": "Your strongest trait",
       "summary": "Your strongest trait is {trait}.",
       "levels": {
@@ -107,7 +107,7 @@
       }
     },
 
-    "disclaimer": "This test is based on established personality research and is for informational purposes only — it is not a clinical assessment.",
+    "disclaimer": "This test is based on established personality research and is for informational purposes only - it is not a clinical assessment.",
 
     "traits": {
       "E": "Extraversion",
@@ -189,7 +189,7 @@
   "Profiles": {
     "P01": {
       "core": ["Your thinking is intense and autonomous, often detached from other people’s expectations. You follow your own impulses and inner logic, even when it’s hard to explain to others."],
-      "daily": ["You move in waves — you can be deeply engaged and then suddenly withdraw. You don’t stick to fixed patterns; you respond to whatever captures your attention right now. You make decisions based on the moment, your mood, or an inner impulse."],
+      "daily": ["You move in waves - you can be deeply engaged and then suddenly withdraw. You don’t stick to fixed patterns; you respond to whatever captures your attention right now. You make decisions based on the moment, your mood, or an inner impulse."],
       "strengths": ["You have the courage to think and respond differently than most. You notice what others miss precisely because you don’t filter the world through norms and expectations. Your authenticity can be raw, but it’s real."],
       "watchOut": ["A lack of structure can make it hard to close loops or stay on one course for long. Strong emotions can take the wheel before you’ve had time to name them."],
       "underPressure": ["Under pressure you react intensely and quickly, often before things settle. It’s hard to create emotional distance because tension hits your body and thoughts immediately."],
@@ -205,7 +205,7 @@
     },
     "P03": {
       "core": ["You’re guided by a strong inner sense of meaning and coherence. If something doesn’t resonate with your values, you feel it quickly."],
-      "daily": ["You engage deeply, but only where you see significance — not just a goal. When a situation drifts away from what matters to you, you withdraw without big declarations. You’d rather lose pace than lose authenticity."],
+      "daily": ["You engage deeply, but only where you see significance - not just a goal. When a situation drifts away from what matters to you, you withdraw without big declarations. You’d rather lose pace than lose authenticity."],
       "strengths": ["You can bring depth even to simple actions and conversations. You offer a perspective grounded in meaning, not only effectiveness. For others, you can be a reference point even if you never say it out loud."],
       "watchOut": ["Disappointment can hit harder than you show on the outside. When reality diverges too far from ideals, tension rises quickly."],
       "underPressure": ["Under pressure you react emotionally and intensely on the inside. You need time to separate what you feel from what is actually happening."],
@@ -257,10 +257,10 @@
       "strengths": ["You can keep a clear head even when chaos is happening around you. You bring clarity and concreteness where others start to get lost. Your directness often shortens the road to a decision."],
       "watchOut": ["Your honesty can be perceived as harshness even when you don’t mean it. Emotions sometimes arrive faster than reflection."],
       "underPressure": ["Under pressure you respond impulsively, focused on an immediate fix. Only later comes the moment to pause and evaluate."],
-      "relationships": ["In relationships you speak plainly and don’t wrap things in soft words. People know what to expect from you — which can be a relief or a challenge. You rarely leave things unsaid."]
+      "relationships": ["In relationships you speak plainly and don’t wrap things in soft words. People know what to expect from you - which can be a relief or a challenge. You rarely leave things unsaid."]
     },
     "P10": {
-      "core": ["You feel best when you have direct contact with what’s real and tangible. For you, thinking doesn’t exist separately from doing — one naturally follows the other."],
+      "core": ["You feel best when you have direct contact with what’s real and tangible. For you, thinking doesn’t exist separately from doing - one naturally follows the other."],
       "daily": ["You enter situations without excessive preparation, learning as you move. You test things in practice rather than debating them for long, because experience gives you the most information. Action organizes your thoughts."],
       "strengths": ["You can quickly turn ideas into concrete steps without unnecessary delay. You do well when conditions change and not everything is clear. Around you, things start happening."],
       "watchOut": ["Sometimes you move forward before checking where it leads. Pausing and reflecting doesn’t always arrive at the right time."],
@@ -278,7 +278,7 @@
     "P12": {
       "core": ["You have a strong need to bring things to the point where they truly start working. What satisfies you isn’t the idea itself, but the moment it stops being theory."],
       "daily": ["You connect people and actions into one coherent movement even when conditions aren’t ideal. When you see direction, you can pull others along without waiting for full agreement. Progress matters more to you than perfect preparation."],
-      "strengths": ["You can bring things to the moment they stop being a promise and start working. You see where a process gets stuck and push it forward without drama until it moves. Around you, ideas don’t hang in the air — they land on the ground."],
+      "strengths": ["You can bring things to the moment they stop being a promise and start working. You see where a process gets stuck and push it forward without drama until it moves. Around you, ideas don’t hang in the air - they land on the ground."],
       "watchOut": ["Sometimes you push forward faster than others can keep up. Only afterward do you notice the pace cost more than you assumed."],
       "underPressure": ["Under pressure you focus even harder on execution, narrowing your field of view. Effectiveness helps you survive tension, but it can disconnect you from warning signals."],
       "relationships": ["In relationships you’re someone people can count on when something must be delivered to the end. People feel things move forward around you, even if it can be intense. You often take responsibility before others even name it."]
@@ -300,7 +300,7 @@
       "relationships": ["In relationships you’re intense and authentic but not always predictable. People can feel your depth and sensitivity even when you don’t explain much. Closeness emerges when you have space to be yourself, without the pressure to fit in."]
     },
     "P15": {
-      "core": ["You have a strong need to test boundaries — your own and those imposed by others. Life starts to feel real when uncertainty and stakes appear."],
+      "core": ["You have a strong need to test boundaries - your own and those imposed by others. Life starts to feel real when uncertainty and stakes appear."],
       "daily": ["You step into situations without full guarantees of safety, because the lack of control gives you energy. You move faster than you can analyze everything, trusting your instincts. Movement and decision are your way of mastering fear."],
       "strengths": ["You can stay courageous where others retreat or stop. You do well in breakthrough moments, when a step into the unknown is required. Your willingness to take risks often opens new paths."],
       "watchOut": ["Sometimes intensity blocks your view of consequences that show up later. At times you confuse tension with direction."],
@@ -310,7 +310,7 @@
     "P16": {
       "core": ["You have a strong need to move people and situations rather than observe passively. Life feels meaningful when things start reacting, shifting, and responding to your presence."],
       "daily": ["You naturally bring energy where there used to be stagnation or pause. You respond to people, emotions, and moment-to-moment dynamics faster than you can name it. You often initiate movement before others even realize what was missing."],
-      "strengths": ["You can brighten the atmosphere and activate potential that was asleep. You connect people around an impulse, an emotion, or a shared moment — even if it’s brief. Your presence makes things start happening."],
+      "strengths": ["You can brighten the atmosphere and activate potential that was asleep. You connect people around an impulse, an emotion, or a shared moment - even if it’s brief. Your presence makes things start happening."],
       "watchOut": ["Sometimes constant movement covers the need to pause and close loops. When your energy drops, you may feel emptiness or impatience."],
       "underPressure": ["Under pressure you look for even more stimulation and contact instead of slowing down. Movement helps you discharge tension, but it can also postpone reflection."],
       "relationships": ["In relationships you’re intense, vivid, and easy to read. People respond quickly to your energy, even if they can’t always keep up. Closeness emerges where there’s room for spontaneity, change, and emotion."]

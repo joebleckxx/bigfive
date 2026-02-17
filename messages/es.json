@@ -100,7 +100,7 @@
         "high": "Alto"
       }
     },
-    "disclaimer": "Este test se basa en investigación reconocida sobre personalidad y es informativo — no es un test clínico.",
+    "disclaimer": "Este test se basa en investigación reconocida sobre personalidad y es informativo - no es un test clínico.",
     "traits": {
       "E": "Extraversión",
       "O": "Apertura",
@@ -153,7 +153,7 @@
   "Types": {
     "P01": {
       "name": "Pensador",
-      "desc": "Piensa de forma intensa y a su manera — actúa en oleadas, guiado por un impulso interno."
+      "desc": "Piensa de forma intensa y a su manera - actúa en oleadas, guiado por un impulso interno."
     },
     "P02": {
       "name": "Explorador",
@@ -189,7 +189,7 @@
     },
     "P10": {
       "name": "Práctico",
-      "desc": "Piensa a través de la acción — se siente mejor en lo concreto."
+      "desc": "Piensa a través de la acción - se siente mejor en lo concreto."
     },
     "P11": {
       "name": "Analista",
