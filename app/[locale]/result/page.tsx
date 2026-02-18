@@ -603,6 +603,67 @@ export default function ResultPage() {
     },
   ] as const;
 
+  // --- Card text formatting (Option #1): split into sentences + emphasize last ---
+  function splitIntoSentences(input: string) {
+    const text = (input || "").trim();
+    if (!text) return [];
+
+    // split on sentence end + space (keeps it simple & safe for short copy)
+    const parts = text
+      .replace(/\s+/g, " ")
+      .split(/(?<=[.!?])\s+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+    return parts;
+  }
+
+  function renderCardLines(lines: string[]) {
+    const arr = (lines || []).map((s) => (s || "").trim()).filter(Boolean);
+    if (arr.length === 0) return null;
+
+    // Case 1: mamy 1 długi tekst -> oddziel tylko ostatnie zdanie
+    if (arr.length === 1) {
+      const sentences = splitIntoSentences(arr[0]);
+      if (sentences.length <= 1) {
+        return (
+          <div className="mt-2 text-sm leading-relaxed">
+            <p className="whitespace-normal text-white/70">{arr[0]}</p>
+          </div>
+        );
+      }
+
+      const body = sentences.slice(0, -1).join(" ");
+      const last = sentences[sentences.length - 1];
+
+      return (
+        <div className="mt-2 text-sm leading-relaxed">
+          <p className="whitespace-normal text-white/70">{body}</p>
+          <p className="mt-3 whitespace-normal text-white/85 font-medium">{last}</p>
+        </div>
+      );
+    }
+
+    // Case 2: mamy kilka linijek -> ostatnia linijka jako puenta
+    const body = arr.slice(0, -1).join(" ");
+    const last = arr[arr.length - 1];
+
+    return (
+      <div className="mt-2 text-sm leading-relaxed">
+        {body && (
+          <p className="whitespace-normal text-white/70">
+            {body}
+          </p>
+        )}
+        {last && (
+          <p className="mt-4 whitespace-normal text-white/85 font-medium">
+            {last}
+          </p>
+        )}
+      </div>
+    );
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 py-6 text-white sm:px-6 sm:py-10">
       <div className="pointer-events-none absolute inset-0">
@@ -727,7 +788,7 @@ export default function ResultPage() {
 
         {/* ✅ Joe line */}
           <p className="mt-5 text-xs text-white/50 italic">
-            {joeLine} <span className="text-white/45">— Joe</span>
+            {joeLine} <span className="text-white/45">- Joe</span>
           </p>
 
         {/* ✅ Profile sections (6) */}
@@ -743,17 +804,7 @@ export default function ResultPage() {
                 </span>
                 <span>{s.title}</span>
               </div>
-
-              <div className="mt-2 space-y-2 text-[0.95rem] leading-relaxed text-white/80">
-                {s.lines.map((line, i) => (
-                  <p
-                    key={i}
-                    className="whitespace-normal"
-                  >
-                    {line}
-                  </p>
-                ))}
-              </div>
+              {renderCardLines(s.lines)}
             </div>
           ))}
         </div>
