@@ -44,23 +44,29 @@ function CheckIcon() {
 function PremiumRingLoader() {
   return (
     <div className="relative h-14 w-14">
-      {/* soft glow */}
-      <div className="absolute inset-0 rounded-full blur-xl opacity-70 bg-[conic-gradient(from_180deg,#818CF8,#A78BFA,#F472B6,#60A5FA,#818CF8)]" />
-  
-      {/* ring */}
+      {/* rotating arc */}
       <div
         className={[
           "absolute inset-0 rounded-full",
-          "animate-spin",
-          // ring thickness via mask
-          "[mask:radial-gradient(farthest-side,transparent_calc(100%-6px),#000_calc(100%-5px))]",
-          "bg-[conic-gradient(from_180deg,#818CF8,#A78BFA,#F472B6,#60A5FA,#818CF8)]",
+          "animate-[spin_1.1s_linear_infinite]",
+          // thin line only
+          "[mask:radial-gradient(farthest-side,transparent_calc(100%-3px),#000_calc(100%-2px))]",
+          // short arc, not full ring
+          "bg-[conic-gradient(from_0deg,transparent_0deg,transparent_220deg,#6366F1_260deg,#8B5CF6_300deg,#EC4899_330deg,transparent_360deg)]",
           "opacity-95",
         ].join(" ")}
       />
 
-      {/* inner subtle glass */}
-      <div className="absolute inset-[10px] rounded-full bg-white/5 backdrop-blur-sm border border-white/10" />
+      {/* subtle glow */}
+      <div
+        className={[
+          "absolute inset-0 rounded-full blur-lg",
+          "animate-[spin_1.1s_linear_infinite]",
+          "[mask:radial-gradient(farthest-side,transparent_calc(100%-4px),#000_calc(100%-3px))]",
+          "bg-[conic-gradient(from_0deg,transparent_0deg,transparent_220deg,#6366F1_260deg,#8B5CF6_300deg,#EC4899_330deg,transparent_360deg)]",
+          "opacity-40",
+        ].join(" ")}
+      />
     </div>
   );
 }
@@ -87,6 +93,19 @@ export default function PayPage() {
       router.replace("/test");
     }
   }, [router]);
+
+  // Guard: browser back from external checkout (Stripe)
+  useEffect(() => {
+    const onPageShow = (e: PageTransitionEvent) => {
+      // triggered when restoring from bfcache (Safari / iOS, browser back)
+      if (e.persisted) {
+        window.location.replace(`/${locale}/result`);
+      }
+    };
+
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, [locale]);
 
   async function handleUnlock() {
     // ✅ Preview/test mode: payments disabled → unlock locally (no Stripe)

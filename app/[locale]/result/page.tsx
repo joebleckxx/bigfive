@@ -798,13 +798,12 @@ export default function ResultPage() {
               key={s.key}
               className="rounded-3xl bg-white/5 px-4 py-5 shadow-xl sm:px-5 sm:py-6"
             >
-              <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-white/50 whitespace-normal">
+              <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-white/60 whitespace-normal">
                 <span className="inline-flex items-center justify-center text-indigo-300/70 -translate-y-[0.5px]">
                   {s.icon}
                 </span>
                 <span>{s.title}</span>
               </div>
-
               {renderCardLines(s.lines)}
             </div>
           ))}
