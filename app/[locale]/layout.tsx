@@ -28,7 +28,7 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   if (!locales.includes(locale as Locale)) notFound();
-  setRequestLocale(locale);
+  setRequestLocale(locale as Locale);
 
   const messages = MESSAGES[locale as Locale];
 

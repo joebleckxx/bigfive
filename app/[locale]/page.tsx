@@ -1,16 +1,19 @@
-"use client";
-
-import { useLocale, useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/navigation";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import LegalFooter from "@/app/components/ui/legal-footer";
+import Image from "next/image";
 
 export const CTA_GRADIENT =
   "bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-400";
 
-export default function Page() {
-  const t = useTranslations("Home");
-  const locale = useLocale();
+export default async function Page({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const locale = params.locale;
+  const t = await getTranslations({ locale, namespace: "Home" });
 
   return (
     <main
@@ -128,13 +131,14 @@ export default function Page() {
         {/* COLLAGE */}
         <div className="mt-8 flex justify-center">
           <div className="relative w-full max-w-md">
-            <img
-              src="/graphics/avatars-collage-compact-beta.png"
+            <Image
+              src="/graphics/avatars-collage-compact-beta.webp"
               alt=""
               width={900}
               height={420}
+              priority
+              sizes="(max-width: 640px) 100vw, 448px"
               className="w-full select-none [filter:drop-shadow(0_0_26px_rgba(0,0,0,0.5))]"
-              loading="eager"
             />
           </div>
         </div>
