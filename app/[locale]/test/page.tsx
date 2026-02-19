@@ -368,22 +368,19 @@ export default function TestPage() {
         </div>
 
         {/* Progress */}
-        <div className="mb-6 h-[6px] w-full rounded-full bg-white/10">
-          <div
-            className="h-[6px] rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 transition-[width] duration-150"
-            style={{
-              width: `${progress}%`,
-              minWidth: index === 0 ? "24px" : undefined
-            }}
-          />
+        <div className="mb-8">
+          <div className="h-[6px] w-full rounded-full bg-white/10">
+            <div
+              className="h-[6px] rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 transition-[width] duration-150"
+              style={{
+                width: `${progress}%`,
+                minWidth: index === 0 ? "24px" : undefined
+              }}
+            />
+          </div>
         </div>
 
-        {/* Joe microcopy */}
-        <div className="mb-6 mt-1 text-xs text-white/50 italic">
-          {t("tip")}
-        </div>
-
-        <div className="relative z-10">
+        <div className="relative z-10 mt-8">
           <div className="rounded-3xl border border-white/10 bg-white/10
                           px-4 pt-4 pb-5
                           shadow-xl backdrop-blur-2xl
@@ -498,6 +495,10 @@ export default function TestPage() {
                 );
               })}
             </div>
+          </div>
+            {/* Joe microcopy */}
+          <div className="mt-6 mb-6 text-xs text-white/50 italic">
+            {t("tip")}           
           </div>
         </div>
         <LegalFooter />
