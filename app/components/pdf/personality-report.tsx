@@ -78,7 +78,7 @@ const C = {
   barBg: "#1F212A",
   gradStart: "#6366F1",
   gradMid: "#8B5CF6",
-  gradEnd: "#EC4899"
+  gradEnd: "#F472B6"
 };
 
 const SECTION_ICON_SIZE = 18;
@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
 
   title: { fontSize: 24, fontWeight: 700, marginBottom: 6, color: C.title },
   titleAccent: { color: C.titleAccentStart },
+  titleAccentEnd: { color: "#F9A8D4" },
   sub: { fontSize: 10, color: C.text65, marginBottom: 16 },
 
   card: {
@@ -375,12 +376,12 @@ function PageBackground() {
     <View style={styles.pageBg} fixed>
       <Svg width="100%" height="100%" viewBox="0 0 595 842">
         <Defs>
-          <LinearGradient id="pageFade" x1="0" y1="0" x2="0" y2="1">
-            <Stop offset="0%" stopColor="#FFFFFF" stopOpacity={0.06} />
-            <Stop offset="60%" stopColor="#FFFFFF" stopOpacity={0} />
+          <LinearGradient id="pageHorizontalBg" x1="0" y1="0" x2="1" y2="0">
+            <Stop offset="0%" stopColor="#171922" />
+            <Stop offset="100%" stopColor="#000000" />
           </LinearGradient>
         </Defs>
-        <Rect x="0" y="0" width="595" height="300" fill="url(#pageFade)" />
+        <Rect x="0" y="0" width="595" height="842" fill="url(#pageHorizontalBg)" />
       </Svg>
     </View>
   );
@@ -394,10 +395,6 @@ function Header({ data }: { data: PdfReportData }) {
         <Text style={styles.brandTitle}>{data.brandTitle}</Text>
         <Text style={styles.brandSubtitle}>{data.brandSubtitle}</Text>
       </View>
-
-      <Text style={styles.rightMeta}>
-        {data.generatedLabel} {data.dateISO}
-      </Text>
     </View>
   );
 }
@@ -434,6 +431,10 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
     (s) => Array.isArray(s.lines) && s.lines.length > 0
   );
 
+  const accentParts = data.titleAccent.trim().split(/\s+/).filter(Boolean);
+  const accentLastWord = accentParts.length > 1 ? accentParts[accentParts.length - 1] : "";
+  const accentStart = accentParts.length > 1 ? accentParts.slice(0, -1).join(" ") : data.titleAccent;
+
   return (
     <Document>
       {/* PAGE 1+: header + hero + profile + 6 sections (wrap across pages) */}
@@ -443,7 +444,13 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
 
         <Text style={styles.title}>
           {data.titleBefore}{" "}
-          <Text style={styles.titleAccent}>{data.titleAccent}</Text>
+          <Text style={styles.titleAccent}>
+            {accentStart}
+            {accentLastWord ? " " : ""}
+            {accentLastWord ? (
+              <Text style={styles.titleAccentEnd}>{accentLastWord}</Text>
+            ) : null}
+          </Text>
         </Text>
         <Text style={styles.sub}>{data.subtitle}</Text>
 
