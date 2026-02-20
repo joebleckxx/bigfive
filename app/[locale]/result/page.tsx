@@ -294,9 +294,54 @@ export default function ResultPage() {
         tt(`${code}.desc`)
       );
 
-      const avatarUrl = (() => {
+      const avatarUrl = await (async () => {
         try {
-          return new URL(avatarSrc, window.location.origin).toString();
+          const absoluteUrl = new URL(avatarSrc, window.location.origin).toString();
+          if (!absoluteUrl.toLowerCase().endsWith(".svg")) return absoluteUrl;
+
+          const svgRes = await fetch(absoluteUrl);
+          if (!svgRes.ok) return absoluteUrl;
+
+          const svgRaw = await svgRes.text();
+          const svgWhite = svgRaw
+            .replace(/currentColor/gi, "#FFFFFF")
+            .replace(/stroke=(['"])black\1/gi, 'stroke="#FFFFFF"')
+            .replace(/fill=(['"])black\1/gi, 'fill="#FFFFFF"')
+            .replace(/stroke=(['"])#000(?:000)?\1/gi, 'stroke="#FFFFFF"')
+            .replace(/fill=(['"])#000(?:000)?\1/gi, 'fill="#FFFFFF"')
+            .replace(/<svg\b/i, '<svg color="#FFFFFF" ');
+
+          const svgBlob = new Blob([svgWhite], { type: "image/svg+xml;charset=utf-8" });
+          const svgBlobUrl = URL.createObjectURL(svgBlob);
+
+          try {
+            const pngDataUrl = await new Promise<string | undefined>((resolve) => {
+              const img = new window.Image();
+              img.onload = () => {
+                try {
+                  const canvas = document.createElement("canvas");
+                  canvas.width = 128;
+                  canvas.height = 128;
+                  const ctx = canvas.getContext("2d");
+                  if (!ctx) {
+                    resolve(undefined);
+                    return;
+                  }
+                  ctx.clearRect(0, 0, canvas.width, canvas.height);
+                  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                  resolve(canvas.toDataURL("image/png"));
+                } catch {
+                  resolve(undefined);
+                }
+              };
+              img.onerror = () => resolve(undefined);
+              img.src = svgBlobUrl;
+            });
+
+            return pngDataUrl ?? absoluteUrl;
+          } finally {
+            URL.revokeObjectURL(svgBlobUrl);
+          }
         } catch {
           return undefined;
         }

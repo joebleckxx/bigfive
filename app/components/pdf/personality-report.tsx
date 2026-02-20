@@ -146,7 +146,19 @@ const styles = StyleSheet.create({
   },
 
   profileRow: { flexDirection: "row", alignItems: "center" },
-  avatar: { width: 64, height: 64, borderRadius: 999, marginRight: 14 },
+  avatarWrap: {
+    width: 64,
+    height: 64,
+    borderRadius: 999,
+    marginRight: 14,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#171922",
+    borderWidth: 1,
+    borderColor: C.border
+  },
+  avatarIcon: { width: 30, height: 30, objectFit: "contain" },
+  avatarFallback: { fontSize: 20, fontWeight: 700, color: C.text90 },
   typeLabel: {
     fontSize: 8.5,
     color: C.text55,
@@ -400,7 +412,7 @@ function Footer({ data }: { data: PdfReportData }) {
 
 export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
   const levels = data.bigFiveLevels;
-  const showAvatar = false;
+  const showAvatar = true;
 
   const bigFiveOrder: Trait[] = ["S", "E", "O", "C", "A", "N"];
   const bigFiveMap = new Map(data.bigFive.map((row) => [row.key, row]));
@@ -439,16 +451,15 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
         <View style={styles.card}>
           <View style={styles.profileRow}>
             {showAvatar && (
-              data.avatarUrl ? (
-                <Image style={styles.avatar} src={data.avatarUrl} />
-              ) : (
-                <View
-                  style={[
-                    styles.avatar,
-                    { backgroundColor: C.cardBg, borderWidth: 1, borderColor: C.border }
-                  ]}
-                />
-              )
+              <View style={styles.avatarWrap}>
+                {data.avatarUrl ? (
+                  <Image style={styles.avatarIcon} src={data.avatarUrl} />
+                ) : (
+                  <Text style={styles.avatarFallback}>
+                    {data.typeName?.charAt(0) || "?"}
+                  </Text>
+                )}
+              </View>
             )}
 
             <View style={{ flexGrow: 1 }}>
