@@ -5,6 +5,7 @@ import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { calculateResult } from "@/lib/scoring";
+import { AVATARS } from "@/lib/avatars";
 import { toast } from "sonner";
 import LegalFooter from "@/app/components/ui/legal-footer";
 
@@ -42,14 +43,6 @@ const ANSWERS_KEY = "personality_answers_v1";
 const PAID_KEY = "personality_paid_v1";
 const PAID_AT_KEY = "personality_paid_at_v1";
 const GRACE_MS = 30 * 60 * 1000; // 30 minutes
-
-/**
- * Avatary: P01 → 0, P02 → 1, ..., P16 → 15
- */
-const AVATARS = Array.from({ length: 16 }, (_, i) => {
-  const id = String(i + 1).padStart(2, "0");
-  return `/avatars/placeholder/avatar-${id}.png`;
-});
 
 const TYPE_CODES = Array.from({ length: 16 }, (_, i) =>
   `P${String(i + 1).padStart(2, "0")}`
@@ -127,7 +120,8 @@ export default function ResultPage() {
   const [loaded, setLoaded] = useState(false);
   const [showBigFive, setShowBigFive] = useState(false);
   const [downloading, setDownloading] = useState(false);
-  const showAvatar = false;
+  const [avatarError, setAvatarError] = useState(false);
+  const showAvatar = true;
 
   // ✅ menu ⋯ (jak na /test)
   const [menuOpen, setMenuOpen] = useState(false);
@@ -250,6 +244,10 @@ export default function ResultPage() {
     if (!data) return AVATARS[0];
     return AVATARS[avatarIndexFromTypeCode(data.typeCode)];
   }, [data]);
+
+  useEffect(() => {
+    setAvatarError(false);
+  }, [avatarSrc]);
 
   // ✅ Profiles (6 sekcji) — potrzebne do PDF
   const profile = useMemo(() => {
@@ -762,13 +760,29 @@ export default function ResultPage() {
               <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
                 {showAvatar && (
                   <div className="relative shrink-0">
-                    <div className="pointer-events-none absolute -inset-4 rounded-full bg-[radial-gradient(circle,_rgba(14,18,32,0.95)_30%,_rgba(58,76,125,0.85)_55%,_rgba(122,141,190,0.25)_78%)] blur-3xl" />
+                    <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
                     <div
                       role="img"
                       aria-label={typeName}
-                      className="relative z-10 h-28 w-28 shrink-0 overflow-hidden rounded-full bg-center bg-cover bg-no-repeat"
-                      style={{ backgroundImage: `url(${avatarSrc})` }}
-                    />
+                      className="relative z-10 flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-black/25 ring-1 ring-white/10"
+                    >
+                      {avatarError ? (
+                        <div
+                          aria-hidden="true"
+                          className="text-2xl font-semibold text-white"
+                        >
+                          {typeName?.charAt(0) || "?"}
+                        </div>
+                      ) : (
+                        <img
+                          src={avatarSrc}
+                          alt=""
+                          className="h-11 w-11 object-contain"
+                          style={{ filter: "brightness(0) invert(1)" }}
+                          onError={() => setAvatarError(true)}
+                        />
+                      )}
+                    </div>
                   </div>
                 )}
 
