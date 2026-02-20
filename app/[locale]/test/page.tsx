@@ -382,7 +382,10 @@ export default function TestPage() {
 
         {/* Test */}
         <div className="relative z-10 mt-8">
-          <div className="rounded-3xl bg-white/2 px-4 pt-4 pb-5 shadow-xl backdrop-blur-2xl sm:px-6 sm:pt-6 sm:pb-7">
+          <div className="rounded-3xl border border-white/10 bg-white/10
+                          px-4 pt-4 pb-5
+                          shadow-xl backdrop-blur-2xl
+                          sm:px-6 sm:pt-6 sm:pb-7">
             <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
               {orderReady ? q(currentQuestion.id) : "\u00A0"}
             </h2>
@@ -390,6 +393,35 @@ export default function TestPage() {
               {SCALE_VALUES.map((v) => {
                 const selected = answers[index] === v;
                 const tapping = tapSelected === v;
+
+                const baseTone =
+                  v === 3
+                    ? "border-white/10 bg-white/2"
+                    : v === 2 || v === 4
+                      ? "border-white/10 bg-white/2"
+                      : "border-white/10 bg-white/2";
+
+                const toneColor =
+                  v === 3
+                    ? "rgba(255, 255, 255, 0.0675)"
+                    : v === 2 || v === 4
+                      ? "rgba(255, 255, 255, 0.04875)"
+                      : "rgba(255, 255, 255, 0.03375)";
+
+                const gradientBorderBase =
+                  "relative w-full appearance-none rounded-3xl border border-transparent px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4";
+
+                const gradientBorderStyle = {
+                  padding: "1.5px",
+                  boxSizing: "border-box",
+                  background:
+                    "linear-gradient(to right, #6366F1, #8B5CF6, #EC4899)",
+                  WebkitMask:
+                    "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  WebkitMaskComposite: "xor",
+                  mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                  maskComposite: "exclude"
+                } as const;
 
                 const onPressStart = () => {
                   if (isAdvancing) return;
@@ -409,17 +441,22 @@ export default function TestPage() {
                       aria-disabled={isAdvancing}
                       type="button"
                       className={[
-                        "relative w-full appearance-none rounded-3xl border px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4",
-                        "border-white/25 bg-black/35",
+                        gradientBorderBase,
                         isAdvancing ? "pointer-events-none cursor-not-allowed" : "",
                         "focus:outline-none focus-visible:outline-none",
                         "transition-transform duration-100 active:scale-[0.98]",
                         "[-webkit-tap-highlight-color:transparent]"
                       ].join(" ")}
+                      style={{ backgroundColor: toneColor }}
                     >
                       <span className="relative z-10 text-sm font-medium text-white/90">
                         {s(String(v))}
                       </span>
+                      <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute -inset-[1.5px] rounded-[calc(1.5rem+1.5px)]"
+                        style={gradientBorderStyle}
+                      />
                     </button>
                   );
                 }
@@ -439,14 +476,22 @@ export default function TestPage() {
                       "focus:outline-none focus-visible:outline-none",
                       "[-webkit-tap-highlight-color:transparent]",
                       "transition-[background-color,border-color,transform] duration-150 active:scale-[0.98]",
-                      "border-white/10 bg-black/25",
-                      !isAdvancing ? "md:group-hover:border-white/20 md:group-hover:bg-black/30" : "",
+                      baseTone,
+                      !isAdvancing
+                        ? "md:group-hover:border-transparent md:group-hover:bg-[var(--tone-color)]"
+                        : "",
                       isAdvancing ? "pointer-events-none cursor-not-allowed" : ""
                     ].join(" ")}
+                    style={{ ["--tone-color" as any]: toneColor }}
                   >
                     <span className="relative z-10 text-sm font-medium text-white/90">
                       {s(String(v))}
                     </span>
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute -inset-[1.5px] rounded-[calc(1.5rem+1.5px)] opacity-0 transition-opacity duration-150 md:group-hover:opacity-100"
+                      style={gradientBorderStyle}
+                    />
                   </button>
                 );
               })}
