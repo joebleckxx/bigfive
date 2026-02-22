@@ -382,7 +382,7 @@ export default function TestPage() {
 
         {/* Test */}
         <div className="relative z-10 mt-8">
-          <div className="rounded-3xl border border-white/10 bg-white/10
+          <div className="rounded-3xl border border-white/10 bg-white/5
                           px-4 pt-4 pb-5
                           shadow-xl backdrop-blur-2xl
                           sm:px-6 sm:pt-6 sm:pb-7">
@@ -394,6 +394,7 @@ export default function TestPage() {
                 const selected = answers[index] === v;
                 const tapping = tapSelected === v;
 
+                // zostawiamy Twoje delikatne tło (to samo co było), ale bez efektów
                 const baseTone =
                   v === 3
                     ? "border-white/10 bg-white/2"
@@ -401,97 +402,33 @@ export default function TestPage() {
                       ? "border-white/10 bg-white/2"
                       : "border-white/10 bg-white/2";
 
-                const toneColor =
-                  v === 3
-                    ? "rgba(255, 255, 255, 0.0675)"
-                    : v === 2 || v === 4
-                      ? "rgba(255, 255, 255, 0.04875)"
-                      : "rgba(255, 255, 255, 0.03375)";
-
-                const gradientBorderBase =
-                  "relative w-full appearance-none rounded-3xl border border-transparent px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4";
-
-                const gradientBorderStyle = {
-                  padding: "1.5px",
-                  boxSizing: "border-box",
-                  background:
-                    "linear-gradient(to right, #6366F1, #8B5CF6, #EC4899)",
-                  WebkitMask:
-                    "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                  WebkitMaskComposite: "xor",
-                  mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                  maskComposite: "exclude"
-                } as const;
-
-                const onPressStart = () => {
-                  if (isAdvancing) return;
-                  setTapSelected(v);
-                };
-                const onPressCancel = () => {
-                  if (tapSelected === v) setTapSelected(null);
-                };
-
-                if (tapping || selected) {
-                  return (
-                    <button
-                      key={v}
-                      onPointerDown={onPressStart}
-                      onPointerCancel={onPressCancel}
-                      onClick={() => handleAnswer(v)}
-                      aria-disabled={isAdvancing}
-                      type="button"
-                      className={[
-                        gradientBorderBase,
-                        isAdvancing ? "pointer-events-none cursor-not-allowed" : "",
-                        "focus:outline-none focus-visible:outline-none",
-                        "transition-transform duration-100 active:scale-[0.98]",
-                        "[-webkit-tap-highlight-color:transparent]"
-                      ].join(" ")}
-                      style={{ backgroundColor: toneColor }}
-                    >
-                      <span className="relative z-10 text-sm font-medium text-white/90">
-                        {s(String(v))}
-                      </span>
-                      <span
-                        aria-hidden="true"
-                        className="pointer-events-none absolute -inset-[1.5px] rounded-[calc(1.5rem+1.5px)]"
-                        style={gradientBorderStyle}
-                      />
-                    </button>
-                  );
-                }
-
                 return (
                   <button
                     key={v}
-                    onPointerDown={onPressStart}
-                    onPointerCancel={onPressCancel}
+                    onPointerDown={() => {
+                      if (!isAdvancing) setTapSelected(v);
+                    }}
+                    onPointerUp={() => {
+                      if (tapSelected === v) setTapSelected(null);
+                    }}
+                    onPointerCancel={() => {
+                      if (tapSelected === v) setTapSelected(null);
+                    }}
                     onClick={() => handleAnswer(v)}
                     aria-disabled={isAdvancing}
                     type="button"
                     className={[
-                      "group relative w-full rounded-3xl border px-4 py-3 text-left backdrop-blur-xl sm:px-5 sm:py-4",
-                      "appearance-none",
-                      "cursor-pointer",
+                      "w-full rounded-3xl border px-4 py-3 text-left sm:px-5 sm:py-4",
+                      "appearance-none cursor-pointer",
                       "focus:outline-none focus-visible:outline-none",
                       "[-webkit-tap-highlight-color:transparent]",
-                      "transition-[background-color,border-color,transform] duration-150 active:scale-[0.98]",
-                      baseTone,
-                      !isAdvancing
-                        ? "md:group-hover:border-transparent md:group-hover:bg-[var(--tone-color)]"
-                        : "",
+                      // ✅ TYLKO to ma się zmieniać wizualnie:
+                      selected ? "border-white/70 bg-white/5" : baseTone,
+                      tapping ? "border-white/70 bg-white/5" : "",
                       isAdvancing ? "pointer-events-none cursor-not-allowed" : ""
                     ].join(" ")}
-                    style={{ ["--tone-color" as any]: toneColor }}
                   >
-                    <span className="relative z-10 text-sm font-medium text-white/90">
-                      {s(String(v))}
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="pointer-events-none absolute -inset-[1.5px] rounded-[calc(1.5rem+1.5px)] opacity-0 transition-opacity duration-150 md:group-hover:opacity-100"
-                      style={gradientBorderStyle}
-                    />
+                    <span className="text-sm font-medium text-white/90">{s(String(v))}</span>
                   </button>
                 );
               })}
