@@ -9,6 +9,7 @@ import {
   questionsFromOrder
 } from "@/lib/personality";
 import LegalFooter from "@/app/components/ui/legal-footer";
+import TMJBackground from "@/app/components/ui/background";
 
 const RESULT_KEY = "personality_result_v1";
 const ANSWERS_KEY = "personality_answers_v1";
@@ -283,11 +284,11 @@ export default function TestPage() {
     setIsAdvancing(true);
     setTapSelected(v);
 
-    window.setTimeout(() => {
-      commitAnswer(v);
+    commitAnswer(v);
+    requestAnimationFrame(() => {
       setTapSelected(null);
       setIsAdvancing(false);
-    }, 80);
+    });
   }
 
   function goBack() {
@@ -299,13 +300,10 @@ export default function TestPage() {
   if (!currentQuestion) return null;
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-4 py-6 text-white sm:px-6 sm:py-10">
-      {/* tło jak wcześniej */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
-        <div className="absolute bottom-0 -right-40 h-[360px] w-[360px] rounded-full bg-pink-500/20 blur-[120px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] via-transparent to-transparent" />
-      </div>
+    <main
+      className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 sm:px-5 py-10 text-white"
+    >
+      <TMJBackground />
 
       <div className="relative mx-auto max-w-xl">
         {/* Topbar */}
