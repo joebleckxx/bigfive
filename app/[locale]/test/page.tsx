@@ -408,9 +408,6 @@ export default function TestPage() {
                     onPointerDown={() => {
                       if (!isAdvancing) setTapSelected(v);
                     }}
-                    onPointerUp={() => {
-                      if (tapSelected === v) setTapSelected(null);
-                    }}
                     onPointerCancel={() => {
                       if (tapSelected === v) setTapSelected(null);
                     }}
