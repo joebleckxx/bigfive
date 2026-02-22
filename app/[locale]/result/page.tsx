@@ -8,6 +8,7 @@ import { calculateResult } from "@/lib/scoring";
 import { AVATARS } from "@/lib/avatars";
 import { toast } from "sonner";
 import LegalFooter from "@/app/components/ui/legal-footer";
+import TMJBackground from "@/app/components/ui/background";
 
 // ✅ PDF
 import {
@@ -708,13 +709,10 @@ export default function ResultPage() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 py-6 text-white sm:px-6 sm:py-10">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
-        <div className="absolute top-1/3 -left-40 h-[360px] w-[360px] rounded-full bg-fuchsia-500/20 blur-[120px]" />
-        <div className="absolute bottom-0 -right-40 h-[360px] w-[360px] rounded-full bg-pink-500/20 blur-[120px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] via-transparent to-transparent" />
-      </div>
+    <main
+      className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 sm:px-5 py-10 text-white"
+    >
+      <TMJBackground />
 
       <div className="relative mx-auto w-full max-w-xl">
         {/* Top bar */}

@@ -8,6 +8,7 @@ import { calculateResult } from "@/lib/scoring";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { useLocale } from "next-intl";
 import LegalFooter from "@/app/components/ui/legal-footer";
+import TMJBackground from "@/app/components/ui/background";
 
 export const CTA_GRADIENT =
   "bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-400";
@@ -162,13 +163,10 @@ export default function PayPage() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] text-white px-6 sm:px-5 py-10">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
-        <div className="absolute top-1/3 -left-40 h-[360px] w-[360px] rounded-full bg-fuchsia-500/20 blur-[120px]" />
-        <div className="absolute bottom-0 -right-40 h-[360px] w-[360px] rounded-full bg-pink-500/20 blur-[120px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] via-transparent to-transparent" />
-      </div>
+    <main
+      className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 sm:px-5 py-10 text-white"
+    >
+      <TMJBackground />
 
       <div className="relative mx-auto w-full max-w-md">
         <div className="flex items-center justify-between gap-3">
@@ -225,7 +223,7 @@ export default function PayPage() {
             className={[
               "relative inline-flex w-full items-center justify-center rounded-3xl px-6 py-4 text-base font-semibold text-white",
               CTA_GRADIENT,
-              "shadow-[0_20px_60px_rgba(99,102,241,0.35)]",
+              "shadow-[0_20px_60px_rgba(99,102,241,0.28)]",
               "transition active:scale-[0.98]",
               "focus:outline-none focus:ring-4 focus:ring-indigo-400/30",
               "cursor-pointer",
