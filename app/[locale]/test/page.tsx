@@ -380,7 +380,7 @@ export default function TestPage() {
 
         {/* Test */}
         <div className="relative z-10 mt-8">
-          <div className="rounded-3xl border border-white/10 bg-white/5
+          <div className="rounded-3xl border border-white/10 bg-white/8
                           px-4 pt-4 pb-5
                           shadow-xl backdrop-blur-2xl
                           sm:px-6 sm:pt-6 sm:pb-7">
@@ -395,10 +395,10 @@ export default function TestPage() {
                 // zostawiamy Twoje delikatne tło (to samo co było), ale bez efektów
                 const baseTone =
                   v === 3
-                    ? "border-white/10 bg-white/2"
+                    ? "border-white/10 bg-white/8"
                     : v === 2 || v === 4
-                      ? "border-white/10 bg-white/2"
-                      : "border-white/10 bg-white/2";
+                      ? "border-white/10 bg-white/8"
+                      : "border-white/10 bg-white/8";
 
                 return (
                   <button
@@ -418,8 +418,8 @@ export default function TestPage() {
                       "focus:outline-none focus-visible:outline-none",
                       "[-webkit-tap-highlight-color:transparent]",
                       // ✅ TYLKO to ma się zmieniać wizualnie:
-                      selected ? "border-white/70 bg-white/5" : baseTone,
-                      tapping ? "border-white/70 bg-white/5" : "",
+                      selected ? "border-white/70 bg-white/8" : baseTone,
+                      tapping ? "border-white/70 bg-white/8" : "",
                       isAdvancing ? "pointer-events-none cursor-not-allowed" : ""
                     ].join(" ")}
                   >
@@ -430,7 +430,7 @@ export default function TestPage() {
             </div>
           </div>
             {/* Joe microcopy */}
-          <div className="mt-6 mb-6 text-xs text-white/50 italic">
+          <div className="hidden mt-6 mb-6 text-xs text-white/50 italic">
             {t("tip")}           
           </div>
         </div>
