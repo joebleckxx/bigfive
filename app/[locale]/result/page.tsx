@@ -935,14 +935,14 @@ export default function ResultPage() {
                 aria-disabled:opacity-60 aria-disabled:pointer-events-none"
               type="button"
             >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                  className="opacity-90"
-                >
+	                <svg
+	                  width="16"
+	                  height="16"
+	                  viewBox="0 0 24 24"
+	                  fill="none"
+	                  aria-hidden="true"
+	                  className="shrink-0 opacity-90"
+	                >
                   <path
                     d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
                     stroke="currentColor"
@@ -988,19 +988,19 @@ export default function ResultPage() {
               aria-label={tr("share", "Share")}
               title={tr("share", "Share")}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="opacity-90"
-                aria-hidden="true"
-              >
+	              <svg
+	                xmlns="http://www.w3.org/2000/svg"
+	                width="16"
+	                height="16"
+	                viewBox="0 0 24 24"
+	                fill="none"
+	                stroke="currentColor"
+	                strokeWidth="1.6"
+	                strokeLinecap="round"
+	                strokeLinejoin="round"
+	                className="shrink-0 opacity-90"
+	                aria-hidden="true"
+	              >
                 <path d="M12 2v13" />
                 <path d="m16 6-4-4-4 4" />
                 <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
