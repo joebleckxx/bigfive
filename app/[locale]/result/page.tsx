@@ -969,8 +969,8 @@ export default function ResultPage() {
                   />
                 </svg>
 
-                <span>{downloading ? t("pdf.downloading") : t("pdf.download")}</span>
-             </button>
+	                <span>{t("pdf.download")}</span>
+	             </button>
 
             <button
               onClick={shareResult}
