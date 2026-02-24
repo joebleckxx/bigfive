@@ -20,7 +20,7 @@ export default function LegalFooter() {
   const t = labels[locale] ?? labels.en;
 
   return (
-    <footer className="mt-10 border-t border-white/10 pt-6">
+    <footer className="mt-10 border-t border-[#FFFFFF33] pt-6">
       <div className="flex items-center justify-center gap-3 text-xs text-white/45">
         <Link
           href={`/${locale}/privacy`}
