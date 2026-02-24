@@ -869,7 +869,7 @@ export default function ResultPage() {
         </div>
 
 		        {/* Big Five panel */}
-		            <div className="mt-8 rounded-3xl bg-white/5 shadow-xl p-5 pt-5 pb-8 sm:p-6 sm:pt-5 sm:pb-8">
+		            <div className="mt-8 rounded-3xl bg-white/5 shadow-xl px-4 pt-6 pb-8 sm:p-6 sm:pt-5 sm:pb-8">
 		          <div className="flex items-center justify-between gap-4">
 		            <div className="min-w-0">
 		              <div className="text-sm font-semibold text-white/85">
