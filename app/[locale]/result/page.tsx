@@ -10,6 +10,8 @@ import { toast } from "sonner";
 import LegalFooter from "@/app/components/ui/legal-footer";
 import TMJBackground from "@/app/components/ui/background";
 
+const BIG_FIVE_ICON_SRC = "/graphics/bigfive-icon.svg";
+
 // ✅ PDF
 import {
   PersonalityReportPDF,
@@ -866,16 +868,31 @@ export default function ResultPage() {
           ))}
         </div>
 
-        {/* Big Five panel */}
-        <div className="mt-6 rounded-3xl bg-white/5 p-5 shadow-xl sm:p-6">
-          <div className="min-w-0">
-            <div className="text-sm font-semibold text-white/85">
-              {t("bigFive.title")}
-            </div>
-            <div className="mt-1 text-xs text-white/40">
-              {t("bigFive.note")}
-            </div>
-          </div>
+	        {/* Big Five panel */}
+	        <div className="mt-6 rounded-3xl bg-white/5 p-5 shadow-xl sm:p-6">
+	          <div className="flex items-start justify-between gap-4">
+	            <div className="min-w-0">
+	              <div className="text-sm font-semibold text-white/85">
+	                {t("bigFive.title")}
+	              </div>
+	              <div className="mt-1 text-xs text-white/40">
+	                {t("bigFive.note")}
+	              </div>
+	            </div>
+
+	            <div className="relative shrink-0">
+	              <div className="pointer-events-none absolute -inset-2 rounded-full bg-black/20 blur-xl" />
+	              <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-black/25 ring-1 ring-white/10">
+	                <img
+	                  src={BIG_FIVE_ICON_SRC}
+	                  alt=""
+	                  aria-hidden="true"
+	                  className="h-8 w-8 object-contain opacity-100"
+	                  style={{ filter: "brightness(0) invert(1)" }}
+	                />
+	              </div>
+	            </div>
+	          </div>
           <div className="mt-6 space-y-4">
               {bigFiveRows.map((row) => {
                 const k = levelKey(row.value);
@@ -931,7 +948,7 @@ export default function ResultPage() {
 	                  bg-black/25 ring-1 ring-white/10
 	                  focus:outline-none
 	                  cursor-pointer
-	                  aria-disabled:opacity-60 aria-disabled:pointer-events-none"
+	                  aria-disabled:pointer-events-none"
 	              >
 	                <svg
 	                  width="18"
