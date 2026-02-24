@@ -62,11 +62,13 @@
       "text": "Não vejo resultados guardados. Volta ao teste e responde às perguntas.",
       "backToTest": "Voltar ao teste"
     },
+    
     "hero": {
-      "before": "O teu",
-      "accent": "resultado de personalidade",
-      "sub": "Resultado baseado no reconhecido modelo de traços de personalidade Big Five"
+    "before": "Seus",
+    "accent": "padrões de personalidade",
+    "sub": "Um retrato claro de como você tende a pensar, agir e se conectar - moldado pelo nosso modelo híbrido."
     },
+
     "menu": "Menu",
     "menuRetake": "Repetir",
     "pdf": {

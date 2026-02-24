@@ -62,11 +62,13 @@
       "text": "Je ne vois aucun résultat enregistré. Reviens au test et réponds aux questions.",
       "backToTest": "Retour au test"
     },
+
     "hero": {
-      "before": "Ton",
-      "accent": "résultat de personnalité",
-      "sub": "Résultat basé sur le modèle reconnu des traits de personnalité Big Five"
+    "before": "Tes",
+    "accent": "schémas de personnalité",
+    "sub": "Un aperçu clair de ta façon de penser, d’agir et de créer du lien - façonné par notre modèle hybride."
     },
+    
     "menu": "Menu",
     "menuRetake": "Recommencer",
     "pdf": {

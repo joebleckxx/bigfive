@@ -929,9 +929,7 @@ export default function ResultPage() {
 	                title={t("pdf.download")}
 	                className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
 	                  bg-black/25 ring-1 ring-white/10
-	                  hover:ring-white/20 active:ring-white/70
-	                  transition-[box-shadow] duration-100
-	                  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/45
+	                  focus:outline-none
 	                  cursor-pointer
 	                  aria-disabled:opacity-60 aria-disabled:pointer-events-none"
 	              >
@@ -980,10 +978,8 @@ export default function ResultPage() {
 	                title={tr("share", "Share")}
 	                className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
 	                  bg-black/25 ring-1 ring-white/10
-	                  hover:ring-white/20 active:ring-white/70
-	                  transition-[box-shadow] duration-100
-	                  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/45
-	                cursor-pointer"
+	                  focus:outline-none
+	                  cursor-pointer"
 	              >
 	                <svg
 	                  xmlns="http://www.w3.org/2000/svg"
