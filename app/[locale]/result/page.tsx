@@ -868,17 +868,17 @@ export default function ResultPage() {
           ))}
         </div>
 
-	        {/* Big Five panel */}
-	        <div className="mt-6 rounded-3xl bg-white/5 p-5 shadow-xl sm:p-6">
-	          <div className="flex items-start justify-between gap-4">
-	            <div className="min-w-0">
-	              <div className="text-sm font-semibold text-white/85">
-	                {t("bigFive.title")}
-	              </div>
-	              <div className="mt-1 text-xs text-white/40">
-	                {t("bigFive.note")}
-	              </div>
-	            </div>
+		        {/* Big Five panel */}
+            <div className="mt-8 rounded-3xl bg-white/5 shadow-xl p-5 sm:p-6">
+		          <div className="flex items-center justify-between gap-4">
+		            <div className="min-w-0">
+		              <div className="text-sm font-semibold text-white/85">
+		                {t("bigFive.title")}
+		              </div>
+		              <div className="mt-1 text-xs text-white/40">
+		                {t("bigFive.note")}
+		              </div>
+		            </div>
 
 	            <div className="relative shrink-0">
 	              <div className="pointer-events-none absolute -inset-2 rounded-full bg-black/20 blur-xl" />
@@ -893,7 +893,7 @@ export default function ResultPage() {
 	              </div>
 	            </div>
 	          </div>
-          <div className="mt-6 space-y-4">
+          <div className="mt-5 space-y-4 pb-5 sm:pb-6">
               {bigFiveRows.map((row) => {
                 const k = levelKey(row.value);
                 return (
@@ -930,101 +930,102 @@ export default function ResultPage() {
                         style={{ width: `${pct(row.value)}%` }}
                       />
                     </div>
-                  </div>
-                );
-              })}
-          </div>
+	                  </div>
+	                );
+	              })}
+	          </div>
+	        </div>
 
-	          <div className="mt-8 mb-2 flex items-center justify-center gap-4">
-	            <div className="relative">
-	              <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
-	              <button
-	                onClick={downloadPdf}
-	                aria-disabled={downloading}
-	                type="button"
-	                aria-label={t("pdf.download")}
-	                title={t("pdf.download")}
-	                className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
-	                  bg-black/25 ring-1 ring-white/10
-	                  focus:outline-none
-	                  cursor-pointer
-	                  aria-disabled:pointer-events-none"
+	        <div className="mt-8 mb-2 flex items-center justify-center gap-4">
+	          <div className="relative">
+	            <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
+	            <button
+	              onClick={downloadPdf}
+	              aria-disabled={downloading}
+	              type="button"
+	              aria-label={t("pdf.download")}
+	              title={t("pdf.download")}
+	              className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
+	                bg-black/25 ring-1 ring-white/10
+	                focus:outline-none
+	                cursor-pointer
+	                aria-disabled:pointer-events-none"
+	            >
+	              <svg
+	                width="18"
+	                height="18"
+	                viewBox="0 0 24 24"
+	                fill="none"
+	                aria-hidden="true"
+	                className="opacity-90"
 	              >
-	                <svg
-	                  width="18"
-	                  height="18"
-	                  viewBox="0 0 24 24"
-	                  fill="none"
-	                  aria-hidden="true"
-	                  className="opacity-90"
-	                >
-	                  <path
-	                    d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
-	                    stroke="currentColor"
-	                    strokeWidth="1.6"
-	                    strokeLinejoin="round"
-	                  />
-	                  <path
-	                    d="M14 2v6h6"
-	                    stroke="currentColor"
-	                    strokeWidth="1.6"
-	                    strokeLinejoin="round"
-	                  />
-	                  <path
-	                    d="M8 15h8"
-	                    stroke="currentColor"
-	                    strokeWidth="1.6"
-	                    strokeLinecap="round"
-	                  />
-	                  <path
-	                    d="M8 18h6"
-	                    stroke="currentColor"
-	                    strokeWidth="1.6"
-	                    strokeLinecap="round"
-	                  />
-	                </svg>
-	              </button>
-	            </div>
-
-	            <div className="relative">
-	              <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
-	              <button
-	                onClick={shareResult}
-	                type="button"
-	                aria-label={tr("share", "Share")}
-	                title={tr("share", "Share")}
-	                className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
-	                  bg-black/25 ring-1 ring-white/10
-	                  focus:outline-none
-	                  cursor-pointer"
-	              >
-	                <svg
-	                  xmlns="http://www.w3.org/2000/svg"
-	                  width="18"
-	                  height="18"
-	                  viewBox="0 0 24 24"
-	                  fill="none"
+	                <path
+	                  d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
+	                  stroke="currentColor"
+	                  strokeWidth="1.6"
+	                  strokeLinejoin="round"
+	                />
+	                <path
+	                  d="M14 2v6h6"
+	                  stroke="currentColor"
+	                  strokeWidth="1.6"
+	                  strokeLinejoin="round"
+	                />
+	                <path
+	                  d="M8 15h8"
 	                  stroke="currentColor"
 	                  strokeWidth="1.6"
 	                  strokeLinecap="round"
-	                  strokeLinejoin="round"
-	                  className="opacity-90"
-	                  aria-hidden="true"
-	                >
-	                  <path d="M12 2v13" />
-	                  <path d="m16 6-4-4-4 4" />
-	                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-	                </svg>
-	              </button>
-	            </div>
+	                />
+	                <path
+	                  d="M8 18h6"
+	                  stroke="currentColor"
+	                  strokeWidth="1.6"
+	                  strokeLinecap="round"
+	                />
+	              </svg>
+	            </button>
 	          </div>
 
-          <p className="mt-6 text-center text-xs text-white/40">
-            {t("disclaimer")}
-          </p>
-        </div>    
-        <LegalFooter />      
-      </div>
-    </main>
-  );
-}
+	          <div className="relative">
+	            <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
+	            <button
+	              onClick={shareResult}
+	              type="button"
+	              aria-label={tr("share", "Share")}
+	              title={tr("share", "Share")}
+	              className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
+	                bg-black/25 ring-1 ring-white/10
+	                focus:outline-none
+	                cursor-pointer"
+	            >
+	              <svg
+	                xmlns="http://www.w3.org/2000/svg"
+	                width="18"
+	                height="18"
+	                viewBox="0 0 24 24"
+	                fill="none"
+	                stroke="currentColor"
+	                strokeWidth="1.6"
+	                strokeLinecap="round"
+	                strokeLinejoin="round"
+	                className="opacity-90"
+	                aria-hidden="true"
+	              >
+	                <path d="M12 2v13" />
+	                <path d="m16 6-4-4-4 4" />
+	                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+	              </svg>
+	            </button>
+	          </div>
+	        </div>
+
+	          <p className="mt-6 text-center text-xs text-white/40">
+	            {t("disclaimer")}
+	          </p>
+    
+	        <LegalFooter />      
+	      </div>
+	    </main>
+	  );
+	}
