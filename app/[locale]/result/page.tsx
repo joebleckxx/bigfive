@@ -918,96 +918,93 @@ export default function ResultPage() {
               })}
           </div>
 
-          <div className="mt-8 mb-2 grid grid-cols-2 gap-3">
-            <button
-              onClick={downloadPdf}
-              aria-disabled={downloading}
-              className="relative inline-flex w-full items-center justify-center gap-2 rounded-3xl px-6 py-2.5
-                text-base font-semibold text-white
-                bg-white/10 backdrop-blur
-                border border-white/10
-                hover:border-white/60
-                active:scale-[0.99]
-                active:border-white/70
-                transition-[border-color,transform] duration-100
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/45
-                cursor-pointer
-                aria-disabled:opacity-60 aria-disabled:pointer-events-none"
-              type="button"
-            >
+	          <div className="mt-8 mb-2 flex items-center justify-center gap-4">
+	            <div className="relative">
+	              <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
+	              <button
+	                onClick={downloadPdf}
+	                aria-disabled={downloading}
+	                type="button"
+	                aria-label={t("pdf.download")}
+	                title={t("pdf.download")}
+	                className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
+	                  bg-black/25 ring-1 ring-white/10
+	                  hover:ring-white/20 active:ring-white/70
+	                  transition-[box-shadow] duration-100
+	                  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/45
+	                  cursor-pointer
+	                  aria-disabled:opacity-60 aria-disabled:pointer-events-none"
+	              >
 	                <svg
-	                  width="16"
-	                  height="16"
+	                  width="18"
+	                  height="18"
 	                  viewBox="0 0 24 24"
 	                  fill="none"
 	                  aria-hidden="true"
-	                  className="shrink-0 opacity-90"
+	                  className="opacity-90"
 	                >
-                  <path
-                    d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M14 2v6h6"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M8 15h8"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M8 18h6"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                  />
-                </svg>
+	                  <path
+	                    d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
+	                    stroke="currentColor"
+	                    strokeWidth="1.6"
+	                    strokeLinejoin="round"
+	                  />
+	                  <path
+	                    d="M14 2v6h6"
+	                    stroke="currentColor"
+	                    strokeWidth="1.6"
+	                    strokeLinejoin="round"
+	                  />
+	                  <path
+	                    d="M8 15h8"
+	                    stroke="currentColor"
+	                    strokeWidth="1.6"
+	                    strokeLinecap="round"
+	                  />
+	                  <path
+	                    d="M8 18h6"
+	                    stroke="currentColor"
+	                    strokeWidth="1.6"
+	                    strokeLinecap="round"
+	                  />
+	                </svg>
+	              </button>
+	            </div>
 
-	                <span>{t("pdf.download")}</span>
-	             </button>
-
-            <button
-              onClick={shareResult}
-              className="relative inline-flex w-full items-center justify-center gap-2 rounded-3xl px-6 py-2.5
-                text-base font-semibold text-white
-                bg-white/10 backdrop-blur
-                border border-white/10
-                hover:border-white/60
-                active:scale-[0.99]
-                active:border-white/70
-                transition-[border-color,transform] duration-100
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/45
-                cursor-pointer"
-              type="button"
-              aria-label={tr("share", "Share")}
-              title={tr("share", "Share")}
-            >
-	              <svg
-	                xmlns="http://www.w3.org/2000/svg"
-	                width="16"
-	                height="16"
-	                viewBox="0 0 24 24"
-	                fill="none"
-	                stroke="currentColor"
-	                strokeWidth="1.6"
-	                strokeLinecap="round"
-	                strokeLinejoin="round"
-	                className="shrink-0 opacity-90"
-	                aria-hidden="true"
+	            <div className="relative">
+	              <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
+	              <button
+	                onClick={shareResult}
+	                type="button"
+	                aria-label={tr("share", "Share")}
+	                title={tr("share", "Share")}
+	                className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
+	                  bg-black/25 ring-1 ring-white/10
+	                  hover:ring-white/20 active:ring-white/70
+	                  transition-[box-shadow] duration-100
+	                  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/45
+	                cursor-pointer"
 	              >
-                <path d="M12 2v13" />
-                <path d="m16 6-4-4-4 4" />
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-              </svg>
-              <span>{tr("share", "Share")}</span>
-            </button>
-          </div>
+	                <svg
+	                  xmlns="http://www.w3.org/2000/svg"
+	                  width="18"
+	                  height="18"
+	                  viewBox="0 0 24 24"
+	                  fill="none"
+	                  stroke="currentColor"
+	                  strokeWidth="1.6"
+	                  strokeLinecap="round"
+	                  strokeLinejoin="round"
+	                  className="opacity-90"
+	                  aria-hidden="true"
+	                >
+	                  <path d="M12 2v13" />
+	                  <path d="m16 6-4-4-4 4" />
+	                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+	                </svg>
+	              </button>
+	            </div>
+	          </div>
 
           <p className="mt-6 text-center text-xs text-white/40">
             {t("disclaimer")}
