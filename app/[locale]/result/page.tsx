@@ -869,7 +869,7 @@ export default function ResultPage() {
         </div>
 
 		        {/* Big Five panel */}
-            <div className="mt-8 rounded-3xl bg-white/5 shadow-xl p-5 sm:p-6">
+		            <div className="mt-8 rounded-3xl bg-white/5 shadow-xl p-5 pt-5 pb-8 sm:p-6 sm:pt-5 sm:pb-8">
 		          <div className="flex items-center justify-between gap-4">
 		            <div className="min-w-0">
 		              <div className="text-sm font-semibold text-white/85">
@@ -893,7 +893,7 @@ export default function ResultPage() {
 	              </div>
 	            </div>
 	          </div>
-          <div className="mt-5 space-y-4 pb-5 sm:pb-6">
+		          <div className="mt-4 space-y-4">
               {bigFiveRows.map((row) => {
                 const k = levelKey(row.value);
                 return (
@@ -946,7 +946,7 @@ export default function ResultPage() {
 	              aria-label={t("pdf.download")}
 	              title={t("pdf.download")}
 	              className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
-	                bg-black/25 ring-1 ring-white/10
+	                bg-black/25 ring-1 ring-white/20
 	                focus:outline-none
 	                cursor-pointer
 	                aria-disabled:pointer-events-none"
@@ -995,7 +995,7 @@ export default function ResultPage() {
 	              aria-label={tr("share", "Share")}
 	              title={tr("share", "Share")}
 	              className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
-	                bg-black/25 ring-1 ring-white/10
+	                bg-black/25 ring-1 ring-white/20
 	                focus:outline-none
 	                cursor-pointer"
 	            >
