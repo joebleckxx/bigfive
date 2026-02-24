@@ -798,7 +798,7 @@ export default function ResultPage() {
         </div>
 
         {/* Main card */}
-        <div className="mt-8 rounded-3xl bg-white/2 px-6 py-7 shadow-xl sm:px-8 sm:py-8">
+        <div className="mt-7 rounded-3xl bg-white/2 px-6 py-7 shadow-xl sm:mt-8 sm:px-8 sm:py-8">
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
