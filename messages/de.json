@@ -62,11 +62,13 @@
       "text": "Ich sehe keine gespeicherten Ergebnisse. Geh zurück zum Test und beantworte die Fragen.",
       "backToTest": "Zurück zum Test"
     },
+
     "hero": {
-      "before": "Dein",
-      "accent": "Persönlichkeitsergebnis",
-      "sub": "Ergebnis basierend auf dem anerkannten Persönlichkeitsmodell Big Five"
+    "before": "Deine",
+    "accent": "Persönlichkeitsmuster",
+    "sub": "Ein klarer Überblick darüber, wie du typischerweise denkst, handelst und Beziehungen aufbaust - geprägt von unserem Hybridmodell."
     },
+
     "menu": "Menü",
     "menuRetake": "Wiederholen",
     "pdf": {

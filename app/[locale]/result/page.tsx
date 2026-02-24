@@ -10,6 +10,8 @@ import { toast } from "sonner";
 import LegalFooter from "@/app/components/ui/legal-footer";
 import TMJBackground from "@/app/components/ui/background";
 
+const BIG_FIVE_ICON_SRC = "/graphics/bigfive-icon.svg";
+
 // ✅ PDF
 import {
   PersonalityReportPDF,
@@ -796,7 +798,7 @@ export default function ResultPage() {
         </div>
 
         {/* Main card */}
-        <div className="mt-8 rounded-3xl bg-white/2 px-6 py-7 shadow-xl sm:px-8 sm:py-8">
+        <div className="mt-7 rounded-3xl bg-white/2 px-6 py-7 shadow-xl sm:mt-8 sm:px-8 sm:py-8">
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
@@ -866,75 +868,32 @@ export default function ResultPage() {
           ))}
         </div>
 
-        {/* Actions */}
-        <div className="mt-6">
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setShowBigFive((v) => !v)}
-              className="inline-flex flex-1 min-w-0 items-center justify-center gap-2 rounded-3xl
-                px-6 py-2.5 text-base font-semibold
-                text-white/90
-                bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-400
-                shadow-[0_10px_30px_rgba(99,102,241,0.25)]
-                hover:brightness-105
-                active:scale-[0.99]
-                transition
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40
-                cursor-pointer"
-              type="button"
-            >
-              <span className="truncate">
-                {showBigFive ? t("bigFive.hide") : t("bigFive.show")}
-              </span>
-              <span className="shrink-0 text-white/70">{showBigFive ? "▴" : "▾"}</span>
-            </button>
+		        {/* Big Five panel */}
+		            <div className="mt-8 rounded-3xl bg-white/5 shadow-xl px-4 pt-6 pb-8 sm:p-6 sm:pt-5 sm:pb-8">
+		          <div className="flex items-center justify-between gap-4">
+		            <div className="min-w-0">
+		              <div className="text-sm font-semibold text-white/85">
+		                {t("bigFive.title")}
+		              </div>
+		              <div className="mt-1 text-xs text-white/40">
+		                {t("bigFive.note")}
+		              </div>
+		            </div>
 
-            <button
-              onClick={shareResult}
-              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-3xl
-                px-4 py-2.5 text-base font-semibold
-                text-white/85
-                bg-white/10 backdrop-blur
-                border border-white/16
-                ring-1 ring-white/12
-                hover:bg-white/14 hover:border-white/22
-                active:scale-[0.99]
-                transition
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40
-                cursor-pointer"
-              type="button"
-              aria-label={tr("share", "Share")}
-              title={tr("share", "Share")}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="opacity-90"
-                aria-hidden="true"
-              >
-                <path d="M12 2v13" />
-                <path d="m16 6-4-4-4 4" />
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-              </svg>
-
-              <span className="hidden sm:inline">{tr("share", "Share")}</span>
-            </button>
-          </div>
-
-          <div className="mt-4 text-xs text-white/40">{t("bigFive.note")}</div>
-        </div>
-
-        {/* Big Five panel */}
-        {showBigFive && (
-          <div className="mt-6 rounded-3xl bg-white/5 p-5 shadow-xl sm:p-6">
-            <div className="mt-2 space-y-4">
+	            <div className="relative shrink-0">
+	              <div className="pointer-events-none absolute -inset-2 rounded-full bg-black/20 blur-xl" />
+	              <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-black/25 ring-1 ring-white/10">
+	                <img
+	                  src={BIG_FIVE_ICON_SRC}
+	                  alt=""
+	                  aria-hidden="true"
+	                  className="h-8 w-8 object-contain opacity-100"
+	                  style={{ filter: "brightness(0) invert(1)" }}
+	                />
+	              </div>
+	            </div>
+	          </div>
+		          <div className="mt-4 space-y-4">
               {bigFiveRows.map((row) => {
                 const k = levelKey(row.value);
                 return (
@@ -971,74 +930,102 @@ export default function ResultPage() {
                         style={{ width: `${pct(row.value)}%` }}
                       />
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+	                  </div>
+	                );
+	              })}
+	          </div>
+	        </div>
 
-            <div className="mt-8 mb-2">
-              <button
-                onClick={downloadPdf}
-                disabled={downloading}
-                className="relative inline-flex w-full items-center justify-center gap-2 rounded-3xl px-6 py-2.5
-                  text-base font-semibold text-white
-                  bg-white/14 backdrop-blur
-                  border border-white/20
-                  ring-1 ring-white/20
-                  shadow-[0_10px_30px_rgba(255,255,255,0.06)]
-                  hover:bg-white/18 hover:ring-white/35
-                  disabled:opacity-60
-                  active:scale-[0.99]
-                  transition
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/45
-                  cursor-pointer"
-                type="button"
-              >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                  className="opacity-90"
-                >
-                  <path
-                    d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M14 2v6h6"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M8 15h8"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M8 18h6"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                  />
-                </svg>
+	        <div className="mt-8 mb-2 flex items-center justify-center gap-4">
+	          <div className="relative">
+	            <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
+	            <button
+	              onClick={downloadPdf}
+	              aria-disabled={downloading}
+	              type="button"
+	              aria-label={t("pdf.download")}
+	              title={t("pdf.download")}
+	              className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
+	                bg-black/25 ring-1 ring-white/20
+	                focus:outline-none
+	                cursor-pointer
+	                aria-disabled:pointer-events-none"
+	            >
+	              <svg
+	                width="18"
+	                height="18"
+	                viewBox="0 0 24 24"
+	                fill="none"
+	                aria-hidden="true"
+	                className="opacity-90"
+	              >
+	                <path
+	                  d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
+	                  stroke="currentColor"
+	                  strokeWidth="1.6"
+	                  strokeLinejoin="round"
+	                />
+	                <path
+	                  d="M14 2v6h6"
+	                  stroke="currentColor"
+	                  strokeWidth="1.6"
+	                  strokeLinejoin="round"
+	                />
+	                <path
+	                  d="M8 15h8"
+	                  stroke="currentColor"
+	                  strokeWidth="1.6"
+	                  strokeLinecap="round"
+	                />
+	                <path
+	                  d="M8 18h6"
+	                  stroke="currentColor"
+	                  strokeWidth="1.6"
+	                  strokeLinecap="round"
+	                />
+	              </svg>
+	            </button>
+	          </div>
 
-                <span>{downloading ? t("pdf.downloading") : t("pdf.download")}</span>
-              </button>
-            </div>
+	          <div className="relative">
+	            <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
+	            <button
+	              onClick={shareResult}
+	              type="button"
+	              aria-label={tr("share", "Share")}
+	              title={tr("share", "Share")}
+	              className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
+	                bg-black/25 ring-1 ring-white/20
+	                focus:outline-none
+	                cursor-pointer"
+	            >
+	              <svg
+	                xmlns="http://www.w3.org/2000/svg"
+	                width="18"
+	                height="18"
+	                viewBox="0 0 24 24"
+	                fill="none"
+	                stroke="currentColor"
+	                strokeWidth="1.6"
+	                strokeLinecap="round"
+	                strokeLinejoin="round"
+	                className="opacity-90"
+	                aria-hidden="true"
+	              >
+	                <path d="M12 2v13" />
+	                <path d="m16 6-4-4-4 4" />
+	                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+	              </svg>
+	            </button>
+	          </div>
+	        </div>
 
-            <p className="mt-4 text-center text-xs text-white/40">
-              {t("disclaimer")}
-            </p>
-          </div>
-        )}
-        <LegalFooter />      
-      </div>
-    </main>
-  );
-}
+	          <p className="mt-6 text-center text-xs text-white/40">
+	            {t("disclaimer")}
+	          </p>
+    
+	        <LegalFooter />      
+	      </div>
+	    </main>
+	  );
+	}

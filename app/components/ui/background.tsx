@@ -20,10 +20,14 @@ export default function TMJBackground({ className = "" }: Props) {
         className="absolute inset-0"
         style={{
           backgroundImage: [
-            "radial-gradient(120% 95% at 84% 84%, rgba(36,78,255,0.26) 0%, rgba(36,78,255,0) 68%)",
-            "radial-gradient(100% 80% at 76% 30%, rgba(122,56,236,0.28) 0%, rgba(122,56,236,0) 70%)",
-            "radial-gradient(90% 70% at 24% 88%, rgba(188,62,232,0.14) 0%, rgba(188,62,232,0) 72%)",
-            "radial-gradient(120% 100% at 12% 12%, rgba(72,64,220,0.12) 0%, rgba(72,64,220,0) 62%)",
+            // violet (primary)
+            "radial-gradient(112% 88% at 74% 30%, rgba(124,58,237,0.28) 0%, rgba(124,58,237,0) 72%)",
+            // blue (primary, equal weight)
+            "radial-gradient(118% 92% at 86% 84%, rgba(59,130,246,0.28) 0%, rgba(59,130,246,0) 70%)",
+            // indigo (accent, smaller + softer)
+            "radial-gradient(82% 62% at 22% 86%, rgba(99,102,241,0.12) 0%, rgba(99,102,241,0) 72%)",
+            // lift (keeps shadows from going flat)
+            "radial-gradient(120% 100% at 12% 12%, rgba(124,58,237,0.10) 0%, rgba(124,58,237,0) 62%)",
           ].join(", "),
         }}
       />
@@ -32,9 +36,9 @@ export default function TMJBackground({ className = "" }: Props) {
       <div
         className="absolute inset-0"
         style={{
-          opacity: 0.42,
+          opacity: 0.4,
           background:
-            "linear-gradient(130deg, rgba(5,6,18,0) 18%, rgba(96,58,186,0.14) 48%, rgba(8,9,24,0) 78%)",
+            "linear-gradient(130deg, rgba(5,6,18,0) 18%, rgba(99,102,241,0.10) 46%, rgba(59,130,246,0.10) 52%, rgba(8,9,24,0) 78%)",
         }}
       />
 
@@ -45,7 +49,10 @@ export default function TMJBackground({ className = "" }: Props) {
           opacity: 0.34,
           filter: "blur(72px)",
           backgroundImage:
-            "radial-gradient(58% 52% at 72% 76%, rgba(120,74,255,0.30) 0%, rgba(120,74,255,0) 100%)",
+            [
+              "radial-gradient(62% 56% at 72% 76%, rgba(124,58,237,0.22) 0%, rgba(124,58,237,0) 100%)",
+              "radial-gradient(62% 56% at 78% 80%, rgba(59,130,246,0.20) 0%, rgba(59,130,246,0) 100%)",
+            ].join(", "),
         }}
       />
 

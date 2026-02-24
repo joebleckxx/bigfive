@@ -63,9 +63,9 @@
     },
 
     "hero": {
-      "before": "Ditt",
-      "accent": "personlighetsresultat",
-      "sub": "Baserat på den etablerade Big Five-modellen för personlighetsdrag"
+    "before": "Dina",
+    "accent": "personlighetsmönster",
+    "sub": "En tydlig bild av hur du brukar tänka, agera och skapa kontakt - formad av vår hybridmodell."
     },
 
     "menu": "Meny",

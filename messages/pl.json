@@ -63,11 +63,13 @@
       "text": "Nie widzę zapisanych wyników. Wróć do testu i odpowiedz na pytania.",
       "backToTest": "Wróć do testu"
     },
+
     "hero": {
-      "before": "Twój",
-      "accent": "wynik osobowości",
-      "sub": "Wynik oparty na uznanym modelu cech osobowości Big Five"
+    "before": "Twoje",
+    "accent": "wzorce osobowości",
+    "sub": "Jasny obraz tego, jak zwykle myślisz, działasz i budujesz relacje - ukształtowany przez nasz hybrydowy model."
     },
+
     "menu": "Menu",
     "menuRetake": "Powtórz",
     "pdf": {
