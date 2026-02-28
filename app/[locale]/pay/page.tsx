@@ -232,11 +232,36 @@ export default function PayPage() {
             {t("cta")} →
           </button>
 
-          <p className="mt-3 text-center text-sm text-white/75">
+          <p className="mt-4 text-center text-sm text-white/75">
             {t("note")}
           </p>
           <p className="mt-2 mb-1 text-center text-xs text-white/50">
-            {t("stripeNote")}
+            {(() => {
+              const stripeNote = t("stripeNote");
+              const stripeWord = "Stripe";
+
+              if (!stripeNote.includes(stripeWord)) {
+                return stripeNote;
+              }
+
+              const [before, ...rest] = stripeNote.split(stripeWord);
+              const after = rest.join(stripeWord);
+
+              return (
+                <>
+                  {before}
+                  <a
+                    href="https://stripe.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold transition hover:text-white/80"
+                  >
+                    Stripe
+                  </a>
+                  {after}
+                </>
+              );
+            })()}
           </p>
 
         </div>
