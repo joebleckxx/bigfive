@@ -693,7 +693,7 @@ export default function ResultPage() {
       return (
         <div className="mt-2 text-sm leading-relaxed">
           <p className="whitespace-normal text-white/70">{body}</p>
-          <p className="mt-3 whitespace-normal text-white/85 font-medium">{last}</p>
+          <p className="mt-3 whitespace-normal text-white/90 font-medium">{last}</p>
         </div>
       );
     }
@@ -800,7 +800,7 @@ export default function ResultPage() {
               {t("hero.accent")}
             </span>
           </h1>
-          <p className="text-base text-white/65 sm:text-lg">
+          <p className="mt-4 text-base leading-relaxed text-white/75">
             {t("hero.sub")}
           </p>
         </div>
@@ -867,7 +867,7 @@ export default function ResultPage() {
               key={s.key}
               className="rounded-3xl bg-white/5 px-4 py-5 shadow-xl sm:px-5 sm:py-6"
             >
-              <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-white/60 whitespace-normal">
+              <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-white/40 whitespace-normal">
                 <span className="inline-flex items-center justify-center text-indigo-300/70 -translate-y-[0.5px]">
                   {s.icon}
                 </span>
@@ -911,7 +911,7 @@ export default function ResultPage() {
                 return (
                   <div key={row.key}>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-sm text-white/80">
+                      <div className="flex items-center gap-2 text-sm text-white/90">
                         {row.label}
                         {row.key === highestTrait.key && (
                           <span
@@ -924,7 +924,7 @@ export default function ResultPage() {
                         )}
                       </div>
 
-                      <div className="text-sm text-white/70">{pct(row.value)}</div>
+                      <div className="text-sm text-white/90">{pct(row.value)}</div>
                     </div>
 
                     <div className="mt-1 text-xs text-white/50">

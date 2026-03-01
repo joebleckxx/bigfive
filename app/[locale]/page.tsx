@@ -50,7 +50,7 @@ export default async function Page({
           </span>
         </h1>
 
-        <p className="mt-3 text-sm leading-relaxed text-white/90">
+        <p className="mt-4 text-base leading-relaxed text-white/90">
           {t("subheadline")}
         </p>
 
@@ -125,7 +125,7 @@ export default async function Page({
 
         {/* COLLAGE */}
         <div className="mt-8 flex justify-center">
-          <div className="relative w-full max-w-md">
+          <div className="relative w-full max-w-md rounded-2xl shadow-[0_10px_28px_rgba(0,0,0,0.28)]">
             <Image
               src="/graphics/avatars-collage-compact-beta.webp"
               alt=""
@@ -133,7 +133,7 @@ export default async function Page({
               height={420}
               priority
               sizes="(max-width: 640px) 100vw, 448px"
-              className="w-full select-none [filter:drop-shadow(0_0_26px_rgba(0,0,0,0.5))]"
+              className="w-full select-none"
             />
           </div>
         </div>
