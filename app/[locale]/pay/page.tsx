@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "@/navigation";
+import { Link, useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { QUESTIONS } from "@/lib/personality";
 import { calculateResult } from "@/lib/scoring";
@@ -171,7 +171,8 @@ export default function PayPage() {
       <div className="relative mx-auto w-full max-w-md">
         <div className="flex items-center justify-between gap-3">
           <div className="leading-tight">
-            <div
+            <Link
+              href="/"
               className="text-sm font-bold tracking-tight text-white/80"
               style={{
                 fontFamily:
@@ -179,7 +180,7 @@ export default function PayPage() {
               }}
             >
               {t("brandTitle")}
-            </div>
+            </Link>
             <div className="text-xs text-white/55">{t("brandSubtitle")}</div>
           </div>
 
@@ -224,7 +225,7 @@ export default function PayPage() {
               "relative inline-flex w-full items-center justify-center rounded-3xl px-6 py-4 text-base font-semibold text-white",
               CTA_GRADIENT,
               "shadow-[0_20px_60px_rgba(99,102,241,0.28)]",
-              "transition active:scale-[0.98]",
+              "transition",
               "focus:outline-none focus:ring-4 focus:ring-indigo-400/30",
               "cursor-pointer",
               ].join(" ")}

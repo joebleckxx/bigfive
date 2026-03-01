@@ -460,7 +460,11 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
             {showAvatar && (
               <View style={styles.avatarWrap}>
                 {data.avatarUrl ? (
-                  <Image style={styles.avatarIcon} src={data.avatarUrl} />
+                  // eslint-disable-next-line jsx-a11y/alt-text
+                  <Image
+                    style={styles.avatarIcon}
+                    src={data.avatarUrl}
+                  />
                 ) : (
                   <Text style={styles.avatarFallback}>
                     {data.typeName?.charAt(0) || "?"}

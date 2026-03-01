@@ -80,25 +80,38 @@ export default function TestPage() {
   const [orderReady, setOrderReady] = useState(false);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(QUESTION_ORDER_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length === total) {
-          setQuestionOrder(parsed);
-          setOrderReady(true);
-          return;
+    let cancelled = false;
+    const timeoutId = window.setTimeout(() => {
+      if (cancelled) return;
+      try {
+        const raw = localStorage.getItem(QUESTION_ORDER_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length === total) {
+            if (!cancelled) {
+              setQuestionOrder(parsed);
+              setOrderReady(true);
+            }
+            return;
+          }
         }
-      }
 
-      const seed = crypto.randomUUID();
-      const order = makeQuestionOrder(seed, 2);
-      localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
-      setQuestionOrder(order);
-      setOrderReady(true);
-    } catch {
-      setOrderReady(true);
-    }
+        const seed = crypto.randomUUID();
+        const order = makeQuestionOrder(seed, 2);
+        localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
+        if (!cancelled) {
+          setQuestionOrder(order);
+          setOrderReady(true);
+        }
+      } catch {
+        if (!cancelled) setOrderReady(true);
+      }
+    }, 0);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeoutId);
+    };
   }, [total]);
 
   const orderedQuestions = useMemo(
@@ -138,72 +151,85 @@ export default function TestPage() {
 
   // load progress + TTL
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(ANSWERS_KEY);
-      const hasAnswers = !!raw;
-
-      if (hasAnswers) {
-        const lastActiveAt = readLastActive();
-        const expired =
-          !lastActiveAt || Date.now() - lastActiveAt > PROGRESS_TTL_MS;
-
-        if (expired) {
-          clearProgressStorage();
-          setAnswers(Array(total).fill(0));
-          setIndex(0);
-          setTapSelected(null);
-          setIsAdvancing(false);
-
-          // ✅ po TTL resetujemy też kolejność
-          try {
-            const seed = crypto.randomUUID();
-            const order = makeQuestionOrder(seed, 2);
-            localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
-            setQuestionOrder(order);
-          } catch {
-            // ignore
-          }
-
-          return;
-        }
-      }
-
-      // ✅ upewnij się, że mamy kolejność (jeśli ktoś ma stare storage bez order)
+    let cancelled = false;
+    const timeoutId = window.setTimeout(() => {
+      if (cancelled) return;
       try {
-        const rawOrder = localStorage.getItem(QUESTION_ORDER_KEY);
-        if (rawOrder) {
-          const parsed = JSON.parse(rawOrder);
-          if (Array.isArray(parsed) && parsed.length === total) {
-            setQuestionOrder(parsed);
+        const raw = localStorage.getItem(ANSWERS_KEY);
+        const hasAnswers = !!raw;
+
+        if (hasAnswers) {
+          const lastActiveAt = readLastActive();
+          const expired =
+            !lastActiveAt || Date.now() - lastActiveAt > PROGRESS_TTL_MS;
+
+          if (expired) {
+            clearProgressStorage();
+            if (!cancelled) {
+              setAnswers(Array(total).fill(0));
+              setIndex(0);
+              setTapSelected(null);
+              setIsAdvancing(false);
+            }
+
+            // ✅ po TTL resetujemy też kolejność
+            try {
+              const seed = crypto.randomUUID();
+              const order = makeQuestionOrder(seed, 2);
+              localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
+              if (!cancelled) setQuestionOrder(order);
+            } catch {
+              // ignore
+            }
+
+            return;
+          }
+        }
+
+        // ✅ upewnij się, że mamy kolejność (jeśli ktoś ma stare storage bez order)
+        try {
+          const rawOrder = localStorage.getItem(QUESTION_ORDER_KEY);
+          if (rawOrder) {
+            const parsed = JSON.parse(rawOrder);
+            if (Array.isArray(parsed) && parsed.length === total) {
+              if (!cancelled) setQuestionOrder(parsed);
+            } else {
+              const seed = crypto.randomUUID();
+              const order = makeQuestionOrder(seed, 2);
+              localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
+              if (!cancelled) setQuestionOrder(order);
+            }
           } else {
             const seed = crypto.randomUUID();
             const order = makeQuestionOrder(seed, 2);
             localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
-            setQuestionOrder(order);
+            if (!cancelled) setQuestionOrder(order);
           }
-        } else {
-          const seed = crypto.randomUUID();
-          const order = makeQuestionOrder(seed, 2);
-          localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
-          setQuestionOrder(order);
+        } catch {
+          // ignore
+        }
+
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        const normalized = normalizeAnswers(parsed, total);
+        if (!normalized) return;
+
+        if (!cancelled) {
+          setAnswers(normalized);
+          const firstUnanswered = normalized.findIndex((v) => v === 0);
+          setIndex(firstUnanswered === -1 ? total - 1 : firstUnanswered);
+          setTapSelected(null);
+          setIsAdvancing(false);
         }
       } catch {
         // ignore
       }
+    }, 0);
 
-      if (!raw) return;
-      const parsed = JSON.parse(raw);
-      const normalized = normalizeAnswers(parsed, total);
-      if (!normalized) return;
-
-      setAnswers(normalized);
-      const firstUnanswered = normalized.findIndex((v) => v === 0);
-      setIndex(firstUnanswered === -1 ? total - 1 : firstUnanswered);
-      setTapSelected(null);
-      setIsAdvancing(false);
-    } catch {
-      // ignore
-    }
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeoutId);
+    };
   }, [total]);
 
   const progressText = t("progress", {
@@ -254,11 +280,6 @@ export default function TestPage() {
     } catch {
       // ignore
     }
-  }
-
-  function goToStart() {
-    setMenuOpen(false);
-    router.push("/");
   }
 
   function commitAnswer(v: number) {

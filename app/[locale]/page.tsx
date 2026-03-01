@@ -26,7 +26,8 @@ export default async function Page({
         {/* HEADER */}
         <div className="flex items-center justify-between gap-3">
           <div className="leading-tight">
-            <div
+            <Link
+              href="/"
               className="text-sm font-bold tracking-tight text-white/80"
               style={{
                 fontFamily:
@@ -34,7 +35,7 @@ export default async function Page({
               }}
             >
               {t("brand.title")}
-            </div>
+            </Link>
             <div className="text-xs text-white/55">{t("brand.subtitle")}</div>
           </div>
           
@@ -49,7 +50,7 @@ export default async function Page({
           </span>
         </h1>
 
-        <p className="mt-3 text-sm leading-relaxed text-white/90">
+        <p className="mt-4 text-base leading-relaxed text-white/90">
           {t("subheadline")}
         </p>
 
@@ -112,7 +113,7 @@ export default async function Page({
               "relative inline-flex w-full items-center justify-center rounded-3xl px-6 py-4 text-base font-semibold text-white",
               CTA_GRADIENT,
               "shadow-[0_20px_60px_rgba(99,102,241,0.28)]",
-              "transition active:scale-[0.98]",
+              "transition",
               "focus:outline-none focus:ring-4 focus:ring-indigo-400/30",
               "cursor-pointer",
             ].join(" ")}
@@ -124,7 +125,7 @@ export default async function Page({
 
         {/* COLLAGE */}
         <div className="mt-8 flex justify-center">
-          <div className="relative w-full max-w-md">
+          <div className="relative w-full max-w-md rounded-2xl shadow-[0_10px_28px_rgba(0,0,0,0.28)]">
             <Image
               src="/graphics/avatars-collage-compact-beta.webp"
               alt=""
@@ -132,7 +133,7 @@ export default async function Page({
               height={420}
               priority
               sizes="(max-width: 640px) 100vw, 448px"
-              className="w-full select-none [filter:drop-shadow(0_0_26px_rgba(0,0,0,0.5))]"
+              className="w-full select-none"
             />
           </div>
         </div>

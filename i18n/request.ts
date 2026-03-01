@@ -9,12 +9,20 @@ import de from "../messages/de.json";
 import fr from "../messages/fr.json";
 import pt from "../messages/pt.json";
 
-const MESSAGES: Record<string, any> = {en, pl, sv, es, de, fr, pt};
+type Locale = (typeof routing.locales)[number];
+type Messages = Record<string, unknown>;
+
+const MESSAGES: Record<Locale, Messages> = {en, pl, sv, es, de, fr, pt};
+
+function isLocale(value: string): value is Locale {
+  return routing.locales.includes(value as Locale);
+}
 
 export default getRequestConfig(async ({requestLocale}) => {
   const requested = await requestLocale;
-  const locale = routing.locales.includes(requested as any)
-    ? (requested as string)
+  const locale =
+    typeof requested === "string" && isLocale(requested)
+    ? requested
     : routing.defaultLocale;
 
   return {
