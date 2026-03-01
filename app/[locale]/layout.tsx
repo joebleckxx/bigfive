@@ -12,7 +12,7 @@ import de from "../../messages/de.json";
 import fr from "../../messages/fr.json";
 import pt from "../../messages/pt.json";
 
-type Messages = typeof en;
+type Messages = Record<string, unknown>;
 const MESSAGES: Record<Locale, Messages> = { en, pl, sv, es, de, fr, pt };
 
 export function generateStaticParams() {

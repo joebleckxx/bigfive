@@ -10,7 +10,7 @@ import fr from "../messages/fr.json";
 import pt from "../messages/pt.json";
 
 type Locale = (typeof routing.locales)[number];
-type Messages = typeof en;
+type Messages = Record<string, unknown>;
 
 const MESSAGES: Record<Locale, Messages> = {en, pl, sv, es, de, fr, pt};
 

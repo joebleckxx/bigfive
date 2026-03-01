@@ -730,7 +730,7 @@ export default function ResultPage() {
           <div className="leading-tight min-w-0">
             <Link
               href="/"
-              className="text-sm font-bold text-white/80 hover:text-white/95 transition"
+              className="text-sm font-bold tracking-tight text-white/80"
               style={{
                 fontFamily:
                   '"Satoshi", var(--font-geist-sans), system-ui, sans-serif',
