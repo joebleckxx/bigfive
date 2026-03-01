@@ -12,7 +12,8 @@ import de from "../../messages/de.json";
 import fr from "../../messages/fr.json";
 import pt from "../../messages/pt.json";
 
-const MESSAGES: Record<Locale, any> = { en, pl, sv, es, de, fr, pt };
+type Messages = typeof en;
+const MESSAGES: Record<Locale, Messages> = { en, pl, sv, es, de, fr, pt };
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));

@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { useRouter } from "@/navigation";
+import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
+import { Link, useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { calculateResult } from "@/lib/scoring";
@@ -76,17 +77,21 @@ function levelKey(v: number): "low" | "medium" | "high" {
   return "high";
 }
 
-function isResultShape(x: any): x is StoredResultV1 {
+function isResultShape(x: unknown): x is StoredResultV1 {
+  if (typeof x !== "object" || x === null) return false;
+  const candidate = x as Partial<StoredResultV1> & {
+    scores?: Partial<Record<Trait, unknown>>;
+  };
+
   return (
-    x &&
-    isValidTypeCode(x.typeCode) &&
-    x.scores &&
-    typeof x.scores.E === "number" &&
-    typeof x.scores.O === "number" &&
-    typeof x.scores.C === "number" &&
-    typeof x.scores.A === "number" &&
-    typeof x.scores.N === "number" &&
-    typeof x.stability === "number"
+    isValidTypeCode(candidate.typeCode) &&
+    !!candidate.scores &&
+    typeof candidate.scores.E === "number" &&
+    typeof candidate.scores.O === "number" &&
+    typeof candidate.scores.C === "number" &&
+    typeof candidate.scores.A === "number" &&
+    typeof candidate.scores.N === "number" &&
+    typeof candidate.stability === "number"
   );
 }
 
@@ -121,7 +126,6 @@ export default function ResultPage() {
 
   const [data, setData] = useState<StoredResultV1 | null>(null);
   const [loaded, setLoaded] = useState(false);
-  const [showBigFive, setShowBigFive] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const [avatarError, setAvatarError] = useState(false);
   const showAvatar = true;
@@ -259,7 +263,7 @@ export default function ResultPage() {
     const code = data.typeCode;
 
     // next-intl: arrays pobieramy przez .raw
-    const raw = (tp as any).raw as (key: string) => any;
+    const raw = (tp as typeof tp & { raw: (key: string) => unknown }).raw;
 
     const getLines = (k: string): string[] => {
       try {
@@ -402,7 +406,7 @@ export default function ResultPage() {
           key: r.key,
           label: r.label,
           value: r.value,
-          note: (r as any).note
+          note: r.note
         })),
         bigFiveLevels: {
           low: t("bigFive.levels.low"),
@@ -447,31 +451,35 @@ export default function ResultPage() {
   }
 
   // ✅ safe i18n fallback (nie wywali jeśli brakuje klucza w JSON)
-   const tr = (key: string, fallback: string) =>
-     safeGet(() => t(key as any), fallback);
+  const tr = (key: string, fallback: string) =>
+    safeGet(() => t(key as Parameters<typeof t>[0]), fallback);
  
-   async function shareResult() {
-     try {
-       const url = window.location.origin; // share homepage (auto language detect)
-       const title = tr("shareTitle", "tellmejoe.");
-       const text = tr("shareText", "Take the test and see your result.");
- 
-       if (navigator.share) {
-         await navigator.share({ title, text, url });
-         return;
-       }
- 
-       if (navigator.clipboard?.writeText) {
-         await navigator.clipboard.writeText(url);
-         toast(tr("shareCopied", "Link copied"));
-         return;
-       }
- 
-       window.prompt(tr("sharePrompt", "Copy this link:"), url);
-     } catch (e: any) {
+  async function shareResult() {
+    try {
+      const url = window.location.origin; // share homepage (auto language detect)
+      const title = tr("shareTitle", "tellmejoe.");
+      const text = tr("shareText", "Take the test and see your result.");
+
+      if (navigator.share) {
+        await navigator.share({ title, text, url });
+        return;
+      }
+
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(url);
+        toast(tr("shareCopied", "Link copied"));
+        return;
+      }
+
+      window.prompt(tr("sharePrompt", "Copy this link:"), url);
+    } catch (e: unknown) {
       // iOS: user closed share sheet (cancel) -> AbortError (to nie jest błąd)
-      const name = e?.name || "";
-      const msg = String(e?.message || "");
+      const err =
+        typeof e === "object" && e !== null
+          ? (e as { name?: string; message?: string })
+          : {};
+      const name = err.name ?? "";
+      const msg = String(err.message ?? "");
 
       if (
         name === "AbortError" ||
@@ -484,7 +492,7 @@ export default function ResultPage() {
       console.error("Share failed:", e);
       toast(tr("shareError", "Couldn’t share right now"));
     }
-   }
+  }
 
   if (!loaded || !data) return null;
 
@@ -720,7 +728,7 @@ export default function ResultPage() {
         {/* Top bar */}
         <div className="flex items-center justify-between gap-3">
           <div className="leading-tight min-w-0">
-            <a
+            <Link
               href="/"
               className="text-sm font-bold text-white/80 hover:text-white/95 transition"
               style={{
@@ -729,7 +737,7 @@ export default function ResultPage() {
               }}
             >
               {t("brandTitle")}
-            </a>
+            </Link>
             <div className="text-xs text-white/55">
               {t("brandSubtitle")}
             </div>
@@ -819,9 +827,11 @@ export default function ResultPage() {
                           {typeName?.charAt(0) || "?"}
                         </div>
                       ) : (
-                        <img
+                        <Image
                           src={avatarSrc}
                           alt=""
+                          width={44}
+                          height={44}
                           className="h-11 w-11 object-contain"
                           style={{ filter: "brightness(0) invert(1)" }}
                           onError={() => setAvatarError(true)}
@@ -883,13 +893,15 @@ export default function ResultPage() {
 	            <div className="relative shrink-0">
 	              <div className="pointer-events-none absolute -inset-2 rounded-full bg-black/20 blur-xl" />
 	              <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-black/25 ring-1 ring-white/10">
-	                <img
-	                  src={BIG_FIVE_ICON_SRC}
-	                  alt=""
-	                  aria-hidden="true"
-	                  className="h-8 w-8 object-contain opacity-100"
-	                  style={{ filter: "brightness(0) invert(1)" }}
-	                />
+		                <Image
+		                  src={BIG_FIVE_ICON_SRC}
+		                  alt=""
+		                  aria-hidden="true"
+                      width={32}
+                      height={32}
+		                  className="h-8 w-8 object-contain opacity-100"
+		                  style={{ filter: "brightness(0) invert(1)" }}
+		                />
 	              </div>
 	            </div>
 	          </div>
