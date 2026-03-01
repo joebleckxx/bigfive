@@ -125,7 +125,7 @@ export default async function Page({
 
         {/* COLLAGE */}
         <div className="mt-8 flex justify-center">
-          <div className="relative w-full max-w-md rounded-2xl shadow-[0_10px_28px_rgba(0,0,0,0.28)]">
+          <div className="relative w-full max-w-md">
             <Image
               src="/graphics/avatars-collage-compact-beta.webp"
               alt=""
