@@ -5,7 +5,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: Request) {
   try {
-    const { locale } = await req.json().catch(() => ({ locale: "en" }));
+    const { locale, checkoutAttemptId } = await req
+      .json()
+      .catch(() => ({ locale: "en", checkoutAttemptId: null }));
 
     const appUrl =
       process.env.NEXT_PUBLIC_APP_URL ||
@@ -15,6 +17,12 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: [{ price: process.env.STRIPE_PRICE_ID!, quantity: 1 }],
+      client_reference_id:
+        typeof checkoutAttemptId === "string" &&
+        checkoutAttemptId.length > 0 &&
+        checkoutAttemptId.length <= 255
+          ? checkoutAttemptId
+          : undefined,
 
       // ✅ Jedyna kluczowa zmiana dla metod płatności:
       // Apple Pay / Google Pay pojawią się jako "card wallets", a znikają dziwne metody.

@@ -7,12 +7,19 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const session_id = searchParams.get("session_id");
+    const attempt_id = searchParams.get("attempt_id");
 
     if (!session_id) {
       return NextResponse.json({ paid: false, error: "missing_session_id" }, { status: 400 });
     }
+    if (!attempt_id) {
+      return NextResponse.json({ paid: false, error: "missing_attempt_id" }, { status: 400 });
+    }
 
     const session = await stripe.checkout.sessions.retrieve(session_id);
+    if (session.client_reference_id !== attempt_id) {
+      return NextResponse.json({ paid: false, error: "attempt_mismatch" }, { status: 403 });
+    }
 
     const paid = session.payment_status === "paid";
     const paidAt = session.created ? session.created * 1000 : Date.now();
