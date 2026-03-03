@@ -4,17 +4,15 @@
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"
     },
-    "headline": {
-      "before": "Conhece-te.",
-      "accent": "Com clareza."
+    "headline": { "before": "Descobre a tua", "accent": "personalidade"
     },
     "subheadline": "Um olhar mais profundo sobre como pensas, decides e te relacionas com as pessoas.",
     "note": "Leva ~5–7 minutos. Sem conta.",
     "cta": "Começar o teste",
     "editorial": {
-      "line1": "25 perguntas simples - rápidas, focadas, reveladoras.",
-      "line2": "Um modelo híbrido único que transforma padrões em perceção prática que podes mesmo usar.",
-      "line3": "Vê como ages no dia a dia, lidas com a pressão e constróis relações."
+      "line1": "25 perguntas simples — pronto em apenas alguns minutos.",
+      "line2": "Uma visão prática de como funcionas no dia a dia, como reages sob pressão e o teu estilo ao construir relações.",
+      "line3": "Um teste baseado num modelo híbrido que mapeia os teus padrões para um dos 16 tipos profile."
     },
     "footer": "TMJ • tellmejoe."
   },
