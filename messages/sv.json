@@ -1,15 +1,15 @@
 {
   "Home": {
     "brand": { "title": "tellmejoe.", "subtitle": "no judgment • just patterns" },
-    "headline": { "before": "Känn dig själv.", "accent": "Klart." },
+    "headline": { "before": "Upptäck din", "accent": "personlighet" },
     "subheadline": "En djupare titt på hur du tänker, fattar beslut och relaterar till andra människor.",
     "note": "Tar ~5–7 minuter. Inget konto krävs.",
     "cta": "Starta testet",
     "editorial": {
-      "line1": "25 enkla frågor - snabbt, fokuserat, avslöjande.",
-      "line2": "En unik hybridmodell som omvandlar mönster till praktisk insikt du faktiskt kan använda.",
-      "line3": "Se hur du agerar i vardagen, hanterar press och bygger relationer."
-  },
+      "line1": "25 enkla frågor — klart på bara några minuter.",
+      "line2": "Praktisk insikt i hur du fungerar i vardagen, reagerar under press och bygger relationer.",
+      "line3": "Ett test baserat på en hybridmodell som mappar dina mönster till en av 16 typer profile."
+    },
     "footer": "TMJ • tellmejoe."
   },
 

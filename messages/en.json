@@ -1,14 +1,14 @@
 {
   "Home": {
     "brand": { "title": "tellmejoe.", "subtitle": "no judgment • just patterns" },
-    "headline": { "before": "Know yourself.", "accent": "Clearly." },
+    "headline": { "before": "Discover your", "accent": "personality" },
     "subheadline": "A deeper look at how you think, decide, and relate to people.",
     "note": "Takes ~5–7 minutes. No account.",
     "cta": "Start the test",
     "editorial": {
-      "line1": "25 simple questions - quick, focused, revealing.",
-      "line2": "A unique hybrid model that turns patterns into practical insight you can actually use.",
-      "line3": "See how you act day to day, handle pressure, and build relationships."
+      "line1": "25 simple questions — ready in just a few minutes.",
+      "line2": "Practical insight into how you operate day to day, respond under pressure, and your style of building relationships.",
+      "line3": "A test based on a hybrid model that maps your patterns into one of 16 profiles."
     },
     "footer": "tellmejoe. · TMJ"
   },
