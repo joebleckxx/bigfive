@@ -44,8 +44,10 @@
       "line1": "Detaljerad poängsättning av egenskaper (0–100) samt mappning av dina mönster till 1 av 16 personlighetsprofiler.",
       "line2": "Förstå hur dina styrkor - och blinda fläckar - visar sig i sättet du agerar.",
       "line3": "Insikt i hur du reagerar under press och vad som hjälper dig att behålla balans i relationer."
-    },  
+    },
     "cta": "Se fullständiga resultat för 1 $",
+    "profileReady": "Din profil är redo.",
+    "whatWillIGet": "Vad får jag?",
     "note": "Engångsbetalning · Ingen prenumeration",
     "stripeNote": "Säker betalning via Stripe",
     "loading": "Skickar dig till säker betalning...",

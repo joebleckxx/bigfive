@@ -46,6 +46,7 @@ const ANSWERS_KEY = "personality_answers_v1";
 
 const PAID_KEY = "personality_paid_v1";
 const PAID_AT_KEY = "personality_paid_at_v1";
+const CHECKOUT_ATTEMPT_KEY = "personality_checkout_attempt_v1";
 const GRACE_MS = 30 * 60 * 1000; // 30 minutes
 
 const TYPE_CODES = Array.from({ length: 16 }, (_, i) =>
@@ -189,7 +190,15 @@ export default function ResultPage() {
 
         // Wracamy ze Stripe → weryfikuj payment
         if (sessionId) {
-          const res = await fetch(`/api/stripe/verify?session_id=${encodeURIComponent(sessionId)}`);
+          const checkoutAttemptId = sessionStorage.getItem(CHECKOUT_ATTEMPT_KEY);
+          if (!checkoutAttemptId) {
+            router.replace("/pay");
+            return;
+          }
+
+          const res = await fetch(
+            `/api/stripe/verify?session_id=${encodeURIComponent(sessionId)}&attempt_id=${encodeURIComponent(checkoutAttemptId)}`
+          );
           const json = await res.json().catch(() => null);
 
           if (!res.ok || !json?.paid) {
@@ -199,6 +208,7 @@ export default function ResultPage() {
 
           localStorage.setItem(PAID_KEY, "true");
           localStorage.setItem(PAID_AT_KEY, String(json.paidAt ?? Date.now()));
+          sessionStorage.removeItem(CHECKOUT_ATTEMPT_KEY);
 
           // Policz wynik z answers
           const rawAnswers = localStorage.getItem(ANSWERS_KEY);
