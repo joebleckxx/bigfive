@@ -110,7 +110,7 @@ export default async function Page({
           <Link
             href="/test"
             className={[
-              "relative inline-flex w-full items-center justify-center rounded-3xl px-6 py-4 text-base font-semibold text-white",
+              "relative inline-flex w-full items-center justify-center rounded-[1.9rem] px-6 py-4 text-base font-semibold text-white",
               CTA_GRADIENT,
               "shadow-[0_20px_60px_rgba(99,102,241,0.28)]",
               "transition",

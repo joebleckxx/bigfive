@@ -280,7 +280,10 @@ export default function PayPage() {
               </div>
 
               <div className="relative mt-5 -mx-6 bg-white/5 px-6 pt-5 pb-0 sm:-mx-8 sm:px-8 sm:pt-6 sm:pb-0">
-                <div className="blur-[4px] opacity-80">
+                <div className="relative pr-5 blur-[4px] opacity-80 sm:pr-6">
+                  <div className="pointer-events-none absolute right-0 top-2 bottom-2 z-[1] w-[3px] rounded-full bg-white/12">
+                    <div className="absolute left-0 top-[11px] h-10 w-[3px] rounded-full bg-white/45 shadow-[0_0_12px_rgba(255,255,255,0.2)]" />
+                  </div>
                   <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-white/40">
                     <svg
                       viewBox="0 0 24 24"
@@ -338,6 +341,7 @@ export default function PayPage() {
                     </div>
                   </div>
                 </div>
+                <div className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-b from-transparent via-black/20 to-black/35" />
                 <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
                   <p className="text-sm tracking-wide text-white/70">
                     {(() => {
@@ -358,7 +362,7 @@ export default function PayPage() {
           <button
             onClick={handleUnlock}
             className={[
-              "relative inline-flex w-full items-center justify-center rounded-3xl px-6 py-4 text-base font-semibold text-white",
+              "relative inline-flex w-full items-center justify-center rounded-[1.9rem] px-6 py-4 text-base font-semibold text-white",
               CTA_GRADIENT,
               "shadow-[0_20px_60px_rgba(99,102,241,0.28)]",
               "transition",
@@ -400,7 +404,7 @@ export default function PayPage() {
               );
             })()}
           </p>
-          <p className="mt-6 text-center text-sm text-white/75">
+          <p className="mt-8 text-center text-sm text-white/60">
             {(() => {
               try {
                 return t("whatWillIGet");
@@ -413,10 +417,10 @@ export default function PayPage() {
         </div>
 
         {/* 3 lines – same pattern as Home */}
-        <div className="mt-6 space-y-4 text-sm leading-relaxed text-white/80">
+        <div className="mt-7 space-y-4 text-sm leading-relaxed text-white/80">
           <div className="flex gap-3">
             <CheckIcon />
-            <p className="m-0">{t("editorial.line3")}</p>
+            <p className="m-0">{t("editorial.line1")}</p>
           </div>
 
           <div className="flex gap-3">
@@ -426,7 +430,7 @@ export default function PayPage() {
 
           <div className="flex gap-3">
             <CheckIcon />
-            <p className="m-0">{t("editorial.line1")}</p>
+            <p className="m-0">{t("editorial.line3")}</p>
           </div>
         </div>
 
