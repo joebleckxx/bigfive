@@ -43,6 +43,7 @@ type StoredResultV1 = {
 
 const STORAGE_KEY = "personality_result_v1";
 const ANSWERS_KEY = "personality_answers_v1";
+const QUESTION_ORDER_KEY = "personality_question_order_v1";
 
 const PAID_KEY = "personality_paid_v1";
 const PAID_AT_KEY = "personality_paid_at_v1";
@@ -101,6 +102,19 @@ function safeGet<T>(fn: () => T, fallback: T): T {
     return fn();
   } catch {
     return fallback;
+  }
+}
+
+function readQuestionOrder(total: number): string[] | undefined {
+  try {
+    const raw = localStorage.getItem(QUESTION_ORDER_KEY);
+    if (!raw) return undefined;
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length !== total) return undefined;
+    if (!parsed.every((id) => typeof id === "string")) return undefined;
+    return parsed;
+  } catch {
+    return undefined;
   }
 }
 
@@ -217,7 +231,8 @@ export default function ResultPage() {
             return;
           }
           const answers = JSON.parse(rawAnswers);
-          const payload = calculateResult(answers);
+          const questionOrder = readQuestionOrder(answers.length);
+          const payload = calculateResult(answers, questionOrder);
 
           localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
           setData(payload);
