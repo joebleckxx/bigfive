@@ -15,10 +15,33 @@ export default async function Page({
 }) {
   const locale = params.locale;
   const t = await getTranslations({ locale, namespace: "Home" });
+  const featureCards = [
+    {
+      icon: "/icons/home/feature-questions.svg",
+      iconAlt: "Questions feature icon",
+      iconBgClass: "bg-[rgba(56,167,214,0.18)]",
+      title: t("features.item1.title"),
+      description: t("editorial.line1"),
+    },
+    {
+      icon: "/icons/home/feature-insights.svg",
+      iconAlt: "Insights feature icon",
+      iconBgClass: "bg-[rgba(170,85,247,0.17)]",
+      title: t("features.item2.title"),
+      description: t("editorial.line2"),
+    },
+    {
+      icon: "/icons/home/feature-hybrid.svg",
+      iconAlt: "Hybrid model feature icon",
+      iconBgClass: "bg-[rgba(129,99,246,0.17)]",
+      title: t("features.item3.title"),
+      description: t("editorial.line3"),
+    },
+  ];
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 sm:px-5 py-10 text-white"
+      className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 py-10 text-white sm:px-5"
     >
       <TMJBackground />
 
@@ -28,114 +51,100 @@ export default async function Page({
           <div className="leading-tight">
             <Link
               href="/"
-              className="text-sm font-bold tracking-tight text-white/80"
-              style={{
-                fontFamily:
-                  '"Satoshi", var(--font-geist-sans), system-ui, sans-serif',
-              }}
+              className="bg-[linear-gradient(90deg,#57D6FF_0%,#7CB6FF_42%,#C08CFF_72%,#F08CFF_100%)] bg-clip-text text-sm font-bold tracking-tight text-transparent"
             >
               {t("brand.title")}
             </Link>
-            <div className="text-xs text-white/55">{t("brand.subtitle")}</div>
           </div>
           
           <LanguageSwitcher />
         </div>
 
         {/* HERO */}
-        <h1 className="mt-10 break-normal text-[2.4rem] sm:text-[2.6rem] font-semibold leading-[1.05] tracking-tight [hyphens:auto] [text-wrap:balance]">
-          {t("headline.before")}{" "}
-          <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent">
-            {t("headline.accent")}
-          </span>
-        </h1>
-
-        <p className="mt-4 text-base leading-relaxed text-white/90">
-          {t("subheadline")}
-        </p>
-
-        {/* EDITORIAL – VARIANT A */}
-        <div className="mt-6 space-y-4 text-sm leading-relaxed text-white/80">
-          <div className="flex gap-3">
-            <svg
-              className="mt-0.5 h-6 w-6 shrink-0 text-indigo-300"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+        <div className="mt-18 flex justify-center">
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.04] bg-[#0D1A34]/95 px-5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_16px_40px_rgba(0,0,0,0.16)]">
+            <Image
+              src="/icons/home/badge-sparkle.svg"
+              alt=""
               aria-hidden="true"
-            >
-              <path d="M5 12l5 5L19 7" />
-            </svg>
-            <p className="m-0">{t("editorial.line1")}</p>
-          </div>
-
-          <div className="flex gap-3">
-            <svg
-              className="mt-0.5 h-6 w-6 shrink-0 text-indigo-300"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M5 12l5 5L19 7" />
-            </svg>
-            <p className="m-0">{t("editorial.line2")}</p>
-          </div>
-
-          <div className="flex gap-3">
-            <svg
-              className="mt-0.5 h-6 w-6 shrink-0 text-indigo-300"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M5 12l5 5L19 7" />
-            </svg>
-            <p className="m-0">{t("editorial.line3")}</p>
+              width={16}
+              height={16}
+              className="h-4 w-4"
+            />
+            <span className="text-[0.78rem] font-bold tracking-[0.16em] text-[#79D9FF]">
+              {t("badge")}
+            </span>
           </div>
         </div>
 
+        <h1 className="mt-10 text-center text-[4.4rem] font-bold leading-[0.92] tracking-[-0.05em] text-[#E8ECFF] sm:text-[4.9rem]">
+          <span className="block">{t("headline.line1")}</span>
+          <span className="mt-2 block">
+            {t("headline.line2")}{" "}
+            <span className="bg-[linear-gradient(90deg,#4ED8FF_0%,#66C6FF_30%,#7EAAFF_68%,#B38CFF_100%)] bg-clip-text text-transparent">
+              {t("headline.line2Accent")}
+            </span>
+          </span>
+          <span className="mt-2 block bg-[linear-gradient(90deg,#9A7BFF_0%,#C57EFF_52%,#F08CFF_100%)] bg-clip-text text-transparent">
+            {t("headline.line3")}
+          </span>
+        </h1>
+
+        <p className="mx-auto mt-8 max-w-[23rem] text-center text-[1.14rem] leading-[1.72] tracking-[-0.02em] text-[#C7CAE0] sm:max-w-[24.5rem] sm:text-[1.2rem]">
+          {t("subheadline")}
+        </p>
+
+        <div className="mt-16 space-y-7">
+          {featureCards.map((card) => (
+            <section
+              key={card.title}
+              className="rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95 px-7 pb-10 pt-9 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)]"
+            >
+              <div className={`mx-auto flex h-16 w-16 items-center justify-center rounded-full ${card.iconBgClass}`}>
+                <Image
+                  src={card.icon}
+                  alt={card.iconAlt}
+                  width={34}
+                  height={34}
+                  className="h-[2.125rem] w-[2.125rem]"
+                />
+              </div>
+              <h2 className="mt-10 text-[2rem] font-bold leading-[1.08] tracking-[-0.04em] text-[#EEF1FF]">
+                {card.title}
+              </h2>
+              <p className="mx-auto mt-5 max-w-[19rem] text-[1.06rem] leading-[1.72] tracking-[-0.02em] text-[#B8BDD8]">
+                {card.description}
+              </p>
+            </section>
+          ))}
+        </div>
+
         {/* CTA */}
-        <div className="mt-8">
+        <div className="mt-12 text-center">
           <Link
             href="/test"
             className={[
-              "relative inline-flex w-full items-center justify-center rounded-[1.9rem] px-6 py-4 text-base font-semibold text-white",
-              CTA_GRADIENT,
-              "shadow-[0_20px_60px_rgba(99,102,241,0.28)]",
-              "transition",
+              "relative inline-flex min-w-[16.5rem] items-center justify-center gap-3 rounded-full px-8 py-5 text-[1.05rem] font-bold text-[#09101D]",
+              "bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)]",
+              "shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_0_35px_rgba(199,110,255,0.22),0_0_70px_rgba(79,206,255,0.14)]",
+              "transition-transform duration-200 hover:scale-[1.01]",
               "focus:outline-none focus:ring-4 focus:ring-indigo-400/30",
               "cursor-pointer",
             ].join(" ")}
           >
-            {t("cta")} →
-          </Link>
-
-        </div>
-
-        {/* COLLAGE */}
-        <div className="mt-8 flex justify-center">
-          <div className="relative w-full max-w-md">
+            <span>{t("cta")}</span>
             <Image
-              src="/graphics/avatars-collage-compact-beta.webp"
+              src="/icons/shared/cta-icon.svg"
               alt=""
-              width={900}
-              height={420}
-              priority
-              sizes="(max-width: 640px) 100vw, 448px"
-              className="w-full select-none"
+              aria-hidden="true"
+              width={28}
+              height={28}
+              className="h-7 w-7"
             />
-          </div>
+          </Link>
+          <p className="mt-7 text-[0.7rem] font-medium tracking-[0.32em] text-white/35">
+            {t("note")}
+          </p>
         </div>
 
         <LegalFooter />

@@ -21,13 +21,13 @@ export default function TMJBackground({ className = "" }: Props) {
         style={{
           backgroundImage: [
             // violet (primary)
-            "radial-gradient(112% 88% at 74% 30%, rgba(124,58,237,0.28) 0%, rgba(124,58,237,0) 72%)",
+            "radial-gradient(108% 82% at 74% 28%, rgba(124,58,237,0.18) 0%, rgba(124,58,237,0) 68%)",
             // blue (primary, equal weight)
             "radial-gradient(118% 92% at 86% 84%, rgba(59,130,246,0.28) 0%, rgba(59,130,246,0) 70%)",
             // indigo (accent, smaller + softer)
             "radial-gradient(82% 62% at 22% 86%, rgba(99,102,241,0.12) 0%, rgba(99,102,241,0) 72%)",
             // lift (keeps shadows from going flat)
-            "radial-gradient(120% 100% at 12% 12%, rgba(124,58,237,0.10) 0%, rgba(124,58,237,0) 62%)",
+            "radial-gradient(112% 92% at 12% 10%, rgba(124,58,237,0.05) 0%, rgba(124,58,237,0) 56%)",
           ].join(", "),
         }}
       />

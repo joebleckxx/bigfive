@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
@@ -232,6 +233,11 @@ export default function TestPage() {
     };
   }, [total]);
 
+  const answeredCount = useMemo(
+    () => answers.filter((value) => value >= 1 && value <= 5).length,
+    [answers]
+  );
+
   const progressText = t("progress", {
     current: Math.min(index + 1, total),
     total
@@ -239,8 +245,8 @@ export default function TestPage() {
 
   const progress = useMemo(() => {
     if (total === 0) return 0;
-    return Math.round(((index + 1) / total) * 100);
-  }, [index, total]);
+    return Math.round((answeredCount / total) * 100);
+  }, [answeredCount, total]);
 
   // ✅ ZAMIANA: pytanie wg wylosowanej kolejności
   const currentQuestion = orderedQuestions[index];
@@ -304,7 +310,6 @@ export default function TestPage() {
 
     setIsAdvancing(true);
     setTapSelected(v);
-
     commitAnswer(v);
     requestAnimationFrame(() => {
       setTapSelected(null);
@@ -328,15 +333,13 @@ export default function TestPage() {
 
       <div className="relative mx-auto max-w-xl">
         {/* Topbar */}
-        <div className="relative z-30 mb-6 flex items-center justify-between">
-          <div className="text-sm text-white/70">{progressText}</div>
-
+        <div className="relative z-30 mb-6 flex items-center justify-end">
           <div className="flex items-center gap-4">
             <button
               onClick={goBack}
               type="button"
               disabled={index === 0}
-              className="text-sm text-white/60 underline underline-offset-4 decoration-white/20 hover:text-white/90 hover:decoration-white/45 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
+              className="text-sm text-white/62 underline underline-offset-4 decoration-white/40 hover:text-white hover:decoration-white/55 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
               aria-disabled={index === 0 || isAdvancing}
             >
               {t("back")}
@@ -387,10 +390,18 @@ export default function TestPage() {
         </div>
 
         {/* Progress */}
-        <div className="mb-8">
-          <div className="h-[6px] w-full rounded-full bg-white/10">
+        <div className="mb-10">
+          <div className="mb-3 flex items-center justify-between gap-4">
+            <div className="text-[0.98rem] font-medium tracking-[-0.03em] text-white/92">
+              {progressText}
+            </div>
+            <div className="text-[0.82rem] font-medium tracking-[0.16em] text-[#67D7FF] uppercase">
+              {progress}% COMPLETE
+            </div>
+          </div>
+          <div className="relative h-[8px] w-full overflow-hidden rounded-full bg-[#1A2544] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
             <div
-              className="h-[6px] rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 transition-[width] duration-150"
+              className="absolute left-0 top-0 h-[8px] rounded-full bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] shadow-[0_0_18px_rgba(82,212,255,0.28)] transition-[width] duration-150"
               style={{
                 width: `${progress}%`,
                 minWidth: index === 0 ? "24px" : undefined
@@ -401,9 +412,9 @@ export default function TestPage() {
 
         {/* Test */}
         <div className="relative z-10 mt-8">
-          <div className="rounded-3xl border border-white/10 bg-white/8
+          <div className="rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95
                           px-4 pt-4 pb-5
-                          shadow-xl backdrop-blur-2xl
+                          shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl
                           sm:px-6 sm:pt-6 sm:pb-7">
             <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
               {orderReady ? q(currentQuestion.id) : "\u00A0"}
@@ -443,8 +454,37 @@ export default function TestPage() {
                       tapping ? "border-white/70 bg-white/8" : "",
                       isAdvancing ? "pointer-events-none cursor-not-allowed" : ""
                     ].join(" ")}
+                    style={
+                      selected || tapping
+                        ? { borderColor: "#67D7FF" }
+                        : undefined
+                    }
                   >
-                    <span className="text-sm font-medium text-white/90">{s(String(v))}</span>
+                    <span className="flex items-center justify-between gap-4">
+                      <span className="text-sm font-medium text-white/90">
+                        {s(String(v))}
+                      </span>
+                      <span
+                        className={[
+                          "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors duration-150",
+                          selected || tapping
+                            ? "border-[#67D7FF] bg-[#67D7FF]"
+                            : "border-white/10 bg-transparent",
+                        ].join(" ")}
+                        aria-hidden="true"
+                      >
+                        {(selected || tapping) && (
+                          <Image
+                            src="/icons/test/answer-check.svg"
+                            alt=""
+                            aria-hidden="true"
+                            width={12}
+                            height={12}
+                            className="h-3 w-3"
+                          />
+                        )}
+                      </span>
+                    </span>
                   </button>
                 );
               })}

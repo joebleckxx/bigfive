@@ -1,14 +1,25 @@
 {
   "Home": {
     "brand": { "title": "tellmejoe.", "subtitle": "no judgment • just patterns" },
-    "headline": { "before": "Discover your", "accent": "personality" },
-    "subheadline": "A deeper look at how you think, decide, and relate to people.",
-    "note": "Takes ~5–7 minutes. No account.",
-    "cta": "Start the test",
+    "headline": {
+      "line1": "Discover",
+      "line2": "Your",
+      "line2Accent": "True",
+      "line3": "Self"
+    },
+    "badge": "THE DIGITAL SOUL ASSESSMENT",
+    "subheadline": "Embark on a guided visual journey designed to uncover the layers of your personality. No clinical labels-just deep insights curated for your growth.",
+    "note": "TAKES APPROXIMATELY 4 MINUTES",
+    "cta": "START TEST",
+    "features": {
+      "item1": { "title": "25 simple questions" },
+      "item2": { "title": "Practical insights" },
+      "item3": { "title": "A hybrid test model" }
+    },
     "editorial": {
-      "line1": "25 simple questions - ready in just a few minutes.",
-      "line2": "Practical insight into how you operate day to day, respond under pressure, and your style of building relationships.",
-      "line3": "A test based on a hybrid model that maps your patterns into one of 16 profiles."
+      "line1": "Quick yet profound queries designed to bypass the ego and reveal your core.",
+      "line2": "Actionable data that translates your personality into tangible real-world growth.",
+      "line3": "A unique synthesis of leading personality systems and behavioral analytics, offering a deeper, multi-dimensional view of your profile."
     },
     "footer": "tellmejoe. · TMJ"
   },
@@ -34,16 +45,22 @@
   "Pay": {
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
+    "badge": "ANALYSIS COMPLETE 99%",
     "headline": { "before": "Unlock your full", "accent": "insight", "after": "" },
-    "description": "A clear, structured breakdown of how you operate.",
+    "description": "A clear, structured breakdown of how you operate. Deep-dive into your cognitive architecture.",
     "editorial": {
+      "title1": "Your Personal Blueprint",
+      "title2": "Reveal Your Blind Spots",
+      "title3": "Mastery Under Pressure",
       "line1": "Detailed trait scores (0–100) and mapping of your patterns to 1 of 16 personality profiles.",
       "line2": "Understand how your strengths - and blind spots - translate into the way you act.",
       "line3": "Insight into how you respond under pressure and what helps you stay balanced in relationships."
     },
-    "cta": "See full results for $1",
+    "cta": "UNLOCK FULL RESULT",
     "profileReady": "Your full profile is ready.",
+    "primaryArchetype": "Your Primary Archetype",
     "whatWillIGet": "What will I get?",
+    "socialProof": "Join 12,000+ others exploring their personality.",
     "note": "One-time payment · No subscription",
     "stripeNote": "Secure checkout via Stripe",
     "loading": "Redirecting to secure checkout...",
