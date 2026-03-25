@@ -77,7 +77,10 @@ export default async function Page({
           </div>
         </div>
 
-        <h1 className="mt-10 py-[0.04em] text-center text-[4.4rem] font-bold leading-[0.92] tracking-[-0.05em] text-[#E8ECFF] sm:text-[4.9rem]">
+        <h1
+          className="mx-auto mt-10 py-[0.04em] text-center text-[4.4rem] font-bold leading-[0.95] tracking-[-0.05em] text-[#E8ECFF] sm:text-[4.9rem]"
+          style={{ maxWidth: "calc(100% - 0.5rem)" }}
+        >
           <span className="block">{t("headline.line1")}</span>
           <span className="mt-2 block">
             {t("headline.line2")}{" "}
