@@ -15,9 +15,15 @@
     "note": "DEMORA APROXIMADAMENTE 4 MINUTOS",
     "cta": "COMEÇAR O TESTE",
     "features": {
-      "item1": { "title": "25 perguntas simples" },
-      "item2": { "title": "Insights práticos" },
-      "item3": { "title": "Um modelo de teste híbrido" }
+      "item1": {
+        "title": "25 perguntas simples"
+      },
+      "item2": {
+        "title": "Insights práticos"
+      },
+      "item3": {
+        "title": "Um modelo de teste híbrido"
+      }
     },
     "editorial": {
       "line1": "Perguntas rápidas, mas surpreendentemente profundas, desenhadas para contornar o ego e revelar o teu núcleo.",
@@ -52,19 +58,29 @@
       "accent": "clareza",
       "after": ""
     },
-    "description": "Uma análise clara e estruturada de como funcionas.",
+    "description": "Uma análise clara e estruturada de como funcionas. Um mergulho profundo na tua arquitetura cognitiva.",
     "editorial": {
       "line1": "Pontuações detalhadas de traços (0–100) e mapeamento dos seus padrões para 1 de 16 perfis de personalidade.",
       "line2": "Percebe como os teus pontos fortes - e pontos cegos - se traduzem na forma como ages.",
-      "line3": "Insight sobre como reages sob pressão e o que te ajuda a manter o equilíbrio nas relações."
+      "line3": "Insight sobre como reages sob pressão e o que te ajuda a manter o equilíbrio nas relações.",
+      "title1": "O teu mapa pessoal",
+      "title2": "Revela os teus pontos cegos",
+      "title3": "Domínio sob pressão"
     },
-    "cta": "Ver resultados completos por 1 $",
+    "cta": "DESBLOQUEIA O RESULTADO COMPLETO",
     "profileReady": "O teu perfil completo está pronto.",
     "whatWillIGet": "O que vou receber?",
     "note": "Pagamento único · Sem subscrição",
     "stripeNote": "Pagamento seguro via Stripe",
     "loading": "Redirecionando para pagamento seguro...",
-    "footer": "TMJ • tellmejoe."
+    "footer": "TMJ • tellmejoe.",
+    "badge": "ANÁLISE CONCLUÍDA 99%",
+    "primaryArchetype": "O teu arquétipo principal",
+    "socialProof": "Junta-te a mais de 12 000 pessoas a explorar a sua personalidade.",
+    "socialProofCount": "+12k",
+    "onlyOneDollarPrefix": "Só",
+    "onlyOneDollarAmount": "$1",
+    "stripeLabel": "Stripe"
   },
   "Result": {
     "brandTitle": "tellmejoe.",
@@ -74,13 +90,11 @@
       "text": "Não vejo resultados guardados. Volta ao teste e responde às perguntas.",
       "backToTest": "Voltar ao teste"
     },
-    
     "hero": {
-    "before": "Seus",
-    "accent": "padrões de personalidade",
-    "sub": "Um retrato claro de como você tende a pensar, agir e se conectar - moldado pelo nosso modelo híbrido."
+      "before": "Seus",
+      "accent": "padrões de personalidade",
+      "sub": "Um retrato claro de como você tende a pensar, agir e se conectar - moldado pelo nosso modelo híbrido."
     },
-
     "menu": "Menu",
     "menuRetake": "Repetir",
     "pdf": {
@@ -90,14 +104,12 @@
       "error": "Não foi possível gerar o PDF. Verifica a consola.",
       "disclaimer": "Este relatório é apenas informativo. Não é uma ferramenta médica nem de diagnóstico."
     },
-
     "share": "Compartilhar",
     "shareTitle": "tellmejoe.",
     "shareText": "Acabei de fazer TMJ. Faça o teste e veja seu resultado.",
     "shareCopied": "Link copiado",
     "sharePrompt": "Copiar este link:",
     "shareError": "Não foi possível compartilhar agora",
-
     "retake": "Repetir",
     "retakeConfirm": "Repetir irá repor este resultado. Um novo resultado requer pagamento. Continuar?",
     "yourTypeLabel": "O teu perfil",

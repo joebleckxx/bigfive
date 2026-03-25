@@ -15,9 +15,15 @@
     "note": "ZAJMUJE OKOŁO 4 MINUT",
     "cta": "ROZPOCZNIJ TEST",
     "features": {
-      "item1": { "title": "25 prostych pytań" },
-      "item2": { "title": "Praktyczne wglądy" },
-      "item3": { "title": "Hybrydowy model testu" }
+      "item1": {
+        "title": "25 prostych pytań"
+      },
+      "item2": {
+        "title": "Praktyczne wglądy"
+      },
+      "item3": {
+        "title": "Hybrydowy model testu"
+      }
     },
     "editorial": {
       "line1": "Szybkie, ale zaskakująco głębokie pytania zaprojektowane tak, by ominąć ego i odsłonić Twój rdzeń.",
@@ -52,19 +58,29 @@
       "accent": "wyniki",
       "after": ""
     },
-    "description": "Jasne, uporządkowane omówienie tego, jak działasz.",
+    "description": "Jasne, uporządkowane omówienie tego, jak działasz. Głębokie zanurzenie w architekturę Twojego myślenia.",
     "editorial": {
       "line1": "Szczegółowa punktacja cech (0–100) oraz mapowanie Twoich wzorców do 1 z 16 profili osobowości.",
       "line2": "Zrozum, jak Twoje mocne i słabe strony wpływają na Twoje codzienne decyzje i zachowania.",
-      "line3": "Wgląd w to, jak reagujesz pod presją i co pomaga Ci zachować równowagę w relacjach."
+      "line3": "Wgląd w to, jak reagujesz pod presją i co pomaga Ci zachować równowagę w relacjach.",
+      "title1": "Twój osobisty blueprint",
+      "title2": "Odkryj swoje ślepe punkty",
+      "title3": "Opanowanie pod presją"
     },
-    "cta": "Zobacz pełne wyniki za 1 $",
+    "cta": "ODBLOKUJ PEŁNY WYNIK",
     "profileReady": "Twój pełny profil jest gotowy.",
     "whatWillIGet": "Co otrzymam?",
     "note": "Płatność jednorazowa · Brak subskrypcji",
     "stripeNote": "Bezpieczna płatność przez Stripe",
     "loading": "Przekierowuję do bezpiecznej płatności...",
-    "footer": "TMJ • tellmejoe."
+    "footer": "TMJ • tellmejoe.",
+    "badge": "ANALIZA ZAKOŃCZONA 99%",
+    "primaryArchetype": "Twój główny archetyp",
+    "socialProof": "Dołącz do ponad 12 000 osób odkrywających swoją osobowość.",
+    "socialProofCount": "+12k",
+    "onlyOneDollarPrefix": "Tylko",
+    "onlyOneDollarAmount": "$1",
+    "stripeLabel": "Stripe"
   },
   "Result": {
     "brandTitle": "tellmejoe.",
@@ -74,13 +90,11 @@
       "text": "Nie widzę zapisanych wyników. Wróć do testu i odpowiedz na pytania.",
       "backToTest": "Wróć do testu"
     },
-
     "hero": {
-    "before": "Twoje",
-    "accent": "wzorce osobowości",
-    "sub": "Jasny obraz tego, jak zwykle myślisz, działasz i budujesz relacje - ukształtowany przez nasz hybrydowy model."
+      "before": "Twoje",
+      "accent": "wzorce osobowości",
+      "sub": "Jasny obraz tego, jak zwykle myślisz, działasz i budujesz relacje - ukształtowany przez nasz hybrydowy model."
     },
-
     "menu": "Menu",
     "menuRetake": "Powtórz",
     "pdf": {
@@ -90,14 +104,12 @@
       "error": "Nie udało się wygenerować PDF. Sprawdź konsolę.",
       "disclaimer": "Ten raport służy wyłącznie do celów informacyjnych. Nie jest narzędziem medycznym ani diagnostycznym."
     },
-
     "share": "Udostępnij",
     "shareTitle": "tellmejoe.",
     "shareText": "Właśnie zrobiłem TMJ. Zrób test i zobacz swój wynik.",
     "shareCopied": "Link skopiowany",
     "sharePrompt": "Skopiuj ten link:",
     "shareError": "Nie udało się udostępnić",
-    
     "retake": "Powtórz",
     "retakeConfirm": "Powtórzenie zresetuje ten wynik. Kolejny wynik wymaga płatności. Kontynuować?",
     "yourTypeLabel": "Twój profil",
@@ -128,7 +140,6 @@
       "S": "wyżej = większy spokój pod presją"
     },
     "footer": "TMJ • tellmejoe.",
-
     "profileSections": {
       "core": "Twój rdzeń",
       "daily": "Jak działasz na co dzień",
@@ -165,7 +176,6 @@
     "N4": "Mój nastrój potrafi szybko się zmieniać.",
     "N5": "Zwykle zachowuję spokój pod presją."
   },
-  
   "Types": {
     "P01": {
       "name": "Myśliciel",
@@ -232,7 +242,6 @@
       "desc": "Wnosi energię i uruchamia ruch wokół siebie."
     }
   },
-
   "Profiles": {
     "P01": {
       "core": [

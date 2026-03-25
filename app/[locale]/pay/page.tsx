@@ -231,6 +231,7 @@ export default function PayPage() {
   const headlineLine2 = headlineBeforeWords.slice(1, -1).join(" ");
   const headlineLine3Accent = headlineBeforeWords.at(-1) ?? "";
   const headlineLine3 = t("headline.accent");
+  const stripeLabel = t("stripeLabel");
 
   return (
     <main
@@ -260,7 +261,7 @@ export default function PayPage() {
           </div>
         </div>
 
-        <h1 className="mt-10 text-center text-[4.4rem] font-bold leading-[0.92] tracking-[-0.05em] text-[#E8ECFF] sm:text-[4.9rem]">
+        <h1 className="mt-10 text-center text-[clamp(3.35rem,15.8vw,4.41rem)] font-bold leading-[1] tracking-[-0.05em] text-[#E8ECFF]">
           <span className="block">{headlineLine1}</span>
           <span className="mt-2 block">{headlineLine2}</span>
           <span className="mt-2 block">
@@ -358,7 +359,7 @@ export default function PayPage() {
                 <p className="m-0 text-center text-[0.82rem] font-medium text-[rgba(255,255,255,0.88)]">
                   {(() => {
                     const stripeNote = t("stripeNote");
-                    const stripeWord = "Stripe";
+                    const stripeWord = stripeLabel;
 
                     if (!stripeNote.includes(stripeWord)) {
                       return stripeNote;
@@ -408,7 +409,7 @@ export default function PayPage() {
                   </div>
                 ))}
                 <div className="-ml-3 relative z-10 flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#0B1730] bg-[#9A5FFF] text-[1rem] font-semibold tracking-tight text-white shadow-[0_8px_18px_rgba(0,0,0,0.18)]">
-                  +12k
+                  {t("socialProofCount")}
                 </div>
               </div>
               <p className="mt-5 m-0 max-w-[10.5rem] text-[0.98rem] font-medium leading-[1.35] tracking-[-0.03em] text-white/80">
@@ -454,20 +455,14 @@ export default function PayPage() {
                     className="h-5 w-5 opacity-100"
                   />
                   <span className="text-[0.92rem] text-white/80">
-                    Only <span className="font-bold">$1</span>
+                    {t("onlyOneDollarPrefix")} <span className="font-bold">{t("onlyOneDollarAmount")}</span>
                   </span>
                 </div>
               </div>
             </div>
           </div>
           <p className="mt-12 text-center text-[0.76rem] font-medium tracking-[0.18em] text-white/90 uppercase">
-            {(() => {
-              try {
-                return t("whatWillIGet");
-              } catch {
-                return "What will I get?";
-              }
-            })()}
+            {t("whatWillIGet")}
           </p>
 
         </div>

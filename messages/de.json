@@ -15,9 +15,15 @@
     "note": "DAUERT UNGEFÄHR 4 MINUTEN",
     "cta": "TEST STARTEN",
     "features": {
-      "item1": { "title": "25 einfache Fragen" },
-      "item2": { "title": "Praktische Einblicke" },
-      "item3": { "title": "Ein hybrides Testmodell" }
+      "item1": {
+        "title": "25 einfache Fragen"
+      },
+      "item2": {
+        "title": "Praktische Einblicke"
+      },
+      "item3": {
+        "title": "Ein hybrides Testmodell"
+      }
     },
     "editorial": {
       "line1": "Schnelle und zugleich erstaunlich tiefgehende Fragen, die das Ego umgehen und deinen Kern sichtbar machen.",
@@ -52,19 +58,29 @@
       "accent": "Einblick frei",
       "after": ""
     },
-    "description": "Eine klare, strukturierte Aufschlüsselung, wie du funktionierst.",
+    "description": "Eine klare, strukturierte Aufschlüsselung, wie du funktionierst. Ein tiefer Einblick in deine kognitive Architektur.",
     "editorial": {
       "line1": "Detaillierte Merkmalswerte (0–100) sowie die Zuordnung deiner Muster zu 1 von 16 Persönlichkeitsprofilen.",
       "line2": "Verstehe, wie sich deine Stärken - und blinden Flecken - in deiner Art zu handeln zeigen.",
-      "line3": "Einblick darin, wie du unter Druck reagierst und was dir hilft, in Beziehungen im Gleichgewicht zu bleiben."
+      "line3": "Einblick darin, wie du unter Druck reagierst und was dir hilft, in Beziehungen im Gleichgewicht zu bleiben.",
+      "title1": "Dein persönlicher Bauplan",
+      "title2": "Erkenne deine blinden Flecken",
+      "title3": "Souverän unter Druck"
     },
-    "cta": "Volle Ergebnisse für 1 $ ansehen",
+    "cta": "VOLLES ERGEBNIS FREISCHALTEN",
     "profileReady": "Dein vollständiges Profil ist bereit.",
     "whatWillIGet": "Was bekomme ich?",
     "note": "Einmalige Zahlung · Kein Abonnement",
     "stripeNote": "Sichere Zahlung über Stripe",
     "loading": "Weiterleitung zur sicheren Zahlung...",
-    "footer": "TMJ • tellmejoe."
+    "footer": "TMJ • tellmejoe.",
+    "badge": "ANALYSE ABGESCHLOSSEN 99%",
+    "primaryArchetype": "Dein primärer Archetyp",
+    "socialProof": "Schließe dich 12.000+ anderen an, die ihre Persönlichkeit erkunden.",
+    "socialProofCount": "+12k",
+    "onlyOneDollarPrefix": "Nur",
+    "onlyOneDollarAmount": "$1",
+    "stripeLabel": "Stripe"
   },
   "Result": {
     "brandTitle": "tellmejoe.",
@@ -74,13 +90,11 @@
       "text": "Ich sehe keine gespeicherten Ergebnisse. Geh zurück zum Test und beantworte die Fragen.",
       "backToTest": "Zurück zum Test"
     },
-
     "hero": {
-    "before": "Deine",
-    "accent": "Persönlichkeitsmuster",
-    "sub": "Ein klarer Überblick darüber, wie du typischerweise denkst, handelst und Beziehungen aufbaust - geprägt von unserem Hybridmodell."
+      "before": "Deine",
+      "accent": "Persönlichkeitsmuster",
+      "sub": "Ein klarer Überblick darüber, wie du typischerweise denkst, handelst und Beziehungen aufbaust - geprägt von unserem Hybridmodell."
     },
-
     "menu": "Menü",
     "menuRetake": "Wiederholen",
     "pdf": {
@@ -90,14 +104,12 @@
       "error": "PDF konnte nicht erstellt werden. Prüfe die Konsole.",
       "disclaimer": "Dieser Bericht dient nur zu Informationszwecken. Er ist kein medizinisches oder diagnostisches Instrument."
     },
-
     "share": "Teilen",
     "shareTitle": "tellmejoe.",
     "shareText": "Ich habe gerade TMJ gemacht. Mach den Test und sieh dein Ergebnis.",
     "shareCopied": "Link kopiert",
     "sharePrompt": "Diesen Link kopieren:",
     "shareError": "Konnte gerade nicht geteilt werden",
-
     "retake": "Wiederholen",
     "retakeConfirm": "Wiederholen setzt dieses Ergebnis zurück. Ein neues Ergebnis erfordert eine Zahlung. Fortfahren?",
     "yourTypeLabel": "Dein Profil",
