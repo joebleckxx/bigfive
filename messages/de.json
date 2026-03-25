@@ -4,22 +4,34 @@
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"
     },
-    "headline": { "before": "Entdecke deine", "accent": "Persönlichkeit" 
+    "headline": {
+      "line1": "Entdecke",
+      "line2": "Dein",
+      "line2Accent": "Wahres",
+      "line3": "Selbst"
     },
-    "subheadline": "Ein tieferer Blick darauf, wie du denkst, entscheidest und mit Menschen umgehst.",
-    "note": "Dauert ~5–7 Minuten. Ohne Konto.",
-    "cta": "Meine Ergebnisse ansehen",
+    "badge": "DIE DIGITALE SEELENANALYSE",
+    "subheadline": "Begib dich auf eine geführte visuelle Reise, die die Schichten deiner Persönlichkeit freilegt. Keine klinischen Etiketten - nur tiefgehende Einsichten, kuratiert für dein Wachstum.",
+    "note": "DAUERT UNGEFÄHR 4 MINUTEN",
+    "cta": "TEST STARTEN",
+    "features": {
+      "item1": { "title": "25 einfache Fragen" },
+      "item2": { "title": "Praktische Einblicke" },
+      "item3": { "title": "Ein hybrides Testmodell" }
+    },
     "editorial": {
-      "line1": "25 einfache Fragen - fertig in nur wenigen Minuten.",
-      "line2": "Praktische Einblicke darin, wie du im Alltag funktionierst, unter Druck reagierst und Beziehungen aufbaust.",
-      "line3": "Ein Test basierend auf einem Hybridmodell, das deine Muster einem von 16 Typen zuordnet profile."
+      "line1": "Schnelle und zugleich erstaunlich tiefgehende Fragen, die das Ego umgehen und deinen Kern sichtbar machen.",
+      "line2": "Konkrete Daten, die deine Persönlichkeit in greifbares Wachstum in der realen Welt übersetzen.",
+      "line3": "Eine einzigartige Synthese führender Persönlichkeitssysteme und Verhaltensanalytik, die ein tieferes, mehrdimensionales Bild deines Profils liefert."
     },
-    "footer": "TMJ • tellmejoe."
+    "footer": "tellmejoe. · TMJ"
   },
   "Test": {
     "progress": "Frage {current} von {total}",
+    "complete": "Abgeschlossen",
     "menu": "Menü",
     "back": "Zurück",
+    "next": "Weiter",
     "reset": "Zurücksetzen",
     "start": "Start",
     "tip": "Dauert etwa 5 Minuten. Vertraue deiner Intuition - es gibt keine falschen Antworten.",

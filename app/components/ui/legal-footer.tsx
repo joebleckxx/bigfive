@@ -45,14 +45,7 @@ export default function LegalFooter() {
       </div>
 
       <p className="mt-5 text-center text-xs text-white/40">
-        <Link
-          href={`/${locale}`}
-          className="hover:text-white/70 transition"
-          aria-label="Back to home"
-        >
-          tellmejoe.
-        </Link>{" "}
-        TMJ © {new Date().getFullYear()}
+        tellmejoe. TMJ © {new Date().getFullYear()}
       </p>
     </footer>
   );

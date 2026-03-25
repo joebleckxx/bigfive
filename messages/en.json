@@ -26,8 +26,10 @@
 
   "Test": {
     "progress": "Question {current} of {total}",
+    "complete": "Complete",
     "menu": "Menu",
     "back": "Back",
+    "next": "Next",
     "reset": "Reset",
     "start": "Start",
     "tip": "Takes about 5 minutes. Trust your intuition - there are no wrong answers.",

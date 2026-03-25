@@ -4,22 +4,34 @@
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"
     },
-    "headline": { "before": "Descobre a tua", "accent": "personalidade"
+    "headline": {
+      "line1": "Descobre",
+      "line2": "O Teu",
+      "line2Accent": "Verdadeiro",
+      "line3": "Eu"
     },
-    "subheadline": "Um olhar mais profundo sobre como pensas, decides e te relacionas com as pessoas.",
-    "note": "Leva ~5–7 minutos. Sem conta.",
-    "cta": "Começar o teste",
+    "badge": "A AVALIAÇÃO DIGITAL DA ALMA",
+    "subheadline": "Embarca numa jornada visual guiada pensada para revelar as camadas da tua personalidade. Sem rótulos clínicos - apenas insights profundos, curados para o teu crescimento.",
+    "note": "DEMORA APROXIMADAMENTE 4 MINUTOS",
+    "cta": "COMEÇAR O TESTE",
+    "features": {
+      "item1": { "title": "25 perguntas simples" },
+      "item2": { "title": "Insights práticos" },
+      "item3": { "title": "Um modelo de teste híbrido" }
+    },
     "editorial": {
-      "line1": "25 perguntas simples - pronto em apenas alguns minutos.",
-      "line2": "Uma visão prática de como funcionas no dia a dia, como reages sob pressão e o teu estilo ao construir relações.",
-      "line3": "Um teste baseado num modelo híbrido que mapeia os teus padrões para um dos 16 tipos profile."
+      "line1": "Perguntas rápidas, mas surpreendentemente profundas, desenhadas para contornar o ego e revelar o teu núcleo.",
+      "line2": "Dados acionáveis que traduzem a tua personalidade em crescimento tangível no mundo real.",
+      "line3": "Uma síntese única dos principais sistemas de personalidade e da análise comportamental, oferecendo uma visão mais profunda e multidimensional do teu perfil."
     },
-    "footer": "TMJ • tellmejoe."
+    "footer": "tellmejoe. · TMJ"
   },
   "Test": {
     "progress": "Pergunta {current} de {total}",
+    "complete": "Concluído",
     "menu": "Menu",
     "back": "Voltar",
+    "next": "Seguinte",
     "reset": "Repor",
     "start": "Iniciar",
     "tip": "Leva cerca de 5 minutos. Confia na tua intuição - não há respostas erradas.",

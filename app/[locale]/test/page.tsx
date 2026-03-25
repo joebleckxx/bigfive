@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "@/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import {
   QUESTIONS,
@@ -69,6 +69,7 @@ function clearProgressStorage() {
 export default function TestPage() {
   const router = useRouter();
   const t = useTranslations("Test");
+  const th = useTranslations("Home");
   const s = useTranslations("Scale");
   const q = useTranslations("Questions");
 
@@ -126,29 +127,6 @@ export default function TestPage() {
   // tap feedback
   const [tapSelected, setTapSelected] = useState<number | null>(null);
   const [isAdvancing, setIsAdvancing] = useState(false);
-
-  // menu ⋯
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") setMenuOpen(false);
-    }
-    function onPointerDown(e: MouseEvent | TouchEvent) {
-      if (!menuRef.current) return;
-      const target = e.target as Node;
-      if (!menuRef.current.contains(target)) setMenuOpen(false);
-    }
-    document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("mousedown", onPointerDown);
-    document.addEventListener("touchstart", onPointerDown);
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.removeEventListener("mousedown", onPointerDown);
-      document.removeEventListener("touchstart", onPointerDown);
-    };
-  }, []);
 
   // load progress + TTL
   useEffect(() => {
@@ -269,25 +247,6 @@ export default function TestPage() {
     }
   }
 
-  function doReset() {
-    clearProgressStorage();
-    setAnswers(Array(total).fill(0));
-    setIndex(0);
-    setTapSelected(null);
-    setIsAdvancing(false);
-    setMenuOpen(false);
-
-    // ✅ reset generuje nową kolejność
-    try {
-      const seed = crypto.randomUUID();
-      const order = makeQuestionOrder(seed, 2);
-      localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
-      setQuestionOrder(order);
-    } catch {
-      // ignore
-    }
-  }
-
   function commitAnswer(v: number) {
     const next = [...answers];
     next[index] = v;
@@ -323,7 +282,21 @@ export default function TestPage() {
     setIndex((i) => Math.max(0, i - 1));
   }
 
+  function goNext() {
+    if (isAdvancing) return;
+    const currentValue = answers[index];
+    if (!(currentValue >= 1 && currentValue <= 5)) return;
+
+    touchLastActive();
+    if (index < total - 1) {
+      setIndex((i) => Math.min(total - 1, i + 1));
+      return;
+    }
+    router.push("/pay");
+  }
+
   if (!currentQuestion) return null;
+  const currentAnswered = answers[index] >= 1 && answers[index] <= 5;
 
   return (
     <main
@@ -333,70 +306,25 @@ export default function TestPage() {
 
       <div className="relative mx-auto max-w-xl">
         {/* Topbar */}
-        <div className="relative z-30 mb-6 flex items-center justify-end">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={goBack}
-              type="button"
-              disabled={index === 0}
-              className="text-sm text-white/62 underline underline-offset-4 decoration-white/40 hover:text-white hover:decoration-white/55 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
-              aria-disabled={index === 0 || isAdvancing}
+        <div className="relative z-30 mb-6 flex items-center justify-between gap-3">
+          <div className="leading-tight">
+            <Link
+              href="/"
+              className="bg-[linear-gradient(90deg,#57D6FF_0%,#7CB6FF_42%,#C08CFF_72%,#F08CFF_100%)] bg-clip-text text-sm font-bold tracking-tight text-transparent"
             >
-              {t("back")}
-            </button>
-
-            {/* Menu ⋯ */}
-            <div className="relative" ref={menuRef}>
-              <button
-                type="button"
-                onClick={() => setMenuOpen((v) => !v)}
-                className="inline-flex items-center justify-center rounded-xl
-                  px-2.5 py-1.5 text-sm font-semibold tracking-tight
-                  text-white/70 hover:text-white/90
-                  border border-white/10 hover:border-white/20
-                  bg-transparent hover:bg-white/5
-                  transition focus:outline-none
-                  cursor-pointer"
-                aria-haspopup="menu"
-                aria-expanded={menuOpen}
-                aria-label={t("menu")}
-              >
-                ⋯
-              </button>
-
-              {menuOpen && (
-                <div
-                  className="absolute right-0 z-50 mt-2 w-max
-                    rounded-xl border border-white/10
-                    bg-[#0B0C14]/90 backdrop-blur-xl
-                    shadow-xl overflow-hidden p-1"
-                  role="menu"
-                >
-                  <button
-                    type="button"
-                    onClick={doReset}
-                    className="block w-full whitespace-nowrap rounded-lg
-                      px-3 py-2 text-sm font-medium tracking-tight
-                      text-white/75 hover:text-white/90 hover:bg-white/8
-                      cursor-pointer"
-                    role="menuitem"
-                  >
-                    {t("reset")}
-                  </button>
-                </div>
-              )}
-            </div>
+              {th("brand.title")}
+            </Link>
           </div>
         </div>
 
         {/* Progress */}
         <div className="mb-10">
           <div className="mb-3 flex items-center justify-between gap-4">
-            <div className="text-[0.98rem] font-medium tracking-[-0.03em] text-white/92">
+            <div className="text-[0.98rem] font-medium tracking-[0.02em] text-white/92">
               {progressText}
             </div>
-            <div className="text-[0.82rem] font-medium tracking-[0.16em] text-[#67D7FF] uppercase">
-              {progress}% COMPLETE
+            <div className="text-[0.82rem] font-medium tracking-[0.18em] text-[#67D7FF] uppercase">
+              {progress}% {t("complete")}
             </div>
           </div>
           <div className="relative h-[8px] w-full overflow-hidden rounded-full bg-[#1A2544] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
@@ -490,7 +418,44 @@ export default function TestPage() {
               })}
             </div>
           </div>
-            {/* Joe microcopy */}
+          <div className="mt-5 flex items-center justify-between gap-4 px-1">
+            <button
+              onClick={goBack}
+              type="button"
+              disabled={index === 0}
+              className="inline-flex items-center gap-2 text-sm font-medium text-white/80 transition hover:text-white disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
+              aria-disabled={index === 0 || isAdvancing}
+            >
+              <Image
+                src="/icons/test/nav-back.svg"
+                alt=""
+                aria-hidden="true"
+                width={13}
+                height={13}
+                className="h-[0.8125rem] w-[0.8125rem]"
+              />
+              <span>{t("back")}</span>
+            </button>
+
+            <button
+              onClick={goNext}
+              type="button"
+              disabled={!currentAnswered || isAdvancing}
+              className="inline-flex items-center gap-2 text-sm font-medium text-white/80 transition hover:text-white disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
+              aria-disabled={!currentAnswered || isAdvancing}
+            >
+              <span>{t("next")}</span>
+              <Image
+                src="/icons/test/nav-next.svg"
+                alt=""
+                aria-hidden="true"
+                width={13}
+                height={13}
+                className="h-[0.8125rem] w-[0.8125rem]"
+              />
+            </button>
+          </div>
+          {/* Joe microcopy */}
           <div className="hidden mt-6 mb-6 text-xs text-white/50 italic">
             {t("tip")}           
           </div>

@@ -5,24 +5,33 @@
       "subtitle": "no judgment • just patterns"
     },
     "headline": {
-      "before": "Odkryj swoją",
-      "accent": "osobowość"
+      "line1": "Odkryj",
+      "line2": "Swoje",
+      "line2Accent": "Prawdziwe",
+      "line3": "Ja"
     },
-
-    "subheadline": "Głębsze spojrzenie na to, jak myślisz, decydujesz i budujesz relacje z innymi.",
-    "note": "Zajmuje ~5–7 minut. Bez konta.",
-    "cta": "Rozpocznij test",
+    "badge": "CYFROWA OCENA DUSZY",
+    "subheadline": "Wyrusz w prowadzoną wizualną podróż, która pomoże odkryć warstwy Twojej osobowości. Bez klinicznych etykiet - tylko głębokie wglądy stworzone z myślą o Twoim rozwoju.",
+    "note": "ZAJMUJE OKOŁO 4 MINUT",
+    "cta": "ROZPOCZNIJ TEST",
+    "features": {
+      "item1": { "title": "25 prostych pytań" },
+      "item2": { "title": "Praktyczne wglądy" },
+      "item3": { "title": "Hybrydowy model testu" }
+    },
     "editorial": {
-      "line1": "25 prostych pytań - gotowe w kilka minut.",
-      "line2": "Praktyczny wgląd w to, jak działasz na co dzień, reagujesz pod presją i budujesz relacje.",      
-      "line3": "Test oparty na modelu hybrydowym, który mapuje Twoje wzorce do jednego z 16 profili."
+      "line1": "Szybkie, ale zaskakująco głębokie pytania zaprojektowane tak, by ominąć ego i odsłonić Twój rdzeń.",
+      "line2": "Praktyczne dane, które przekładają Twoją osobowość na namacalny rozwój w prawdziwym świecie.",
+      "line3": "Unikalna synteza wiodących systemów osobowości i analityki zachowań, dająca głębszy, wielowymiarowy obraz Twojego profilu."
     },
-    "footer": "TMJ • tellmejoe."
+    "footer": "tellmejoe. · TMJ"
   },
   "Test": {
     "progress": "Pytanie {current} z {total}",
+    "complete": "Ukończono",
     "menu": "Menu",
     "back": "Wstecz",
+    "next": "Dalej",
     "reset": "Resetuj",
     "start": "Start",
     "tip": "Zajmuje około 5 minut. Zaufaj swojej intuicji - nie ma złych odpowiedzi.",

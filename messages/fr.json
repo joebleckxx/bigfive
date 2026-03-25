@@ -4,22 +4,34 @@
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"
     },
-    "headline": { "before": "Découvre ta", "accent": "personnalité"
+    "headline": {
+      "line1": "Découvre",
+      "line2": "Ton",
+      "line2Accent": "Vrai",
+      "line3": "Moi"
     },
-    "subheadline": "Un regard plus profond sur ta façon de penser, de décider et d’entrer en relation avec les autres.",
-    "note": "~5–7 minutes. Sans compte.",
-    "cta": "Commencer le test",
+    "badge": "L’ÉVALUATION NUMÉRIQUE DE L’ÂME",
+    "subheadline": "Embarque pour un voyage visuel guidé conçu pour révéler les différentes couches de ta personnalité. Aucun label clinique, seulement des insights profonds pensés pour nourrir ton évolution.",
+    "note": "PREND ENVIRON 4 MINUTES",
+    "cta": "COMMENCER LE TEST",
+    "features": {
+      "item1": { "title": "25 questions simples" },
+      "item2": { "title": "Des insights concrets" },
+      "item3": { "title": "Un modèle de test hybride" }
+    },
     "editorial": {
-      "line1": "25 questions simples - prêt en quelques minutes.",
-      "line2": "Un aperçu concret de ton fonctionnement au quotidien, de tes réactions sous pression et de ta façon de construire des relations.",
-      "line3": "Un test basé sur un modèle hybride qui associe tes schémas à l’un des 16 types profile."
+      "line1": "Des questions rapides mais étonnamment profondes, conçues pour contourner l’ego et révéler ton noyau.",
+      "line2": "Des données actionnables qui traduisent ta personnalité en une évolution concrète dans le monde réel.",
+      "line3": "Une synthèse unique des grands systèmes de personnalité et de l’analyse comportementale, offrant une lecture plus profonde et multidimensionnelle de ton profil."
     },
-    "footer": "TMJ • tellmejoe."
+    "footer": "tellmejoe. · TMJ"
   },
   "Test": {
     "progress": "Question {current} sur {total}",
+    "complete": "Terminé",
     "menu": "Menu",
     "back": "Retour",
+    "next": "Suivant",
     "reset": "Réinitialiser",
     "start": "Démarrer",
     "tip": "Ça prend environ 5 minutes. Fais confiance à ton intuition - il n’y a pas de mauvaise réponse.",

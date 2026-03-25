@@ -77,16 +77,18 @@ export default async function Page({
           </div>
         </div>
 
-        <h1 className="mt-10 text-center text-[4.4rem] font-bold leading-[0.92] tracking-[-0.05em] text-[#E8ECFF] sm:text-[4.9rem]">
+        <h1 className="mt-10 py-[0.04em] text-center text-[4.4rem] font-bold leading-[0.92] tracking-[-0.05em] text-[#E8ECFF] sm:text-[4.9rem]">
           <span className="block">{t("headline.line1")}</span>
           <span className="mt-2 block">
             {t("headline.line2")}{" "}
-            <span className="bg-[linear-gradient(90deg,#4ED8FF_0%,#66C6FF_30%,#7EAAFF_68%,#B38CFF_100%)] bg-clip-text text-transparent">
+            <span className="inline-block bg-[linear-gradient(90deg,#4ED8FF_0%,#66C6FF_30%,#7EAAFF_68%,#B38CFF_100%)] bg-clip-text text-transparent">
               {t("headline.line2Accent")}
             </span>
           </span>
-          <span className="mt-2 block bg-[linear-gradient(90deg,#9A7BFF_0%,#C57EFF_52%,#F08CFF_100%)] bg-clip-text text-transparent">
-            {t("headline.line3")}
+          <span className="mt-2 block">
+            <span className="inline-block bg-[linear-gradient(90deg,#9A7BFF_0%,#C57EFF_52%,#F08CFF_100%)] bg-clip-text text-transparent">
+              {t("headline.line3")}
+            </span>
           </span>
         </h1>
 
@@ -134,7 +136,7 @@ export default async function Page({
           >
             <span>{t("cta")}</span>
             <Image
-              src="/icons/shared/cta-icon.svg"
+              src="/icons/home/cta-arrow.svg"
               alt=""
               aria-hidden="true"
               width={28}

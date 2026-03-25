@@ -1,22 +1,35 @@
 {
   "Home": {
     "brand": { "title": "tellmejoe.", "subtitle": "no judgment • just patterns" },
-    "headline": { "before": "Upptäck din", "accent": "personlighet" },
-    "subheadline": "En djupare titt på hur du tänker, fattar beslut och relaterar till andra människor.",
-    "note": "Tar ~5–7 minuter. Inget konto krävs.",
-    "cta": "Starta testet",
-    "editorial": {
-      "line1": "25 enkla frågor - klart på bara några minuter.",
-      "line2": "Praktisk insikt i hur du fungerar i vardagen, reagerar under press och bygger relationer.",
-      "line3": "Ett test baserat på en hybridmodell som mappar dina mönster till en av 16 typer profile."
+    "headline": {
+      "line1": "Upptäck",
+      "line2": "Ditt",
+      "line2Accent": "Sanna",
+      "line3": "Jag"
     },
-    "footer": "TMJ • tellmejoe."
+    "badge": "DEN DIGITALA SJÄLSANALYSEN",
+    "subheadline": "Ge dig ut på en guidad visuell resa som är utformad för att blottlägga lagren i din personlighet. Inga kliniska etiketter - bara djupa insikter utvalda för din utveckling.",
+    "note": "TAR UNGEFÄR 4 MINUTER",
+    "cta": "STARTA TESTET",
+    "features": {
+      "item1": { "title": "25 enkla frågor" },
+      "item2": { "title": "Praktiska insikter" },
+      "item3": { "title": "En hybridmodell för testet" }
+    },
+    "editorial": {
+      "line1": "Snabba men förvånansvärt djupa frågor, utformade för att gå förbi egot och avslöja din kärna.",
+      "line2": "Handlingsbara data som översätter din personlighet till konkret utveckling i verkligheten.",
+      "line3": "En unik syntes av ledande personlighetssystem och beteendeanalys som ger en djupare, flerdimensionell bild av din profil."
+    },
+    "footer": "tellmejoe. · TMJ"
   },
 
   "Test": {
     "progress": "Fråga {current} av {total}",
+    "complete": "Klart",
     "menu": "Meny",
     "back": "Tillbaka",
+    "next": "Nästa",
     "reset": "Återställ",
     "start": "Start",
     "tip": "Tar cirka 5 minuter. Lita på din intuition - det finns inga fel svar.",
