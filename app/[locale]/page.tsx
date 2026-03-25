@@ -78,7 +78,7 @@ export default async function Page({
         </div>
 
         <h1
-          className="mt-10 text-center text-[clamp(3.35rem,15.2vw,4.41rem)] font-bold leading-[1] tracking-[-0.05em] text-[#E8ECFF]"
+          className="mt-10 text-center text-[clamp(3.35rem,15.8vw,4.41rem)] font-bold leading-[1] tracking-[-0.05em] text-[#E8ECFF]"
         >
           <span className="block">{t("headline.line1")}</span>
           <span className="mt-2 block">
