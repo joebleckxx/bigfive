@@ -14,7 +14,6 @@ export default async function Page({
   params: { locale: string };
 }) {
   const locale = params.locale;
-  const useEnglishHeadlineLayout = locale === "en";
   const t = await getTranslations({ locale, namespace: "Home" });
   const featureCards = [
     {
@@ -79,38 +78,20 @@ export default async function Page({
         </div>
 
         <h1
-          className="mx-auto mt-10 max-w-[calc(100%-0.75rem)] px-[0.2rem] py-[0.04em] text-center text-[clamp(3.6rem,16vw,4.9rem)] font-bold leading-[1] tracking-[-0.05em] text-[#E8ECFF]"
+          className="mt-10 text-center text-[4.4rem] font-bold leading-[0.92] tracking-[-0.05em] text-[#E8ECFF] sm:text-[4.9rem]"
         >
-          {useEnglishHeadlineLayout ? (
-            <>
-              <span className="block">{t("headline.line1")}</span>
-              <span className="mt-2 block">
-                {t("headline.line2")}{" "}
-                <span className="inline-block bg-[linear-gradient(90deg,#4ED8FF_0%,#66C6FF_30%,#7EAAFF_68%,#B38CFF_100%)] bg-clip-text text-transparent">
-                  {t("headline.line2Accent")}
-                </span>
-              </span>
-              <span className="mt-2 block">
-                <span className="inline-block bg-[linear-gradient(90deg,#9A7BFF_0%,#C57EFF_52%,#F08CFF_100%)] bg-clip-text text-transparent">
-                  {t("headline.line3")}
-                </span>
-              </span>
-            </>
-          ) : (
-            <>
-              <span className="block">
-                {t("headline.line1")} {t("headline.line2")}
-              </span>
-              <span className="mt-2 block">
-                <span className="bg-[linear-gradient(90deg,#4ED8FF_0%,#66C6FF_30%,#7EAAFF_68%,#B38CFF_100%)] bg-clip-text text-transparent">
-                  {t("headline.line2Accent")}
-                </span>{" "}
-                <span className="bg-[linear-gradient(90deg,#9A7BFF_0%,#C57EFF_52%,#F08CFF_100%)] bg-clip-text text-transparent">
-                  {t("headline.line3")}
-                </span>
-              </span>
-            </>
-          )}
+          <span className="block">{t("headline.line1")}</span>
+          <span className="mt-2 block">
+            {t("headline.line2")}{" "}
+            <span className="inline-block bg-[linear-gradient(90deg,#4ED8FF_0%,#66C6FF_30%,#7EAAFF_68%,#B38CFF_100%)] bg-clip-text text-transparent">
+              {t("headline.line2Accent")}
+            </span>
+          </span>
+          <span className="mt-2 block">
+            <span className="inline-block bg-[linear-gradient(90deg,#9A7BFF_0%,#C57EFF_52%,#F08CFF_100%)] bg-clip-text text-transparent">
+              {t("headline.line3")}
+            </span>
+          </span>
         </h1>
 
         <p className="mx-auto mt-8 max-w-[23rem] text-center text-[1.14rem] leading-[1.72] tracking-[-0.02em] text-[#C7CAE0] sm:max-w-[24.5rem] sm:text-[1.2rem]">
