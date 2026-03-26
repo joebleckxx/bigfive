@@ -80,7 +80,11 @@
     "socialProofCount": "+12k",
     "onlyOneDollarPrefix": "Só",
     "onlyOneDollarAmount": "$1",
-    "stripeLabel": "Stripe"
+    "stripeLabel": "Stripe",
+    "quote": {
+      "line1": "A clareza muda tudo",
+      "line2": "quando finalmente vês o teu padrão."
+    }
   },
   "Result": {
     "brandTitle": "tellmejoe.",

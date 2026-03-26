@@ -80,7 +80,11 @@
     "socialProofCount": "+12k",
     "onlyOneDollarPrefix": "Tylko",
     "onlyOneDollarAmount": "$1",
-    "stripeLabel": "Stripe"
+    "stripeLabel": "Stripe",
+    "quote": {
+      "line1": "Jasność zmienia wszystko",
+      "line2": "gdy w końcu dostrzegasz swój wzorzec."
+    }
   },
   "Result": {
     "brandTitle": "tellmejoe.",

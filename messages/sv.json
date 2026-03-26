@@ -80,7 +80,11 @@
     "socialProofCount": "+12k",
     "onlyOneDollarPrefix": "Bara",
     "onlyOneDollarAmount": "$1",
-    "stripeLabel": "Stripe"
+    "stripeLabel": "Stripe",
+    "quote": {
+      "line1": "Klarhet förändrar allt",
+      "line2": "när du äntligen ser ditt mönster."
+    }
   },
   "Result": {
     "brandTitle": "tellmejoe.",

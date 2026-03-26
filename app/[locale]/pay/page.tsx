@@ -291,15 +291,15 @@ export default function PayPage() {
                 <div
                   role="img"
                   aria-label={profileName}
-                  className="relative z-10 flex h-28 w-28 shrink-0 items-center justify-center rounded-full bg-black/25 ring-1 ring-white/10"
+                  className="relative z-10 flex h-34 w-34 shrink-0 items-center justify-center rounded-full bg-black/25 ring-1 ring-white/10"
                 >
                   {!avatarError ? (
                     <Image
                       src={avatarSrc}
                       alt=""
-                      width={56}
-                      height={56}
-                      className="h-14 w-14 object-contain"
+                      width={72}
+                      height={72}
+                      className="h-18 w-18 object-contain"
                       style={{ filter: "brightness(0) invert(1)" }}
                       onError={() => setAvatarError(true)}
                     />
@@ -389,79 +389,57 @@ export default function PayPage() {
           </div>
         )}
 
-        <div className={`${previewTypeCode ? "mt-10" : "mt-16"} text-center`}>
-          <div className="mx-auto grid w-full min-w-0 grid-cols-2 gap-3.5">
-            <div className="min-w-0 rounded-[1.8rem] border border-white/[0.04] bg-[rgba(15,24,46,0.74)] px-4 py-4 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_20px_45px_rgba(0,0,0,0.18)]">
-              <div className="relative flex h-11 items-center">
-                {socialProofAvatars.map((src, index) => (
-                <div
-                  key={src}
-                  className={`${index === 0 ? "" : "-ml-3"} relative z-0 flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border-2 border-[#0B1730] bg-[#121C34] shadow-[0_8px_18px_rgba(0,0,0,0.18)]`}
-                >
-                    <Image
-                      src={src}
-                      alt=""
-                      aria-hidden="true"
-                      fill
-                      sizes="44px"
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-                <div className="-ml-3 relative z-10 flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#0B1730] bg-[#9A5FFF] text-[1rem] font-semibold tracking-tight text-white shadow-[0_8px_18px_rgba(0,0,0,0.18)]">
-                  {t("socialProofCount")}
-                </div>
-              </div>
-              <p className="mt-5 m-0 max-w-[10.5rem] text-[0.98rem] font-medium leading-[1.35] tracking-[-0.03em] text-white/80">
-                {t("socialProof")}
-              </p>
-            </div>
+        <div className={`${previewTypeCode ? "mt-12" : "mt-16"} text-center`}>
+          <div className="text-[2.6rem] font-semibold leading-none tracking-tight text-[#B79FFF]">
+            $1
+          </div>
+          <div className="mt-6 flex items-center justify-center gap-2.5">
+            <Image
+              src="/icons/pay/one-time-payment.svg"
+              alt=""
+              aria-hidden="true"
+              width={20}
+              height={20}
+              className="h-5 w-5 opacity-100"
+            />
+            <span className="text-[0.92rem] font-medium text-white/88">
+              {noteParts[0]}
+            </span>
+          </div>
+          <div className="mt-4 mb-12 flex items-center justify-center gap-2.5">
+            <Image
+              src="/icons/pay/no-subscription.svg"
+              alt=""
+              aria-hidden="true"
+              width={20}
+              height={20}
+              className="h-5 w-5 opacity-100"
+            />
+            <span className="text-[0.92rem] font-medium text-white/88">
+              {noteParts[1]}
+            </span>
+          </div>
 
-            <div className="min-w-0 rounded-[1.8rem] border border-white/[0.04] bg-[rgba(15,24,46,0.74)] px-4 py-4 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_20px_45px_rgba(0,0,0,0.18)]">
-              <div className="flex min-h-[8.25rem] flex-col justify-center gap-4">
-                <div className="flex items-center gap-2.5">
-                  <Image
-                    src="/icons/pay/one-time-payment.svg"
+          <div className="mx-auto mt-10 w-full min-w-0">
+            <div className="min-w-0 rounded-[1.8rem] border border-white/[0.04] bg-[rgba(15,24,46,0.72)] px-5 py-0 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_20px_45px_rgba(0,0,0,0.18)]">
+              <div className="flex min-h-[10rem] flex-col items-center justify-center text-center">
+                <Image
+                  src="/icons/pay/quote-open.svg"
                   alt=""
                   aria-hidden="true"
-                  width={20}
-                  height={20}
-                  className="h-5 w-5 opacity-100"
+                  width={24}
+                  height={24}
+                  className="mx-auto mb-5 h-6 w-6"
                 />
-                <span className="text-[0.92rem] font-medium text-white/80">
-                  {noteParts[0]}
-                </span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <Image
-                    src="/icons/pay/no-subscription.svg"
-                    alt=""
-                    aria-hidden="true"
-                    width={20}
-                    height={20}
-                    className="h-5 w-5 opacity-100"
-                  />
-                  <span className="text-[0.92rem] font-medium text-white/80">
-                    {noteParts[1]}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <Image
-                    src="/icons/pay/only-one-dollar.svg"
-                    alt=""
-                    aria-hidden="true"
-                    width={20}
-                    height={20}
-                    className="h-5 w-5 opacity-100"
-                  />
-                  <span className="text-[0.92rem] text-white/80">
-                    {t("onlyOneDollarPrefix")} <span className="font-bold">{t("onlyOneDollarAmount")}</span>
-                  </span>
-                </div>
+                <p className="mx-auto max-w-[15.5rem] text-[1rem] font-medium leading-[1.45] tracking-[-0.03em] text-white/82">
+                  "{t("quote.line1")}
+                  <br />
+                  {t("quote.line2")}"
+                </p>
               </div>
             </div>
           </div>
-          <p className="mt-12 text-center text-[0.76rem] font-medium tracking-[0.18em] text-white/90 uppercase">
+          <p className="mt-12 mb-12 text-center text-[0.76rem] font-medium tracking-[0.18em] text-white/90 uppercase">
             {t("whatWillIGet")}
           </p>
 
@@ -493,6 +471,36 @@ export default function PayPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-10">
+          <div className="min-w-0 rounded-[1.8rem] border border-white/[0.04] bg-[rgba(15,24,46,0.72)] px-5 py-0 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_20px_45px_rgba(0,0,0,0.18)]">
+            <div className="flex min-h-[7.5rem] items-center gap-5">
+              <div className="relative flex h-11 shrink-0 items-center">
+                {socialProofAvatars.map((src, index) => (
+                  <div
+                    key={src}
+                    className={`${index === 0 ? "" : "-ml-3"} relative z-0 flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border-2 border-[#0B1730] bg-[#121C34] shadow-[0_8px_18px_rgba(0,0,0,0.18)]`}
+                  >
+                    <Image
+                      src={src}
+                      alt=""
+                      aria-hidden="true"
+                      fill
+                      sizes="44px"
+                      className="object-cover"
+                    />
+                  </div>
+                ))}
+                <div className="-ml-3 relative z-10 flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#0B1730] bg-[#9A5FFF] text-[0.88rem] font-semibold tracking-tight text-white shadow-[0_8px_18px_rgba(0,0,0,0.18)]">
+                  {t("socialProofCount")}
+                </div>
+              </div>
+              <p className="m-0 max-w-[13.5rem] text-[0.98rem] font-medium leading-[1.35] tracking-[-0.03em] text-white/80">
+                {t("socialProof")}
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="mt-12">

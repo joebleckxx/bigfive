@@ -21,15 +21,6 @@ import {
 
 type Trait = "E" | "O" | "C" | "A" | "N";
 
-/* ✅ Joe — result microcopy (5 variants, random) */
-const JOE_RESULTS = [
-  "This is just a snapshot. Use it gently.",
-  "Take what’s useful. Leave the rest.",
-  "A result, not a rule.",
-  "Just a perspective - not the whole story.",
-  "This is one way of seeing it."
-];
-
 type StoredResultV1 = {
   version: "v1";
   createdAt: string;
@@ -148,11 +139,6 @@ export default function ResultPage() {
   // ✅ menu ⋯ (jak na /test)
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
-
-  // ✅ Joe line (pick once per mount)
-  const joeLine = useMemo(() => {
-    return JOE_RESULTS[Math.floor(Math.random() * JOE_RESULTS.length)];
-  }, []);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -722,7 +708,7 @@ export default function ResultPage() {
       if (sentences.length <= 1) {
         return (
           <div className="mt-2 text-sm leading-relaxed">
-            <p className="whitespace-normal text-white/70">{arr[0]}</p>
+            <p className="whitespace-normal text-white/75">{arr[0]}</p>
           </div>
         );
       }
@@ -732,8 +718,18 @@ export default function ResultPage() {
 
       return (
         <div className="mt-2 text-sm leading-relaxed">
-          <p className="whitespace-normal text-white/70">{body}</p>
-          <p className="mt-3 whitespace-normal text-white/90 font-medium">{last}</p>
+          <p className="whitespace-normal text-white/75">{body}</p>
+          <div className="mt-3 flex items-start gap-2.5">
+            <Image
+              src="/icons/result/card-emphasis.svg"
+              alt=""
+              aria-hidden="true"
+              width={16}
+              height={16}
+              className="mt-0.5 h-4 w-4 shrink-0"
+            />
+            <p className="whitespace-normal text-white/90 font-medium">{last}</p>
+          </div>
         </div>
       );
     }
@@ -745,14 +741,24 @@ export default function ResultPage() {
     return (
       <div className="mt-2 text-sm leading-relaxed">
         {body && (
-          <p className="whitespace-normal text-white/70">
+          <p className="whitespace-normal text-white/75">
             {body}
           </p>
         )}
         {last && (
-          <p className="mt-4 whitespace-normal text-white/85 font-medium">
-            {last}
-          </p>
+          <div className="mt-4 flex items-start gap-2.5">
+            <Image
+              src="/icons/result/card-emphasis.svg"
+              alt=""
+              aria-hidden="true"
+              width={16}
+              height={16}
+              className="mt-0.5 h-4 w-4 shrink-0"
+            />
+            <p className="whitespace-normal text-white/90 font-medium">
+              {last}
+            </p>
+          </div>
         )}
       </div>
     );
@@ -830,12 +836,12 @@ export default function ResultPage() {
           <h1
             className="mx-auto mb-2 max-w-[24rem] font-semibold tracking-tight break-normal [overflow-wrap:normal] hyphens-auto [text-wrap:balance] sm:max-w-[26rem]"
             style={{
-              fontSize: "3.5rem",
+              fontSize: "clamp(3.1rem, 10.2vw, 3.5rem)",
               lineHeight: 1.02,
             }}
           >
-            {t("hero.before")}{" "}
-            <span className="bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] bg-clip-text text-transparent hyphens-auto">
+            <span className="block">{t("hero.before")}</span>
+            <span className="mt-2 block whitespace-normal [overflow-wrap:anywhere] [word-break:normal] bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] bg-clip-text text-transparent hyphens-auto">
               {t("hero.accent")}
             </span>
           </h1>
@@ -893,14 +899,8 @@ export default function ResultPage() {
             </div>
           </div>
         </div>
-
-        {/* ✅ Joe line */}
-          <p className="mt-5 text-xs text-white/50 italic">
-            {joeLine} <span className="text-white/45">- Joe</span>
-          </p>
-
         {/* ✅ Profile sections (6) */}
-        <div className="mt-6 space-y-4">
+        <div className="mt-8 space-y-4">
           {sections.map((s) => (
             <div
               key={s.key}
@@ -962,8 +962,6 @@ export default function ResultPage() {
                           </span>
                         )}
                       </div>
-
-                      <div className="text-sm text-white/90">{pct(row.value)}</div>
                     </div>
 
                     <div className="mt-1 text-xs text-white/50">
@@ -978,11 +976,19 @@ export default function ResultPage() {
                     <div className="mt-2 h-2 w-full rounded-full bg-white/10">
                       <div
                         className={`h-full rounded-full ${bigFiveBarClass}`}
-                        style={{
-                          width: `${pct(row.value)}%`,
-                          backgroundSize: `${pct(row.value) > 0 ? 10000 / pct(row.value) : 100}% 100%`,
-                          backgroundPosition: "left center",
-                        }}
+                        style={(() => {
+                          const value = pct(row.value);
+                          const scaleCutoff = 50;
+                          const effectiveRange = Math.min(value, scaleCutoff);
+                          const backgroundSize =
+                            effectiveRange > 0 ? `${(scaleCutoff / effectiveRange) * 100}% 100%` : "100% 100%";
+
+                          return {
+                            width: `${value}%`,
+                            backgroundSize,
+                            backgroundPosition: "left center",
+                          };
+                        })()}
                       />
                     </div>
 	                  </div>

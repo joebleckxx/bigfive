@@ -80,7 +80,11 @@
     "socialProofCount": "+12k",
     "onlyOneDollarPrefix": "Only",
     "onlyOneDollarAmount": "$1",
-    "stripeLabel": "Stripe"
+    "stripeLabel": "Stripe",
+    "quote": {
+      "line1": "Clarity changes everything",
+      "line2": "once you finally see your pattern."
+    }
   },
   "Result": {
     "brandTitle": "tellmejoe.",
