@@ -13,6 +13,7 @@
     "badge": "DEN DIGITALA SJÄLSANALYSEN",
     "subheadline": "Ge dig ut på en guidad visuell resa som är utformad för att blottlägga lagren i din personlighet. Inga kliniska etiketter - bara djupa insikter utvalda för din utveckling.",
     "note": "TAR UNGEFÄR 4 MINUTER",
+    "noteSecondary": "Helt anonymt och privat",
     "cta": "STARTA TESTET",
     "features": {
       "item1": {
@@ -133,6 +134,14 @@
         "low": "Låg",
         "medium": "Medel",
         "high": "Hög"
+      },
+      "poles": {
+        "S": { "left": "Reaktiv", "right": "Lugn" },
+        "E": { "left": "Tyst", "right": "Social" },
+        "O": { "left": "Jordnära", "right": "Utforskande" },
+        "C": { "left": "Spontan", "right": "Organiserad" },
+        "A": { "left": "Självständig", "right": "Samarbetsvillig" },
+        "N": { "left": "Stadig", "right": "Känslig" }
       },
       "stabilityMeaning": "Emotionell stabilitet beskriver hur lugn och motståndskraftig du tenderar att vara under press."
     },

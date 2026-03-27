@@ -13,6 +13,7 @@
     "badge": "CYFROWA OCENA DUSZY",
     "subheadline": "Wyrusz w prowadzoną wizualną podróż, która pomoże odkryć warstwy Twojej osobowości. Bez klinicznych etykiet - tylko głębokie wglądy stworzone z myślą o Twoim rozwoju.",
     "note": "ZAJMUJE OKOŁO 4 MINUT",
+    "noteSecondary": "W pełni anonimowe i prywatne",
     "cta": "ROZPOCZNIJ TEST",
     "features": {
       "item1": {
@@ -128,6 +129,14 @@
         "low": "Niski",
         "medium": "Średni",
         "high": "Wysoki"
+      },
+      "poles": {
+        "S": { "left": "Reaktywny", "right": "Spokojny" },
+        "E": { "left": "Cichy", "right": "Towarzyski" },
+        "O": { "left": "Przy ziemi", "right": "Odkrywczy" },
+        "C": { "left": "Spontaniczny", "right": "Uporządkowany" },
+        "A": { "left": "Niezależny", "right": "Współpracujący" },
+        "N": { "left": "Stabilny", "right": "Wrażliwy" }
       }
     },
     "disclaimer": "Ten test opiera się na uznanych badaniach osobowości i ma charakter informacyjny - nie jest testem klinicznym.",

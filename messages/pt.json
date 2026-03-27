@@ -13,6 +13,7 @@
     "badge": "A AVALIAÇÃO DIGITAL DA ALMA",
     "subheadline": "Embarca numa jornada visual guiada pensada para revelar as camadas da tua personalidade. Sem rótulos clínicos - apenas insights profundos, curados para o teu crescimento.",
     "note": "DEMORA APROXIMADAMENTE 4 MINUTOS",
+    "noteSecondary": "Totalmente anónimo e privado",
     "cta": "COMEÇAR O TESTE",
     "features": {
       "item1": {
@@ -128,6 +129,14 @@
         "low": "Baixo",
         "medium": "Médio",
         "high": "Alto"
+      },
+      "poles": {
+        "S": { "left": "Reativo", "right": "Calmo" },
+        "E": { "left": "Reservado", "right": "Sociável" },
+        "O": { "left": "Pé no chão", "right": "Explorador" },
+        "C": { "left": "Espontâneo", "right": "Organizado" },
+        "A": { "left": "Independente", "right": "Cooperativo" },
+        "N": { "left": "Estável", "right": "Sensível" }
       }
     },
     "disclaimer": "Este teste baseia-se em investigação reconhecida sobre personalidade e tem caráter informativo - não é um teste clínico.",

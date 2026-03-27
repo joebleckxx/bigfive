@@ -62,12 +62,12 @@ function pct(n: number) {
   return Math.max(0, Math.min(100, Math.round(n)));
 }
 
-// ✅ Big Five UX label key (i18n via json)
-function levelKey(v: number): "low" | "medium" | "high" {
-  const x = pct(v);
-  if (x <= 33) return "low";
-  if (x <= 66) return "medium";
-  return "high";
+function visualStretchPct(n: number) {
+  const x = pct(n);
+  const center = 50;
+  const normalized = (x - center) / center;
+  const stretched = Math.sign(normalized) * Math.pow(Math.abs(normalized), 0.82);
+  return Math.max(0, Math.min(100, Math.round(center + stretched * center)));
 }
 
 function isResultShape(x: unknown): x is StoredResultV1 {
@@ -528,11 +528,6 @@ export default function ResultPage() {
     }
   ];
 
-  const highestTrait = bigFiveRows.reduce(
-    (max, row) => (row.value > max.value ? row : max),
-    bigFiveRows[0]
-  );
-
   const bigFiveBarClass =
     "bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)]";
 
@@ -541,6 +536,7 @@ export default function ResultPage() {
       key: "core",
       cardClass: "bg-[#071126]/95",
       iconWrapClass: "bg-[rgba(56,167,214,0.18)]",
+      accentColor: "#63D8FF",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -569,6 +565,7 @@ export default function ResultPage() {
       key: "daily",
       cardClass: "bg-[#08142B]/95",
       iconWrapClass: "bg-[rgba(87,214,255,0.16)]",
+      accentColor: "#57D6FF",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -590,6 +587,7 @@ export default function ResultPage() {
       key: "strengths",
       cardClass: "bg-[#0A1329]/95",
       iconWrapClass: "bg-[rgba(124,182,255,0.16)]",
+      accentColor: "#7CB6FF",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -619,6 +617,7 @@ export default function ResultPage() {
       key: "watchOut",
       cardClass: "bg-[#0A1127]/95",
       iconWrapClass: "bg-[rgba(165,142,255,0.16)]",
+      accentColor: "#A58EFF",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -642,6 +641,7 @@ export default function ResultPage() {
       key: "underPressure",
       cardClass: "bg-[#091127]/95",
       iconWrapClass: "bg-[rgba(197,126,255,0.15)]",
+      accentColor: "#C57EFF",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -664,6 +664,7 @@ export default function ResultPage() {
       key: "relationships",
       cardClass: "bg-[#08152B]/95",
       iconWrapClass: "bg-[rgba(240,140,255,0.14)]",
+      accentColor: "#F08CFF",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -698,7 +699,7 @@ export default function ResultPage() {
     return parts;
   }
 
-  function renderCardLines(lines: string[]) {
+  function renderCardLines(lines: string[], accentColor: string) {
     const arr = (lines || []).map((s) => (s || "").trim()).filter(Boolean);
     if (arr.length === 0) return null;
 
@@ -719,17 +720,24 @@ export default function ResultPage() {
       return (
         <div className="mt-2 text-sm leading-relaxed">
           <p className="whitespace-normal text-white/75">{body}</p>
-          <div className="mt-3 flex items-start gap-2.5">
-            <Image
-              src="/icons/result/card-emphasis.svg"
-              alt=""
+          <p className="mt-3 whitespace-normal text-white/90 font-medium">
+            <span
               aria-hidden="true"
-              width={16}
-              height={16}
-              className="mt-0.5 h-4 w-4 shrink-0"
+              className="mr-3 inline-block h-4 w-4 align-[-0.05em]"
+              style={{
+                backgroundColor: accentColor,
+                WebkitMaskImage: "url('/icons/result/card-emphasis.svg')",
+                maskImage: "url('/icons/result/card-emphasis.svg')",
+                WebkitMaskRepeat: "no-repeat",
+                maskRepeat: "no-repeat",
+                WebkitMaskPosition: "center",
+                maskPosition: "center",
+                WebkitMaskSize: "contain",
+                maskSize: "contain",
+              }}
             />
-            <p className="whitespace-normal text-white/90 font-medium">{last}</p>
-          </div>
+            {last}
+          </p>
         </div>
       );
     }
@@ -746,19 +754,26 @@ export default function ResultPage() {
           </p>
         )}
         {last && (
-          <div className="mt-4 flex items-start gap-2.5">
-            <Image
-              src="/icons/result/card-emphasis.svg"
-              alt=""
-              aria-hidden="true"
-              width={16}
-              height={16}
-              className="mt-0.5 h-4 w-4 shrink-0"
-            />
-            <p className="whitespace-normal text-white/90 font-medium">
+          <>
+            <p className="mt-4 whitespace-normal text-white/90 font-medium">
+              <span
+                aria-hidden="true"
+                className="mr-3 inline-block h-4 w-4 align-[-0.05em]"
+                style={{
+                  backgroundColor: accentColor,
+                  WebkitMaskImage: "url('/icons/result/card-emphasis.svg')",
+                  maskImage: "url('/icons/result/card-emphasis.svg')",
+                  WebkitMaskRepeat: "no-repeat",
+                  maskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center",
+                  maskPosition: "center",
+                  WebkitMaskSize: "contain",
+                  maskSize: "contain",
+                }}
+              />
               {last}
             </p>
-          </div>
+          </>
         )}
       </div>
     );
@@ -912,7 +927,7 @@ export default function ResultPage() {
                 </span>
                 <span>{s.title}</span>
               </div>
-              {renderCardLines(s.lines)}
+              {renderCardLines(s.lines, s.accentColor)}
             </div>
           ))}
         </div>
@@ -946,38 +961,19 @@ export default function ResultPage() {
 	          </div>
 		          <div className="mt-4 space-y-4">
               {bigFiveRows.map((row) => {
-                const k = levelKey(row.value);
                 return (
                   <div key={row.key}>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 text-sm text-white/90">
                         {row.label}
-                        {row.key === highestTrait.key && (
-                          <span
-                            className="text-yellow-300/90 text-sm"
-                            title={t("bigFive.topTrait")}
-                            aria-label={t("bigFive.topTrait")}
-                          >
-                            ★
-                          </span>
-                        )}
                       </div>
-                    </div>
-
-                    <div className="mt-1 text-xs text-white/50">
-                      {t(`bigFive.levels.${k}`)}
-                      {(row.key === "S" || row.key === "N") && (
-                        <span className="ml-1 text-[11px] leading-none">
-                          ({row.key === "S" ? t("traitsNotes.S") : t("traitsNotes.N")})
-                        </span>
-                      )}
                     </div>
 
                     <div className="mt-2 h-2 w-full rounded-full bg-white/10">
                       <div
                         className={`h-full rounded-full ${bigFiveBarClass}`}
                         style={(() => {
-                          const value = pct(row.value);
+                          const value = visualStretchPct(row.value);
                           const scaleCutoff = 50;
                           const effectiveRange = Math.min(value, scaleCutoff);
                           const backgroundSize =
@@ -990,6 +986,10 @@ export default function ResultPage() {
                           };
                         })()}
                       />
+                    </div>
+                    <div className="mt-2 flex items-center justify-between gap-4 text-[0.72rem] font-medium tracking-[0.02em] text-white/42">
+                      <span>{t(`bigFive.poles.${row.key}.left`)}</span>
+                      <span className="text-right">{t(`bigFive.poles.${row.key}.right`)}</span>
                     </div>
 	                  </div>
 	                );

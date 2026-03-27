@@ -113,7 +113,7 @@ export default async function Page({
                   className="h-[2.125rem] w-[2.125rem]"
                 />
               </div>
-              <h2 className="mt-10 text-[2rem] font-bold leading-[1.08] tracking-[-0.04em] text-[#EEF1FF]">
+              <h2 className="mt-10 text-[1.76rem] font-bold leading-[1.08] tracking-[-0.04em] text-[#EEF1FF]">
                 {card.title}
               </h2>
               <p className="mx-auto mt-5 max-w-[19rem] text-[1.06rem] leading-[1.72] tracking-[-0.02em] text-[#B8BDD8]">
@@ -149,6 +149,11 @@ export default async function Page({
           <p className="mt-7 text-[0.7rem] font-medium tracking-[0.32em] text-white/35">
             {t("note")}
           </p>
+          {t.has("noteSecondary") && (
+            <p className="mt-2 text-[0.7rem] font-medium tracking-[0.15em] text-white/35">
+              {t("noteSecondary")}
+            </p>
+          )}
         </div>
 
         <LegalFooter />

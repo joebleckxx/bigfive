@@ -13,6 +13,7 @@
     "badge": "DIE DIGITALE SEELENANALYSE",
     "subheadline": "Begib dich auf eine geführte visuelle Reise, die die Schichten deiner Persönlichkeit freilegt. Keine klinischen Etiketten - nur tiefgehende Einsichten, kuratiert für dein Wachstum.",
     "note": "DAUERT UNGEFÄHR 4 MINUTEN",
+    "noteSecondary": "Vollständig anonym und privat",
     "cta": "TEST STARTEN",
     "features": {
       "item1": {
@@ -128,6 +129,14 @@
         "low": "Niedrig",
         "medium": "Mittel",
         "high": "Hoch"
+      },
+      "poles": {
+        "S": { "left": "Reaktiv", "right": "Gelassen" },
+        "E": { "left": "Ruhig", "right": "Gesellig" },
+        "O": { "left": "Bodenständig", "right": "Entdeckerisch" },
+        "C": { "left": "Spontan", "right": "Organisiert" },
+        "A": { "left": "Unabhängig", "right": "Kooperativ" },
+        "N": { "left": "Beständig", "right": "Sensibel" }
       }
     },
     "disclaimer": "Dieser Test basiert auf anerkannter Persönlichkeitsforschung und ist informativ - kein klinischer Test.",

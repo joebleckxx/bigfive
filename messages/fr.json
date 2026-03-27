@@ -13,6 +13,7 @@
     "badge": "L’ÉVALUATION NUMÉRIQUE DE L’ÂME",
     "subheadline": "Embarque pour un voyage visuel guidé conçu pour révéler les différentes couches de ta personnalité. Aucun label clinique, seulement des insights profonds pensés pour nourrir ton évolution.",
     "note": "PREND ENVIRON 4 MINUTES",
+    "noteSecondary": "Entièrement anonyme et privé",
     "cta": "COMMENCER LE TEST",
     "features": {
       "item1": {
@@ -128,6 +129,14 @@
         "low": "Faible",
         "medium": "Moyen",
         "high": "Élevé"
+      },
+      "poles": {
+        "S": { "left": "Réactif", "right": "Calme" },
+        "E": { "left": "Réservé", "right": "Sociable" },
+        "O": { "left": "Ancré", "right": "Explorateur" },
+        "C": { "left": "Spontané", "right": "Organisé" },
+        "A": { "left": "Indépendant", "right": "Coopératif" },
+        "N": { "left": "Stable", "right": "Sensible" }
       }
     },
     "disclaimer": "Ce test s’appuie sur des recherches reconnues en personnalité et est informatif - ce n’est pas un test clinique.",

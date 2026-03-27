@@ -254,7 +254,15 @@ export default function PayPage() {
         </div>
 
         <div className="mt-18 flex justify-center">
-          <div className="inline-flex items-center rounded-full border border-white/[0.04] bg-[#2A1C4D]/95 px-5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_16px_40px_rgba(0,0,0,0.16)]">
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.04] bg-[#2A1C4D]/95 px-5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_16px_40px_rgba(0,0,0,0.16)]">
+            <Image
+              src="/icons/pay/badge-sparkle.svg"
+              alt=""
+              aria-hidden="true"
+              width={16}
+              height={16}
+              className="h-4 w-4"
+            />
             <span className="text-[0.78rem] font-bold tracking-[0.16em] text-[#C57EFF]">
               {t("badge")}
             </span>
@@ -475,7 +483,7 @@ export default function PayPage() {
 
         <div className="mt-10">
           <div className="min-w-0 rounded-[1.8rem] border border-white/[0.04] bg-[rgba(15,24,46,0.72)] px-5 py-0 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_20px_45px_rgba(0,0,0,0.18)]">
-            <div className="flex min-h-[7.5rem] items-center gap-5">
+            <div className="flex min-h-[7.5rem] items-center gap-5 max-[380px]:flex-col max-[380px]:justify-center max-[380px]:gap-4 max-[380px]:py-4">
               <div className="relative flex h-11 shrink-0 items-center">
                 {socialProofAvatars.map((src, index) => (
                   <div
@@ -496,7 +504,7 @@ export default function PayPage() {
                   {t("socialProofCount")}
                 </div>
               </div>
-              <p className="m-0 max-w-[13.5rem] text-[0.98rem] font-medium leading-[1.35] tracking-[-0.03em] text-white/80">
+              <p className="m-0 max-w-[13.5rem] text-[0.98rem] font-medium leading-[1.35] tracking-[-0.03em] text-white/80 max-[380px]:text-center">
                 {t("socialProof")}
               </p>
             </div>

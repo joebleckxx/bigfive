@@ -13,6 +13,7 @@
     "badge": "LA EVALUACIÓN DIGITAL DEL ALMA",
     "subheadline": "Embárcate en un viaje visual guiado diseñado para descubrir las capas de tu personalidad. Sin etiquetas clínicas, solo ideas profundas cuidadosamente pensadas para tu crecimiento.",
     "note": "TOMA APROXIMADAMENTE 4 MINUTOS",
+    "noteSecondary": "Totalmente anónimo y privado",
     "cta": "EMPEZAR EL TEST",
     "features": {
       "item1": {
@@ -128,6 +129,14 @@
         "low": "Bajo",
         "medium": "Medio",
         "high": "Alto"
+      },
+      "poles": {
+        "S": { "left": "Reactivo", "right": "Sereno" },
+        "E": { "left": "Reservado", "right": "Sociable" },
+        "O": { "left": "Práctico", "right": "Explorador" },
+        "C": { "left": "Espontáneo", "right": "Organizado" },
+        "A": { "left": "Independiente", "right": "Cooperativo" },
+        "N": { "left": "Estable", "right": "Sensible" }
       }
     },
     "disclaimer": "Este test se basa en investigación reconocida sobre personalidad y es informativo - no es un test clínico.",
