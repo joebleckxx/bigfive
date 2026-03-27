@@ -122,7 +122,6 @@
       "title": "Cechy osobowości",
       "show": "Pokaż szczegóły cech osobowości",
       "hide": "Ukryj szczegóły cech osobowości",
-      "note": "Oparte na modelu Big Five – pięciu podstawowych cechach osobowości.",
       "topTrait": "Twoja najsilniejsza cecha",
       "summary": "Najmocniej wyróżnia się u Ciebie {trait}.",
       "levels": {
@@ -131,12 +130,30 @@
         "high": "Wysoki"
       },
       "poles": {
-        "S": { "left": "Reaktywny", "right": "Spokojny" },
-        "E": { "left": "Cichy", "right": "Towarzyski" },
-        "O": { "left": "Przy ziemi", "right": "Odkrywczy" },
-        "C": { "left": "Spontaniczny", "right": "Uporządkowany" },
-        "A": { "left": "Niezależny", "right": "Współpracujący" },
-        "N": { "left": "Stabilny", "right": "Wrażliwy" }
+        "S": {
+          "left": "Reaktywny",
+          "right": "Spokojny"
+        },
+        "E": {
+          "left": "Cichy",
+          "right": "Towarzyski"
+        },
+        "O": {
+          "left": "Przy ziemi",
+          "right": "Odkrywczy"
+        },
+        "C": {
+          "left": "Spontaniczny",
+          "right": "Uporządkowany"
+        },
+        "A": {
+          "left": "Niezależny",
+          "right": "Współpracujący"
+        },
+        "N": {
+          "left": "Stabilny",
+          "right": "Wrażliwy"
+        }
       }
     },
     "disclaimer": "Ten test opiera się na uznanych badaniach osobowości i ma charakter informacyjny - nie jest testem klinicznym.",

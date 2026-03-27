@@ -61,7 +61,7 @@ export default async function Page({
         </div>
 
         {/* HERO */}
-        <div className="mt-18 flex justify-center">
+        <div className="mt-10 flex justify-center">
           <div className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.04] bg-[#0D1A34]/95 px-5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_16px_40px_rgba(0,0,0,0.16)]">
             <Image
               src="/icons/home/badge-sparkle.svg"

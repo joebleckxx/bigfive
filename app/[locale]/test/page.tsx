@@ -300,7 +300,7 @@ export default function TestPage() {
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 sm:px-5 py-10 text-white"
+      className="relative min-h-screen overflow-hidden bg-[#02030A] px-5 sm:px-5 py-10 text-white"
     >
       <TMJBackground />
 
@@ -341,7 +341,7 @@ export default function TestPage() {
         {/* Test */}
         <div className="relative z-10 mt-8">
           <div className="rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95
-                          px-4 pt-4 pb-5
+                          px-5 pt-4 pb-5
                           shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl
                           sm:px-6 sm:pt-6 sm:pb-7">
             <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">

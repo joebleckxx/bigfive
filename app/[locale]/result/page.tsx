@@ -933,14 +933,11 @@ export default function ResultPage() {
         </div>
 
 		        {/* Big Five panel */}
-		            <div className="mt-8 rounded-[2.15rem] border border-white/[0.04] bg-[#071126]/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)] px-4 pt-6 pb-8 sm:p-6 sm:pt-5 sm:pb-8">
+		            <div className="mt-8 rounded-[2.15rem] border border-white/[0.04] bg-[#071126]/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)] px-5 pt-6 pb-8 sm:p-6 sm:pt-5 sm:pb-8">
 		          <div className="flex items-center justify-between gap-4">
 		            <div className="min-w-0">
-		              <div className="text-sm font-semibold text-white/85">
+		              <div className="text-sm font-medium uppercase tracking-[0.12em] text-white/85">
 		                {t("bigFive.title")}
-		              </div>
-		              <div className="mt-1 text-xs text-white/40">
-		                {t("bigFive.note")}
 		              </div>
 		            </div>
 
@@ -987,7 +984,7 @@ export default function ResultPage() {
                         })()}
                       />
                     </div>
-                    <div className="mt-2 flex items-center justify-between gap-4 text-[0.72rem] font-medium tracking-[0.02em] text-white/42">
+                    <div className="mt-2 flex items-center justify-between gap-4 text-[0.78rem] font-medium tracking-[0.02em] text-white/42">
                       <span>{t(`bigFive.poles.${row.key}.left`)}</span>
                       <span className="text-right">{t(`bigFive.poles.${row.key}.right`)}</span>
                     </div>

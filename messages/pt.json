@@ -122,7 +122,6 @@
       "title": "Traços de personalidade",
       "show": "Mostrar detalhes dos traços",
       "hide": "Ocultar detalhes dos traços",
-      "note": "Baseado no modelo Big Five - cinco traços fundamentais de personalidade.",
       "topTrait": "O teu traço mais forte",
       "summary": "O traço que mais se destaca em ti é {trait}.",
       "levels": {
@@ -131,12 +130,30 @@
         "high": "Alto"
       },
       "poles": {
-        "S": { "left": "Reativo", "right": "Calmo" },
-        "E": { "left": "Reservado", "right": "Sociável" },
-        "O": { "left": "Pé no chão", "right": "Explorador" },
-        "C": { "left": "Espontâneo", "right": "Organizado" },
-        "A": { "left": "Independente", "right": "Cooperativo" },
-        "N": { "left": "Estável", "right": "Sensível" }
+        "S": {
+          "left": "Reativo",
+          "right": "Calmo"
+        },
+        "E": {
+          "left": "Reservado",
+          "right": "Sociável"
+        },
+        "O": {
+          "left": "Pé no chão",
+          "right": "Explorador"
+        },
+        "C": {
+          "left": "Espontâneo",
+          "right": "Organizado"
+        },
+        "A": {
+          "left": "Independente",
+          "right": "Cooperativo"
+        },
+        "N": {
+          "left": "Estável",
+          "right": "Sensível"
+        }
       }
     },
     "disclaimer": "Este teste baseia-se em investigação reconhecida sobre personalidade e tem caráter informativo - não é um teste clínico.",

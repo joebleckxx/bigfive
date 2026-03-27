@@ -122,7 +122,6 @@
       "title": "Traits de personnalité",
       "show": "Afficher les détails des traits",
       "hide": "Masquer les détails des traits",
-      "note": "Basé sur le modèle Big Five - cinq traits fondamentaux de personnalité.",
       "topTrait": "Ton trait le plus marqué",
       "summary": "Le trait qui ressort le plus chez toi est {trait}.",
       "levels": {
@@ -131,12 +130,30 @@
         "high": "Élevé"
       },
       "poles": {
-        "S": { "left": "Réactif", "right": "Calme" },
-        "E": { "left": "Réservé", "right": "Sociable" },
-        "O": { "left": "Ancré", "right": "Explorateur" },
-        "C": { "left": "Spontané", "right": "Organisé" },
-        "A": { "left": "Indépendant", "right": "Coopératif" },
-        "N": { "left": "Stable", "right": "Sensible" }
+        "S": {
+          "left": "Réactif",
+          "right": "Calme"
+        },
+        "E": {
+          "left": "Réservé",
+          "right": "Sociable"
+        },
+        "O": {
+          "left": "Ancré",
+          "right": "Explorateur"
+        },
+        "C": {
+          "left": "Spontané",
+          "right": "Organisé"
+        },
+        "A": {
+          "left": "Indépendant",
+          "right": "Coopératif"
+        },
+        "N": {
+          "left": "Stable",
+          "right": "Sensible"
+        }
       }
     },
     "disclaimer": "Ce test s’appuie sur des recherches reconnues en personnalité et est informatif - ce n’est pas un test clinique.",

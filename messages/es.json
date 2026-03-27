@@ -122,7 +122,6 @@
       "title": "Rasgos de personalidad",
       "show": "Mostrar detalles de rasgos",
       "hide": "Ocultar detalles de rasgos",
-      "note": "Basado en el modelo Big Five: cinco rasgos básicos de personalidad.",
       "topTrait": "Tu rasgo más fuerte",
       "summary": "El rasgo que más destaca en ti es {trait}.",
       "levels": {
@@ -131,12 +130,30 @@
         "high": "Alto"
       },
       "poles": {
-        "S": { "left": "Reactivo", "right": "Sereno" },
-        "E": { "left": "Reservado", "right": "Sociable" },
-        "O": { "left": "Práctico", "right": "Explorador" },
-        "C": { "left": "Espontáneo", "right": "Organizado" },
-        "A": { "left": "Independiente", "right": "Cooperativo" },
-        "N": { "left": "Estable", "right": "Sensible" }
+        "S": {
+          "left": "Reactivo",
+          "right": "Sereno"
+        },
+        "E": {
+          "left": "Reservado",
+          "right": "Sociable"
+        },
+        "O": {
+          "left": "Práctico",
+          "right": "Explorador"
+        },
+        "C": {
+          "left": "Espontáneo",
+          "right": "Organizado"
+        },
+        "A": {
+          "left": "Independiente",
+          "right": "Cooperativo"
+        },
+        "N": {
+          "left": "Estable",
+          "right": "Sensible"
+        }
       }
     },
     "disclaimer": "Este test se basa en investigación reconocida sobre personalidad y es informativo - no es un test clínico.",

@@ -127,7 +127,6 @@
       "title": "Personlighetsdrag",
       "show": "Visa detaljer om personlighetsdrag",
       "hide": "Dölj detaljer om personlighetsdrag",
-      "note": "Baserat på Big Five-modellen – fem grundläggande personlighetsdrag.",
       "topTrait": "Din starkaste egenskap",
       "summary": "Din starkaste egenskap är {trait}.",
       "levels": {
@@ -136,12 +135,30 @@
         "high": "Hög"
       },
       "poles": {
-        "S": { "left": "Reaktiv", "right": "Lugn" },
-        "E": { "left": "Tyst", "right": "Social" },
-        "O": { "left": "Jordnära", "right": "Utforskande" },
-        "C": { "left": "Spontan", "right": "Organiserad" },
-        "A": { "left": "Självständig", "right": "Samarbetsvillig" },
-        "N": { "left": "Stadig", "right": "Känslig" }
+        "S": {
+          "left": "Reaktiv",
+          "right": "Lugn"
+        },
+        "E": {
+          "left": "Tyst",
+          "right": "Social"
+        },
+        "O": {
+          "left": "Jordnära",
+          "right": "Utforskande"
+        },
+        "C": {
+          "left": "Spontan",
+          "right": "Organiserad"
+        },
+        "A": {
+          "left": "Självständig",
+          "right": "Samarbetsvillig"
+        },
+        "N": {
+          "left": "Stadig",
+          "right": "Känslig"
+        }
       },
       "stabilityMeaning": "Emotionell stabilitet beskriver hur lugn och motståndskraftig du tenderar att vara under press."
     },

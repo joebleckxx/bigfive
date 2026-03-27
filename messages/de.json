@@ -122,7 +122,6 @@
       "title": "Persönlichkeitsmerkmale",
       "show": "Details der Merkmale anzeigen",
       "hide": "Details der Merkmale ausblenden",
-      "note": "Basierend auf dem Big-Five-Modell - fünf grundlegenden Persönlichkeitsmerkmalen.",
       "topTrait": "Dein stärkstes Merkmal",
       "summary": "Am stärksten ausgeprägt ist bei dir {trait}.",
       "levels": {
@@ -131,12 +130,30 @@
         "high": "Hoch"
       },
       "poles": {
-        "S": { "left": "Reaktiv", "right": "Gelassen" },
-        "E": { "left": "Ruhig", "right": "Gesellig" },
-        "O": { "left": "Bodenständig", "right": "Entdeckerisch" },
-        "C": { "left": "Spontan", "right": "Organisiert" },
-        "A": { "left": "Unabhängig", "right": "Kooperativ" },
-        "N": { "left": "Beständig", "right": "Sensibel" }
+        "S": {
+          "left": "Reaktiv",
+          "right": "Gelassen"
+        },
+        "E": {
+          "left": "Ruhig",
+          "right": "Gesellig"
+        },
+        "O": {
+          "left": "Bodenständig",
+          "right": "Entdeckerisch"
+        },
+        "C": {
+          "left": "Spontan",
+          "right": "Organisiert"
+        },
+        "A": {
+          "left": "Unabhängig",
+          "right": "Kooperativ"
+        },
+        "N": {
+          "left": "Beständig",
+          "right": "Sensibel"
+        }
       }
     },
     "disclaimer": "Dieser Test basiert auf anerkannter Persönlichkeitsforschung und ist informativ - kein klinischer Test.",
