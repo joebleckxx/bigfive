@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "@/navigation";
+import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import {
   QUESTIONS,
@@ -68,6 +69,7 @@ function clearProgressStorage() {
 export default function TestPage() {
   const router = useRouter();
   const t = useTranslations("Test");
+  const th = useTranslations("Home");
   const s = useTranslations("Scale");
   const q = useTranslations("Questions");
 
@@ -125,29 +127,6 @@ export default function TestPage() {
   // tap feedback
   const [tapSelected, setTapSelected] = useState<number | null>(null);
   const [isAdvancing, setIsAdvancing] = useState(false);
-
-  // menu ⋯
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") setMenuOpen(false);
-    }
-    function onPointerDown(e: MouseEvent | TouchEvent) {
-      if (!menuRef.current) return;
-      const target = e.target as Node;
-      if (!menuRef.current.contains(target)) setMenuOpen(false);
-    }
-    document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("mousedown", onPointerDown);
-    document.addEventListener("touchstart", onPointerDown);
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.removeEventListener("mousedown", onPointerDown);
-      document.removeEventListener("touchstart", onPointerDown);
-    };
-  }, []);
 
   // load progress + TTL
   useEffect(() => {
@@ -232,6 +211,11 @@ export default function TestPage() {
     };
   }, [total]);
 
+  const answeredCount = useMemo(
+    () => answers.filter((value) => value >= 1 && value <= 5).length,
+    [answers]
+  );
+
   const progressText = t("progress", {
     current: Math.min(index + 1, total),
     total
@@ -239,8 +223,8 @@ export default function TestPage() {
 
   const progress = useMemo(() => {
     if (total === 0) return 0;
-    return Math.round(((index + 1) / total) * 100);
-  }, [index, total]);
+    return Math.round((answeredCount / total) * 100);
+  }, [answeredCount, total]);
 
   // ✅ ZAMIANA: pytanie wg wylosowanej kolejności
   const currentQuestion = orderedQuestions[index];
@@ -258,25 +242,6 @@ export default function TestPage() {
       if (!localStorage.getItem(QUESTION_ORDER_KEY)) {
         localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(questionOrder));
       }
-    } catch {
-      // ignore
-    }
-  }
-
-  function doReset() {
-    clearProgressStorage();
-    setAnswers(Array(total).fill(0));
-    setIndex(0);
-    setTapSelected(null);
-    setIsAdvancing(false);
-    setMenuOpen(false);
-
-    // ✅ reset generuje nową kolejność
-    try {
-      const seed = crypto.randomUUID();
-      const order = makeQuestionOrder(seed, 2);
-      localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(order));
-      setQuestionOrder(order);
     } catch {
       // ignore
     }
@@ -304,7 +269,6 @@ export default function TestPage() {
 
     setIsAdvancing(true);
     setTapSelected(v);
-
     commitAnswer(v);
     requestAnimationFrame(() => {
       setTapSelected(null);
@@ -318,79 +282,54 @@ export default function TestPage() {
     setIndex((i) => Math.max(0, i - 1));
   }
 
+  function goNext() {
+    if (isAdvancing) return;
+    const currentValue = answers[index];
+    if (!(currentValue >= 1 && currentValue <= 5)) return;
+
+    touchLastActive();
+    if (index < total - 1) {
+      setIndex((i) => Math.min(total - 1, i + 1));
+      return;
+    }
+    router.push("/pay");
+  }
+
   if (!currentQuestion) return null;
+  const currentAnswered = answers[index] >= 1 && answers[index] <= 5;
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 sm:px-5 py-10 text-white"
+      className="relative min-h-screen overflow-hidden bg-[#02030A] px-5 sm:px-5 py-10 text-white"
     >
       <TMJBackground />
 
       <div className="relative mx-auto max-w-xl">
         {/* Topbar */}
-        <div className="relative z-30 mb-6 flex items-center justify-between">
-          <div className="text-sm text-white/70">{progressText}</div>
-
-          <div className="flex items-center gap-4">
-            <button
-              onClick={goBack}
-              type="button"
-              disabled={index === 0}
-              className="text-sm text-white/60 underline underline-offset-4 decoration-white/20 hover:text-white/90 hover:decoration-white/45 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
-              aria-disabled={index === 0 || isAdvancing}
+        <div className="relative z-30 mb-6 flex items-center justify-between gap-3">
+          <div className="leading-tight">
+            <Link
+              href="/"
+              className="bg-[linear-gradient(90deg,#57D6FF_0%,#7CB6FF_42%,#C08CFF_72%,#F08CFF_100%)] bg-clip-text text-sm font-bold tracking-tight text-transparent"
             >
-              {t("back")}
-            </button>
-
-            {/* Menu ⋯ */}
-            <div className="relative" ref={menuRef}>
-              <button
-                type="button"
-                onClick={() => setMenuOpen((v) => !v)}
-                className="inline-flex items-center justify-center rounded-xl
-                  px-2.5 py-1.5 text-sm font-semibold tracking-tight
-                  text-white/70 hover:text-white/90
-                  border border-white/10 hover:border-white/20
-                  bg-transparent hover:bg-white/5
-                  transition focus:outline-none
-                  cursor-pointer"
-                aria-haspopup="menu"
-                aria-expanded={menuOpen}
-                aria-label={t("menu")}
-              >
-                ⋯
-              </button>
-
-              {menuOpen && (
-                <div
-                  className="absolute right-0 z-50 mt-2 w-max
-                    rounded-xl border border-white/10
-                    bg-[#0B0C14]/90 backdrop-blur-xl
-                    shadow-xl overflow-hidden p-1"
-                  role="menu"
-                >
-                  <button
-                    type="button"
-                    onClick={doReset}
-                    className="block w-full whitespace-nowrap rounded-lg
-                      px-3 py-2 text-sm font-medium tracking-tight
-                      text-white/75 hover:text-white/90 hover:bg-white/8
-                      cursor-pointer"
-                    role="menuitem"
-                  >
-                    {t("reset")}
-                  </button>
-                </div>
-              )}
-            </div>
+              {th("brand.title")}
+            </Link>
           </div>
         </div>
 
         {/* Progress */}
-        <div className="mb-8">
-          <div className="h-[6px] w-full rounded-full bg-white/10">
+        <div className="mb-10">
+          <div className="mb-3 flex items-center justify-between gap-4">
+            <div className="text-[0.98rem] font-medium tracking-[0.02em] text-white/92">
+              {progressText}
+            </div>
+            <div className="text-[0.82rem] font-medium tracking-[0.18em] text-[#67D7FF] uppercase">
+              {progress}% {t("complete")}
+            </div>
+          </div>
+          <div className="relative h-[8px] w-full overflow-hidden rounded-full bg-[#1A2544] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
             <div
-              className="h-[6px] rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 transition-[width] duration-150"
+              className="absolute left-0 top-0 h-[8px] rounded-full bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] shadow-[0_0_18px_rgba(82,212,255,0.28)] transition-[width] duration-150"
               style={{
                 width: `${progress}%`,
                 minWidth: index === 0 ? "24px" : undefined
@@ -401,9 +340,9 @@ export default function TestPage() {
 
         {/* Test */}
         <div className="relative z-10 mt-8">
-          <div className="rounded-3xl border border-white/10 bg-white/8
-                          px-4 pt-4 pb-5
-                          shadow-xl backdrop-blur-2xl
+          <div className="rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95
+                          px-5 pt-4 pb-5
+                          shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl
                           sm:px-6 sm:pt-6 sm:pb-7">
             <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
               {orderReady ? q(currentQuestion.id) : "\u00A0"}
@@ -443,14 +382,80 @@ export default function TestPage() {
                       tapping ? "border-white/70 bg-white/8" : "",
                       isAdvancing ? "pointer-events-none cursor-not-allowed" : ""
                     ].join(" ")}
+                    style={
+                      selected || tapping
+                        ? { borderColor: "#67D7FF" }
+                        : undefined
+                    }
                   >
-                    <span className="text-sm font-medium text-white/90">{s(String(v))}</span>
+                    <span className="flex items-center justify-between gap-4">
+                      <span className="text-sm font-medium text-white/90">
+                        {s(String(v))}
+                      </span>
+                      <span
+                        className={[
+                          "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors duration-150",
+                          selected || tapping
+                            ? "border-[#67D7FF] bg-[#67D7FF]"
+                            : "border-white/10 bg-transparent",
+                        ].join(" ")}
+                        aria-hidden="true"
+                      >
+                        {(selected || tapping) && (
+                          <Image
+                            src="/icons/test/answer-check.svg"
+                            alt=""
+                            aria-hidden="true"
+                            width={12}
+                            height={12}
+                            className="h-3 w-3"
+                          />
+                        )}
+                      </span>
+                    </span>
                   </button>
                 );
               })}
             </div>
           </div>
-            {/* Joe microcopy */}
+          <div className="mt-5 flex items-center justify-between gap-4 px-1">
+            <button
+              onClick={goBack}
+              type="button"
+              disabled={index === 0}
+              className="inline-flex items-center gap-2 text-sm font-medium text-white/80 transition hover:text-white disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
+              aria-disabled={index === 0 || isAdvancing}
+            >
+              <Image
+                src="/icons/test/nav-back.svg"
+                alt=""
+                aria-hidden="true"
+                width={13}
+                height={13}
+                className="h-[0.8125rem] w-[0.8125rem]"
+              />
+              <span>{t("back")}</span>
+            </button>
+
+            <button
+              onClick={goNext}
+              type="button"
+              disabled={!currentAnswered || isAdvancing}
+              className="inline-flex items-center gap-2 text-sm font-medium text-white/80 transition hover:text-white disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
+              aria-disabled={!currentAnswered || isAdvancing}
+            >
+              <span>{t("next")}</span>
+              <Image
+                src="/icons/test/nav-next.svg"
+                alt=""
+                aria-hidden="true"
+                width={13}
+                height={13}
+                className="h-[0.8125rem] w-[0.8125rem]"
+              />
+            </button>
+          </div>
+          {/* Joe microcopy */}
           <div className="hidden mt-6 mb-6 text-xs text-white/50 italic">
             {t("tip")}           
           </div>

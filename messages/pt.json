@@ -4,22 +4,41 @@
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"
     },
-    "headline": { "before": "Descobre a tua", "accent": "personalidade"
+    "headline": {
+      "line1": "Descobre",
+      "line2": "O Teu",
+      "line2Accent": "Verdadeiro",
+      "line3": "Eu"
     },
-    "subheadline": "Um olhar mais profundo sobre como pensas, decides e te relacionas com as pessoas.",
-    "note": "Leva ~5–7 minutos. Sem conta.",
-    "cta": "Começar o teste",
+    "badge": "ANÁLISE DOS TEUS PADRÕES",
+    "subheadline": "Um teste de personalidade rápido que mostra como pensas, ages e te relacionas. Sem rótulos clínicos - apenas uma imagem clara dos teus padrões, que te ajuda a compreender-te melhor.",
+    "note": "DEMORA APROXIMADAMENTE 4 MINUTOS",
+    "noteSecondary": "Totalmente anónimo e privado",
+    "cta": "COMEÇAR O TESTE",
+    "features": {
+      "item1": {
+        "title": "25 perguntas simples"
+      },
+      "item2": {
+        "title": "Insights práticos"
+      },
+      "item3": {
+        "title": "Um modelo de teste híbrido"
+      }
+    },
     "editorial": {
-      "line1": "25 perguntas simples - pronto em apenas alguns minutos.",
-      "line2": "Uma visão prática de como funcionas no dia a dia, como reages sob pressão e o teu estilo ao construir relações.",
-      "line3": "Um teste baseado num modelo híbrido que mapeia os teus padrões para um dos 16 tipos profile."
+      "line1": "Um conjunto curto de perguntas que te ajuda a ir além do superficial e a chegar a padrões mais profundos.",
+      "line2": "Uma perspetiva prática sobre os padrões que influenciam os teus comportamentos, decisões e hábitos do dia a dia.",
+      "line3": "Uma combinação única dos principais sistemas de personalidade e da análise comportamental, que oferece uma visão mais profunda e multidimensional da tua personalidade."
     },
-    "footer": "TMJ • tellmejoe."
+    "footer": "tellmejoe. · TMJ"
   },
   "Test": {
     "progress": "Pergunta {current} de {total}",
+    "complete": "Concluído",
     "menu": "Menu",
     "back": "Voltar",
+    "next": "Seguinte",
     "reset": "Repor",
     "start": "Iniciar",
     "tip": "Leva cerca de 5 minutos. Confia na tua intuição - não há respostas erradas.",
@@ -40,19 +59,33 @@
       "accent": "clareza",
       "after": ""
     },
-    "description": "Uma análise clara e estruturada de como funcionas.",
+    "description": "Um olhar claro e estruturado sobre a forma como funcionas. Mais fundo naquilo que realmente está por trás das tuas reações e da tua forma de agir.",
     "editorial": {
       "line1": "Pontuações detalhadas de traços (0–100) e mapeamento dos seus padrões para 1 de 16 perfis de personalidade.",
       "line2": "Percebe como os teus pontos fortes - e pontos cegos - se traduzem na forma como ages.",
-      "line3": "Insight sobre como reages sob pressão e o que te ajuda a manter o equilíbrio nas relações."
+      "line3": "Insight sobre como reages sob pressão e o que te ajuda a manter o equilíbrio nas relações.",
+      "title1": "O teu perfil pessoal",
+      "title2": "Revela os teus pontos cegos",
+      "title3": "Domínio sob pressão"
     },
-    "cta": "Ver resultados completos por 1 $",
+    "cta": "DESBLOQUEIA O RESULTADO COMPLETO",
     "profileReady": "O teu perfil completo está pronto.",
     "whatWillIGet": "O que vou receber?",
     "note": "Pagamento único · Sem subscrição",
     "stripeNote": "Pagamento seguro via Stripe",
     "loading": "Redirecionando para pagamento seguro...",
-    "footer": "TMJ • tellmejoe."
+    "footer": "TMJ • tellmejoe.",
+    "badge": "ANÁLISE CONCLUÍDA 99%",
+    "primaryArchetype": "O teu arquétipo principal",
+    "socialProof": "Junta-te a mais de 12 000 pessoas que estão a explorar a sua personalidade.",
+    "socialProofCount": "+12k",
+    "onlyOneDollarPrefix": "Só",
+    "onlyOneDollarAmount": "$1",
+    "stripeLabel": "Stripe",
+    "quote": {
+      "line1": "Quando vês o padrão,",
+      "line2": "fica mais fácil compreenderes-te a ti próprio."
+    }
   },
   "Result": {
     "brandTitle": "tellmejoe.",
@@ -62,13 +95,11 @@
       "text": "Não vejo resultados guardados. Volta ao teste e responde às perguntas.",
       "backToTest": "Voltar ao teste"
     },
-    
     "hero": {
-    "before": "Seus",
-    "accent": "padrões de personalidade",
-    "sub": "Um retrato claro de como você tende a pensar, agir e se conectar - moldado pelo nosso modelo híbrido."
+      "before": "Seus",
+      "accent": "padrões de personalidade",
+      "sub": "Um retrato claro de como você tende a pensar, agir e se conectar - moldado pelo nosso modelo híbrido."
     },
-
     "menu": "Menu",
     "menuRetake": "Repetir",
     "pdf": {
@@ -78,14 +109,12 @@
       "error": "Não foi possível gerar o PDF. Verifica a consola.",
       "disclaimer": "Este relatório é apenas informativo. Não é uma ferramenta médica nem de diagnóstico."
     },
-
     "share": "Compartilhar",
     "shareTitle": "tellmejoe.",
     "shareText": "Acabei de fazer TMJ. Faça o teste e veja seu resultado.",
     "shareCopied": "Link copiado",
     "sharePrompt": "Copiar este link:",
     "shareError": "Não foi possível compartilhar agora",
-
     "retake": "Repetir",
     "retakeConfirm": "Repetir irá repor este resultado. Um novo resultado requer pagamento. Continuar?",
     "yourTypeLabel": "O teu perfil",
@@ -93,13 +122,38 @@
       "title": "Traços de personalidade",
       "show": "Mostrar detalhes dos traços",
       "hide": "Ocultar detalhes dos traços",
-      "note": "Baseado no modelo Big Five - cinco traços fundamentais de personalidade.",
       "topTrait": "O teu traço mais forte",
       "summary": "O traço que mais se destaca em ti é {trait}.",
       "levels": {
         "low": "Baixo",
         "medium": "Médio",
         "high": "Alto"
+      },
+      "poles": {
+        "S": {
+          "left": "Reativo",
+          "right": "Calmo"
+        },
+        "E": {
+          "left": "Reservado",
+          "right": "Sociável"
+        },
+        "O": {
+          "left": "Pé no chão",
+          "right": "Explorador"
+        },
+        "C": {
+          "left": "Espontâneo",
+          "right": "Organizado"
+        },
+        "A": {
+          "left": "Independente",
+          "right": "Cooperativo"
+        },
+        "N": {
+          "left": "Estável",
+          "right": "Sensível"
+        }
       }
     },
     "disclaimer": "Este teste baseia-se em investigação reconhecida sobre personalidade e tem caráter informativo - não é um teste clínico.",

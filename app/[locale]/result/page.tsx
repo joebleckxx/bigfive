@@ -21,15 +21,6 @@ import {
 
 type Trait = "E" | "O" | "C" | "A" | "N";
 
-/* ✅ Joe — result microcopy (5 variants, random) */
-const JOE_RESULTS = [
-  "This is just a snapshot. Use it gently.",
-  "Take what’s useful. Leave the rest.",
-  "A result, not a rule.",
-  "Just a perspective - not the whole story.",
-  "This is one way of seeing it."
-];
-
 type StoredResultV1 = {
   version: "v1";
   createdAt: string;
@@ -71,12 +62,12 @@ function pct(n: number) {
   return Math.max(0, Math.min(100, Math.round(n)));
 }
 
-// ✅ Big Five UX label key (i18n via json)
-function levelKey(v: number): "low" | "medium" | "high" {
-  const x = pct(v);
-  if (x <= 33) return "low";
-  if (x <= 66) return "medium";
-  return "high";
+function visualStretchPct(n: number) {
+  const x = pct(n);
+  const center = 50;
+  const normalized = (x - center) / center;
+  const stretched = Math.sign(normalized) * Math.pow(Math.abs(normalized), 0.82);
+  return Math.max(0, Math.min(100, Math.round(center + stretched * center)));
 }
 
 function isResultShape(x: unknown): x is StoredResultV1 {
@@ -148,11 +139,6 @@ export default function ResultPage() {
   // ✅ menu ⋯ (jak na /test)
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
-
-  // ✅ Joe line (pick once per mount)
-  const joeLine = useMemo(() => {
-    return JOE_RESULTS[Math.floor(Math.random() * JOE_RESULTS.length)];
-  }, []);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -379,6 +365,57 @@ export default function ResultPage() {
         }
       })();
 
+      const bigFiveIconUrl = await (async () => {
+        try {
+          const absoluteUrl = new URL("/graphics/bigfive-icon.svg", window.location.origin).toString();
+          const svgRes = await fetch(absoluteUrl);
+          if (!svgRes.ok) return absoluteUrl;
+
+          const svgRaw = await svgRes.text();
+          const svgWhite = svgRaw
+            .replace(/currentColor/gi, "#FFFFFF")
+            .replace(/stroke=(['"])black\1/gi, 'stroke="#FFFFFF"')
+            .replace(/fill=(['"])black\1/gi, 'fill="#FFFFFF"')
+            .replace(/stroke=(['"])#000(?:000)?\1/gi, 'stroke="#FFFFFF"')
+            .replace(/fill=(['"])#000(?:000)?\1/gi, 'fill="#FFFFFF"')
+            .replace(/<svg\b/i, '<svg color="#FFFFFF" ');
+
+          const svgBlob = new Blob([svgWhite], { type: "image/svg+xml;charset=utf-8" });
+          const svgBlobUrl = URL.createObjectURL(svgBlob);
+
+          try {
+            const pngDataUrl = await new Promise<string | undefined>((resolve) => {
+              const img = new window.Image();
+              img.onload = () => {
+                try {
+                  const canvas = document.createElement("canvas");
+                  canvas.width = 128;
+                  canvas.height = 128;
+                  const ctx = canvas.getContext("2d");
+                  if (!ctx) {
+                    resolve(undefined);
+                    return;
+                  }
+                  ctx.clearRect(0, 0, canvas.width, canvas.height);
+                  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                  resolve(canvas.toDataURL("image/png"));
+                } catch {
+                  resolve(undefined);
+                }
+              };
+              img.onerror = () => resolve(undefined);
+              img.src = svgBlobUrl;
+            });
+
+            return pngDataUrl ?? absoluteUrl;
+          } finally {
+            URL.revokeObjectURL(svgBlobUrl);
+          }
+        } catch {
+          return undefined;
+        }
+      })();
+
       const emotionalStability = 100 - data.scores.N;
 
       const bigFiveRows = [
@@ -386,12 +423,6 @@ export default function ResultPage() {
         { key: "O", label: t("traits.O"), value: data.scores.O },
         { key: "C", label: t("traits.C"), value: data.scores.C },
         { key: "A", label: t("traits.A"), value: data.scores.A },
-        {
-          key: "N",
-          label: t("traits.N"),
-          value: data.scores.N,
-          note: t("traitsNotes.N")
-        },
         {
           key: "S",
           label: t("traits.S"),
@@ -408,6 +439,8 @@ export default function ResultPage() {
         brandSubtitle: t("brandSubtitle"),
         generatedLabel: t("pdf.generated"),
         dateISO: new Date().toISOString().slice(0, 10),
+        logoImageUrl: new URL("/images/pdf/logo-gradient.png", window.location.origin).toString(),
+        bigFiveIconUrl,
         titleBefore: t("hero.before"),
         titleAccent: t("hero.accent"),
         subtitle: t("hero.sub"),
@@ -431,14 +464,10 @@ export default function ResultPage() {
           key: r.key,
           label: r.label,
           value: r.value,
-          note: r.note
+          note: r.key === "S" || r.key === "N" ? undefined : r.note,
+          leftPole: t(`bigFive.poles.${r.key}.left`),
+          rightPole: t(`bigFive.poles.${r.key}.right`)
         })),
-        bigFiveLevels: {
-          low: t("bigFive.levels.low"),
-          medium: t("bigFive.levels.medium"),
-          high: t("bigFive.levels.high")
-        },
-
         disclaimer: t("pdf.disclaimer")
       };
 
@@ -533,23 +562,18 @@ export default function ResultPage() {
     { key: "E", label: t("traits.E"), value: data.scores.E },
     { key: "O", label: t("traits.O"), value: data.scores.O },
     { key: "C", label: t("traits.C"), value: data.scores.C },
-    { key: "A", label: t("traits.A"), value: data.scores.A },
-    {
-      key: "N",
-      label: t("traits.N"),
-      value: data.scores.N,
-      note: t("traitsNotes.N")
-    }
+    { key: "A", label: t("traits.A"), value: data.scores.A }
   ];
 
-  const highestTrait = bigFiveRows.reduce(
-    (max, row) => (row.value > max.value ? row : max),
-    bigFiveRows[0]
-  );
+  const bigFiveBarClass =
+    "bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)]";
 
   const sections = [
     {
       key: "core",
+      cardClass: "bg-[#071126]/95",
+      iconWrapClass: "bg-[rgba(56,167,214,0.18)]",
+      accentColor: "#63D8FF",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -559,7 +583,7 @@ export default function ResultPage() {
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-indigo-300/75"
+          className="h-5 w-5 text-[#63D8FF]"
         >
           <path d="M12 18V5" />
           <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" />
@@ -576,6 +600,9 @@ export default function ResultPage() {
     },
     {
       key: "daily",
+      cardClass: "bg-[#08142B]/95",
+      iconWrapClass: "bg-[rgba(87,214,255,0.16)]",
+      accentColor: "#57D6FF",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -585,7 +612,7 @@ export default function ResultPage() {
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-indigo-400/75"
+          className="h-5 w-5 text-[#57D6FF]"
         >
           <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
         </svg>
@@ -595,6 +622,9 @@ export default function ResultPage() {
     },
     {
       key: "strengths",
+      cardClass: "bg-[#0A1329]/95",
+      iconWrapClass: "bg-[rgba(124,182,255,0.16)]",
+      accentColor: "#7CB6FF",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -604,7 +634,7 @@ export default function ResultPage() {
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-violet-400/75"
+          className="h-5 w-5 text-[#7CB6FF]"
         >
           {/* główna gwiazda — gradient */}
           <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
@@ -622,6 +652,9 @@ export default function ResultPage() {
     },
     {
       key: "watchOut",
+      cardClass: "bg-[#0A1127]/95",
+      iconWrapClass: "bg-[rgba(165,142,255,0.16)]",
+      accentColor: "#A58EFF",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -631,7 +664,7 @@ export default function ResultPage() {
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-violet-500/75"
+          className="h-5 w-5 text-[#A58EFF]"
         >
           <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
           <path d="M12 8v4" />
@@ -643,6 +676,9 @@ export default function ResultPage() {
     },
     {
       key: "underPressure",
+      cardClass: "bg-[#091127]/95",
+      iconWrapClass: "bg-[rgba(197,126,255,0.15)]",
+      accentColor: "#C57EFF",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -652,7 +688,7 @@ export default function ResultPage() {
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-fuchsia-400/75"
+          className="h-5 w-5 text-[#C57EFF]"
         >
           <path d="m12 14 4-4" />
           <path d="M3.34 19a10 10 0 1 1 17.32 0" />
@@ -663,6 +699,9 @@ export default function ResultPage() {
     },
     {
       key: "relationships",
+      cardClass: "bg-[#08152B]/95",
+      iconWrapClass: "bg-[rgba(240,140,255,0.14)]",
+      accentColor: "#F08CFF",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -672,7 +711,7 @@ export default function ResultPage() {
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-pink-400/75"
+          className="h-5 w-5 text-[#F08CFF]"
         >
           <path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762" />
         </svg>
@@ -697,7 +736,7 @@ export default function ResultPage() {
     return parts;
   }
 
-  function renderCardLines(lines: string[]) {
+  function renderCardLines(lines: string[], accentColor: string) {
     const arr = (lines || []).map((s) => (s || "").trim()).filter(Boolean);
     if (arr.length === 0) return null;
 
@@ -707,7 +746,7 @@ export default function ResultPage() {
       if (sentences.length <= 1) {
         return (
           <div className="mt-2 text-sm leading-relaxed">
-            <p className="whitespace-normal text-white/70">{arr[0]}</p>
+            <p className="whitespace-normal text-white/75">{arr[0]}</p>
           </div>
         );
       }
@@ -717,8 +756,25 @@ export default function ResultPage() {
 
       return (
         <div className="mt-2 text-sm leading-relaxed">
-          <p className="whitespace-normal text-white/70">{body}</p>
-          <p className="mt-3 whitespace-normal text-white/90 font-medium">{last}</p>
+          <p className="whitespace-normal text-white/75">{body}</p>
+          <p className="mt-3 whitespace-normal text-white/90 font-medium">
+            <span
+              aria-hidden="true"
+              className="mr-3 inline-block h-4 w-4 align-[-0.05em]"
+              style={{
+                backgroundColor: accentColor,
+                WebkitMaskImage: "url('/icons/result/card-emphasis.svg')",
+                maskImage: "url('/icons/result/card-emphasis.svg')",
+                WebkitMaskRepeat: "no-repeat",
+                maskRepeat: "no-repeat",
+                WebkitMaskPosition: "center",
+                maskPosition: "center",
+                WebkitMaskSize: "contain",
+                maskSize: "contain",
+              }}
+            />
+            {last}
+          </p>
         </div>
       );
     }
@@ -730,14 +786,31 @@ export default function ResultPage() {
     return (
       <div className="mt-2 text-sm leading-relaxed">
         {body && (
-          <p className="whitespace-normal text-white/70">
+          <p className="whitespace-normal text-white/75">
             {body}
           </p>
         )}
         {last && (
-          <p className="mt-4 whitespace-normal text-white/85 font-medium">
-            {last}
-          </p>
+          <>
+            <p className="mt-4 whitespace-normal text-white/90 font-medium">
+              <span
+                aria-hidden="true"
+                className="mr-3 inline-block h-4 w-4 align-[-0.05em]"
+                style={{
+                  backgroundColor: accentColor,
+                  WebkitMaskImage: "url('/icons/result/card-emphasis.svg')",
+                  maskImage: "url('/icons/result/card-emphasis.svg')",
+                  WebkitMaskRepeat: "no-repeat",
+                  maskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center",
+                  maskPosition: "center",
+                  WebkitMaskSize: "contain",
+                  maskSize: "contain",
+                }}
+              />
+              {last}
+            </p>
+          </>
         )}
       </div>
     );
@@ -755,17 +828,10 @@ export default function ResultPage() {
           <div className="leading-tight min-w-0">
             <Link
               href="/"
-              className="text-sm font-bold tracking-tight text-white/80"
-              style={{
-                fontFamily:
-                  '"Satoshi", var(--font-geist-sans), system-ui, sans-serif',
-              }}
+              className="bg-[linear-gradient(90deg,#57D6FF_0%,#7CB6FF_42%,#C08CFF_72%,#F08CFF_100%)] bg-clip-text text-sm font-bold tracking-tight text-transparent"
             >
               {t("brandTitle")}
             </Link>
-            <div className="text-xs text-white/55">
-              {t("brandSubtitle")}
-            </div>
           </div>
 
           <div className="flex items-center gap-3">
@@ -818,20 +884,26 @@ export default function ResultPage() {
         </div>
 
         {/* Hero */}
-        <div className="mt-10">
-          <h1 className="mb-2 text-[2.4rem] font-semibold leading-[1.1] tracking-tight sm:text-[2.6rem] break-normal [overflow-wrap:normal] hyphens-auto [text-wrap:balance]">
-            {t("hero.before")}{" "}
-            <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-pink-300 bg-clip-text text-transparent hyphens-auto">
+        <div className="mt-10 px-4 text-center sm:px-6">
+          <h1
+            className="mx-auto mb-2 max-w-[24rem] font-semibold tracking-tight break-normal [overflow-wrap:normal] hyphens-auto [text-wrap:balance] sm:max-w-[26rem]"
+            style={{
+              fontSize: "clamp(3.1rem, 10.2vw, 3.5rem)",
+              lineHeight: 1.02,
+            }}
+          >
+            <span className="block">{t("hero.before")}</span>
+            <span className="mt-2 block whitespace-normal [overflow-wrap:anywhere] [word-break:normal] bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] bg-clip-text text-transparent hyphens-auto">
               {t("hero.accent")}
             </span>
           </h1>
-          <p className="mt-4 text-base leading-relaxed text-white/75">
+          <p className="mx-auto mt-4 max-w-[22rem] text-base leading-relaxed text-white/75 sm:max-w-[24rem]">
             {t("hero.sub")}
           </p>
         </div>
 
         {/* Main card */}
-        <div className="mt-7 rounded-3xl bg-white/2 px-6 py-7 shadow-xl sm:mt-8 sm:px-8 sm:py-8">
+        <div className="mt-7 rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95 px-6 py-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] sm:mt-8 sm:px-8 sm:py-8">
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
@@ -879,39 +951,30 @@ export default function ResultPage() {
             </div>
           </div>
         </div>
-
-        {/* ✅ Joe line */}
-          <p className="mt-5 text-xs text-white/50 italic">
-            {joeLine} <span className="text-white/45">- Joe</span>
-          </p>
-
         {/* ✅ Profile sections (6) */}
-        <div className="mt-6 space-y-4">
+        <div className="mt-8 space-y-4">
           {sections.map((s) => (
             <div
               key={s.key}
-              className="rounded-3xl bg-white/5 px-4 py-5 shadow-xl sm:px-5 sm:py-6"
+              className={`rounded-[2.15rem] border border-white/[0.04] px-5 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)] sm:px-6 sm:py-6 ${s.cardClass}`}
             >
               <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-white/40 whitespace-normal">
-                <span className="inline-flex items-center justify-center text-indigo-300/70 -translate-y-[0.5px]">
+                <span className={`inline-flex h-10 w-10 items-center justify-center rounded-full ${s.iconWrapClass}`}>
                   {s.icon}
                 </span>
                 <span>{s.title}</span>
               </div>
-              {renderCardLines(s.lines)}
+              {renderCardLines(s.lines, s.accentColor)}
             </div>
           ))}
         </div>
 
 		        {/* Big Five panel */}
-		            <div className="mt-8 rounded-3xl bg-white/5 shadow-xl px-4 pt-6 pb-8 sm:p-6 sm:pt-5 sm:pb-8">
+		            <div className="mt-8 rounded-[2.15rem] border border-white/[0.04] bg-[#071126]/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)] px-5 pt-6 pb-8 sm:p-6 sm:pt-5 sm:pb-8">
 		          <div className="flex items-center justify-between gap-4">
 		            <div className="min-w-0">
-		              <div className="text-sm font-semibold text-white/85">
+		              <div className="text-sm font-medium uppercase tracking-[0.12em] text-white/85">
 		                {t("bigFive.title")}
-		              </div>
-		              <div className="mt-1 text-xs text-white/40">
-		                {t("bigFive.note")}
 		              </div>
 		            </div>
 
@@ -932,40 +995,35 @@ export default function ResultPage() {
 	          </div>
 		          <div className="mt-4 space-y-4">
               {bigFiveRows.map((row) => {
-                const k = levelKey(row.value);
                 return (
                   <div key={row.key}>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 text-sm text-white/90">
                         {row.label}
-                        {row.key === highestTrait.key && (
-                          <span
-                            className="text-yellow-300/90 text-sm"
-                            title={t("bigFive.topTrait")}
-                            aria-label={t("bigFive.topTrait")}
-                          >
-                            ★
-                          </span>
-                        )}
                       </div>
-
-                      <div className="text-sm text-white/90">{pct(row.value)}</div>
-                    </div>
-
-                    <div className="mt-1 text-xs text-white/50">
-                      {t(`bigFive.levels.${k}`)}
-                      {(row.key === "S" || row.key === "N") && (
-                        <span className="ml-1 text-[11px] leading-none">
-                          ({row.key === "S" ? t("traitsNotes.S") : t("traitsNotes.N")})
-                        </span>
-                      )}
                     </div>
 
                     <div className="mt-2 h-2 w-full rounded-full bg-white/10">
                       <div
-                        className="h-full rounded-full bg-gradient-to-r from-indigo-400 via-violet-400 to-pink-400"
-                        style={{ width: `${pct(row.value)}%` }}
+                        className={`h-full rounded-full ${bigFiveBarClass}`}
+                        style={(() => {
+                          const value = visualStretchPct(row.value);
+                          const scaleCutoff = 50;
+                          const effectiveRange = Math.min(value, scaleCutoff);
+                          const backgroundSize =
+                            effectiveRange > 0 ? `${(scaleCutoff / effectiveRange) * 100}% 100%` : "100% 100%";
+
+                          return {
+                            width: `${value}%`,
+                            backgroundSize,
+                            backgroundPosition: "left center",
+                          };
+                        })()}
                       />
+                    </div>
+                    <div className="mt-2 flex items-center justify-between gap-4 text-[0.78rem] font-medium tracking-[0.02em] text-white/42">
+                      <span>{t(`bigFive.poles.${row.key}.left`)}</span>
+                      <span className="text-right">{t(`bigFive.poles.${row.key}.right`)}</span>
                     </div>
 	                  </div>
 	                );
@@ -983,7 +1041,7 @@ export default function ResultPage() {
 	              aria-label={t("pdf.download")}
 	              title={t("pdf.download")}
 	              className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
-	                bg-black/25 ring-1 ring-white/20
+	                bg-black/25 ring-1 ring-white/20 text-white
 	                focus:outline-none
 	                cursor-pointer
 	                aria-disabled:pointer-events-none"
@@ -1032,7 +1090,7 @@ export default function ResultPage() {
 	              aria-label={tr("share", "Share")}
 	              title={tr("share", "Share")}
 	              className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
-	                bg-black/25 ring-1 ring-white/20
+	                bg-black/25 ring-1 ring-white/20 text-white
 	                focus:outline-none
 	                cursor-pointer"
 	            >

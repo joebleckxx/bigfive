@@ -4,22 +4,41 @@
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"
     },
-    "headline": { "before": "Découvre ta", "accent": "personnalité"
+    "headline": {
+      "line1": "Découvre",
+      "line2": "Ton",
+      "line2Accent": "Vrai",
+      "line3": "Moi"
     },
-    "subheadline": "Un regard plus profond sur ta façon de penser, de décider et d’entrer en relation avec les autres.",
-    "note": "~5–7 minutes. Sans compte.",
-    "cta": "Commencer le test",
+    "badge": "ANALYSE DE TES SCHÉMAS",
+    "subheadline": "Un test de personnalité rapide qui montre comment tu penses, agis et entres en relation. Aucun label clinique - seulement une image claire de tes schémas qui t’aide à mieux te comprendre.",
+    "note": "PREND ENVIRON 4 MINUTES",
+    "noteSecondary": "Entièrement anonyme et privé",
+    "cta": "COMMENCER LE TEST",
+    "features": {
+      "item1": {
+        "title": "25 questions simples"
+      },
+      "item2": {
+        "title": "Des insights concrets"
+      },
+      "item3": {
+        "title": "Un modèle de test hybride"
+      }
+    },
     "editorial": {
-      "line1": "25 questions simples - prêt en quelques minutes.",
-      "line2": "Un aperçu concret de ton fonctionnement au quotidien, de tes réactions sous pression et de ta façon de construire des relations.",
-      "line3": "Un test basé sur un modèle hybride qui associe tes schémas à l’un des 16 types profile."
+      "line1": "Une courte série de questions qui t’aide à dépasser la surface pour atteindre des schémas plus profonds.",
+      "line2": "Un éclairage concret sur les schémas qui influencent tes comportements, tes décisions et tes habitudes au quotidien.",
+      "line3": "Une combinaison unique des grands systèmes de personnalité et de l’analyse comportementale, pour une lecture plus profonde et multidimensionnelle de ta personnalité."
     },
-    "footer": "TMJ • tellmejoe."
+    "footer": "tellmejoe. · TMJ"
   },
   "Test": {
     "progress": "Question {current} sur {total}",
+    "complete": "Terminé",
     "menu": "Menu",
     "back": "Retour",
+    "next": "Suivant",
     "reset": "Réinitialiser",
     "start": "Démarrer",
     "tip": "Ça prend environ 5 minutes. Fais confiance à ton intuition - il n’y a pas de mauvaise réponse.",
@@ -40,19 +59,33 @@
       "accent": "lucidité",
       "after": ""
     },
-    "description": "Une analyse claire et structurée de ta façon de fonctionner.",
+    "description": "Un regard clair et structuré sur ta façon de fonctionner. Plus en profondeur sur ce qui se cache vraiment derrière tes réactions et ta manière d’agir.",
     "editorial": {
       "line1": "Scores détaillés des traits (0–100) et correspondance de vos schémas à 1 des 16 profils de personnalité.",
       "line2": "Comprends comment tes forces - et tes angles morts - se traduisent dans ta manière d’agir.",
-      "line3": "Des éclairages sur ta façon de réagir sous pression et sur ce qui t’aide à garder l’équilibre dans tes relations."
+      "line3": "Des éclairages sur ta façon de réagir sous pression et sur ce qui t’aide à garder l’équilibre dans tes relations.",
+      "title1": "Ton profil personnel",
+      "title2": "Révélez vos angles morts",
+      "title3": "Maîtrise sous pression"
     },
-    "cta": "Voir les résultats complets pour 1 $",
+    "cta": "DÉBLOQUEZ LE RÉSULTAT COMPLET",
     "profileReady": "Ton profil complet est prêt.",
     "whatWillIGet": "Qu’est-ce que je vais obtenir ?",
     "note": "Paiement unique · Sans abonnement",
     "stripeNote": "Paiement sécurisé via Stripe",
     "loading": "Redirection vers le paiement sécurisé...",
-    "footer": "TMJ • tellmejoe."
+    "footer": "TMJ • tellmejoe.",
+    "badge": "ANALYSE TERMINÉE 99%",
+    "primaryArchetype": "Votre archétype principal",
+    "socialProof": "Rejoins plus de 12 000 personnes qui explorent leur personnalité.",
+    "socialProofCount": "+12k",
+    "onlyOneDollarPrefix": "Seulement",
+    "onlyOneDollarAmount": "$1",
+    "stripeLabel": "Stripe",
+    "quote": {
+      "line1": "Quand tu vois le schéma,",
+      "line2": "il devient plus facile de te comprendre."
+    }
   },
   "Result": {
     "brandTitle": "tellmejoe.",
@@ -62,13 +95,11 @@
       "text": "Je ne vois aucun résultat enregistré. Reviens au test et réponds aux questions.",
       "backToTest": "Retour au test"
     },
-
     "hero": {
-    "before": "Tes",
-    "accent": "schémas de personnalité",
-    "sub": "Un aperçu clair de ta façon de penser, d’agir et de créer du lien - façonné par notre modèle hybride."
+      "before": "Tes",
+      "accent": "schémas de personnalité",
+      "sub": "Un aperçu clair de ta façon de penser, d’agir et de créer du lien - façonné par notre modèle hybride."
     },
-    
     "menu": "Menu",
     "menuRetake": "Recommencer",
     "pdf": {
@@ -78,14 +109,12 @@
       "error": "Impossible de générer le PDF. Vérifie la console.",
       "disclaimer": "Ce rapport est fourni à titre informatif uniquement. Ce n’est pas un outil médical ni diagnostique."
     },
-
     "share": "Partager",
     "shareTitle": "tellmejoe.",
     "shareText": "Je viens de faire TMJ. Fais le test et découvre ton résultat.",
     "shareCopied": "Lien copié",
     "sharePrompt": "Copiez ce lien :",
     "shareError": "Impossible de partager pour le moment",
-
     "retake": "Recommencer",
     "retakeConfirm": "Recommencer réinitialisera ce résultat. Un nouveau résultat nécessite un paiement. Continuer ?",
     "yourTypeLabel": "Ton profil",
@@ -93,13 +122,38 @@
       "title": "Traits de personnalité",
       "show": "Afficher les détails des traits",
       "hide": "Masquer les détails des traits",
-      "note": "Basé sur le modèle Big Five - cinq traits fondamentaux de personnalité.",
       "topTrait": "Ton trait le plus marqué",
       "summary": "Le trait qui ressort le plus chez toi est {trait}.",
       "levels": {
         "low": "Faible",
         "medium": "Moyen",
         "high": "Élevé"
+      },
+      "poles": {
+        "S": {
+          "left": "Réactif",
+          "right": "Calme"
+        },
+        "E": {
+          "left": "Réservé",
+          "right": "Sociable"
+        },
+        "O": {
+          "left": "Ancré",
+          "right": "Explorateur"
+        },
+        "C": {
+          "left": "Spontané",
+          "right": "Organisé"
+        },
+        "A": {
+          "left": "Indépendant",
+          "right": "Coopératif"
+        },
+        "N": {
+          "left": "Stable",
+          "right": "Sensible"
+        }
       }
     },
     "disclaimer": "Ce test s’appuie sur des recherches reconnues en personnalité et est informatif - ce n’est pas un test clinique.",

@@ -2,20 +2,15 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import TMJBackground from "@/app/components/ui/background";
 
 export default function TermsPage() {
   const params = useParams();
   const locale = (params?.locale as string) || "en";
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0B0C14] px-6 sm:px-5 py-10 text-white">
-      {/* Background (main-like blobs + overlay) */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-[120px]" />
-        <div className="absolute top-1/3 -left-40 h-[360px] w-[360px] rounded-full bg-fuchsia-500/20 blur-[120px]" />
-        <div className="absolute bottom-0 -right-40 h-[360px] w-[360px] rounded-full bg-pink-500/20 blur-[120px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.06] via-transparent to-transparent" />
-      </div>
+    <main className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 sm:px-5 py-10 text-white">
+      <TMJBackground />
 
       <div className="relative mx-auto w-full max-w-3xl">
         <div className="mb-6 flex items-center justify-between">
@@ -25,7 +20,9 @@ export default function TermsPage() {
           >
             ← Back
           </Link>
-          <div className="text-[11px] text-white/45">tellmejoe.</div>
+          <div className="bg-[linear-gradient(90deg,#57D6FF_0%,#7CB6FF_42%,#C08CFF_72%,#F08CFF_100%)] bg-clip-text text-sm font-bold tracking-tight text-transparent">
+            tellmejoe.
+          </div>
         </div>
 
         <h1 className="text-xl font-semibold tracking-tight">Terms of Service</h1>

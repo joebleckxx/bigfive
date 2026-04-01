@@ -5,24 +5,40 @@
       "subtitle": "no judgment • just patterns"
     },
     "headline": {
-      "before": "Odkryj swoją",
-      "accent": "osobowość"
+      "line1": "Odkryj",
+      "line2": "Swoje",
+      "line2Accent": "Prawdziwe",
+      "line3": "Ja"
     },
-
-    "subheadline": "Głębsze spojrzenie na to, jak myślisz, decydujesz i budujesz relacje z innymi.",
-    "note": "Zajmuje ~5–7 minut. Bez konta.",
-    "cta": "Rozpocznij test",
+    "badge": "ANALIZA TWOICH WZORCÓW",
+    "subheadline": "Szybki test osobowości, który pokazuje, jak myślisz, działasz i tworzysz relacje. Bez klinicznych etykiet - tylko jasny obraz Twoich wzorców, który pomaga Ci lepiej zrozumieć siebie.",
+    "note": "ZAJMUJE OKOŁO 4 MINUT",
+    "noteSecondary": "W pełni anonimowe i prywatne",
+    "cta": "ROZPOCZNIJ TEST",
+    "features": {
+      "item1": {
+        "title": "25 prostych pytań"
+      },
+      "item2": {
+        "title": "Praktyczne wglądy"
+      },
+      "item3": {
+        "title": "Hybrydowy model testu"
+      }
+    },
     "editorial": {
-      "line1": "25 prostych pytań - gotowe w kilka minut.",
-      "line2": "Praktyczny wgląd w to, jak działasz na co dzień, reagujesz pod presją i budujesz relacje.",      
-      "line3": "Test oparty na modelu hybrydowym, który mapuje Twoje wzorce do jednego z 16 profili."
+      "line1": "Krótki zestaw pytań, który pomaga ominąć to, co powierzchowne, i dotrzeć do głębszych wzorców.",
+      "line2": "Praktyczny wgląd w schematy, które wpływają na Twoje codzienne zachowania, decyzje i nawyki.",
+      "line3": "Unikalna synteza wiodących systemów osobowości i analityki zachowań, dająca głębszy, wielowymiarowy obraz Twojej osobowości."
     },
-    "footer": "TMJ • tellmejoe."
+    "footer": "tellmejoe. · TMJ"
   },
   "Test": {
     "progress": "Pytanie {current} z {total}",
+    "complete": "Ukończono",
     "menu": "Menu",
     "back": "Wstecz",
+    "next": "Dalej",
     "reset": "Resetuj",
     "start": "Start",
     "tip": "Zajmuje około 5 minut. Zaufaj swojej intuicji - nie ma złych odpowiedzi.",
@@ -43,19 +59,33 @@
       "accent": "wyniki",
       "after": ""
     },
-    "description": "Jasne, uporządkowane omówienie tego, jak działasz.",
+    "description": "Jasne, uporządkowane spojrzenie na to, jak działasz. Głębiej w to, co naprawdę stoi za Twoimi reakcjami i zachowaniem.",
     "editorial": {
       "line1": "Szczegółowa punktacja cech (0–100) oraz mapowanie Twoich wzorców do 1 z 16 profili osobowości.",
       "line2": "Zrozum, jak Twoje mocne i słabe strony wpływają na Twoje codzienne decyzje i zachowania.",
-      "line3": "Wgląd w to, jak reagujesz pod presją i co pomaga Ci zachować równowagę w relacjach."
+      "line3": "Wgląd w to, jak reagujesz pod presją i co pomaga Ci zachować równowagę w relacjach.",
+      "title1": "Twój osobisty profil",
+      "title2": "Odkryj swoje ślepe punkty",
+      "title3": "Opanowanie pod presją"
     },
-    "cta": "Zobacz pełne wyniki za 1 $",
+    "cta": "ODBLOKUJ PEŁNY WYNIK",
     "profileReady": "Twój pełny profil jest gotowy.",
     "whatWillIGet": "Co otrzymam?",
     "note": "Płatność jednorazowa · Brak subskrypcji",
     "stripeNote": "Bezpieczna płatność przez Stripe",
     "loading": "Przekierowuję do bezpiecznej płatności...",
-    "footer": "TMJ • tellmejoe."
+    "footer": "TMJ • tellmejoe.",
+    "badge": "ANALIZA ZAKOŃCZONA 99%",
+    "primaryArchetype": "Twój główny archetyp",
+    "socialProof": "Dołącz do ponad 12 000 osób, które odkryły swoją osobowość.",
+    "socialProofCount": "+12k",
+    "onlyOneDollarPrefix": "Tylko",
+    "onlyOneDollarAmount": "$1",
+    "stripeLabel": "Stripe",
+    "quote": {
+    "line1": "Gdy widzisz wzorzec,",
+    "line2": "łatwiej zrozumieć samego siebie."
+    }
   },
   "Result": {
     "brandTitle": "tellmejoe.",
@@ -65,13 +95,11 @@
       "text": "Nie widzę zapisanych wyników. Wróć do testu i odpowiedz na pytania.",
       "backToTest": "Wróć do testu"
     },
-
     "hero": {
-    "before": "Twoje",
-    "accent": "wzorce osobowości",
-    "sub": "Jasny obraz tego, jak zwykle myślisz, działasz i budujesz relacje - ukształtowany przez nasz hybrydowy model."
+      "before": "Twoje",
+      "accent": "wzorce osobowości",
+      "sub": "Jasny obraz tego, jak zwykle myślisz, działasz i budujesz relacje - ukształtowany przez nasz hybrydowy model."
     },
-
     "menu": "Menu",
     "menuRetake": "Powtórz",
     "pdf": {
@@ -81,14 +109,12 @@
       "error": "Nie udało się wygenerować PDF. Sprawdź konsolę.",
       "disclaimer": "Ten raport służy wyłącznie do celów informacyjnych. Nie jest narzędziem medycznym ani diagnostycznym."
     },
-
     "share": "Udostępnij",
     "shareTitle": "tellmejoe.",
     "shareText": "Właśnie zrobiłem TMJ. Zrób test i zobacz swój wynik.",
     "shareCopied": "Link skopiowany",
     "sharePrompt": "Skopiuj ten link:",
     "shareError": "Nie udało się udostępnić",
-    
     "retake": "Powtórz",
     "retakeConfirm": "Powtórzenie zresetuje ten wynik. Kolejny wynik wymaga płatności. Kontynuować?",
     "yourTypeLabel": "Twój profil",
@@ -96,13 +122,38 @@
       "title": "Cechy osobowości",
       "show": "Pokaż szczegóły cech osobowości",
       "hide": "Ukryj szczegóły cech osobowości",
-      "note": "Oparte na modelu Big Five – pięciu podstawowych cechach osobowości.",
       "topTrait": "Twoja najsilniejsza cecha",
       "summary": "Najmocniej wyróżnia się u Ciebie {trait}.",
       "levels": {
         "low": "Niski",
         "medium": "Średni",
         "high": "Wysoki"
+      },
+      "poles": {
+        "S": {
+          "left": "Reaktywny",
+          "right": "Spokojny"
+        },
+        "E": {
+          "left": "Cichy",
+          "right": "Towarzyski"
+        },
+        "O": {
+          "left": "Praktyczny",
+          "right": "Odkrywczy"
+        },
+        "C": {
+          "left": "Spontaniczny",
+          "right": "Uporządkowany"
+        },
+        "A": {
+          "left": "Niezależny",
+          "right": "Współpracujący"
+        },
+        "N": {
+          "left": "Stabilny",
+          "right": "Wrażliwy"
+        }
       }
     },
     "disclaimer": "Ten test opiera się na uznanych badaniach osobowości i ma charakter informacyjny - nie jest testem klinicznym.",
@@ -119,7 +170,6 @@
       "S": "wyżej = większy spokój pod presją"
     },
     "footer": "TMJ • tellmejoe.",
-
     "profileSections": {
       "core": "Twój rdzeń",
       "daily": "Jak działasz na co dzień",
@@ -156,7 +206,6 @@
     "N4": "Mój nastrój potrafi szybko się zmieniać.",
     "N5": "Zwykle zachowuję spokój pod presją."
   },
-  
   "Types": {
     "P01": {
       "name": "Myśliciel",
@@ -223,7 +272,6 @@
       "desc": "Wnosi energię i uruchamia ruch wokół siebie."
     }
   },
-
   "Profiles": {
     "P01": {
       "core": [
