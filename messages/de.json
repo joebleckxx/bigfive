@@ -10,8 +10,8 @@
       "line2Accent": "Wahres",
       "line3": "Selbst"
     },
-    "badge": "DIE DIGITALE SEELENANALYSE",
-    "subheadline": "Begib dich auf eine geführte visuelle Reise, die die Schichten deiner Persönlichkeit freilegt. Keine klinischen Etiketten - nur tiefgehende Einsichten, kuratiert für dein Wachstum.",
+    "badge": "ANALYSE DEINER MUSTER",
+    "subheadline": "Ein schneller Persönlichkeitstest, der zeigt, wie du denkst, handelst und Beziehungen gestaltest. Keine klinischen Etiketten - nur ein klares Bild deiner Muster, das dir hilft, dich selbst besser zu verstehen.",
     "note": "DAUERT UNGEFÄHR 4 MINUTEN",
     "noteSecondary": "Vollständig anonym und privat",
     "cta": "TEST STARTEN",
@@ -27,9 +27,9 @@
       }
     },
     "editorial": {
-      "line1": "Schnelle und zugleich erstaunlich tiefgehende Fragen, die das Ego umgehen und deinen Kern sichtbar machen.",
-      "line2": "Konkrete Daten, die deine Persönlichkeit in greifbares Wachstum in der realen Welt übersetzen.",
-      "line3": "Eine einzigartige Synthese führender Persönlichkeitssysteme und Verhaltensanalytik, die ein tieferes, mehrdimensionales Bild deines Profils liefert."
+      "line1": "Ein kurzes Set von Fragen, das dir hilft, über das Oberflächliche hinauszugehen und tiefere Muster zu erkennen.",
+      "line2": "Praktische Einblicke in die Muster, die dein Verhalten, deine Entscheidungen und Gewohnheiten im Alltag prägen.",
+      "line3": "Eine einzigartige Verbindung führender Persönlichkeitssysteme und Verhaltensanalytik, die ein tieferes, mehrdimensionales Bild deiner Persönlichkeit zeichnet."
     },
     "footer": "tellmejoe. · TMJ"
   },
@@ -59,12 +59,12 @@
       "accent": "Einblick frei",
       "after": ""
     },
-    "description": "Eine klare, strukturierte Aufschlüsselung, wie du funktionierst. Ein tiefer Einblick in deine kognitive Architektur.",
+    "description": "Ein klarer, strukturierter Blick darauf, wie du funktionierst. Tiefer hinein in das, was wirklich hinter deinen Reaktionen und deinem Verhalten steckt.",
     "editorial": {
       "line1": "Detaillierte Merkmalswerte (0–100) sowie die Zuordnung deiner Muster zu 1 von 16 Persönlichkeitsprofilen.",
       "line2": "Verstehe, wie sich deine Stärken - und blinden Flecken - in deiner Art zu handeln zeigen.",
       "line3": "Einblick darin, wie du unter Druck reagierst und was dir hilft, in Beziehungen im Gleichgewicht zu bleiben.",
-      "title1": "Dein persönlicher Bauplan",
+      "title1": "Dein persönliches Profil",
       "title2": "Erkenne deine blinden Flecken",
       "title3": "Souverän unter Druck"
     },
@@ -83,8 +83,8 @@
     "onlyOneDollarAmount": "$1",
     "stripeLabel": "Stripe",
     "quote": {
-      "line1": "Klarheit verändert alles,",
-      "line2": "wenn du endlich dein Muster erkennst."
+      "line1": "Wenn du das Muster erkennst,",
+      "line2": "fällt es leichter, dich selbst zu verstehen."
     }
   },
   "Result": {

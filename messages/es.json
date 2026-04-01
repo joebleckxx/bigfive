@@ -10,8 +10,8 @@
       "line2Accent": "Verdadero",
       "line3": "Yo"
     },
-    "badge": "LA EVALUACIÓN DIGITAL DEL ALMA",
-    "subheadline": "Embárcate en un viaje visual guiado diseñado para descubrir las capas de tu personalidad. Sin etiquetas clínicas, solo ideas profundas cuidadosamente pensadas para tu crecimiento.",
+    "badge": "ANÁLISIS DE TUS PATRONES",
+    "subheadline": "Un test de personalidad rápido que muestra cómo piensas, actúas y te relacionas. Sin etiquetas clínicas, solo una imagen clara de tus patrones que te ayuda a entenderte mejor.",
     "note": "TOMA APROXIMADAMENTE 4 MINUTOS",
     "noteSecondary": "Totalmente anónimo y privado",
     "cta": "EMPEZAR EL TEST",
@@ -27,9 +27,9 @@
       }
     },
     "editorial": {
-      "line1": "Preguntas rápidas pero sorprendentemente profundas, diseñadas para esquivar el ego y revelar tu núcleo.",
-      "line2": "Datos accionables que traducen tu personalidad en un crecimiento tangible en el mundo real.",
-      "line3": "Una síntesis única de los principales sistemas de personalidad y del análisis conductual, que ofrece una visión más profunda y multidimensional de tu perfil."
+      "line1": "Un conjunto breve de preguntas que te ayuda a ir más allá de lo superficial y llegar a patrones más profundos.",
+      "line2": "Una visión práctica de los patrones que influyen en tus comportamientos, decisiones y hábitos del día a día.",
+      "line3": "Una combinación única de los principales sistemas de personalidad y del análisis conductual, que ofrece una visión más profunda y multidimensional de tu personalidad."
     },
     "footer": "tellmejoe. · TMJ"
   },
@@ -59,12 +59,12 @@
       "accent": "visión",
       "after": ""
     },
-    "description": "Un desglose claro y estructurado de cómo funcionas. Una inmersión profunda en tu arquitectura cognitiva.",
+    "description": "Una mirada clara y estructurada a cómo funcionas. Más a fondo en lo que realmente está detrás de tus reacciones y tu forma de actuar.",
     "editorial": {
       "line1": "Puntuaciones detalladas de rasgos (0–100) y asignación de tus patrones a 1 de 16 perfiles de personalidad.",
       "line2": "Entiende cómo tus fortalezas - y puntos ciegos - se traducen en tu forma de actuar.",
       "line3": "Información sobre cómo respondes bajo presión y qué te ayuda a mantener el equilibrio en tus relaciones.",
-      "title1": "Tu mapa personal",
+      "title1": "Tu perfil personal",
       "title2": "Revela tus puntos ciegos",
       "title3": "Dominio bajo presión"
     },
@@ -83,8 +83,8 @@
     "onlyOneDollarAmount": "$1",
     "stripeLabel": "Stripe",
     "quote": {
-      "line1": "La claridad lo cambia todo",
-      "line2": "cuando por fin ves tu patrón."
+      "line1": "Cuando ves el patrón,",
+      "line2": "te resulta más fácil entenderte a ti mismo."
     }
   },
   "Result": {

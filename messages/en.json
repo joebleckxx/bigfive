@@ -11,8 +11,8 @@
       "line3": "Self"
     },
     "badge": "THE DIGITAL SOUL ASSESSMENT",
-    "subheadline": "Embark on a guided visual journey designed to uncover the layers of your personality. No clinical labels - just deep insights curated for your growth.",
-    "note": "TAKES APPROXIMATELY 4 MINUTES",
+    "subheadline": "A fast personality assessment designed to reveal how you think, act, and relate. No clinical labels - just deep insights curated for your growth.",
+    "note": "TAKES ABOUT 4 MINUTES",
     "noteSecondary": "Fully anonymous and private",
     "cta": "START TEST",
     "features": {
@@ -27,9 +27,9 @@
       }
     },
     "editorial": {
-      "line1": "Quick yet profound queries designed to bypass the ego and reveal your core.",
-      "line2": "Actionable data that translates your personality into tangible real-world growth.",
-      "line3": "A unique synthesis of leading personality systems and behavioral analytics, offering a deeper, multi-dimensional view of your profile."
+      "line1": "A short set of questions designed to slip past the ego and reveal your deeper patterns.",
+      "line2": "Clear, actionable insight into the patterns shaping your everyday behavior to better understand and improve your daily habits.",
+      "line3": "A hybrid model combining personality systems and behavioral analytics for a deeper, multi-dimensional view of your personality."
     },
     "footer": "tellmejoe. · TMJ"
   },
@@ -60,7 +60,7 @@
       "accent": "insight",
       "after": ""
     },
-    "description": "A clear, structured breakdown of how you operate. Deep-dive into your cognitive architecture.",
+    "description": "A clear, structured breakdown of how you operate. A deeper look at the patterns behind your behavior.",
     "editorial": {
       "title1": "Your Personal Blueprint",
       "title2": "Reveal Your Blind Spots",
@@ -83,8 +83,8 @@
     "onlyOneDollarAmount": "$1",
     "stripeLabel": "Stripe",
     "quote": {
-      "line1": "Clarity changes everything",
-      "line2": "once you finally see your pattern."
+      "line1": "Once you see the pattern,",
+      "line2": "you stop guessing."
     }
   },
   "Result": {

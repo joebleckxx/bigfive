@@ -10,8 +10,8 @@
       "line2Accent": "Prawdziwe",
       "line3": "Ja"
     },
-    "badge": "CYFROWA OCENA DUSZY",
-    "subheadline": "Wyrusz w prowadzoną wizualną podróż, która pomoże odkryć warstwy Twojej osobowości. Bez klinicznych etykiet - tylko głębokie wglądy stworzone z myślą o Twoim rozwoju.",
+    "badge": "ANALIZA TWOICH WZORCÓW",
+    "subheadline": "Szybki test osobowości, który pokazuje, jak myślisz, działasz i tworzysz relacje. Bez klinicznych etykiet - tylko jasny obraz Twoich wzorców, który pomaga Ci lepiej zrozumieć siebie.",
     "note": "ZAJMUJE OKOŁO 4 MINUT",
     "noteSecondary": "W pełni anonimowe i prywatne",
     "cta": "ROZPOCZNIJ TEST",
@@ -27,9 +27,9 @@
       }
     },
     "editorial": {
-      "line1": "Szybkie, ale zaskakująco głębokie pytania zaprojektowane tak, by ominąć ego i odsłonić Twój rdzeń.",
-      "line2": "Praktyczne dane, które przekładają Twoją osobowość na namacalny rozwój w prawdziwym świecie.",
-      "line3": "Unikalna synteza wiodących systemów osobowości i analityki zachowań, dająca głębszy, wielowymiarowy obraz Twojego profilu."
+      "line1": "Krótki zestaw pytań, który pomaga ominąć to, co powierzchowne, i dotrzeć do głębszych wzorców.",
+      "line2": "Praktyczny wgląd w schematy, które wpływają na Twoje codzienne zachowania, decyzje i nawyki.",
+      "line3": "Unikalna synteza wiodących systemów osobowości i analityki zachowań, dająca głębszy, wielowymiarowy obraz Twojej osobowości."
     },
     "footer": "tellmejoe. · TMJ"
   },
@@ -59,12 +59,12 @@
       "accent": "wyniki",
       "after": ""
     },
-    "description": "Jasne, uporządkowane omówienie tego, jak działasz. Głębokie zanurzenie w architekturę Twojego myślenia.",
+    "description": "Jasne, uporządkowane spojrzenie na to, jak działasz. Głębiej w to, co naprawdę stoi za Twoimi reakcjami i zachowaniem.",
     "editorial": {
       "line1": "Szczegółowa punktacja cech (0–100) oraz mapowanie Twoich wzorców do 1 z 16 profili osobowości.",
       "line2": "Zrozum, jak Twoje mocne i słabe strony wpływają na Twoje codzienne decyzje i zachowania.",
       "line3": "Wgląd w to, jak reagujesz pod presją i co pomaga Ci zachować równowagę w relacjach.",
-      "title1": "Twój osobisty blueprint",
+      "title1": "Twój osobisty profil",
       "title2": "Odkryj swoje ślepe punkty",
       "title3": "Opanowanie pod presją"
     },
@@ -77,14 +77,14 @@
     "footer": "TMJ • tellmejoe.",
     "badge": "ANALIZA ZAKOŃCZONA 99%",
     "primaryArchetype": "Twój główny archetyp",
-    "socialProof": "Dołącz do ponad 12 000 osób odkrywających swoją osobowość.",
+    "socialProof": "Dołącz do ponad 12 000 osób, które odkryły swoją osobowość.",
     "socialProofCount": "+12k",
     "onlyOneDollarPrefix": "Tylko",
     "onlyOneDollarAmount": "$1",
     "stripeLabel": "Stripe",
     "quote": {
-      "line1": "Jasność zmienia wszystko",
-      "line2": "gdy w końcu dostrzegasz swój wzorzec."
+    "line1": "Gdy widzisz wzorzec,",
+    "line2": "łatwiej zrozumieć samego siebie."
     }
   },
   "Result": {
@@ -139,7 +139,7 @@
           "right": "Towarzyski"
         },
         "O": {
-          "left": "Przy ziemi",
+          "left": "Praktyczny",
           "right": "Odkrywczy"
         },
         "C": {

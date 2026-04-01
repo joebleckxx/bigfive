@@ -365,6 +365,57 @@ export default function ResultPage() {
         }
       })();
 
+      const bigFiveIconUrl = await (async () => {
+        try {
+          const absoluteUrl = new URL("/graphics/bigfive-icon.svg", window.location.origin).toString();
+          const svgRes = await fetch(absoluteUrl);
+          if (!svgRes.ok) return absoluteUrl;
+
+          const svgRaw = await svgRes.text();
+          const svgWhite = svgRaw
+            .replace(/currentColor/gi, "#FFFFFF")
+            .replace(/stroke=(['"])black\1/gi, 'stroke="#FFFFFF"')
+            .replace(/fill=(['"])black\1/gi, 'fill="#FFFFFF"')
+            .replace(/stroke=(['"])#000(?:000)?\1/gi, 'stroke="#FFFFFF"')
+            .replace(/fill=(['"])#000(?:000)?\1/gi, 'fill="#FFFFFF"')
+            .replace(/<svg\b/i, '<svg color="#FFFFFF" ');
+
+          const svgBlob = new Blob([svgWhite], { type: "image/svg+xml;charset=utf-8" });
+          const svgBlobUrl = URL.createObjectURL(svgBlob);
+
+          try {
+            const pngDataUrl = await new Promise<string | undefined>((resolve) => {
+              const img = new window.Image();
+              img.onload = () => {
+                try {
+                  const canvas = document.createElement("canvas");
+                  canvas.width = 128;
+                  canvas.height = 128;
+                  const ctx = canvas.getContext("2d");
+                  if (!ctx) {
+                    resolve(undefined);
+                    return;
+                  }
+                  ctx.clearRect(0, 0, canvas.width, canvas.height);
+                  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                  resolve(canvas.toDataURL("image/png"));
+                } catch {
+                  resolve(undefined);
+                }
+              };
+              img.onerror = () => resolve(undefined);
+              img.src = svgBlobUrl;
+            });
+
+            return pngDataUrl ?? absoluteUrl;
+          } finally {
+            URL.revokeObjectURL(svgBlobUrl);
+          }
+        } catch {
+          return undefined;
+        }
+      })();
+
       const emotionalStability = 100 - data.scores.N;
 
       const bigFiveRows = [
@@ -372,12 +423,6 @@ export default function ResultPage() {
         { key: "O", label: t("traits.O"), value: data.scores.O },
         { key: "C", label: t("traits.C"), value: data.scores.C },
         { key: "A", label: t("traits.A"), value: data.scores.A },
-        {
-          key: "N",
-          label: t("traits.N"),
-          value: data.scores.N,
-          note: t("traitsNotes.N")
-        },
         {
           key: "S",
           label: t("traits.S"),
@@ -394,6 +439,8 @@ export default function ResultPage() {
         brandSubtitle: t("brandSubtitle"),
         generatedLabel: t("pdf.generated"),
         dateISO: new Date().toISOString().slice(0, 10),
+        logoImageUrl: new URL("/images/pdf/logo-gradient.png", window.location.origin).toString(),
+        bigFiveIconUrl,
         titleBefore: t("hero.before"),
         titleAccent: t("hero.accent"),
         subtitle: t("hero.sub"),
@@ -417,14 +464,10 @@ export default function ResultPage() {
           key: r.key,
           label: r.label,
           value: r.value,
-          note: r.note
+          note: r.key === "S" || r.key === "N" ? undefined : r.note,
+          leftPole: t(`bigFive.poles.${r.key}.left`),
+          rightPole: t(`bigFive.poles.${r.key}.right`)
         })),
-        bigFiveLevels: {
-          low: t("bigFive.levels.low"),
-          medium: t("bigFive.levels.medium"),
-          high: t("bigFive.levels.high")
-        },
-
         disclaimer: t("pdf.disclaimer")
       };
 
@@ -519,13 +562,7 @@ export default function ResultPage() {
     { key: "E", label: t("traits.E"), value: data.scores.E },
     { key: "O", label: t("traits.O"), value: data.scores.O },
     { key: "C", label: t("traits.C"), value: data.scores.C },
-    { key: "A", label: t("traits.A"), value: data.scores.A },
-    {
-      key: "N",
-      label: t("traits.N"),
-      value: data.scores.N,
-      note: t("traitsNotes.N")
-    }
+    { key: "A", label: t("traits.A"), value: data.scores.A }
   ];
 
   const bigFiveBarClass =

@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Image,
   Svg,
+  Ellipse,
   Defs,
   LinearGradient,
   Stop,
@@ -28,6 +29,8 @@ export type PdfReportData = {
   brandSubtitle: string;
   generatedLabel: string;
   dateISO: string;
+  logoImageUrl?: string;
+  bigFiveIconUrl?: string;
 
   titleBefore: string;
   titleAccent: string;
@@ -45,12 +48,9 @@ export type PdfReportData = {
     label: string;
     value: number;
     note?: string;
+    leftPole?: string;
+    rightPole?: string;
   }>;
-  bigFiveLevels: {
-    low: string;
-    medium: string;
-    high: string;
-  };
 
   // ✅ 6 sections (core/daily/strengths/watchOut/underPressure/relationships)
   profileSections: PdfProfileSection[];
@@ -60,11 +60,13 @@ export type PdfReportData = {
 };
 
 const C = {
-  bg: "#0B0C14",
-  cardBg: "#23242C",
-  border: "#303037",
+  bg: "#02030A",
+  cardBg: "#071126",
+  border: "#1A2235",
   title: "rgba(255,255,255,0.90)",
-  titleAccentStart: "#A5B4FC",
+  brandAccent: "#9F7AEA",
+  titleAccentFirst: "#92AEFF",
+  titleAccentSecond: "#A97BFF",
   text90: "rgba(255,255,255,0.90)",
   text85: "rgba(255,255,255,0.85)",
   text80: "rgba(255,255,255,0.80)",
@@ -75,21 +77,22 @@ const C = {
   text50: "rgba(255,255,255,0.50)",
   text45: "rgba(255,255,255,0.45)",
   text40: "rgba(255,255,255,0.40)",
-  barBg: "#1F212A",
-  gradStart: "#6366F1",
-  gradMid: "#8B5CF6",
-  gradEnd: "#F472B6"
+  barBg: "#151C2B",
+  gradStart: "#52D4FF",
+  gradMid: "#79C1FF",
+  gradMid2: "#B79FFF",
+  gradEnd: "#F087EE"
 };
 
 const SECTION_ICON_SIZE = 18;
 const SECTION_ICON_OPACITY = 0.75;
 const SECTION_ICON_COLORS = {
-  core: "#A5B4FC", // indigo-300
-  daily: "#818CF8", // indigo-400
-  strengths: "#A78BFA", // violet-400
-  watchOut: "#8B5CF6", // violet-500
-  underPressure: "#E879F9", // fuchsia-400
-  relationships: "#F472B6" // pink-400
+  core: "#63D8FF",
+  daily: "#57D6FF",
+  strengths: "#7CB6FF",
+  watchOut: "#A58EFF",
+  underPressure: "#C57EFF",
+  relationships: "#F08CFF"
 } as const;
 
 let fontRegistered = false;
@@ -127,14 +130,10 @@ const styles = StyleSheet.create({
     marginBottom: 18
   },
   brand: { flexDirection: "column" },
-  brandTitle: { fontSize: 12, fontWeight: 700, color: C.text85, letterSpacing: 0.2 },
+  brandLogo: { width: 65, height: 14, objectFit: "contain" },
   brandSubtitle: { fontSize: 9, color: C.text55, marginTop: 1 },
 
-  rightMeta: { fontSize: 9, color: C.text55, textAlign: "right" },
-
   title: { fontSize: 24, fontWeight: 700, marginBottom: 6, color: C.title },
-  titleAccent: { color: C.titleAccentStart },
-  titleAccentEnd: { color: "#F9A8D4" },
   sub: { fontSize: 10, color: C.text65, marginBottom: 16 },
 
   card: {
@@ -176,7 +175,24 @@ const styles = StyleSheet.create({
     color: C.text85
   },
 
-  barRow: { marginBottom: 10 },
+  bigFiveHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12
+  },
+  bigFiveIconWrap: {
+    width: 42,
+    height: 42,
+    borderRadius: 999,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#171922",
+    borderWidth: 1,
+    borderColor: C.border
+  },
+  bigFiveIcon: { width: 22, height: 22, objectFit: "contain" },
+  barRow: { marginBottom: 12 },
   barTop: { flexDirection: "row", justifyContent: "space-between" },
   barLabelRow: { flexDirection: "row", alignItems: "center" },
   barLabel: { fontSize: 10, color: C.text80 },
@@ -190,9 +206,14 @@ const styles = StyleSheet.create({
   },
   barFillWrap: { height: 8, borderRadius: 999, overflow: "hidden" },
   barGradient: { width: "100%", height: "100%" },
-  barMetaRow: { flexDirection: "row", alignItems: "center", marginTop: 3 },
-  barMetaText: { fontSize: 9, color: C.text55, lineHeight: 1.2 },
-  barMetaNote: { fontSize: 8.5, color: C.text55, marginLeft: 4, lineHeight: 1.2 },
+  barMetaRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 4
+  },
+  barMetaText: { fontSize: 8.5, color: C.text45, lineHeight: 1.2 },
+  barMetaNote: { fontSize: 8.5, color: C.text55, marginTop: 3, lineHeight: 1.2 },
   topTrait: { marginLeft: 6 },
 
   // profile sections
@@ -229,17 +250,6 @@ function clampPct(n: number) {
   return Math.max(0, Math.min(100, Math.round(n)));
 }
 
-function levelKey(v: number): "low" | "medium" | "high" {
-  const x = clampPct(v);
-  if (x <= 33) return "low";
-  if (x <= 66) return "medium";
-  return "high";
-}
-
-function toUpper(value: string) {
-  return value.toLocaleUpperCase();
-}
-
 function getYearFromISO(dateISO: string) {
   const y = Number(String(dateISO).slice(0, 4));
   return Number.isFinite(y) ? String(y) : String(new Date().getFullYear());
@@ -261,112 +271,98 @@ function SectionIcon({ sectionKey }: { sectionKey: string }) {
   switch (sectionKey) {
     case "core":
       return (
-        <View style={styles.psIconWrap}>
-          <Svg
-            width={SECTION_ICON_SIZE}
-            height={SECTION_ICON_SIZE}
-            viewBox="0 0 24 24"
-          >
-            <Path d="M12 18V5" {...pathProps} />
-            <Path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" {...pathProps} />
-            <Path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" {...pathProps} />
-            <Path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" {...pathProps} />
-            <Path d="M18 18a4 4 0 0 0 2-7.464" {...pathProps} />
-            <Path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" {...pathProps} />
-            <Path d="M6 18a4 4 0 0 1-2-7.464" {...pathProps} />
-            <Path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" {...pathProps} />
-          </Svg>
-        </View>
+        <Svg
+          width={SECTION_ICON_SIZE}
+          height={SECTION_ICON_SIZE}
+          viewBox="0 0 24 24"
+        >
+          <Path d="M12 18V5" {...pathProps} />
+          <Path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" {...pathProps} />
+          <Path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" {...pathProps} />
+          <Path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" {...pathProps} />
+          <Path d="M18 18a4 4 0 0 0 2-7.464" {...pathProps} />
+          <Path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" {...pathProps} />
+          <Path d="M6 18a4 4 0 0 1-2-7.464" {...pathProps} />
+          <Path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" {...pathProps} />
+        </Svg>
       );
     case "daily":
       return (
-        <View style={styles.psIconWrap}>
-          <Svg
-            width={SECTION_ICON_SIZE}
-            height={SECTION_ICON_SIZE}
-            viewBox="0 0 24 24"
-          >
-            <Path
-              d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
-              {...pathProps}
-            />
-          </Svg>
-        </View>
+        <Svg
+          width={SECTION_ICON_SIZE}
+          height={SECTION_ICON_SIZE}
+          viewBox="0 0 24 24"
+        >
+          <Path
+            d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
+            {...pathProps}
+          />
+        </Svg>
       );
     case "strengths":
       return (
-        <View style={styles.psIconWrap}>
-          <Svg
-            width={SECTION_ICON_SIZE}
-            height={SECTION_ICON_SIZE}
-            viewBox="0 0 24 24"
-          >
-            <Path
-              d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"
-              {...pathProps}
-            />
-            <Path d="M20 2v4" {...pathProps} strokeWidth={1.8} />
-            <Path d="M22 4h-4" {...pathProps} strokeWidth={1.8} />
-            <Path d="M4 20a2 2 0 1 0 4 0a2 2 0 1 0-4 0" {...pathProps} strokeWidth={1.8} />
-          </Svg>
-        </View>
+        <Svg
+          width={SECTION_ICON_SIZE}
+          height={SECTION_ICON_SIZE}
+          viewBox="0 0 24 24"
+        >
+          <Path
+            d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"
+            {...pathProps}
+          />
+          <Path d="M20 2v4" {...pathProps} strokeWidth={1.8} />
+          <Path d="M22 4h-4" {...pathProps} strokeWidth={1.8} />
+          <Path d="M4 20a2 2 0 1 0 4 0a2 2 0 1 0-4 0" {...pathProps} strokeWidth={1.8} />
+        </Svg>
       );
     case "watchOut":
       return (
-        <View style={styles.psIconWrap}>
-          <Svg
-            width={SECTION_ICON_SIZE}
-            height={SECTION_ICON_SIZE}
-            viewBox="0 0 24 24"
-          >
-            <Path
-              d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"
-              {...pathProps}
-            />
-            <Path d="M12 8v4" {...pathProps} />
-            <Path d="M12 16h.01" {...pathProps} />
-          </Svg>
-        </View>
+        <Svg
+          width={SECTION_ICON_SIZE}
+          height={SECTION_ICON_SIZE}
+          viewBox="0 0 24 24"
+        >
+          <Path
+            d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"
+            {...pathProps}
+          />
+          <Path d="M12 8v4" {...pathProps} />
+          <Path d="M12 16h.01" {...pathProps} />
+        </Svg>
       );
     case "underPressure":
       return (
-        <View style={styles.psIconWrap}>
-          <Svg
-            width={SECTION_ICON_SIZE}
-            height={SECTION_ICON_SIZE}
-            viewBox="0 0 24 24"
-          >
-            <Path d="m12 14 4-4" {...pathProps} />
-            <Path d="M3.34 19a10 10 0 1 1 17.32 0" {...pathProps} />
-          </Svg>
-        </View>
+        <Svg
+          width={SECTION_ICON_SIZE}
+          height={SECTION_ICON_SIZE}
+          viewBox="0 0 24 24"
+        >
+          <Path d="m12 14 4-4" {...pathProps} />
+          <Path d="M3.34 19a10 10 0 1 1 17.32 0" {...pathProps} />
+        </Svg>
       );
     case "relationships":
       return (
-        <View style={styles.psIconWrap}>
-          <Svg
-            width={SECTION_ICON_SIZE}
-            height={SECTION_ICON_SIZE}
-            viewBox="0 0 24 24"
-          >
-            <Path
-              d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762"
-              {...pathProps}
-            />
-          </Svg>
-        </View>
+        <Svg
+          width={SECTION_ICON_SIZE}
+          height={SECTION_ICON_SIZE}
+          viewBox="0 0 24 24"
+        >
+          <Path
+            d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762"
+            {...pathProps}
+          />
+        </Svg>
       );
     default:
       return (
-        <View style={styles.psIconWrap}>
-          <Svg
-            width={SECTION_ICON_SIZE}
-            height={SECTION_ICON_SIZE}
-            viewBox="0 0 24 24"
-          >
-            <Path d="M12 12h.01" {...pathProps} />
-          </Svg>
-        </View>
+        <Svg
+          width={SECTION_ICON_SIZE}
+          height={SECTION_ICON_SIZE}
+          viewBox="0 0 24 24"
+        >
+          <Path d="M12 12h.01" {...pathProps} />
+        </Svg>
       );
   }
 }
@@ -376,25 +372,37 @@ function PageBackground() {
     <View style={styles.pageBg} fixed>
       <Svg width="100%" height="100%" viewBox="0 0 595 842">
         <Defs>
-          <LinearGradient id="pageHorizontalBg" x1="0" y1="0" x2="1" y2="0">
-            <Stop offset="0%" stopColor="#171922" />
-            <Stop offset="100%" stopColor="#000000" />
+          <LinearGradient id="pageBaseBg" x1="0" y1="0" x2="1" y2="1">
+            <Stop offset="0%" stopColor="#02030A" />
+            <Stop offset="52%" stopColor="#040617" />
+            <Stop offset="100%" stopColor="#010209" />
+          </LinearGradient>
+          <LinearGradient id="pageSweepBg" x1="0" y1="0" x2="1" y2="1">
+            <Stop offset="0%" stopColor="#050612" stopOpacity="0" />
+            <Stop offset="44%" stopColor="#7C3AED" stopOpacity="0.12" />
+            <Stop offset="53%" stopColor="#3B82F6" stopOpacity="0.11" />
+            <Stop offset="100%" stopColor="#080918" stopOpacity="0" />
+          </LinearGradient>
+          <LinearGradient id="pageVignette" x1="0" y1="0" x2="0" y2="1">
+            <Stop offset="0%" stopColor="#050612" stopOpacity="0.08" />
+            <Stop offset="38%" stopColor="#050612" stopOpacity="0" />
+            <Stop offset="100%" stopColor="#000000" stopOpacity="0.68" />
+          </LinearGradient>
+          <LinearGradient id="pageBottomTint" x1="0" y1="0" x2="1" y2="1">
+            <Stop offset="0%" stopColor="#4338CA" stopOpacity="0.10" />
+            <Stop offset="52%" stopColor="#2563EB" stopOpacity="0.12" />
+            <Stop offset="100%" stopColor="#02030A" stopOpacity="0" />
           </LinearGradient>
         </Defs>
-        <Rect x="0" y="0" width="595" height="842" fill="url(#pageHorizontalBg)" />
+        <Rect x="0" y="0" width="595" height="842" fill="url(#pageBaseBg)" />
+        <Ellipse cx="470" cy="170" rx="330" ry="150" fill="#7C3AED" fillOpacity="0.12" />
+        <Ellipse cx="560" cy="590" rx="260" ry="320" fill="#3B82F6" fillOpacity="0.10" />
+        <Ellipse cx="120" cy="748" rx="250" ry="165" fill="#6366F1" fillOpacity="0.12" />
+        <Ellipse cx="36" cy="220" rx="280" ry="170" fill="#7C3AED" fillOpacity="0.05" />
+        <Rect x="0" y="340" width="595" height="502" fill="url(#pageBottomTint)" />
+        <Rect x="0" y="0" width="595" height="842" fill="url(#pageSweepBg)" />
+        <Rect x="0" y="0" width="595" height="842" fill="url(#pageVignette)" />
       </Svg>
-    </View>
-  );
-}
-
-function Header({ data }: { data: PdfReportData }) {
-  return (
-    <View style={styles.headerRow} fixed>
-      {/* ✅ logo/text-only (no icon mark) */}
-      <View style={styles.brand}>
-        <Text style={styles.brandTitle}>{data.brandTitle}</Text>
-        <Text style={styles.brandSubtitle}>{data.brandSubtitle}</Text>
-      </View>
     </View>
   );
 }
@@ -408,7 +416,6 @@ function Footer({ data }: { data: PdfReportData }) {
 }
 
 export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
-  const levels = data.bigFiveLevels;
   const showAvatar = true;
 
   const bigFiveOrder: Trait[] = ["S", "E", "O", "C", "A", "N"];
@@ -422,35 +429,37 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
     ...data.bigFive.filter((row) => !bigFiveOrder.includes(row.key as Trait))
   ];
 
-  const topTrait = orderedBigFive.reduce(
-    (best, row) => (row.value > best.value ? row : best),
-    orderedBigFive[0] ?? data.bigFive[0]
-  );
-
   const sections = (data.profileSections ?? []).filter(
     (s) => Array.isArray(s.lines) && s.lines.length > 0
   );
-
-  const accentParts = data.titleAccent.trim().split(/\s+/).filter(Boolean);
-  const accentLastWord = accentParts.length > 1 ? accentParts[accentParts.length - 1] : "";
-  const accentStart = accentParts.length > 1 ? accentParts.slice(0, -1).join(" ") : data.titleAccent;
+  const accentWords = data.titleAccent.trim().split(/\s+/).filter(Boolean);
+  const accentFirstWord = accentWords[0] ?? "";
+  const accentRest = accentWords.slice(1).join(" ");
 
   return (
     <Document>
       {/* PAGE 1+: header + hero + profile + 6 sections (wrap across pages) */}
       <Page size="A4" style={styles.page} wrap>
         <PageBackground />
-        <Header data={data} />
+        <View style={styles.headerRow} fixed>
+          <View style={styles.brand}>
+            {data.logoImageUrl ? (
+              // eslint-disable-next-line jsx-a11y/alt-text
+              <Image style={styles.brandLogo} src={data.logoImageUrl} />
+            ) : (
+              <Text style={{ fontSize: 13, fontWeight: 700, letterSpacing: 0.1, color: C.brandAccent }}>
+                tellmejoe.
+              </Text>
+            )}
+          </View>
+        </View>
 
         <Text style={styles.title}>
           {data.titleBefore}{" "}
-          <Text style={styles.titleAccent}>
-            {accentStart}
-            {accentLastWord ? " " : ""}
-            {accentLastWord ? (
-              <Text style={styles.titleAccentEnd}>{accentLastWord}</Text>
-            ) : null}
-          </Text>
+          <Text style={{ color: C.titleAccentFirst }}>{accentFirstWord}</Text>
+          {accentRest ? (
+            <Text style={{ color: C.titleAccentSecond }}> {accentRest}</Text>
+          ) : null}
         </Text>
         <Text style={styles.sub}>{data.subtitle}</Text>
 
@@ -474,7 +483,6 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
             )}
 
             <View style={{ flexGrow: 1 }}>
-              <Text style={styles.typeLabel}>{toUpper(data.profileLabel)}</Text>
               <Text style={styles.typeName}>{data.typeName}</Text>
               <Text style={styles.typeDesc}>{data.typeDescription}</Text>
             </View>
@@ -487,7 +495,9 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
             {sections.map((s) => (
               <View key={s.key} style={{ marginBottom: 14 }}>
                 <View style={styles.psTitleRow}>
-                  <SectionIcon sectionKey={s.key} />
+                  <View style={styles.psIconWrap}>
+                    <SectionIcon sectionKey={s.key} />
+                  </View>
                   <Text style={styles.psKicker}>{s.title}</Text>
                 </View>
 
@@ -510,24 +520,35 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
       {/* LAST PAGE: Big Five details */}
       <Page size="A4" style={styles.page}>
         <PageBackground />
-        <Header data={data} />
+        <View style={styles.headerRow} fixed>
+          <View style={styles.brand}>
+            {data.logoImageUrl ? (
+              // eslint-disable-next-line jsx-a11y/alt-text
+              <Image style={styles.brandLogo} src={data.logoImageUrl} />
+            ) : (
+              <Text style={{ fontSize: 13, fontWeight: 700, letterSpacing: 0.1, color: C.brandAccent }}>
+                tellmejoe.
+              </Text>
+            )}
+          </View>
+        </View>
 
         <View style={styles.card}>
-          <Text style={styles.sectionTitle}>{data.traitsTitle}</Text>
+          <View style={styles.bigFiveHeader}>
+            <Text style={styles.sectionTitle}>{data.traitsTitle}</Text>
+            {data.bigFiveIconUrl ? (
+              <View style={styles.bigFiveIconWrap}>
+                {/* eslint-disable-next-line jsx-a11y/alt-text */}
+                <Image style={styles.bigFiveIcon} src={data.bigFiveIconUrl} />
+              </View>
+            ) : null}
+          </View>
 
           {orderedBigFive.map((row) => (
             <View key={row.key} style={styles.barRow}>
               <View style={styles.barTop}>
                 <View style={styles.barLabelRow}>
                   <Text style={styles.barLabel}>{row.label}</Text>
-                  {topTrait && row.key === topTrait.key ? (
-                    <Svg style={styles.topTrait} width={10} height={10} viewBox="0 0 24 24">
-                      <Path
-                        d="M12 2l2.83 6.63 7.17.62-5.45 4.74 1.64 7.01L12 17.27 5.81 21l1.64-7.01L2 9.25l7.17-.62L12 2z"
-                        fill="#FDE68A"
-                      />
-                    </Svg>
-                  ) : null}
                 </View>
                 <Text style={styles.barVal}>{clampPct(row.value)}</Text>
               </View>
@@ -538,7 +559,8 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
                     <Defs>
                       <LinearGradient id="barGrad" x1="0" y1="0" x2="1" y2="0">
                         <Stop offset="0%" stopColor={C.gradStart} />
-                        <Stop offset="50%" stopColor={C.gradMid} />
+                        <Stop offset="32%" stopColor={C.gradMid} />
+                        <Stop offset="69%" stopColor={C.gradMid2} />
                         <Stop offset="100%" stopColor={C.gradEnd} />
                       </LinearGradient>
                     </Defs>
@@ -548,9 +570,10 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
               </View>
 
               <View style={styles.barMetaRow}>
-                <Text style={styles.barMetaText}>{levels[levelKey(row.value)]}</Text>
-                {row.note ? <Text style={styles.barMetaNote}>({row.note})</Text> : null}
+                <Text style={styles.barMetaText}>{row.leftPole ?? ""}</Text>
+                <Text style={styles.barMetaText}>{row.rightPole ?? ""}</Text>
               </View>
+              {row.note ? <Text style={styles.barMetaNote}>{row.note}</Text> : null}
             </View>
           ))}
 

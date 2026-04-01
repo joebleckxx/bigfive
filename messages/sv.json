@@ -10,8 +10,8 @@
       "line2Accent": "Sanna",
       "line3": "Jag"
     },
-    "badge": "DEN DIGITALA SJÄLSANALYSEN",
-    "subheadline": "Ge dig ut på en guidad visuell resa som är utformad för att blottlägga lagren i din personlighet. Inga kliniska etiketter - bara djupa insikter utvalda för din utveckling.",
+    "badge": "ANALYS AV DINA MÖNSTER",
+    "subheadline": "Ett snabbt personlighetstest som visar hur du tänker, agerar och relaterar till andra. Inga kliniska etiketter - bara en tydlig bild av dina mönster som hjälper dig att förstå dig själv bättre.",
     "note": "TAR UNGEFÄR 4 MINUTER",
     "noteSecondary": "Helt anonymt och privat",
     "cta": "STARTA TESTET",
@@ -27,9 +27,9 @@
       }
     },
     "editorial": {
-      "line1": "Snabba men förvånansvärt djupa frågor, utformade för att gå förbi egot och avslöja din kärna.",
-      "line2": "Handlingsbara data som översätter din personlighet till konkret utveckling i verkligheten.",
-      "line3": "En unik syntes av ledande personlighetssystem och beteendeanalys som ger en djupare, flerdimensionell bild av din profil."
+      "line1": "En kort uppsättning frågor som hjälper dig att gå förbi det ytliga och nå djupare mönster.",
+      "line2": "Praktisk insikt i de mönster som påverkar dina vardagliga beteenden, beslut och vanor.",
+      "line3": "En unik kombination av ledande personlighetssystem och beteendeanalys som ger en djupare, mer mångdimensionell bild av din personlighet."
     },
     "footer": "tellmejoe. · TMJ"
   },
@@ -59,12 +59,12 @@
       "accent": "insikt",
       "after": ""
     },
-    "description": "En tydlig, strukturerad genomgång av hur du fungerar. En djupdykning i din kognitiva arkitektur.",
+    "description": "En tydlig och strukturerad bild av hur du fungerar. Djupare in i det som faktiskt ligger bakom dina reaktioner och beteenden.",
     "editorial": {
       "line1": "Detaljerad poängsättning av egenskaper (0–100) samt mappning av dina mönster till 1 av 16 personlighetsprofiler.",
       "line2": "Förstå hur dina styrkor - och blinda fläckar - visar sig i sättet du agerar.",
       "line3": "Insikt i hur du reagerar under press och vad som hjälper dig att behålla balans i relationer.",
-      "title1": "Din personliga karta",
+      "title1": "Din personliga profil",
       "title2": "Avslöja dina blinda fläckar",
       "title3": "Behärskning under press"
     },
@@ -83,8 +83,8 @@
     "onlyOneDollarAmount": "$1",
     "stripeLabel": "Stripe",
     "quote": {
-      "line1": "Klarhet förändrar allt",
-      "line2": "när du äntligen ser ditt mönster."
+      "line1": "När du ser mönstret,",
+      "line2": "blir det lättare att förstå dig själv."
     }
   },
   "Result": {
