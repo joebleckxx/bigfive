@@ -41,6 +41,15 @@
     "next": "Seguinte",
     "reset": "Repor",
     "start": "Iniciar",
+    "intro": {
+      "questions": "25 perguntas",
+      "headline": "Vê o que está por trás dos teus padrões",
+      "subheadline": "Uma leitura rápida de como ages, reages e te relacionas.",
+      "duration": "Cerca de 4 minutos",
+      "privacy": "Totalmente privado",
+      "patterns": "Padrões no teu comportamento, nas relações e sob pressão",
+      "cta": "Começar o teste"
+    },
     "tip": "Leva cerca de 5 minutos. Confia na tua intuição - não há respostas erradas.",
     "footer": "TMJ • tellmejoe."
   },

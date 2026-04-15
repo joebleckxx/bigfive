@@ -41,6 +41,15 @@
     "next": "Siguiente",
     "reset": "Reiniciar",
     "start": "Empezar",
+    "intro": {
+      "questions": "25 preguntas",
+      "headline": "Descubre qué hay detrás de tus patrones",
+      "subheadline": "Una lectura rápida de cómo actúas, reaccionas y te relacionas.",
+      "duration": "Unos 4 minutos",
+      "privacy": "Totalmente privado",
+      "patterns": "Patrones en tu forma de actuar, en tus relaciones y bajo presión",
+      "cta": "Empezar el test"
+    },
     "tip": "Toma unos 5 minutos. Confía en tu intuición - no hay respuestas incorrectas.",
     "footer": "TMJ • tellmejoe."
   },

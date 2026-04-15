@@ -41,6 +41,15 @@
     "next": "Suivant",
     "reset": "Réinitialiser",
     "start": "Démarrer",
+    "intro": {
+      "questions": "25 questions",
+      "headline": "Découvre ce qui se cache derrière tes schémas",
+      "subheadline": "Un aperçu rapide de la façon dont tu agis, réagis et entres en relation.",
+      "duration": "Environ 4 minutes",
+      "privacy": "Entièrement privé",
+      "patterns": "Schémas dans ta façon d’agir, dans tes relations et sous pression",
+      "cta": "Commencer le test"
+    },
     "tip": "Ça prend environ 5 minutes. Fais confiance à ton intuition - il n’y a pas de mauvaise réponse.",
     "footer": "TMJ • tellmejoe."
   },
