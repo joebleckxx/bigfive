@@ -41,6 +41,15 @@
     "next": "Nästa",
     "reset": "Återställ",
     "start": "Start",
+    "intro": {
+      "questions": "25 frågor",
+      "headline": "Se vad som ligger bakom dina mönster",
+      "subheadline": "En snabb bild av hur du agerar, reagerar och relaterar till andra.",
+      "duration": "Cirka 4 minuter",
+      "privacy": "Helt privat",
+      "patterns": "Mönster i hur du agerar, hanterar press och relaterar till andra",
+      "cta": "Starta testet"
+    },
     "tip": "Tar cirka 5 minuter. Lita på din intuition - det finns inga fel svar.",
     "footer": "TMJ • tellmejoe."
   },

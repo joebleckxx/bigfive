@@ -41,6 +41,15 @@
     "next": "Next",
     "reset": "Reset",
     "start": "Start",
+    "intro": {
+      "questions": "25 questions",
+      "headline": "See what’s behind your patterns",
+      "subheadline": "A quick read on how you act, react, and relate.",
+      "duration": "About 4 minutes",
+      "privacy": "Fully private",
+      "patterns": "Includes behavior, pressure, and relationship patterns",
+      "cta": "Start test"
+    },
     "tip": "Takes about 5 minutes. Trust your intuition - there are no wrong answers.",
     "footer": "TMJ • tellmejoe."
   },

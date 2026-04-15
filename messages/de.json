@@ -41,6 +41,15 @@
     "next": "Weiter",
     "reset": "Zurücksetzen",
     "start": "Start",
+    "intro": {
+      "questions": "25 Fragen",
+      "headline": "Sieh, was hinter deinen Mustern steckt",
+      "subheadline": "Ein kurzer Einblick darin, wie du handelst, reagierst und Beziehungen gestaltest.",
+      "duration": "Etwa 4 Minuten",
+      "privacy": "Vollständig privat",
+      "patterns": "Muster in deinem Verhalten, in Beziehungen und unter Druck",
+      "cta": "Test starten"
+    },
     "tip": "Dauert etwa 5 Minuten. Vertraue deiner Intuition - es gibt keine falschen Antworten.",
     "footer": "TMJ • tellmejoe."
   },

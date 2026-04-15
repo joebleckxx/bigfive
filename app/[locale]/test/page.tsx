@@ -9,6 +9,7 @@ import {
   makeQuestionOrder,
   questionsFromOrder
 } from "@/lib/personality";
+import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import LegalFooter from "@/app/components/ui/legal-footer";
 import TMJBackground from "@/app/components/ui/background";
 
@@ -77,9 +78,11 @@ export default function TestPage() {
 
   // ✅ LOSOWA, ZAMROŻONA KOLEJNOŚĆ PYTAŃ (bez hydration mismatch)
   const [questionOrder, setQuestionOrder] = useState<string[]>(
-    () => QUESTIONS.map((qq) => qq.id) // deterministycznie na SSR i na 1. render klienta
+    () => QUESTIONS.map((qq) => qq.id)
   );
   const [orderReady, setOrderReady] = useState(false);
+
+  const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -149,9 +152,9 @@ export default function TestPage() {
               setIndex(0);
               setTapSelected(null);
               setIsAdvancing(false);
+              setShowIntro(true);
             }
 
-            // ✅ po TTL resetujemy też kolejność
             try {
               const seed = crypto.randomUUID();
               const order = makeQuestionOrder(seed, 2);
@@ -165,7 +168,6 @@ export default function TestPage() {
           }
         }
 
-        // ✅ upewnij się, że mamy kolejność (jeśli ktoś ma stare storage bez order)
         try {
           const rawOrder = localStorage.getItem(QUESTION_ORDER_KEY);
           if (rawOrder) {
@@ -188,17 +190,27 @@ export default function TestPage() {
           // ignore
         }
 
-        if (!raw) return;
+        if (!raw) {
+          if (!cancelled) setShowIntro(true);
+          return;
+        }
+
         const parsed = JSON.parse(raw);
         const normalized = normalizeAnswers(parsed, total);
-        if (!normalized) return;
+        if (!normalized) {
+          if (!cancelled) setShowIntro(true);
+          return;
+        }
 
         if (!cancelled) {
           setAnswers(normalized);
           const firstUnanswered = normalized.findIndex((v) => v === 0);
+          const hasStarted = normalized.some((v) => v >= 1 && v <= 5);
+
           setIndex(firstUnanswered === -1 ? total - 1 : firstUnanswered);
           setTapSelected(null);
           setIsAdvancing(false);
+          setShowIntro(!hasStarted);
         }
       } catch {
         // ignore
@@ -226,19 +238,16 @@ export default function TestPage() {
     return Math.round((answeredCount / total) * 100);
   }, [answeredCount, total]);
 
-  // ✅ ZAMIANA: pytanie wg wylosowanej kolejności
   const currentQuestion = orderedQuestions[index];
 
   function persistAnswers(nextAnswers: number[]) {
     try {
-      // ✅ reset paid + result po każdej zmianie odpowiedzi (czyści oba klucze)
       localStorage.removeItem(PAID_KEY);
       localStorage.removeItem(RESULT_KEY);
 
       touchLastActive();
       localStorage.setItem(ANSWERS_KEY, JSON.stringify(nextAnswers));
 
-      // ✅ kolejność już jest zapisana; tu tylko dbamy, żeby nie znikła przypadkiem
       if (!localStorage.getItem(QUESTION_ORDER_KEY)) {
         localStorage.setItem(QUESTION_ORDER_KEY, JSON.stringify(questionOrder));
       }
@@ -295,13 +304,16 @@ export default function TestPage() {
     router.push("/pay");
   }
 
+  function startTest() {
+    touchLastActive();
+    setShowIntro(false);
+  }
+
   if (!currentQuestion) return null;
   const currentAnswered = answers[index] >= 1 && answers[index] <= 5;
 
   return (
-    <main
-      className="relative min-h-screen overflow-hidden bg-[#02030A] px-5 sm:px-5 py-10 text-white"
-    >
+    <main className="relative min-h-screen overflow-hidden bg-[#02030A] px-5 py-10 text-white sm:px-5">
       <TMJBackground />
 
       <div className="relative mx-auto max-w-xl">
@@ -315,151 +327,193 @@ export default function TestPage() {
               {th("brand.title")}
             </Link>
           </div>
+
+          <LanguageSwitcher />
         </div>
 
-        {/* Progress */}
-        <div className="mb-10">
-          <div className="mb-3 flex items-center justify-between gap-4">
-            <div className="text-[0.98rem] font-medium tracking-[0.02em] text-white/92">
-              {progressText}
+        {!showIntro && (
+          <div className="mb-10">
+            <div className="mb-3 flex items-center justify-between gap-4">
+              <div className="text-[0.98rem] font-medium tracking-[0.02em] text-white/92">
+                {progressText}
+              </div>
+              <div className="text-[0.82rem] font-medium uppercase tracking-[0.18em] text-[#67D7FF]">
+                {progress}% {t("complete")}
+              </div>
             </div>
-            <div className="text-[0.82rem] font-medium tracking-[0.18em] text-[#67D7FF] uppercase">
-              {progress}% {t("complete")}
+            <div className="relative h-[8px] w-full overflow-hidden rounded-full bg-[#1A2544] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+              <div
+                className="absolute left-0 top-0 h-[8px] rounded-full bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] shadow-[0_0_18px_rgba(82,212,255,0.28)] transition-[width] duration-150"
+                style={{
+                  width: `${progress}%`,
+                  minWidth: index === 0 ? "24px" : undefined
+                }}
+              />
             </div>
           </div>
-          <div className="relative h-[8px] w-full overflow-hidden rounded-full bg-[#1A2544] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
-            <div
-              className="absolute left-0 top-0 h-[8px] rounded-full bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] shadow-[0_0_18px_rgba(82,212,255,0.28)] transition-[width] duration-150"
-              style={{
-                width: `${progress}%`,
-                minWidth: index === 0 ? "24px" : undefined
-              }}
-            />
-          </div>
-        </div>
+        )}
 
-        {/* Test */}
         <div className="relative z-10 mt-8">
-          <div className="rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95
-                          px-5 pt-4 pb-5
-                          shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl
-                          sm:px-6 sm:pt-6 sm:pb-7">
-            <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
-              {orderReady ? q(currentQuestion.id) : "\u00A0"}
-            </h2>
-            <div className="space-y-3">
-              {SCALE_VALUES.map((v) => {
-                const selected = answers[index] === v;
-                const tapping = tapSelected === v;
+          {showIntro ? (
+            <div
+              className="rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95 px-5 pt-6 pb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6 sm:pt-7 sm:pb-7"
+            >
+              <div className="mx-auto max-w-md">
+                <div className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[#67D7FF]">
+                  {t("intro.questions")}
+                </div>
 
-                // zostawiamy Twoje delikatne tło (to samo co było), ale bez efektów
-                const baseTone =
-                  v === 3
-                    ? "border-white/10 bg-white/8"
-                    : v === 2 || v === 4
-                      ? "border-white/10 bg-white/8"
-                      : "border-white/10 bg-white/8";
+                <h1 className="text-[1.7rem] font-semibold leading-[1.1] tracking-tight sm:text-[2rem]">
+                  {t("intro.headline")}
+                </h1>
 
-                return (
-                  <button
-                    key={v}
-                    onPointerDown={() => {
-                      if (!isAdvancing) setTapSelected(v);
-                    }}
-                    onPointerCancel={() => {
-                      if (tapSelected === v) setTapSelected(null);
-                    }}
-                    onClick={() => handleAnswer(v)}
-                    aria-disabled={isAdvancing}
-                    type="button"
-                    className={[
-                      "w-full rounded-3xl border px-4 py-3 text-left sm:px-5 sm:py-4",
-                      "appearance-none cursor-pointer",
-                      "focus:outline-none focus-visible:outline-none",
-                      "[-webkit-tap-highlight-color:transparent]",
-                      // ✅ TYLKO to ma się zmieniać wizualnie:
-                      selected ? "border-white/70 bg-white/8" : baseTone,
-                      tapping ? "border-white/70 bg-white/8" : "",
-                      isAdvancing ? "pointer-events-none cursor-not-allowed" : ""
-                    ].join(" ")}
-                    style={
-                      selected || tapping
-                        ? { borderColor: "#67D7FF" }
-                        : undefined
-                    }
-                  >
-                    <span className="flex items-center justify-between gap-4">
-                      <span className="text-sm font-medium text-white/90">
-                        {s(String(v))}
-                      </span>
-                      <span
-                        className={[
-                          "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors duration-150",
-                          selected || tapping
-                            ? "border-[#67D7FF] bg-[#67D7FF]"
-                            : "border-white/10 bg-transparent",
-                        ].join(" ")}
-                        aria-hidden="true"
-                      >
-                        {(selected || tapping) && (
-                          <Image
-                            src="/icons/test/answer-check.svg"
-                            alt=""
-                            aria-hidden="true"
-                            width={12}
-                            height={12}
-                            className="h-3 w-3"
-                          />
-                        )}
-                      </span>
-                    </span>
-                  </button>
-                );
-              })}
+                <p className="mt-4 text-[0.98rem] leading-relaxed text-white/72">
+                  {t("intro.subheadline")}
+                </p>
+
+                <div className="mt-6 space-y-3 text-sm text-white/82">
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+                    {t("intro.duration")}
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+                    {t("intro.privacy")}
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+                    {t("intro.patterns")}
+                  </div>
+                </div>
+
+                <button
+                  onClick={startTest}
+                  type="button"
+                  className="mt-7 inline-flex w-full items-center justify-center rounded-3xl bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] px-5 py-4 text-sm font-semibold text-[#08111F] shadow-[0_10px_30px_rgba(82,212,255,0.18)] transition hover:scale-[1.01] cursor-pointer"
+                >
+                  {t("intro.cta")}
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="mt-5 flex items-center justify-between gap-4 px-1">
-            <button
-              onClick={goBack}
-              type="button"
-              disabled={index === 0}
-              className="inline-flex items-center gap-2 text-sm font-medium text-white/80 transition hover:text-white disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
-              aria-disabled={index === 0 || isAdvancing}
-            >
-              <Image
-                src="/icons/test/nav-back.svg"
-                alt=""
-                aria-hidden="true"
-                width={13}
-                height={13}
-                className="h-[0.8125rem] w-[0.8125rem]"
-              />
-              <span>{t("back")}</span>
-            </button>
+          ) : (
+            <>
+              <div className="rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95 px-5 pt-4 pb-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6 sm:pt-6 sm:pb-7">
+                <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
+                  {orderReady ? q(currentQuestion.id) : "\u00A0"}
+                </h2>
 
-            <button
-              onClick={goNext}
-              type="button"
-              disabled={!currentAnswered || isAdvancing}
-              className="inline-flex items-center gap-2 text-sm font-medium text-white/80 transition hover:text-white disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
-              aria-disabled={!currentAnswered || isAdvancing}
-            >
-              <span>{t("next")}</span>
-              <Image
-                src="/icons/test/nav-next.svg"
-                alt=""
-                aria-hidden="true"
-                width={13}
-                height={13}
-                className="h-[0.8125rem] w-[0.8125rem]"
-              />
-            </button>
-          </div>
-          {/* Joe microcopy */}
-          <div className="hidden mt-6 mb-6 text-xs text-white/50 italic">
-            {t("tip")}           
-          </div>
+                <div className="space-y-3">
+                  {SCALE_VALUES.map((v) => {
+                    const selected = answers[index] === v;
+                    const tapping = tapSelected === v;
+
+                    const baseTone =
+                      v === 3
+                        ? "border-white/10 bg-white/8"
+                        : v === 2 || v === 4
+                          ? "border-white/10 bg-white/8"
+                          : "border-white/10 bg-white/8";
+
+                    return (
+                      <button
+                        key={v}
+                        onPointerDown={() => {
+                          if (!isAdvancing) setTapSelected(v);
+                        }}
+                        onPointerCancel={() => {
+                          if (tapSelected === v) setTapSelected(null);
+                        }}
+                        onClick={() => handleAnswer(v)}
+                        aria-disabled={isAdvancing}
+                        type="button"
+                        className={[
+                          "w-full rounded-3xl border px-4 py-3 text-left sm:px-5 sm:py-4",
+                          "appearance-none cursor-pointer",
+                          "focus:outline-none focus-visible:outline-none",
+                          "[-webkit-tap-highlight-color:transparent]",
+                          selected ? "border-white/70 bg-white/8" : baseTone,
+                          tapping ? "border-white/70 bg-white/8" : "",
+                          isAdvancing ? "pointer-events-none cursor-not-allowed" : ""
+                        ].join(" ")}
+                        style={
+                          selected || tapping
+                            ? { borderColor: "#67D7FF" }
+                            : undefined
+                        }
+                      >
+                        <span className="flex items-center justify-between gap-4">
+                          <span className="text-sm font-medium text-white/90">
+                            {s(String(v))}
+                          </span>
+                          <span
+                            className={[
+                              "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors duration-150",
+                              selected || tapping
+                                ? "border-[#67D7FF] bg-[#67D7FF]"
+                                : "border-white/10 bg-transparent"
+                            ].join(" ")}
+                            aria-hidden="true"
+                          >
+                            {(selected || tapping) && (
+                              <Image
+                                src="/icons/test/answer-check.svg"
+                                alt=""
+                                aria-hidden="true"
+                                width={12}
+                                height={12}
+                                className="h-3 w-3"
+                              />
+                            )}
+                          </span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="mt-5 flex items-center justify-between gap-4 px-1">
+                <button
+                  onClick={goBack}
+                  type="button"
+                  disabled={index === 0}
+                  className="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-white/80 transition hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+                  aria-disabled={index === 0 || isAdvancing}
+                >
+                  <Image
+                    src="/icons/test/nav-back.svg"
+                    alt=""
+                    aria-hidden="true"
+                    width={13}
+                    height={13}
+                    className="h-[0.8125rem] w-[0.8125rem]"
+                  />
+                  <span>{t("back")}</span>
+                </button>
+
+                <button
+                  onClick={goNext}
+                  type="button"
+                  disabled={!currentAnswered || isAdvancing}
+                  className="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-white/80 transition hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+                  aria-disabled={!currentAnswered || isAdvancing}
+                >
+                  <span>{t("next")}</span>
+                  <Image
+                    src="/icons/test/nav-next.svg"
+                    alt=""
+                    aria-hidden="true"
+                    width={13}
+                    height={13}
+                    className="h-[0.8125rem] w-[0.8125rem]"
+                  />
+                </button>
+              </div>
+
+              <div className="hidden mt-6 mb-6 text-xs italic text-white/50">
+                {t("tip")}
+              </div>
+            </>
+          )}
         </div>
+
         <LegalFooter />
       </div>
     </main>

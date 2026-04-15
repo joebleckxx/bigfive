@@ -41,6 +41,15 @@
     "next": "Dalej",
     "reset": "Resetuj",
     "start": "Start",
+    "intro": {
+      "questions": "25 pytań",
+      "headline": "Zobacz, co kryje się za Twoimi wzorcami",
+      "subheadline": "Krótki wgląd w to, jak działasz, reagujesz i budujesz relacje.",
+      "duration": "Około 4 minut",
+      "privacy": "W pełni prywatne",
+      "patterns": "Wzorce w Twoim działaniu, relacjach i pod presją",
+      "cta": "Rozpocznij test"
+    },
     "tip": "Zajmuje około 5 minut. Zaufaj swojej intuicji - nie ma złych odpowiedzi.",
     "footer": "TMJ • tellmejoe."
   },
