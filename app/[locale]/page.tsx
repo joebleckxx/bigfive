@@ -11,9 +11,9 @@ export const CTA_GRADIENT =
 export default async function Page({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  const locale = params.locale;
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Home" });
   const featureCards = [
     {
