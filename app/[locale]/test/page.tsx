@@ -82,7 +82,7 @@ export default function TestPage() {
   );
   const [orderReady, setOrderReady] = useState(false);
 
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -152,7 +152,7 @@ export default function TestPage() {
               setIndex(0);
               setTapSelected(null);
               setIsAdvancing(false);
-              setShowIntro(true);
+              setShowIntro(false);
             }
 
             try {
@@ -191,26 +191,25 @@ export default function TestPage() {
         }
 
         if (!raw) {
-          if (!cancelled) setShowIntro(true);
+          if (!cancelled) setShowIntro(false);
           return;
         }
 
         const parsed = JSON.parse(raw);
         const normalized = normalizeAnswers(parsed, total);
         if (!normalized) {
-          if (!cancelled) setShowIntro(true);
+          if (!cancelled) setShowIntro(false);
           return;
         }
 
         if (!cancelled) {
           setAnswers(normalized);
           const firstUnanswered = normalized.findIndex((v) => v === 0);
-          const hasStarted = normalized.some((v) => v >= 1 && v <= 5);
 
           setIndex(firstUnanswered === -1 ? total - 1 : firstUnanswered);
           setTapSelected(null);
           setIsAdvancing(false);
-          setShowIntro(!hasStarted);
+          setShowIntro(false);
         }
       } catch {
         // ignore

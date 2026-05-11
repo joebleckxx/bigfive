@@ -11,9 +11,9 @@ export const CTA_GRADIENT =
 export default async function Page({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  const locale = params.locale;
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Home" });
   const featureCards = [
     {
@@ -126,7 +126,7 @@ export default async function Page({
         {/* CTA */}
         <div className="mt-12 text-center">
           <Link
-            href="/test"
+            href={{ pathname: "/test", query: { from: "main" } }}
             className={[
               "relative inline-flex min-w-[16.5rem] items-center justify-center gap-3 rounded-full px-8 py-5 text-[1.05rem] font-bold text-[#09101D]",
               "bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)]",
