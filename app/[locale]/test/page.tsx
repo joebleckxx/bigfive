@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useRouter } from "@/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { track } from "@vercel/analytics";
 import {
   QUESTIONS,
   makeQuestionOrder,
@@ -22,6 +23,7 @@ const PAID_KEY = "personality_paid_v1";
 
 const LAST_ACTIVE_KEY = "personality_last_active_v1";
 const PROGRESS_TTL_MS = 30 * 60 * 1000;
+const TEST_STARTED_SESSION_KEY = "personality_test_started_v1";
 
 const SCALE_VALUES = [1, 2, 3, 4, 5] as const;
 
@@ -69,6 +71,7 @@ function clearProgressStorage() {
 
 export default function TestPage() {
   const router = useRouter();
+  const locale = useLocale();
   const t = useTranslations("Test");
   const th = useTranslations("Home");
   const s = useTranslations("Scale");
@@ -126,6 +129,9 @@ export default function TestPage() {
 
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<number[]>(() => Array(total).fill(0));
+  const answeredCountRef = useRef(0);
+  const completedRef = useRef(false);
+  const abandonmentTrackedRef = useRef(false);
 
   // tap feedback
   const [tapSelected, setTapSelected] = useState<number | null>(null);
@@ -239,6 +245,42 @@ export default function TestPage() {
 
   const currentQuestion = orderedQuestions[index];
 
+  useEffect(() => {
+    answeredCountRef.current = answeredCount;
+  }, [answeredCount]);
+
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem(TEST_STARTED_SESSION_KEY) === "true") return;
+      track("test_started", { locale });
+      sessionStorage.setItem(TEST_STARTED_SESSION_KEY, "true");
+    } catch {
+      // ignore
+    }
+  }, [locale]);
+
+  useEffect(() => {
+    function trackAbandonment() {
+      if (completedRef.current || abandonmentTrackedRef.current) return;
+
+      abandonmentTrackedRef.current = true;
+      track("test_abandoned", {
+        locale,
+        lastAnsweredQuestion: answeredCountRef.current
+      });
+    }
+
+    function handlePageHide() {
+      trackAbandonment();
+    }
+
+    window.addEventListener("pagehide", handlePageHide);
+    return () => {
+      window.removeEventListener("pagehide", handlePageHide);
+      trackAbandonment();
+    };
+  }, [locale]);
+
   function persistAnswers(nextAnswers: number[]) {
     try {
       localStorage.removeItem(PAID_KEY);
@@ -257,14 +299,32 @@ export default function TestPage() {
 
   function commitAnswer(v: number) {
     const next = [...answers];
+    const wasAnswered = next[index] >= 1 && next[index] <= 5;
     next[index] = v;
     setAnswers(next);
     persistAnswers(next);
 
+    if (!wasAnswered) {
+      track("question_answered", {
+        locale,
+        questionNumber: index + 1
+      });
+    }
+
     const done = next.every((x) => x >= 1 && x <= 5);
     if (done) {
-      if (index < total - 1) setIndex(index + 1);
-      else router.push("/pay");
+      if (index < total - 1) {
+        setIndex(index + 1);
+      } else {
+        completedRef.current = true;
+        abandonmentTrackedRef.current = true;
+        track("test_completed", {
+          locale,
+          totalQuestions: total
+        });
+        sessionStorage.removeItem(TEST_STARTED_SESSION_KEY);
+        router.push("/pay");
+      }
       return;
     }
 
@@ -300,6 +360,13 @@ export default function TestPage() {
       setIndex((i) => Math.min(total - 1, i + 1));
       return;
     }
+    completedRef.current = true;
+    abandonmentTrackedRef.current = true;
+    track("test_completed", {
+      locale,
+      totalQuestions: total
+    });
+    sessionStorage.removeItem(TEST_STARTED_SESSION_KEY);
     router.push("/pay");
   }
 

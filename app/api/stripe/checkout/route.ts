@@ -17,6 +17,9 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: [{ price: process.env.STRIPE_PRICE_ID!, quantity: 1 }],
+      metadata: {
+        locale: typeof locale === "string" && locale.length > 0 ? locale : "unknown"
+      },
       client_reference_id:
         typeof checkoutAttemptId === "string" &&
         checkoutAttemptId.length > 0 &&

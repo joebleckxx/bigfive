@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { Link, useRouter } from "@/navigation";
+import { track } from "@vercel/analytics";
 import { useTranslations } from "next-intl";
 import { QUESTIONS } from "@/lib/personality";
 import { calculateResult } from "@/lib/scoring";
@@ -18,6 +19,7 @@ const ANSWERS_KEY = "personality_answers_v1";
 const RESULT_KEY = "personality_result_v1";
 const QUESTION_ORDER_KEY = "personality_question_order_v1";
 const CHECKOUT_ATTEMPT_KEY = "personality_checkout_attempt_v1";
+const CHECKOUT_CANCELED_TRACKED_KEY = "personality_checkout_canceled_tracked_v1";
 
 function isCompleteAnswers(answers: number[]) {
   return (
@@ -100,6 +102,23 @@ export default function PayPage() {
     }
   }, [router]);
 
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const isCanceled = params.get("canceled") === "1";
+      const hasAttemptId = !!sessionStorage.getItem(CHECKOUT_ATTEMPT_KEY);
+      const alreadyTracked =
+        sessionStorage.getItem(CHECKOUT_CANCELED_TRACKED_KEY) === "true";
+
+      if (!isCanceled || !hasAttemptId || alreadyTracked) return;
+
+      track("checkout_canceled", { locale });
+      sessionStorage.setItem(CHECKOUT_CANCELED_TRACKED_KEY, "true");
+    } catch {
+      // ignore
+    }
+  }, [locale]);
+
   // Guard: browser back from external checkout (Stripe)
   useEffect(() => {
     const onPageShow = (e: PageTransitionEvent) => {
@@ -149,6 +168,8 @@ export default function PayPage() {
         globalThis.crypto?.randomUUID?.() ??
         `attempt_${Date.now()}_${Math.random().toString(36).slice(2)}`;
       sessionStorage.setItem(CHECKOUT_ATTEMPT_KEY, checkoutAttemptId);
+      sessionStorage.removeItem(CHECKOUT_CANCELED_TRACKED_KEY);
+      track("checkout_started", { locale });
 
       setIsRedirecting(true);
       await new Promise<void>((r) => requestAnimationFrame(() => r()));
@@ -440,9 +461,9 @@ export default function PayPage() {
                   className="mx-auto mb-5 h-6 w-6"
                 />
                 <p className="mx-auto max-w-[15.5rem] text-[1rem] font-medium leading-[1.45] tracking-[-0.03em] text-white/82">
-                  "{t("quote.line1")}
+                  &ldquo;{t("quote.line1")}
                   <br />
-                  {t("quote.line2")}"
+                  {t("quote.line2")}&rdquo;
                 </p>
               </div>
             </div>
