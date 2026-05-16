@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
+import { track } from "@vercel/analytics/server";
 
 export const runtime = "nodejs";
 
@@ -37,6 +38,11 @@ export async function POST(req: Request) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
+
+    await track("payment_paid", {
+      locale: session.metadata?.locale ?? "unknown",
+      amount: (session.amount_total ?? 0) / 100
+    });
 
     console.log("✅ WEBHOOK checkout.session.completed", {
       id: session.id,
