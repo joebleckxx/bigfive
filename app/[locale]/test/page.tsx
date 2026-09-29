@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useRouter } from "@/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { track } from "@vercel/analytics";
+import { track, startTestTracking, completeTestTracking, resetTestTracking } from "@/lib/analytics";
 import {
   QUESTIONS,
   makeQuestionOrder,
@@ -23,7 +23,6 @@ const PAID_KEY = "personality_paid_v1";
 
 const LAST_ACTIVE_KEY = "personality_last_active_v1";
 const PROGRESS_TTL_MS = 30 * 60 * 1000;
-const TEST_STARTED_SESSION_KEY = "personality_test_started_v1";
 
 const SCALE_VALUES = [1, 2, 3, 4, 5] as const;
 
@@ -55,6 +54,7 @@ function touchLastActive() {
 }
 
 function clearProgressStorage() {
+  resetTestTracking();
   try {
     localStorage.removeItem(ANSWERS_KEY);
     localStorage.removeItem(QUESTION_ORDER_KEY);
@@ -86,6 +86,7 @@ export default function TestPage() {
   const [orderReady, setOrderReady] = useState(false);
 
   const [showIntro, setShowIntro] = useState(false);
+  const [progressLoaded, setProgressLoaded] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -220,6 +221,7 @@ export default function TestPage() {
       } catch {
         // ignore
       }
+      finally { if (!cancelled) setProgressLoaded(true); }
     }, 0);
 
     return () => {
@@ -250,18 +252,14 @@ export default function TestPage() {
   }, [answeredCount]);
 
   useEffect(() => {
-    try {
-      if (sessionStorage.getItem(TEST_STARTED_SESSION_KEY) === "true") return;
-      track("test_started", { locale });
-      sessionStorage.setItem(TEST_STARTED_SESSION_KEY, "true");
-    } catch {
-      // ignore
-    }
-  }, [locale]);
+    if (!progressLoaded) return;
+    startTestTracking(locale);
+    if (answeredCountRef.current === total) completedRef.current = true;
+  }, [locale, progressLoaded, total]);
 
   useEffect(() => {
     function trackAbandonment() {
-      if (completedRef.current || abandonmentTrackedRef.current) return;
+      if (!progressLoaded || completedRef.current || abandonmentTrackedRef.current) return;
 
       abandonmentTrackedRef.current = true;
       track("test_abandoned", {
@@ -277,9 +275,8 @@ export default function TestPage() {
     window.addEventListener("pagehide", handlePageHide);
     return () => {
       window.removeEventListener("pagehide", handlePageHide);
-      trackAbandonment();
     };
-  }, [locale]);
+  }, [locale, progressLoaded]);
 
   function persistAnswers(nextAnswers: number[]) {
     try {
@@ -318,11 +315,7 @@ export default function TestPage() {
       } else {
         completedRef.current = true;
         abandonmentTrackedRef.current = true;
-        track("test_completed", {
-          locale,
-          totalQuestions: total
-        });
-        sessionStorage.removeItem(TEST_STARTED_SESSION_KEY);
+        completeTestTracking(locale, total);
         router.push("/pay");
       }
       return;
@@ -360,13 +353,10 @@ export default function TestPage() {
       setIndex((i) => Math.min(total - 1, i + 1));
       return;
     }
+    if (!answers.every((value) => value >= 1 && value <= 5)) return;
     completedRef.current = true;
     abandonmentTrackedRef.current = true;
-    track("test_completed", {
-      locale,
-      totalQuestions: total
-    });
-    sessionStorage.removeItem(TEST_STARTED_SESSION_KEY);
+    completeTestTracking(locale, total);
     router.push("/pay");
   }
 

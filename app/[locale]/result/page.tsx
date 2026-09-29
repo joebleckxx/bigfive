@@ -1,9 +1,11 @@
 "use client";
 
+import { track, resetTestTracking } from "@/lib/analytics";
+
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { Link, useRouter } from "@/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { calculateResult } from "@/lib/scoring";
 import { AVATARS } from "@/lib/avatars";
@@ -124,6 +126,7 @@ function longestByKeys<T extends string>(
 }
 
 export default function ResultPage() {
+  const locale = useLocale();
   const router = useRouter();
 
   const t = useTranslations("Result");
@@ -241,6 +244,13 @@ export default function ResultPage() {
       }
     })();
   }, [router]);
+
+  const resultTracked = useRef(false);
+  useEffect(() => {
+    if (!loaded || !data || resultTracked.current) return;
+    resultTracked.current = true;
+    track("result_viewed", { locale });
+  }, [loaded, data, locale]);
 
   const typeName = useMemo(() => {
     if (!data) return "";
@@ -480,9 +490,11 @@ export default function ResultPage() {
       a.href = url;
       a.download = filename;
       a.click();
+      track("pdf_downloaded", { locale });
 
       URL.revokeObjectURL(url);
     } catch (error) {
+      track("pdf_failed", { locale });
       console.error("PDF generation failed", error);
       alert(t("pdf.error"));
     } finally {
@@ -493,6 +505,7 @@ export default function ResultPage() {
   function retake() {
     const ok = window.confirm(t("retakeConfirm"));
     if (!ok) return;
+    resetTestTracking();
 
     try {
       localStorage.removeItem(PAID_KEY);

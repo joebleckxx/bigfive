@@ -4,6 +4,7 @@ import { getLocale } from "next-intl/server";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
+import ProductAnalytics from "./components/analytics";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -35,6 +36,7 @@ export default async function RootLayout({
       >
         {children}
         <Analytics />
+        <ProductAnalytics />
         <SpeedInsights />
       </body>
     </html>

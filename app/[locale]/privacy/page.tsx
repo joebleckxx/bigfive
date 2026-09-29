@@ -60,9 +60,13 @@ export default function TermsPage() {
               <div>
                 <h3 className="text-[13px] font-semibold text-white">A) Device and usage data (analytics)</h3>
                 <p className="mt-2">
-                  We use <span className="font-semibold text-white">Vercel Analytics</span> to understand performance and
+                  We use <span className="font-semibold text-white">Vercel Analytics</span> and <span className="font-semibold text-white">PostHog (EU)</span> to understand performance and
                   usage (e.g., page views, device type, general usage metrics). This data is used to improve reliability
-                  and user experience.
+                  and user experience. PostHog records page visits, campaign tags, test progress, checkout steps,
+                  payment confirmation and PDF downloads using a pseudonymous identifier held in session storage.
+                  We do not send your answers, personality results, email address or card details to PostHog.
+                  Session recording and automatic click capture are disabled. PostHog respects your browser’s
+                  Do Not Track setting. Closing the tab clears its session storage.
                 </p>
               </div>
 
@@ -127,6 +131,7 @@ export default function TermsPage() {
             <ul className="mt-3 list-disc pl-5 space-y-2 text-[13px]">
               <li><span className="font-semibold text-white">Stripe</span> (payment processing and refunds);</li>
               <li><span className="font-semibold text-white">Vercel</span> (hosting and analytics);</li>
+              <li><span className="font-semibold text-white">PostHog</span> (product analytics hosted in the EU);</li>
               <li>service providers assisting with operation and security (if used).</li>
             </ul>
             <p className="mt-3">We do not sell your personal data.</p>
