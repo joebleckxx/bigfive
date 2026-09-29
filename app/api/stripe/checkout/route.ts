@@ -5,7 +5,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: Request) {
   try {
-    const { locale, checkoutAttemptId } = await req
+    const { locale, checkoutAttemptId, analytics } = await req
       .json()
       .catch(() => ({ locale: "en", checkoutAttemptId: null }));
 
@@ -18,7 +18,13 @@ export async function POST(req: Request) {
       mode: "payment",
       line_items: [{ price: process.env.STRIPE_PRICE_ID!, quantity: 1 }],
       metadata: {
-        locale: typeof locale === "string" && locale.length > 0 ? locale : "unknown"
+        locale: typeof locale === "string" && locale.length > 0 ? locale : "unknown",
+        ...(typeof analytics?.distinctId === "string" && /^[a-zA-Z0-9_-]{1,100}$/.test(analytics.distinctId)
+          ? { posthog_distinct_id: analytics.distinctId } : {}),
+        ...(typeof analytics?.testAttemptId === "string" && /^[a-zA-Z0-9_-]{1,100}$/.test(analytics.testAttemptId)
+          ? { test_attempt_id: analytics.testAttemptId } : {}),
+        posthog_disabled: analytics?.enabled === false ? "true" : "false",
+        analytics_test: analytics?.isTest === true ? "true" : "false"
       },
       client_reference_id:
         typeof checkoutAttemptId === "string" &&

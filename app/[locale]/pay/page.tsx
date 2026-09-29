@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { Link, useRouter } from "@/navigation";
-import { track } from "@vercel/analytics";
+import { track, analyticsContext } from "@/lib/analytics";
 import { useTranslations } from "next-intl";
 import { QUESTIONS } from "@/lib/personality";
 import { calculateResult } from "@/lib/scoring";
@@ -133,6 +133,7 @@ export default function PayPage() {
   }, [locale]);
 
   async function handleUnlock() {
+    if (isRedirecting) return;
     // ✅ Preview/test mode: payments disabled → unlock locally (no Stripe)
     if (process.env.NEXT_PUBLIC_PAYMENTS_DISABLED === "true") {
       try {
@@ -176,7 +177,7 @@ export default function PayPage() {
       const res = await fetch("/api/stripe/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ locale, checkoutAttemptId }),
+        body: JSON.stringify({ locale, checkoutAttemptId, analytics: analyticsContext() }),
       });
 
       const json = await res.json();
@@ -186,8 +187,10 @@ export default function PayPage() {
         return;
       }
 
+      track("checkout_failed", { locale, reason: "missing_checkout_url" });
       console.error("Stripe checkout: missing url", json);
     } catch (e) {
+      track("checkout_failed", { locale, reason: "request_failed" });
       console.error("Stripe checkout failed", e);
     }
     setIsRedirecting(false);
