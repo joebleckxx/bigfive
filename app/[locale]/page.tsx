@@ -3,6 +3,7 @@ import { Link } from "@/navigation";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import LegalFooter from "@/app/components/ui/legal-footer";
 import Image from "next/image";
+import HomeStartLink from "@/app/components/home-start-link";
 import TMJBackground from "@/app/components/ui/background";
 
 export const CTA_GRADIENT =
@@ -41,7 +42,7 @@ export default async function Page({
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 py-10 text-white sm:px-5"
+      className="relative min-h-screen overflow-hidden bg-[#02030A] px-5 py-5 text-white sm:py-10"
     >
       <TMJBackground />
 
@@ -61,8 +62,8 @@ export default async function Page({
         </div>
 
         {/* HERO */}
-        <div className="mt-10 flex justify-center">
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.04] bg-[#0D1A34]/95 px-5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_16px_40px_rgba(0,0,0,0.16)]">
+        <div className="mt-5 flex justify-center sm:mt-10">
+          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.04] bg-[#0D1A34]/95 px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_16px_40px_rgba(0,0,0,0.16)]">
             <Image
               src="/icons/home/badge-sparkle.svg"
               alt=""
@@ -71,14 +72,14 @@ export default async function Page({
               height={16}
               className="h-4 w-4"
             />
-            <span className="text-[0.78rem] font-bold tracking-[0.16em] text-[#79D9FF]">
+            <span className="text-[0.65rem] font-bold tracking-[0.12em] sm:text-[0.78rem] text-[#79D9FF]">
               {t("badge")}
             </span>
           </div>
         </div>
 
         <h1
-          className="mt-10 text-center text-[clamp(3.35rem,15.8vw,4.41rem)] font-bold leading-[1] tracking-[-0.05em] text-[#E8ECFF]"
+          className="mt-5 text-center text-[clamp(2.5rem,11vw,3.25rem)] sm:mt-8 sm:text-[4rem] font-bold leading-[1] tracking-[-0.05em] text-[#E8ECFF]"
         >
           <span className="block">{t("headline.line1")}</span>
           <span className="mt-2 block">
@@ -94,9 +95,16 @@ export default async function Page({
           </span>
         </h1>
 
-        <p className="mx-auto mt-8 max-w-[23rem] text-center text-[1.14rem] leading-[1.72] tracking-[-0.02em] text-[#C7CAE0] sm:max-w-[24.5rem] sm:text-[1.2rem]">
+        <p className="mx-auto mt-5 max-w-[23rem] text-center text-base leading-relaxed tracking-[-0.02em] text-[#C7CAE0] sm:max-w-[24.5rem] sm:text-[1.2rem]">
           {t("subheadline")}
         </p>
+
+        <div className="mt-6 text-center">
+          <HomeStartLink label={t("cta")} locale={locale} placement="hero" />
+          <p className="mt-4 text-xs font-medium tracking-[0.15em] text-white/65">
+            {t("note")}
+          </p>
+        </div>
 
         <div className="mt-16 space-y-7">
           {featureCards.map((card) => (
@@ -125,27 +133,7 @@ export default async function Page({
 
         {/* CTA */}
         <div className="mt-12 text-center">
-          <Link
-            href={{ pathname: "/test", query: { from: "main" } }}
-            className={[
-              "relative inline-flex min-w-[16.5rem] items-center justify-center gap-3 rounded-full px-8 py-5 text-[1.05rem] font-bold text-[#09101D]",
-              "bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)]",
-              "shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_0_35px_rgba(199,110,255,0.22),0_0_70px_rgba(79,206,255,0.14)]",
-              "transition-transform duration-200 hover:scale-[1.01]",
-              "focus:outline-none focus:ring-4 focus:ring-indigo-400/30",
-              "cursor-pointer",
-            ].join(" ")}
-          >
-            <span>{t("cta")}</span>
-            <Image
-              src="/icons/home/cta-arrow.svg"
-              alt=""
-              aria-hidden="true"
-              width={28}
-              height={28}
-              className="h-7 w-7"
-            />
-          </Link>
+          <HomeStartLink label={t("cta")} locale={locale} placement="bottom" />
           <p className="mt-7 text-[0.7rem] font-medium tracking-[0.32em] text-white/35">
             {t("note")}
           </p>
