@@ -10,28 +10,32 @@
       "line2Accent": "Prawdziwe",
       "line3": "Ja"
     },
-    "badge": "ANALIZA TWOICH WZORCÓW",
-    "subheadline": "Szybki test osobowości, który pokazuje, jak myślisz, działasz i tworzysz relacje. Bez klinicznych etykiet - tylko jasny obraz Twoich wzorców, który pomaga Ci lepiej zrozumieć siebie.",
-    "note": "ZAJMUJE OKOŁO 4 MINUT",
-    "noteSecondary": "W pełni anonimowe i prywatne",
-    "cta": "ROZPOCZNIJ TEST",
+    "badge": "TWOJA OSOBOWOŚĆ W PRAKTYCE",
+    "subheadline": "Odkryj swoje mocne strony, reakcje pod presją i to, co wnosisz do relacji.",
+    "note": "25 pytań · Około 4 minut",
+    "noteSecondary": "Jednorazowa płatność · Bez subskrypcji",
+    "cta": "Rozpocznij test",
     "features": {
       "item1": {
-        "title": "25 prostych pytań"
+        "title": "Twój profil osobowości"
       },
       "item2": {
-        "title": "Praktyczne wglądy"
+        "title": "Wskazówki na co dzień"
       },
       "item3": {
-        "title": "Hybrydowy model testu"
+        "title": "Raport, do którego wrócisz"
       }
     },
     "editorial": {
-      "line1": "Krótki zestaw pytań, który pomaga ominąć to, co powierzchowne, i dotrzeć do głębszych wzorców.",
-      "line2": "Praktyczny wgląd w schematy, które wpływają na Twoje codzienne zachowania, decyzje i nawyki.",
-      "line3": "Unikalna synteza wiodących systemów osobowości i analityki zachowań, dająca głębszy, wielowymiarowy obraz Twojej osobowości."
+      "line1": "Jasny opis Twojej osobowości w sześciu sekcjach: od mocnych stron i nawyków po reakcje pod presją i relacje.",
+      "line2": "Sprawdź, jak Twoje schematy wpływają na decyzje, działanie i kontakty z innymi.",
+      "line3": "Po teście odblokuj pełny wynik i pobierz raport PDF, aby wrócić do niego w dowolnej chwili."
     },
-    "footer": "tellmejoe. · TMJ"
+    "footer": "tellmejoe. · TMJ",
+    "heroTitle": "Zrozum siebie.",
+    "heroAccent": "Poznaj swoje schematy.",
+    "paymentNote": "Najpierw odpowiedz. Pełny wynik odblokujesz za 1 USD.",
+    "benefitsTitle": "Co otrzymasz"
   },
   "Test": {
     "progress": "Pytanie {current} z {total}",
@@ -92,8 +96,8 @@
     "onlyOneDollarAmount": "$1",
     "stripeLabel": "Stripe",
     "quote": {
-    "line1": "Gdy widzisz wzorzec,",
-    "line2": "łatwiej zrozumieć samego siebie."
+      "line1": "Gdy widzisz wzorzec,",
+      "line2": "łatwiej zrozumieć samego siebie."
     }
   },
   "Result": {

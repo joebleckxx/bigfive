@@ -10,28 +10,32 @@
       "line2Accent": "Vrai",
       "line3": "Moi"
     },
-    "badge": "ANALYSE DE TES SCHÉMAS",
-    "subheadline": "Un test de personnalité rapide qui montre comment tu penses, agis et entres en relation. Aucun label clinique - seulement une image claire de tes schémas qui t’aide à mieux te comprendre.",
-    "note": "PREND ENVIRON 4 MINUTES",
-    "noteSecondary": "Entièrement anonyme et privé",
-    "cta": "COMMENCER LE TEST",
+    "badge": "TA PERSONNALITÉ, EXPLIQUÉE",
+    "subheadline": "Découvre tes forces, tes réactions sous pression et ce que tu apportes à tes relations.",
+    "note": "25 questions · Environ 4 minutes",
+    "noteSecondary": "Paiement unique · Sans abonnement",
+    "cta": "Commencer mon test",
     "features": {
       "item1": {
-        "title": "25 questions simples"
+        "title": "Ton profil de personnalité"
       },
       "item2": {
-        "title": "Des insights concrets"
+        "title": "Des pistes pour le quotidien"
       },
       "item3": {
-        "title": "Un modèle de test hybride"
+        "title": "Un rapport à conserver"
       }
     },
     "editorial": {
-      "line1": "Une courte série de questions qui t’aide à dépasser la surface pour atteindre des schémas plus profonds.",
-      "line2": "Un éclairage concret sur les schémas qui influencent tes comportements, tes décisions et tes habitudes au quotidien.",
-      "line3": "Une combinaison unique des grands systèmes de personnalité et de l’analyse comportementale, pour une lecture plus profonde et multidimensionnelle de ta personnalité."
+      "line1": "Une description claire de ta personnalité en six sections sur tes forces, tes habitudes, la pression et les relations.",
+      "line2": "Explore comment tes schémas influencent tes décisions, tes actions et tes relations.",
+      "line3": "Débloque ton résultat complet après le test, puis télécharge ton rapport en PDF pour le relire quand tu veux."
     },
-    "footer": "tellmejoe. · TMJ"
+    "footer": "tellmejoe. · TMJ",
+    "heroTitle": "Comprends-toi mieux.",
+    "heroAccent": "Découvre tes schémas.",
+    "paymentNote": "Réponds d’abord. Débloque ton résultat complet pour 1 USD.",
+    "benefitsTitle": "Ce que tu obtiens"
   },
   "Test": {
     "progress": "Question {current} sur {total}",
