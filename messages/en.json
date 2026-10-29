@@ -10,28 +10,32 @@
       "line2Accent": "True",
       "line3": "Self"
     },
-    "badge": "THE DIGITAL SOUL ASSESSMENT",
-    "subheadline": "A fast personality assessment designed to reveal how you think, act, and relate. No clinical labels - just deep insights curated for your growth.",
-    "note": "TAKES ABOUT 4 MINUTES",
-    "noteSecondary": "Fully anonymous and private",
-    "cta": "START TEST",
+    "badge": "YOUR PERSONALITY, EXPLAINED",
+    "subheadline": "Discover your strengths, how you respond under pressure, and what you bring to relationships.",
+    "note": "25 questions · About 4 minutes",
+    "noteSecondary": "One-time payment · No subscription",
+    "cta": "Start my test",
     "features": {
       "item1": {
-        "title": "25 simple questions"
+        "title": "Your personality profile"
       },
       "item2": {
-        "title": "Practical insights"
+        "title": "Insights for everyday life"
       },
       "item3": {
-        "title": "A hybrid test model"
+        "title": "A report to keep"
       }
     },
     "editorial": {
-      "line1": "A short set of questions designed to slip past the ego and reveal your deeper patterns.",
-      "line2": "Clear, actionable insight into the patterns shaping your everyday behavior to better understand and improve your daily habits.",
-      "line3": "A hybrid model combining personality systems and behavioral analytics for a deeper, multi-dimensional view of your personality."
+      "line1": "A clear description of your personality, with six sections covering your strengths, habits, pressure and relationships.",
+      "line2": "Explore how your patterns show up in the way you make decisions, act and connect with others.",
+      "line3": "Unlock your full result after the test, then download your report as a PDF to revisit anytime."
     },
-    "footer": "tellmejoe. · TMJ"
+    "footer": "tellmejoe. · TMJ",
+    "heroTitle": "Understand yourself.",
+    "heroAccent": "See your patterns.",
+    "paymentNote": "Answer first. Unlock your full result for $1 USD.",
+    "benefitsTitle": "What you get"
   },
   "Test": {
     "progress": "Question {current} of {total}",

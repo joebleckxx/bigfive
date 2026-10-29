@@ -10,28 +10,32 @@
       "line2Accent": "Sanna",
       "line3": "Jag"
     },
-    "badge": "ANALYS AV DINA MÖNSTER",
-    "subheadline": "Ett snabbt personlighetstest som visar hur du tänker, agerar och relaterar till andra. Inga kliniska etiketter - bara en tydlig bild av dina mönster som hjälper dig att förstå dig själv bättre.",
-    "note": "TAR UNGEFÄR 4 MINUTER",
-    "noteSecondary": "Helt anonymt och privat",
-    "cta": "STARTA TESTET",
+    "badge": "DIN PERSONLIGHET, FÖRKLARAD",
+    "subheadline": "Upptäck dina styrkor, hur du reagerar under press och vad du bidrar med i relationer.",
+    "note": "25 frågor · Cirka 4 minuter",
+    "noteSecondary": "Engångsbetalning · Ingen prenumeration",
+    "cta": "Starta mitt test",
     "features": {
       "item1": {
-        "title": "25 enkla frågor"
+        "title": "Din personlighetsprofil"
       },
       "item2": {
-        "title": "Praktiska insikter"
+        "title": "Insikter för vardagen"
       },
       "item3": {
-        "title": "En hybridmodell för testet"
+        "title": "En rapport att behålla"
       }
     },
     "editorial": {
-      "line1": "En kort uppsättning frågor som hjälper dig att gå förbi det ytliga och nå djupare mönster.",
-      "line2": "Praktisk insikt i de mönster som påverkar dina vardagliga beteenden, beslut och vanor.",
-      "line3": "En unik kombination av ledande personlighetssystem och beteendeanalys som ger en djupare, mer mångdimensionell bild av din personlighet."
+      "line1": "En tydlig beskrivning av din personlighet i sex avsnitt om bland annat styrkor, vanor, press och relationer.",
+      "line2": "Utforska hur dina mönster påverkar dina beslut, ditt agerande och dina relationer.",
+      "line3": "Lås upp hela resultatet efter testet och ladda ner din rapport som PDF för att läsa den igen när du vill."
     },
-    "footer": "tellmejoe. · TMJ"
+    "footer": "tellmejoe. · TMJ",
+    "heroTitle": "Förstå dig själv.",
+    "heroAccent": "Se dina mönster.",
+    "paymentNote": "Svara först. Lås upp hela ditt resultat för 1 USD.",
+    "benefitsTitle": "Det här får du"
   },
   "Test": {
     "progress": "Fråga {current} av {total}",

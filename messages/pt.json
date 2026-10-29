@@ -10,28 +10,32 @@
       "line2Accent": "Verdadeiro",
       "line3": "Eu"
     },
-    "badge": "ANÁLISE DOS TEUS PADRÕES",
-    "subheadline": "Um teste de personalidade rápido que mostra como pensas, ages e te relacionas. Sem rótulos clínicos - apenas uma imagem clara dos teus padrões, que te ajuda a compreender-te melhor.",
-    "note": "DEMORA APROXIMADAMENTE 4 MINUTOS",
-    "noteSecondary": "Totalmente anónimo e privado",
-    "cta": "COMEÇAR O TESTE",
+    "badge": "A TUA PERSONALIDADE, EXPLICADA",
+    "subheadline": "Descobre os teus pontos fortes, como reages sob pressão e o que trazes às tuas relações.",
+    "note": "25 perguntas · Cerca de 4 minutos",
+    "noteSecondary": "Pagamento único · Sem subscrição",
+    "cta": "Começar o meu teste",
     "features": {
       "item1": {
-        "title": "25 perguntas simples"
+        "title": "O teu perfil de personalidade"
       },
       "item2": {
-        "title": "Insights práticos"
+        "title": "Ideias para o dia a dia"
       },
       "item3": {
-        "title": "Um modelo de teste híbrido"
+        "title": "Um relatório para guardar"
       }
     },
     "editorial": {
-      "line1": "Um conjunto curto de perguntas que te ajuda a ir além do superficial e a chegar a padrões mais profundos.",
-      "line2": "Uma perspetiva prática sobre os padrões que influenciam os teus comportamentos, decisões e hábitos do dia a dia.",
-      "line3": "Uma combinação única dos principais sistemas de personalidade e da análise comportamental, que oferece uma visão mais profunda e multidimensional da tua personalidade."
+      "line1": "Uma descrição clara da tua personalidade em seis secções sobre pontos fortes, hábitos, pressão e relações.",
+      "line2": "Explora como os teus padrões influenciam as tuas decisões, ações e relações.",
+      "line3": "Desbloqueia o resultado completo após o teste e descarrega o relatório em PDF para o consultares quando quiseres."
     },
-    "footer": "tellmejoe. · TMJ"
+    "footer": "tellmejoe. · TMJ",
+    "heroTitle": "Compreende-te melhor.",
+    "heroAccent": "Descobre os teus padrões.",
+    "paymentNote": "Responde primeiro. Desbloqueia o resultado completo por 1 USD.",
+    "benefitsTitle": "O que vais receber"
   },
   "Test": {
     "progress": "Pergunta {current} de {total}",

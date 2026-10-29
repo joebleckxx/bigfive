@@ -78,20 +78,10 @@ export default async function Page({
           </div>
         </div>
 
-        <h1
-          className="mt-5 text-center text-[clamp(2.5rem,11vw,3.25rem)] sm:mt-8 sm:text-[4rem] font-bold leading-[1] tracking-[-0.05em] text-[#E8ECFF]"
-        >
-          <span className="block">{t("headline.line1")}</span>
-          <span className="mt-2 block">
-            {t("headline.line2")}{" "}
-            <span className="inline-block bg-[linear-gradient(90deg,#4ED8FF_0%,#66C6FF_30%,#7EAAFF_68%,#B38CFF_100%)] bg-clip-text text-transparent">
-              {t("headline.line2Accent")}
-            </span>
-          </span>
-          <span className="mt-2 block">
-            <span className="inline-block bg-[linear-gradient(90deg,#9A7BFF_0%,#C57EFF_52%,#F08CFF_100%)] bg-clip-text text-transparent">
-              {t("headline.line3")}
-            </span>
+        <h1 className="mt-5 text-center text-[clamp(1.9rem,8vw,2.7rem)] font-bold leading-[1.12] tracking-[-0.04em] text-[#E8ECFF] sm:mt-8 sm:text-[3rem]">
+          <span className="block">{t("heroTitle")}</span>
+          <span className="mt-2 block bg-[linear-gradient(90deg,#4ED8FF_0%,#B38CFF_55%,#F08CFF_100%)] bg-clip-text text-transparent">
+            {t("heroAccent")}
           </span>
         </h1>
 
@@ -99,20 +89,23 @@ export default async function Page({
           {t("subheadline")}
         </p>
 
-        <div className="mt-6 text-center">
+        <div className="mt-5 text-center">
+          <p className="mb-3 text-sm font-medium text-[#C7CAE0]">{t("note")}</p>
           <HomeStartLink label={t("cta")} locale={locale} placement="hero" />
-          <p className="mt-4 text-xs font-medium tracking-[0.15em] text-white/65">
-            {t("note")}
+          <p className="mx-auto mt-4 max-w-[23rem] text-sm leading-relaxed text-[#E8ECFF]">
+            {t("paymentNote")}
           </p>
+          <p className="mt-1 text-xs leading-relaxed text-white/65">{t("noteSecondary")}</p>
         </div>
 
-        <div className="mt-16 space-y-7">
+        <h2 className="mt-12 text-center text-xl font-semibold text-[#E8ECFF]">{t("benefitsTitle")}</h2>
+        <div className="mt-5 space-y-4">
           {featureCards.map((card) => (
             <section
               key={card.title}
-              className="rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95 px-7 pb-10 pt-9 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)]"
+              className="rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95 px-6 py-6 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)]"
             >
-              <div className={`mx-auto flex h-16 w-16 items-center justify-center rounded-full ${card.iconBgClass}`}>
+              <div className={`mx-auto flex h-12 w-12 items-center justify-center rounded-full ${card.iconBgClass}`}>
                 <Image
                   src={card.icon}
                   alt={card.iconAlt}
@@ -121,10 +114,10 @@ export default async function Page({
                   className="h-[2.125rem] w-[2.125rem]"
                 />
               </div>
-              <h2 className="mt-10 text-[1.76rem] font-bold leading-[1.08] tracking-[-0.04em] text-[#EEF1FF]">
+              <h3 className="mt-4 text-[1.4rem] font-bold leading-[1.08] tracking-[-0.04em] text-[#EEF1FF]">
                 {card.title}
-              </h2>
-              <p className="mx-auto mt-5 max-w-[19rem] text-[1.06rem] leading-[1.72] tracking-[-0.02em] text-[#B8BDD8]">
+              </h3>
+              <p className="mx-auto mt-3 max-w-[22rem] text-base leading-relaxed tracking-[-0.02em] text-[#B8BDD8]">
                 {card.description}
               </p>
             </section>
@@ -134,14 +127,8 @@ export default async function Page({
         {/* CTA */}
         <div className="mt-12 text-center">
           <HomeStartLink label={t("cta")} locale={locale} placement="bottom" />
-          <p className="mt-7 text-[0.7rem] font-medium tracking-[0.32em] text-white/35">
-            {t("note")}
-          </p>
-          {t.has("noteSecondary") && (
-            <p className="mt-2 text-[0.7rem] font-medium tracking-[0.15em] text-white/35">
-              {t("noteSecondary")}
-            </p>
-          )}
+          <p className="mt-4 text-sm leading-relaxed text-[#E8ECFF]">{t("paymentNote")}</p>
+          <p className="mt-1 text-xs leading-relaxed text-white/65">{t("noteSecondary")}</p>
         </div>
 
         <LegalFooter />

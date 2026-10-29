@@ -10,28 +10,32 @@
       "line2Accent": "Verdadero",
       "line3": "Yo"
     },
-    "badge": "ANÁLISIS DE TUS PATRONES",
-    "subheadline": "Un test de personalidad rápido que muestra cómo piensas, actúas y te relacionas. Sin etiquetas clínicas, solo una imagen clara de tus patrones que te ayuda a entenderte mejor.",
-    "note": "TOMA APROXIMADAMENTE 4 MINUTOS",
-    "noteSecondary": "Totalmente anónimo y privado",
-    "cta": "EMPEZAR EL TEST",
+    "badge": "TU PERSONALIDAD, EXPLICADA",
+    "subheadline": "Descubre tus fortalezas, cómo reaccionas bajo presión y qué aportas a tus relaciones.",
+    "note": "25 preguntas · Unos 4 minutos",
+    "noteSecondary": "Pago único · Sin suscripción",
+    "cta": "Empezar mi test",
     "features": {
       "item1": {
-        "title": "25 preguntas sencillas"
+        "title": "Tu perfil de personalidad"
       },
       "item2": {
-        "title": "Ideas prácticas"
+        "title": "Ideas para el día a día"
       },
       "item3": {
-        "title": "Un modelo de test híbrido"
+        "title": "Un informe para guardar"
       }
     },
     "editorial": {
-      "line1": "Un conjunto breve de preguntas que te ayuda a ir más allá de lo superficial y llegar a patrones más profundos.",
-      "line2": "Una visión práctica de los patrones que influyen en tus comportamientos, decisiones y hábitos del día a día.",
-      "line3": "Una combinación única de los principales sistemas de personalidad y del análisis conductual, que ofrece una visión más profunda y multidimensional de tu personalidad."
+      "line1": "Una descripción clara de tu personalidad en seis secciones sobre fortalezas, hábitos, presión y relaciones.",
+      "line2": "Explora cómo tus patrones influyen en tus decisiones, tus acciones y tus relaciones.",
+      "line3": "Desbloquea el resultado completo después del test y descarga tu informe en PDF para consultarlo cuando quieras."
     },
-    "footer": "tellmejoe. · TMJ"
+    "footer": "tellmejoe. · TMJ",
+    "heroTitle": "Compréndete mejor.",
+    "heroAccent": "Descubre tus patrones.",
+    "paymentNote": "Responde primero. Desbloquea tu resultado completo por 1 USD.",
+    "benefitsTitle": "Qué recibirás"
   },
   "Test": {
     "progress": "Pregunta {current} de {total}",
