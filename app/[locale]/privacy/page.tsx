@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { Brand } from "@/app/components/ui/logo";
+import { BRAND } from "@/lib/brand";
 import TMJBackground from "@/app/components/ui/background";
 
 export default function TermsPage() {
@@ -9,10 +11,10 @@ export default function TermsPage() {
   const locale = (params?.locale as string) || "en";
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 sm:px-5 py-10 text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter py-10 text-white">
       <TMJBackground />
 
-      <div className="relative mx-auto w-full max-w-3xl">
+      <div className="tmj-container">
         <div className="mb-6 flex items-center justify-between">
           <Link
             href={`/${locale}`}
@@ -20,9 +22,7 @@ export default function TermsPage() {
           >
             ← Back
           </Link>
-          <div className="bg-[linear-gradient(90deg,#57D6FF_0%,#7CB6FF_42%,#C08CFF_72%,#F08CFF_100%)] bg-clip-text text-sm font-bold tracking-tight text-transparent">
-            tellmejoe.
-          </div>
+          <Brand />
         </div>
 
         <h1 className="text-xl font-semibold tracking-tight">Privacy Policy</h1>
@@ -35,7 +35,7 @@ export default function TermsPage() {
           <section className="pt-7 first:pt-0">
             <h2 className="text-base font-semibold text-white">1. Introduction</h2>
             <p className="mt-2">
-              This Privacy Policy explains how <span className="font-semibold text-white">tellmejoe.</span> (“we”, “us”,
+              This Privacy Policy explains how <span className="font-semibold text-white">{BRAND.name}</span> (“we”, “us”,
               “our”) handles information when you use our Service. We aim to collect as little personal data as possible.
             </p>
           </section>
@@ -209,7 +209,7 @@ export default function TermsPage() {
 
           <footer className="pt-8">
             <p className="mt-10 text-center text-xs text-white/40">
-              tellmejoe. TMJ © {new Date().getFullYear()}
+              {BRAND.name} © {new Date().getFullYear()}
             </p>
           </footer>
         </article>

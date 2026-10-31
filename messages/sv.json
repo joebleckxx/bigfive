@@ -1,5 +1,13 @@
 {
   "Home": {
+    "landing": {
+      "headline": "Upptäck din",
+      "headlineAccent": "personlighetsprofil",
+      "questions": "25 enkla frågor. Bara några minuter.",
+      "profiles": "Baserat på etablerad psykologi. En av 16 personlighetsprofiler.",
+      "insights": "Praktisk insikt i dina styrkor och blinda fläckar.",
+      "cta": "Starta testet"
+    },
     "brand": {
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"

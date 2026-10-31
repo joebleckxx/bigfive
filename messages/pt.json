@@ -1,5 +1,13 @@
 {
   "Home": {
+    "landing": {
+      "headline": "Descubra seu",
+      "headlineAccent": "perfil de personalidade",
+      "questions": "25 perguntas simples. Apenas alguns minutos.",
+      "profiles": "Baseado na psicologia estabelecida. Um dos 16 perfis de personalidade.",
+      "insights": "Uma visão prática dos seus pontos fortes e pontos cegos.",
+      "cta": "Começar o teste"
+    },
     "brand": {
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"

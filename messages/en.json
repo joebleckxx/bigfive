@@ -1,5 +1,13 @@
 {
   "Home": {
+    "landing": {
+      "headline": "Discover your",
+      "headlineAccent": "personality profile",
+      "questions": "25 simple questions. Just a few minutes.",
+      "profiles": "Based on established psychology. One of 16 personality profiles.",
+      "insights": "Practical insight into your strengths and blind spots.",
+      "cta": "Start the test"
+    },
     "brand": {
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"

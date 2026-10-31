@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link, useRouter } from "@/navigation";
+import { useRouter } from "@/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { track } from "@vercel/analytics";
 import {
@@ -12,6 +12,7 @@ import {
 } from "@/lib/personality";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import LegalFooter from "@/app/components/ui/legal-footer";
+import { Brand } from "@/app/components/ui/logo";
 import TMJBackground from "@/app/components/ui/background";
 
 const RESULT_KEY = "personality_result_v1";
@@ -73,7 +74,7 @@ export default function TestPage() {
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations("Test");
-  const th = useTranslations("Home");
+
   const s = useTranslations("Scale");
   const q = useTranslations("Questions");
 
@@ -379,20 +380,13 @@ export default function TestPage() {
   const currentAnswered = answers[index] >= 1 && answers[index] <= 5;
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#02030A] px-5 py-10 text-white sm:px-5">
+    <main className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter py-10 text-white">
       <TMJBackground />
 
-      <div className="relative mx-auto max-w-xl">
+      <div className="tmj-container">
         {/* Topbar */}
         <div className="relative z-30 mb-6 flex items-center justify-between gap-3">
-          <div className="leading-tight">
-            <Link
-              href="/"
-              className="bg-[linear-gradient(90deg,#57D6FF_0%,#7CB6FF_42%,#C08CFF_72%,#F08CFF_100%)] bg-clip-text text-sm font-bold tracking-tight text-transparent"
-            >
-              {th("brand.title")}
-            </Link>
-          </div>
+          <Brand />
 
           <LanguageSwitcher />
         </div>
@@ -403,13 +397,13 @@ export default function TestPage() {
               <div className="text-[0.98rem] font-medium tracking-[0.02em] text-white/92">
                 {progressText}
               </div>
-              <div className="text-[0.82rem] font-medium uppercase tracking-[0.18em] text-[#67D7FF]">
+              <div className="text-[0.82rem] font-medium uppercase tracking-[0.18em] text-[#b5baff]">
                 {progress}% {t("complete")}
               </div>
             </div>
             <div className="relative h-[8px] w-full overflow-hidden rounded-full bg-[#1A2544] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
               <div
-                className="absolute left-0 top-0 h-[8px] rounded-full bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] shadow-[0_0_18px_rgba(82,212,255,0.28)] transition-[width] duration-150"
+                className="absolute left-0 top-0 h-[8px] rounded-full bg-[image:var(--tmj-brand-gradient)] shadow-[0_0_18px_rgba(82,212,255,0.28)] transition-[width] duration-150"
                 style={{
                   width: `${progress}%`,
                   minWidth: index === 0 ? "24px" : undefined
@@ -422,10 +416,10 @@ export default function TestPage() {
         <div className="relative z-10 mt-8">
           {showIntro ? (
             <div
-              className="rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95 px-5 pt-6 pb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6 sm:pt-7 sm:pb-7"
+              className="rounded-[2.35rem] border border-white/[0.025] bg-[var(--tmj-surface)] px-5 pt-6 pb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6 sm:pt-7 sm:pb-7"
             >
               <div className="mx-auto max-w-md">
-                <div className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[#67D7FF]">
+                <div className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[#b5baff]">
                   {t("intro.questions")}
                 </div>
 
@@ -452,7 +446,7 @@ export default function TestPage() {
                 <button
                   onClick={startTest}
                   type="button"
-                  className="mt-7 inline-flex w-full items-center justify-center rounded-3xl bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] px-5 py-4 text-sm font-semibold text-[#08111F] shadow-[0_10px_30px_rgba(82,212,255,0.18)] transition hover:scale-[1.01] cursor-pointer"
+                  className="mt-7 inline-flex w-full items-center justify-center rounded-3xl bg-[image:var(--tmj-action-gradient)] px-5 py-4 text-sm font-semibold text-[#08111F] shadow-[0_10px_30px_rgba(82,212,255,0.18)] transition hover:scale-[1.01] cursor-pointer"
                 >
                   {t("intro.cta")}
                 </button>
@@ -460,7 +454,7 @@ export default function TestPage() {
             </div>
           ) : (
             <>
-              <div className="rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95 px-5 pt-4 pb-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6 sm:pt-6 sm:pb-7">
+              <div className="rounded-[2.35rem] border border-white/[0.025] bg-[var(--tmj-surface)] px-5 pt-4 pb-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6 sm:pt-6 sm:pb-7">
                 <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
                   {orderReady ? q(currentQuestion.id) : "\u00A0"}
                 </h2>
@@ -500,7 +494,7 @@ export default function TestPage() {
                         ].join(" ")}
                         style={
                           selected || tapping
-                            ? { borderColor: "#67D7FF" }
+                            ? { borderColor: "#42d65a" }
                             : undefined
                         }
                       >
@@ -512,7 +506,7 @@ export default function TestPage() {
                             className={[
                               "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors duration-150",
                               selected || tapping
-                                ? "border-[#67D7FF] bg-[#67D7FF]"
+                                ? "border-[#42d65a] bg-[#42d65a]"
                                 : "border-white/10 bg-transparent"
                             ].join(" ")}
                             aria-hidden="true"

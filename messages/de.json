@@ -1,5 +1,13 @@
 {
   "Home": {
+    "landing": {
+      "headline": "Entdecke dein",
+      "headlineAccent": "Persönlichkeitsprofil",
+      "questions": "25 einfache Fragen. Nur wenige Minuten.",
+      "profiles": "Basierend auf bewährter Psychologie. Eines von 16 Persönlichkeitsprofilen.",
+      "insights": "Praktische Einblicke in deine Stärken und blinden Flecken.",
+      "cta": "Test starten"
+    },
     "brand": {
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"

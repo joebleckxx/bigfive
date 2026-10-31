@@ -1,5 +1,13 @@
 {
   "Home": {
+    "landing": {
+      "headline": "Descubre tu",
+      "headlineAccent": "perfil de personalidad",
+      "questions": "25 preguntas sencillas. Solo unos minutos.",
+      "profiles": "Basado en la psicología reconocida. Uno de 16 perfiles de personalidad.",
+      "insights": "Una visión práctica de tus fortalezas y puntos ciegos.",
+      "cta": "Empezar el test"
+    },
     "brand": {
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"

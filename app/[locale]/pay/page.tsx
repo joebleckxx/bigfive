@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { Link, useRouter } from "@/navigation";
+import { useRouter } from "@/navigation";
 import { track } from "@vercel/analytics";
 import { useTranslations } from "next-intl";
 import { QUESTIONS } from "@/lib/personality";
@@ -11,6 +11,8 @@ import { AVATARS } from "@/lib/avatars";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { useLocale } from "next-intl";
 import LegalFooter from "@/app/components/ui/legal-footer";
+import { Brand } from "@/app/components/ui/logo";
+import styles from "./pay.module.css";
 import TMJBackground from "@/app/components/ui/background";
 
 const PAID_KEY = "personality_paid_v1";
@@ -79,7 +81,7 @@ function PremiumRingLoader() {
 export default function PayPage() {
   const router = useRouter();
   const t = useTranslations("Pay");
-  const th = useTranslations("Home");
+
   const tt = useTranslations("Types");
   const locale = useLocale();
   const [isRedirecting, setIsRedirecting] = useState(false);
@@ -215,11 +217,6 @@ export default function PayPage() {
   const avatarSrc = previewTypeCode
     ? AVATARS[avatarIndexFromTypeCode(previewTypeCode)]
     : AVATARS[0];
-  const socialProofAvatars = [
-    "/images/pay/social-proof-01.png",
-    "/images/pay/social-proof-02.png",
-    "/images/pay/social-proof-03.png",
-  ];
 
   const profileName = previewTypeCode ? tt(`${previewTypeCode}.name`) : "";
   const profileDesc = previewTypeCode ? tt(`${previewTypeCode}.desc`) : "";
@@ -256,51 +253,35 @@ export default function PayPage() {
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 sm:px-5 py-10 text-white"
+      className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter py-10 text-white"
     >
       <TMJBackground />
 
-      <div className="relative mx-auto w-full max-w-md">
+      <div className="tmj-container">
         <div className="flex items-center justify-between gap-3">
-          <div className="leading-tight">
-            <Link
-              href="/"
-              className="bg-[linear-gradient(90deg,#57D6FF_0%,#7CB6FF_42%,#C08CFF_72%,#F08CFF_100%)] bg-clip-text text-sm font-bold tracking-tight text-transparent"
-            >
-              {th("brand.title")}
-            </Link>
-          </div>
+          <Brand />
 
           <LanguageSwitcher />
         </div>
 
-        <div className="mt-10 flex justify-center">
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.04] bg-[#2A1C4D]/95 px-5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_16px_40px_rgba(0,0,0,0.16)]">
-            <Image
-              src="/icons/pay/badge-sparkle.svg"
-              alt=""
-              aria-hidden="true"
-              width={16}
-              height={16}
-              className="h-4 w-4"
-            />
-            <span className="text-[0.78rem] font-bold tracking-[0.16em] text-[#C57EFF]">
-              {t("badge")}
-            </span>
+        <div className={styles.readyStatus}>
+          <div className={styles.reportMark} aria-hidden="true">
+            <svg viewBox="0 0 64 72" fill="none">
+              <rect x="17" y="7" width="38" height="51" rx="7" transform="rotate(10 17 7)" fill="#302348" stroke="#8361bc" />
+              <rect x="10" y="10" width="38" height="51" rx="7" fill="#211b32" stroke="#b49ae4" />
+              <path d="M18 24h22M18 32h15M18 44h4M27 44h4M36 44h4" stroke="#c6aff1" strokeWidth="2" strokeLinecap="round" />
+              <circle cx="45" cy="53" r="11" fill="#8b43ed" stroke="#c19aff" />
+              <path d="m40 53 3 3 6-7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </div>
+          <p>{t("profileReady")}</p>
         </div>
 
         <h1 className="mt-10 text-center text-[clamp(3.35rem,15.8vw,4.41rem)] font-bold leading-[1] tracking-[-0.05em] text-[#E8ECFF]">
           <span className="block">{headlineLine1}</span>
-          <span className="mt-2 block">{headlineLine2}</span>
-          <span className="mt-2 block">
-            <span className="bg-[linear-gradient(90deg,#4ED8FF_0%,#66C6FF_30%,#7EAAFF_68%,#B38CFF_100%)] bg-clip-text text-transparent">
-              {headlineLine3Accent}
-            </span>
-            {" "}
-            <span className="bg-[linear-gradient(90deg,#9A7BFF_0%,#C57EFF_52%,#F08CFF_100%)] bg-clip-text text-transparent">
-              {headlineLine3}
-            </span>
+          {headlineLine2 && <span className="mt-2 block">{headlineLine2}</span>}
+          <span className={styles.headlineAccent}>
+            {headlineLine3Accent} {headlineLine3}
           </span>
         </h1>
 
@@ -309,7 +290,7 @@ export default function PayPage() {
         </p>
 
         {previewTypeCode && (
-          <div className="relative mt-16 overflow-hidden rounded-[2.35rem] border border-white/[0.03] bg-[#071126]/88 px-6 pt-5 pb-0 shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_18px_48px_rgba(0,0,0,0.28),0_0_42px_rgba(82,212,255,0.08)] sm:px-8">
+          <div className="relative mt-16 overflow-hidden rounded-[2.35rem] border border-white/[0.03] bg-[var(--tmj-surface)] px-6 pt-5 pb-0 shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_18px_48px_rgba(0,0,0,0.28),0_0_42px_rgba(82,212,255,0.08)] sm:px-8">
             <div className="flex min-h-[28rem] flex-col items-center justify-center py-10 text-center blur-[3.5px] opacity-85">
               <div className="text-[0.7rem] font-medium uppercase tracking-[0.18em] text-white/42">
                 {t("primaryArchetype")}
@@ -326,10 +307,9 @@ export default function PayPage() {
                     <Image
                       src={avatarSrc}
                       alt=""
-                      width={72}
-                      height={72}
-                      className="h-18 w-18 object-contain"
-                      style={{ filter: "brightness(0) invert(1)" }}
+                      width={256}
+                      height={256}
+                      className="h-34 w-34 object-contain"
                       onError={() => setAvatarError(true)}
                     />
                   ) : (
@@ -355,12 +335,14 @@ export default function PayPage() {
 
             <div className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-b from-transparent via-black/14 to-black/26" />
             <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 px-6 text-center sm:px-8">
+              <div className={styles.purchaseGroup}>
+              <div className={styles.price}>{t("onlyOneDollarAmount")}</div>
               <button
                 onClick={handleUnlock}
                 className={[
-                  "relative inline-flex min-w-[16.5rem] items-center justify-center gap-3 rounded-full px-8 py-5 text-[1.05rem] font-bold text-[#09101D]",
-                  "bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)]",
-                  "shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_0_35px_rgba(199,110,255,0.22),0_0_70px_rgba(79,206,255,0.14)]",
+                  "relative inline-flex w-full max-w-[20rem] min-w-0 items-center justify-center gap-3 rounded-full px-4 py-5 text-[1.05rem] font-bold text-[#09101D]",
+                  "bg-[image:var(--tmj-action-gradient)]",
+                  "shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_0_35px_rgba(0,198,76,0.16),0_0_70px_rgba(0,184,137,0.10)]",
                   "transition-transform duration-200 hover:scale-[1.01]",
                   "focus:outline-none focus:ring-4 focus:ring-indigo-400/30",
                   "cursor-pointer",
@@ -414,123 +396,46 @@ export default function PayPage() {
                   })()}
                 </p>
               </div>
+              </div>
             </div>
           </div>
         )}
 
-        <div className={`${previewTypeCode ? "mt-12" : "mt-16"} text-center`}>
-          <div className="text-[2.6rem] font-semibold leading-none tracking-tight text-[#B79FFF]">
-            $1
-          </div>
-          <div className="mt-6 flex items-center justify-center gap-2.5">
-            <Image
-              src="/icons/pay/one-time-payment.svg"
-              alt=""
-              aria-hidden="true"
-              width={20}
-              height={20}
-              className="h-5 w-5 opacity-100"
-            />
-            <span className="text-[0.92rem] font-medium text-white/88">
-              {noteParts[0]}
-            </span>
-          </div>
-          <div className="mt-4 mb-12 flex items-center justify-center gap-2.5">
-            <Image
-              src="/icons/pay/no-subscription.svg"
-              alt=""
-              aria-hidden="true"
-              width={20}
-              height={20}
-              className="h-5 w-5 opacity-100"
-            />
-            <span className="text-[0.92rem] font-medium text-white/88">
-              {noteParts[1]}
-            </span>
-          </div>
-
-          <div className="mx-auto mt-10 w-full min-w-0">
-            <div className="min-w-0 rounded-[1.8rem] border border-white/[0.04] bg-[rgba(15,24,46,0.72)] px-5 py-0 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_20px_45px_rgba(0,0,0,0.18)]">
-              <div className="flex min-h-[10rem] flex-col items-center justify-center text-center">
-                <Image
-                  src="/icons/pay/quote-open.svg"
-                  alt=""
-                  aria-hidden="true"
-                  width={24}
-                  height={24}
-                  className="mx-auto mb-5 h-6 w-6"
-                />
-                <p className="mx-auto max-w-[15.5rem] text-[1rem] font-medium leading-[1.45] tracking-[-0.03em] text-white/82">
-                  &ldquo;{t("quote.line1")}
-                  <br />
-                  {t("quote.line2")}&rdquo;
-                </p>
-              </div>
-            </div>
-          </div>
-          <p className="mt-12 mb-12 text-center text-[0.76rem] font-medium tracking-[0.18em] text-white/90 uppercase">
-            {t("whatWillIGet")}
-          </p>
-
+        <div className={styles.paymentTerms}>
+          <span>{noteParts[0]}</span>
+          <span className={styles.paymentDivider} aria-hidden="true">·</span>
+          <span>{noteParts[1]}</span>
         </div>
 
-        <div className="mt-10 space-y-3.5">
-          {benefitCards.map((card) => (
-            <div
-              key={card.text}
-              className="flex items-center gap-4 rounded-[2rem] border border-white/[0.04] bg-[#071126]/95 px-5 py-5 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)]"
-            >
-              <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${card.iconBgClass}`}>
-                <Image
-                  src={card.icon}
-                  alt={card.iconAlt}
-                  aria-hidden="true"
-                  width={24}
-                  height={24}
-                  className="h-6 w-6 shrink-0"
-                />
-              </div>
-              <div className="min-w-0">
-                <p className="m-0 text-[1rem] font-bold leading-snug text-white/88">
-                  {card.title}
-                </p>
-                <p className="mt-2 m-0 text-sm leading-relaxed text-white/80">
-                  {card.text}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10">
-          <div className="min-w-0 rounded-[1.8rem] border border-white/[0.04] bg-[rgba(15,24,46,0.72)] px-5 py-0 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_20px_45px_rgba(0,0,0,0.18)]">
-            <div className="flex min-h-[7.5rem] items-center gap-5 max-[380px]:flex-col max-[380px]:justify-center max-[380px]:gap-4 max-[380px]:py-4">
-              <div className="relative flex h-11 shrink-0 items-center">
-                {socialProofAvatars.map((src, index) => (
-                  <div
-                    key={src}
-                    className={`${index === 0 ? "" : "-ml-3"} relative z-0 flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border-2 border-[#0B1730] bg-[#121C34] shadow-[0_8px_18px_rgba(0,0,0,0.18)]`}
-                  >
-                    <Image
-                      src={src}
-                      alt=""
-                      aria-hidden="true"
-                      fill
-                      sizes="44px"
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-                <div className="-ml-3 relative z-10 flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#0B1730] bg-[#9A5FFF] text-[0.88rem] font-semibold tracking-tight text-white shadow-[0_8px_18px_rgba(0,0,0,0.18)]">
-                  {t("socialProofCount")}
+        <section className={styles.benefits} aria-labelledby="pay-benefits-title">
+          <h2 id="pay-benefits-title" className={styles.sectionTitle}>{t("whatWillIGet")}</h2>
+          <ol className={styles.benefitList}>
+            {benefitCards.map((card, index) => (
+              <li key={card.title} className={styles.benefit}>
+                <span className={styles.step} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3>{card.title}</h3>
+                  <p>{card.text}</p>
                 </div>
-              </div>
-              <p className="m-0 max-w-[13.5rem] text-[0.98rem] font-medium leading-[1.35] tracking-[-0.03em] text-white/80 max-[380px]:text-center">
-                {t("socialProof")}
-              </p>
-            </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className={styles.socialProof}>
+          <Image
+            src="/graphics/community-portraits.png"
+            alt=""
+            width={1600}
+            height={520}
+            sizes="(max-width: 640px) 78vw, 360px"
+            className={styles.communityPortraits}
+          />
+          <div className={styles.socialCount}>
+            {t("socialProofCount").replace("+", "").toUpperCase()}<sup>+</sup>
           </div>
-        </div>
+          <p>{t("socialProof")}</p>
+        </section>
 
         <div className="mt-12">
           <LegalFooter />

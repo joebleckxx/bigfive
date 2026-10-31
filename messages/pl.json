@@ -1,5 +1,13 @@
 {
   "Home": {
+    "landing": {
+      "headline": "Odkryj swój",
+      "headlineAccent": "profil osobowości",
+      "questions": "25 prostych pytań. Tylko kilka minut.",
+      "profiles": "W oparciu o uznaną psychologię. Jeden z 16 profili osobowości.",
+      "insights": "Praktyczny wgląd w Twoje mocne strony i słabe punkty.",
+      "cta": "Rozpocznij test"
+    },
     "brand": {
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"

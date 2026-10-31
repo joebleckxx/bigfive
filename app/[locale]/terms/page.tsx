@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { Brand } from "@/app/components/ui/logo";
+import { BRAND } from "@/lib/brand";
 import TMJBackground from "@/app/components/ui/background";
 
 export default function TermsPage() {
@@ -9,10 +11,10 @@ export default function TermsPage() {
   const locale = (params?.locale as string) || "en";
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 sm:px-5 py-10 text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter py-10 text-white">
       <TMJBackground />
 
-      <div className="relative mx-auto w-full max-w-3xl">
+      <div className="tmj-container">
         <div className="mb-6 flex items-center justify-between">
           <Link
             href={`/${locale}`}
@@ -20,9 +22,7 @@ export default function TermsPage() {
           >
             ← Back
           </Link>
-          <div className="bg-[linear-gradient(90deg,#57D6FF_0%,#7CB6FF_42%,#C08CFF_72%,#F08CFF_100%)] bg-clip-text text-sm font-bold tracking-tight text-transparent">
-            tellmejoe.
-          </div>
+          <Brand />
         </div>
 
         <h1 className="text-xl font-semibold tracking-tight">Terms of Service</h1>
@@ -35,7 +35,7 @@ export default function TermsPage() {
           <section className="pt-7 first:pt-0">
             <h2 className="text-base font-semibold text-white">1. Agreement to Terms</h2>
             <p className="mt-2">
-              By accessing or using <span className="font-semibold text-white">tellmejoe.</span> (the “Service”), you
+              By accessing or using <span className="font-semibold text-white">{BRAND.name}</span> (the “Service”), you
               agree to be bound by these Terms of Service (“Terms”). If you do not agree, do not use the Service.
             </p>
           </section>
@@ -43,7 +43,7 @@ export default function TermsPage() {
           <section className="pt-7">
             <h2 className="text-base font-semibold text-white">2. Who We Are</h2>
             <p className="mt-2">
-              <span className="font-semibold text-white">tellmejoe.</span> is operated by an individual sole proprietor
+              <span className="font-semibold text-white">{BRAND.name}</span> is operated by an individual sole proprietor
               based in <span className="font-semibold text-white">Sweden</span> (“we”, “us”, “our”). For support, contact{" "}
               <a className="underline underline-offset-4 hover:text-white transition" href="mailto:support@hellotmj.com">
                 support@hellotmj.com
@@ -148,7 +148,7 @@ export default function TermsPage() {
             <h2 className="text-base font-semibold text-white">8. Intellectual Property</h2>
             <p className="mt-2">
               All content, design, questions, results, text, logos, and software related to the Service are owned by us
-              or our licensors and are protected by intellectual property laws. “tellmejoe.” and associated branding may
+              or our licensors and are protected by intellectual property laws. “{BRAND.name}” and associated branding may
               be trademarks.
             </p>
           </section>
@@ -215,7 +215,7 @@ export default function TermsPage() {
 
           <footer className="pt-8">
             <p className="mt-10 text-center text-xs text-white/40">
-              tellmejoe. TMJ © {new Date().getFullYear()}
+              {BRAND.name} © {new Date().getFullYear()}
             </p>
           </footer>
         </article>

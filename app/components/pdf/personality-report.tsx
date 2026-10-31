@@ -1,4 +1,5 @@
 import React from "react";
+import { BRAND } from "@/lib/brand";
 import {
   Document,
   Page,
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: C.border
   },
-  avatarIcon: { width: 30, height: 30, objectFit: "contain" },
+  avatarIcon: { width: 64, height: 64, objectFit: "contain" },
   avatarFallback: { fontSize: 20, fontWeight: 700, color: C.text90 },
   typeLabel: {
     fontSize: 8.5,
@@ -410,7 +411,7 @@ function PageBackground() {
 function Footer({ data }: { data: PdfReportData }) {
   return (
     <Text style={styles.footer} fixed>
-      {data.brandTitle} TMJ © {getYearFromISO(data.dateISO)}
+      {BRAND.name} © {getYearFromISO(data.dateISO)}
     </Text>
   );
 }
@@ -443,14 +444,13 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
         <PageBackground />
         <View style={styles.headerRow} fixed>
           <View style={styles.brand}>
-            {data.logoImageUrl ? (
-              // eslint-disable-next-line jsx-a11y/alt-text
-              <Image style={styles.brandLogo} src={data.logoImageUrl} />
-            ) : (
-              <Text style={{ fontSize: 13, fontWeight: 700, letterSpacing: 0.1, color: C.brandAccent }}>
-                tellmejoe.
-              </Text>
-            )}
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+              <Svg width={32} height={28} viewBox={BRAND.mark.viewBox}>
+                <Path d={BRAND.mark.loop} fill="none" stroke="#a6afff" strokeWidth={3.5} />
+                <Path d={BRAND.mark.slash} fill="none" stroke="#a6afff" strokeWidth={4.5} strokeLinecap="round" transform="rotate(13 35 28)" />
+              </Svg>
+              <Text style={{ fontSize: 13, fontWeight: 700, color: "#ffffff" }}>{BRAND.name}</Text>
+            </View>
           </View>
         </View>
 
@@ -522,14 +522,13 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
         <PageBackground />
         <View style={styles.headerRow} fixed>
           <View style={styles.brand}>
-            {data.logoImageUrl ? (
-              // eslint-disable-next-line jsx-a11y/alt-text
-              <Image style={styles.brandLogo} src={data.logoImageUrl} />
-            ) : (
-              <Text style={{ fontSize: 13, fontWeight: 700, letterSpacing: 0.1, color: C.brandAccent }}>
-                tellmejoe.
-              </Text>
-            )}
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+              <Svg width={32} height={28} viewBox={BRAND.mark.viewBox}>
+                <Path d={BRAND.mark.loop} fill="none" stroke="#a6afff" strokeWidth={3.5} />
+                <Path d={BRAND.mark.slash} fill="none" stroke="#a6afff" strokeWidth={4.5} strokeLinecap="round" transform="rotate(13 35 28)" />
+              </Svg>
+              <Text style={{ fontSize: 13, fontWeight: 700, color: "#ffffff" }}>{BRAND.name}</Text>
+            </View>
           </View>
         </View>
 

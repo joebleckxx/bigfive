@@ -2,13 +2,15 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { Link, useRouter } from "@/navigation";
+import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { calculateResult } from "@/lib/scoring";
 import { AVATARS } from "@/lib/avatars";
 import { toast } from "sonner";
 import LegalFooter from "@/app/components/ui/legal-footer";
+import { Brand } from "@/app/components/ui/logo";
+import { BRAND } from "@/lib/brand";
 import TMJBackground from "@/app/components/ui/background";
 
 const BIG_FIVE_ICON_SRC = "/graphics/bigfive-icon.svg";
@@ -435,11 +437,10 @@ export default function ResultPage() {
       const reportTypeDesc = useMax ? maxTypeDesc : typeDescription;
 
       const report: PdfReportData = {
-        brandTitle: t("brandTitle"),
+        brandTitle: BRAND.name,
         brandSubtitle: t("brandSubtitle"),
         generatedLabel: t("pdf.generated"),
         dateISO: new Date().toISOString().slice(0, 10),
-        logoImageUrl: new URL("/images/pdf/logo-gradient.png", window.location.origin).toString(),
         bigFiveIconUrl,
         titleBefore: t("hero.before"),
         titleAccent: t("hero.accent"),
@@ -511,7 +512,7 @@ export default function ResultPage() {
   async function shareResult() {
     try {
       const url = window.location.origin; // share homepage (auto language detect)
-      const title = tr("shareTitle", "tellmejoe.");
+      const title = BRAND.name;
       const text = tr("shareText", "Take the test and see your result.");
 
       if (navigator.share) {
@@ -557,23 +558,70 @@ export default function ResultPage() {
       key: "S",
       label: t("traits.S"),
       value: emotionalStability,
-      note: t("traitsNotes.S")
+      accent: {
+        solid: "#42D65A",
+        gradient: "linear-gradient(135deg, #20C979 0%, #42D65A 52%, #7BE58C 100%)",
+        shadow: "rgba(66, 214, 90, 0.28)",
+      },
+      snapshotLabel: rowSnapshotLabel("S", emotionalStability),
     },
-    { key: "E", label: t("traits.E"), value: data.scores.E },
-    { key: "O", label: t("traits.O"), value: data.scores.O },
-    { key: "C", label: t("traits.C"), value: data.scores.C },
-    { key: "A", label: t("traits.A"), value: data.scores.A }
+    {
+      key: "E",
+      label: t("traits.E"),
+      value: data.scores.E,
+      accent: {
+        solid: "#58D7FF",
+        gradient: "linear-gradient(135deg, #4ED7FF 0%, #69C8FF 55%, #86E0FF 100%)",
+        shadow: "rgba(78, 215, 255, 0.28)",
+      },
+      snapshotLabel: rowSnapshotLabel("E", data.scores.E),
+    },
+    {
+      key: "O",
+      label: t("traits.O"),
+      value: data.scores.O,
+      accent: {
+        solid: "#A17CFF",
+        gradient: "linear-gradient(135deg, #7D66FF 0%, #A67EFF 55%, #C68BFF 100%)",
+        shadow: "rgba(161, 124, 255, 0.28)",
+      },
+      snapshotLabel: rowSnapshotLabel("O", data.scores.O),
+    },
+    {
+      key: "C",
+      label: t("traits.C"),
+      value: data.scores.C,
+      accent: {
+        solid: "#FF72C4",
+        gradient: "linear-gradient(135deg, #F25FB3 0%, #FF7DCC 58%, #FF9FB8 100%)",
+        shadow: "rgba(255, 114, 196, 0.26)",
+      },
+    },
+    {
+      key: "A",
+      label: t("traits.A"),
+      value: data.scores.A,
+      accent: {
+        solid: "#FFB15B",
+        gradient: "linear-gradient(135deg, #FF9B5F 0%, #FFB15B 52%, #FFD08A 100%)",
+        shadow: "rgba(255, 177, 91, 0.26)",
+      },
+    }
   ];
 
-  const bigFiveBarClass =
-    "bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)]";
+  const topCircleRows = bigFiveRows.slice(0, 3);
+
+  function rowSnapshotLabel(key: string, value: number) {
+    const high = pct(value) >= 50;
+    return t(`bigFive.poles.${key}.${high ? "right" : "left"}`);
+  }
 
   const sections = [
     {
       key: "core",
-      cardClass: "bg-[#071126]/95",
-      iconWrapClass: "bg-[rgba(56,167,214,0.18)]",
-      accentColor: "#63D8FF",
+      cardClass: "bg-[var(--tmj-surface)]",
+      iconWrapClass: "bg-[rgba(89,202,115,0.13)]",
+      accentColor: "#59CA73",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -583,7 +631,7 @@ export default function ResultPage() {
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-[#63D8FF]"
+          className="h-5 w-5 text-[#59CA73]"
         >
           <path d="M12 18V5" />
           <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" />
@@ -600,7 +648,7 @@ export default function ResultPage() {
     },
     {
       key: "daily",
-      cardClass: "bg-[#08142B]/95",
+      cardClass: "bg-[var(--tmj-surface)]",
       iconWrapClass: "bg-[rgba(87,214,255,0.16)]",
       accentColor: "#57D6FF",
       icon: (
@@ -622,7 +670,7 @@ export default function ResultPage() {
     },
     {
       key: "strengths",
-      cardClass: "bg-[#0A1329]/95",
+      cardClass: "bg-[var(--tmj-surface)]",
       iconWrapClass: "bg-[rgba(124,182,255,0.16)]",
       accentColor: "#7CB6FF",
       icon: (
@@ -652,7 +700,7 @@ export default function ResultPage() {
     },
     {
       key: "watchOut",
-      cardClass: "bg-[#0A1127]/95",
+      cardClass: "bg-[var(--tmj-surface)]",
       iconWrapClass: "bg-[rgba(165,142,255,0.16)]",
       accentColor: "#A58EFF",
       icon: (
@@ -676,7 +724,7 @@ export default function ResultPage() {
     },
     {
       key: "underPressure",
-      cardClass: "bg-[#091127]/95",
+      cardClass: "bg-[var(--tmj-surface)]",
       iconWrapClass: "bg-[rgba(197,126,255,0.15)]",
       accentColor: "#C57EFF",
       icon: (
@@ -699,7 +747,7 @@ export default function ResultPage() {
     },
     {
       key: "relationships",
-      cardClass: "bg-[#08152B]/95",
+      cardClass: "bg-[var(--tmj-surface)]",
       iconWrapClass: "bg-[rgba(240,140,255,0.14)]",
       accentColor: "#F08CFF",
       icon: (
@@ -818,21 +866,14 @@ export default function ResultPage() {
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 sm:px-5 py-10 text-white"
+      className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter py-10 text-white"
     >
       <TMJBackground />
 
-      <div className="relative mx-auto w-full max-w-xl">
+      <div className="tmj-container">
         {/* Top bar */}
         <div className="flex items-center justify-between gap-3">
-          <div className="leading-tight min-w-0">
-            <Link
-              href="/"
-              className="bg-[linear-gradient(90deg,#57D6FF_0%,#7CB6FF_42%,#C08CFF_72%,#F08CFF_100%)] bg-clip-text text-sm font-bold tracking-tight text-transparent"
-            >
-              {t("brandTitle")}
-            </Link>
-          </div>
+          <Brand />
 
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
@@ -893,7 +934,7 @@ export default function ResultPage() {
             }}
           >
             <span className="block">{t("hero.before")}</span>
-            <span className="mt-2 block whitespace-normal [overflow-wrap:anywhere] [word-break:normal] bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] bg-clip-text text-transparent hyphens-auto">
+            <span className="mt-2 block whitespace-normal [overflow-wrap:anywhere] [word-break:normal] tmj-gradient-text hyphens-auto">
               {t("hero.accent")}
             </span>
           </h1>
@@ -903,38 +944,20 @@ export default function ResultPage() {
         </div>
 
         {/* Main card */}
-        <div className="mt-7 rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95 px-6 py-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] sm:mt-8 sm:px-8 sm:py-8">
+        <div className="mt-7 rounded-[2.35rem] border border-white/[0.025] bg-[var(--tmj-surface)] px-6 py-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] sm:mt-8 sm:px-8 sm:py-8">
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
               <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
                 {showAvatar && (
                   <div className="relative shrink-0">
-                    <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
-                    <div
-                      role="img"
-                      aria-label={typeName}
-                      className="relative z-10 flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-black/25 ring-1 ring-white/10"
-                    >
-                      {avatarError ? (
-                        <div
-                          aria-hidden="true"
-                          className="text-2xl font-semibold text-white"
-                        >
-                          {typeName?.charAt(0) || "?"}
-                        </div>
-                      ) : (
-                        <Image
-                          src={avatarSrc}
-                          alt=""
-                          width={44}
-                          height={44}
-                          className="h-11 w-11 object-contain"
-                          style={{ filter: "brightness(0) invert(1)" }}
-                          onError={() => setAvatarError(true)}
-                        />
-                      )}
-                    </div>
+                    <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-full bg-violet-400/20 blur-2xl" />
+                    {avatarError ? (
+                      <div className="flex h-32 w-32 items-center justify-center rounded-full bg-white/5 text-3xl">{typeName?.charAt(0) || "?"}</div>
+                    ) : (
+                      <Image src={avatarSrc} alt={typeName} width={256} height={256}
+                        className="relative h-32 w-32 object-contain" onError={() => setAvatarError(true)} />
+                    )}
                   </div>
                 )}
 
@@ -970,7 +993,7 @@ export default function ResultPage() {
         </div>
 
 		        {/* Big Five panel */}
-		            <div className="mt-8 rounded-[2.15rem] border border-white/[0.04] bg-[#071126]/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)] px-5 pt-6 pb-8 sm:p-6 sm:pt-5 sm:pb-8">
+		            <div className="mt-8 rounded-[2.15rem] border border-white/[0.04] bg-[var(--tmj-surface)] shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)] px-5 pt-6 pb-8 sm:p-6 sm:pt-5 sm:pb-8">
 		          <div className="flex items-center justify-between gap-4">
 		            <div className="min-w-0">
 		              <div className="text-sm font-medium uppercase tracking-[0.12em] text-white/85">
@@ -992,35 +1015,155 @@ export default function ResultPage() {
 		                />
 	              </div>
 	            </div>
-	          </div>
-		          <div className="mt-4 space-y-4">
-              {bigFiveRows.map((row) => {
+		          </div>
+		          <div className="mt-5">
+              <div className="flex items-start justify-between gap-3 px-2 py-3 sm:gap-5 sm:px-3 sm:py-4">
+              {topCircleRows.map((row) => {
+                const value = pct(row.value);
+                const size = 112;
+                const strokeWidth = 8;
+                const radius = (size - strokeWidth) / 2;
+                const circumference = 2 * Math.PI * radius;
+                const dash = Math.max((value / 100) * circumference, strokeWidth * 1.35);
+                const gap = Math.max(circumference - dash, 0);
+
                 return (
-                  <div key={row.key}>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-sm text-white/90">
-                        {row.label}
+                  <div
+                    key={row.key}
+                    className="min-w-0 flex-1 text-center"
+                  >
+                    <div className="mx-auto flex w-full justify-center">
+                      <div className="relative h-[5.25rem] w-[5.25rem] sm:h-[6.5rem] sm:w-[6.5rem]">
+                        <div
+                          className="absolute inset-0 rounded-full blur-2xl"
+                          style={{ backgroundColor: row.accent.shadow }}
+                        />
+                        <div
+                          className="absolute inset-0 rounded-full"
+                          style={{
+                            background:
+                              "radial-gradient(circle at center, rgba(5,12,30,0.9) 50%, rgba(9,16,36,0.36) 100%)",
+                          }}
+                        />
+                        <svg
+                          viewBox={`0 0 ${size} ${size}`}
+                          className="absolute inset-0 h-full w-full -rotate-90"
+                          aria-hidden="true"
+                        >
+                          <defs>
+                            <linearGradient
+                              id={`bigfive-ring-${row.key}`}
+                              x1="0%"
+                              y1="0%"
+                              x2="100%"
+                              y2="100%"
+                            >
+                              {row.key === "S" && (
+                                <>
+                                  <stop offset="0%" stopColor="#20C979" />
+                                  <stop offset="52%" stopColor="#42D65A" />
+                                  <stop offset="100%" stopColor="#7BE58C" />
+                                </>
+                              )}
+                              {row.key === "E" && (
+                                <>
+                                  <stop offset="0%" stopColor="#4ED7FF" />
+                                  <stop offset="55%" stopColor="#69C8FF" />
+                                  <stop offset="100%" stopColor="#86E0FF" />
+                                </>
+                              )}
+                              {row.key === "O" && (
+                                <>
+                                  <stop offset="0%" stopColor="#7D66FF" />
+                                  <stop offset="55%" stopColor="#A67EFF" />
+                                  <stop offset="100%" stopColor="#C68BFF" />
+                                </>
+                              )}
+                            </linearGradient>
+                          </defs>
+                          <circle
+                            cx={size / 2}
+                            cy={size / 2}
+                            r={radius}
+                            fill="none"
+                            stroke="rgba(154, 144, 212, 0.24)"
+                            strokeWidth={strokeWidth}
+                          />
+                          <circle
+                            cx={size / 2}
+                            cy={size / 2}
+                            r={radius}
+                            fill="none"
+                            stroke={`url(#bigfive-ring-${row.key})`}
+                            strokeWidth={strokeWidth}
+                            strokeLinecap="round"
+                            strokeDasharray={`${dash} ${gap}`}
+                          />
+                        </svg>
+                        <div
+                          className="absolute inset-[9px] rounded-full bg-[var(--tmj-surface)] sm:inset-[10px]"
+                          style={{
+                            boxShadow: `inset 0 0 0 1px rgba(255,255,255,0.04), 0 0 22px ${row.accent.shadow}`,
+                          }}
+                        />
+                        <div
+                          className="absolute inset-[7px] rounded-full border border-white/8 sm:inset-[8px]"
+                          style={{
+                            background:
+                              "radial-gradient(circle at 50% 40%, rgba(18,32,66,0.4), rgba(5,10,24,0.03) 72%, transparent 100%)",
+                          }}
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-[1.35rem] font-medium tracking-[-0.05em] text-white sm:text-[1.6rem]">
+                            {value}%
+                          </span>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="mt-2 h-2 w-full rounded-full bg-white/10">
-                      <div
-                        className={`h-full rounded-full ${bigFiveBarClass}`}
-                        style={(() => {
-                          const value = visualStretchPct(row.value);
-                          const scaleCutoff = 50;
-                          const effectiveRange = Math.min(value, scaleCutoff);
-                          const backgroundSize =
-                            effectiveRange > 0 ? `${(scaleCutoff / effectiveRange) * 100}% 100%` : "100% 100%";
+                    <div className="mt-4 text-sm font-medium tracking-[0.01em] text-white/88 sm:mt-5">
+                      {row.label}
+                    </div>
+                    <div
+                      className="mt-1 text-sm tracking-[0.01em]"
+                      style={{ color: row.accent.solid }}
+                    >
+                      {row.snapshotLabel}
+                    </div>
+	                  </div>
+	                );
+	              })}
+              </div>
 
-                          return {
-                            width: `${value}%`,
-                            backgroundSize,
-                            backgroundPosition: "left center",
-                          };
-                        })()}
+              <div className="mt-7 space-y-4 border-t border-white/8 pt-6 sm:mt-8 sm:space-y-5 sm:pt-7">
+              {bigFiveRows.map((row) => {
+                const value = visualStretchPct(row.value);
+
+                return (
+                  <div key={`${row.key}-list`}>
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="text-sm font-medium text-white/92">
+                        {row.label}
+                      </div>
+                      <div
+                        className="text-sm font-semibold tracking-[0.01em]"
+                        style={{ color: row.accent.solid }}
+                      >
+                        {pct(row.value)}%
+                      </div>
+                    </div>
+
+                    <div className="mt-3 h-2.5 w-full rounded-full bg-white/10">
+                      <div
+                        className="h-full rounded-full"
+                        style={{
+                          width: `${value}%`,
+                          background: row.accent.gradient,
+                          boxShadow: `0 0 14px ${row.accent.shadow}`,
+                        }}
                       />
                     </div>
+
                     <div className="mt-2 flex items-center justify-between gap-4 text-[0.78rem] font-medium tracking-[0.02em] text-white/42">
                       <span>{t(`bigFive.poles.${row.key}.left`)}</span>
                       <span className="text-right">{t(`bigFive.poles.${row.key}.right`)}</span>
@@ -1028,6 +1171,7 @@ export default function ResultPage() {
 	                  </div>
 	                );
 	              })}
+              </div>
 	          </div>
 	        </div>
 

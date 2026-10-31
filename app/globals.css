@@ -1,15 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0b0c14;
+  --foreground: #ffffff;
+  --tmj-brand-gradient: linear-gradient(115deg, #a4afff 0%, #c4afff 48%, #f582d0 92%);
+  --tmj-action-gradient: linear-gradient(100deg, #00b889 0%, #00c64c 57%, #7bd000 100%);
+  --tmj-surface: #191829;
+  --tmj-content-width: 560px;
+  --tmj-gutter: clamp(28px, 8vw, 36px);
+  --tmj-page-background: radial-gradient(ellipse 78% 55% at 50% 0%, #282846 0%, transparent 85%), radial-gradient(ellipse 35% 65% at 0% 55%, #1a1025a6 0%, transparent 100%), radial-gradient(ellipse 35% 65% at 100% 55%, #20132166 0%, transparent 100%), #0b0c14;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-plus-jakarta-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: Arial, Helvetica, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,7 +28,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-plus-jakarta-sans), Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* iOS / Safari tap & focus flash killer */
@@ -81,3 +87,31 @@ button,
   background: rgba(10, 10, 16, 0.65) !important;
   color: rgba(255, 255, 255, 0.9) !important;
 }
+
+.tmj-background { background: var(--tmj-page-background); }
+.tmj-page-gutter { padding-inline: var(--tmj-gutter); }
+.tmj-brand { display: inline-flex; align-items: center; gap: 12px; min-width: 0; color: white; text-decoration: none; }
+.tmj-logo { display: inline-grid; place-items: center; flex-shrink: 0; border-radius: 40%; border: 2px solid #ffffff10; background: #ffffff1a; color: #a6afff; }
+.tmj-logo svg { width: 90%; height: 76%; }
+.tmj-brand-copy { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.tmj-brand-name { font-size: 20px; font-weight: 700; line-height: 1.2; }
+.tmj-brand-tagline { color: #9b99ae; font-size: 24px; line-height: 1.4; }
+.tmj-brand-hero { gap: 22px; }
+.tmj-brand-hero .tmj-brand-name { font-size: 28px; }
+.tmj-brand:focus-visible { outline: 3px solid #b5bcff; outline-offset: 6px; border-radius: 12px; }
+@media (max-width: 640px) {
+  .tmj-brand-hero { gap: 12px; }
+  .tmj-brand-hero .tmj-logo { width: 52px !important; height: 52px !important; }
+  .tmj-brand-hero .tmj-brand-name { font-size: 20px; }
+  .tmj-brand-tagline { font-size: 12px; }
+}
+@media (max-width: 360px) {
+  .tmj-brand { gap: 8px; }
+  .tmj-brand .tmj-logo { width: 40px !important; height: 40px !important; }
+  .tmj-brand .tmj-brand-name { font-size: 17px; }
+  .tmj-brand-tagline { font-size: 10px; }
+}
+
+.tmj-gradient-text { background-image: var(--tmj-brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+.tmj-container { position: relative; width: 100%; max-width: var(--tmj-content-width); margin-inline: auto; }

@@ -1,5 +1,6 @@
 "use client";
 
+import { BRAND } from "@/lib/brand";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
@@ -45,7 +46,7 @@ export default function LegalFooter() {
       </div>
 
       <p className="mt-5 text-center text-xs text-white/40">
-        tellmejoe. TMJ © {new Date().getFullYear()}
+        {BRAND.name} © {new Date().getFullYear()}
       </p>
     </footer>
   );

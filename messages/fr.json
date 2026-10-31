@@ -1,5 +1,13 @@
 {
   "Home": {
+    "landing": {
+      "headline": "Découvrez votre",
+      "headlineAccent": "profil de personnalité",
+      "questions": "25 questions simples. Quelques minutes suffisent.",
+      "profiles": "Basé sur la psychologie reconnue. Un profil parmi 16.",
+      "insights": "Un éclairage concret sur vos forces et vos angles morts.",
+      "cta": "Commencer le test"
+    },
     "brand": {
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"
