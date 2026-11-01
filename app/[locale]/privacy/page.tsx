@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import LegalFooter from "@/app/components/ui/legal-footer";
 import { Brand } from "@/app/components/ui/logo";
 import { BRAND } from "@/lib/brand";
 import TMJBackground from "@/app/components/ui/background";
@@ -207,12 +208,8 @@ export default function TermsPage() {
             </p>
           </section>
 
-          <footer className="pt-8">
-            <p className="mt-10 text-center text-xs text-white/40">
-              {BRAND.name} © {new Date().getFullYear()}
-            </p>
-          </footer>
         </article>
+        <LegalFooter />
       </div>
     </main>
   );

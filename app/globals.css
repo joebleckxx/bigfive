@@ -7,7 +7,7 @@
   --tmj-action-gradient: linear-gradient(100deg, #00b889 0%, #00c64c 57%, #7bd000 100%);
   --tmj-surface: #191829;
   --tmj-content-width: 560px;
-  --tmj-gutter: clamp(28px, 8vw, 36px);
+  --tmj-gutter: clamp(24px, calc(8vw - 4px), 32px);
   --tmj-page-background: radial-gradient(ellipse 78% 55% at 50% 0%, #282846 0%, transparent 85%), radial-gradient(ellipse 35% 65% at 0% 55%, #1a1025a6 0%, transparent 100%), radial-gradient(ellipse 35% 65% at 100% 55%, #20132166 0%, transparent 100%), #0b0c14;
 }
 
@@ -90,24 +90,15 @@ button,
 
 .tmj-background { background: var(--tmj-page-background); }
 .tmj-page-gutter { padding-inline: var(--tmj-gutter); }
-.tmj-brand { display: inline-flex; align-items: center; gap: 12px; min-width: 0; color: white; text-decoration: none; }
-.tmj-logo { display: inline-grid; place-items: center; flex-shrink: 0; border-radius: 40%; border: 2px solid #ffffff10; background: #ffffff1a; color: #a6afff; }
+.tmj-brand { display: inline-flex; align-items: center; gap: 10px; min-width: 0; color: white; text-decoration: none; }
+.tmj-logo { display: inline-grid; place-items: center; flex-shrink: 0; border-radius: 40%; border: 1px solid #ffffff18; background: #ffffff1a; color: #a6afff; }
 .tmj-logo svg { width: 90%; height: 76%; }
-.tmj-brand-copy { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-.tmj-brand-name { font-size: 20px; font-weight: 700; line-height: 1.2; }
-.tmj-brand-tagline { color: #9b99ae; font-size: 24px; line-height: 1.4; }
-.tmj-brand-hero { gap: 22px; }
-.tmj-brand-hero .tmj-brand-name { font-size: 28px; }
+.tmj-brand-copy { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.tmj-brand-name { font-size: 18px; font-weight: 700; line-height: 1.2; }
+.tmj-brand-tagline { color: #9b99ae; font-size: 11px; line-height: 1.4; }
 .tmj-brand:focus-visible { outline: 3px solid #b5bcff; outline-offset: 6px; border-radius: 12px; }
-@media (max-width: 640px) {
-  .tmj-brand-hero { gap: 12px; }
-  .tmj-brand-hero .tmj-logo { width: 52px !important; height: 52px !important; }
-  .tmj-brand-hero .tmj-brand-name { font-size: 20px; }
-  .tmj-brand-tagline { font-size: 12px; }
-}
 @media (max-width: 360px) {
   .tmj-brand { gap: 8px; }
-  .tmj-brand .tmj-logo { width: 40px !important; height: 40px !important; }
   .tmj-brand .tmj-brand-name { font-size: 17px; }
   .tmj-brand-tagline { font-size: 10px; }
 }

@@ -2,9 +2,6 @@
   position: absolute;
   bottom: calc(100% + 14px);
   padding: 4px 12px;
-  border-radius: 10px;
-  background: #171622d9;
-  box-shadow: 0 0 16px #38d98630, 0 0 32px #38d98614;
   color: #69e9a1;
   font-size: 2rem;
   line-height: 1;

@@ -3,7 +3,7 @@ import { Link } from "@/navigation";
 
 type LogoProps = { size?: number; className?: string };
 
-export function Logo({ size = 48, className = "" }: LogoProps) {
+export function Logo({ size = 40, className = "" }: LogoProps) {
   return (
     <span className={`tmj-logo ${className}`} style={{ width: size, height: size }} aria-hidden="true">
       <svg viewBox={BRAND.mark.viewBox} fill="none">
@@ -14,13 +14,13 @@ export function Logo({ size = 48, className = "" }: LogoProps) {
   );
 }
 
-export function Brand({ hero = false }: { hero?: boolean }) {
+export function Brand() {
   return (
-    <Link href="/" className={`tmj-brand${hero ? " tmj-brand-hero" : ""}`} aria-label={BRAND.name}>
-      <Logo size={hero ? 84 : 48} />
+    <Link href="/" className="tmj-brand" aria-label={BRAND.name}>
+      <Logo size={40} />
       <span className="tmj-brand-copy">
         <span className="tmj-brand-name">{BRAND.name}</span>
-        {hero && <span className="tmj-brand-tagline">{BRAND.tagline}</span>}
+        <span className="tmj-brand-tagline">{BRAND.tagline}</span>
       </span>
     </Link>
   );

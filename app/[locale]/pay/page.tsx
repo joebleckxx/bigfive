@@ -267,11 +267,26 @@ export default function PayPage() {
         <div className={styles.readyStatus}>
           <div className={styles.reportMark} aria-hidden="true">
             <svg viewBox="0 0 64 72" fill="none">
-              <rect x="17" y="7" width="38" height="51" rx="7" transform="rotate(10 17 7)" fill="#302348" stroke="#8361bc" />
-              <rect x="10" y="10" width="38" height="51" rx="7" fill="#211b32" stroke="#b49ae4" />
-              <path d="M18 24h22M18 32h15M18 44h4M27 44h4M36 44h4" stroke="#c6aff1" strokeWidth="2" strokeLinecap="round" />
-              <circle cx="45" cy="53" r="11" fill="#8b43ed" stroke="#c19aff" />
-              <path d="m40 53 3 3 6-7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <defs>
+                <linearGradient id="ready-paper" x1="10" y1="10" x2="48" y2="61" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#1d314b" />
+                  <stop offset="1" stopColor="#191e30" />
+                </linearGradient>
+                <linearGradient id="ready-seal" x1="37" y1="44" x2="54" y2="62" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#69ce82" />
+                  <stop offset="1" stopColor="#32945d" />
+                </linearGradient>
+              </defs>
+              <rect x="17" y="9" width="36" height="49" rx="6" transform="rotate(9 35 33.5)" fill="#123e69" fillOpacity="0.25" stroke="#1688e0" />
+              <g transform="rotate(-8 28 35)">
+                <rect x="9" y="9" width="38" height="51" rx="6" fill="url(#ready-paper)" stroke="#28a5ff" strokeWidth="1.2" />
+                <path d="M17 18h12" stroke="#69baff" strokeOpacity="0.65" strokeWidth="2.5" strokeLinecap="round" />
+                <path d="M17 28h22M17 35h16" stroke="#69baff" strokeOpacity="0.45" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M17 47h4M25 47h4M33 47h4" stroke="#69baff" strokeOpacity="0.3" strokeWidth="1.5" strokeLinecap="round" />
+              </g>
+              <circle cx="46" cy="54" r="12" fill="#15111f" />
+              <circle cx="46" cy="53" r="10.5" fill="url(#ready-seal)" stroke="#9bdfaa" strokeWidth="1.2" />
+              <path d="m41.5 53 3 3 6-6.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <p>{t("profileReady")}</p>
@@ -437,9 +452,7 @@ export default function PayPage() {
           <p>{t("socialProof")}</p>
         </section>
 
-        <div className="mt-12">
-          <LegalFooter />
-        </div>
+        <LegalFooter />
       </div>
 
       {isRedirecting && (

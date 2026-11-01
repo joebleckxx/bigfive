@@ -21,8 +21,8 @@ export default async function Page({
     <main className={styles.page}>
       <div className={styles.container}>
         <header className={styles.header}>
-          <Brand hero />
-          <div className={styles.language}><LanguageSwitcher /></div>
+          <Brand />
+          <LanguageSwitcher />
         </header>
 
         <h1 className={styles.headline}>
@@ -60,7 +60,7 @@ export default async function Page({
           className={styles.avatars}
           priority
         />
-        <div className={styles.footer}><LegalFooter /></div>
+        <LegalFooter />
       </div>
     </main>
   );
