@@ -363,6 +363,7 @@ export default function PayPage() {
               <button
                 onClick={handleUnlock}
                 className={[
+                  styles.unlockButton,
                   "relative inline-flex w-full max-w-[20rem] min-w-0 items-center justify-center gap-3 rounded-full px-4 py-5 text-[1.05rem] font-bold text-[#09101D]",
                   "bg-[image:var(--tmj-action-gradient)]",
                   "shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_0_35px_rgba(0,198,76,0.16),0_0_70px_rgba(0,184,137,0.10)]",
@@ -377,7 +378,7 @@ export default function PayPage() {
                   aria-hidden="true"
                   width={18}
                   height={18}
-                  className="h-[1.125rem] w-[1.125rem]"
+                  className="h-[1.125rem] w-[1.125rem] shrink-0"
                 />
                 <span>{t("cta")}</span>
               </button>
