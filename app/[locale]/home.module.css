@@ -26,7 +26,7 @@
   .features li { gap: 16px; font-size: 17px; line-height: 1.5; }
   .features svg { flex-basis: 26px; width: 26px; height: 26px; }
   .action { margin-top: 36px; }
-  .cta { font-size: 23px; }
+  .cta { padding-block: 16px; font-size: 23px; line-height: 1.4; }
   .avatars { margin-top: 32px; }
 }
 @media (prefers-reduced-motion: reduce) { .cta { transition: none; } }
