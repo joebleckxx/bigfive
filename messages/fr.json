@@ -84,6 +84,9 @@
     "5": "Tout à fait d’accord"
   },
   "Pay": {
+    "profilesTeaserTitle": "Lequel des 16 profils te correspond ?",
+    "profilesTeaserBody": "Chaque profil a son propre avatar. Découvre le tien, tes forces, tes habitudes et ce qui peut t’échapper.",
+    "profilesTeaserCaption": "16 profils. Différents regards sur la personnalité.",
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "headline": {

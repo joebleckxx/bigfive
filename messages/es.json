@@ -84,6 +84,9 @@
     "5": "Totalmente de acuerdo"
   },
   "Pay": {
+    "profilesTeaserTitle": "¿Cuál de los 16 perfiles encaja contigo?",
+    "profilesTeaserBody": "Cada perfil tiene su propio avatar. Descubre el tuyo y explora tus fortalezas, tus patrones cotidianos y lo que podrías pasar por alto.",
+    "profilesTeaserCaption": "16 perfiles. Distintas perspectivas sobre la personalidad.",
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "headline": {

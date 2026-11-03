@@ -489,6 +489,21 @@ export default function PayPage() {
           <p>{t("socialProof")}</p>
         </section>
 
+        <section className={styles.profilesTeaser} aria-labelledby="profiles-teaser-title">
+          <h2 id="profiles-teaser-title" className={styles.profilesTeaserTitle}>
+            {t("profilesTeaserTitle")}
+          </h2>
+          <p className={styles.profilesTeaserBody}>{t("profilesTeaserBody")}</p>
+          <div className={styles.avatarWindow} aria-hidden="true">
+            <div className={styles.avatarCollage}>
+              {[6, 1, 10, 4, 13, 2, 15, 8, 11, 5, 0, 7, 12, 3, 9, 14].map((avatar) => (
+                <Image key={avatar} src={AVATARS[avatar]} alt="" width={112} height={112} sizes="112px" className={styles.teaserAvatar} />
+              ))}
+            </div>
+          </div>
+          <p className={styles.profilesTeaserCaption}>{t("profilesTeaserCaption")}</p>
+        </section>
+
         <LegalFooter />
       </div>
 

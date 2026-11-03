@@ -84,6 +84,9 @@
     "5": "Strongly agree"
   },
   "Pay": {
+    "profilesTeaserTitle": "Which of the 16 profiles fits you?",
+    "profilesTeaserBody": "Every profile has its own avatar. Discover yours and explore your strengths, everyday patterns, and what you might overlook.",
+    "profilesTeaserCaption": "16 profiles. Different perspectives on personality.",
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "badge": "ANALYSIS COMPLETE 99%",

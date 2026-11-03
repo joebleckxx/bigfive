@@ -627,11 +627,11 @@ export default function ResultPage() {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.4"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-[#59CA73]"
+          className="h-[22px] w-[22px] text-[#59CA73]"
         >
           <path d="M12 18V5" />
           <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" />
@@ -656,13 +656,16 @@ export default function ResultPage() {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.4"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-[#57D6FF]"
+          className="h-[22px] w-[22px] text-[#57D6FF]"
         >
-          <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
+          <path d="M3 6h3m4 0h11M3 12h11m4 0h3M3 18h5m4 0h9" />
+          <circle cx="8" cy="6" r="2" />
+          <circle cx="16" cy="12" r="2" />
+          <circle cx="10" cy="18" r="2" />
         </svg>
       ),
       title: t("profileSections.daily"),
@@ -678,21 +681,14 @@ export default function ResultPage() {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.4"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-[#7CB6FF]"
+          className="h-[22px] w-[22px] text-[#7CB6FF]"
         >
-          {/* główna gwiazda — gradient */}
-          <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
-
-          {/* mały plus — bez gradientu, czytelny */}
-          <path d="M20 2v4" stroke="currentColor" strokeWidth="1.8" />
-          <path d="M22 4h-4" stroke="currentColor" strokeWidth="1.8" />
-
-          {/* kółko — bez gradientu, czytelne */}
-          <circle cx="4" cy="20" r="2" stroke="currentColor" strokeWidth="1.8" />
+          <path d="M12 3 20 6v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-3Z" />
+          <path d="m13 7-5 6h4l-1 4 5-6h-4l1-4Z" fill="currentColor" stroke="none" />
         </svg>
       ),
       title: t("profileSections.strengths"),
@@ -708,15 +704,14 @@ export default function ResultPage() {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.4"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-[#A58EFF]"
+          className="h-[22px] w-[22px] text-[#A58EFF]"
         >
-          <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-          <path d="M12 8v4" />
-          <path d="M12 16h.01" />
+          <path d="M2 12c2.5-4.5 6-7 10-7s7.5 2.5 10 7c-2.5 4.5-6 7-10 7S4.5 16.5 2 12Z" />
+          <circle cx="12" cy="12" r="3" />
         </svg>
       ),
       title: t("profileSections.watchOut"),
@@ -732,14 +727,15 @@ export default function ResultPage() {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.4"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-[#C57EFF]"
+          className="h-[22px] w-[22px] text-[#C57EFF]"
         >
-          <path d="m12 14 4-4" />
-          <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+          <path d="M4.2 19a9 9 0 1 1 15.6 0" />
+          <path d="m12 14 3.5-5" />
+          <circle cx="12" cy="14" r="1.5" fill="currentColor" stroke="none" />
         </svg>
       ),
       title: t("profileSections.underPressure"),
@@ -755,11 +751,11 @@ export default function ResultPage() {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.4"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-[#F08CFF]"
+          className="h-[22px] w-[22px] text-[#F08CFF]"
         >
           <path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762" />
         </svg>
@@ -805,22 +801,8 @@ export default function ResultPage() {
       return (
         <div className="mt-2 text-sm leading-relaxed">
           <p className="whitespace-normal text-white/75">{body}</p>
-          <p className="mt-3 whitespace-normal text-white/90 font-medium">
-            <span
-              aria-hidden="true"
-              className="mr-3 inline-block h-4 w-4 align-[-0.05em]"
-              style={{
-                backgroundColor: accentColor,
-                WebkitMaskImage: "url('/icons/result/card-emphasis.svg')",
-                maskImage: "url('/icons/result/card-emphasis.svg')",
-                WebkitMaskRepeat: "no-repeat",
-                maskRepeat: "no-repeat",
-                WebkitMaskPosition: "center",
-                maskPosition: "center",
-                WebkitMaskSize: "contain",
-                maskSize: "contain",
-              }}
-            />
+          <p className="mt-4 rounded-r-xl border-l-2 px-3 py-2.5 whitespace-normal text-white/95 font-medium"
+              style={{ borderLeftColor: accentColor, background: `linear-gradient(90deg, ${accentColor}12, ${accentColor}03)` }}>
             {last}
           </p>
         </div>
@@ -840,22 +822,8 @@ export default function ResultPage() {
         )}
         {last && (
           <>
-            <p className="mt-4 whitespace-normal text-white/90 font-medium">
-              <span
-                aria-hidden="true"
-                className="mr-3 inline-block h-4 w-4 align-[-0.05em]"
-                style={{
-                  backgroundColor: accentColor,
-                  WebkitMaskImage: "url('/icons/result/card-emphasis.svg')",
-                  maskImage: "url('/icons/result/card-emphasis.svg')",
-                  WebkitMaskRepeat: "no-repeat",
-                  maskRepeat: "no-repeat",
-                  WebkitMaskPosition: "center",
-                  maskPosition: "center",
-                  WebkitMaskSize: "contain",
-                  maskSize: "contain",
-                }}
-              />
+            <p className="mt-4 rounded-r-xl border-l-2 px-3 py-2.5 whitespace-normal text-white/95 font-medium"
+              style={{ borderLeftColor: accentColor, background: `linear-gradient(90deg, ${accentColor}12, ${accentColor}03)` }}>
               {last}
             </p>
           </>
@@ -981,8 +949,9 @@ export default function ResultPage() {
               key={s.key}
               className={`rounded-[2.15rem] border border-white/[0.04] px-5 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)] sm:px-6 sm:py-6 ${s.cardClass}`}
             >
-              <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-white/40 whitespace-normal">
-                <span className={`inline-flex h-10 w-10 items-center justify-center rounded-full ${s.iconWrapClass}`}>
+              <div className="flex items-center gap-3 text-xs uppercase tracking-wide text-white/50 whitespace-normal">
+                <span className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${s.iconWrapClass}`}
+                  style={{ boxShadow: `inset 0 0 0 1px ${s.accentColor}30, inset 0 1px 0 ${s.accentColor}20` }}>
                   {s.icon}
                 </span>
                 <span>{s.title}</span>
