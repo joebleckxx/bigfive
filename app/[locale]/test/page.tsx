@@ -27,6 +27,11 @@ const PROGRESS_TTL_MS = 30 * 60 * 1000;
 const TEST_STARTED_SESSION_KEY = "personality_test_started_v1";
 
 const MILESTONES = [6, 13, 20] as const;
+const MILESTONE_ICONS: Record<number, string> = {
+  6: "/icons/test/milestones/choices.svg",
+  13: "/icons/test/milestones/traits.svg",
+  20: "/icons/test/milestones/strengths.svg"
+};
 const MILESTONE_KEY = "personality_pending_milestone_v1";
 
 const SCALE_VALUES = [1, 2, 3, 4, 5] as const;
@@ -479,6 +484,14 @@ export default function TestPage() {
             </div>
           ) : milestone !== null ? (
             <section aria-labelledby="test-milestone-heading" className="rounded-[2.35rem] border border-white/[0.025] bg-[var(--tmj-surface)] px-5 py-10 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] sm:px-6 sm:py-12">
+              <Image
+                src={MILESTONE_ICONS[milestone]}
+                alt=""
+                aria-hidden="true"
+                width={80}
+                height={80}
+                className="mx-auto mb-6 h-20 w-20"
+              />
               <h2 id="test-milestone-heading" ref={milestoneHeading} tabIndex={-1} className="mx-auto max-w-sm text-xl font-semibold leading-snug tracking-tight text-white outline-none">
                 {t(`milestones.${milestone}.title`)}
               </h2>
