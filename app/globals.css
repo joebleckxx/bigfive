@@ -106,3 +106,9 @@ button,
 .tmj-gradient-text { background-image: var(--tmj-brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 .tmj-container { position: relative; width: 100%; max-width: var(--tmj-content-width); margin-inline: auto; }
+
+/* Shared vertical page spacing: compact mobile header, consistent footer. */
+.tmj-page-spacing { padding-block: 40px; }
+@media (max-width: 640px) {
+  .tmj-page-spacing { padding-top: 32px; }
+}

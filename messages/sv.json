@@ -42,6 +42,21 @@
     "footer": "tellmejoe. · TMJ"
   },
   "Test": {
+    "milestones": {
+      "continue": "Fortsätt",
+      "6": {
+        "title": "De små sakerna avslöjar mycket.",
+        "body": "Hur du gör vardagliga val kan säga mer om din personlighet än du kanske tror."
+      },
+      "13": {
+        "title": "Du är mer än ett enda personlighetsdrag.",
+        "body": "Det är kombinationen av dina egenskaper som gör din personlighet intressant. Och ibland överraskande."
+      },
+      "20": {
+        "title": "Dina styrkor har en annan sida.",
+        "body": "Egenskaperna som hjälper dig att lyckas kan också skapa utmaningar. Allt beror på sammanhanget."
+      }
+    },
     "progress": "Fråga {current} av {total}",
     "complete": "Klart",
     "menu": "Meny",
@@ -86,6 +101,7 @@
       "title3": "Behärskning under press"
     },
     "cta": "LÅS UPP HELA RESULTATET",
+    "testReady": "Ditt testresultat är klart",
     "profileReady": "Din fullständiga profil är redo.",
     "whatWillIGet": "Vad får jag?",
     "note": "Engångsbetalning · Ingen prenumeration",

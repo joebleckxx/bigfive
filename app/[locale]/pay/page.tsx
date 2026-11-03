@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import { QUESTIONS } from "@/lib/personality";
 import { calculateResult } from "@/lib/scoring";
 import { AVATARS } from "@/lib/avatars";
+import { PAY_HERO_VISUAL, PAY_HERO_AVATAR_NUMBERS } from "@/lib/pay-visual";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { useLocale } from "next-intl";
 import LegalFooter from "@/app/components/ui/legal-footer";
@@ -253,7 +254,7 @@ export default function PayPage() {
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter py-10 text-white"
+      className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter tmj-page-spacing text-white"
     >
       <TMJBackground />
 
@@ -264,35 +265,42 @@ export default function PayPage() {
           <LanguageSwitcher />
         </div>
 
-        <div className={styles.readyStatus}>
-          <div className={styles.reportMark} aria-hidden="true">
-            <svg viewBox="0 0 64 72" fill="none">
-              <defs>
-                <linearGradient id="ready-paper" x1="10" y1="10" x2="48" y2="61" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#1d314b" />
-                  <stop offset="1" stopColor="#191e30" />
-                </linearGradient>
-                <linearGradient id="ready-seal" x1="37" y1="44" x2="54" y2="62" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#69ce82" />
-                  <stop offset="1" stopColor="#32945d" />
-                </linearGradient>
-              </defs>
-              <rect x="17" y="9" width="36" height="49" rx="6" transform="rotate(9 35 33.5)" fill="#123e69" fillOpacity="0.25" stroke="#1688e0" />
-              <g transform="rotate(-8 28 35)">
-                <rect x="9" y="9" width="38" height="51" rx="6" fill="url(#ready-paper)" stroke="#28a5ff" strokeWidth="1.2" />
-                <path d="M17 18h12" stroke="#69baff" strokeOpacity="0.65" strokeWidth="2.5" strokeLinecap="round" />
-                <path d="M17 28h22M17 35h16" stroke="#69baff" strokeOpacity="0.45" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M17 47h4M25 47h4M33 47h4" stroke="#69baff" strokeOpacity="0.3" strokeWidth="1.5" strokeLinecap="round" />
-              </g>
-              <circle cx="46" cy="54" r="12" fill="#15111f" />
-              <circle cx="46" cy="53" r="10.5" fill="url(#ready-seal)" stroke="#9bdfaa" strokeWidth="1.2" />
-              <path d="m41.5 53 3 3 6-6.5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <p>{t("profileReady")}</p>
+        {PAY_HERO_VISUAL === "avatars" ? (
+        <div className={styles.profileFan} aria-hidden="true">
+          {PAY_HERO_AVATAR_NUMBERS.map((number) => AVATARS[number - 1]).map((src, index) => (
+            <Image
+              key={src}
+              src={src}
+              alt=""
+              width={96}
+              height={96}
+              sizes={index === 1 ? "88px" : "68px"}
+              className={styles.profilePortrait}
+            />
+          ))}
         </div>
+        ) : PAY_HERO_VISUAL === "completed-test" ? (
+          <Image
+            src="/icons/pay/completed-test.svg"
+            alt=""
+            aria-hidden="true"
+            width={144}
+            height={120}
+            className={styles.completedTest}
+          />
+        ) : null}
 
-        <h1 className="mt-10 text-center text-[clamp(3.35rem,15.8vw,4.41rem)] font-bold leading-[1] tracking-[-0.05em] text-[#E8ECFF]">
+        <p className={`${styles.testReady} ${PAY_HERO_VISUAL === "status" ? styles.readyStatus : ""}`}>
+          {PAY_HERO_VISUAL === "status" && (
+            <svg className={styles.statusIcon} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M20.5 11.5v.5a8.5 8.5 0 1 1-5-7.75" />
+              <path d="m8 11.5 3.5 3.5 9-10" />
+            </svg>
+          )}
+          {t("testReady")}
+        </p>
+
+        <h1 className={styles.headline}>
           <span className="block">{headlineLine1}</span>
           {headlineLine2 && <span className="mt-2 block">{headlineLine2}</span>}
           <span className={styles.headlineAccent}>
@@ -300,12 +308,12 @@ export default function PayPage() {
           </span>
         </h1>
 
-        <p className="mx-auto mt-8 max-w-[23rem] text-center text-[1.14rem] leading-[1.72] tracking-[-0.02em] text-[#C7CAE0] sm:max-w-[24.5rem] sm:text-[1.2rem]">
+        <p className="mx-auto mt-6 max-w-[23rem] text-center text-[1.14rem] leading-[1.72] tracking-[-0.02em] text-[#C7CAE0] sm:max-w-[24.5rem] sm:text-[1.2rem]">
           {t("description")}
         </p>
 
         {previewTypeCode && (
-          <div className="relative mt-16 overflow-hidden rounded-[2.35rem] border border-white/[0.03] bg-[var(--tmj-surface)] px-6 pt-5 pb-0 shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_18px_48px_rgba(0,0,0,0.28),0_0_42px_rgba(82,212,255,0.08)] sm:px-8">
+          <div className="relative mt-12 overflow-hidden rounded-[2.35rem] border border-white/[0.03] bg-[var(--tmj-surface)] px-6 pt-5 pb-0 shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_18px_48px_rgba(0,0,0,0.28),0_0_42px_rgba(82,212,255,0.08)] sm:px-8">
             <div className="flex min-h-[28rem] flex-col items-center justify-center py-10 text-center blur-[3.5px] opacity-85">
               <div className="text-[0.7rem] font-medium uppercase tracking-[0.18em] text-white/42">
                 {t("primaryArchetype")}
@@ -424,17 +432,45 @@ export default function PayPage() {
 
         <section className={styles.benefits} aria-labelledby="pay-benefits-title">
           <h2 id="pay-benefits-title" className={styles.sectionTitle}>{t("whatWillIGet")}</h2>
-          <ol className={styles.benefitList}>
+          <ul className={styles.benefitList}>
             {benefitCards.map((card, index) => (
               <li key={card.title} className={styles.benefit}>
-                <span className={styles.step} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <span className={styles.step} aria-hidden="true">
+                  <svg viewBox="0 0 64 64" fill="none">
+                    {index === 0 ? (
+                      <>
+                        <g transform="rotate(-8 30 31)">
+                          <rect x="12" y="8" width="36" height="46" rx="6" fill="#231936" stroke="currentColor" />
+                          <circle cx="30" cy="24" r="6" fill="currentColor" fillOpacity=".16" stroke="#dec8ff" />
+                          <path d="M20 43v-3a10 10 0 0 1 20 0v3" stroke="#dec8ff" />
+                        </g>
+                        <circle cx="47" cy="47" r="11" fill="#231936" stroke="currentColor" />
+                        <path d="m42 47 3.5 3.5L52 44" stroke="#dec8ff" />
+                      </>
+                    ) : index === 1 ? (
+                      <>
+                        <path d="M5 32C12 21 21 16 32 16s20 5 27 16c-7 11-16 16-27 16S12 43 5 32Z" fill="currentColor" fillOpacity=".08" stroke="currentColor" />
+                        <circle cx="32" cy="32" r="11" fill="#332049" stroke="#dec8ff" />
+                        <circle cx="32" cy="32" r="4" fill="currentColor" />
+                        <circle cx="35" cy="29" r="1.5" fill="#f4eaff" />
+                      </>
+                    ) : (
+                      <>
+                        <path d="M32 9v45M23 54h18M12 24l40-8" stroke="#dec8ff" />
+                        <path d="m14 23.6-8 16h16l-8-16Zm36-7.2-8 16h16l-8-16Z" stroke="currentColor" />
+                        <path d="M6 39.6h16a8 8 0 0 1-16 0ZM42 32.4h16a8 8 0 0 1-16 0Z" fill="currentColor" fillOpacity=".22" stroke="currentColor" />
+                        <circle cx="32" cy="20" r="3" fill="#231936" stroke="#dec8ff" />
+                      </>
+                    )}
+                  </svg>
+                </span>
                 <div>
                   <h3>{card.title}</h3>
                   <p>{card.text}</p>
                 </div>
               </li>
             ))}
-          </ol>
+          </ul>
         </section>
 
         <section className={styles.socialProof}>

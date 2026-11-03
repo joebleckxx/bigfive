@@ -42,6 +42,21 @@
     "footer": "tellmejoe. · TMJ"
   },
   "Test": {
+    "milestones": {
+      "continue": "Continuer",
+      "6": {
+        "title": "Les petits détails en disent long.",
+        "body": "Tes choix du quotidien peuvent en dire plus sur ta personnalité que tu ne le penses."
+      },
+      "13": {
+        "title": "Tu ne te résumes pas à un seul trait.",
+        "body": "C’est la combinaison de tes traits qui rend ta personnalité intéressante. Et parfois surprenante."
+      },
+      "20": {
+        "title": "Tes forces ont une autre facette.",
+        "body": "Les traits qui t’aident à réussir peuvent aussi créer des difficultés. Tout dépend du contexte."
+      }
+    },
     "progress": "Question {current} sur {total}",
     "complete": "Terminé",
     "menu": "Menu",
@@ -86,6 +101,7 @@
       "title3": "Maîtrise sous pression"
     },
     "cta": "DÉBLOQUEZ LE RÉSULTAT COMPLET",
+    "testReady": "Le résultat de ton test est prêt",
     "profileReady": "Ton profil complet est prêt.",
     "whatWillIGet": "Qu’est-ce que je vais obtenir ?",
     "note": "Paiement unique · Sans abonnement",

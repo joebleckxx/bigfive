@@ -866,7 +866,7 @@ export default function ResultPage() {
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter py-10 text-white"
+      className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter tmj-page-spacing text-white"
     >
       <TMJBackground />
 
@@ -930,11 +930,11 @@ export default function ResultPage() {
             className="mx-auto mb-2 max-w-[24rem] font-semibold tracking-tight break-normal [overflow-wrap:normal] hyphens-auto [text-wrap:balance] sm:max-w-[26rem]"
             style={{
               fontSize: "clamp(3.1rem, 10.2vw, 3.5rem)",
-              lineHeight: 1.02,
+              lineHeight: 1.12,
             }}
           >
             <span className="block">{t("hero.before")}</span>
-            <span className="mt-2 block whitespace-normal [overflow-wrap:anywhere] [word-break:normal] tmj-gradient-text hyphens-auto">
+            <span className="block whitespace-normal [overflow-wrap:anywhere] [word-break:normal] tmj-gradient-text hyphens-auto">
               {t("hero.accent")}
             </span>
           </h1>
@@ -944,7 +944,7 @@ export default function ResultPage() {
         </div>
 
         {/* Main card */}
-        <div className="mt-7 rounded-[2.35rem] border border-white/[0.025] bg-[var(--tmj-surface)] px-6 py-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] sm:mt-8 sm:px-8 sm:py-8">
+        <div className="mt-8 rounded-[2.35rem] border border-white/[0.025] bg-[var(--tmj-surface)] px-6 py-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] sm:px-8 sm:py-8">
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">

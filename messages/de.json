@@ -42,6 +42,21 @@
     "footer": "tellmejoe. · TMJ"
   },
   "Test": {
+    "milestones": {
+      "continue": "Weiter",
+      "6": {
+        "title": "Die kleinen Dinge verraten viel.",
+        "body": "Wie du alltägliche Entscheidungen triffst, kann mehr über deine Persönlichkeit verraten, als du vielleicht erwartest."
+      },
+      "13": {
+        "title": "Du bist mehr als eine einzelne Eigenschaft.",
+        "body": "Die Kombination deiner Eigenschaften macht deine Persönlichkeit interessant. Und manchmal überraschend."
+      },
+      "20": {
+        "title": "Deine Stärken haben noch eine andere Seite.",
+        "body": "Eigenschaften, die dir zum Erfolg verhelfen, können auch Herausforderungen mit sich bringen. Es kommt auf die Situation an."
+      }
+    },
     "progress": "Frage {current} von {total}",
     "complete": "Abgeschlossen",
     "menu": "Menü",
@@ -86,6 +101,7 @@
       "title3": "Souverän unter Druck"
     },
     "cta": "VOLLES ERGEBNIS FREISCHALTEN",
+    "testReady": "Dein Testergebnis ist fertig",
     "profileReady": "Dein vollständiges Profil ist bereit.",
     "whatWillIGet": "Was bekomme ich?",
     "note": "Einmalige Zahlung · Kein Abonnement",

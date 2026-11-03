@@ -42,6 +42,21 @@
     "footer": "tellmejoe. · TMJ"
   },
   "Test": {
+    "milestones": {
+      "continue": "Continuar",
+      "6": {
+        "title": "Os pequenos detalhes revelam muito.",
+        "body": "A forma como fazes escolhas no dia a dia pode dizer mais sobre a tua personalidade do que imaginas."
+      },
+      "13": {
+        "title": "És mais do que uma única característica.",
+        "body": "É a combinação das tuas características que torna a tua personalidade interessante. E, por vezes, surpreendente."
+      },
+      "20": {
+        "title": "Os teus pontos fortes têm outro lado.",
+        "body": "As características que te ajudam a ter sucesso também podem criar desafios. O contexto faz toda a diferença."
+      }
+    },
     "progress": "Pergunta {current} de {total}",
     "complete": "Concluído",
     "menu": "Menu",
@@ -86,6 +101,7 @@
       "title3": "Domínio sob pressão"
     },
     "cta": "DESBLOQUEIA O RESULTADO COMPLETO",
+    "testReady": "O resultado do teu teste está pronto",
     "profileReady": "O teu perfil completo está pronto.",
     "whatWillIGet": "O que vou receber?",
     "note": "Pagamento único · Sem subscrição",

@@ -12,7 +12,7 @@ export default function TermsPage() {
   const locale = (params?.locale as string) || "en";
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter py-10 text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter tmj-page-spacing text-white">
       <TMJBackground />
 
       <div className="tmj-container">

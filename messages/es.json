@@ -42,6 +42,21 @@
     "footer": "tellmejoe. · TMJ"
   },
   "Test": {
+    "milestones": {
+      "continue": "Continuar",
+      "6": {
+        "title": "Los pequeños detalles revelan mucho.",
+        "body": "La forma en que tomas decisiones cotidianas puede decir más sobre tu personalidad de lo que imaginas."
+      },
+      "13": {
+        "title": "Eres más que un solo rasgo.",
+        "body": "La combinación de tus rasgos hace que tu personalidad sea interesante. Y, a veces, sorprendente."
+      },
+      "20": {
+        "title": "Tus fortalezas tienen otra cara.",
+        "body": "Los rasgos que te ayudan a tener éxito también pueden plantearte desafíos. El contexto marca la diferencia."
+      }
+    },
     "progress": "Pregunta {current} de {total}",
     "complete": "Completado",
     "menu": "Menú",
@@ -86,6 +101,7 @@
       "title3": "Dominio bajo presión"
     },
     "cta": "DESBLOQUEA EL RESULTADO COMPLETO",
+    "testReady": "El resultado de tu test ya está listo",
     "profileReady": "Tu perfil completo está listo.",
     "whatWillIGet": "¿Qué recibiré?",
     "note": "Pago único · Sin suscripción",

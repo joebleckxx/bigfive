@@ -42,6 +42,21 @@
     "footer": "tellmejoe. · TMJ"
   },
   "Test": {
+    "milestones": {
+      "continue": "Kontynuuj",
+      "6": {
+        "title": "Drobne rzeczy mówią o nas więcej, niż myślisz.",
+        "body": "Sposób, w jaki podejmujesz codzienne decyzje, może zdradzać o Twojej osobowości więcej, niż się spodziewasz."
+      },
+      "13": {
+        "title": "Nie da się opisać Cię jedną cechą.",
+        "body": "To połączenie różnych cech sprawia, że Twoja osobowość jest wyjątkowa. A czasem potrafi zaskoczyć nawet Ciebie."
+      },
+      "20": {
+        "title": "Twoje mocne strony mają też drugą stronę.",
+        "body": "Cechy, które pomagają Ci osiągać sukcesy, mogą czasem działać przeciwko Tobie. Wszystko zależy od sytuacji."
+      }
+    },
     "progress": "Pytanie {current} z {total}",
     "complete": "Ukończono",
     "menu": "Menu",
@@ -86,6 +101,7 @@
       "title3": "Opanowanie pod presją"
     },
     "cta": "ODBLOKUJ PEŁNY WYNIK",
+    "testReady": "Twój wynik jest gotowy",
     "profileReady": "Twój pełny profil jest gotowy.",
     "whatWillIGet": "Co otrzymam?",
     "note": "Płatność jednorazowa · Brak subskrypcji",

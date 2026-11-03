@@ -42,6 +42,21 @@
     "footer": "tellmejoe. · TMJ"
   },
   "Test": {
+    "milestones": {
+      "continue": "Continue",
+      "6": {
+        "title": "The little things reveal a lot.",
+        "body": "The way you make everyday choices can say more about your personality than you might expect."
+      },
+      "13": {
+        "title": "There's more to you than one trait.",
+        "body": "It's the combination of your traits that makes your personality interesting. And sometimes surprising."
+      },
+      "20": {
+        "title": "Your strengths have another side.",
+        "body": "The traits that help you succeed can also create challenges. Context makes all the difference."
+      }
+    },
     "progress": "Question {current} of {total}",
     "complete": "Complete",
     "menu": "Menu",
@@ -87,6 +102,7 @@
       "line3": "Insight into how you respond under pressure and what helps you stay balanced in relationships."
     },
     "cta": "UNLOCK FULL RESULT",
+    "testReady": "Your test result is ready",
     "profileReady": "Your full profile is ready.",
     "primaryArchetype": "Your Primary Archetype",
     "whatWillIGet": "What will I get?",
