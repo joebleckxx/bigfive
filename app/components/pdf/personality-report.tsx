@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Image,
   Svg,
-  Ellipse,
+  Circle,
   Defs,
   LinearGradient,
   Stop,
@@ -61,13 +61,13 @@ export type PdfReportData = {
 };
 
 const C = {
-  bg: "#02030A",
-  cardBg: "#071126",
-  border: "#1A2235",
+  bg: "#0b0c14",
+  cardBg: "#191829",
+  border: "#292739",
   title: "rgba(255,255,255,0.90)",
   brandAccent: "#9F7AEA",
-  titleAccentFirst: "#92AEFF",
-  titleAccentSecond: "#A97BFF",
+  titleAccentFirst: "#a4afff",
+  titleAccentSecond: "#f582d0",
   text90: "rgba(255,255,255,0.90)",
   text85: "rgba(255,255,255,0.85)",
   text80: "rgba(255,255,255,0.80)",
@@ -78,7 +78,7 @@ const C = {
   text50: "rgba(255,255,255,0.50)",
   text45: "rgba(255,255,255,0.45)",
   text40: "rgba(255,255,255,0.40)",
-  barBg: "#151C2B",
+  barBg: "#2d293d",
   gradStart: "#52D4FF",
   gradMid: "#79C1FF",
   gradMid2: "#B79FFF",
@@ -86,9 +86,9 @@ const C = {
 };
 
 const SECTION_ICON_SIZE = 18;
-const SECTION_ICON_OPACITY = 0.75;
+const SECTION_ICON_OPACITY = 1;
 const SECTION_ICON_COLORS = {
-  core: "#63D8FF",
+  core: "#59CA73",
   daily: "#57D6FF",
   strengths: "#7CB6FF",
   watchOut: "#A58EFF",
@@ -98,8 +98,7 @@ const SECTION_ICON_COLORS = {
 
 let fontRegistered = false;
 
-// NOTE: this stays compatible with your current setup (Geist font files in /public/fonts).
-// If later you add Satoshi files, you can register them here and switch brandTitle to use it.
+// Embed the bundled font to preserve accented characters across all report languages.
 if (typeof window !== "undefined" && !fontRegistered) {
   const baseUrl = window.location.origin;
 
@@ -117,6 +116,7 @@ if (typeof window !== "undefined" && !fontRegistered) {
 const styles = StyleSheet.create({
   page: {
     padding: 36,
+    paddingBottom: 60,
     fontSize: 10,
     fontFamily: "GeistSans",
     color: "#FFFFFF",
@@ -134,13 +134,13 @@ const styles = StyleSheet.create({
   brandLogo: { width: 65, height: 14, objectFit: "contain" },
   brandSubtitle: { fontSize: 9, color: C.text55, marginTop: 1 },
 
-  title: { fontSize: 24, fontWeight: 700, marginBottom: 6, color: C.title },
-  sub: { fontSize: 10, color: C.text65, marginBottom: 16 },
+  title: { fontSize: 26, lineHeight: 1.12, fontWeight: 700, marginBottom: 6, color: C.title },
+  sub: { fontSize: 10, lineHeight: 1.5, color: C.text75, marginBottom: 20 },
 
   card: {
     borderWidth: 1,
     borderColor: C.border,
-    borderRadius: 14,
+    borderRadius: 18,
     padding: 16,
     marginBottom: 14,
     backgroundColor: C.cardBg
@@ -226,9 +226,13 @@ const styles = StyleSheet.create({
     textTransform: "uppercase"
   },
   psIconWrap: {
-    width: SECTION_ICON_SIZE,
-    height: SECTION_ICON_SIZE,
-    marginRight: 8
+    width: 30,
+    height: 30,
+    borderRadius: 10,
+    borderWidth: 0.7,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 9
   },
 
   psBody: { fontSize: 10, color: C.text75, lineHeight: 1.45 },
@@ -265,7 +269,7 @@ function SectionIcon({ sectionKey }: { sectionKey: string }) {
     strokeOpacity: SECTION_ICON_OPACITY,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
-    strokeWidth: 1.4,
+    strokeWidth: 1.6,
     fill: "none"
   };
 
@@ -277,14 +281,14 @@ function SectionIcon({ sectionKey }: { sectionKey: string }) {
           height={SECTION_ICON_SIZE}
           viewBox="0 0 24 24"
         >
-          <Path d="M12 18V5" {...pathProps} />
-          <Path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" {...pathProps} />
-          <Path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" {...pathProps} />
-          <Path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" {...pathProps} />
-          <Path d="M18 18a4 4 0 0 0 2-7.464" {...pathProps} />
-          <Path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" {...pathProps} />
-          <Path d="M6 18a4 4 0 0 1-2-7.464" {...pathProps} />
-          <Path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" {...pathProps} />
+          <Path {...pathProps} d="M12 18V5" />
+          <Path {...pathProps} d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" />
+          <Path {...pathProps} d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" />
+          <Path {...pathProps} d="M17.997 5.125a4 4 0 0 1 2.526 5.77" />
+          <Path {...pathProps} d="M18 18a4 4 0 0 0 2-7.464" />
+          <Path {...pathProps} d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" />
+          <Path {...pathProps} d="M6 18a4 4 0 0 1-2-7.464" />
+          <Path {...pathProps} d="M6.003 5.125a4 4 0 0 0-2.526 5.77" />
         </Svg>
       );
     case "daily":
@@ -294,10 +298,10 @@ function SectionIcon({ sectionKey }: { sectionKey: string }) {
           height={SECTION_ICON_SIZE}
           viewBox="0 0 24 24"
         >
-          <Path
-            d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"
-            {...pathProps}
-          />
+          <Path {...pathProps} d="M3 6h3m4 0h11M3 12h11m4 0h3M3 18h5m4 0h9" />
+          <Circle {...pathProps} cx="8" cy="6" r="2" />
+          <Circle {...pathProps} cx="16" cy="12" r="2" />
+          <Circle {...pathProps} cx="10" cy="18" r="2" />
         </Svg>
       );
     case "strengths":
@@ -307,13 +311,8 @@ function SectionIcon({ sectionKey }: { sectionKey: string }) {
           height={SECTION_ICON_SIZE}
           viewBox="0 0 24 24"
         >
-          <Path
-            d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"
-            {...pathProps}
-          />
-          <Path d="M20 2v4" {...pathProps} strokeWidth={1.8} />
-          <Path d="M22 4h-4" {...pathProps} strokeWidth={1.8} />
-          <Path d="M4 20a2 2 0 1 0 4 0a2 2 0 1 0-4 0" {...pathProps} strokeWidth={1.8} />
+          <Path {...pathProps} d="M12 3 20 6v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-3Z" />
+          <Path {...pathProps} d="m13 7-5 6h4l-1 4 5-6h-4l1-4Z" fill={color} stroke="none" />
         </Svg>
       );
     case "watchOut":
@@ -323,12 +322,8 @@ function SectionIcon({ sectionKey }: { sectionKey: string }) {
           height={SECTION_ICON_SIZE}
           viewBox="0 0 24 24"
         >
-          <Path
-            d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"
-            {...pathProps}
-          />
-          <Path d="M12 8v4" {...pathProps} />
-          <Path d="M12 16h.01" {...pathProps} />
+          <Path {...pathProps} d="M2 12c2.5-4.5 6-7 10-7s7.5 2.5 10 7c-2.5 4.5-6 7-10 7S4.5 16.5 2 12Z" />
+          <Circle {...pathProps} cx="12" cy="12" r="3" />
         </Svg>
       );
     case "underPressure":
@@ -338,8 +333,9 @@ function SectionIcon({ sectionKey }: { sectionKey: string }) {
           height={SECTION_ICON_SIZE}
           viewBox="0 0 24 24"
         >
-          <Path d="m12 14 4-4" {...pathProps} />
-          <Path d="M3.34 19a10 10 0 1 1 17.32 0" {...pathProps} />
+          <Path {...pathProps} d="M4.2 19a9 9 0 1 1 15.6 0" />
+          <Path {...pathProps} d="m12 14 3.5-5" />
+          <Circle {...pathProps} cx="12" cy="14" r="1.5" fill={color} stroke="none" />
         </Svg>
       );
     case "relationships":
@@ -349,10 +345,7 @@ function SectionIcon({ sectionKey }: { sectionKey: string }) {
           height={SECTION_ICON_SIZE}
           viewBox="0 0 24 24"
         >
-          <Path
-            d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762"
-            {...pathProps}
-          />
+          <Path {...pathProps} d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762" />
         </Svg>
       );
     default:
@@ -373,39 +366,62 @@ function PageBackground() {
     <View style={styles.pageBg} fixed>
       <Svg width="100%" height="100%" viewBox="0 0 595 842">
         <Defs>
-          <LinearGradient id="pageBaseBg" x1="0" y1="0" x2="1" y2="1">
-            <Stop offset="0%" stopColor="#02030A" />
-            <Stop offset="52%" stopColor="#040617" />
-            <Stop offset="100%" stopColor="#010209" />
-          </LinearGradient>
-          <LinearGradient id="pageSweepBg" x1="0" y1="0" x2="1" y2="1">
-            <Stop offset="0%" stopColor="#050612" stopOpacity="0" />
-            <Stop offset="44%" stopColor="#7C3AED" stopOpacity="0.12" />
-            <Stop offset="53%" stopColor="#3B82F6" stopOpacity="0.11" />
-            <Stop offset="100%" stopColor="#080918" stopOpacity="0" />
-          </LinearGradient>
-          <LinearGradient id="pageVignette" x1="0" y1="0" x2="0" y2="1">
-            <Stop offset="0%" stopColor="#050612" stopOpacity="0.08" />
-            <Stop offset="38%" stopColor="#050612" stopOpacity="0" />
-            <Stop offset="100%" stopColor="#000000" stopOpacity="0.68" />
-          </LinearGradient>
-          <LinearGradient id="pageBottomTint" x1="0" y1="0" x2="1" y2="1">
-            <Stop offset="0%" stopColor="#4338CA" stopOpacity="0.10" />
-            <Stop offset="52%" stopColor="#2563EB" stopOpacity="0.12" />
-            <Stop offset="100%" stopColor="#02030A" stopOpacity="0" />
+          <LinearGradient id="pageBaseBg" x1="0" y1="0" x2="0" y2="1">
+            <Stop offset="0%" stopColor="#282846" />
+            <Stop offset="48%" stopColor="#141321" />
+            <Stop offset="100%" stopColor="#0b0c14" />
           </LinearGradient>
         </Defs>
         <Rect x="0" y="0" width="595" height="842" fill="url(#pageBaseBg)" />
-        <Ellipse cx="470" cy="170" rx="330" ry="150" fill="#7C3AED" fillOpacity="0.12" />
-        <Ellipse cx="560" cy="590" rx="260" ry="320" fill="#3B82F6" fillOpacity="0.10" />
-        <Ellipse cx="120" cy="748" rx="250" ry="165" fill="#6366F1" fillOpacity="0.12" />
-        <Ellipse cx="36" cy="220" rx="280" ry="170" fill="#7C3AED" fillOpacity="0.05" />
-        <Rect x="0" y="340" width="595" height="502" fill="url(#pageBottomTint)" />
-        <Rect x="0" y="0" width="595" height="842" fill="url(#pageSweepBg)" />
-        <Rect x="0" y="0" width="595" height="842" fill="url(#pageVignette)" />
       </Svg>
     </View>
   );
+}
+
+function ReportHeader({ data }: { data: PdfReportData }) {
+  return (
+    <View style={styles.headerRow} fixed>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 9 }}>
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
+        <Image src={data.logoImageUrl ?? BRAND.logoSrc} style={{ width: 32, height: 32, borderRadius: 9 }} />
+        <View>
+          <Text style={{ fontSize: 13, fontWeight: 700 }}>{BRAND.name}</Text>
+          <Text style={styles.brandSubtitle}>{BRAND.tagline}</Text>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const TRAIT_COLORS: Record<string, [string, string, string]> = {
+  S: ["#20C979", "#42D65A", "#7BE58C"],
+  E: ["#4ED7FF", "#69C8FF", "#86E0FF"],
+  O: ["#7D66FF", "#A67EFF", "#C68BFF"],
+  C: ["#F25FB3", "#FF7DCC", "#FF9FB8"],
+  A: ["#FF9B5F", "#FFB15B", "#FFD08A"]
+};
+
+function blendColor(from: string, to: string, amount: number) {
+  const channels = [1, 3, 5].map((offset) => {
+    const start = parseInt(from.slice(offset, offset + 2), 16);
+    const end = parseInt(to.slice(offset, offset + 2), 16);
+    return Math.round(start + (end - start) * amount).toString(16).padStart(2, "0");
+  });
+  return `#${channels.join("")}`;
+}
+
+function titleGradient(position: number) {
+  return position <= 0.48
+    ? blendColor("#a4afff", "#c4afff", position / 0.48)
+    : blendColor("#c4afff", "#f582d0", Math.min(1, (position - 0.48) / 0.44));
+}
+
+function sectionCopy(lines: string[]) {
+  const clean = lines.map((line) => line.trim()).filter(Boolean);
+  const parts = clean.length === 1 ? clean[0].replace(/\s+/g, " ").split(/(?<=[.!?])\s+/) : clean;
+  return parts.length > 1
+    ? { body: parts.slice(0, -1).join(" "), emphasis: parts[parts.length - 1] }
+    : { body: parts[0] ?? "", emphasis: "" };
 }
 
 function Footer({ data }: { data: PdfReportData }) {
@@ -433,33 +449,19 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
   const sections = (data.profileSections ?? []).filter(
     (s) => Array.isArray(s.lines) && s.lines.length > 0
   );
-  const accentWords = data.titleAccent.trim().split(/\s+/).filter(Boolean);
-  const accentFirstWord = accentWords[0] ?? "";
-  const accentRest = accentWords.slice(1).join(" ");
 
   return (
-    <Document>
+    <Document title={`${BRAND.name} — ${data.typeName}`} author={BRAND.name}>
       {/* PAGE 1+: header + hero + profile + 6 sections (wrap across pages) */}
       <Page size="A4" style={styles.page} wrap>
         <PageBackground />
-        <View style={styles.headerRow} fixed>
-          <View style={styles.brand}>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-              <Svg width={32} height={28} viewBox={BRAND.mark.viewBox}>
-                <Path d={BRAND.mark.loop} fill="none" stroke="#a6afff" strokeWidth={3.5} />
-                <Path d={BRAND.mark.slash} fill="none" stroke="#a6afff" strokeWidth={4.5} strokeLinecap="round" transform="rotate(13 35 28)" />
-              </Svg>
-              <Text style={{ fontSize: 13, fontWeight: 700, color: "#ffffff" }}>{BRAND.name}</Text>
-            </View>
-          </View>
-        </View>
+        <ReportHeader data={data} />
 
         <Text style={styles.title}>
           {data.titleBefore}{" "}
-          <Text style={{ color: C.titleAccentFirst }}>{accentFirstWord}</Text>
-          {accentRest ? (
-            <Text style={{ color: C.titleAccentSecond }}> {accentRest}</Text>
-          ) : null}
+          {[...data.titleAccent].map((character, index, characters) => (
+            <Text key={index} style={{ color: titleGradient(index / Math.max(1, characters.length - 1)) }}>{character}</Text>
+          ))}
         </Text>
         <Text style={styles.sub}>{data.subtitle}</Text>
 
@@ -482,37 +484,34 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
               </View>
             )}
 
-            <View style={{ flexGrow: 1 }}>
+            <View style={{ flexGrow: 1, flexShrink: 1 }}>
               <Text style={styles.typeName}>{data.typeName}</Text>
               <Text style={styles.typeDesc}>{data.typeDescription}</Text>
             </View>
           </View>
         </View>
 
-        {/* 6 profile sections */}
-        {sections.length > 0 ? (
-          <View style={styles.card}>
-            {sections.map((s) => (
-              <View key={s.key} style={{ marginBottom: 14 }}>
-                <View style={styles.psTitleRow}>
-                  <View style={styles.psIconWrap}>
-                    <SectionIcon sectionKey={s.key} />
-                  </View>
-                  <Text style={styles.psKicker}>{s.title}</Text>
+        {/* Keep each section and its key takeaway together when paginating. */}
+        {sections.map((section) => {
+          const accent = SECTION_ICON_COLORS[section.key as keyof typeof SECTION_ICON_COLORS] ?? SECTION_ICON_COLORS.core;
+          const copy = sectionCopy(section.lines);
+          return (
+            <View key={section.key} style={styles.card} wrap={false}>
+              <View style={styles.psTitleRow}>
+                <View style={[styles.psIconWrap, { backgroundColor: blendColor("#191829", accent, 0.13), borderColor: blendColor("#191829", accent, 0.25) }]}>
+                  <SectionIcon sectionKey={section.key} />
                 </View>
-
-                {s.lines.map((line, i) => (
-                  <Text
-                    key={`${s.key}-${i}`}
-                    style={[styles.psBody, ...(i === 0 ? [] : [styles.psPara])]}
-                  >
-                    {line}
-                  </Text>
-                ))}
+                <Text style={styles.psKicker}>{section.title}</Text>
               </View>
-            ))}
-          </View>
-        ) : null}
+              <Text style={styles.psBody}>{copy.body}</Text>
+              {copy.emphasis ? (
+                <View style={{ marginTop: 10, borderLeftWidth: 2, borderLeftColor: accent, backgroundColor: blendColor("#191829", accent, 0.07), paddingHorizontal: 10, paddingVertical: 8, borderTopRightRadius: 8, borderBottomRightRadius: 8 }}>
+                  <Text style={[styles.psBody, { color: C.text90, fontWeight: 700 }]}>{copy.emphasis}</Text>
+                </View>
+              ) : null}
+            </View>
+          );
+        })}
 
         <Footer data={data} />
       </Page>
@@ -520,17 +519,7 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
       {/* LAST PAGE: Big Five details */}
       <Page size="A4" style={styles.page}>
         <PageBackground />
-        <View style={styles.headerRow} fixed>
-          <View style={styles.brand}>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-              <Svg width={32} height={28} viewBox={BRAND.mark.viewBox}>
-                <Path d={BRAND.mark.loop} fill="none" stroke="#a6afff" strokeWidth={3.5} />
-                <Path d={BRAND.mark.slash} fill="none" stroke="#a6afff" strokeWidth={4.5} strokeLinecap="round" transform="rotate(13 35 28)" />
-              </Svg>
-              <Text style={{ fontSize: 13, fontWeight: 700, color: "#ffffff" }}>{BRAND.name}</Text>
-            </View>
-          </View>
-        </View>
+        <ReportHeader data={data} />
 
         <View style={styles.card}>
           <View style={styles.bigFiveHeader}>
@@ -549,7 +538,7 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
                 <View style={styles.barLabelRow}>
                   <Text style={styles.barLabel}>{row.label}</Text>
                 </View>
-                <Text style={styles.barVal}>{clampPct(row.value)}</Text>
+                <Text style={[styles.barVal, { color: (TRAIT_COLORS[row.key] ?? TRAIT_COLORS.O)[1], fontWeight: 700 }]}>{clampPct(row.value)}%</Text>
               </View>
 
               <View style={styles.barBg}>
@@ -557,10 +546,9 @@ export function PersonalityReportPDF({ data }: { data: PdfReportData }) {
                   <Svg style={styles.barGradient} viewBox="0 0 100 8" preserveAspectRatio="none">
                     <Defs>
                       <LinearGradient id="barGrad" x1="0" y1="0" x2="1" y2="0">
-                        <Stop offset="0%" stopColor={C.gradStart} />
-                        <Stop offset="32%" stopColor={C.gradMid} />
-                        <Stop offset="69%" stopColor={C.gradMid2} />
-                        <Stop offset="100%" stopColor={C.gradEnd} />
+                        <Stop offset="0%" stopColor={(TRAIT_COLORS[row.key] ?? TRAIT_COLORS.O)[0]} />
+                        <Stop offset="55%" stopColor={(TRAIT_COLORS[row.key] ?? TRAIT_COLORS.O)[1]} />
+                        <Stop offset="100%" stopColor={(TRAIT_COLORS[row.key] ?? TRAIT_COLORS.O)[2]} />
                       </LinearGradient>
                     </Defs>
                     <Rect x="0" y="0" width="100" height="8" fill="url(#barGrad)" rx="999" ry="999" />

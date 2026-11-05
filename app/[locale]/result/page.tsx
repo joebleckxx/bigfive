@@ -438,7 +438,8 @@ export default function ResultPage() {
 
       const report: PdfReportData = {
         brandTitle: BRAND.name,
-        brandSubtitle: t("brandSubtitle"),
+        brandSubtitle: BRAND.tagline,
+        logoImageUrl: new URL(BRAND.logoSrc, window.location.origin).toString(),
         generatedLabel: t("pdf.generated"),
         dateISO: new Date().toISOString().slice(0, 10),
         bigFiveIconUrl,
@@ -1144,89 +1145,30 @@ export default function ResultPage() {
 	          </div>
 	        </div>
 
-	        <div className="mt-8 mb-2 flex items-center justify-center gap-4">
-	          <div className="relative">
-	            <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
-	            <button
-	              onClick={downloadPdf}
-	              aria-disabled={downloading}
-	              type="button"
-	              aria-label={t("pdf.download")}
-	              title={t("pdf.download")}
-	              className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
-	                bg-black/25 ring-1 ring-white/20 text-white
-	                focus:outline-none
-	                cursor-pointer
-	                aria-disabled:pointer-events-none"
-	            >
-	              <svg
-	                width="18"
-	                height="18"
-	                viewBox="0 0 24 24"
-	                fill="none"
-	                aria-hidden="true"
-	                className="opacity-90"
-	              >
-	                <path
-	                  d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
-	                  stroke="currentColor"
-	                  strokeWidth="1.6"
-	                  strokeLinejoin="round"
-	                />
-	                <path
-	                  d="M14 2v6h6"
-	                  stroke="currentColor"
-	                  strokeWidth="1.6"
-	                  strokeLinejoin="round"
-	                />
-	                <path
-	                  d="M8 15h8"
-	                  stroke="currentColor"
-	                  strokeWidth="1.6"
-	                  strokeLinecap="round"
-	                />
-	                <path
-	                  d="M8 18h6"
-	                  stroke="currentColor"
-	                  strokeWidth="1.6"
-	                  strokeLinecap="round"
-	                />
-	              </svg>
-	            </button>
-	          </div>
-
-	          <div className="relative">
-	            <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
-	            <button
-	              onClick={shareResult}
-	              type="button"
-	              aria-label={tr("share", "Share")}
-	              title={tr("share", "Share")}
-	              className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
-	                bg-black/25 ring-1 ring-white/20 text-white
-	                focus:outline-none
-	                cursor-pointer"
-	            >
-	              <svg
-	                xmlns="http://www.w3.org/2000/svg"
-	                width="18"
-	                height="18"
-	                viewBox="0 0 24 24"
-	                fill="none"
-	                stroke="currentColor"
-	                strokeWidth="1.6"
-	                strokeLinecap="round"
-	                strokeLinejoin="round"
-	                className="opacity-90"
-	                aria-hidden="true"
-	              >
-	                <path d="M12 2v13" />
-	                <path d="m16 6-4-4-4 4" />
-	                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-	              </svg>
-	            </button>
-	          </div>
-	        </div>
+        <div className="mx-auto mt-8 mb-2 grid w-fit max-w-full grid-cols-2 gap-3">
+          <button
+            onClick={shareResult}
+            type="button"
+            className="inline-flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-full bg-[image:var(--tmj-action-gradient)] px-3 py-3.5 min-[380px]:px-5 text-sm font-bold text-[#09101D] shadow-[0_6px_24px_rgba(0,198,76,0.12)] transition-colors hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#42d65a] cursor-pointer sm:text-base"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" aria-hidden="true">
+              <path d="M12 2v13m4-9-4-4-4 4M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+            </svg>
+            <span>Share</span>
+          </button>
+          <button
+            onClick={downloadPdf}
+            disabled={downloading}
+            aria-busy={downloading}
+            type="button"
+            className="inline-flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-full border border-[#c8aeff]/30 bg-[#a581d2]/20 px-3 py-3.5 min-[380px]:px-5 text-sm font-semibold text-[#e1d3fa] transition-colors hover:bg-[#a581d2]/30 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#c8aeff] disabled:cursor-wait disabled:opacity-60 cursor-pointer sm:text-base"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" aria-hidden="true">
+              <path d="M12 3v12m-4-4 4 4 4-4M4 16v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4" />
+            </svg>
+            <span className="whitespace-nowrap">Download PDF</span>
+          </button>
+        </div>
 
 	          <p className="mt-6 text-center text-xs text-white/40">
 	            {t("disclaimer")}

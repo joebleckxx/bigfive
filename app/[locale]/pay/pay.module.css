@@ -77,10 +77,10 @@
 
 .completedTest { display: block; width: 93px; height: auto; margin: 24px auto 0; }
 
-.testReady { margin: 8px 0 0; text-align: center; color: #c4c3cc; font-size: 14px; font-weight: 500; line-height: 1.5; }
+.testReady { margin: 8px 0 0; text-align: center; color: #d8cee9; font-size: 16px; font-weight: 500; line-height: 1.5; }
 
-.readyStatus { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 32px; }
-.statusIcon { width: 18px; height: 18px; flex-shrink: 0; color: #af91d6; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.readyStatus { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 32px; }
+.statusIcon { width: 22px; height: 22px; flex-shrink: 0; color: #af91d6; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
 .step svg { width: 100%; height: auto; overflow: visible; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
@@ -91,9 +91,13 @@
 .profilesTeaser { margin-top: 40px; padding-top: 32px; border-top: 1px solid #b99ae626; text-align: center; }
 .profilesTeaserTitle { max-width: 380px; margin: 0 auto; color: #f5f0ff; font-size: 26px; font-weight: 700; line-height: 1.2; letter-spacing: -.025em; text-wrap: balance; }
 .profilesTeaserBody { max-width: 390px; margin: 16px auto 0; color: #b8b5c7; font-size: 15px; line-height: 1.65; }
-.avatarWindow { position: relative; height: 218px; margin-top: 28px; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
-.avatarWindow::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(transparent 68%, #0b0c14 100%); }
-.avatarCollage { position: absolute; left: 50%; top: 0; display: grid; grid-template-columns: repeat(8, 112px); gap: 8px; width: max-content; transform: translateX(-50%) rotate(-5deg); }
-.teaserAvatar { display: block; width: 112px; height: 112px; object-fit: contain; }
-.teaserAvatar:nth-child(n+9) { transform: translateX(42px); }
+.avatarWindow { position: relative; width: 78%; max-width: 340px; aspect-ratio: 1; margin: 28px auto 0; overflow: hidden; border-radius: 50%; mask-image: radial-gradient(circle closest-side, #000 62%, #000b 78%, transparent 100%); -webkit-mask-image: radial-gradient(circle closest-side, #000 62%, #000b 78%, transparent 100%); }
+.avatarCollage { position: absolute; inset: 0; isolation: isolate; }
+.teaserAvatar { position: absolute; left: var(--avatar-left); top: var(--avatar-top); display: block; width: 40%; max-width: none; height: auto; object-fit: contain; transform: translate(-50%, -50%); filter: drop-shadow(0 4px 6px #0005); }
+/* Five equally spaced centers on a circle; portraits overlap slightly. */
+.teaserAvatar:nth-child(1) { --avatar-left: 50%; --avatar-top: 20%; }
+.teaserAvatar:nth-child(2) { --avatar-left: 78.53%; --avatar-top: 40.73%; }
+.teaserAvatar:nth-child(3) { --avatar-left: 67.63%; --avatar-top: 74.27%; z-index: 2; }
+.teaserAvatar:nth-child(4) { --avatar-left: 32.37%; --avatar-top: 74.27%; z-index: 3; }
+.teaserAvatar:nth-child(5) { --avatar-left: 21.47%; --avatar-top: 40.73%; z-index: 1; }
 .profilesTeaserCaption { margin: 16px 0 0; color: #a59caf; font-size: 13px; line-height: 1.5; }

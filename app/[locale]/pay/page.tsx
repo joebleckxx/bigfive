@@ -496,7 +496,7 @@ export default function PayPage() {
           <p className={styles.profilesTeaserBody}>{t("profilesTeaserBody")}</p>
           <div className={styles.avatarWindow} aria-hidden="true">
             <div className={styles.avatarCollage}>
-              {[6, 1, 10, 4, 13, 2, 15, 8, 11, 5, 0, 7, 12, 3, 9, 14].map((avatar) => (
+              {[6, 4, 15, 13, 9].map((avatar) => (
                 <Image key={avatar} src={AVATARS[avatar]} alt="" width={112} height={112} sizes="112px" className={styles.teaserAvatar} />
               ))}
             </div>
