@@ -6,6 +6,8 @@ import Image from "next/image";
 import { Brand } from "@/app/components/ui/logo";
 import { BRAND } from "@/lib/brand";
 import styles from "./home.module.css";
+import payStyles from "./pay/pay.module.css";
+import { AVATARS } from "@/lib/avatars";
 
 export const metadata = { title: BRAND.name };
 
@@ -15,7 +17,10 @@ export default async function Page({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "Home" });
+  const [t, tp] = await Promise.all([
+    getTranslations({ locale, namespace: "Home" }),
+    getTranslations({ locale, namespace: "Pay" }),
+  ]);
 
   return (
     <main className={styles.page}>
@@ -49,15 +54,36 @@ export default async function Page({
           </p>
         </div>
 
-        <Image
-          src="/graphics/personality-avatars.png"
-          alt=""
-          width={1600}
-          height={520}
-          sizes="(max-width: 632px) calc(100vw - 56px), 560px"
-          className={styles.avatars}
-          priority
-        />
+        <section className={payStyles.socialProof}>
+          <Image
+            src="/graphics/community-portraits.png"
+            alt=""
+            width={1600}
+            height={520}
+            sizes="(max-width: 640px) 78vw, 360px"
+            className={payStyles.communityPortraits}
+          />
+          <div className={payStyles.socialCount}>
+            {tp("socialProofCount").replace("+", "").toUpperCase()}<sup>+</sup>
+          </div>
+          <p>{tp("socialProof")}</p>
+        </section>
+
+        <section className={payStyles.profilesTeaser} aria-labelledby="profiles-teaser-title">
+          <h2 id="profiles-teaser-title" className={payStyles.profilesTeaserTitle}>
+            {tp("profilesTeaserTitle")}
+          </h2>
+          <p className={payStyles.profilesTeaserBody}>{tp("profilesTeaserBody")}</p>
+          <div className={payStyles.avatarWindow} aria-hidden="true">
+            <div className={payStyles.avatarCollage}>
+              {[6, 4, 15, 13, 9].map((avatar) => (
+                <Image key={avatar} src={AVATARS[avatar]} alt="" width={112} height={112} sizes="112px" className={payStyles.teaserAvatar} />
+              ))}
+            </div>
+          </div>
+          <p className={payStyles.profilesTeaserCaption}>{tp("profilesTeaserCaption")}</p>
+        </section>
+
         <LegalFooter />
       </div>
     </main>
