@@ -1,5 +1,13 @@
 {
   "Home": {
+    "avatarTeaser": {
+      "title": "Vilken profil är du?",
+      "body": "Lås upp din avatar och dela ditt resultat med vänner. Jämför era profiler och avatarer. Se vad ni har gemensamt och vad som skiljer er åt."
+    },
+    "reportOffer": {
+      "title": "Din fullständiga personlighetsrapport",
+      "body": "Efter testet kan du låsa upp hela ditt resultat och ladda ner en PDF-rapport att återvända till när du vill."
+    },
     "landing": {
       "headline": "Upptäck din",
       "headlineAccent": "personlighetsprofil",

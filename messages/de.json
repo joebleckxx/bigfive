@@ -1,5 +1,13 @@
 {
   "Home": {
+    "avatarTeaser": {
+      "title": "Welches Profil bist du?",
+      "body": "Schalte deinen Avatar frei und teile dein Ergebnis mit Freunden. Vergleicht eure Profile und Avatare. Entdeckt Gemeinsamkeiten und Unterschiede."
+    },
+    "reportOffer": {
+      "title": "Dein vollständiger Persönlichkeitsbericht",
+      "body": "Schalte nach dem Test dein vollständiges Ergebnis frei und lade deinen PDF-Bericht herunter, um ihn jederzeit wieder anzusehen."
+    },
     "landing": {
       "headline": "Entdecke dein",
       "headlineAccent": "Persönlichkeitsprofil",

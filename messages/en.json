@@ -1,5 +1,13 @@
 {
   "Home": {
+    "avatarTeaser": {
+      "title": "Which profile is yours?",
+      "body": "Unlock your avatar and share your result with friends. Compare your profiles and avatars. See what you have in common and where you differ."
+    },
+    "reportOffer": {
+      "title": "Your full personality report",
+      "body": "After the test, unlock your full result and download a PDF report to revisit anytime."
+    },
     "landing": {
       "headline": "Discover your",
       "headlineAccent": "personality profile",

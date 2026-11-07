@@ -32,3 +32,10 @@
 @media (prefers-reduced-motion: reduce) { .cta { transition: none; } }
 
 .privacyIcon { width: 16px; height: 16px; flex-shrink: 0; opacity: 1; }
+
+.reportOffer { margin-top: 40px; padding: 32px 20px; border-radius: 28px; background: #12121e; border: 1px solid #ffffff07; text-align: center; }
+.reportOffer h2 { margin: 0; color: #e5e1ed; font-size: 20px; font-weight: 600; line-height: 1.25; letter-spacing: -.025em; text-wrap: balance; }
+.reportPrice { margin-top: 20px; color: #60ce78; font-size: 42px; font-weight: 700; line-height: 1.1; letter-spacing: -.04em; text-shadow: 0 0 24px #00c64c26; }
+.reportPrice span { font-size: 13px; font-weight: 500; letter-spacing: .04em; }
+.reportTerms { margin: 14px 0 0; color: #eeeaf4; font-size: 14px; line-height: 1.6; }
+.reportDescription { max-width: 390px; margin: 16px auto 0; color: #b8b5c7; font-size: 15px; line-height: 1.65; }

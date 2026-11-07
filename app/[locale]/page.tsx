@@ -69,11 +69,18 @@ export default async function Page({
           <p>{tp("socialProof")}</p>
         </section>
 
+        <section className={styles.reportOffer} aria-labelledby="report-offer-title">
+          <h2 id="report-offer-title">{t("reportOffer.title")}</h2>
+          <div className={styles.reportPrice}>{tp("onlyOneDollarAmount")} <span>USD</span></div>
+          <p className={styles.reportTerms}>{tp("note")}</p>
+          <p className={styles.reportDescription}>{t("reportOffer.body")}</p>
+        </section>
+
         <section className={payStyles.profilesTeaser} aria-labelledby="profiles-teaser-title">
           <h2 id="profiles-teaser-title" className={payStyles.profilesTeaserTitle}>
-            {tp("profilesTeaserTitle")}
+            {t("avatarTeaser.title")}
           </h2>
-          <p className={payStyles.profilesTeaserBody}>{tp("profilesTeaserBody")}</p>
+          <p className={payStyles.profilesTeaserBody}>{t("avatarTeaser.body")}</p>
           <div className={payStyles.avatarWindow} aria-hidden="true">
             <div className={payStyles.avatarCollage}>
               {[6, 4, 15, 13, 9].map((avatar) => (

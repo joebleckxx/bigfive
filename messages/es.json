@@ -1,5 +1,13 @@
 {
   "Home": {
+    "avatarTeaser": {
+      "title": "¿Cuál es tu perfil?",
+      "body": "Desbloquea tu avatar y comparte tu resultado con amigos. Comparad vuestros perfiles y avatares. Descubrid qué tenéis en común y qué os diferencia."
+    },
+    "reportOffer": {
+      "title": "Tu informe completo de personalidad",
+      "body": "Después del test, desbloquea tu resultado completo y descarga un informe PDF para consultarlo cuando quieras."
+    },
     "landing": {
       "headline": "Descubre tu",
       "headlineAccent": "perfil de personalidad",
