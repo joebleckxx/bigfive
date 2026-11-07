@@ -15,7 +15,6 @@ export function Logo({ size = 40, className = "" }: LogoProps) {
 export function Brand() {
   return (
     <Link href="/" className="tmj-brand" aria-label={BRAND.name}>
-      <Logo size={40} />
       <span className="tmj-brand-copy">
         <span className="tmj-brand-name">{BRAND.name}</span>
         <span className="tmj-brand-tagline">{BRAND.tagline}</span>

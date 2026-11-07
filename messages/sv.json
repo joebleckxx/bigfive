@@ -45,16 +45,36 @@
     "milestones": {
       "continue": "Fortsätt",
       "6": {
-        "title": "De små sakerna avslöjar mycket.",
-        "body": "Hur du gör vardagliga val kan säga mer om din personlighet än du kanske tror."
+        "eyebrow": "VISSTE DU ATT...",
+        "title": "Även introverta kan vara festens mittpunkt.",
+        "body": "Forskning visar att vårt beteende kan variera mycket beroende på situationen. Även personer som oftast är introverta kan vara mycket sociala.",
+        "question": "Vad kan din naturliga tendens vara?",
+        "note": "Baserat på forskning om variation i beteende."
       },
       "13": {
-        "title": "Du är mer än ett enda personlighetsdrag.",
-        "body": "Det är kombinationen av dina egenskaper som gör din personlighet intressant. Och ibland överraskande."
+        "eyebrow": "PSYKOLOGI I PRAKTIKEN",
+        "title": "Samma egenskap kan vara en styrka och en svaghet.",
+        "body": "Hög vänlighet hjälper oss att bygga goda relationer, men i situationer som kräver tuffa förhandlingar är den inte alltid till vår fördel.",
+        "question": "Vilka av dina styrkor har en annan sida?"
       },
       "20": {
-        "title": "Dina styrkor har en annan sida.",
-        "body": "Egenskaperna som hjälper dig att lyckas kan också skapa utmaningar. Allt beror på sammanhanget."
+        "eyebrow": "DINA SVAR",
+        "title": "En första observation om dig",
+        "note": "Det här är en första observation utifrån dina svar, inte din fullständiga profil. Bara 5 frågor kvar.",
+        "fallbackTitle": "Bara 5 frågor kvar.",
+        "fallbackBody": "Ännu finns inget tillräckligt tydligt mönster för att lyfta fram en enskild egenskap. Slutför testet för att se hela resultatet."
+      },
+      "observations": {
+        "EHigh": "Dina svar beskriver dig som någon som gärna umgås med andra.",
+        "ELow": "Dina svar lutar åt lugn och mindre intensivt socialt umgänge.",
+        "OHigh": "Dina svar tyder på nyfikenhet inför nya idéer och upplevelser.",
+        "OLow": "Dina svar lutar åt det välbekanta och beprövade.",
+        "CHigh": "Dina svar visar att du värdesätter planering, ordning och att slutföra saker.",
+        "CLow": "Dina svar lutar åt flexibilitet snarare än strikt planering.",
+        "AHigh": "Dina svar tyder på att samarbete och andras behov är viktiga för dig.",
+        "ALow": "Dina svar lutar åt att stå på dig, även när det innebär att tycka olika.",
+        "NHigh": "Dina svar beskriver en större känslighet för stress och spänningar.",
+        "NLow": "Dina svar beskriver oftast lugna reaktioner på stressiga situationer."
       }
     },
     "progress": "Fråga {current} av {total}",
@@ -124,6 +144,7 @@
     }
   },
   "Result": {
+    "resetDialog": {"title": "Göra om testet?", "cancel": "Avbryt", "confirm": "Gör om testet"},
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "noData": {
@@ -139,7 +160,7 @@
     "menu": "Meny",
     "menuRetake": "Gör om",
     "pdf": {
-      "download": "Ladda ner rapport",
+      "download": "Ladda ner PDF",
       "downloading": "Skapar…",
       "generated": "Skapad",
       "error": "Kunde inte skapa PDF. Kontrollera konsolen.",

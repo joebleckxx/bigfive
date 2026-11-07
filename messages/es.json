@@ -45,16 +45,36 @@
     "milestones": {
       "continue": "Continuar",
       "6": {
-        "title": "Los pequeños detalles revelan mucho.",
-        "body": "La forma en que tomas decisiones cotidianas puede decir más sobre tu personalidad de lo que imaginas."
+        "eyebrow": "¿SABÍAS QUE...?",
+        "title": "Una persona introvertida también puede ser el alma de la fiesta.",
+        "body": "Las investigaciones muestran que nuestro comportamiento puede variar mucho según la situación. Incluso las personas más bien introvertidas pueden ser muy sociables.",
+        "question": "¿Cuál será tu tendencia natural?",
+        "note": "Basado en investigaciones sobre la variabilidad del comportamiento."
       },
       "13": {
-        "title": "Eres más que un solo rasgo.",
-        "body": "La combinación de tus rasgos hace que tu personalidad sea interesante. Y, a veces, sorprendente."
+        "eyebrow": "PSICOLOGÍA EN LA PRÁCTICA",
+        "title": "Un mismo rasgo puede ser una fortaleza y una debilidad.",
+        "body": "Una alta amabilidad ayuda a construir buenas relaciones, pero en situaciones que requieren negociaciones duras no siempre juega a nuestro favor.",
+        "question": "¿Cuáles de tus fortalezas tienen otra cara?"
       },
       "20": {
-        "title": "Tus fortalezas tienen otra cara.",
-        "body": "Los rasgos que te ayudan a tener éxito también pueden plantearte desafíos. El contexto marca la diferencia."
+        "eyebrow": "TUS RESPUESTAS",
+        "title": "Una primera observación sobre ti",
+        "note": "Es una primera observación basada en tus respuestas, no tu perfil completo. Solo quedan 5 preguntas.",
+        "fallbackTitle": "Solo quedan 5 preguntas.",
+        "fallbackBody": "Por ahora no hay una tendencia lo bastante clara para destacar un rasgo. Termina el test para ver tu resultado completo."
+      },
+      "observations": {
+        "EHigh": "Tus respuestas te describen como alguien que disfruta relacionándose con otras personas.",
+        "ELow": "Tus respuestas se inclinan por la tranquilidad y las interacciones sociales menos intensas.",
+        "OHigh": "Tus respuestas sugieren curiosidad por nuevas ideas y experiencias.",
+        "OLow": "Tus respuestas se inclinan por lo conocido y probado.",
+        "CHigh": "Tus respuestas valoran claramente la planificación, el orden y terminar lo que empiezas.",
+        "CLow": "Tus respuestas se inclinan por la flexibilidad más que por una planificación estricta.",
+        "AHigh": "Tus respuestas sugieren que valoras la cooperación y las necesidades de los demás.",
+        "ALow": "Tus respuestas se inclinan por mantener tu postura, incluso cuando hay desacuerdo.",
+        "NHigh": "Tus respuestas describen una mayor sensibilidad al estrés y la tensión.",
+        "NLow": "Tus respuestas describen reacciones generalmente tranquilas ante el estrés."
       }
     },
     "progress": "Pregunta {current} de {total}",
@@ -124,6 +144,7 @@
     }
   },
   "Result": {
+    "resetDialog": {"title": "¿Repetir el test?", "cancel": "Cancelar", "confirm": "Repetir test"},
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "noData": {
@@ -139,7 +160,7 @@
     "menu": "Menú",
     "menuRetake": "Repetir",
     "pdf": {
-      "download": "Descargar informe",
+      "download": "Descargar PDF",
       "downloading": "Generando…",
       "generated": "Generado",
       "error": "No se pudo generar el PDF. Revisa la consola.",

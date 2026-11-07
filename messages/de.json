@@ -45,16 +45,36 @@
     "milestones": {
       "continue": "Weiter",
       "6": {
-        "title": "Die kleinen Dinge verraten viel.",
-        "body": "Wie du alltägliche Entscheidungen triffst, kann mehr über deine Persönlichkeit verraten, als du vielleicht erwartest."
+        "eyebrow": "WUSSTEST DU SCHON?",
+        "title": "Auch Introvertierte können eine Party beleben.",
+        "body": "Forschung zeigt, dass unser Verhalten je nach Situation stark variieren kann. Auch eher introvertierte Menschen können sehr gesellig sein.",
+        "question": "Was ist wohl deine natürliche Tendenz?",
+        "note": "Gestützt auf Forschung zur Veränderlichkeit des Verhaltens."
       },
       "13": {
-        "title": "Du bist mehr als eine einzelne Eigenschaft.",
-        "body": "Die Kombination deiner Eigenschaften macht deine Persönlichkeit interessant. Und manchmal überraschend."
+        "eyebrow": "PSYCHOLOGIE IM ALLTAG",
+        "title": "Dieselbe Eigenschaft kann Stärke und Schwäche sein.",
+        "body": "Hohe Verträglichkeit hilft, gute Beziehungen aufzubauen. In Situationen, die harte Verhandlungen erfordern, ist sie aber nicht immer von Vorteil.",
+        "question": "Welche deiner Stärken haben eine andere Seite?"
       },
       "20": {
-        "title": "Deine Stärken haben noch eine andere Seite.",
-        "body": "Eigenschaften, die dir zum Erfolg verhelfen, können auch Herausforderungen mit sich bringen. Es kommt auf die Situation an."
+        "eyebrow": "DEINE ANTWORTEN",
+        "title": "Eine erste Beobachtung über dich",
+        "note": "Eine erste Beobachtung anhand deiner Antworten, noch kein vollständiges Profil. Noch 5 Fragen.",
+        "fallbackTitle": "Noch 5 Fragen.",
+        "fallbackBody": "Bisher ist keine Tendenz deutlich genug, um eine einzelne Eigenschaft hervorzuheben. Beende den Test für dein vollständiges Ergebnis."
+      },
+      "observations": {
+        "EHigh": "Deine Antworten beschreiben dich als jemanden, der gerne mit anderen in Kontakt tritt.",
+        "ELow": "Deine Antworten deuten eher auf Ruhe und weniger intensive soziale Kontakte hin.",
+        "OHigh": "Deine Antworten zeigen Neugier auf neue Ideen und Erfahrungen.",
+        "OLow": "Deine Antworten bevorzugen eher Bekanntes und Bewährtes.",
+        "CHigh": "Deine Antworten betonen Planung, Ordnung und das Abschließen von Aufgaben.",
+        "CLow": "Deine Antworten bevorzugen Flexibilität gegenüber strikter Planung.",
+        "AHigh": "Deine Antworten zeigen, dass Zusammenarbeit und die Bedürfnisse anderer dir wichtig sind.",
+        "ALow": "Deine Antworten deuten darauf hin, dass du eher deinen Standpunkt vertrittst, auch bei Meinungsverschiedenheiten.",
+        "NHigh": "Deine Antworten beschreiben eine höhere Empfindlichkeit gegenüber Stress und Anspannung.",
+        "NLow": "Deine Antworten beschreiben eher ruhige Reaktionen auf Stresssituationen."
       }
     },
     "progress": "Frage {current} von {total}",
@@ -124,6 +144,7 @@
     }
   },
   "Result": {
+    "resetDialog": {"title": "Test wiederholen?", "cancel": "Abbrechen", "confirm": "Test wiederholen"},
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "noData": {
@@ -139,7 +160,7 @@
     "menu": "Menü",
     "menuRetake": "Wiederholen",
     "pdf": {
-      "download": "Bericht herunterladen",
+      "download": "PDF herunterladen",
       "downloading": "Wird erstellt…",
       "generated": "Erstellt",
       "error": "PDF konnte nicht erstellt werden. Prüfe die Konsole.",

@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { track } from "@vercel/analytics";
+import { preliminaryObservation } from "@/lib/preliminary-observation";
 import {
   QUESTIONS,
   makeQuestionOrder,
@@ -27,11 +28,6 @@ const PROGRESS_TTL_MS = 30 * 60 * 1000;
 const TEST_STARTED_SESSION_KEY = "personality_test_started_v1";
 
 const MILESTONES = [6, 13, 20] as const;
-const MILESTONE_ICONS: Record<number, string> = {
-  6: "/icons/test/milestones/choices.svg",
-  13: "/icons/test/milestones/traits.svg",
-  20: "/icons/test/milestones/strengths.svg"
-};
 const MILESTONE_KEY = "personality_pending_milestone_v1";
 
 const SCALE_VALUES = [1, 2, 3, 4, 5] as const;
@@ -264,6 +260,10 @@ export default function TestPage() {
   }, [answeredCount, total]);
 
   const currentQuestion = orderedQuestions[index];
+  const observation = useMemo(
+    () => milestone === 20 ? preliminaryObservation(answers, questionOrder) : null,
+    [milestone, answers, questionOrder]
+  );
 
   useEffect(() => {
     answeredCountRef.current = answeredCount;
@@ -484,20 +484,40 @@ export default function TestPage() {
             </div>
           ) : milestone !== null ? (
             <section aria-labelledby="test-milestone-heading" className="rounded-[2.35rem] border border-white/[0.025] bg-[var(--tmj-surface)] px-5 py-10 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] sm:px-6 sm:py-12">
-              <Image
-                src={MILESTONE_ICONS[milestone]}
-                alt=""
-                aria-hidden="true"
-                width={80}
-                height={80}
-                className="mx-auto mb-6 h-20 w-20"
-              />
+              <p className="mb-3 flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#b5a1d5]">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" aria-hidden="true">
+                  {milestone === 6 ? (
+                    <>
+                      <path d="M9 17v-2a6 6 0 1 1 6 0v2M9 18h6M10 21h4" />
+                    </>
+                  ) : milestone === 13 ? (
+                    <>
+                      <path d="M12 3v17M8 21h8M4 7h16M5 7l-3 7h6L5 7Zm14 0-3 7h6l-3-7Z" />
+                    </>
+                  ) : (
+                    <>
+                      <path d="M4 4v16h16M8 15v-4M12 15V7M16 15v-6" />
+                    </>
+                  )}
+                </svg>
+                <span>{t(`milestones.${milestone}.eyebrow`)}</span>
+              </p>
               <h2 id="test-milestone-heading" ref={milestoneHeading} tabIndex={-1} className="mx-auto max-w-sm text-xl font-semibold leading-snug tracking-tight text-white outline-none">
-                {t(`milestones.${milestone}.title`)}
+                {t(`milestones.${milestone}.${milestone === 20 && !observation ? "fallbackTitle" : "title"}`)}
               </h2>
               <p className="mx-auto mt-6 max-w-sm text-[0.98rem] leading-[1.8] text-white/72">
-                {t(`milestones.${milestone}.body`)}
+                {milestone === 20
+                  ? observation ? t(`milestones.observations.${observation}`) : t("milestones.20.fallbackBody")
+                  : t(`milestones.${milestone}.body`)}
               </p>
+              {milestone !== 20 && (
+                <p className="mx-auto mt-5 max-w-sm text-[0.98rem] font-medium leading-relaxed text-white/90">
+                  {t(`milestones.${milestone}.question`)}
+                </p>
+              )}
+              {milestone === 20 && observation && (
+                <p className="mx-auto mt-5 max-w-sm text-xs leading-relaxed text-white/50">{t("milestones.20.note")}</p>
+              )}
               <button type="button" onClick={continueTest} className="mx-auto mt-10 flex min-h-12 w-full items-center justify-center gap-3 rounded-3xl border border-white/10 bg-white/8 px-4 py-3 text-sm font-medium text-white/90 sm:px-5 sm:py-4 cursor-pointer transition-colors hover:border-[#42d65a] active:border-[#42d65a] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#42d65a]">
                 {t("milestones.continue")} <span aria-hidden="true">→</span>
               </button>
@@ -505,7 +525,7 @@ export default function TestPage() {
           ) : (
             <>
               <div className="rounded-[2.35rem] border border-white/[0.025] bg-[var(--tmj-surface)] px-5 pt-4 pb-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6 sm:pt-6 sm:pb-7">
-                <h2 id="test-question-heading" tabIndex={-1} className="outline-none mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
+                <h2 id="test-question-heading" tabIndex={-1} className="outline-none mb-6 mt-2 text-[21px] font-medium leading-[1.5] tracking-normal text-[#f5f3fa] [overflow-wrap:break-word] sm:text-[22px]">
                   {orderReady ? q(currentQuestion.id) : "\u00A0"}
                 </h2>
 

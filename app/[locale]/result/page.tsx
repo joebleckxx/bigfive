@@ -141,6 +141,7 @@ export default function ResultPage() {
   // ✅ menu ⋯ (jak na /test)
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const resetDialogRef = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -493,8 +494,7 @@ export default function ResultPage() {
   }
 
   function retake() {
-    const ok = window.confirm(t("retakeConfirm"));
-    if (!ok) return;
+    resetDialogRef.current?.close();
 
     try {
       localStorage.removeItem(PAID_KEY);
@@ -745,8 +745,8 @@ export default function ResultPage() {
     {
       key: "relationships",
       cardClass: "bg-[var(--tmj-surface)]",
-      iconWrapClass: "bg-[rgba(240,140,255,0.14)]",
-      accentColor: "#F08CFF",
+      iconWrapClass: "bg-[rgba(245,130,174,0.14)]",
+      accentColor: "#F582AE",
       icon: (
         <svg
           viewBox="0 0 24 24"
@@ -756,7 +756,7 @@ export default function ResultPage() {
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-[22px] w-[22px] text-[#F08CFF]"
+          className="h-[22px] w-[22px] text-[#F582AE]"
         >
           <path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762" />
         </svg>
@@ -766,70 +766,14 @@ export default function ResultPage() {
     },
   ] as const;
 
-  // --- Card text formatting (Option #1): split into sentences + emphasize last ---
-  function splitIntoSentences(input: string) {
-    const text = (input || "").trim();
-    if (!text) return [];
-
-    // split on sentence end + space (keeps it simple & safe for short copy)
-    const parts = text
-      .replace(/\s+/g, " ")
-      .split(/(?<=[.!?])\s+/)
-      .map((s) => s.trim())
-      .filter(Boolean);
-
-    return parts;
-  }
-
-  function renderCardLines(lines: string[], accentColor: string) {
-    const arr = (lines || []).map((s) => (s || "").trim()).filter(Boolean);
-    if (arr.length === 0) return null;
-
-    // Case 1: mamy 1 długi tekst -> oddziel tylko ostatnie zdanie
-    if (arr.length === 1) {
-      const sentences = splitIntoSentences(arr[0]);
-      if (sentences.length <= 1) {
-        return (
-          <div className="mt-2 text-sm leading-relaxed">
-            <p className="whitespace-normal text-white/75">{arr[0]}</p>
-          </div>
-        );
-      }
-
-      const body = sentences.slice(0, -1).join(" ");
-      const last = sentences[sentences.length - 1];
-
-      return (
-        <div className="mt-2 text-sm leading-relaxed">
-          <p className="whitespace-normal text-white/75">{body}</p>
-          <p className="mt-4 rounded-r-xl border-l-2 px-3 py-2.5 whitespace-normal text-white/95 font-medium"
-              style={{ borderLeftColor: accentColor, background: `linear-gradient(90deg, ${accentColor}12, ${accentColor}03)` }}>
-            {last}
-          </p>
-        </div>
-      );
-    }
-
-    // Case 2: mamy kilka linijek -> ostatnia linijka jako puenta
-    const body = arr.slice(0, -1).join(" ");
-    const last = arr[arr.length - 1];
+  function renderCardLines(lines: string[]) {
+    const text = lines.map((line) => line.trim()).filter(Boolean).join(" ");
+    if (!text) return null;
 
     return (
-      <div className="mt-2 text-sm leading-relaxed">
-        {body && (
-          <p className="whitespace-normal text-white/75">
-            {body}
-          </p>
-        )}
-        {last && (
-          <>
-            <p className="mt-4 rounded-r-xl border-l-2 px-3 py-2.5 whitespace-normal text-white/95 font-medium"
-              style={{ borderLeftColor: accentColor, background: `linear-gradient(90deg, ${accentColor}12, ${accentColor}03)` }}>
-              {last}
-            </p>
-          </>
-        )}
-      </div>
+      <p className="mt-3 text-sm leading-relaxed text-white/75">
+        {text}
+      </p>
     );
   }
 
@@ -878,7 +822,7 @@ export default function ResultPage() {
                     type="button"
                     onClick={() => {
                       setMenuOpen(false);
-                      retake();
+                      resetDialogRef.current?.showModal();
                     }}
                     className="block w-full whitespace-nowrap rounded-lg
                       px-3 py-2 text-sm font-medium tracking-tight
@@ -950,14 +894,21 @@ export default function ResultPage() {
               key={s.key}
               className={`rounded-[2.15rem] border border-white/[0.04] px-5 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)] sm:px-6 sm:py-6 ${s.cardClass}`}
             >
-              <div className="flex items-center gap-3 text-xs uppercase tracking-wide text-white/50 whitespace-normal">
-                <span className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${s.iconWrapClass}`}
-                  style={{ boxShadow: `inset 0 0 0 1px ${s.accentColor}30, inset 0 1px 0 ${s.accentColor}20` }}>
+              <div
+                className="flex min-h-12 items-center gap-3 rounded-2xl px-3 py-3 sm:gap-3.5 sm:px-4"
+                style={{
+                  background: `linear-gradient(100deg, ${s.accentColor}22 0%, ${s.accentColor}0c 60%, ${s.accentColor}03 100%)`,
+                  boxShadow: `inset 2px 0 0 ${s.accentColor}99`,
+                }}
+              >
+                <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center" aria-hidden="true">
                   {s.icon}
                 </span>
-                <span>{s.title}</span>
+                <h3 className="min-w-0 text-[13px] font-semibold uppercase leading-relaxed tracking-[0.06em] text-white/90 sm:text-sm">
+                  {s.title}
+                </h3>
               </div>
-              {renderCardLines(s.lines, s.accentColor)}
+              {renderCardLines(s.lines)}
             </div>
           ))}
         </div>
@@ -1154,7 +1105,7 @@ export default function ResultPage() {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" aria-hidden="true">
               <path d="M12 2v13m4-9-4-4-4 4M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
             </svg>
-            <span>Share</span>
+            <span className="min-w-0">{t("share")}</span>
           </button>
           <button
             onClick={downloadPdf}
@@ -1166,7 +1117,7 @@ export default function ResultPage() {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" aria-hidden="true">
               <path d="M12 3v12m-4-4 4 4 4-4M4 16v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4" />
             </svg>
-            <span className="whitespace-nowrap">Download PDF</span>
+            <span className="min-w-0">{t("pdf.download")}</span>
           </button>
         </div>
 
@@ -1176,6 +1127,24 @@ export default function ResultPage() {
     
 	        <LegalFooter />      
 	      </div>
+        <dialog
+          ref={resetDialogRef}
+          aria-labelledby="reset-dialog-title"
+          aria-describedby="reset-dialog-description"
+          onClose={() => menuRef.current?.querySelector("button")?.focus()}
+          className="m-auto w-[calc(100%_-_48px)] max-w-sm rounded-[2rem] border border-[#b494ed]/20 bg-[#191829] p-6 text-white shadow-[0_24px_80px_#0008] backdrop:bg-[#090914]/75 backdrop:backdrop-blur-sm sm:p-8"
+        >
+          <h2 id="reset-dialog-title" className="text-xl font-semibold tracking-tight">{t("resetDialog.title")}</h2>
+          <p id="reset-dialog-description" className="mt-4 text-sm leading-relaxed text-white/70">{t("retakeConfirm")}</p>
+          <div className="mt-6 grid grid-cols-2 gap-3">
+            <button type="button" autoFocus onClick={() => resetDialogRef.current?.close()} className="min-h-12 rounded-full border border-[#b494ed]/30 bg-[#a581d2]/10 px-3 py-3 text-sm font-medium text-[#e1d3fa] hover:bg-[#a581d2]/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b494ed] cursor-pointer">
+              {t("resetDialog.cancel")}
+            </button>
+            <button type="button" onClick={retake} className="min-h-12 rounded-full bg-[image:var(--tmj-action-gradient)] px-3 py-3 text-sm font-semibold text-[#09101d] hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#42d65a] cursor-pointer">
+              {t("resetDialog.confirm")}
+            </button>
+          </div>
+        </dialog>
 	    </main>
 	  );
 	}

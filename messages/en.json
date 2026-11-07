@@ -45,16 +45,36 @@
     "milestones": {
       "continue": "Continue",
       "6": {
-        "title": "The little things reveal a lot.",
-        "body": "The way you make everyday choices can say more about your personality than you might expect."
+        "eyebrow": "DID YOU KNOW?",
+        "title": "Introverts can be the life of the party, too.",
+        "body": "Research shows that our behavior can vary considerably depending on the situation. Even people who tend to be introverted can be very sociable.",
+        "question": "What might your natural tendency be?",
+        "note": "Based on research into variability in behavior."
       },
       "13": {
-        "title": "There's more to you than one trait.",
-        "body": "It's the combination of your traits that makes your personality interesting. And sometimes surprising."
+        "eyebrow": "PSYCHOLOGY IN PRACTICE",
+        "title": "The same trait can be a strength and a weakness.",
+        "body": "High agreeableness helps build good relationships, but in situations that call for tough negotiations, it does not always work in our favor.",
+        "question": "Which of your strengths have another side?"
       },
       "20": {
-        "title": "Your strengths have another side.",
-        "body": "The traits that help you succeed can also create challenges. Context makes all the difference."
+        "eyebrow": "YOUR ANSWERS",
+        "title": "An early observation about you",
+        "note": "This is an early observation based on your answers, not your full profile. Just 5 questions to go.",
+        "fallbackTitle": "Just 5 questions to go.",
+        "fallbackBody": "So far, there is no clear enough pattern to highlight one trait. Finish the test to see your full result."
+      },
+      "observations": {
+        "EHigh": "Your answers describe someone who enjoys engaging with other people.",
+        "ELow": "Your answers lean toward quiet and less intensive social interaction.",
+        "OHigh": "Your answers suggest curiosity about new ideas and experiences.",
+        "OLow": "Your answers lean toward familiar, tried-and-tested approaches.",
+        "CHigh": "Your answers clearly value planning, order, and following through.",
+        "CLow": "Your answers lean toward flexibility rather than strict planning.",
+        "AHigh": "Your answers suggest that cooperation and considering others’ needs matter to you.",
+        "ALow": "Your answers lean toward standing your ground, even when it means disagreeing.",
+        "NHigh": "Your answers describe greater sensitivity to stress and tension.",
+        "NLow": "Your answers describe generally calm reactions to stressful situations."
       }
     },
     "progress": "Question {current} of {total}",
@@ -124,6 +144,7 @@
     }
   },
   "Result": {
+    "resetDialog": {"title": "Retake the test?", "cancel": "Cancel", "confirm": "Retake test"},
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "noData": {
@@ -139,7 +160,7 @@
     "menu": "Menu",
     "menuRetake": "Retake",
     "pdf": {
-      "download": "Download report",
+      "download": "Download PDF",
       "downloading": "Generating…",
       "generated": "Generated",
       "error": "Could not generate PDF. Check the console for details.",

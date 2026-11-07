@@ -43,16 +43,36 @@
     "milestones": {
       "continue": "Kontynuuj",
       "6": {
-        "title": "Drobne rzeczy mówią o nas więcej, niż myślisz.",
-        "body": "Sposób, w jaki podejmujesz codzienne decyzje, może zdradzać o Twojej osobowości więcej, niż się spodziewasz."
+        "eyebrow": "CZY WIESZ, ŻE...",
+        "title": "Introwertyk też potrafi być duszą towarzystwa.",
+        "body": "Badania pokazują, że nasze zachowanie potrafi mocno zmieniać się w zależności od sytuacji. Nawet osoby raczej introwertyczne bywają bardzo towarzyskie.",
+        "question": "Ciekawe, co jest Twoją naturalną tendencją?",
+        "note": "Fakt oparty na badaniach nad zmiennością zachowań."
       },
       "13": {
-        "title": "Nie da się opisać Cię jedną cechą.",
-        "body": "To połączenie różnych cech sprawia, że Twoja osobowość jest wyjątkowa. A czasem potrafi zaskoczyć nawet Ciebie."
+        "eyebrow": "PSYCHOLOGIA W PRAKTYCE",
+        "title": "Ta sama cecha może być Twoją zaletą i słabością.",
+        "body": "Wysoka ugodowość pomaga budować dobre relacje, ale w sytuacjach wymagających twardych negocjacji nie zawsze działa na naszą korzyść.",
+        "question": "Które z Twoich mocnych stron mają drugą stronę?"
       },
       "20": {
-        "title": "Twoje mocne strony mają też drugą stronę.",
-        "body": "Cechy, które pomagają Ci osiągać sukcesy, mogą czasem działać przeciwko Tobie. Wszystko zależy od sytuacji."
+        "eyebrow": "TWOJE ODPOWIEDZI",
+        "title": "Pierwsza obserwacja o Tobie",
+        "note": "To wstępna obserwacja na podstawie Twoich odpowiedzi, nie pełny profil. Jeszcze 5 pytań.",
+        "fallbackTitle": "Jeszcze 5 pytań.",
+        "fallbackBody": "Na razie nie ma wystarczająco wyraźnej tendencji, by wskazać jedną cechę. Dokończ test, aby zobaczyć pełny wynik."
+      },
+      "observations": {
+        "EHigh": "W odpowiedziach opisujesz siebie jako osobę, która chętnie angażuje się w kontakty z innymi.",
+        "ELow": "W odpowiedziach częściej wybierasz spokój i mniej intensywne kontakty z innymi.",
+        "OHigh": "Twoje odpowiedzi wskazują na ciekawość nowych pomysłów i doświadczeń.",
+        "OLow": "W odpowiedziach częściej wybierasz to, co znane i sprawdzone.",
+        "CHigh": "W odpowiedziach wyraźnie cenisz planowanie, porządek i doprowadzanie spraw do końca.",
+        "CLow": "W odpowiedziach częściej stawiasz na elastyczność niż ścisłe planowanie.",
+        "AHigh": "Twoje odpowiedzi wskazują, że ważne są dla Ciebie współpraca i uwzględnianie potrzeb innych.",
+        "ALow": "W odpowiedziach częściej stawiasz na swoim, nawet gdy oznacza to różnicę zdań.",
+        "NHigh": "W odpowiedziach opisujesz większą wrażliwość na stres i napięcie.",
+        "NLow": "W odpowiedziach opisujesz raczej spokojne reakcje na stresujące sytuacje."
       }
     },
     "progress": "Pytanie {current} z {total}",
@@ -122,6 +142,7 @@
     }
   },
   "Result": {
+    "resetDialog": {"title": "Powtórzyć test?", "cancel": "Anuluj", "confirm": "Powtórz test"},
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "noData": {
@@ -137,7 +158,7 @@
     "menu": "Menu",
     "menuRetake": "Powtórz",
     "pdf": {
-      "download": "Pobierz raport",
+      "download": "Pobierz PDF",
       "downloading": "Generowanie…",
       "generated": "Wygenerowano",
       "error": "Nie udało się wygenerować PDF. Sprawdź konsolę.",

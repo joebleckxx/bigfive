@@ -45,16 +45,36 @@
     "milestones": {
       "continue": "Continuer",
       "6": {
-        "title": "Les petits détails en disent long.",
-        "body": "Tes choix du quotidien peuvent en dire plus sur ta personnalité que tu ne le penses."
+        "eyebrow": "LE SAVAIS-TU ?",
+        "title": "Un introverti peut aussi mettre l’ambiance.",
+        "body": "Les recherches montrent que notre comportement peut beaucoup varier selon la situation. Même les personnes plutôt introverties peuvent être très sociables.",
+        "question": "Quelle est ta tendance naturelle ?",
+        "note": "Fondé sur des recherches sur la variabilité du comportement."
       },
       "13": {
-        "title": "Tu ne te résumes pas à un seul trait.",
-        "body": "C’est la combinaison de tes traits qui rend ta personnalité intéressante. Et parfois surprenante."
+        "eyebrow": "LA PSYCHOLOGIE EN PRATIQUE",
+        "title": "Un même trait peut être une force et une faiblesse.",
+        "body": "Une forte agréabilité aide à nouer de bonnes relations, mais dans les situations qui exigent des négociations difficiles, elle ne joue pas toujours en notre faveur.",
+        "question": "Lesquelles de tes forces ont une autre facette ?"
       },
       "20": {
-        "title": "Tes forces ont une autre facette.",
-        "body": "Les traits qui t’aident à réussir peuvent aussi créer des difficultés. Tout dépend du contexte."
+        "eyebrow": "TES RÉPONSES",
+        "title": "Une première observation sur toi",
+        "note": "C’est une première observation fondée sur tes réponses, pas ton profil complet. Encore 5 questions.",
+        "fallbackTitle": "Encore 5 questions.",
+        "fallbackBody": "Pour le moment, aucune tendance n’est assez nette pour mettre en avant un trait. Termine le test pour découvrir ton résultat complet."
+      },
+      "observations": {
+        "EHigh": "Tes réponses te décrivent comme une personne qui aime échanger avec les autres.",
+        "ELow": "Tes réponses penchent vers le calme et des interactions sociales moins intenses.",
+        "OHigh": "Tes réponses suggèrent une curiosité pour les idées et expériences nouvelles.",
+        "OLow": "Tes réponses privilégient ce qui est familier et éprouvé.",
+        "CHigh": "Tes réponses accordent une place importante à la planification, à l’ordre et au suivi des tâches.",
+        "CLow": "Tes réponses privilégient la souplesse plutôt qu’une planification stricte.",
+        "AHigh": "Tes réponses suggèrent que la coopération et les besoins des autres comptent pour toi.",
+        "ALow": "Tes réponses indiquent que tu tends à défendre ta position, même en cas de désaccord.",
+        "NHigh": "Tes réponses décrivent une sensibilité plus forte au stress et aux tensions.",
+        "NLow": "Tes réponses décrivent des réactions plutôt calmes face au stress."
       }
     },
     "progress": "Question {current} sur {total}",
@@ -124,6 +144,7 @@
     }
   },
   "Result": {
+    "resetDialog": {"title": "Refaire le test ?", "cancel": "Annuler", "confirm": "Refaire le test"},
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "noData": {
@@ -139,7 +160,7 @@
     "menu": "Menu",
     "menuRetake": "Recommencer",
     "pdf": {
-      "download": "Télécharger le rapport",
+      "download": "Télécharger le PDF",
       "downloading": "Génération…",
       "generated": "Généré",
       "error": "Impossible de générer le PDF. Vérifie la console.",
