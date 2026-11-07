@@ -1,5 +1,13 @@
 {
   "Home": {
+    "landing": {
+      "headline": "Entdecke dein",
+      "headlineAccent": "Persönlichkeitsprofil",
+      "questions": "25 einfache Fragen. Nur wenige Minuten.",
+      "profiles": "Basierend auf bewährter Psychologie. Eines von 16 Persönlichkeitsprofilen.",
+      "insights": "Praktische Einblicke in deine Stärken und blinden Flecken.",
+      "cta": "Test starten"
+    },
     "brand": {
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"
@@ -13,7 +21,7 @@
     "badge": "DEINE PERSÖNLICHKEIT, ERKLÄRT",
     "subheadline": "Entdecke deine Stärken, deine Reaktionen unter Druck und was du in Beziehungen einbringst.",
     "note": "25 Fragen · Etwa 4 Minuten",
-    "noteSecondary": "Einmalige Zahlung · Kein Abo",
+    "noteSecondary": "Vollständig anonym und privat",
     "cta": "Meinen Test starten",
     "features": {
       "item1": {
@@ -38,6 +46,41 @@
     "benefitsTitle": "Das bekommst du"
   },
   "Test": {
+    "milestones": {
+      "continue": "Weiter",
+      "6": {
+        "eyebrow": "WUSSTEST DU SCHON?",
+        "title": "Auch Introvertierte können eine Party beleben.",
+        "body": "Forschung zeigt, dass unser Verhalten je nach Situation stark variieren kann. Auch eher introvertierte Menschen können sehr gesellig sein.",
+        "question": "Was ist wohl deine natürliche Tendenz?",
+        "note": "Gestützt auf Forschung zur Veränderlichkeit des Verhaltens."
+      },
+      "13": {
+        "eyebrow": "PSYCHOLOGIE IM ALLTAG",
+        "title": "Dieselbe Eigenschaft kann Stärke und Schwäche sein.",
+        "body": "Hohe Verträglichkeit hilft, gute Beziehungen aufzubauen. In Situationen, die harte Verhandlungen erfordern, ist sie aber nicht immer von Vorteil.",
+        "question": "Welche deiner Stärken haben eine andere Seite?"
+      },
+      "20": {
+        "eyebrow": "DEINE ANTWORTEN",
+        "title": "Eine erste Beobachtung über dich",
+        "note": "Eine erste Beobachtung anhand deiner Antworten, noch kein vollständiges Profil. Noch 5 Fragen.",
+        "fallbackTitle": "Noch 5 Fragen.",
+        "fallbackBody": "Bisher ist keine Tendenz deutlich genug, um eine einzelne Eigenschaft hervorzuheben. Beende den Test für dein vollständiges Ergebnis."
+      },
+      "observations": {
+        "EHigh": "Deine Antworten beschreiben dich als jemanden, der gerne mit anderen in Kontakt tritt.",
+        "ELow": "Deine Antworten deuten eher auf Ruhe und weniger intensive soziale Kontakte hin.",
+        "OHigh": "Deine Antworten zeigen Neugier auf neue Ideen und Erfahrungen.",
+        "OLow": "Deine Antworten bevorzugen eher Bekanntes und Bewährtes.",
+        "CHigh": "Deine Antworten betonen Planung, Ordnung und das Abschließen von Aufgaben.",
+        "CLow": "Deine Antworten bevorzugen Flexibilität gegenüber strikter Planung.",
+        "AHigh": "Deine Antworten zeigen, dass Zusammenarbeit und die Bedürfnisse anderer dir wichtig sind.",
+        "ALow": "Deine Antworten deuten darauf hin, dass du eher deinen Standpunkt vertrittst, auch bei Meinungsverschiedenheiten.",
+        "NHigh": "Deine Antworten beschreiben eine höhere Empfindlichkeit gegenüber Stress und Anspannung.",
+        "NLow": "Deine Antworten beschreiben eher ruhige Reaktionen auf Stresssituationen."
+      }
+    },
     "progress": "Frage {current} von {total}",
     "complete": "Abgeschlossen",
     "menu": "Menü",
@@ -65,6 +108,9 @@
     "5": "Stimme voll zu"
   },
   "Pay": {
+    "profilesTeaserTitle": "Welches Profil bist du?",
+    "profilesTeaserBody": "Teile dein Ergebnis mit Freunden. Vergleicht eure Profile und Avatare. Entdeckt Gemeinsamkeiten und Unterschiede.",
+    "profilesTeaserCaption": "16 Profile. Verschiedene Perspektiven auf Persönlichkeit.",
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "headline": {
@@ -82,6 +128,7 @@
       "title3": "Souverän unter Druck"
     },
     "cta": "VOLLES ERGEBNIS FREISCHALTEN",
+    "testReady": "Dein Testergebnis ist fertig",
     "profileReady": "Dein vollständiges Profil ist bereit.",
     "whatWillIGet": "Was bekomme ich?",
     "note": "Einmalige Zahlung · Kein Abonnement",
@@ -101,6 +148,7 @@
     }
   },
   "Result": {
+    "resetDialog": {"title": "Test wiederholen?", "cancel": "Abbrechen", "confirm": "Test wiederholen"},
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "noData": {
@@ -116,7 +164,7 @@
     "menu": "Menü",
     "menuRetake": "Wiederholen",
     "pdf": {
-      "download": "Bericht herunterladen",
+      "download": "PDF herunterladen",
       "downloading": "Wird erstellt…",
       "generated": "Erstellt",
       "error": "PDF konnte nicht erstellt werden. Prüfe die Konsole.",

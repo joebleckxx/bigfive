@@ -1,24 +1,13 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { BRAND } from "@/lib/brand";
 import { getLocale } from "next-intl/server";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import ProductAnalytics from "./components/analytics";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta-sans",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "tellmejoe.",
+  title: BRAND.name,
   description: "Personality test",
 };
 
@@ -31,9 +20,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body
-        className={`${plusJakartaSans.className} ${plusJakartaSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         {children}
         <Analytics />
         <ProductAnalytics />

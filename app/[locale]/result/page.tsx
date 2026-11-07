@@ -4,13 +4,15 @@ import { track, resetTestTracking } from "@/lib/analytics";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { Link, useRouter } from "@/navigation";
+import { useRouter } from "@/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { calculateResult } from "@/lib/scoring";
 import { AVATARS } from "@/lib/avatars";
 import { toast } from "sonner";
 import LegalFooter from "@/app/components/ui/legal-footer";
+import { Brand } from "@/app/components/ui/logo";
+import { BRAND } from "@/lib/brand";
 import TMJBackground from "@/app/components/ui/background";
 
 const BIG_FIVE_ICON_SRC = "/graphics/bigfive-icon.svg";
@@ -142,6 +144,7 @@ export default function ResultPage() {
   // ✅ menu ⋯ (jak na /test)
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const resetDialogRef = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -445,11 +448,11 @@ export default function ResultPage() {
       const reportTypeDesc = useMax ? maxTypeDesc : typeDescription;
 
       const report: PdfReportData = {
-        brandTitle: t("brandTitle"),
-        brandSubtitle: t("brandSubtitle"),
+        brandTitle: BRAND.name,
+        brandSubtitle: BRAND.tagline,
+        logoImageUrl: new URL(BRAND.logoSrc, window.location.origin).toString(),
         generatedLabel: t("pdf.generated"),
         dateISO: new Date().toISOString().slice(0, 10),
-        logoImageUrl: new URL("/images/pdf/logo-gradient.png", window.location.origin).toString(),
         bigFiveIconUrl,
         titleBefore: t("hero.before"),
         titleAccent: t("hero.accent"),
@@ -503,8 +506,7 @@ export default function ResultPage() {
   }
 
   function retake() {
-    const ok = window.confirm(t("retakeConfirm"));
-    if (!ok) return;
+    resetDialogRef.current?.close();
     resetTestTracking();
 
     try {
@@ -524,7 +526,7 @@ export default function ResultPage() {
   async function shareResult() {
     try {
       const url = window.location.origin; // share homepage (auto language detect)
-      const title = tr("shareTitle", "tellmejoe.");
+      const title = BRAND.name;
       const text = tr("shareText", "Take the test and see your result.");
 
       if (navigator.share) {
@@ -570,33 +572,80 @@ export default function ResultPage() {
       key: "S",
       label: t("traits.S"),
       value: emotionalStability,
-      note: t("traitsNotes.S")
+      accent: {
+        solid: "#42D65A",
+        gradient: "linear-gradient(135deg, #20C979 0%, #42D65A 52%, #7BE58C 100%)",
+        shadow: "rgba(66, 214, 90, 0.28)",
+      },
+      snapshotLabel: rowSnapshotLabel("S", emotionalStability),
     },
-    { key: "E", label: t("traits.E"), value: data.scores.E },
-    { key: "O", label: t("traits.O"), value: data.scores.O },
-    { key: "C", label: t("traits.C"), value: data.scores.C },
-    { key: "A", label: t("traits.A"), value: data.scores.A }
+    {
+      key: "E",
+      label: t("traits.E"),
+      value: data.scores.E,
+      accent: {
+        solid: "#58D7FF",
+        gradient: "linear-gradient(135deg, #4ED7FF 0%, #69C8FF 55%, #86E0FF 100%)",
+        shadow: "rgba(78, 215, 255, 0.28)",
+      },
+      snapshotLabel: rowSnapshotLabel("E", data.scores.E),
+    },
+    {
+      key: "O",
+      label: t("traits.O"),
+      value: data.scores.O,
+      accent: {
+        solid: "#A17CFF",
+        gradient: "linear-gradient(135deg, #7D66FF 0%, #A67EFF 55%, #C68BFF 100%)",
+        shadow: "rgba(161, 124, 255, 0.28)",
+      },
+      snapshotLabel: rowSnapshotLabel("O", data.scores.O),
+    },
+    {
+      key: "C",
+      label: t("traits.C"),
+      value: data.scores.C,
+      accent: {
+        solid: "#FF72C4",
+        gradient: "linear-gradient(135deg, #F25FB3 0%, #FF7DCC 58%, #FF9FB8 100%)",
+        shadow: "rgba(255, 114, 196, 0.26)",
+      },
+    },
+    {
+      key: "A",
+      label: t("traits.A"),
+      value: data.scores.A,
+      accent: {
+        solid: "#FFB15B",
+        gradient: "linear-gradient(135deg, #FF9B5F 0%, #FFB15B 52%, #FFD08A 100%)",
+        shadow: "rgba(255, 177, 91, 0.26)",
+      },
+    }
   ];
 
-  const bigFiveBarClass =
-    "bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)]";
+  const topCircleRows = bigFiveRows.slice(0, 3);
+
+  function rowSnapshotLabel(key: string, value: number) {
+    const high = pct(value) >= 50;
+    return t(`bigFive.poles.${key}.${high ? "right" : "left"}`);
+  }
 
   const sections = [
     {
       key: "core",
-      cardClass: "bg-[#071126]/95",
-      iconWrapClass: "bg-[rgba(56,167,214,0.18)]",
-      accentColor: "#63D8FF",
+      cardClass: "bg-[var(--tmj-surface)]",
+      iconWrapClass: "bg-[rgba(89,202,115,0.13)]",
+      accentColor: "#59CA73",
       icon: (
         <svg
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.4"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-[#63D8FF]"
+          className="h-[22px] w-[22px] text-[#59CA73]"
         >
           <path d="M12 18V5" />
           <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" />
@@ -613,7 +662,7 @@ export default function ResultPage() {
     },
     {
       key: "daily",
-      cardClass: "bg-[#08142B]/95",
+      cardClass: "bg-[var(--tmj-surface)]",
       iconWrapClass: "bg-[rgba(87,214,255,0.16)]",
       accentColor: "#57D6FF",
       icon: (
@@ -621,13 +670,16 @@ export default function ResultPage() {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.4"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-[#57D6FF]"
+          className="h-[22px] w-[22px] text-[#57D6FF]"
         >
-          <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
+          <path d="M3 6h3m4 0h11M3 12h11m4 0h3M3 18h5m4 0h9" />
+          <circle cx="8" cy="6" r="2" />
+          <circle cx="16" cy="12" r="2" />
+          <circle cx="10" cy="18" r="2" />
         </svg>
       ),
       title: t("profileSections.daily"),
@@ -635,7 +687,7 @@ export default function ResultPage() {
     },
     {
       key: "strengths",
-      cardClass: "bg-[#0A1329]/95",
+      cardClass: "bg-[var(--tmj-surface)]",
       iconWrapClass: "bg-[rgba(124,182,255,0.16)]",
       accentColor: "#7CB6FF",
       icon: (
@@ -643,21 +695,14 @@ export default function ResultPage() {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.4"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-[#7CB6FF]"
+          className="h-[22px] w-[22px] text-[#7CB6FF]"
         >
-          {/* główna gwiazda — gradient */}
-          <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
-
-          {/* mały plus — bez gradientu, czytelny */}
-          <path d="M20 2v4" stroke="currentColor" strokeWidth="1.8" />
-          <path d="M22 4h-4" stroke="currentColor" strokeWidth="1.8" />
-
-          {/* kółko — bez gradientu, czytelne */}
-          <circle cx="4" cy="20" r="2" stroke="currentColor" strokeWidth="1.8" />
+          <path d="M12 3 20 6v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-3Z" />
+          <path d="m13 7-5 6h4l-1 4 5-6h-4l1-4Z" fill="currentColor" stroke="none" />
         </svg>
       ),
       title: t("profileSections.strengths"),
@@ -665,7 +710,7 @@ export default function ResultPage() {
     },
     {
       key: "watchOut",
-      cardClass: "bg-[#0A1127]/95",
+      cardClass: "bg-[var(--tmj-surface)]",
       iconWrapClass: "bg-[rgba(165,142,255,0.16)]",
       accentColor: "#A58EFF",
       icon: (
@@ -673,15 +718,14 @@ export default function ResultPage() {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.4"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-[#A58EFF]"
+          className="h-[22px] w-[22px] text-[#A58EFF]"
         >
-          <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-          <path d="M12 8v4" />
-          <path d="M12 16h.01" />
+          <path d="M2 12c2.5-4.5 6-7 10-7s7.5 2.5 10 7c-2.5 4.5-6 7-10 7S4.5 16.5 2 12Z" />
+          <circle cx="12" cy="12" r="3" />
         </svg>
       ),
       title: t("profileSections.watchOut"),
@@ -689,7 +733,7 @@ export default function ResultPage() {
     },
     {
       key: "underPressure",
-      cardClass: "bg-[#091127]/95",
+      cardClass: "bg-[var(--tmj-surface)]",
       iconWrapClass: "bg-[rgba(197,126,255,0.15)]",
       accentColor: "#C57EFF",
       icon: (
@@ -697,14 +741,15 @@ export default function ResultPage() {
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.4"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-[#C57EFF]"
+          className="h-[22px] w-[22px] text-[#C57EFF]"
         >
-          <path d="m12 14 4-4" />
-          <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+          <path d="M4.2 19a9 9 0 1 1 15.6 0" />
+          <path d="m12 14 3.5-5" />
+          <circle cx="12" cy="14" r="1.5" fill="currentColor" stroke="none" />
         </svg>
       ),
       title: t("profileSections.underPressure"),
@@ -712,19 +757,19 @@ export default function ResultPage() {
     },
     {
       key: "relationships",
-      cardClass: "bg-[#08152B]/95",
-      iconWrapClass: "bg-[rgba(240,140,255,0.14)]",
-      accentColor: "#F08CFF",
+      cardClass: "bg-[var(--tmj-surface)]",
+      iconWrapClass: "bg-[rgba(245,130,174,0.14)]",
+      accentColor: "#F582AE",
       icon: (
         <svg
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.4"
+          strokeWidth="1.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           aria-hidden="true"
-          className="h-5 w-5 text-[#F08CFF]"
+          className="h-[22px] w-[22px] text-[#F582AE]"
         >
           <path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762" />
         </svg>
@@ -734,118 +779,27 @@ export default function ResultPage() {
     },
   ] as const;
 
-  // --- Card text formatting (Option #1): split into sentences + emphasize last ---
-  function splitIntoSentences(input: string) {
-    const text = (input || "").trim();
-    if (!text) return [];
-
-    // split on sentence end + space (keeps it simple & safe for short copy)
-    const parts = text
-      .replace(/\s+/g, " ")
-      .split(/(?<=[.!?])\s+/)
-      .map((s) => s.trim())
-      .filter(Boolean);
-
-    return parts;
-  }
-
-  function renderCardLines(lines: string[], accentColor: string) {
-    const arr = (lines || []).map((s) => (s || "").trim()).filter(Boolean);
-    if (arr.length === 0) return null;
-
-    // Case 1: mamy 1 długi tekst -> oddziel tylko ostatnie zdanie
-    if (arr.length === 1) {
-      const sentences = splitIntoSentences(arr[0]);
-      if (sentences.length <= 1) {
-        return (
-          <div className="mt-2 text-sm leading-relaxed">
-            <p className="whitespace-normal text-white/75">{arr[0]}</p>
-          </div>
-        );
-      }
-
-      const body = sentences.slice(0, -1).join(" ");
-      const last = sentences[sentences.length - 1];
-
-      return (
-        <div className="mt-2 text-sm leading-relaxed">
-          <p className="whitespace-normal text-white/75">{body}</p>
-          <p className="mt-3 whitespace-normal text-white/90 font-medium">
-            <span
-              aria-hidden="true"
-              className="mr-3 inline-block h-4 w-4 align-[-0.05em]"
-              style={{
-                backgroundColor: accentColor,
-                WebkitMaskImage: "url('/icons/result/card-emphasis.svg')",
-                maskImage: "url('/icons/result/card-emphasis.svg')",
-                WebkitMaskRepeat: "no-repeat",
-                maskRepeat: "no-repeat",
-                WebkitMaskPosition: "center",
-                maskPosition: "center",
-                WebkitMaskSize: "contain",
-                maskSize: "contain",
-              }}
-            />
-            {last}
-          </p>
-        </div>
-      );
-    }
-
-    // Case 2: mamy kilka linijek -> ostatnia linijka jako puenta
-    const body = arr.slice(0, -1).join(" ");
-    const last = arr[arr.length - 1];
+  function renderCardLines(lines: string[]) {
+    const text = lines.map((line) => line.trim()).filter(Boolean).join(" ");
+    if (!text) return null;
 
     return (
-      <div className="mt-2 text-sm leading-relaxed">
-        {body && (
-          <p className="whitespace-normal text-white/75">
-            {body}
-          </p>
-        )}
-        {last && (
-          <>
-            <p className="mt-4 whitespace-normal text-white/90 font-medium">
-              <span
-                aria-hidden="true"
-                className="mr-3 inline-block h-4 w-4 align-[-0.05em]"
-                style={{
-                  backgroundColor: accentColor,
-                  WebkitMaskImage: "url('/icons/result/card-emphasis.svg')",
-                  maskImage: "url('/icons/result/card-emphasis.svg')",
-                  WebkitMaskRepeat: "no-repeat",
-                  maskRepeat: "no-repeat",
-                  WebkitMaskPosition: "center",
-                  maskPosition: "center",
-                  WebkitMaskSize: "contain",
-                  maskSize: "contain",
-                }}
-              />
-              {last}
-            </p>
-          </>
-        )}
-      </div>
+      <p className="mt-3 text-sm leading-relaxed text-white/75">
+        {text}
+      </p>
     );
   }
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 sm:px-5 py-10 text-white"
+      className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter tmj-page-spacing text-white"
     >
       <TMJBackground />
 
-      <div className="relative mx-auto w-full max-w-xl">
+      <div className="tmj-container">
         {/* Top bar */}
         <div className="flex items-center justify-between gap-3">
-          <div className="leading-tight min-w-0">
-            <Link
-              href="/"
-              className="bg-[linear-gradient(90deg,#57D6FF_0%,#7CB6FF_42%,#C08CFF_72%,#F08CFF_100%)] bg-clip-text text-sm font-bold tracking-tight text-transparent"
-            >
-              {t("brandTitle")}
-            </Link>
-          </div>
+          <Brand />
 
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
@@ -881,7 +835,7 @@ export default function ResultPage() {
                     type="button"
                     onClick={() => {
                       setMenuOpen(false);
-                      retake();
+                      resetDialogRef.current?.showModal();
                     }}
                     className="block w-full whitespace-nowrap rounded-lg
                       px-3 py-2 text-sm font-medium tracking-tight
@@ -902,11 +856,11 @@ export default function ResultPage() {
             className="mx-auto mb-2 max-w-[24rem] font-semibold tracking-tight break-normal [overflow-wrap:normal] hyphens-auto [text-wrap:balance] sm:max-w-[26rem]"
             style={{
               fontSize: "clamp(3.1rem, 10.2vw, 3.5rem)",
-              lineHeight: 1.02,
+              lineHeight: 1.12,
             }}
           >
             <span className="block">{t("hero.before")}</span>
-            <span className="mt-2 block whitespace-normal [overflow-wrap:anywhere] [word-break:normal] bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] bg-clip-text text-transparent hyphens-auto">
+            <span className="block whitespace-normal [overflow-wrap:anywhere] [word-break:normal] tmj-gradient-text hyphens-auto">
               {t("hero.accent")}
             </span>
           </h1>
@@ -916,38 +870,20 @@ export default function ResultPage() {
         </div>
 
         {/* Main card */}
-        <div className="mt-7 rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95 px-6 py-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] sm:mt-8 sm:px-8 sm:py-8">
+        <div className="mt-8 rounded-[2.35rem] border border-white/[0.025] bg-[var(--tmj-surface)] px-6 py-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] sm:px-8 sm:py-8">
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
               <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
                 {showAvatar && (
                   <div className="relative shrink-0">
-                    <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
-                    <div
-                      role="img"
-                      aria-label={typeName}
-                      className="relative z-10 flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-black/25 ring-1 ring-white/10"
-                    >
-                      {avatarError ? (
-                        <div
-                          aria-hidden="true"
-                          className="text-2xl font-semibold text-white"
-                        >
-                          {typeName?.charAt(0) || "?"}
-                        </div>
-                      ) : (
-                        <Image
-                          src={avatarSrc}
-                          alt=""
-                          width={44}
-                          height={44}
-                          className="h-11 w-11 object-contain"
-                          style={{ filter: "brightness(0) invert(1)" }}
-                          onError={() => setAvatarError(true)}
-                        />
-                      )}
-                    </div>
+                    <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-full bg-violet-400/20 blur-2xl" />
+                    {avatarError ? (
+                      <div className="flex h-32 w-32 items-center justify-center rounded-full bg-white/5 text-3xl">{typeName?.charAt(0) || "?"}</div>
+                    ) : (
+                      <Image src={avatarSrc} alt={typeName} width={256} height={256}
+                        className="relative h-32 w-32 object-contain" onError={() => setAvatarError(true)} />
+                    )}
                   </div>
                 )}
 
@@ -971,19 +907,27 @@ export default function ResultPage() {
               key={s.key}
               className={`rounded-[2.15rem] border border-white/[0.04] px-5 py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)] sm:px-6 sm:py-6 ${s.cardClass}`}
             >
-              <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-white/40 whitespace-normal">
-                <span className={`inline-flex h-10 w-10 items-center justify-center rounded-full ${s.iconWrapClass}`}>
+              <div
+                className="flex min-h-12 items-center gap-3 rounded-2xl px-3 py-3 sm:gap-3.5 sm:px-4"
+                style={{
+                  background: `linear-gradient(100deg, ${s.accentColor}22 0%, ${s.accentColor}0c 60%, ${s.accentColor}03 100%)`,
+                  boxShadow: `inset 2px 0 0 ${s.accentColor}99`,
+                }}
+              >
+                <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center" aria-hidden="true">
                   {s.icon}
                 </span>
-                <span>{s.title}</span>
+                <h3 className="min-w-0 text-[13px] font-semibold uppercase leading-relaxed tracking-[0.06em] text-white/90 sm:text-sm">
+                  {s.title}
+                </h3>
               </div>
-              {renderCardLines(s.lines, s.accentColor)}
+              {renderCardLines(s.lines)}
             </div>
           ))}
         </div>
 
 		        {/* Big Five panel */}
-		            <div className="mt-8 rounded-[2.15rem] border border-white/[0.04] bg-[#071126]/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)] px-5 pt-6 pb-8 sm:p-6 sm:pt-5 sm:pb-8">
+		            <div className="mt-8 rounded-[2.15rem] border border-white/[0.04] bg-[var(--tmj-surface)] shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)] px-5 pt-6 pb-8 sm:p-6 sm:pt-5 sm:pb-8">
 		          <div className="flex items-center justify-between gap-4">
 		            <div className="min-w-0">
 		              <div className="text-sm font-medium uppercase tracking-[0.12em] text-white/85">
@@ -1005,35 +949,155 @@ export default function ResultPage() {
 		                />
 	              </div>
 	            </div>
-	          </div>
-		          <div className="mt-4 space-y-4">
-              {bigFiveRows.map((row) => {
+		          </div>
+		          <div className="mt-5">
+              <div className="flex items-start justify-between gap-3 px-2 py-3 sm:gap-5 sm:px-3 sm:py-4">
+              {topCircleRows.map((row) => {
+                const value = pct(row.value);
+                const size = 112;
+                const strokeWidth = 8;
+                const radius = (size - strokeWidth) / 2;
+                const circumference = 2 * Math.PI * radius;
+                const dash = Math.max((value / 100) * circumference, strokeWidth * 1.35);
+                const gap = Math.max(circumference - dash, 0);
+
                 return (
-                  <div key={row.key}>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-sm text-white/90">
-                        {row.label}
+                  <div
+                    key={row.key}
+                    className="min-w-0 flex-1 text-center"
+                  >
+                    <div className="mx-auto flex w-full justify-center">
+                      <div className="relative h-[5.25rem] w-[5.25rem] sm:h-[6.5rem] sm:w-[6.5rem]">
+                        <div
+                          className="absolute inset-0 rounded-full blur-2xl"
+                          style={{ backgroundColor: row.accent.shadow }}
+                        />
+                        <div
+                          className="absolute inset-0 rounded-full"
+                          style={{
+                            background:
+                              "radial-gradient(circle at center, rgba(5,12,30,0.9) 50%, rgba(9,16,36,0.36) 100%)",
+                          }}
+                        />
+                        <svg
+                          viewBox={`0 0 ${size} ${size}`}
+                          className="absolute inset-0 h-full w-full -rotate-90"
+                          aria-hidden="true"
+                        >
+                          <defs>
+                            <linearGradient
+                              id={`bigfive-ring-${row.key}`}
+                              x1="0%"
+                              y1="0%"
+                              x2="100%"
+                              y2="100%"
+                            >
+                              {row.key === "S" && (
+                                <>
+                                  <stop offset="0%" stopColor="#20C979" />
+                                  <stop offset="52%" stopColor="#42D65A" />
+                                  <stop offset="100%" stopColor="#7BE58C" />
+                                </>
+                              )}
+                              {row.key === "E" && (
+                                <>
+                                  <stop offset="0%" stopColor="#4ED7FF" />
+                                  <stop offset="55%" stopColor="#69C8FF" />
+                                  <stop offset="100%" stopColor="#86E0FF" />
+                                </>
+                              )}
+                              {row.key === "O" && (
+                                <>
+                                  <stop offset="0%" stopColor="#7D66FF" />
+                                  <stop offset="55%" stopColor="#A67EFF" />
+                                  <stop offset="100%" stopColor="#C68BFF" />
+                                </>
+                              )}
+                            </linearGradient>
+                          </defs>
+                          <circle
+                            cx={size / 2}
+                            cy={size / 2}
+                            r={radius}
+                            fill="none"
+                            stroke="rgba(154, 144, 212, 0.24)"
+                            strokeWidth={strokeWidth}
+                          />
+                          <circle
+                            cx={size / 2}
+                            cy={size / 2}
+                            r={radius}
+                            fill="none"
+                            stroke={`url(#bigfive-ring-${row.key})`}
+                            strokeWidth={strokeWidth}
+                            strokeLinecap="round"
+                            strokeDasharray={`${dash} ${gap}`}
+                          />
+                        </svg>
+                        <div
+                          className="absolute inset-[9px] rounded-full bg-[var(--tmj-surface)] sm:inset-[10px]"
+                          style={{
+                            boxShadow: `inset 0 0 0 1px rgba(255,255,255,0.04), 0 0 22px ${row.accent.shadow}`,
+                          }}
+                        />
+                        <div
+                          className="absolute inset-[7px] rounded-full border border-white/8 sm:inset-[8px]"
+                          style={{
+                            background:
+                              "radial-gradient(circle at 50% 40%, rgba(18,32,66,0.4), rgba(5,10,24,0.03) 72%, transparent 100%)",
+                          }}
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-[1.35rem] font-medium tracking-[-0.05em] text-white sm:text-[1.6rem]">
+                            {value}%
+                          </span>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="mt-2 h-2 w-full rounded-full bg-white/10">
-                      <div
-                        className={`h-full rounded-full ${bigFiveBarClass}`}
-                        style={(() => {
-                          const value = visualStretchPct(row.value);
-                          const scaleCutoff = 50;
-                          const effectiveRange = Math.min(value, scaleCutoff);
-                          const backgroundSize =
-                            effectiveRange > 0 ? `${(scaleCutoff / effectiveRange) * 100}% 100%` : "100% 100%";
+                    <div className="mt-4 text-sm font-medium tracking-[0.01em] text-white/88 sm:mt-5">
+                      {row.label}
+                    </div>
+                    <div
+                      className="mt-1 text-sm tracking-[0.01em]"
+                      style={{ color: row.accent.solid }}
+                    >
+                      {row.snapshotLabel}
+                    </div>
+	                  </div>
+	                );
+	              })}
+              </div>
 
-                          return {
-                            width: `${value}%`,
-                            backgroundSize,
-                            backgroundPosition: "left center",
-                          };
-                        })()}
+              <div className="mt-7 space-y-4 border-t border-white/8 pt-6 sm:mt-8 sm:space-y-5 sm:pt-7">
+              {bigFiveRows.map((row) => {
+                const value = visualStretchPct(row.value);
+
+                return (
+                  <div key={`${row.key}-list`}>
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="text-sm font-medium text-white/92">
+                        {row.label}
+                      </div>
+                      <div
+                        className="text-sm font-semibold tracking-[0.01em]"
+                        style={{ color: row.accent.solid }}
+                      >
+                        {pct(row.value)}%
+                      </div>
+                    </div>
+
+                    <div className="mt-3 h-2.5 w-full rounded-full bg-white/10">
+                      <div
+                        className="h-full rounded-full"
+                        style={{
+                          width: `${value}%`,
+                          background: row.accent.gradient,
+                          boxShadow: `0 0 14px ${row.accent.shadow}`,
+                        }}
                       />
                     </div>
+
                     <div className="mt-2 flex items-center justify-between gap-4 text-[0.78rem] font-medium tracking-[0.02em] text-white/42">
                       <span>{t(`bigFive.poles.${row.key}.left`)}</span>
                       <span className="text-right">{t(`bigFive.poles.${row.key}.right`)}</span>
@@ -1041,92 +1105,34 @@ export default function ResultPage() {
 	                  </div>
 	                );
 	              })}
+              </div>
 	          </div>
 	        </div>
 
-	        <div className="mt-8 mb-2 flex items-center justify-center gap-4">
-	          <div className="relative">
-	            <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
-	            <button
-	              onClick={downloadPdf}
-	              aria-disabled={downloading}
-	              type="button"
-	              aria-label={t("pdf.download")}
-	              title={t("pdf.download")}
-	              className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
-	                bg-black/25 ring-1 ring-white/20 text-white
-	                focus:outline-none
-	                cursor-pointer
-	                aria-disabled:pointer-events-none"
-	            >
-	              <svg
-	                width="18"
-	                height="18"
-	                viewBox="0 0 24 24"
-	                fill="none"
-	                aria-hidden="true"
-	                className="opacity-90"
-	              >
-	                <path
-	                  d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-6Z"
-	                  stroke="currentColor"
-	                  strokeWidth="1.6"
-	                  strokeLinejoin="round"
-	                />
-	                <path
-	                  d="M14 2v6h6"
-	                  stroke="currentColor"
-	                  strokeWidth="1.6"
-	                  strokeLinejoin="round"
-	                />
-	                <path
-	                  d="M8 15h8"
-	                  stroke="currentColor"
-	                  strokeWidth="1.6"
-	                  strokeLinecap="round"
-	                />
-	                <path
-	                  d="M8 18h6"
-	                  stroke="currentColor"
-	                  strokeWidth="1.6"
-	                  strokeLinecap="round"
-	                />
-	              </svg>
-	            </button>
-	          </div>
-
-	          <div className="relative">
-	            <div className="pointer-events-none absolute -inset-3 rounded-full bg-black/20 blur-2xl" />
-	            <button
-	              onClick={shareResult}
-	              type="button"
-	              aria-label={tr("share", "Share")}
-	              title={tr("share", "Share")}
-	              className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full
-	                bg-black/25 ring-1 ring-white/20 text-white
-	                focus:outline-none
-	                cursor-pointer"
-	            >
-	              <svg
-	                xmlns="http://www.w3.org/2000/svg"
-	                width="18"
-	                height="18"
-	                viewBox="0 0 24 24"
-	                fill="none"
-	                stroke="currentColor"
-	                strokeWidth="1.6"
-	                strokeLinecap="round"
-	                strokeLinejoin="round"
-	                className="opacity-90"
-	                aria-hidden="true"
-	              >
-	                <path d="M12 2v13" />
-	                <path d="m16 6-4-4-4 4" />
-	                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-	              </svg>
-	            </button>
-	          </div>
-	        </div>
+        <div className="mx-auto mt-8 mb-2 grid w-fit max-w-full grid-cols-2 gap-3">
+          <button
+            onClick={shareResult}
+            type="button"
+            className="inline-flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-full bg-[image:var(--tmj-action-gradient)] px-3 py-3.5 min-[380px]:px-5 text-sm font-bold text-[#09101D] shadow-[0_6px_24px_rgba(0,198,76,0.12)] transition-colors hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#42d65a] cursor-pointer sm:text-base"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" aria-hidden="true">
+              <path d="M12 2v13m4-9-4-4-4 4M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+            </svg>
+            <span className="min-w-0">{t("share")}</span>
+          </button>
+          <button
+            onClick={downloadPdf}
+            disabled={downloading}
+            aria-busy={downloading}
+            type="button"
+            className="inline-flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-full border border-[#c8aeff]/30 bg-[#a581d2]/20 px-3 py-3.5 min-[380px]:px-5 text-sm font-semibold text-[#e1d3fa] transition-colors hover:bg-[#a581d2]/30 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#c8aeff] disabled:cursor-wait disabled:opacity-60 cursor-pointer sm:text-base"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" aria-hidden="true">
+              <path d="M12 3v12m-4-4 4 4 4-4M4 16v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4" />
+            </svg>
+            <span className="min-w-0">{t("pdf.download")}</span>
+          </button>
+        </div>
 
 	          <p className="mt-6 text-center text-xs text-white/40">
 	            {t("disclaimer")}
@@ -1134,6 +1140,24 @@ export default function ResultPage() {
     
 	        <LegalFooter />      
 	      </div>
+        <dialog
+          ref={resetDialogRef}
+          aria-labelledby="reset-dialog-title"
+          aria-describedby="reset-dialog-description"
+          onClose={() => menuRef.current?.querySelector("button")?.focus()}
+          className="m-auto w-[calc(100%_-_48px)] max-w-sm rounded-[2rem] border border-[#b494ed]/20 bg-[#191829] p-6 text-white shadow-[0_24px_80px_#0008] backdrop:bg-[#090914]/75 backdrop:backdrop-blur-sm sm:p-8"
+        >
+          <h2 id="reset-dialog-title" className="text-xl font-semibold tracking-tight">{t("resetDialog.title")}</h2>
+          <p id="reset-dialog-description" className="mt-4 text-sm leading-relaxed text-white/70">{t("retakeConfirm")}</p>
+          <div className="mt-6 grid grid-cols-2 gap-3">
+            <button type="button" autoFocus onClick={() => resetDialogRef.current?.close()} className="min-h-12 rounded-full border border-[#b494ed]/30 bg-[#a581d2]/10 px-3 py-3 text-sm font-medium text-[#e1d3fa] hover:bg-[#a581d2]/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#b494ed] cursor-pointer">
+              {t("resetDialog.cancel")}
+            </button>
+            <button type="button" onClick={retake} className="min-h-12 rounded-full bg-[image:var(--tmj-action-gradient)] px-3 py-3 text-sm font-semibold text-[#09101d] hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#42d65a] cursor-pointer">
+              {t("resetDialog.confirm")}
+            </button>
+          </div>
+        </dialog>
 	    </main>
 	  );
 	}

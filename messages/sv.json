@@ -1,5 +1,13 @@
 {
   "Home": {
+    "landing": {
+      "headline": "Upptäck din",
+      "headlineAccent": "personlighetsprofil",
+      "questions": "25 enkla frågor. Bara några minuter.",
+      "profiles": "Baserat på etablerad psykologi. En av 16 personlighetsprofiler.",
+      "insights": "Praktisk insikt i dina styrkor och blinda fläckar.",
+      "cta": "Starta testet"
+    },
     "brand": {
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"
@@ -13,7 +21,7 @@
     "badge": "DIN PERSONLIGHET, FÖRKLARAD",
     "subheadline": "Upptäck dina styrkor, hur du reagerar under press och vad du bidrar med i relationer.",
     "note": "25 frågor · Cirka 4 minuter",
-    "noteSecondary": "Engångsbetalning · Ingen prenumeration",
+    "noteSecondary": "Helt anonymt och privat",
     "cta": "Starta mitt test",
     "features": {
       "item1": {
@@ -38,6 +46,41 @@
     "benefitsTitle": "Det här får du"
   },
   "Test": {
+    "milestones": {
+      "continue": "Fortsätt",
+      "6": {
+        "eyebrow": "VISSTE DU ATT...",
+        "title": "Även introverta kan vara festens mittpunkt.",
+        "body": "Forskning visar att vårt beteende kan variera mycket beroende på situationen. Även personer som oftast är introverta kan vara mycket sociala.",
+        "question": "Vad kan din naturliga tendens vara?",
+        "note": "Baserat på forskning om variation i beteende."
+      },
+      "13": {
+        "eyebrow": "PSYKOLOGI I PRAKTIKEN",
+        "title": "Samma egenskap kan vara en styrka och en svaghet.",
+        "body": "Hög vänlighet hjälper oss att bygga goda relationer, men i situationer som kräver tuffa förhandlingar är den inte alltid till vår fördel.",
+        "question": "Vilka av dina styrkor har en annan sida?"
+      },
+      "20": {
+        "eyebrow": "DINA SVAR",
+        "title": "En första observation om dig",
+        "note": "Det här är en första observation utifrån dina svar, inte din fullständiga profil. Bara 5 frågor kvar.",
+        "fallbackTitle": "Bara 5 frågor kvar.",
+        "fallbackBody": "Ännu finns inget tillräckligt tydligt mönster för att lyfta fram en enskild egenskap. Slutför testet för att se hela resultatet."
+      },
+      "observations": {
+        "EHigh": "Dina svar beskriver dig som någon som gärna umgås med andra.",
+        "ELow": "Dina svar lutar åt lugn och mindre intensivt socialt umgänge.",
+        "OHigh": "Dina svar tyder på nyfikenhet inför nya idéer och upplevelser.",
+        "OLow": "Dina svar lutar åt det välbekanta och beprövade.",
+        "CHigh": "Dina svar visar att du värdesätter planering, ordning och att slutföra saker.",
+        "CLow": "Dina svar lutar åt flexibilitet snarare än strikt planering.",
+        "AHigh": "Dina svar tyder på att samarbete och andras behov är viktiga för dig.",
+        "ALow": "Dina svar lutar åt att stå på dig, även när det innebär att tycka olika.",
+        "NHigh": "Dina svar beskriver en större känslighet för stress och spänningar.",
+        "NLow": "Dina svar beskriver oftast lugna reaktioner på stressiga situationer."
+      }
+    },
     "progress": "Fråga {current} av {total}",
     "complete": "Klart",
     "menu": "Meny",
@@ -65,6 +108,9 @@
     "5": "Instämmer helt"
   },
   "Pay": {
+    "profilesTeaserTitle": "Vilken profil är du?",
+    "profilesTeaserBody": "Dela ditt resultat med dina vänner. Jämför era profiler och avatarer. Se vad ni har gemensamt och vad som skiljer er åt.",
+    "profilesTeaserCaption": "16 profiler. Olika perspektiv på personlighet.",
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "headline": {
@@ -82,6 +128,7 @@
       "title3": "Behärskning under press"
     },
     "cta": "LÅS UPP HELA RESULTATET",
+    "testReady": "Ditt testresultat är klart",
     "profileReady": "Din fullständiga profil är redo.",
     "whatWillIGet": "Vad får jag?",
     "note": "Engångsbetalning · Ingen prenumeration",
@@ -101,6 +148,7 @@
     }
   },
   "Result": {
+    "resetDialog": {"title": "Göra om testet?", "cancel": "Avbryt", "confirm": "Gör om testet"},
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "noData": {
@@ -116,7 +164,7 @@
     "menu": "Meny",
     "menuRetake": "Gör om",
     "pdf": {
-      "download": "Ladda ner rapport",
+      "download": "Ladda ner PDF",
       "downloading": "Skapar…",
       "generated": "Skapad",
       "error": "Kunde inte skapa PDF. Kontrollera konsolen.",

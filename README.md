@@ -4,6 +4,9 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 First, run the development server:
 
+Run the commands from the `bigfive` directory. Local development uses Webpack
+because Turbopack can stall while compiling this project.
+
 ```bash
 npm run dev
 # or

@@ -1,19 +1,27 @@
 {
   "Home": {
+    "landing": {
+      "headline": "Odkryj swój",
+      "headlineAccent": "profil osobowości",
+      "questions": "25 prostych pytań. Tylko kilka minut.",
+      "profiles": "W oparciu o uznaną psychologię. Jeden z 16 profili osobowości.",
+      "insights": "Praktyczny wgląd w Twoje mocne strony i słabe punkty.",
+      "cta": "Rozpocznij test"
+    },
     "brand": {
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"
     },
     "headline": {
-      "line1": "Odkryj",
-      "line2": "Swoje",
       "line2Accent": "Prawdziwe",
-      "line3": "Ja"
+      "line3": "Ja",
+      "line1": "Odkryj",
+      "line2": "Swoje"
     },
     "badge": "TWOJA OSOBOWOŚĆ W PRAKTYCE",
     "subheadline": "Odkryj swoje mocne strony, reakcje pod presją i to, co wnosisz do relacji.",
     "note": "25 pytań · Około 4 minut",
-    "noteSecondary": "Jednorazowa płatność · Bez subskrypcji",
+    "noteSecondary": "W pełni anonimowe i prywatne",
     "cta": "Rozpocznij test",
     "features": {
       "item1": {
@@ -38,6 +46,41 @@
     "benefitsTitle": "Co otrzymasz"
   },
   "Test": {
+    "milestones": {
+      "continue": "Kontynuuj",
+      "6": {
+        "eyebrow": "CZY WIESZ, ŻE...",
+        "title": "Introwertyk też potrafi być duszą towarzystwa.",
+        "body": "Badania pokazują, że nasze zachowanie potrafi mocno zmieniać się w zależności od sytuacji. Nawet osoby raczej introwertyczne bywają bardzo towarzyskie.",
+        "question": "Ciekawe, co jest Twoją naturalną tendencją?",
+        "note": "Fakt oparty na badaniach nad zmiennością zachowań."
+      },
+      "13": {
+        "eyebrow": "PSYCHOLOGIA W PRAKTYCE",
+        "title": "Ta sama cecha może być Twoją zaletą i słabością.",
+        "body": "Wysoka ugodowość pomaga budować dobre relacje, ale w sytuacjach wymagających twardych negocjacji nie zawsze działa na naszą korzyść.",
+        "question": "Które z Twoich mocnych stron mają drugą stronę?"
+      },
+      "20": {
+        "eyebrow": "TWOJE ODPOWIEDZI",
+        "title": "Pierwsza obserwacja o Tobie",
+        "note": "To wstępna obserwacja na podstawie Twoich odpowiedzi, nie pełny profil. Jeszcze 5 pytań.",
+        "fallbackTitle": "Jeszcze 5 pytań.",
+        "fallbackBody": "Na razie nie ma wystarczająco wyraźnej tendencji, by wskazać jedną cechę. Dokończ test, aby zobaczyć pełny wynik."
+      },
+      "observations": {
+        "EHigh": "W odpowiedziach opisujesz siebie jako osobę, która chętnie angażuje się w kontakty z innymi.",
+        "ELow": "W odpowiedziach częściej wybierasz spokój i mniej intensywne kontakty z innymi.",
+        "OHigh": "Twoje odpowiedzi wskazują na ciekawość nowych pomysłów i doświadczeń.",
+        "OLow": "W odpowiedziach częściej wybierasz to, co znane i sprawdzone.",
+        "CHigh": "W odpowiedziach wyraźnie cenisz planowanie, porządek i doprowadzanie spraw do końca.",
+        "CLow": "W odpowiedziach częściej stawiasz na elastyczność niż ścisłe planowanie.",
+        "AHigh": "Twoje odpowiedzi wskazują, że ważne są dla Ciebie współpraca i uwzględnianie potrzeb innych.",
+        "ALow": "W odpowiedziach częściej stawiasz na swoim, nawet gdy oznacza to różnicę zdań.",
+        "NHigh": "W odpowiedziach opisujesz większą wrażliwość na stres i napięcie.",
+        "NLow": "W odpowiedziach opisujesz raczej spokojne reakcje na stresujące sytuacje."
+      }
+    },
     "progress": "Pytanie {current} z {total}",
     "complete": "Ukończono",
     "menu": "Menu",
@@ -65,6 +108,9 @@
     "5": "Zdecydowanie się zgadzam"
   },
   "Pay": {
+    "profilesTeaserTitle": "Który profil jest Twój?",
+    "profilesTeaserBody": "Podziel się swoim wynikiem ze znajomymi. Porównajcie profile i awatary. Sprawdźcie, co Was łączy, a co różni.",
+    "profilesTeaserCaption": "16 profili. Różne spojrzenia na osobowość.",
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "headline": {
@@ -82,6 +128,7 @@
       "title3": "Opanowanie pod presją"
     },
     "cta": "ODBLOKUJ PEŁNY WYNIK",
+    "testReady": "Twój wynik jest gotowy",
     "profileReady": "Twój pełny profil jest gotowy.",
     "whatWillIGet": "Co otrzymam?",
     "note": "Płatność jednorazowa · Brak subskrypcji",
@@ -101,6 +148,7 @@
     }
   },
   "Result": {
+    "resetDialog": {"title": "Powtórzyć test?", "cancel": "Anuluj", "confirm": "Powtórz test"},
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "noData": {
@@ -116,7 +164,7 @@
     "menu": "Menu",
     "menuRetake": "Powtórz",
     "pdf": {
-      "download": "Pobierz raport",
+      "download": "Pobierz PDF",
       "downloading": "Generowanie…",
       "generated": "Wygenerowano",
       "error": "Nie udało się wygenerować PDF. Sprawdź konsolę.",

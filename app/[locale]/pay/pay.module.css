@@ -1,0 +1,103 @@
+.price {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  padding: 4px 12px;
+  color: #69e9a1;
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -.055em;
+  text-shadow: 0 2px 20px #0008;
+}
+.headlineAccent {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 8px auto 0;
+  padding-bottom: .08em;
+  background-image: var(--tmj-brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.benefits { margin-top: 40px; }
+.sectionTitle { margin: 0 0 32px; font-size: 26px; font-weight: 700; letter-spacing: -.025em; color: #f5f0ff; }
+.benefitList { list-style: none; margin: 0; padding: 0; }
+.benefit { position: relative; display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 16px; padding-bottom: 32px; }
+.step { display: grid; place-items: center; width: 52px; height: 60px; color: #b78aff; }
+.benefit h3 { margin: 3px 0 8px; color: #f3edff; font-size: 19px; line-height: 1.35; font-weight: 700; letter-spacing: -.02em; }
+.benefit p { margin: 0; color: #b8b5c7; font-size: 15px; line-height: 1.65; }
+.socialProof {
+  position: relative;
+  margin-top: 24px;
+  padding: 40px 0 12px;
+  border-top: 1px solid #b99ae633;
+  text-align: center;
+}
+.communityPortraits { display: block; width: 100%; max-width: 360px; height: auto; margin: 0 auto 24px; }
+.socialCount { color: #eee6ff; font-size: 46px; line-height: 1; letter-spacing: -.055em; font-weight: 700; white-space: nowrap; }
+.socialCount sup { display: inline-block; vertical-align: top; margin: 4px 0 0 4px; font-size: .5em; color: #ae77ff; line-height: 1; font-weight: 400; }
+.socialProof p { max-width: 290px; margin: 16px auto 0; color: #bfbdc9; font-size: 15px; line-height: 1.65; }
+.profileFan { display: flex; align-items: center; justify-content: center; height: 104px; margin: 32px auto 0; isolation: isolate; }
+.profilePortrait { width: 68px; height: 68px; object-fit: contain; filter: drop-shadow(0 8px 12px #0004); }
+.profilePortrait:first-child { transform: translate(12px, 8px) rotate(-12deg); }
+.profilePortrait:nth-child(2) { position: relative; z-index: 1; width: 88px; height: 88px; transform: translateY(-4px); }
+.profilePortrait:last-child { transform: translate(-12px, 8px) rotate(12deg); }
+.headline { margin: 24px 0 0; text-align: center; font-size: clamp(50px, 13.5vw, 68px); font-weight: 700; line-height: 1.04; letter-spacing: -.05em; color: #e8ecff; }
+.benefit:nth-child(1) .step { color: #bd91fa; }
+.benefit:nth-child(2) .step { color: #b58af7; }
+.benefit:nth-child(3) .step { color: #ad83f4; }
+@media (max-width: 360px) {
+  .benefit { gap: 13px; grid-template-columns: 44px minmax(0, 1fr); }
+  .step { width: 44px; height: 52px; }
+  .socialCount { font-size: 42px; }
+}
+
+.paymentTerms {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  column-gap: 9px;
+  row-gap: 5px;
+  margin-top: 20px;
+  color: #b8b5c7;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+}
+.paymentTerms > span { white-space: nowrap; }
+.paymentDivider { color: #82798f; }
+@media (max-width: 360px) {
+  .paymentTerms { flex-direction: column; align-items: center; }
+  .paymentDivider { display: none; }
+}
+
+.purchaseGroup { position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; max-width: 320px; }
+
+.completedTest { display: block; width: 93px; height: auto; margin: 24px auto 0; }
+
+.testReady { margin: 8px 0 0; text-align: center; color: #d8cee9; font-size: 16px; font-weight: 500; line-height: 1.5; }
+
+.readyStatus { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 32px; }
+.statusIcon { width: 22px; height: 22px; flex-shrink: 0; color: #af91d6; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+.step svg { width: 100%; height: auto; overflow: visible; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+@media (max-width: 640px) {
+  .unlockButton { min-height: 65px; gap: 8px; padding: 16px 12px; font-size: clamp(12px, calc(4vw - 1px), 16.8px); }
+}
+
+.profilesTeaser { margin-top: 40px; padding-top: 32px; border-top: 1px solid #b99ae626; text-align: center; }
+.profilesTeaserTitle { max-width: 380px; margin: 0 auto; color: #f5f0ff; font-size: 26px; font-weight: 700; line-height: 1.2; letter-spacing: -.025em; text-wrap: balance; }
+.profilesTeaserBody { max-width: 390px; margin: 16px auto 0; color: #b8b5c7; font-size: 15px; line-height: 1.65; }
+.avatarWindow { position: relative; width: 78%; max-width: 340px; aspect-ratio: 1; margin: 28px auto 0; overflow: hidden; border-radius: 50%; mask-image: radial-gradient(circle closest-side, #000 62%, #000b 78%, transparent 100%); -webkit-mask-image: radial-gradient(circle closest-side, #000 62%, #000b 78%, transparent 100%); }
+.avatarCollage { position: absolute; inset: 0; isolation: isolate; }
+.teaserAvatar { position: absolute; left: var(--avatar-left); top: var(--avatar-top); display: block; width: 40%; max-width: none; height: auto; object-fit: contain; transform: translate(-50%, -50%); filter: drop-shadow(0 4px 6px #0005); }
+/* Five equally spaced centers on a circle; portraits overlap slightly. */
+.teaserAvatar:nth-child(1) { --avatar-left: 50%; --avatar-top: 20%; }
+.teaserAvatar:nth-child(2) { --avatar-left: 78.53%; --avatar-top: 40.73%; }
+.teaserAvatar:nth-child(3) { --avatar-left: 67.63%; --avatar-top: 74.27%; z-index: 2; }
+.teaserAvatar:nth-child(4) { --avatar-left: 32.37%; --avatar-top: 74.27%; z-index: 3; }
+.teaserAvatar:nth-child(5) { --avatar-left: 21.47%; --avatar-top: 40.73%; z-index: 1; }
+.profilesTeaserCaption { margin: 16px 0 0; color: #a59caf; font-size: 13px; line-height: 1.5; }

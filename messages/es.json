@@ -1,5 +1,13 @@
 {
   "Home": {
+    "landing": {
+      "headline": "Descubre tu",
+      "headlineAccent": "perfil de personalidad",
+      "questions": "25 preguntas sencillas. Solo unos minutos.",
+      "profiles": "Basado en la psicología reconocida. Uno de 16 perfiles de personalidad.",
+      "insights": "Una visión práctica de tus fortalezas y puntos ciegos.",
+      "cta": "Empezar el test"
+    },
     "brand": {
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"
@@ -13,7 +21,7 @@
     "badge": "TU PERSONALIDAD, EXPLICADA",
     "subheadline": "Descubre tus fortalezas, cómo reaccionas bajo presión y qué aportas a tus relaciones.",
     "note": "25 preguntas · Unos 4 minutos",
-    "noteSecondary": "Pago único · Sin suscripción",
+    "noteSecondary": "Totalmente anónimo y privado",
     "cta": "Empezar mi test",
     "features": {
       "item1": {
@@ -38,6 +46,41 @@
     "benefitsTitle": "Qué recibirás"
   },
   "Test": {
+    "milestones": {
+      "continue": "Continuar",
+      "6": {
+        "eyebrow": "¿SABÍAS QUE...?",
+        "title": "Una persona introvertida también puede ser el alma de la fiesta.",
+        "body": "Las investigaciones muestran que nuestro comportamiento puede variar mucho según la situación. Incluso las personas más bien introvertidas pueden ser muy sociables.",
+        "question": "¿Cuál será tu tendencia natural?",
+        "note": "Basado en investigaciones sobre la variabilidad del comportamiento."
+      },
+      "13": {
+        "eyebrow": "PSICOLOGÍA EN LA PRÁCTICA",
+        "title": "Un mismo rasgo puede ser una fortaleza y una debilidad.",
+        "body": "Una alta amabilidad ayuda a construir buenas relaciones, pero en situaciones que requieren negociaciones duras no siempre juega a nuestro favor.",
+        "question": "¿Cuáles de tus fortalezas tienen otra cara?"
+      },
+      "20": {
+        "eyebrow": "TUS RESPUESTAS",
+        "title": "Una primera observación sobre ti",
+        "note": "Es una primera observación basada en tus respuestas, no tu perfil completo. Solo quedan 5 preguntas.",
+        "fallbackTitle": "Solo quedan 5 preguntas.",
+        "fallbackBody": "Por ahora no hay una tendencia lo bastante clara para destacar un rasgo. Termina el test para ver tu resultado completo."
+      },
+      "observations": {
+        "EHigh": "Tus respuestas te describen como alguien que disfruta relacionándose con otras personas.",
+        "ELow": "Tus respuestas se inclinan por la tranquilidad y las interacciones sociales menos intensas.",
+        "OHigh": "Tus respuestas sugieren curiosidad por nuevas ideas y experiencias.",
+        "OLow": "Tus respuestas se inclinan por lo conocido y probado.",
+        "CHigh": "Tus respuestas valoran claramente la planificación, el orden y terminar lo que empiezas.",
+        "CLow": "Tus respuestas se inclinan por la flexibilidad más que por una planificación estricta.",
+        "AHigh": "Tus respuestas sugieren que valoras la cooperación y las necesidades de los demás.",
+        "ALow": "Tus respuestas se inclinan por mantener tu postura, incluso cuando hay desacuerdo.",
+        "NHigh": "Tus respuestas describen una mayor sensibilidad al estrés y la tensión.",
+        "NLow": "Tus respuestas describen reacciones generalmente tranquilas ante el estrés."
+      }
+    },
     "progress": "Pregunta {current} de {total}",
     "complete": "Completado",
     "menu": "Menú",
@@ -65,6 +108,9 @@
     "5": "Totalmente de acuerdo"
   },
   "Pay": {
+    "profilesTeaserTitle": "¿Cuál es tu perfil?",
+    "profilesTeaserBody": "Comparte tu resultado con tus amigos. Comparad vuestros perfiles y avatares. Descubrid qué tenéis en común y qué os diferencia.",
+    "profilesTeaserCaption": "16 perfiles. Distintas perspectivas sobre la personalidad.",
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "headline": {
@@ -82,6 +128,7 @@
       "title3": "Dominio bajo presión"
     },
     "cta": "DESBLOQUEA EL RESULTADO COMPLETO",
+    "testReady": "El resultado de tu test ya está listo",
     "profileReady": "Tu perfil completo está listo.",
     "whatWillIGet": "¿Qué recibiré?",
     "note": "Pago único · Sin suscripción",
@@ -101,6 +148,7 @@
     }
   },
   "Result": {
+    "resetDialog": {"title": "¿Repetir el test?", "cancel": "Cancelar", "confirm": "Repetir test"},
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "noData": {
@@ -116,7 +164,7 @@
     "menu": "Menú",
     "menuRetake": "Repetir",
     "pdf": {
-      "download": "Descargar informe",
+      "download": "Descargar PDF",
       "downloading": "Generando…",
       "generated": "Generado",
       "error": "No se pudo generar el PDF. Revisa la consola.",

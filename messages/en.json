@@ -1,5 +1,13 @@
 {
   "Home": {
+    "landing": {
+      "headline": "Discover your",
+      "headlineAccent": "personality profile",
+      "questions": "25 simple questions. Just a few minutes.",
+      "profiles": "Based on established psychology. One of 16 personality profiles.",
+      "insights": "Practical insight into your strengths and blind spots.",
+      "cta": "Start the test"
+    },
     "brand": {
       "title": "tellmejoe.",
       "subtitle": "no judgment • just patterns"
@@ -13,7 +21,7 @@
     "badge": "YOUR PERSONALITY, EXPLAINED",
     "subheadline": "Discover your strengths, how you respond under pressure, and what you bring to relationships.",
     "note": "25 questions · About 4 minutes",
-    "noteSecondary": "One-time payment · No subscription",
+    "noteSecondary": "Fully anonymous and private",
     "cta": "Start my test",
     "features": {
       "item1": {
@@ -38,6 +46,41 @@
     "benefitsTitle": "What you get"
   },
   "Test": {
+    "milestones": {
+      "continue": "Continue",
+      "6": {
+        "eyebrow": "DID YOU KNOW?",
+        "title": "Introverts can be the life of the party, too.",
+        "body": "Research shows that our behavior can vary considerably depending on the situation. Even people who tend to be introverted can be very sociable.",
+        "question": "What might your natural tendency be?",
+        "note": "Based on research into variability in behavior."
+      },
+      "13": {
+        "eyebrow": "PSYCHOLOGY IN PRACTICE",
+        "title": "The same trait can be a strength and a weakness.",
+        "body": "High agreeableness helps build good relationships, but in situations that call for tough negotiations, it does not always work in our favor.",
+        "question": "Which of your strengths have another side?"
+      },
+      "20": {
+        "eyebrow": "YOUR ANSWERS",
+        "title": "An early observation about you",
+        "note": "This is an early observation based on your answers, not your full profile. Just 5 questions to go.",
+        "fallbackTitle": "Just 5 questions to go.",
+        "fallbackBody": "So far, there is no clear enough pattern to highlight one trait. Finish the test to see your full result."
+      },
+      "observations": {
+        "EHigh": "Your answers describe someone who enjoys engaging with other people.",
+        "ELow": "Your answers lean toward quiet and less intensive social interaction.",
+        "OHigh": "Your answers suggest curiosity about new ideas and experiences.",
+        "OLow": "Your answers lean toward familiar, tried-and-tested approaches.",
+        "CHigh": "Your answers clearly value planning, order, and following through.",
+        "CLow": "Your answers lean toward flexibility rather than strict planning.",
+        "AHigh": "Your answers suggest that cooperation and considering others’ needs matter to you.",
+        "ALow": "Your answers lean toward standing your ground, even when it means disagreeing.",
+        "NHigh": "Your answers describe greater sensitivity to stress and tension.",
+        "NLow": "Your answers describe generally calm reactions to stressful situations."
+      }
+    },
     "progress": "Question {current} of {total}",
     "complete": "Complete",
     "menu": "Menu",
@@ -65,6 +108,9 @@
     "5": "Strongly agree"
   },
   "Pay": {
+    "profilesTeaserTitle": "Which profile is yours?",
+    "profilesTeaserBody": "Share your result with friends. Compare your profiles and avatars. See what you have in common and where you differ.",
+    "profilesTeaserCaption": "16 profiles. Different perspectives on personality.",
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "badge": "ANALYSIS COMPLETE 99%",
@@ -83,6 +129,7 @@
       "line3": "Insight into how you respond under pressure and what helps you stay balanced in relationships."
     },
     "cta": "UNLOCK FULL RESULT",
+    "testReady": "Your test result is ready",
     "profileReady": "Your full profile is ready.",
     "primaryArchetype": "Your Primary Archetype",
     "whatWillIGet": "What will I get?",
@@ -101,6 +148,7 @@
     }
   },
   "Result": {
+    "resetDialog": {"title": "Retake the test?", "cancel": "Cancel", "confirm": "Retake test"},
     "brandTitle": "tellmejoe.",
     "brandSubtitle": "no judgment • just patterns",
     "noData": {
@@ -116,7 +164,7 @@
     "menu": "Menu",
     "menuRetake": "Retake",
     "pdf": {
-      "download": "Download report",
+      "download": "Download PDF",
       "downloading": "Generating…",
       "generated": "Generated",
       "error": "Could not generate PDF. Check the console for details.",

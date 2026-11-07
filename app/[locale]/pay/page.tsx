@@ -2,15 +2,18 @@
 
 import Image from "next/image";
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { Link, useRouter } from "@/navigation";
+import { useRouter } from "@/navigation";
 import { track, analyticsContext } from "@/lib/analytics";
 import { useTranslations } from "next-intl";
 import { QUESTIONS } from "@/lib/personality";
 import { calculateResult } from "@/lib/scoring";
 import { AVATARS } from "@/lib/avatars";
+import { PAY_HERO_VISUAL, PAY_HERO_AVATAR_NUMBERS } from "@/lib/pay-visual";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import { useLocale } from "next-intl";
 import LegalFooter from "@/app/components/ui/legal-footer";
+import { Brand } from "@/app/components/ui/logo";
+import styles from "./pay.module.css";
 import TMJBackground from "@/app/components/ui/background";
 
 const PAID_KEY = "personality_paid_v1";
@@ -79,7 +82,7 @@ function PremiumRingLoader() {
 export default function PayPage() {
   const router = useRouter();
   const t = useTranslations("Pay");
-  const th = useTranslations("Home");
+
   const tt = useTranslations("Types");
   const locale = useLocale();
   const [isRedirecting, setIsRedirecting] = useState(false);
@@ -218,11 +221,6 @@ export default function PayPage() {
   const avatarSrc = previewTypeCode
     ? AVATARS[avatarIndexFromTypeCode(previewTypeCode)]
     : AVATARS[0];
-  const socialProofAvatars = [
-    "/images/pay/social-proof-01.png",
-    "/images/pay/social-proof-02.png",
-    "/images/pay/social-proof-03.png",
-  ];
 
   const profileName = previewTypeCode ? tt(`${previewTypeCode}.name`) : "";
   const profileDesc = previewTypeCode ? tt(`${previewTypeCode}.desc`) : "";
@@ -259,60 +257,66 @@ export default function PayPage() {
 
   return (
     <main
-      className="relative min-h-screen overflow-hidden bg-[#02030A] px-6 sm:px-5 py-10 text-white"
+      className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter tmj-page-spacing text-white"
     >
       <TMJBackground />
 
-      <div className="relative mx-auto w-full max-w-md">
+      <div className="tmj-container">
         <div className="flex items-center justify-between gap-3">
-          <div className="leading-tight">
-            <Link
-              href="/"
-              className="bg-[linear-gradient(90deg,#57D6FF_0%,#7CB6FF_42%,#C08CFF_72%,#F08CFF_100%)] bg-clip-text text-sm font-bold tracking-tight text-transparent"
-            >
-              {th("brand.title")}
-            </Link>
-          </div>
+          <Brand />
 
           <LanguageSwitcher />
         </div>
 
-        <div className="mt-10 flex justify-center">
-          <div className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.04] bg-[#2A1C4D]/95 px-5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.03),0_16px_40px_rgba(0,0,0,0.16)]">
+        {PAY_HERO_VISUAL === "avatars" ? (
+        <div className={styles.profileFan} aria-hidden="true">
+          {PAY_HERO_AVATAR_NUMBERS.map((number) => AVATARS[number - 1]).map((src, index) => (
             <Image
-              src="/icons/pay/badge-sparkle.svg"
+              key={src}
+              src={src}
               alt=""
-              aria-hidden="true"
-              width={16}
-              height={16}
-              className="h-4 w-4"
+              width={96}
+              height={96}
+              sizes={index === 1 ? "88px" : "68px"}
+              className={styles.profilePortrait}
             />
-            <span className="text-[0.78rem] font-bold tracking-[0.16em] text-[#C57EFF]">
-              {t("badge")}
-            </span>
-          </div>
+          ))}
         </div>
+        ) : PAY_HERO_VISUAL === "completed-test" ? (
+          <Image
+            src="/icons/pay/completed-test.svg"
+            alt=""
+            aria-hidden="true"
+            width={144}
+            height={120}
+            className={styles.completedTest}
+          />
+        ) : null}
 
-        <h1 className="mt-10 text-center text-[clamp(3.35rem,15.8vw,4.41rem)] font-bold leading-[1] tracking-[-0.05em] text-[#E8ECFF]">
+        <p className={`${styles.testReady} ${PAY_HERO_VISUAL === "status" ? styles.readyStatus : ""}`}>
+          {PAY_HERO_VISUAL === "status" && (
+            <svg className={styles.statusIcon} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M20.5 11.5v.5a8.5 8.5 0 1 1-5-7.75" />
+              <path d="m8 11.5 3.5 3.5 9-10" />
+            </svg>
+          )}
+          {t("testReady")}
+        </p>
+
+        <h1 className={styles.headline}>
           <span className="block">{headlineLine1}</span>
-          <span className="mt-2 block">{headlineLine2}</span>
-          <span className="mt-2 block">
-            <span className="bg-[linear-gradient(90deg,#4ED8FF_0%,#66C6FF_30%,#7EAAFF_68%,#B38CFF_100%)] bg-clip-text text-transparent">
-              {headlineLine3Accent}
-            </span>
-            {" "}
-            <span className="bg-[linear-gradient(90deg,#9A7BFF_0%,#C57EFF_52%,#F08CFF_100%)] bg-clip-text text-transparent">
-              {headlineLine3}
-            </span>
+          {headlineLine2 && <span className="mt-2 block">{headlineLine2}</span>}
+          <span className={styles.headlineAccent}>
+            {headlineLine3Accent} {headlineLine3}
           </span>
         </h1>
 
-        <p className="mx-auto mt-8 max-w-[23rem] text-center text-[1.14rem] leading-[1.72] tracking-[-0.02em] text-[#C7CAE0] sm:max-w-[24.5rem] sm:text-[1.2rem]">
+        <p className="mx-auto mt-6 max-w-[23rem] text-center text-[1.14rem] leading-[1.72] tracking-[-0.02em] text-[#C7CAE0] sm:max-w-[24.5rem] sm:text-[1.2rem]">
           {t("description")}
         </p>
 
         {previewTypeCode && (
-          <div className="relative mt-16 overflow-hidden rounded-[2.35rem] border border-white/[0.03] bg-[#071126]/88 px-6 pt-5 pb-0 shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_18px_48px_rgba(0,0,0,0.28),0_0_42px_rgba(82,212,255,0.08)] sm:px-8">
+          <div className="relative mt-12 overflow-hidden rounded-[2.35rem] border border-white/[0.03] bg-[var(--tmj-surface)] px-6 pt-5 pb-0 shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_18px_48px_rgba(0,0,0,0.28),0_0_42px_rgba(82,212,255,0.08)] sm:px-8">
             <div className="flex min-h-[28rem] flex-col items-center justify-center py-10 text-center blur-[3.5px] opacity-85">
               <div className="text-[0.7rem] font-medium uppercase tracking-[0.18em] text-white/42">
                 {t("primaryArchetype")}
@@ -329,10 +333,9 @@ export default function PayPage() {
                     <Image
                       src={avatarSrc}
                       alt=""
-                      width={72}
-                      height={72}
-                      className="h-18 w-18 object-contain"
-                      style={{ filter: "brightness(0) invert(1)" }}
+                      width={256}
+                      height={256}
+                      className="h-34 w-34 object-contain"
                       onError={() => setAvatarError(true)}
                     />
                   ) : (
@@ -358,12 +361,15 @@ export default function PayPage() {
 
             <div className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-b from-transparent via-black/14 to-black/26" />
             <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 px-6 text-center sm:px-8">
+              <div className={styles.purchaseGroup}>
+              <div className={styles.price}>{t("onlyOneDollarAmount")}</div>
               <button
                 onClick={handleUnlock}
                 className={[
-                  "relative inline-flex min-w-[16.5rem] items-center justify-center gap-3 rounded-full px-8 py-5 text-[1.05rem] font-bold text-[#09101D]",
-                  "bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)]",
-                  "shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_0_35px_rgba(199,110,255,0.22),0_0_70px_rgba(79,206,255,0.14)]",
+                  styles.unlockButton,
+                  "relative inline-flex w-full max-w-[20rem] min-w-0 items-center justify-center gap-3 rounded-full px-4 py-5 text-[1.05rem] font-bold text-[#09101D]",
+                  "bg-[image:var(--tmj-action-gradient)]",
+                  "shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_0_35px_rgba(0,198,76,0.16),0_0_70px_rgba(0,184,137,0.10)]",
                   "transition-transform duration-200 hover:scale-[1.01]",
                   "focus:outline-none focus:ring-4 focus:ring-indigo-400/30",
                   "cursor-pointer",
@@ -375,7 +381,7 @@ export default function PayPage() {
                   aria-hidden="true"
                   width={18}
                   height={18}
-                  className="h-[1.125rem] w-[1.125rem]"
+                  className="h-[1.125rem] w-[1.125rem] shrink-0"
                 />
                 <span>{t("cta")}</span>
               </button>
@@ -417,127 +423,91 @@ export default function PayPage() {
                   })()}
                 </p>
               </div>
+              </div>
             </div>
           </div>
         )}
 
-        <div className={`${previewTypeCode ? "mt-12" : "mt-16"} text-center`}>
-          <div className="text-[2.6rem] font-semibold leading-none tracking-tight text-[#B79FFF]">
-            $1
-          </div>
-          <div className="mt-6 flex items-center justify-center gap-2.5">
-            <Image
-              src="/icons/pay/one-time-payment.svg"
-              alt=""
-              aria-hidden="true"
-              width={20}
-              height={20}
-              className="h-5 w-5 opacity-100"
-            />
-            <span className="text-[0.92rem] font-medium text-white/88">
-              {noteParts[0]}
-            </span>
-          </div>
-          <div className="mt-4 mb-12 flex items-center justify-center gap-2.5">
-            <Image
-              src="/icons/pay/no-subscription.svg"
-              alt=""
-              aria-hidden="true"
-              width={20}
-              height={20}
-              className="h-5 w-5 opacity-100"
-            />
-            <span className="text-[0.92rem] font-medium text-white/88">
-              {noteParts[1]}
-            </span>
-          </div>
-
-          <div className="mx-auto mt-10 w-full min-w-0">
-            <div className="min-w-0 rounded-[1.8rem] border border-white/[0.04] bg-[rgba(15,24,46,0.72)] px-5 py-0 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_20px_45px_rgba(0,0,0,0.18)]">
-              <div className="flex min-h-[10rem] flex-col items-center justify-center text-center">
-                <Image
-                  src="/icons/pay/quote-open.svg"
-                  alt=""
-                  aria-hidden="true"
-                  width={24}
-                  height={24}
-                  className="mx-auto mb-5 h-6 w-6"
-                />
-                <p className="mx-auto max-w-[15.5rem] text-[1rem] font-medium leading-[1.45] tracking-[-0.03em] text-white/82">
-                  &ldquo;{t("quote.line1")}
-                  <br />
-                  {t("quote.line2")}&rdquo;
-                </p>
-              </div>
-            </div>
-          </div>
-          <p className="mt-12 mb-12 text-center text-[0.76rem] font-medium tracking-[0.18em] text-white/90 uppercase">
-            {t("whatWillIGet")}
-          </p>
-
+        <div className={styles.paymentTerms}>
+          <span>{noteParts[0]}</span>
+          <span className={styles.paymentDivider} aria-hidden="true">·</span>
+          <span>{noteParts[1]}</span>
         </div>
 
-        <div className="mt-10 space-y-3.5">
-          {benefitCards.map((card) => (
-            <div
-              key={card.text}
-              className="flex items-center gap-4 rounded-[2rem] border border-white/[0.04] bg-[#071126]/95 px-5 py-5 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)]"
-            >
-              <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${card.iconBgClass}`}>
-                <Image
-                  src={card.icon}
-                  alt={card.iconAlt}
-                  aria-hidden="true"
-                  width={24}
-                  height={24}
-                  className="h-6 w-6 shrink-0"
-                />
-              </div>
-              <div className="min-w-0">
-                <p className="m-0 text-[1rem] font-bold leading-snug text-white/88">
-                  {card.title}
-                </p>
-                <p className="mt-2 m-0 text-sm leading-relaxed text-white/80">
-                  {card.text}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10">
-          <div className="min-w-0 rounded-[1.8rem] border border-white/[0.04] bg-[rgba(15,24,46,0.72)] px-5 py-0 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_20px_45px_rgba(0,0,0,0.18)]">
-            <div className="flex min-h-[7.5rem] items-center gap-5 max-[380px]:flex-col max-[380px]:justify-center max-[380px]:gap-4 max-[380px]:py-4">
-              <div className="relative flex h-11 shrink-0 items-center">
-                {socialProofAvatars.map((src, index) => (
-                  <div
-                    key={src}
-                    className={`${index === 0 ? "" : "-ml-3"} relative z-0 flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border-2 border-[#0B1730] bg-[#121C34] shadow-[0_8px_18px_rgba(0,0,0,0.18)]`}
-                  >
-                    <Image
-                      src={src}
-                      alt=""
-                      aria-hidden="true"
-                      fill
-                      sizes="44px"
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-                <div className="-ml-3 relative z-10 flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#0B1730] bg-[#9A5FFF] text-[0.88rem] font-semibold tracking-tight text-white shadow-[0_8px_18px_rgba(0,0,0,0.18)]">
-                  {t("socialProofCount")}
+        <section className={styles.benefits} aria-labelledby="pay-benefits-title">
+          <h2 id="pay-benefits-title" className={styles.sectionTitle}>{t("whatWillIGet")}</h2>
+          <ul className={styles.benefitList}>
+            {benefitCards.map((card, index) => (
+              <li key={card.title} className={styles.benefit}>
+                <span className={styles.step} aria-hidden="true">
+                  <svg viewBox="0 0 64 64" fill="none">
+                    {index === 0 ? (
+                      <>
+                        <g transform="rotate(-8 30 31)">
+                          <rect x="12" y="8" width="36" height="46" rx="6" fill="#231936" stroke="currentColor" />
+                          <circle cx="30" cy="24" r="6" fill="currentColor" fillOpacity=".16" stroke="#dec8ff" />
+                          <path d="M20 43v-3a10 10 0 0 1 20 0v3" stroke="#dec8ff" />
+                        </g>
+                        <circle cx="47" cy="47" r="11" fill="#231936" stroke="currentColor" />
+                        <path d="m42 47 3.5 3.5L52 44" stroke="#dec8ff" />
+                      </>
+                    ) : index === 1 ? (
+                      <>
+                        <path d="M5 32C12 21 21 16 32 16s20 5 27 16c-7 11-16 16-27 16S12 43 5 32Z" fill="currentColor" fillOpacity=".08" stroke="currentColor" />
+                        <circle cx="32" cy="32" r="11" fill="#332049" stroke="#dec8ff" />
+                        <circle cx="32" cy="32" r="4" fill="currentColor" />
+                        <circle cx="35" cy="29" r="1.5" fill="#f4eaff" />
+                      </>
+                    ) : (
+                      <>
+                        <path d="M32 9v45M23 54h18M12 24l40-8" stroke="#dec8ff" />
+                        <path d="m14 23.6-8 16h16l-8-16Zm36-7.2-8 16h16l-8-16Z" stroke="currentColor" />
+                        <path d="M6 39.6h16a8 8 0 0 1-16 0ZM42 32.4h16a8 8 0 0 1-16 0Z" fill="currentColor" fillOpacity=".22" stroke="currentColor" />
+                        <circle cx="32" cy="20" r="3" fill="#231936" stroke="#dec8ff" />
+                      </>
+                    )}
+                  </svg>
+                </span>
+                <div>
+                  <h3>{card.title}</h3>
+                  <p>{card.text}</p>
                 </div>
-              </div>
-              <p className="m-0 max-w-[13.5rem] text-[0.98rem] font-medium leading-[1.35] tracking-[-0.03em] text-white/80 max-[380px]:text-center">
-                {t("socialProof")}
-              </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className={styles.socialProof}>
+          <Image
+            src="/graphics/community-portraits.png"
+            alt=""
+            width={1600}
+            height={520}
+            sizes="(max-width: 640px) 78vw, 360px"
+            className={styles.communityPortraits}
+          />
+          <div className={styles.socialCount}>
+            {t("socialProofCount").replace("+", "").toUpperCase()}<sup>+</sup>
+          </div>
+          <p>{t("socialProof")}</p>
+        </section>
+
+        <section className={styles.profilesTeaser} aria-labelledby="profiles-teaser-title">
+          <h2 id="profiles-teaser-title" className={styles.profilesTeaserTitle}>
+            {t("profilesTeaserTitle")}
+          </h2>
+          <p className={styles.profilesTeaserBody}>{t("profilesTeaserBody")}</p>
+          <div className={styles.avatarWindow} aria-hidden="true">
+            <div className={styles.avatarCollage}>
+              {[6, 4, 15, 13, 9].map((avatar) => (
+                <Image key={avatar} src={AVATARS[avatar]} alt="" width={112} height={112} sizes="112px" className={styles.teaserAvatar} />
+              ))}
             </div>
           </div>
-        </div>
+          <p className={styles.profilesTeaserCaption}>{t("profilesTeaserCaption")}</p>
+        </section>
 
-        <div className="mt-12">
-          <LegalFooter />
-        </div>
+        <LegalFooter />
       </div>
 
       {isRedirecting && (

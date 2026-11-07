@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link, useRouter } from "@/navigation";
+import { useRouter } from "@/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { track, startTestTracking, completeTestTracking, resetTestTracking } from "@/lib/analytics";
+import { preliminaryObservation } from "@/lib/preliminary-observation";
 import {
   QUESTIONS,
   makeQuestionOrder,
@@ -12,6 +13,7 @@ import {
 } from "@/lib/personality";
 import { LanguageSwitcher } from "@/app/components/ui/language-switcher";
 import LegalFooter from "@/app/components/ui/legal-footer";
+import { Brand } from "@/app/components/ui/logo";
 import TMJBackground from "@/app/components/ui/background";
 
 const RESULT_KEY = "personality_result_v1";
@@ -23,6 +25,9 @@ const PAID_KEY = "personality_paid_v1";
 
 const LAST_ACTIVE_KEY = "personality_last_active_v1";
 const PROGRESS_TTL_MS = 30 * 60 * 1000;
+
+const MILESTONES = [6, 13, 20] as const;
+const MILESTONE_KEY = "personality_pending_milestone_v1";
 
 const SCALE_VALUES = [1, 2, 3, 4, 5] as const;
 
@@ -57,6 +62,7 @@ function clearProgressStorage() {
   resetTestTracking();
   try {
     localStorage.removeItem(ANSWERS_KEY);
+    localStorage.removeItem(MILESTONE_KEY);
     localStorage.removeItem(QUESTION_ORDER_KEY);
 
     // ✅ czyścimy oba (nowy + legacy)
@@ -73,7 +79,7 @@ export default function TestPage() {
   const router = useRouter();
   const locale = useLocale();
   const t = useTranslations("Test");
-  const th = useTranslations("Home");
+
   const s = useTranslations("Scale");
   const q = useTranslations("Questions");
 
@@ -87,6 +93,12 @@ export default function TestPage() {
 
   const [showIntro, setShowIntro] = useState(false);
   const [progressLoaded, setProgressLoaded] = useState(false);
+  const [milestone, setMilestone] = useState<number | null>(null);
+  const milestoneHeading = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (milestone !== null) milestoneHeading.current?.focus();
+  }, [milestone]);
 
   useEffect(() => {
     let cancelled = false;
@@ -214,6 +226,10 @@ export default function TestPage() {
           const firstUnanswered = normalized.findIndex((v) => v === 0);
 
           setIndex(firstUnanswered === -1 ? total - 1 : firstUnanswered);
+          const pending = Number(localStorage.getItem(MILESTONE_KEY));
+          if (MILESTONES.some((step) => step === pending) && firstUnanswered === pending) {
+            setMilestone(pending);
+          }
           setTapSelected(null);
           setIsAdvancing(false);
           setShowIntro(false);
@@ -236,7 +252,7 @@ export default function TestPage() {
   );
 
   const progressText = t("progress", {
-    current: Math.min(index + 1, total),
+    current: milestone ?? Math.min(index + 1, total),
     total
   });
 
@@ -246,6 +262,10 @@ export default function TestPage() {
   }, [answeredCount, total]);
 
   const currentQuestion = orderedQuestions[index];
+  const observation = useMemo(
+    () => milestone === 20 ? preliminaryObservation(answers, questionOrder) : null,
+    [milestone, answers, questionOrder]
+  );
 
   useEffect(() => {
     answeredCountRef.current = answeredCount;
@@ -322,11 +342,15 @@ export default function TestPage() {
     }
 
     const firstUnanswered = next.findIndex((x) => x === 0);
+    if (!wasAnswered && MILESTONES.some((step) => step === index + 1) && firstUnanswered === index + 1) {
+      setMilestone(index + 1);
+      try { localStorage.setItem(MILESTONE_KEY, String(index + 1)); } catch { /* Storage may be unavailable. */ }
+    }
     setIndex(firstUnanswered === -1 ? total - 1 : firstUnanswered);
   }
 
   function handleAnswer(v: number) {
-    if (isAdvancing) return;
+    if (isAdvancing || milestone !== null) return;
 
     setIsAdvancing(true);
     setTapSelected(v);
@@ -344,7 +368,7 @@ export default function TestPage() {
   }
 
   function goNext() {
-    if (isAdvancing) return;
+    if (isAdvancing || milestone !== null) return;
     const currentValue = answers[index];
     if (!(currentValue >= 1 && currentValue <= 5)) return;
 
@@ -360,6 +384,13 @@ export default function TestPage() {
     router.push("/pay");
   }
 
+  function continueTest() {
+    touchLastActive();
+    try { localStorage.removeItem(MILESTONE_KEY); } catch { /* Storage may be unavailable. */ }
+    setMilestone(null);
+    requestAnimationFrame(() => document.getElementById("test-question-heading")?.focus());
+  }
+
   function startTest() {
     touchLastActive();
     setShowIntro(false);
@@ -369,37 +400,30 @@ export default function TestPage() {
   const currentAnswered = answers[index] >= 1 && answers[index] <= 5;
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#02030A] px-5 py-10 text-white sm:px-5">
+    <main className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter tmj-page-spacing text-white">
       <TMJBackground />
 
-      <div className="relative mx-auto max-w-xl">
+      <div className="tmj-container">
         {/* Topbar */}
         <div className="relative z-30 mb-6 flex items-center justify-between gap-3">
-          <div className="leading-tight">
-            <Link
-              href="/"
-              className="bg-[linear-gradient(90deg,#57D6FF_0%,#7CB6FF_42%,#C08CFF_72%,#F08CFF_100%)] bg-clip-text text-sm font-bold tracking-tight text-transparent"
-            >
-              {th("brand.title")}
-            </Link>
-          </div>
+          <Brand />
 
           <LanguageSwitcher />
         </div>
 
         {!showIntro && (
-          <div className="mb-10">
+          <div className="mb-8">
             <div className="mb-3 flex items-center justify-between gap-4">
               <div className="text-[0.98rem] font-medium tracking-[0.02em] text-white/92">
                 {progressText}
               </div>
-              <div className="text-[0.82rem] font-medium uppercase tracking-[0.18em] text-[#67D7FF]">
+              <div className="text-[0.82rem] font-medium uppercase tracking-[0.18em] text-[#b5baff]">
                 {progress}% {t("complete")}
               </div>
             </div>
             <div className="relative h-[8px] w-full overflow-hidden rounded-full bg-[#1A2544] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
               <div
-                className="absolute left-0 top-0 h-[8px] rounded-full bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] shadow-[0_0_18px_rgba(82,212,255,0.28)] transition-[width] duration-150"
+                className="absolute left-0 top-0 h-[8px] rounded-full bg-[image:var(--tmj-brand-gradient)] shadow-[0_0_18px_rgba(82,212,255,0.28)] transition-[width] duration-150"
                 style={{
                   width: `${progress}%`,
                   minWidth: index === 0 ? "24px" : undefined
@@ -412,10 +436,10 @@ export default function TestPage() {
         <div className="relative z-10 mt-8">
           {showIntro ? (
             <div
-              className="rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95 px-5 pt-6 pb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6 sm:pt-7 sm:pb-7"
+              className="rounded-[2.35rem] border border-white/[0.025] bg-[var(--tmj-surface)] px-5 pt-6 pb-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6 sm:pt-7 sm:pb-7"
             >
               <div className="mx-auto max-w-md">
-                <div className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[#67D7FF]">
+                <div className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-[#b5baff]">
                   {t("intro.questions")}
                 </div>
 
@@ -442,16 +466,56 @@ export default function TestPage() {
                 <button
                   onClick={startTest}
                   type="button"
-                  className="mt-7 inline-flex w-full items-center justify-center rounded-3xl bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] px-5 py-4 text-sm font-semibold text-[#08111F] shadow-[0_10px_30px_rgba(82,212,255,0.18)] transition hover:scale-[1.01] cursor-pointer"
+                  className="mt-7 inline-flex w-full items-center justify-center rounded-3xl bg-[image:var(--tmj-action-gradient)] px-5 py-4 text-sm font-semibold text-[#08111F] shadow-[0_10px_30px_rgba(82,212,255,0.18)] transition hover:scale-[1.01] cursor-pointer"
                 >
                   {t("intro.cta")}
                 </button>
               </div>
             </div>
+          ) : milestone !== null ? (
+            <section aria-labelledby="test-milestone-heading" className="rounded-[2.35rem] border border-white/[0.025] bg-[var(--tmj-surface)] px-5 py-10 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] sm:px-6 sm:py-12">
+              <p className="mb-3 flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#b5a1d5]">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" aria-hidden="true">
+                  {milestone === 6 ? (
+                    <>
+                      <path d="M9 17v-2a6 6 0 1 1 6 0v2M9 18h6M10 21h4" />
+                    </>
+                  ) : milestone === 13 ? (
+                    <>
+                      <path d="M12 3v17M8 21h8M4 7h16M5 7l-3 7h6L5 7Zm14 0-3 7h6l-3-7Z" />
+                    </>
+                  ) : (
+                    <>
+                      <path d="M4 4v16h16M8 15v-4M12 15V7M16 15v-6" />
+                    </>
+                  )}
+                </svg>
+                <span>{t(`milestones.${milestone}.eyebrow`)}</span>
+              </p>
+              <h2 id="test-milestone-heading" ref={milestoneHeading} tabIndex={-1} className="mx-auto max-w-sm text-xl font-semibold leading-snug tracking-tight text-white outline-none">
+                {t(`milestones.${milestone}.${milestone === 20 && !observation ? "fallbackTitle" : "title"}`)}
+              </h2>
+              <p className="mx-auto mt-6 max-w-sm text-[0.98rem] leading-[1.8] text-white/72">
+                {milestone === 20
+                  ? observation ? t(`milestones.observations.${observation}`) : t("milestones.20.fallbackBody")
+                  : t(`milestones.${milestone}.body`)}
+              </p>
+              {milestone !== 20 && (
+                <p className="mx-auto mt-5 max-w-sm text-[0.98rem] font-medium leading-relaxed text-white/90">
+                  {t(`milestones.${milestone}.question`)}
+                </p>
+              )}
+              {milestone === 20 && observation && (
+                <p className="mx-auto mt-5 max-w-sm text-xs leading-relaxed text-white/50">{t("milestones.20.note")}</p>
+              )}
+              <button type="button" onClick={continueTest} className="mx-auto mt-10 flex min-h-12 w-full items-center justify-center gap-3 rounded-3xl border border-white/10 bg-white/8 px-4 py-3 text-sm font-medium text-white/90 sm:px-5 sm:py-4 cursor-pointer transition-colors hover:border-[#42d65a] active:border-[#42d65a] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#42d65a]">
+                {t("milestones.continue")} <span aria-hidden="true">→</span>
+              </button>
+            </section>
           ) : (
             <>
-              <div className="rounded-[2.35rem] border border-white/[0.025] bg-[#071126]/95 px-5 pt-4 pb-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6 sm:pt-6 sm:pb-7">
-                <h2 className="mb-6 mt-2 text-xl font-semibold leading-snug tracking-tight">
+              <div className="rounded-[2.35rem] border border-white/[0.025] bg-[var(--tmj-surface)] px-5 pt-4 pb-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6 sm:pt-6 sm:pb-7">
+                <h2 id="test-question-heading" tabIndex={-1} className="outline-none mb-6 mt-2 text-[21px] font-medium leading-[1.5] tracking-normal text-[#f5f3fa] [overflow-wrap:break-word] sm:text-[22px]">
                   {orderReady ? q(currentQuestion.id) : "\u00A0"}
                 </h2>
 
@@ -490,7 +554,7 @@ export default function TestPage() {
                         ].join(" ")}
                         style={
                           selected || tapping
-                            ? { borderColor: "#67D7FF" }
+                            ? { borderColor: "#42d65a" }
                             : undefined
                         }
                       >
@@ -502,7 +566,7 @@ export default function TestPage() {
                             className={[
                               "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors duration-150",
                               selected || tapping
-                                ? "border-[#67D7FF] bg-[#67D7FF]"
+                                ? "border-[#42d65a] bg-[#42d65a]"
                                 : "border-white/10 bg-transparent"
                             ].join(" ")}
                             aria-hidden="true"

@@ -1,0 +1,33 @@
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
+  min-height: 36px;
+  padding: 7px 10px;
+  border: 1px solid #ffffff1c;
+  border-radius: 12px;
+  background: transparent;
+  color: #ffffffb3;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.trigger:hover { background: #ffffff0d; color: #fff; }
+.trigger:focus-visible, .option:focus-visible { outline: 2px solid #b5bcff; outline-offset: 3px; }
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  min-height: 36px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffffbf;
+  transition: background-color 150ms ease;
+}
+.option:hover { color: #fff; background: #ffffff14; }

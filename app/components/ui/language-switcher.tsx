@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale } from "next-intl";
 import { Link, usePathname } from "@/navigation";
+import styles from "./language-switcher.module.css";
 import { locales, type Locale } from "@/i18n/routing";
 
 const LABEL: Record<Locale, string> = {
@@ -51,13 +52,7 @@ export function LanguageSwitcher() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center justify-center rounded-xl
-          px-2 py-1.5 text-xs font-semibold tracking-tight
-          text-white/70 hover:text-white/90
-          border border-white/10 hover:border-white/20
-          bg-transparent hover:bg-white/5
-          transition focus:outline-none
-          cursor-pointer"
+        className={styles.trigger}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label="Language"
@@ -84,10 +79,7 @@ export function LanguageSwitcher() {
                   href={pathname}
                   locale={item.locale}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-2
-                    text-xs font-medium tracking-tight
-                    text-white/75 hover:text-white
-                    hover:bg-white/8 transition"
+                  className={styles.option}
                   role="menuitem"
                 >
                   {item.label}
