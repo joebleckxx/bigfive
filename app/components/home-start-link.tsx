@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import Image from "next/image";
 import { Link } from "@/navigation";
 import { track } from "@/lib/analytics";
 
-type Props = { label: string; locale: string; placement: "hero" | "bottom"; className?: string };
+type Props = { label: string; locale: string; placement: "hero" | "bottom" | "report"; className?: string; children?: ReactNode };
 
-export default function HomeStartLink({ label, locale, placement, className }: Props) {
+export default function HomeStartLink({ label, locale, placement, className, children }: Props) {
   const linkRef = useRef<HTMLAnchorElement>(null);
   const viewed = useRef(false);
 
@@ -29,11 +29,14 @@ export default function HomeStartLink({ label, locale, placement, className }: P
       ref={linkRef}
       href={{ pathname: "/test", query: { from: "main" } }}
       data-cta-placement={placement}
+      aria-label={children ? label : undefined}
       onClick={() => track("home_cta_clicked", { locale, placement, home_version: "home_clarity_v2" })}
       className={className ?? "relative inline-flex w-full max-w-[23rem] items-center justify-center gap-3 rounded-full bg-[linear-gradient(90deg,#52D4FF_0%,#79C1FF_32%,#B79FFF_69%,#F087EE_100%)] px-5 py-4 text-[1.05rem] font-bold text-[#09101D] shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_0_35px_rgba(199,110,255,0.22),0_0_70px_rgba(79,206,255,0.14)] transition-transform duration-200 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-400/30 cursor-pointer"}
     >
+      {children ?? <>
       <span>{label}</span>
       {className ? <span aria-hidden="true">→</span> : <Image src="/icons/home/cta-arrow.svg" alt="" aria-hidden="true" width={28} height={28} className="h-7 w-7 shrink-0" />}
+      </>}
     </Link>
   );
 }

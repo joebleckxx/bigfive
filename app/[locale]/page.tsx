@@ -39,7 +39,13 @@ export default async function Page({
           {(["questions", "profiles", "insights"] as const).map((feature) => (
             <li key={feature}>
               <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <path d="m5 17 8 8L28 7" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+                <defs>
+                  <linearGradient id={`home-check-${feature}`} x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor="#a4b3ff" />
+                    <stop offset="100%" stopColor="#c4afff" />
+                  </linearGradient>
+                </defs>
+                <path d="m5 17 8 8L28 7" stroke={`url(#home-check-${feature})`} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <span>{t(`landing.${feature}`)}</span>
             </li>
@@ -69,12 +75,13 @@ export default async function Page({
           <p>{tp("socialProof")}</p>
         </section>
 
-        <section className={styles.reportOffer} aria-labelledby="report-offer-title">
+        <HomeStartLink className={styles.reportOffer} label={`${t("landing.cta")} — ${t("reportOffer.title")}`} locale={locale} placement="report">
           <h2 id="report-offer-title">{t("reportOffer.title")}</h2>
           <div className={styles.reportPrice}>{tp("onlyOneDollarAmount")} <span>USD</span></div>
           <p className={styles.reportTerms}>{tp("note")}</p>
           <p className={styles.reportDescription}>{t("reportOffer.body")}</p>
-        </section>
+          <span className={styles.reportAction}>{t("landing.cta")} <span aria-hidden="true">→</span></span>
+        </HomeStartLink>
 
         <section className={payStyles.profilesTeaser} aria-labelledby="profiles-teaser-title">
           <h2 id="profiles-teaser-title" className={payStyles.profilesTeaserTitle}>

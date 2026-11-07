@@ -10,7 +10,7 @@
 .headline > span { display: block; }
 .accent { margin-inline: 0; width: fit-content; max-width: 100%; padding-bottom: 7px; background: var(--tmj-brand-gradient); background-clip: text; -webkit-background-clip: text; color: transparent; }
 .features { display: grid; gap: 28px; margin: 36px 0 0; padding: 0; list-style: none; }
-.features li { display: flex; justify-content: flex-start; text-align: left; align-items: flex-start; gap: 20px; color: #b8b7c0; font-size: 20px; line-height: 1.5; }
+.features li { display: flex; justify-content: flex-start; text-align: left; align-items: flex-start; gap: 20px; color: #cbc9d3; font-size: 20px; line-height: 1.5; }
 .features svg { flex: 0 0 30px; width: 30px; height: 30px; margin-top: 1px; color: #a4b3ff; }
 .action { margin-top: 40px; text-align: center; }
 .cta { display: inline-flex; align-items: center; justify-content: center; gap: 12px; width: calc(100% - 32px); max-width: 320px; min-height: 64px; padding: 20px 24px; border-radius: 999px; background: var(--tmj-action-gradient); color: #fff; font-size: 24px; font-weight: 700; text-decoration: none; box-shadow: 0 0 0 1px #ffffff0a, 0 0 35px #00c64c29, 0 0 70px #00b8891a; transition: filter 180ms ease, transform 180ms ease; }
@@ -33,9 +33,14 @@
 
 .privacyIcon { width: 16px; height: 16px; flex-shrink: 0; opacity: 1; }
 
-.reportOffer { margin-top: 40px; padding: 32px 20px; border-radius: 28px; background: radial-gradient(ellipse at 50% 0%, #00c64c10, transparent 75%), #191829; border: 1px solid #ffffff0a; text-align: center; }
+.reportOffer { display: block; text-decoration: none; transition: border-color 180ms ease; margin-top: 40px; padding: 32px 20px; border-radius: 28px; background: radial-gradient(ellipse at 50% 0%, #00c64c10, transparent 75%), #191829; border: 1px solid #ffffff0a; text-align: center; }
 .reportOffer h2 { margin: 0; color: #e5e1ed; font-size: 20px; font-weight: 600; line-height: 1.25; letter-spacing: -.025em; text-wrap: balance; }
-.reportPrice { margin-top: 20px; color: #60ce78; font-size: 42px; font-weight: 700; line-height: 1.1; letter-spacing: -.04em; text-shadow: 0 0 24px #00c64c26; }
+.reportPrice { width: fit-content; margin: 20px auto 0; background: linear-gradient(90deg, #7bd000 0%, #00c64c 53.75%, #00bd74 100%); background-clip: text; -webkit-background-clip: text; color: transparent; font-size: 42px; font-weight: 700; line-height: 1.1; letter-spacing: -.04em; filter: drop-shadow(0 0 12px #00c64c26); }
 .reportPrice span { font-size: 13px; font-weight: 500; letter-spacing: .04em; }
 .reportTerms { margin: 14px 0 0; color: #eeeaf4; font-size: 14px; line-height: 1.6; }
 .reportDescription { max-width: 390px; margin: 16px auto 0; color: #b8b5c7; font-size: 15px; line-height: 1.65; }
+
+.reportOffer:hover { border-color: #7bd00040; }
+.reportOffer:focus-visible { outline: 3px solid #b5bcff; outline-offset: 6px; }
+.reportAction { display: inline-block; margin-top: 20px; color: #c5b6e4; font-size: 14px; font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { .reportOffer { transition: none; } }
