@@ -386,8 +386,7 @@ function ReportHeader({ data }: { data: PdfReportData }) {
         {/* eslint-disable-next-line jsx-a11y/alt-text */}
         <Image src={data.logoImageUrl ?? BRAND.logoSrc} style={{ width: 32, height: 32, borderRadius: 9 }} />
         <View>
-          <Text style={{ fontSize: 13, fontWeight: 700 }}>{BRAND.name}</Text>
-          <Text style={styles.brandSubtitle}>{BRAND.tagline}</Text>
+          <Text style={{ fontSize: 13, fontWeight: 700, color: "#42D65A" }}>{BRAND.name}</Text>
         </View>
       </View>
     </View>

@@ -403,7 +403,7 @@ export default function TestPage() {
     <main className="relative min-h-screen overflow-hidden bg-[#0b0c14] tmj-page-gutter tmj-page-spacing text-white">
       <TMJBackground />
 
-      <div className="tmj-container">
+      <div className="tmj-container relative z-10">
         {/* Topbar */}
         <div className="relative z-30 mb-6 flex items-center justify-between gap-3">
           <Brand />
@@ -515,7 +515,7 @@ export default function TestPage() {
           ) : (
             <>
               <div className="rounded-[2.35rem] border border-white/[0.025] bg-[var(--tmj-surface)] px-5 pt-4 pb-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_30px_70px_rgba(0,0,0,0.24)] backdrop-blur-2xl sm:px-6 sm:pt-6 sm:pb-7">
-                <h2 id="test-question-heading" tabIndex={-1} className="outline-none mb-6 mt-2 text-[21px] font-medium leading-[1.5] tracking-normal text-[#f5f3fa] [overflow-wrap:break-word] sm:text-[22px]">
+                <h2 id="test-question-heading" tabIndex={-1} className="outline-none mb-8 mt-4 px-4 sm:px-5 text-[21px] font-medium leading-[1.5] tracking-normal text-[#f5f3fa] [overflow-wrap:break-word] sm:text-[22px]">
                   {orderReady ? q(currentQuestion.id) : "\u00A0"}
                 </h2>
 

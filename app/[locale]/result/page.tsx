@@ -15,7 +15,6 @@ import { Brand } from "@/app/components/ui/logo";
 import { BRAND } from "@/lib/brand";
 import TMJBackground from "@/app/components/ui/background";
 
-const BIG_FIVE_ICON_SRC = "/graphics/bigfive-icon.svg";
 
 // ✅ PDF
 import {
@@ -874,15 +873,15 @@ export default function ResultPage() {
           {/* Profile header + CTA */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
-              <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
+              <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center">
                 {showAvatar && (
                   <div className="relative shrink-0">
                     <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-full bg-violet-400/20 blur-2xl" />
                     {avatarError ? (
-                      <div className="flex h-32 w-32 items-center justify-center rounded-full bg-white/5 text-3xl">{typeName?.charAt(0) || "?"}</div>
+                      <div className="flex h-40 w-40 items-center justify-center rounded-full bg-white/5 text-3xl">{typeName?.charAt(0) || "?"}</div>
                     ) : (
                       <Image src={avatarSrc} alt={typeName} width={256} height={256}
-                        className="relative h-32 w-32 object-contain" onError={() => setAvatarError(true)} />
+                        className="relative h-40 w-40 object-contain" onError={() => setAvatarError(true)} />
                     )}
                   </div>
                 )}
@@ -928,27 +927,13 @@ export default function ResultPage() {
 
 		        {/* Big Five panel */}
 		            <div className="mt-8 rounded-[2.15rem] border border-white/[0.04] bg-[var(--tmj-surface)] shadow-[inset_0_1px_0_rgba(255,255,255,0.02),0_24px_56px_rgba(0,0,0,0.22)] px-5 pt-6 pb-8 sm:p-6 sm:pt-5 sm:pb-8">
-		          <div className="flex items-center justify-between gap-4">
+		          <div className="flex items-center justify-center gap-4 py-2 text-center">
 		            <div className="min-w-0">
-		              <div className="text-sm font-medium uppercase tracking-[0.12em] text-white/85">
+		              <div className="text-sm font-medium uppercase tracking-[0.12em] text-[#f1f0f5]">
 		                {t("bigFive.title")}
 		              </div>
 		            </div>
 
-	            <div className="relative shrink-0">
-	              <div className="pointer-events-none absolute -inset-2 rounded-full bg-black/20 blur-xl" />
-	              <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-black/25 ring-1 ring-white/10">
-		                <Image
-		                  src={BIG_FIVE_ICON_SRC}
-		                  alt=""
-		                  aria-hidden="true"
-                      width={32}
-                      height={32}
-		                  className="h-8 w-8 object-contain opacity-100"
-		                  style={{ filter: "brightness(0) invert(1)" }}
-		                />
-	              </div>
-	            </div>
 		          </div>
 		          <div className="mt-5">
               <div className="flex items-start justify-between gap-3 px-2 py-3 sm:gap-5 sm:px-3 sm:py-4">
@@ -967,11 +952,10 @@ export default function ResultPage() {
                     className="min-w-0 flex-1 text-center"
                   >
                     <div className="mx-auto flex w-full justify-center">
-                      <div className="relative h-[5.25rem] w-[5.25rem] sm:h-[6.5rem] sm:w-[6.5rem]">
-                        <div
-                          className="absolute inset-0 rounded-full blur-2xl"
-                          style={{ backgroundColor: row.accent.shadow }}
-                        />
+                      <div
+                        className="relative h-[5.25rem] w-[5.25rem] rounded-full sm:h-[6.5rem] sm:w-[6.5rem]"
+                        style={row.key === "O" ? { boxShadow: "0 0 34px rgba(161, 124, 255, 0.34), 0 0 56px rgba(161, 124, 255, 0.20)" } : { boxShadow: `0 0 38px ${row.accent.shadow}` }}
+                      >
                         <div
                           className="absolute inset-0 rounded-full"
                           style={{

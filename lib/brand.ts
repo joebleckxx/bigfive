@@ -1,7 +1,7 @@
 /** Shared identity for page headers, footers, metadata and exported reports. */
 export const BRAND = {
-  name: "tellmejoe",
-  tagline: "no judgment • just patterns",
+  name: "tellmejoe.",
+  tagline: "",
   logoSrc: "/images/brand-j-green.png",
   mark: {
     viewBox: "0 0 72 56",

@@ -80,7 +80,6 @@ export default async function Page({
           <div className={styles.reportPrice}>{tp("onlyOneDollarAmount")} <span>USD</span></div>
           <p className={styles.reportTerms}>{tp("note")}</p>
           <p className={styles.reportDescription}>{t("reportOffer.body")}</p>
-          <span className={styles.reportAction}>{t("landing.cta")} <span aria-hidden="true">→</span></span>
         </HomeStartLink>
 
         <section className={payStyles.profilesTeaser} aria-labelledby="profiles-teaser-title">

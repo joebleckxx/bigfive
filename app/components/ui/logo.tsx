@@ -17,7 +17,7 @@ export function Brand() {
     <Link href="/" className="tmj-brand" aria-label={BRAND.name}>
       <span className="tmj-brand-copy">
         <span className="tmj-brand-name">{BRAND.name}</span>
-        <span className="tmj-brand-tagline">{BRAND.tagline}</span>
+        {BRAND.tagline ? <span className="tmj-brand-tagline">{BRAND.tagline}</span> : null}
       </span>
     </Link>
   );
