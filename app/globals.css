@@ -90,7 +90,9 @@ button,
   color: rgba(255, 255, 255, 0.9) !important;
 }
 
-.tmj-background { background: var(--tmj-page-background); }
+.tmj-background {
+  background: var(--tmj-page-background);
+}
 .tmj-page-gutter { padding-inline: var(--tmj-gutter); }
 .tmj-brand { display: inline-flex; align-items: center; gap: 10px; min-width: 0; color: white; text-decoration: none; }
 .tmj-logo { display: inline-grid; place-items: center; flex-shrink: 0; border-radius: 12px; overflow: hidden; }

@@ -89,7 +89,7 @@ export default async function Page({
           <p className={payStyles.profilesTeaserBody}>{t("avatarTeaser.body")}</p>
           <div className={payStyles.avatarWindow} aria-hidden="true">
             <div className={payStyles.avatarCollage}>
-              {[6, 4, 15, 13, 9].map((avatar) => (
+              {[6, 4, 15, 13, 1].map((avatar) => (
                 <Image key={avatar} src={AVATARS[avatar]} alt="" width={112} height={112} sizes="112px" className={payStyles.teaserAvatar} />
               ))}
             </div>
